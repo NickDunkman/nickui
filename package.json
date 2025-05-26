@@ -1,0 +1,20 @@
+{
+  "name": "nickui",
+  "version": "1.0.0",
+  "description": "Nick-style components!",
+  "homepage": "https://github.com/NickDunkman/nickui#readme",
+  "bugs": {
+    "url": "https://github.com/NickDunkman/nickui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickDunkman/nickui.git"
+  },
+  "license": "MIT",
+  "author": "Nick Dunkman",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
