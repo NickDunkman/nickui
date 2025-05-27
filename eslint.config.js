@@ -35,7 +35,6 @@ export default defineConfig({
     },
     "import/resolver": {
       typescript: {
-        alwaysTryTypes: true,
         project: "./tsconfig.json",
       },
     },
@@ -47,15 +46,10 @@ export default defineConfig({
     ...importPlugin.configs.recommended.rules,
     ...jsxA11yPlugin.configs.recommended.rules,
     ...prettierConfig.rules,
-    //"prettier/prettier": "error",
-    //"react/react-in-jsx-scope": "off",
-    //      //"react/jsx-uses-react": "off",
-    //      "@typescript-eslint/explicit-module-boundary-types": "off",
     //      "@typescript-eslint/no-unused-vars": [
     //        "error",
     //        { argsIgnorePattern: "^_" },
     //      ],
-    //      "react-hooks/exhaustive-deps": "warn",
     //      "import/no-unresolved": "error",
     //      //"import/default": "off",
     //      //"import/no-named-as-default": "off",

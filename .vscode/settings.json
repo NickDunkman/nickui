@@ -1,0 +1,8 @@
+{
+  "files.insertFinalNewline": true,
+  "eslint.runtime": "node",
+  "[typescript][typescriptreact][javascript][javascriptreact][css][scss][markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  }
+}
