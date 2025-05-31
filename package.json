@@ -16,9 +16,9 @@
   "main": "index.js",
   "scripts": {
     "check": "nx run-many -t check:eslint check:prettier check:tsc",
-    "check:eslint": "eslint --max-warnings=0 \"**/*.{js,jsx,ts,tsx}\"",
-    "check:prettier": "prettier -c \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
-    "check:tsc": "tsc"
+    "check:eslint": "nx exec -- eslint --max-warnings=0 \"**/*.{js,jsx,ts,tsx}\"",
+    "check:prettier": "nx exec -- prettier -c \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
+    "check:tsc": "nx exec -- tsc"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.9",

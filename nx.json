@@ -1,7 +1,13 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
-    "check": {
+    "check:eslint": {
+      "cache": true
+    },
+    "check:prettier": {
+      "cache": true
+    },
+    "check:tsc": {
       "cache": true
     }
   }
