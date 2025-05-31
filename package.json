@@ -15,10 +15,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "check": "nx run-many -t check:eslint check:prettier check:tsc",
-    "check:eslint": "nx exec -- eslint --max-warnings=0 \"**/*.{js,jsx,ts,tsx}\"",
-    "check:prettier": "nx exec -- prettier -c \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
-    "check:tsc": "nx exec -- tsc"
+    "check": "npm run check:eslint && npm run check:prettier && npm run check:tsc",
+    "check:eslint": "eslint --max-warnings=0 \"**/*.{js,jsx,ts,tsx}\"",
+    "check:prettier": "prettier -c \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
+    "check:tsc": "tsc"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.9",
@@ -35,12 +35,10 @@
     "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "nx": "21.1.2",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.12",
     "typescript": "^5.8.3"
   },
-  "nx": {},
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "dependencies": {
     "clsx": "^2.1.1",
