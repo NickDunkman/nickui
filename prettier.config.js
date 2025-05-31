@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   printWidth: 80,
   tabWidth: 2,
   singleQuote: true,
@@ -24,6 +24,7 @@ module.exports = {
   // ** settings for prettier-plugin-tailwindcss **
   // automatically sort Tailwind classes passed to the className prop or the
   // clsx() function, according to Tailwind's preferred ordering
+
   tailwindAttributes: ['className'],
   tailwindFunctions: ['clsx'],
 

@@ -15,8 +15,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "eslint": "eslint . --ext .ts,.tsx,.js,.jsx"
+    "check": "nx run-many -t check:eslint check:prettier check:tsc",
+    "check:eslint": "eslint --max-warnings=0 \"**/*.{js,jsx,ts,tsx}\"",
+    "check:prettier": "prettier -c \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
+    "check:tsc": "tsc"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.9",
