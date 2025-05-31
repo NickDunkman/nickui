@@ -1,3 +1,4 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import { fixupPluginRules } from '@eslint/compat';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
@@ -7,6 +8,7 @@ import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import prettierPlugin from 'eslint-plugin-prettier';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import storybookPlugin from 'eslint-plugin-storybook';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig({
@@ -24,6 +26,7 @@ export default defineConfig({
     import: fixupPluginRules(importPlugin),
     'jsx-a11y': fixupPluginRules(jsxA11yPlugin),
     prettier: prettierPlugin,
+    storybook: storybookPlugin,
   },
   settings: {
     react: {
@@ -45,6 +48,7 @@ export default defineConfig({
     ...importPlugin.configs.recommended.rules,
     ...jsxA11yPlugin.configs.recommended.rules,
     ...prettierConfig.rules,
+    ...storybookPlugin.configs.recommended.rules,
     'prettier/prettier': 'error',
     //      "@typescript-eslint/no-unused-vars": [
     //        "error",

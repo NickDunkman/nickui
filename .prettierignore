@@ -1,0 +1,2 @@
+# These files are auto-generated and prettier shouldn't format them or apply any linting rules
+vitest.shims.d.ts
