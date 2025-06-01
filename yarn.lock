@@ -7,6 +7,11 @@
   resolved "https://registry.yarnpkg.com/@adobe/css-tools/-/css-tools-4.4.3.tgz#beebbefb0264fdeb32d3052acae0e0d94315a9a2"
   integrity sha512-VQKMkwriZbaOgVCby1UDY/LDk5fIjhQicCvVPFqfe+69fWaPWydbWJ3wRt59/YzIwda1I81loas3oCoHxnqvdA==
 
+"@alloc/quick-lru@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@alloc/quick-lru/-/quick-lru-5.2.0.tgz#7bf68b20c0a350f936915fcae06f58e32007ce30"
+  integrity sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==
+
 "@ampproject/remapping@^2.2.0", "@ampproject/remapping@^2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.3.0.tgz#ed441b6fa600072520ce18b43d2c8cc8caecc7f4"
@@ -841,6 +846,17 @@
     "@tailwindcss/oxide-wasm32-wasi" "4.1.8"
     "@tailwindcss/oxide-win32-arm64-msvc" "4.1.8"
     "@tailwindcss/oxide-win32-x64-msvc" "4.1.8"
+
+"@tailwindcss/postcss@^4.1.8":
+  version "4.1.8"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/postcss/-/postcss-4.1.8.tgz#b12374b49f3accd9bd902a4324d124e67803350f"
+  integrity sha512-vB/vlf7rIky+w94aWMw34bWW1ka6g6C3xIOdICKX2GC0VcLtL6fhlLiafF0DVIwa9V6EHz8kbWMkS2s2QvvNlw==
+  dependencies:
+    "@alloc/quick-lru" "^5.2.0"
+    "@tailwindcss/node" "4.1.8"
+    "@tailwindcss/oxide" "4.1.8"
+    postcss "^8.4.41"
+    tailwindcss "4.1.8"
 
 "@tailwindcss/vite@^4.1.8":
   version "4.1.8"
@@ -3328,7 +3344,7 @@ possible-typed-array-names@^1.0.0:
   resolved "https://registry.yarnpkg.com/possible-typed-array-names/-/possible-typed-array-names-1.1.0.tgz#93e3582bc0e5426586d9d07b79ee40fc841de4ae"
   integrity sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==
 
-postcss@^8.5.3:
+postcss@^8.4.41, postcss@^8.5.3, postcss@^8.5.4:
   version "8.5.4"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.5.4.tgz#d61014ac00e11d5f58458ed7247d899bd65f99c0"
   integrity sha512-QSa9EBe+uwlGTFmHsPKokv3B/oEMQZxfqW0QqNCyhpa6mB1afzulwn8hihglqAb2pOw+BJgNlmXQ8la2VeHB7w==
