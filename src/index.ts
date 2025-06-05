@@ -1,1 +1,1 @@
-export { FieldLayout } from './FieldLayout';
+export { FieldLayout } from './components/FieldLayout';

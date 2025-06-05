@@ -3,6 +3,7 @@ export default {
   tabWidth: 2,
   singleQuote: true,
   trailingComma: 'all',
+  proseWrap: 'always',
 
   plugins: [
     '@trivago/prettier-plugin-sort-imports',

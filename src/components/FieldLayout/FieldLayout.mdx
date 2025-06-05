@@ -1,0 +1,36 @@
+import * as Stories from './FieldLayout.stories';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import { FieldLayout } from './FieldLayout';
+ 
+<Meta title="Components/FieldLayout" of={Stories} />
+ 
+# FieldLayout
+
+Wraps a form control in a standard form field layout (label, hint, error
+message, etc).
+
+## Props
+
+In addition to the commonly used props below, you can pass any prop accepted
+by the [&lt;div&gt;](htps://react.dev/reference/react-dom/components/common)
+element, which will be applied to the FieldLayout's root div.
+
+<ArgTypes of={FieldLayout} sort="requiredFirst" />
+
+## Sizing
+
+Sizing is done via the `size` prop. You can pass "small", "medium", or
+"large". In keeping with the mobile-first philosophy of Tailwind, the default
+size is "small".
+
+<Canvas of={Stories.Small} />
+<Canvas of={Stories.Medium} />
+<Canvas of={Stories.Large} />
+
+## Errors
+
+To add an error message, use the `error` prop. If you want to show the error
+style without adding a message, you can set the error prop to `true`.
+
+<Canvas of={Stories.Error} />

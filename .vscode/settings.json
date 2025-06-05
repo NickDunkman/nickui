@@ -1,8 +1,13 @@
 {
   "files.insertFinalNewline": true,
   "eslint.runtime": "node",
-  "[typescript][typescriptreact][javascript][javascriptreact][css][scss][markdown]": {
+  "[typescript][typescriptreact][javascript][javascriptreact][css][scss][markdown][mdx]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  }
+    "editor.formatOnSave": true,
+    "editor.rulers": [80]
+  },
+  // This adds tailwind class autocompletion to tailwind-variants usage
+  "tailwindCSS.experimental.classRegex": [
+    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
 }
