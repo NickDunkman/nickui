@@ -58,3 +58,12 @@ export const Error: Story = {
     controlId: 'input-with-error',
   },
 };
+
+export const Required: Story = {
+  args: {
+    children: <input className="border" id="required-input" required />,
+    label: 'Necessary information',
+    controlId: 'required-input',
+    required: true,
+  },
+};

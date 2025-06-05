@@ -9,7 +9,7 @@ export const styles = tv({
     explainer: 'text-xs text-gray-500',
     error: 'text-xs mt-1.5 before:content-["✘"] before:mr-1 text-red-800',
     hint: 'text-xs mt-1.5 text-gray-500',
-    requiredAsterisk: 'ml-0.5 no-underline',
+    requiredAsterisk: 'ml-0.5 no-underline cursor-help',
   },
   variants: {
     size: {
