@@ -1,10 +1,10 @@
-import { FieldSize } from '@/constants';
+import { FieldSizer } from '@/constants';
 import { tv } from 'tailwind-variants';
 
 /** tailwind-variants styles for the FieldLayout component */
 export const styles = tv({
   slots: {
-    heading: 'block mb-1',
+    heading: 'block mb-1.5',
     label: 'text-xs font-bold',
     explainer: 'text-xs text-gray-500',
     error: 'text-xs mt-1.5 before:content-["✘"] before:mr-1 text-red-800',
@@ -12,17 +12,17 @@ export const styles = tv({
     requiredAsterisk: 'ml-0.5 no-underline cursor-help',
   },
   variants: {
-    size: {
-      [FieldSize.small]: {
+    sizer: {
+      [FieldSizer.small]: {
         /* default */
       },
-      [FieldSize.medium]: {
+      [FieldSizer.medium]: {
         heading: 'mb-2',
         label: 'text-sm',
         error: 'text-sm mt-2',
         hint: 'mt-2',
       },
-      [FieldSize.large]: {
+      [FieldSizer.large]: {
         heading: 'mb-2',
         label: 'text-lg',
         explainer: 'text-sm',
@@ -38,6 +38,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    size: FieldSize.small,
+    sizer: FieldSizer.small,
+    hasError: false,
   },
 });

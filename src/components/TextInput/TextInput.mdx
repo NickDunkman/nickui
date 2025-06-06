@@ -1,0 +1,46 @@
+import * as Stories from './TextInput.stories';
+import {
+  ArgTypes,
+  Canvas,
+  Description,
+  Meta,
+  Subtitle,
+  Title,
+} from '@storybook/addon-docs/blocks';
+
+import { TextInput, PureTextInput } from './TextInput';
+import { FieldControl } from '../FieldControl/FieldControl';
+ 
+<Meta title="Components/TextInput" of={Stories} />
+ 
+# TextInput
+
+TextInput is a form control allows users to enter & edit text.
+
+## Common field layout props
+
+These props wrap the TextInput with the common FieldLayout elements.
+
+<ArgTypes of={FieldControl} sort="requiredFirst" />
+
+## TextInput-specific props
+
+TextInput also takes all the props that can be used with
+[&lt;input&gt;](https://react.dev/reference/react-dom/components/input).
+Here are some of the most commonly used:
+
+<ArgTypes of={PureTextInput} sort="requiredFirst" />
+
+## Control states
+
+These are handled via the `value`, `defaultValue`, & `disabled` props.
+
+<Canvas of={Stories.AllControlStates} sourceState="shown" />
+
+## Sizing
+
+Sizing is done via the `sizer` prop. You can pass "small", "medium", or
+"large". In keeping with the mobile-first philosophy of Tailwind, the default
+size is "small".
+
+<Canvas of={Stories.AllSizes} sourceState="shown" />

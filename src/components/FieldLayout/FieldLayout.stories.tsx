@@ -11,7 +11,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Small: Story = {
   args: {
-    size: FieldLayout.size.small,
+    sizer: FieldLayout.sizer.small,
     children: <input className="border" id="small-input" />,
     label: 'Small label',
     explainer: 'Small explanation',
@@ -22,7 +22,7 @@ export const Small: Story = {
 
 export const Medium: Story = {
   args: {
-    size: FieldLayout.size.medium,
+    sizer: FieldLayout.sizer.medium,
     children: <input className="border" id="medium-input" />,
     label: 'Medium label',
     explainer: 'Medium explanation',
@@ -33,7 +33,7 @@ export const Medium: Story = {
 
 export const Large: Story = {
   args: {
-    size: FieldLayout.size.large,
+    sizer: FieldLayout.sizer.large,
     children: <input className="border" id="large-input" />,
     label: 'Large label',
     explainer: 'Large explanation',

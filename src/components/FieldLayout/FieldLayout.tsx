@@ -1,5 +1,5 @@
 import { styles } from './styles';
-import { FieldSize } from '@/constants';
+import { FieldSizer } from '@/constants';
 import * as React from 'react';
 
 export interface FieldLayoutProps extends React.ComponentProps<'div'> {
@@ -8,7 +8,7 @@ export interface FieldLayoutProps extends React.ComponentProps<'div'> {
   /** Optionally add utility classes */
   className?: string;
   /** Changes the size of the field ("small", "medium", "large") */
-  size?: FieldSize;
+  sizer?: FieldSizer;
   /** The main label to show above the form control, naming the field */
   label?: React.ReactNode;
   /**
@@ -79,11 +79,11 @@ export function FieldLayout({
   hint,
   hintId,
   label,
-  size = FieldSize.small,
+  sizer = FieldSizer.small,
   required = false,
   ...otherDivProps
 }: FieldLayoutProps) {
-  const s = styles({ size, hasError: !!error });
+  const s = styles({ sizer, hasError: !!error });
 
   return (
     <div {...otherDivProps}>
@@ -124,4 +124,4 @@ export function FieldLayout({
   );
 }
 
-FieldLayout.size = FieldSize;
+FieldLayout.sizer = FieldSizer;
