@@ -51,6 +51,19 @@ export const AllControlStates: Story = {
   ),
 };
 
+export const FieldLayout: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <TextInput
+      label="A label"
+      explainer="An explainer"
+      error="An error message"
+      hint="A hint"
+      defaultValue="A problematic value"
+    />
+  ),
+};
+
 export const Small: Story = {
   args: {
     sizer: TextInput.sizer.small,

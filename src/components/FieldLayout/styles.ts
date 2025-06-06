@@ -30,15 +30,8 @@ export const styles = tv({
         hint: 'text-sm mt-2',
       },
     },
-    hasError: {
-      false: {},
-      true: {
-        label: 'text-red-800',
-      },
-    },
   },
   defaultVariants: {
     sizer: FieldSizer.small,
-    hasError: false,
   },
 });

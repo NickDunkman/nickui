@@ -83,7 +83,7 @@ export function FieldLayout({
   required = false,
   ...otherDivProps
 }: FieldLayoutProps) {
-  const s = styles({ sizer, hasError: !!error });
+  const s = styles({ sizer });
 
   return (
     <div {...otherDivProps}>

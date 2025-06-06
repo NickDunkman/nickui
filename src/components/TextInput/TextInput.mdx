@@ -37,6 +37,14 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
+## Field layout
+
+TextInputs can optionally have each of the components of a standard FieldLayout:
+label, description, hint, and error. TextInput automatically handles the
+accessibility of these pieces for you!
+
+<Canvas of={Stories.FieldLayout} sourceState="shown" />
+
 ## Sizing
 
 Sizing is done via the `sizer` prop. You can pass "small", "medium", or
