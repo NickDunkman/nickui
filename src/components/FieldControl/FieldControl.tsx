@@ -1,5 +1,6 @@
-import { FieldSizer } from '@/constants';
 import * as React from 'react';
+
+import { FieldSizer } from '@/constants';
 
 /**
  * Do not use this component. It only exists so that we can render an

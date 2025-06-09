@@ -1,5 +1,6 @@
-import { FieldSizer } from '@/constants';
 import { tv } from 'tailwind-variants';
+
+import { FieldSizer } from '@/constants';
 
 /** tailwind-variants styles for the TextInput component */
 export const styles = tv({

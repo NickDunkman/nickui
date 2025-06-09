@@ -12,9 +12,11 @@ export default {
 
   // ** settings for @trivago/prettier-plugin-sort-imports **
   importOrder: [
-    // third party packages at the top
-    '<THIRD_PARTY_MODULES>',
-    // TODO: Add custom import paths (components, etc)
+    '^@\\/constants',
+    '^@\\/utils\\/',
+    '^@\\/components\\/',
+    '^\\.\\.\\/',
+    '^\\.\\/',
   ],
   // add empty lines between the groups defined above
   importOrderSeparation: true,

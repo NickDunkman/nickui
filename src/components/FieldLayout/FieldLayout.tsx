@@ -1,6 +1,8 @@
-import { styles } from './styles';
-import { FieldSizer } from '@/constants';
 import * as React from 'react';
+
+import { FieldSizer } from '@/constants';
+
+import { styles } from './styles';
 
 export interface FieldLayoutProps extends React.ComponentProps<'div'> {
   /** The content of the form-control section of the FieldLayout layout */

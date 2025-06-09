@@ -1,9 +1,12 @@
-import { FieldControl } from '../FieldControl/FieldControl';
-import { FieldLayout } from '../FieldLayout';
-import { styles } from './styles';
+import * as React from 'react';
+
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
-import * as React from 'react';
+
+import { FieldControl } from '@/components/FieldControl/FieldControl';
+import { FieldLayout } from '@/components/FieldLayout';
+
+import { styles } from './styles';
 
 interface PureTextInputProps
   extends Omit<React.ComponentProps<'input'>, 'className'> {

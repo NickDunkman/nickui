@@ -1,19 +1,17 @@
-import * as Stories from './FieldLayout.stories';
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 
 import { FieldLayout } from './FieldLayout';
- 
-<Meta title="Components/FieldLayout" of={Stories} />
- 
-# FieldLayout
+import * as Stories from './FieldLayout.stories';
+
+<Meta title="Components/FieldLayout" of={Stories} /># FieldLayout
 
 Wraps a form control in a standard form field layout (label, hint, error
 message, etc).
 
 ## Props
 
-In addition to the commonly used props below, you can pass any prop accepted
-by the [&lt;div&gt;](htps://react.dev/reference/react-dom/components/common)
+In addition to the commonly used props below, you can pass any prop accepted by
+the [&lt;div&gt;](htps://react.dev/reference/react-dom/components/common)
 element, which will be applied to the FieldLayout's root div.
 
 <ArgTypes of={FieldLayout} sort="requiredFirst" />
@@ -26,9 +24,9 @@ These elements are controlled using the `label`, `explainer`, and `hint` props.
 
 ## Sizing
 
-Sizing is done via the `sizer` prop. You can pass "small", "medium", or
-"large". In keeping with the mobile-first philosophy of Tailwind, the default
-size is "small".
+Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
+In keeping with the mobile-first philosophy of Tailwind, the default size is
+"small".
 
 <Canvas of={Stories.AllSizes} sourceState="shown" />
 
