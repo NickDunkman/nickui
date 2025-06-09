@@ -18,6 +18,12 @@ element, which will be applied to the FieldLayout's root div.
 
 <ArgTypes of={FieldLayout} sort="requiredFirst" />
 
+## Basic elements
+
+These elements are controlled using the `label`, `explainer`, and `hint` props.
+
+<Canvas of={Stories.Basic} sourceState="shown" />
+
 ## Sizing
 
 Sizing is done via the `sizer` prop. You can pass "small", "medium", or
@@ -31,11 +37,11 @@ size is "small".
 To add an error message, use the `error` prop. If you want to show the error
 style without adding a message, you can set the error prop to `true`.
 
-<Canvas of={Stories.Error} />
+<Canvas of={Stories.Error} sourceState="shown" />
 
 ## Required fields
 
 The standard way to designate that a required field is to use the `required`
 prop to add an asterisk to the end of the label.
 
-<Canvas of={Stories.Required} />
+<Canvas of={Stories.Required} sourceState="shown" />

@@ -10,6 +10,17 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const Basic: Story = {
+  tags: ['!dev', '!test'],
+  args: {
+    children: <TextInput sizer={TextInput.sizer.small} id="basic-input" />,
+    label: 'A label for the field',
+    explainer: 'An explanation about the field',
+    hint: 'A hint about the field’s value',
+    controlId: 'basic-input',
+  },
+};
+
 export const Small: Story = {
   args: {
     sizer: FieldLayout.sizer.small,
@@ -61,6 +72,7 @@ export const Error: Story = {
         id="input-with-error"
         value="12345"
         aria-errormessage="error-message-id"
+        error
       />
     ),
     label: 'Phone number',
