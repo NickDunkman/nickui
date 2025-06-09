@@ -1,3 +1,4 @@
+import { TextInput } from '../TextInput/TextInput';
 import { FieldLayout } from './FieldLayout';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
@@ -12,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Small: Story = {
   args: {
     sizer: FieldLayout.sizer.small,
-    children: <input className="border" id="small-input" />,
+    children: <TextInput sizer={TextInput.sizer.small} id="small-input" />,
     label: 'Small label',
     explainer: 'Small explanation',
     hint: 'Small hint',
@@ -23,7 +24,7 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     sizer: FieldLayout.sizer.medium,
-    children: <input className="border" id="medium-input" />,
+    children: <TextInput sizer={TextInput.sizer.medium} id="medium-input" />,
     label: 'Medium label',
     explainer: 'Medium explanation',
     hint: 'Medium hint',
@@ -34,7 +35,7 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     sizer: FieldLayout.sizer.large,
-    children: <input className="border" id="large-input" />,
+    children: <TextInput sizer={TextInput.sizer.large} id="large-input" />,
     label: 'Large label',
     explainer: 'Large explanation',
     hint: 'Large hint',
@@ -42,11 +43,21 @@ export const Large: Story = {
   },
 };
 
+export const AllSizes: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <div className="flex flex-col gap-5 md:flex-row">
+      <FieldLayout {...Small.args} />
+      <FieldLayout {...Medium.args} />
+      <FieldLayout {...Large.args} />
+    </div>
+  ),
+};
+
 export const Error: Story = {
   args: {
     children: (
-      <input
-        className="border"
+      <TextInput
         id="input-with-error"
         value="12345"
         aria-errormessage="error-message-id"
@@ -61,7 +72,7 @@ export const Error: Story = {
 
 export const Required: Story = {
   args: {
-    children: <input className="border" id="required-input" required />,
+    children: <TextInput id="required-input" required />,
     label: 'Necessary information',
     controlId: 'required-input',
     required: true,

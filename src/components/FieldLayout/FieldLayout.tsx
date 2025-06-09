@@ -4,7 +4,7 @@ import * as React from 'react';
 
 export interface FieldLayoutProps extends React.ComponentProps<'div'> {
   /** The content of the form-control section of the FieldLayout layout */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /** Optionally add utility classes */
   className?: string;
   /** Changes the size of the field ("small", "medium", "large") */
