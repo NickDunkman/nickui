@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { FieldSizer } from '@/constants';
+
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 
@@ -8,14 +10,8 @@ import { FieldLayout } from '@/components/FieldLayout';
 
 import { styles } from './styles';
 
-interface PureTextInputProps
-  extends Omit<React.ComponentProps<'input'>, 'className'> {
-  /** Add classes on the interior `<input>` element */
-  inputClassName?: string;
-  /**
-   * Prevents the user from interacting with the TextInput (it cannot be
-   * pressed or focused), and triggers the disabled style
-   */
+interface PureTextInputProps extends React.ComponentProps<'input'> {
+  /** Prevents the user from interacting with the TextInput */
   disabled?: boolean;
   /** Called when the value of the TextInput changes */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -54,6 +50,8 @@ interface PureTextInputProps
    * component
    */
   defaultValue?: string;
+  /** Changes the size of the field ("small", "medium", "large") */
+  sizer?: FieldSizer;
 }
 
 /**
@@ -61,17 +59,30 @@ interface PureTextInputProps
  * @param props {@link PureTextInputProps}
  */
 export function PureTextInput({
-  inputClassName,
+  className,
   disabled = false,
   type = 'text',
+  'aria-errormessage': ariaErrorMessage,
+  'aria-invalid': ariaInvalid,
+  sizer = FieldSizer.small,
   ...inputProps
 }: PureTextInputProps) {
+  const s = styles({ sizer, hasError: !!ariaErrorMessage });
+
   return (
     <input
       {...inputProps}
       type={type}
       disabled={disabled}
-      className={inputClassName}
+      className={clsw(s, className)}
+      aria-errormessage={ariaErrorMessage}
+      // To have a fully accessible error state, the `aria-invalid` attribute on
+      // the <select> needs to be `true` when there is an error. So when that
+      // prop is not provided, set it based on whether there is an error state
+      // or not.
+      aria-invalid={
+        ariaInvalid !== undefined ? ariaInvalid : !!ariaErrorMessage
+      }
     />
   );
 }
@@ -85,7 +96,7 @@ type TextInputProps = PureTextInputProps &
  */
 export function TextInput({
   className,
-  sizer,
+  sizer = FieldSizer.small,
   label,
   explainer,
   hint,
@@ -94,8 +105,6 @@ export function TextInput({
   id: controlledId,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
-  'aria-invalid': controlledAriaInvalid,
-  inputClassName,
   ...otherPureTextInputProps
 }: TextInputProps) {
   // Generate some ids for accessibility, in case they aren't provided as props
@@ -117,14 +126,6 @@ export function TextInput({
     controlledAriaErrorMessage ||
     (error ? uncontrolledAriaErrorMessage : undefined);
 
-  // To have a fully accessible error state, the `aria-invalid` attribute on the
-  // <input> needs to be `true` when there is an error. So when that prop is not
-  // provided, set it based on whether there is an error state or not.
-  const ariaInvalid =
-    controlledAriaInvalid !== undefined ? controlledAriaInvalid : !!error;
-
-  const s = styles({ sizer, hasError: !!error });
-
   return (
     <FieldLayout
       className={className}
@@ -139,16 +140,15 @@ export function TextInput({
       required={required}
     >
       <PureTextInput
-        inputClassName={clsw(s, inputClassName)}
         id={id}
+        sizer={sizer}
+        required={required}
         aria-describedby={ariaDescribedBy}
         aria-errormessage={ariaErrorMessage}
-        aria-invalid={ariaInvalid}
-        required={required}
         {...otherPureTextInputProps}
       />
     </FieldLayout>
   );
 }
 
-TextInput.sizer = FieldLayout.sizer;
+TextInput.sizer = FieldSizer;
