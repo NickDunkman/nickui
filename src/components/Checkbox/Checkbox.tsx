@@ -30,7 +30,7 @@ interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
 }
 
 /**
- * Checkboxes allow users to select zero, one, or many options from a set.
+ * Checkboxes allow users to select zero to many options from a set.
  * @param props {@link CheckboxProps}
  */
 export function Checkbox({
