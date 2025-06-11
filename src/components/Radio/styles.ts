@@ -15,7 +15,7 @@ export const styles = tv({
       pointer-events-none select-none
       peer-focus:border-blue-800 peer-focus:shadow-[0_0_11px] peer-focus:shadow-blue-300 peer-focus:outline-0 
       peer-checked:bg-black
-      peer-checked:after:content-[' '] peer-checked:after:bg-white peer-checked:after:block peer-checked:after:rounded-full
+      peer-checked:after:bg-white peer-checked:after:block peer-checked:after:rounded-full
       peer-focus:peer-checked:bg-blue-800
       peer-disabled:bg-gray-100 peer-disabled:border-gray-300
       peer-disabled:peer-checked:bg-gray-400 peer-disabled:peer-checked:border-gray-400
