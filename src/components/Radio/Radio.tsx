@@ -6,22 +6,22 @@ import { clsw } from '@/utils/clsw';
 
 import { styles } from './styles';
 
-interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
+interface RadioProps extends Omit<React.ComponentProps<'input'>, 'type'> {
   /** Add utility classes */
   className?: string;
   /**
-   * Sets the checked state of the Checkbox when using it as a
+   * Sets the checked state of the Radio when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
    */
   checked?: boolean;
   /**
-   * Sets the checked state of the Checkbox when using it as a uncontrolled
+   * Sets the checked state of the Radio when using it as a uncontrolled
    * component
    */
   defaultChecked?: boolean;
-  /** Prevents the user from interacting with the Checkbox */
+  /** Prevents the user from interacting with the Radio */
   disabled?: boolean;
-  /** Adds a label to the right of the checkbox */
+  /** Adds a label to the right of the Radio */
   label?: React.ReactNode;
   /** Called when the checked state changes  */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -30,22 +30,22 @@ interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
 }
 
 /**
- * Checkboxes allow users to choose zero to many options from a set.
- * @param props {@link CheckboxProps}
+ * Radios allow users to choose one option from a set.
+ * @param props {@link RadioProps}
  */
-export function Checkbox({
+export function Radio({
   className,
   label,
   disabled = false,
   sizer = FieldSizer.small,
   ...inputProps
-}: CheckboxProps) {
+}: RadioProps) {
   const s = styles({ sizer, isDisabled: disabled });
 
   return (
     <label className={clsw(s.root(), className)}>
       <input
-        type="checkbox"
+        type="radio"
         className={s.input()}
         disabled={disabled}
         {...inputProps}
@@ -56,4 +56,4 @@ export function Checkbox({
   );
 }
 
-Checkbox.sizer = FieldSizer;
+Radio.sizer = FieldSizer;
