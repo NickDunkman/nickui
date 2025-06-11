@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { FieldSizer } from '@/constants';
 
-import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 
 import { FieldControl } from '@/components/FieldControl/FieldControl';
@@ -10,7 +9,7 @@ import { FieldLayout } from '@/components/FieldLayout';
 
 import { styles } from './styles';
 
-interface PureTextInputProps extends React.ComponentProps<'input'> {
+interface TextInputProps extends React.ComponentProps<'input'> {
   /** Prevents the user from interacting with the TextInput */
   disabled?: boolean;
   /** Called when the value of the TextInput changes */
@@ -21,7 +20,7 @@ interface PureTextInputProps extends React.ComponentProps<'input'> {
    */
   placeholder?: string;
   /**
-   * The type of input to use (only textual types are allowed with TextInput).
+   * The input type to use (only textual types are allowed with TextInput).
    * See
    * [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
    * for more details
@@ -46,57 +45,18 @@ interface PureTextInputProps extends React.ComponentProps<'input'> {
    */
   value?: string;
   /**
-   * Sets the value of the TextInput when using it as an _uncontrolled_
-   * component
+   * Sets the value of the TextInput when using it as an uncontrolled component
    */
   defaultValue?: string;
-  /** Changes the size of the field ("small", "medium", "large") */
-  sizer?: FieldSizer;
 }
 
 /**
  * TextInput allows users to enter & edit text.
- * @param props {@link PureTextInputProps}
- */
-export function PureTextInput({
-  className,
-  disabled = false,
-  type = 'text',
-  'aria-errormessage': ariaErrorMessage,
-  'aria-invalid': ariaInvalid,
-  sizer = FieldSizer.small,
-  ...inputProps
-}: PureTextInputProps) {
-  const s = styles({ sizer, hasError: !!ariaErrorMessage });
-
-  return (
-    <input
-      {...inputProps}
-      type={type}
-      disabled={disabled}
-      className={clsw(s, className)}
-      aria-errormessage={ariaErrorMessage}
-      // To have a fully accessible error state, the `aria-invalid` attribute on
-      // the <select> needs to be `true` when there is an error. So when that
-      // prop is not provided, set it based on whether there is an error state
-      // or not.
-      aria-invalid={
-        ariaInvalid !== undefined ? ariaInvalid : !!ariaErrorMessage
-      }
-    />
-  );
-}
-
-type TextInputProps = PureTextInputProps &
-  React.ComponentProps<typeof FieldControl>;
-
-/**
- * @description TextInput allows users to enter & edit text.
  * @param props {@link TextInputProps}
  */
 export function TextInput({
   className,
-  sizer = FieldSizer.small,
+  sizer,
   label,
   explainer,
   hint,
@@ -105,8 +65,9 @@ export function TextInput({
   id: controlledId,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
-  ...otherPureTextInputProps
-}: TextInputProps) {
+  'aria-invalid': ariaInvalid,
+  ...otherInputProps
+}: TextInputProps & React.ComponentProps<typeof FieldControl>) {
   // Generate some ids for accessibility, in case they aren't provided as props
   const [uncontrolledId] = React.useState(randomId());
   const [uncontrolledAriaDescribedBy] = React.useState(randomId());
@@ -126,6 +87,8 @@ export function TextInput({
     controlledAriaErrorMessage ||
     (error ? uncontrolledAriaErrorMessage : undefined);
 
+  const s = styles({ sizer: sizer || FieldSizer.small, hasError: !!error });
+
   return (
     <FieldLayout
       className={className}
@@ -139,13 +102,15 @@ export function TextInput({
       errorId={ariaErrorMessage}
       required={required}
     >
-      <PureTextInput
+      <input
+        {...otherInputProps}
         id={id}
-        sizer={sizer}
+        className={s}
         required={required}
         aria-describedby={ariaDescribedBy}
         aria-errormessage={ariaErrorMessage}
-        {...otherPureTextInputProps}
+        // For accessibility, aria-invalid should be set when there is an error
+        aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
       />
     </FieldLayout>
   );
