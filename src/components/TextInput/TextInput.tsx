@@ -10,7 +10,7 @@ import { styles } from './styles';
 
 interface PureTextInputProps
   extends Omit<React.ComponentProps<'input'>, 'className'> {
-  /** Add classes on the interior `input.TextInput` element */
+  /** Add classes on the interior `<input>` element */
   inputClassName?: string;
   /**
    * Prevents the user from interacting with the TextInput (it cannot be
@@ -46,7 +46,7 @@ interface PureTextInputProps
     | 'week';
   /**
    * Sets the value of the TextInput when using it as a
-   * [controlled component](https://reactjs.org/link/controlled-components)
+   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
    */
   value?: string;
   /**
@@ -71,7 +71,7 @@ export function PureTextInput({
       {...inputProps}
       type={type}
       disabled={disabled}
-      className={clsw(inputClassName, 'TextInput')}
+      className={inputClassName}
     />
   );
 }

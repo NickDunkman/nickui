@@ -1,0 +1,33 @@
+import {
+  ArgTypes,
+  Canvas,
+  Description,
+  Meta,
+  Subtitle,
+  Title,
+} from '@storybook/addon-docs/blocks';
+
+import { Checkbox } from './Checkbox';
+import * as Stories from './Checkbox.stories';
+
+<Meta title="Components/Checkbox" of={Stories} /># Checkbox
+
+Checkboxes allow users to select zero, one, or many options from a set.
+
+## Props
+
+<ArgTypes of={Checkbox} sort="requiredFirst" />
+
+## Control states
+
+These are handled via the `value`, `defaultValue`, & `disabled` props.
+
+<Canvas of={Stories.AllControlStates} sourceState="shown" />
+
+## Sizing
+
+Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
+In keeping with the mobile-first philosophy of Tailwind, the default size is
+"small".
+
+<Canvas of={Stories.AllSizes} sourceState="shown" />

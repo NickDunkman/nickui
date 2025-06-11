@@ -99,30 +99,3 @@ export const AllSizes: Story = {
     </div>
   ),
 };
-
-//export const Error: Story = {
-//  args: {
-//    children: (
-//      <input
-//        className="border"
-//        id="input-with-error"
-//        value="12345"
-//        aria-errormessage="error-message-id"
-//      />
-//    ),
-//    label: 'Phone number',
-//    error: 'That is not a valid phone number',
-//    errorId: 'error-message-id',
-//    controlId: 'input-with-error',
-//  },
-//};
-//
-//export const Required: Story = {
-//  args: {
-//    children: <input className="border" id="required-input" required />,
-//    label: 'Necessary information',
-//    controlId: 'required-input',
-//    required: true,
-//  },
-//};
-//
