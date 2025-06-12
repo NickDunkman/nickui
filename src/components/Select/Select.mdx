@@ -1,0 +1,49 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import { FieldControl } from '../FieldControl/FieldControl';
+
+import { Select } from './Select';
+import * as Stories from './Select.stories';
+
+<Meta title="Components/Select" of={Stories} />
+
+# `<Select>`
+
+Select is a form control allows users to choose an option using a menu.
+
+## Select-specific props
+
+Select takes all the props that can be used with
+[&lt;select&gt;](https://react.dev/reference/react-dom/components/select). Here
+are some of the most commonly used:
+
+<ArgTypes of={Stories} sort="requiredFirst" />
+
+## Common field props
+
+Select also accepts all of the common
+[FieldLayout](/docs/components-fieldlayout--docs) props.
+
+<ArgTypes of={FieldControl} sort="requiredFirst" />
+
+## Control states
+
+These are handled via the `value`, `defaultValue`, & `disabled` props.
+
+<Canvas of={Stories.AllControlStates} sourceState="shown" />
+
+## Field layout
+
+TextInputs can optionally have each of the components of a standard
+[FieldLayout](/docs/components-fieldlayout--docs): label, description, hint, and
+error. Select automatically handles the accessibility of these pieces for you!
+
+<Canvas of={Stories.FieldLayout} sourceState="shown" />
+
+## Sizing
+
+Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
+In keeping with the mobile-first philosophy of Tailwind, the default size is
+"small".
+
+<Canvas of={Stories.AllSizes} sourceState="shown" />
