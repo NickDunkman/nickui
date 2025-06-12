@@ -87,7 +87,7 @@ export function TextInput({
     controlledAriaErrorMessage ||
     (error ? uncontrolledAriaErrorMessage : undefined);
 
-  const s = styles({ sizer: sizer || FieldSizer.small, hasError: !!error });
+  const s = styles({ sizer, hasError: !!error });
 
   return (
     <FieldLayout

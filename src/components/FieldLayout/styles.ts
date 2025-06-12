@@ -5,17 +5,21 @@ import { FieldSizer } from '@/constants';
 /** tailwind-variants styles for the FieldLayout component */
 export const styles = tv({
   slots: {
-    heading: 'block mb-1.5',
-    label: 'text-xs font-bold',
-    explainer: 'text-xs text-gray-500',
-    error: 'text-xs mt-1.5 before:content-["✘"] before:mr-1 text-red-800',
-    hint: 'text-xs mt-1.5 text-gray-500',
+    heading: 'block',
+    label: 'font-bold',
+    explainer: 'text-gray-500',
+    error: 'before:content-["✘"] before:mr-1 text-red-800',
+    hint: 'text-gray-500',
     requiredAsterisk: 'ml-0.5 no-underline cursor-help',
   },
   variants: {
     sizer: {
       [FieldSizer.small]: {
-        /* default */
+        heading: 'mb-1.5',
+        label: 'text-xs',
+        explainer: 'text-xs',
+        error: 'text-xs mt-1.5',
+        hint: 'text-xs mt-1.5',
       },
       [FieldSizer.medium]: {
         heading: 'mb-2',

@@ -6,10 +6,7 @@ import { FieldSizer } from '@/constants';
  * Do not use this component. It only exists so that we can render an
  * "ArgsTable" in Storybook that shows the FieldControlProps.
  */
-export function FieldControl({
-  sizer: _sizer = FieldSizer.small,
-  ..._otherProps
-}: {
+export function FieldControl(_props: {
   /** Optionally add utility classes to the root element */
   className?: string;
   /** Changes the size of the field ("small", "medium", "large") */

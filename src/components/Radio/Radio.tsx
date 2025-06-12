@@ -37,7 +37,7 @@ export function Radio({
   className,
   label,
   disabled = false,
-  sizer = FieldSizer.small,
+  sizer,
   ...inputProps
 }: RadioProps) {
   const s = styles({ sizer, isDisabled: disabled });

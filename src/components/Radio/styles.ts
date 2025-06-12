@@ -24,7 +24,6 @@ export const styles = tv({
   variants: {
     sizer: {
       [FieldSizer.small]: {
-        /* default */
         root: 'gap-2',
         label: 'text-xs',
         indicator: 'size-3.5 top-0.5 peer-checked:after:size-1.5',

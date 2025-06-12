@@ -27,7 +27,6 @@ export const styles = tv({
   variants: {
     sizer: {
       [FieldSizer.small]: {
-        /* default */
         root: 'gap-2',
         label: 'text-xs',
         indicator: 'size-3.5 top-0.5 bg-size-[8px_8px]',
@@ -44,7 +43,6 @@ export const styles = tv({
       },
     },
     isDisabled: {
-      false: '',
       true: {
         root: 'cursor-not-allowed',
       },

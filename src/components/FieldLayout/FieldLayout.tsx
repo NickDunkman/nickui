@@ -29,40 +29,14 @@ export interface FieldLayoutProps extends React.ComponentProps<'div'> {
    * number format
    */
   hint?: React.ReactNode;
-  /**
-   * For accessibility purposes: an id to set on the hint element. The same
-   * string should be set on the `aria-describedby` attribute on the form
-   * control, like:
-   *
-   * ```
-   * <FieldLayout
-   *   hint="A hint"
-   *   hintId="name-hint"
-   * >
-   *   <input aria-describedby="name-hint" />
-   * </FieldLayout>
-   * ```
-   */
+  /** For accessibility purposes: an id to set on the hint element */
   hintId?: string;
   /**
    * Error message to show along with the field, or just `true` to trigger the
    * error style without showing an error message.
    */
   error?: boolean | React.ReactNode;
-  /**
-   * For accessibility purposes: an id to set on the error message element. The
-   * same string should be set on the `aria-errormessage` attribute on the form
-   * control, like:
-   *
-   * ```
-   * <FieldLayout
-   *   error="Wrong format!"
-   *   errorId="name-error"
-   * >
-   *   <input aria-errormessage="name-error" />
-   * </FieldLayout>
-   * ```
-   */
+  /** For accessibility purposes: an id to set on the error message element */
   errorId?: string;
   /** When `true`, adds an asterisk to the label */
   required?: boolean;
@@ -81,7 +55,7 @@ export function FieldLayout({
   hint,
   hintId,
   label,
-  sizer = FieldSizer.small,
+  sizer,
   required = false,
   ...otherDivProps
 }: FieldLayoutProps) {
