@@ -2,18 +2,18 @@ import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 
 import { FieldControl } from '../FieldControl/FieldControl';
 
-import { TextInput } from './TextInput';
-import * as Stories from './TextInput.stories';
+import { Text } from './Text';
+import * as Stories from './Text.stories';
 
-<Meta title="Components/TextInput" of={Stories} />
+<Meta title="Components/Text" of={Stories} />
 
-# `<TextInput>`
+# `<Text>`
 
-TextInput is a form control that allows users to enter & edit text.
+Text is a form control that allows users to enter & edit text.
 
-## TextInput-specific props
+## Text-specific props
 
-TextInput takes all the props that can be used with
+Text takes all the props that can be used with
 [&lt;input&gt;](https://react.dev/reference/react-dom/components/input). Here
 are some of the most commonly used:
 
@@ -21,7 +21,7 @@ are some of the most commonly used:
 
 ## Common field props
 
-TextInput also accepts all of the common
+Text also accepts all of the common
 [FieldLayout](/docs/components-fieldlayout--docs) props.
 
 <ArgTypes of={FieldControl} sort="requiredFirst" />
@@ -34,10 +34,9 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 ## Field layout
 
-TextInputs can optionally have each of the components of a standard
+Text can optionally have each of the components of a standard
 [FieldLayout](/docs/components-fieldlayout--docs): label, description, hint, and
-error. TextInput automatically handles the accessibility of these pieces for
-you!
+error. Text automatically handles the accessibility of these pieces for you!
 
 <Canvas of={Stories.FieldLayout} sourceState="shown" />
 

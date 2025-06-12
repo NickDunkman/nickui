@@ -9,10 +9,10 @@ import { FieldLayout } from '@/components/FieldLayout';
 
 import { styles } from './styles';
 
-interface TextInputProps extends React.ComponentProps<'input'> {
-  /** Prevents the user from interacting with the TextInput */
+interface TextProps extends React.ComponentProps<'input'> {
+  /** Prevents the user from interacting with the Text */
   disabled?: boolean;
-  /** Called when the value of the TextInput changes */
+  /** Called when the value of the Text changes */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * A string that contains a brief hint to the user as to what information is
@@ -20,7 +20,7 @@ interface TextInputProps extends React.ComponentProps<'input'> {
    */
   placeholder?: string;
   /**
-   * The input type to use (only textual types are allowed with TextInput).
+   * The input type to use (only textual types are allowed with Text).
    * See
    * [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
    * for more details
@@ -40,21 +40,21 @@ interface TextInputProps extends React.ComponentProps<'input'> {
     | 'url'
     | 'week';
   /**
-   * Sets the value of the TextInput when using it as a
+   * Sets the value of the Text when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
    */
   value?: string;
   /**
-   * Sets the value of the TextInput when using it as an uncontrolled component
+   * Sets the value of the Text when using it as an uncontrolled component
    */
   defaultValue?: string;
 }
 
 /**
- * TextInput allows users to enter & edit text.
- * @param props {@link TextInputProps}
+ * Text allows users to enter & edit text.
+ * @param props {@link TextProps}
  */
-export function TextInput({
+export function Text({
   className,
   sizer,
   label,
@@ -67,7 +67,7 @@ export function TextInput({
   'aria-errormessage': controlledAriaErrorMessage,
   'aria-invalid': ariaInvalid,
   ...otherInputProps
-}: TextInputProps & React.ComponentProps<typeof FieldControl>) {
+}: TextProps & React.ComponentProps<typeof FieldControl>) {
   // Generate some ids for accessibility, in case they aren't provided as props
   const [uncontrolledId] = React.useState(randomId());
   const [uncontrolledAriaDescribedBy] = React.useState(randomId());
@@ -116,4 +116,4 @@ export function TextInput({
   );
 }
 
-TextInput.sizer = FieldSizer;
+Text.sizer = FieldSizer;

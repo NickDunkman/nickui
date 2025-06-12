@@ -78,7 +78,7 @@ export const FieldLayout: Story = {
 export const Small: Story = {
   args: {
     sizer: Select.sizer.small,
-    'aria-label': 'Example small TextInput',
+    'aria-label': 'Example small Select',
     children: <option>Small Select (default)</option>,
   },
 };

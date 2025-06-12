@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants';
 
 import { FieldSizer } from '@/constants';
 
-/** tailwind-variants styles for the TextInput component */
+/** tailwind-variants styles for the Text component */
 export const styles = tv({
   base: `
     w-full
