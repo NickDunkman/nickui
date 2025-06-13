@@ -1,0 +1,67 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import { FieldControl } from '../FieldControl/FieldControl';
+
+import { Textarea } from './Textarea';
+import * as Stories from './Textarea.stories';
+
+<Meta title="Components/Textarea" of={Stories} />
+
+# `<Textarea>`
+
+Textarea is a form control that allows users to enter & edit text.
+
+## Textarea-specific props
+
+Textarea takes some custom props, plus all the props that can be used with
+[&lt;textarea&gt;](https://react.dev/reference/react-dom/components/textarea).
+Here are some of the most commonly used:
+
+<ArgTypes of={Stories} sort="requiredFirst" />
+
+## Common field props
+
+Textarea also accepts all of the common
+[FieldLayout](/docs/components-fieldlayout--docs) props.
+
+<ArgTypes of={FieldControl} sort="requiredFirst" />
+
+## Control states
+
+These are handled via the `value`, `defaultValue`, & `disabled` props.
+
+<Canvas of={Stories.AllControlStates} sourceState="shown" />
+
+## Field layout
+
+Textareas can optionally have each of the components of a standard
+[FieldLayout](/docs/components-fieldlayout--docs): label, description, hint, and
+error. Textarea automatically handles the accessibility of these pieces for you!
+
+<Canvas of={Stories.FieldLayout} sourceState="shown" />
+
+## Sizing
+
+Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
+In keeping with the mobile-first philosophy of Tailwind, the default size is
+"small".
+
+<Canvas of={Stories.AllSizes} sourceState="shown" />
+
+## Controlling the height
+
+Minimum vertical sizing of textareas is done via the `rows` prop (the default is
+2 rows).
+
+<Canvas of={Stories.MinimumHeight} sourceState="shown" />
+
+To allow the Textarea to automatically expand up to some maximum number of rows
+(default is `Infinity`), use the `autoResize` and `maxRows` props. Try adding or
+removing text from these examples!
+
+<Canvas of={Stories.AllResizables} sourceState="shown" />
+
+To prevent the user from being able to resize the Textarea manually, use the
+`disableManualResize` prop.
+
+<Canvas of={Stories.DisableManualResize} sourceState="shown" />
