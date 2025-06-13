@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Text } from './Text';
 
 const meta = {
+  title: 'Forms/Text',
   component: Text,
 } satisfies Meta<typeof Text>;
 

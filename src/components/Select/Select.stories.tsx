@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Select } from './Select';
 
 const meta = {
+  title: 'Forms/Select',
   component: Select,
 } satisfies Meta<typeof Select>;
 

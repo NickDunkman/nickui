@@ -6,6 +6,7 @@ import { Text } from '@/components/Text/Text';
 import { FieldLayout } from './FieldLayout';
 
 const meta = {
+  title: 'Forms/FieldLayout',
   component: FieldLayout,
 } satisfies Meta<typeof FieldLayout>;
 
