@@ -6,7 +6,7 @@ import { FieldSizer } from '@/constants';
 export const styles = tv({
   slots: {
     root: 'flex',
-    input: 'peer opacity-0 absolute z-[-1]',
+    input: 'peer opacity-0 absolute -z-1',
     label: ' peer-disabled:text-gray-400',
     indicator: `
       inline-flex justify-center items-center relative

@@ -109,7 +109,6 @@ export function Text({
         required={required}
         aria-describedby={ariaDescribedBy}
         aria-errormessage={ariaErrorMessage}
-        // For accessibility, aria-invalid should be set when there is an error
         aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
       />
     </FieldLayout>

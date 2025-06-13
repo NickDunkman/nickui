@@ -89,7 +89,6 @@ export function Select({
           required={required}
           aria-describedby={ariaDescribedBy}
           aria-errormessage={ariaErrorMessage}
-          // For accessibility, aria-invalid should be set when there is an error
           aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
         />
       </div>
