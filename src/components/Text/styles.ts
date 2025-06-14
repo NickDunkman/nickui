@@ -8,7 +8,7 @@ export const styles = tv({
     w-full
     border-2 rounded-sm
     placeholder:opacity-100 placeholder:text-gray-400
-    focus:border-blue-800 focus:shadow-[0_0_11px] focus:shadow-blue-300 focus:outline-0 
+    focus:border-indigo-800 focus:shadow-[0_0_11px] focus:shadow-indigo-300 focus:outline-0 
     disabled:bg-gray-100 disabled:border-gray-300 disabled:text-gray-400 disabled:placeholder:text-gray-300 disabled:cursor-not-allowed disabled:opacity-100
   `,
   variants: {
@@ -18,7 +18,7 @@ export const styles = tv({
       [FieldSizer.large]: 'text-lg py-3.5 px-4.5',
     },
     hasError: {
-      true: 'border-red-800 focus:border-red-800 focus:shadow-red-300',
+      true: 'border-rose-800 focus:border-rose-800 focus:shadow-rose-300',
     },
   },
   defaultVariants: {

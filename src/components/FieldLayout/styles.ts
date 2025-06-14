@@ -8,7 +8,7 @@ export const styles = tv({
     heading: 'block',
     label: 'font-bold',
     explainer: 'text-gray-500',
-    error: 'before:content-["✘"] before:mr-1 text-red-800',
+    error: 'before:content-["✘"] before:mr-1 text-rose-800',
     hint: 'text-gray-500',
     requiredAsterisk: 'ml-0.5 no-underline cursor-help',
   },

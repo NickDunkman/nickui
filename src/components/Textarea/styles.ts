@@ -9,7 +9,7 @@ export const styles = tv({
     textarea: `
       border-black rounded-sm
       placeholder:opacity-100 placeholder:text-gray-400
-      focus:border-blue-800 focus:shadow-[0_0_11px] focus:shadow-blue-300 focus:outline-0
+      focus:border-indigo-800 focus:shadow-[0_0_11px] focus:shadow-indigo-300 focus:outline-0
       disabled:bg-gray-100 disabled:border-gray-300 disabled:text-gray-400 disabled:placeholder:text-gray-300 disabled:cursor-not-allowed disabled:opacity-100
     `,
     hiddenTextarea: 'invisible absolute -z-1 pointer-events-none select-none',
@@ -48,7 +48,7 @@ export const styles = tv({
     hasError: {
       false: {},
       true: {
-        textarea: 'border-red-800 focus:border-red-800 focus:shadow-red-300',
+        textarea: 'border-rose-800 focus:border-rose-800 focus:shadow-rose-300',
       },
     },
     disableManualResize: {
@@ -63,8 +63,3 @@ export const styles = tv({
     hasError: false,
   },
 });
-
-//.Textarea--no-manual-resize {
-//  resize: none;
-//}
-//

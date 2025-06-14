@@ -15,7 +15,7 @@ export const styles = tv({
       appearance-none
       w-full
       border-2 rounded-sm
-      focus:border-blue-800 focus:shadow-[0_0_11px] focus:shadow-blue-300 focus:outline-0 
+      focus:border-indigo-800 focus:shadow-[0_0_11px] focus:shadow-indigo-300 focus:outline-0 
       disabled:bg-gray-100 disabled:border-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed disabled:opacity-100
     `,
     // Can't add an :after to the <select> for the iconography, so we need
@@ -44,7 +44,7 @@ export const styles = tv({
     },
     hasError: {
       true: {
-        select: 'border-red-800 focus:border-red-800 focus:shadow-red-300',
+        select: 'border-rose-800 focus:border-rose-800 focus:shadow-rose-300',
       },
     },
     // Unfortunately, can't set style on the :after element using a sibling
