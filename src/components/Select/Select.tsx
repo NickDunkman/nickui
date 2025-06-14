@@ -4,8 +4,8 @@ import { FieldSizer } from '@/constants';
 
 import { randomId } from '@/utils/randomId';
 
+import { Field } from '@/components/Field';
 import { FieldControl } from '@/components/FieldControl/FieldControl';
-import { FieldLayout } from '@/components/FieldLayout';
 
 import { styles } from './styles';
 
@@ -68,7 +68,7 @@ export function Select({
   });
 
   return (
-    <FieldLayout
+    <Field
       className={className}
       sizer={sizer}
       label={label}
@@ -92,7 +92,7 @@ export function Select({
           aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
         />
       </div>
-    </FieldLayout>
+    </Field>
   );
 }
 

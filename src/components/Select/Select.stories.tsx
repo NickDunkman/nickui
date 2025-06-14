@@ -61,7 +61,7 @@ export const AllControlStates: Story = {
   ),
 };
 
-export const FieldLayout: Story = {
+export const Field: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <Select

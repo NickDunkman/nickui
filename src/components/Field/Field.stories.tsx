@@ -3,12 +3,12 @@ import * as React from 'react';
 
 import { Text } from '@/components/Text/Text';
 
-import { FieldLayout } from './FieldLayout';
+import { Field } from './Field';
 
 const meta = {
-  title: 'Forms/FieldLayout',
-  component: FieldLayout,
-} satisfies Meta<typeof FieldLayout>;
+  title: 'Forms/Field',
+  component: Field,
+} satisfies Meta<typeof Field>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -26,7 +26,7 @@ export const Basic: Story = {
 
 export const Small: Story = {
   args: {
-    sizer: FieldLayout.sizer.small,
+    sizer: Field.sizer.small,
     children: <Text sizer={Text.sizer.small} id="small-input" />,
     label: 'Small label',
     explainer: 'Small explanation',
@@ -37,7 +37,7 @@ export const Small: Story = {
 
 export const Medium: Story = {
   args: {
-    sizer: FieldLayout.sizer.medium,
+    sizer: Field.sizer.medium,
     children: <Text sizer={Text.sizer.medium} id="medium-input" />,
     label: 'Medium label',
     explainer: 'Medium explanation',
@@ -48,7 +48,7 @@ export const Medium: Story = {
 
 export const Large: Story = {
   args: {
-    sizer: FieldLayout.sizer.large,
+    sizer: Field.sizer.large,
     children: <Text sizer={Text.sizer.large} id="large-input" />,
     label: 'Large label',
     explainer: 'Large explanation',
@@ -61,9 +61,9 @@ export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-5 md:flex-row">
-      <FieldLayout {...Small.args} />
-      <FieldLayout {...Medium.args} />
-      <FieldLayout {...Large.args} />
+      <Field {...Small.args} />
+      <Field {...Medium.args} />
+      <Field {...Large.args} />
     </div>
   ),
 };

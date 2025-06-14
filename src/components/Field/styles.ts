@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants';
 
 import { FieldSizer } from '@/constants';
 
-/** tailwind-variants styles for the FieldLayout component */
+/** tailwind-variants styles for the Field component */
 export const styles = tv({
   slots: {
     heading: 'block',

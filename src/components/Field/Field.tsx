@@ -4,8 +4,8 @@ import { FieldSizer } from '@/constants';
 
 import { styles } from './styles';
 
-export interface FieldLayoutProps extends React.ComponentProps<'div'> {
-  /** The content of the form-control section of the FieldLayout layout */
+export interface FieldProps extends React.ComponentProps<'div'> {
+  /** The content of the form-control section of the Field */
   children?: React.ReactNode;
   /** Optionally add utility classes */
   className?: string;
@@ -20,7 +20,7 @@ export interface FieldLayoutProps extends React.ComponentProps<'div'> {
   explainer?: React.ReactNode;
   /**
    * The id of the control, for accessibility purposes. If there are multiple
-   * controls in the FieldLayout, you can omit `controlId` and instead set
+   * controls in the Field, you can omit `controlId` and instead set
    * `aria-label` or `aria-labelledby` on the individual controls.
    */
   controlId?: string;
@@ -46,7 +46,7 @@ export interface FieldLayoutProps extends React.ComponentProps<'div'> {
  * Wraps a form control in a standard form field layout (label, hint,
  * error message, etc).
  */
-export function FieldLayout({
+export function Field({
   children,
   controlId,
   explainer,
@@ -58,7 +58,7 @@ export function FieldLayout({
   sizer,
   required = false,
   ...otherDivProps
-}: FieldLayoutProps) {
+}: FieldProps) {
   const s = styles({ sizer });
 
   return (
@@ -100,4 +100,4 @@ export function FieldLayout({
   );
 }
 
-FieldLayout.sizer = FieldSizer;
+Field.sizer = FieldSizer;

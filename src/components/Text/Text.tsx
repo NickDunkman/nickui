@@ -4,8 +4,8 @@ import { FieldSizer } from '@/constants';
 
 import { randomId } from '@/utils/randomId';
 
+import { Field } from '@/components/Field';
 import { FieldControl } from '@/components/FieldControl/FieldControl';
-import { FieldLayout } from '@/components/FieldLayout';
 
 import { styles } from './styles';
 
@@ -90,7 +90,7 @@ export function Text({
   const s = styles({ sizer, hasError: !!error });
 
   return (
-    <FieldLayout
+    <Field
       className={className}
       sizer={sizer}
       label={label}
@@ -111,7 +111,7 @@ export function Text({
         aria-errormessage={ariaErrorMessage}
         aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
       />
-    </FieldLayout>
+    </Field>
   );
 }
 
