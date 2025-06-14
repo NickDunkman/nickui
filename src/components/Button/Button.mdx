@@ -1,0 +1,39 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import { Button } from './Button';
+import * as Stories from './Button.stories';
+
+<Meta of={Stories} />
+
+# `<Button>`
+
+Buttons allow the user to trigger an action, such as submitting a form.
+
+## Props
+
+Button takes some custom props, plus all the props that can be used with
+[&lt;button&gt;](https://react.dev/reference/react-dom/components/common). Here
+are some of the most commonly used:
+
+<ArgTypes of={Button} sort="requiredFirst" />
+
+## Control states
+
+These are handled via the `disabled` prop.
+
+<Canvas of={Stories.AllControlStates} sourceState="shown" />
+
+## Sizing
+
+Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
+In keeping with the mobile-first philosophy of Tailwind, the default size is
+"small".
+
+<Canvas of={Stories.AllSizes} sourceState="shown" />
+
+## Flavors
+
+Coloring is done via the `flavor` prop. You can pass "primary", "secondary", or
+"danger". The default flavor is "primary".
+
+<Canvas of={Stories.AllFlavors} sourceState="shown" />

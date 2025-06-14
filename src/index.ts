@@ -1,3 +1,4 @@
+export { Button } from '@/components/Button';
 export { Checkbox } from '@/components/Checkbox';
 export { FieldLayout } from '@/components/FieldLayout';
 export { Radio } from '@/components/Radio';
