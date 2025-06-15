@@ -2,10 +2,10 @@ import { tv } from 'tailwind-variants';
 
 import { FieldSizer } from '@/constants';
 
-/** tailwind-variants styles for the Field component */
+/** tailwind-variants styles for the Fieldset component */
 export const styles = tv({
   slots: {
-    heading: 'block',
+    legend: 'block',
     label: 'font-bold',
     explainer: 'text-gray-500',
     error: 'before:content-["✘"] before:mr-1 text-rose-800',
@@ -15,21 +15,21 @@ export const styles = tv({
   variants: {
     sizer: {
       [FieldSizer.small]: {
-        heading: 'mb-1.5',
+        legend: 'mb-1.5',
         label: 'text-xs',
         explainer: 'text-xs',
         error: 'text-xs mt-1.5',
         hint: 'text-xs mt-1.5',
       },
       [FieldSizer.medium]: {
-        heading: 'mb-2',
+        legend: 'mb-2',
         label: 'text-sm',
         explainer: 'text-xs',
         error: 'text-sm mt-2',
         hint: 'text-xs mt-2',
       },
       [FieldSizer.large]: {
-        heading: 'mb-2',
+        legend: 'mb-2',
         label: 'text-lg',
         explainer: 'text-sm',
         error: 'text-md mt-2',

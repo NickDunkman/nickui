@@ -27,7 +27,7 @@ export function FieldControl(_props: {
    * Error message to show along with the field, or just `true` to trigger the
    * error style without showing an error message.
    */
-  error?: React.ReactNode;
+  error?: boolean | React.ReactNode;
   /** When `true`, adds an asterisk to the label */
   required?: boolean;
 }) {

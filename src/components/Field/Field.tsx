@@ -31,11 +31,8 @@ export interface FieldProps extends React.ComponentProps<'div'> {
   hint?: React.ReactNode;
   /** For accessibility purposes: an id to set on the hint element */
   hintId?: string;
-  /**
-   * Error message to show along with the field, or just `true` to trigger the
-   * error style without showing an error message.
-   */
-  error?: boolean | React.ReactNode;
+  /** Error message to show along with the field */
+  error?: React.ReactNode;
   /** For accessibility purposes: an id to set on the error message element */
   errorId?: string;
   /** When `true`, adds an asterisk to the label */
@@ -43,11 +40,11 @@ export interface FieldProps extends React.ComponentProps<'div'> {
 }
 
 /**
- * Wraps a form control in a standard form field layout (label, hint,
- * error message, etc).
+ * Field wraps one form control in a standard field layout (label, hint, error
+ * message, etc).
  */
 export function Field({
-  children,
+  children: formControl,
   controlId,
   explainer,
   error,
@@ -63,9 +60,8 @@ export function Field({
 
   return (
     <div {...otherDivProps}>
-      {/* HEADING */}
       {(label || explainer) && (
-        <label htmlFor={controlId} className={s.heading()}>
+        <label className={s.heading()} htmlFor={controlId}>
           {label && (
             <div className={s.label()}>
               {label}
@@ -80,17 +76,14 @@ export function Field({
         </label>
       )}
 
-      {/* FORM CONTROL */}
-      <div>{children}</div>
+      <div>{formControl}</div>
 
-      {/* ERROR MESSAGE */}
-      {error && error !== true && (
+      {error && (
         <div id={errorId} className={s.error()} aria-live="assertive">
           {error}
         </div>
       )}
 
-      {/* HINT */}
       {hint && (
         <div id={hintId} className={s.hint()}>
           {hint}

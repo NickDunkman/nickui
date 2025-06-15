@@ -59,7 +59,7 @@ export function Select({
     (hint ? uncontrolledAriaDescribedBy : undefined);
   const ariaErrorMessage =
     controlledAriaErrorMessage ||
-    (error ? uncontrolledAriaErrorMessage : undefined);
+    (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
   const s = styles({
     sizer,
@@ -75,7 +75,7 @@ export function Select({
       explainer={explainer}
       hint={hint}
       hintId={ariaDescribedBy}
-      error={error}
+      error={error !== true ? error : undefined}
       controlId={id}
       errorId={ariaErrorMessage}
       required={required}

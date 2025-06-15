@@ -1,22 +1,22 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { Field } from './Field';
-import * as Stories from './Field.stories';
+import { Fieldset } from './Fieldset';
+import * as Stories from './Fieldset.stories';
 
 <Meta of={Stories} />
 
-# `<Field>`
+# `<Fieldset>`
 
-Field wraps one form control in a standard field layout (label, hint, error
-message, etc).
+Fieldset wraps multiple form controls in a standard field layout (label, hint,
+error message, etc).
 
 ## Props
 
 In addition to the commonly used props below, you can pass any prop accepted by
-the [&lt;div&gt;](htps://react.dev/reference/react-dom/components/common)
-element, which will be applied to the Field's root div.
+the [&lt;fieldset&gt;](htps://react.dev/reference/react-dom/components/common)
+element, which will be applied to the Field's root element.
 
-<ArgTypes of={Field} sort="requiredFirst" />
+<ArgTypes of={Fieldset} sort="requiredFirst" />
 
 ## Basic elements
 
@@ -30,16 +30,16 @@ Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
 In keeping with the mobile-first philosophy of Tailwind, the default size is
 "small".
 
-<Canvas of={Stories.AllSizes} sourceState="shown" />
+<Canvas of={Stories.AllSizes} />
 
 ## Errors
 
 To add an error message, use the `error` prop.
 
-<Canvas of={Stories.Error} sourceState="shown" />
+<Canvas of={Stories.Error} />
 
 ## Required fields
 
 The `required` prop is used to add an asterisk to the label.
 
-<Canvas of={Stories.Required} sourceState="shown" />
+<Canvas of={Stories.Required} />
