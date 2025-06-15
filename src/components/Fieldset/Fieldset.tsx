@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { FieldSizer } from '@/constants';
-
 import { randomId } from '@/utils/randomId';
 
 import { styles } from './styles';

@@ -1,11 +1,9 @@
 import * as React from 'react';
 
-import { FieldSizer } from '@/constants';
-
-import { randomId } from '@/utils/randomId';
-
 import { Field } from '@/components/Field';
-import { FieldControl } from '@/components/FieldControl/FieldControl';
+import { FieldControl } from '@/components/FieldControl';
+import { FieldSizer } from '@/constants';
+import { randomId } from '@/utils/randomId';
 
 import { styles } from './styles';
 

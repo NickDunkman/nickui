@@ -11,13 +11,7 @@ export default {
   ],
 
   // ** settings for @trivago/prettier-plugin-sort-imports **
-  importOrder: [
-    '^@\\/constants',
-    '^@\\/utils\\/',
-    '^@\\/components\\/',
-    '^\\.\\.\\/',
-    '^\\.\\/',
-  ],
+  importOrder: ['^@\\/', '^\\.\\.\\/', '^\\.\\/'],
   // add empty lines between the groups defined above
   importOrderSeparation: true,
   // sort individual pieces within each import, like:
