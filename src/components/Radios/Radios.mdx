@@ -1,0 +1,57 @@
+import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
+
+import { Radios } from './Radios';
+import * as Stories from './Radios.stories';
+
+<Meta of={Stories} />
+
+# `<Radios>`
+
+Radios renders multiple Radio as one field in a Fieldset
+
+## Props
+
+<ArgTypes of={Stories} sort="requiredFirst" />
+
+## Adding radios
+
+In most situations, you can just use the `options` prop to configure the
+individual radios. The Radios component will manage the interior layout.
+
+<Canvas of={Stories.StandardLayout} sourceState="shown" />
+
+For more fine-grained control of the individual radios, such as to add
+additional elements, or take control of the individual Radio props, you can pass
+a render function as the `children`.
+
+<strong>
+  As shown, it’s important to use the callback provided to pass props down to
+  the individual radios, so that group is functional.
+</strong>
+
+<Source
+  code={`
+    <Radios
+      label="How custom do you like it?"
+      defaultValue="very"
+    >
+      {(getRadioProps) => (
+        <div className="flex flex-row items-baseline gap-x-4">
+          <Radio
+            {...getRadioProps({ value: 'kinda' })}
+            label="A little custom"
+          />
+          <span className="text-xs text-gray-500">or</span>
+          <Radio
+            {...getRadioProps({ value: 'very' })}
+            label={<div className="font-bold text-blue-500">Very custom</div>}
+          />
+        </div>
+      )}
+    </Radios>
+  `}
+  dark
+  language="tsx"
+/>
+
+<Canvas of={Stories.CustomLayout} sourceState="none" />
