@@ -6,6 +6,8 @@ import { clsw } from '@/utils/clsw';
 import { styles } from './styles';
 
 interface RadioProps extends Omit<React.ComponentProps<'input'>, 'type'> {
+  /** Adds a label to the right of the Radio */
+  children?: React.ReactNode;
   /** Add utility classes */
   className?: string;
   /**
@@ -20,8 +22,6 @@ interface RadioProps extends Omit<React.ComponentProps<'input'>, 'type'> {
   defaultChecked?: boolean;
   /** Prevents the user from interacting with the Radio */
   disabled?: boolean;
-  /** Adds a label to the right of the Radio */
-  label?: React.ReactNode;
   /** Called when the checked state changes  */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /** Changes the size of the field ("small", "medium", "large") */
@@ -33,8 +33,8 @@ interface RadioProps extends Omit<React.ComponentProps<'input'>, 'type'> {
  * @param props {@link RadioProps}
  */
 export function Radio({
+  children,
   className,
-  label,
   disabled = false,
   sizer,
   ...inputProps
@@ -50,7 +50,7 @@ export function Radio({
         {...inputProps}
       />
       <span className={s.indicator()} />
-      <span className={s.label()}>{label}</span>
+      <span className={s.label()}>{children}</span>
     </label>
   );
 }

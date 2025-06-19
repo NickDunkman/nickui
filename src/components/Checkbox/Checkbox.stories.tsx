@@ -13,13 +13,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Unchecked: Story = {
   args: {
-    label: 'Unchecked Checkbox',
+    children: 'Unchecked Checkbox',
   },
 };
 
 export const Controlled: Story = {
   args: {
-    label: 'Controlled Checkbox',
+    children: 'Controlled Checkbox',
     checked: true,
     onChange: () => {},
   },
@@ -27,21 +27,21 @@ export const Controlled: Story = {
 
 export const Uncontrolled: Story = {
   args: {
-    label: 'Uncontrolled Checkbox',
+    children: 'Uncontrolled Checkbox',
     defaultChecked: true,
   },
 };
 
 export const Disabled: Story = {
   args: {
-    label: 'Disabled Checkbox',
+    children: 'Disabled Checkbox',
     disabled: true,
   },
 };
 
 export const DisabledChecked: Story = {
   args: {
-    label: 'Disabled & checked Checkbox',
+    children: 'Disabled & checked Checkbox',
     disabled: true,
     defaultChecked: true,
   },
@@ -62,7 +62,7 @@ export const AllControlStates: Story = {
 
 export const Small: Story = {
   args: {
-    label: 'Small checkbox (default)',
+    children: 'Small checkbox (default)',
     defaultChecked: true,
   },
 };
@@ -70,7 +70,7 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     sizer: Checkbox.sizer.medium,
-    label: 'Medium checkbox',
+    children: 'Medium checkbox',
     defaultChecked: true,
   },
 };
@@ -78,7 +78,7 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     sizer: Checkbox.sizer.large,
-    label: 'Large checkbox',
+    children: 'Large checkbox',
     defaultChecked: true,
   },
 };

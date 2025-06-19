@@ -13,13 +13,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Unchecked: Story = {
   args: {
-    label: 'Unchecked Radio',
+    children: 'Unchecked Radio',
   },
 };
 
 export const Controlled: Story = {
   args: {
-    label: 'Controlled Radio',
+    children: 'Controlled Radio',
     checked: true,
     onChange: () => {},
   },
@@ -27,21 +27,21 @@ export const Controlled: Story = {
 
 export const Uncontrolled: Story = {
   args: {
-    label: 'Uncontrolled Radio',
+    children: 'Uncontrolled Radio',
     defaultChecked: true,
   },
 };
 
 export const Disabled: Story = {
   args: {
-    label: 'Disabled Radio',
+    children: 'Disabled Radio',
     disabled: true,
   },
 };
 
 export const DisabledChecked: Story = {
   args: {
-    label: 'Disabled & checked Radio',
+    children: 'Disabled & checked Radio',
     disabled: true,
     defaultChecked: true,
   },
@@ -62,7 +62,7 @@ export const AllControlStates: Story = {
 
 export const Small: Story = {
   args: {
-    label: 'Small Radio (default)',
+    children: 'Small Radio (default)',
     defaultChecked: true,
   },
 };
@@ -70,7 +70,7 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     sizer: Radio.sizer.medium,
-    label: 'Medium Radio',
+    children: 'Medium Radio',
     defaultChecked: true,
   },
 };
@@ -78,7 +78,7 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     sizer: Radio.sizer.large,
-    label: 'Large Radio',
+    children: 'Large Radio',
     defaultChecked: true,
   },
 };

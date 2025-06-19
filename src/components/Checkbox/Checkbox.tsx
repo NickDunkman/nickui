@@ -6,6 +6,8 @@ import { clsw } from '@/utils/clsw';
 import { styles } from './styles';
 
 interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
+  /** Adds a label to the right of the checkbox */
+  children?: React.ReactNode;
   /** Add utility classes */
   className?: string;
   /**
@@ -20,8 +22,6 @@ interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
   defaultChecked?: boolean;
   /** Prevents the user from interacting with the Checkbox */
   disabled?: boolean;
-  /** Adds a label to the right of the checkbox */
-  label?: React.ReactNode;
   /** Called when the checked state changes  */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /** Changes the size of the field ("small", "medium", "large") */
@@ -33,8 +33,8 @@ interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
  * @param props {@link CheckboxProps}
  */
 export function Checkbox({
+  children,
   className,
-  label,
   disabled = false,
   sizer = FieldSizer.small,
   ...inputProps
@@ -50,7 +50,7 @@ export function Checkbox({
         {...inputProps}
       />
       <span className={s.indicator()} />
-      <span className={s.label()}>{label}</span>
+      <span className={s.label()}>{children}</span>
     </label>
   );
 }

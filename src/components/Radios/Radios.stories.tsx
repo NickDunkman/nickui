@@ -40,12 +40,11 @@ export const CustomLayout: Story = {
     defaultValue: 'very',
     children: (getRadioProps) => (
       <div className="flex flex-row items-baseline gap-x-4">
-        <Radio {...getRadioProps({ value: 'kinda' })} label="A little custom" />
+        <Radio {...getRadioProps({ value: 'kinda' })}>A little custom</Radio>
         <span className="text-xs text-gray-500">or</span>
-        <Radio
-          {...getRadioProps({ value: 'very' })}
-          label={<div className="font-bold text-blue-500">Very custom</div>}
-        />
+        <Radio {...getRadioProps({ value: 'very' })}>
+          <div className="font-bold text-blue-500">Very custom 👨‍🎨</div>
+        </Radio>
       </div>
     ),
   },

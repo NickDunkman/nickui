@@ -106,12 +106,13 @@ export function Radios({
                 key={option.value?.toString()}
                 className={option.className}
                 sizer={sizer}
-                label={option.label}
                 {...getRadioProps({
                   value: option.value,
                   disabled: option.disabled,
                 })}
-              />
+              >
+                {option.label}
+              </Radio>
             ))}
           </>
         )}
