@@ -6,8 +6,6 @@ import { FieldSizer } from '@/constants';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 
-import { Field } from '../Field';
-
 /**
  * These are all the RadioGroup-specific props (it also takes all props that
  * Fieldset takes)
