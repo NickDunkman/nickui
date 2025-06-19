@@ -50,7 +50,14 @@ export function Checkbox({
         {...inputProps}
       />
       <span className={s.indicator()} />
-      <span className={s.label()}>{children}</span>
+      {/*
+        This empty element exists to create an extra flex-gap between the
+        absolutely-positioned indicator & the label. It contains a zero-width
+        character so that it doesn’t affect vertical alignment, such as when
+        the Checkbox is inside a `flex items-baseline` parent.
+      */}
+      <span>&#8203;</span>
+      {children && <span className={s.label()}>{children}</span>}
     </label>
   );
 }
