@@ -13,8 +13,9 @@ import { randomId } from '@/utils/randomId';
 interface RadiosProps {
   /** The name applied to each of the radios */
   name?: string;
-  /** Render function used to render customized layouts within the group (it's
-   * more common to use the `options` prop!)
+  /**
+   * Render function used to render customized radios. Call the provided
+   * callback to get props to pass down to each radio.
    */
   children?: (
     getRadioProps: (getRadioProps: {
@@ -22,22 +23,22 @@ interface RadiosProps {
       disabled?: boolean;
     }) => React.ComponentProps<'input'>,
   ) => React.ReactNode;
-  /** Adds radios to the group in the standard layout (for a customized layout,
-   * use `children` instead) */
+  /** Adds radios in the standard layout */
   options?: {
-    className?: string;
     value: React.ComponentProps<'input'>['value'];
     label: React.ReactNode;
     disabled?: boolean;
   }[];
   /** Sets all of the radios in the group to disabled */
   disabled?: boolean;
-  /** Called when the group's value changes */
+  /** Called when the group’s value changes */
   onChange?: React.ComponentProps<'input'>['onChange'];
-  /** Sets the group's value when using as a
-   * [controlled component](https://reactjs.org/link/controlled-components) */
+  /**
+   * Sets the checked radio when using it as a
+   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
+   */
   value?: React.ComponentProps<'input'>['value'];
-  /** Sets the group's value when using as an _uncontrolled_ component */
+  /** Sets the checked radio when using it as an uncontrolled component */
   defaultValue?: React.ComponentProps<'input'>['defaultValue'];
 }
 
@@ -82,10 +83,10 @@ export function Radios({
   }) {
     return {
       name,
-      disabled: disabled || radioDisabled,
-      onChange: handleRadioChange,
       value: radioValue,
       checked: radioValue === value,
+      onChange: handleRadioChange,
+      disabled: disabled || radioDisabled,
     };
   }
 
@@ -104,13 +105,12 @@ export function Radios({
           })
         }
       >
-        {/* When there are `options`, render a standard Radio layout */}
+        {/* Standard layout using `options` */}
         {options && (
           <>
             {options.map((option) => (
               <Radio
                 key={option.value?.toString()}
-                className={option.className}
                 sizer={sizer}
                 {...getRadioProps({
                   value: option.value,
@@ -122,7 +122,8 @@ export function Radios({
             ))}
           </>
         )}
-        {/* Else, render the radios using the children-render-function */}
+
+        {/* Customized layout using `childre4n` */}
         {!options && children?.(getRadioProps)}
       </div>
     </Fieldset>

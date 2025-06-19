@@ -50,7 +50,7 @@ export const CustomLayout: Story = {
         <Radio
           {...getRadioProps({ value: 'too', disabled: true })}
           className="-rotate-30"
-          sizer={Radio.sizer.medium}
+          sizer={Radio.sizer.large}
         >
           Too custom
         </Radio>
