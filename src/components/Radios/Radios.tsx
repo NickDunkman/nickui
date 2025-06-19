@@ -100,7 +100,7 @@ export function Radios({
           // TODO: adjust gaps according to sizer
           options &&
           clsw('flex flex-col', {
-            'gap-y-2': sizer === FieldSizer.small,
+            'gap-y-2': !sizer || sizer === FieldSizer.small,
             'gap-y-2.5': sizer === FieldSizer.medium,
             'gap-y-3': sizer === FieldSizer.large,
           })
