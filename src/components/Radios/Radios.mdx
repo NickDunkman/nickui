@@ -35,21 +35,41 @@ a render function as the `children`.
   code={`
     <Radios
       label="How custom do you like it?"
-      defaultValue="very"
+      defaultValue="pretty"
     >
       {(getRadioProps) => (
         <div className="flex flex-row items-baseline gap-x-4">
-          <Radio {...getRadioProps({ value: 'kinda' })}>
-            A little custom
+          <Radio {...getRadioProps({ value: 'kinda' })}>A little custom</Radio>
+          <span className="text-xs text-gray-500">or</span>
+          <Radio {...getRadioProps({ value: 'pretty' })}>
+            <div className="font-bold text-blue-500">Pretty custom</div>
           </Radio>
           <span className="text-xs text-gray-500">or</span>
-          <Radio {...getRadioProps({ value: 'very' })}>
-            <div className="font-bold text-blue-500">Very custom</div>
-          </Radio>
-        </div>
+          <Radio
+            {...getRadioProps({ value: 'too', disabled: true })}
+            className="-rotate-30"
+          >
+            Too custom
+          </div>
       )}
     </Radios>
   `}
   dark
   language="tsx"
 />
+
+## Fieldset layout
+
+Radios can optionally have each of the components of a standard
+[Fieldset](/docs/components-fieldset--docs): label, explainer, hint, and error.
+The accessibility of all these pieces is automatically handled for you!
+
+<Canvas of={Stories.Fieldset} />
+
+## Sizing
+
+Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
+In keeping with the mobile-first philosophy of Tailwind, the default size is
+"small".
+
+<Canvas of={Stories.AllSizes} />

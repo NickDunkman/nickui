@@ -52,7 +52,7 @@ export function Fieldset({
   const [hintId] = React.useState<string>(randomId());
   const [errorId] = React.useState<string>(randomId());
 
-  // Show the legend if we have at least one of the label or description
+  // Show the legend if we have at least one of the label or explainer
   const showLegend = !!(label || explainer);
 
   const s = styles({ sizer });
@@ -97,15 +97,19 @@ export function Fieldset({
 
       <div>{formControls}</div>
 
-      {error && (
-        <div id={errorId} className={s.error()} aria-live="assertive">
-          {error}
-        </div>
-      )}
+      {(!!error || !!hint) && (
+        <div className={s.footer()}>
+          {error && (
+            <div id={errorId} className={s.error()} aria-live="assertive">
+              {error}
+            </div>
+          )}
 
-      {hint && (
-        <div id={hintId} className={s.hint()}>
-          {hint}
+          {hint && (
+            <div id={hintId} className={s.hint()}>
+              {hint}
+            </div>
+          )}
         </div>
       )}
     </fieldset>

@@ -28,7 +28,7 @@ export const styles = tv({
     sizer: {
       [FieldSizer.small]: {
         root: 'gap-2 pl-3.5 text-xs',
-        indicator: 'size-3.5 top-0.5 bg-size-[8px_8px]',
+        indicator: 'size-3.5 top-0.25 bg-size-[8px_8px]',
       },
       [FieldSizer.medium]: {
         root: 'gap-2.5 pl-4 text-sm',

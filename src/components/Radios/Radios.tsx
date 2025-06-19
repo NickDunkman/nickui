@@ -3,7 +3,10 @@ import * as React from 'react';
 import { Fieldset } from '@/components/Fieldset';
 import { Radio } from '@/components/Radio';
 import { FieldSizer } from '@/constants';
+import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
+
+import { Field } from '../Field';
 
 /**
  * These are all the RadioGroup-specific props (it also takes all props that
@@ -95,7 +98,12 @@ export function Radios({
           // create a standard layout when self-rendering the Radios
           // (otherwise, the caller should manage the layout within `children`)
           // TODO: adjust gaps according to sizer
-          options && 'flex flex-col gap-y-2'
+          options &&
+          clsw('flex flex-col', {
+            'gap-y-2': sizer === FieldSizer.small,
+            'gap-y-2.5': sizer === FieldSizer.medium,
+            'gap-y-3': sizer === FieldSizer.large,
+          })
         }
       >
         {/* When there are `options`, render a standard Radio layout */}
