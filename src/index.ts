@@ -1,5 +1,6 @@
 export { Button } from '@/components/Button';
 export { Checkbox } from '@/components/Checkbox';
+export { Checkboxes } from '@/components/Checkboxes';
 export { Field } from '@/components/Field';
 export { Fieldset } from '@/components/Fieldset';
 export { Radio } from '@/components/Radio';

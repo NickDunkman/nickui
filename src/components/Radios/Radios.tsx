@@ -6,10 +6,6 @@ import { FieldSizer } from '@/constants';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 
-/**
- * These are all the RadioGroup-specific props (it also takes all props that
- * Fieldset takes)
- */
 interface RadiosProps {
   /** The name applied to each of the radios */
   name?: string;
@@ -18,7 +14,7 @@ interface RadiosProps {
    * callback to get props to pass down to each radio.
    */
   children?: (
-    getRadioProps: (getRadioProps: {
+    radio: (radio: {
       value: React.ComponentProps<'input'>['value'];
       disabled?: boolean;
     }) => React.ComponentProps<'input'>,
@@ -29,16 +25,16 @@ interface RadiosProps {
     label: React.ReactNode;
     disabled?: boolean;
   }[];
-  /** Sets all of the radios in the group to disabled */
+  /** Disables all of the radios */
   disabled?: boolean;
-  /** Called when the group’s value changes */
+  /** Called when the value changes */
   onChange?: React.ComponentProps<'input'>['onChange'];
   /**
-   * Sets the checked radio when using it as a
+   * Sets the value when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
    */
   value?: React.ComponentProps<'input'>['value'];
-  /** Sets the checked radio when using it as an uncontrolled component */
+  /** Sets the value when using it as an uncontrolled component */
   defaultValue?: React.ComponentProps<'input'>['defaultValue'];
 }
 
@@ -52,7 +48,7 @@ export function Radios({
   value: controlledValue,
   defaultValue,
   sizer,
-  ...fieldsetLayoutProps
+  ...otherFieldsetProps
 }: RadiosProps & Omit<React.ComponentProps<typeof Fieldset>, 'children'>) {
   // Generate a `name` to use if none is provided, so that the child Radios
   // always function together.
@@ -73,8 +69,8 @@ export function Radios({
     onChange?.(event);
   }
 
-  // This function will generate Props to pass to each Radio
-  function getRadioProps({
+  // This function will generate props to pass to each Radio
+  function radio({
     value: radioValue,
     disabled: radioDisabled = false,
   }: {
@@ -91,12 +87,11 @@ export function Radios({
   }
 
   return (
-    <Fieldset sizer={sizer} {...fieldsetLayoutProps}>
+    <Fieldset sizer={sizer} {...otherFieldsetProps}>
       <div
         className={
           // create a standard layout when self-rendering the Radios
           // (otherwise, the caller should manage the layout within `children`)
-          // TODO: adjust gaps according to sizer
           options &&
           clsw('flex flex-col', {
             'gap-y-2': !sizer || sizer === FieldSizer.small,
@@ -112,7 +107,7 @@ export function Radios({
               <Radio
                 key={option.value?.toString()}
                 sizer={sizer}
-                {...getRadioProps({
+                {...radio({
                   value: option.value,
                   disabled: option.disabled,
                 })}
@@ -124,7 +119,7 @@ export function Radios({
         )}
 
         {/* Customized layout using `childre4n` */}
-        {!options && children?.(getRadioProps)}
+        {!options && children?.(radio)}
       </div>
     </Fieldset>
   );

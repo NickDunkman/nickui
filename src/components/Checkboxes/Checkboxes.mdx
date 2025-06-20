@@ -1,0 +1,93 @@
+import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
+
+import { FieldControl } from '@/components/FieldControl';
+
+import { Checkboxes } from './Checkboxes';
+import * as Stories from './Checkboxes.stories';
+
+<Meta of={Stories} />
+
+# `<Checkboxes>`
+
+Renders multiple checkboxes as one field in a Fieldset.
+
+Form libraries like [Formik](https://formik.org/) rely on `onChange` events to
+trigger updates to field values, and such events cannot have multiple targets.
+Therefore, to function as one holistic field whose value represents all of the
+currently checked checkboxes, the component's value is a single delimited-string
+that is managed using a `<input type="hidden">`. Each checkbox represents a
+substring that can be added to or removed from the delimited-string by toggling
+the checked status.
+
+## Checkboxes-specific props
+
+<ArgTypes of={Stories} sort="requiredFirst" />
+
+## Common field props
+
+Text also accepts all of the common [Fieldset](/docs/forms-fieldset--docs)
+props.
+
+<ArgTypes of={FieldControl} sort="requiredFirst" />
+
+## Adding checkboxes
+
+In most situations, you can just use the `options` prop to configure the
+individual checkboxes. The Checkboxes component will manage the interior layout.
+
+<Canvas of={Stories.StandardLayout} sourceState="shown" />
+
+For more fine-grained control of the individual checkboxes, such as to add
+additional elements, or take control of the individual Checkbox props, you can
+pass a render function as the `children`.
+
+<strong>
+  As shown, it’s important to use the callback provided to pass props down to
+  the individual checkboxes, so that group is functional.
+</strong>
+
+<Canvas of={Stories.CustomLayout} sourceState="none" />
+
+<Source
+  code={`
+    <Checkboxes
+      label="How custom do you like it?"
+      defaultValue="pretty"
+    >
+      {(checkbox) => (
+        <div className="flex flex-row items-baseline gap-x-4">
+          <Checkbox {...checkbox({ value: 'kinda' })}>A little custom</Checkbox>
+          <span className="text-xs text-gray-500">or</span>
+          <Checkbox {...checkbox({ value: 'pretty' })}>
+            <div className="font-bold text-blue-500">Pretty custom</div>
+          </Checkbox>
+          <span className="text-xs text-gray-500">or</span>
+          <Checkbox
+            {...checkbox({ value: 'too', disabled: true })}
+            className="-rotate-30"
+            sizer={Checkbox.sizer.large}
+          >
+            Too custom
+          </Checkbox>
+      )}
+    </Checkboxes>
+  `}
+  dark
+  language="tsx"
+/>
+
+## Fieldset layout
+
+Checkboxes can optionally have each of the components of a standard
+[Fieldset](/docs/forms-fieldset--docs): label, explainer, hint, and error. The
+accessibility of all these pieces is automatically handled for you!
+
+<Canvas of={Stories.Fieldset} />
+
+## Sizing
+
+Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
+In keeping with the mobile-first philosophy of Tailwind, the default size is
+"small".
+
+<Canvas of={Stories.AllSizes} />
