@@ -1,4 +1,4 @@
-import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
 import { FieldControl } from '../FieldControl/FieldControl';
 
@@ -46,3 +46,37 @@ In keeping with the mobile-first philosophy of Tailwind, the default size is
 "small".
 
 <Canvas of={Stories.AllSizes} sourceState="shown" />
+
+## Formik compatibility
+
+The Text component implements all of the necessary props to be used as a Formik
+field!
+
+<Canvas of={Stories.Formik} sourceState="none" />
+
+<Source
+  dark
+  language="tsx"
+  code={`
+    <formik.Formik initialValues={{ firstName: 'Nick' }} onSubmit={() => {}}>
+      {(bag) => (
+        <>
+          <formik.Field
+            name="firstName"
+            validate={(value: string) =>
+              value !== 'Nick' ? 'That name isn’t Nick!' : null
+            }
+            as={Text}
+            sizer={Text.sizer.medium}
+            label="First name"
+            hint="Try editting!"
+            error={bag.errors.firstName}
+          />
+          <pre className="mt-6 bg-amber-100 p-3 font-mono text-xs">
+            {JSON.stringify(bag, null, 2)}
+          </pre>
+        </>
+      )}
+    </formik.Formik>
+  `}
+/>

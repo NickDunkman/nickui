@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import * as formik from 'formik';
 import * as React from 'react';
 
 import { Text } from './Text';
@@ -98,5 +99,31 @@ export const AllSizes: Story = {
       <Text {...Medium.args} />
       <Text {...Large.args} />
     </div>
+  ),
+};
+
+export const Formik: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <formik.Formik initialValues={{ firstName: 'Nick' }} onSubmit={() => {}}>
+      {(bag) => (
+        <>
+          <formik.Field
+            name="firstName"
+            validate={(value: string) =>
+              value !== 'Nick' ? 'That name isn’t Nick!' : null
+            }
+            as={Text}
+            sizer={Text.sizer.medium}
+            label="First name"
+            hint="Try editting!"
+            error={bag.errors.firstName}
+          />
+          <pre className="mt-6 bg-amber-100 p-3 font-mono text-xs">
+            {JSON.stringify(bag, null, 2)}
+          </pre>
+        </>
+      )}
+    </formik.Formik>
   ),
 };
