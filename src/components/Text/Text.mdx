@@ -49,8 +49,8 @@ In keeping with the mobile-first philosophy of Tailwind, the default size is
 
 ## Formik compatibility
 
-The Text component implements all of the necessary props to be used as a Formik
-field!
+The Text component implements all of the necessary props to be used as a
+[Formik](https://formik.org/docs/api/field) field!
 
 <Canvas of={Stories.Formik} sourceState="none" />
 
@@ -64,7 +64,7 @@ field!
           <formik.Field
             name="firstName"
             validate={(value: string) =>
-              value !== 'Nick' ? 'That name isn’t Nick!' : null
+              value !== 'Nick' ? 'That name isn’t Nick!' : undefined
             }
             as={Text}
             sizer={Text.sizer.medium}

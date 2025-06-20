@@ -111,7 +111,7 @@ export const Formik: Story = {
           <formik.Field
             name="firstName"
             validate={(value: string) =>
-              value !== 'Nick' ? 'That name isn’t Nick!' : null
+              value !== 'Nick' ? 'That name isn’t Nick!' : undefined
             }
             as={Text}
             sizer={Text.sizer.medium}
