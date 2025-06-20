@@ -32,6 +32,8 @@ a render function as the `children`.
 <Canvas of={Stories.CustomLayout} sourceState="none" />
 
 <Source
+  dark
+  language="tsx"
   code={`
     <Radios
       label="How custom do you like it?"
@@ -52,11 +54,10 @@ a render function as the `children`.
           >
             Too custom
           </Radio>
+        </div>
       )}
     </Radios>
   `}
-  dark
-  language="tsx"
 />
 
 ## Fieldset layout

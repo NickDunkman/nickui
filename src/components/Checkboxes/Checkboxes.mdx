@@ -49,6 +49,8 @@ pass a render function as the `children`.
 <Canvas of={Stories.CustomLayout} sourceState="none" />
 
 <Source
+  dark
+  language="tsx"
   code={`
     <Checkboxes
       label="How custom do you like it?"
@@ -69,11 +71,10 @@ pass a render function as the `children`.
           >
             Too custom
           </Checkbox>
+        </div>
       )}
     </Checkboxes>
   `}
-  dark
-  language="tsx"
 />
 
 ## Fieldset layout
