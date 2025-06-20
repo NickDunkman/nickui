@@ -39,18 +39,16 @@ export const CustomLayout: Story = {
   args: {
     label: 'How custom do you like it?',
     defaultValue: 'pretty',
-    children: (getRadioProps) => (
+    children: (checkbox) => (
       <div className="flex flex-row items-baseline gap-x-4">
-        <Checkbox {...getRadioProps({ value: 'kinda' })}>
-          A little custom
-        </Checkbox>
+        <Checkbox {...checkbox({ value: 'kinda' })}>A little custom</Checkbox>
         <span className="text-xs text-gray-500">or</span>
-        <Checkbox {...getRadioProps({ value: 'pretty' })}>
+        <Checkbox {...checkbox({ value: 'pretty' })}>
           <div className="font-bold text-blue-500">Pretty custom 👨‍🎨</div>
         </Checkbox>
         <span className="text-xs text-gray-500">or</span>
         <Checkbox
-          {...getRadioProps({ value: 'too', disabled: true })}
+          {...checkbox({ value: 'too', disabled: true })}
           className="-rotate-30"
           sizer={Checkbox.sizer.large}
         >

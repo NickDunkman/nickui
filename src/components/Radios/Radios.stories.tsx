@@ -39,16 +39,16 @@ export const CustomLayout: Story = {
   args: {
     label: 'How custom do you like it?',
     defaultValue: 'pretty',
-    children: (getRadioProps) => (
+    children: (radio) => (
       <div className="flex flex-row items-baseline gap-x-4">
-        <Radio {...getRadioProps({ value: 'kinda' })}>A little custom</Radio>
+        <Radio {...radio({ value: 'kinda' })}>A little custom</Radio>
         <span className="text-xs text-gray-500">or</span>
-        <Radio {...getRadioProps({ value: 'pretty' })}>
+        <Radio {...radio({ value: 'pretty' })}>
           <div className="font-bold text-blue-500">Pretty custom 👨‍🎨</div>
         </Radio>
         <span className="text-xs text-gray-500">or</span>
         <Radio
-          {...getRadioProps({ value: 'too', disabled: true })}
+          {...radio({ value: 'too', disabled: true })}
           className="-rotate-30"
           sizer={Radio.sizer.large}
         >
