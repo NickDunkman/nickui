@@ -45,6 +45,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-storybook": "^9.0.2",
+    "formik": "^2.4.6",
     "playwright": "^1.52.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.12",
