@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import * as formik from 'formik';
 import * as React from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Text } from './Text';
 
@@ -102,28 +102,53 @@ export const AllSizes: Story = {
   ),
 };
 
-export const Formik: Story = {
+function RHFExample() {
+  const {
+    register,
+    watch,
+    formState: {
+      defaultValues,
+      errors,
+      dirtyFields,
+      isDirty,
+      isValid,
+      touchedFields,
+    },
+  } = useForm<{ firstName: string }>({
+    mode: 'all',
+    defaultValues: { firstName: 'Nick' },
+  });
+
+  return (
+    <>
+      <Text
+        {...register('firstName', {
+          validate: (value) => value === 'Nick' || 'That name isn’t Nick!',
+        })}
+        sizer={Text.sizer.medium}
+        label="First name"
+        hint="Try editting!"
+        error={errors.firstName?.message}
+      />
+      <pre className="mt-6 bg-amber-100 p-3 font-mono text-xs">
+        {JSON.stringify(
+          {
+            defaultValues,
+            dirtyFields,
+            isDirty,
+            isValid,
+            touchedFields,
+            watch: watch(),
+          },
+          null,
+          2,
+        )}
+      </pre>
+    </>
+  );
+}
+
+export const ReactHookForm: Story = {
   tags: ['!dev', '!test'],
-  render: (_args) => (
-    <formik.Formik initialValues={{ firstName: 'Nick' }} onSubmit={() => {}}>
-      {(bag) => (
-        <>
-          <formik.Field
-            name="firstName"
-            validate={(value: string) =>
-              value !== 'Nick' ? 'That name isn’t Nick!' : undefined
-            }
-            as={Text}
-            sizer={Text.sizer.medium}
-            label="First name"
-            hint="Try editting!"
-            error={bag.errors.firstName}
-          />
-          <pre className="mt-6 bg-amber-100 p-3 font-mono text-xs">
-            {JSON.stringify(bag, null, 2)}
-          </pre>
-        </>
-      )}
-    </formik.Formik>
-  ),
+  render: () => <RHFExample />,
 };

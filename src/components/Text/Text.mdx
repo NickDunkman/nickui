@@ -1,5 +1,7 @@
 import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
+import { FormikDemo } from '@/docs/FormikDemo';
+
 import { FieldControl } from '../FieldControl/FieldControl';
 
 import { Text } from './Text';
@@ -47,36 +49,45 @@ In keeping with the mobile-first philosophy of Tailwind, the default size is
 
 <Canvas of={Stories.AllSizes} sourceState="shown" />
 
-## Formik compatibility
+## React Hook Form compatibility
 
-The Text component implements all of the necessary props to be used as a
-[Formik](https://formik.org/docs/api/field) field!
+The Text component also works with react-hook-form!
 
-<Canvas of={Stories.Formik} sourceState="none" />
+<Canvas of={Stories.ReactHookForm} sourceState="none" />
 
 <Source
   dark
   language="tsx"
   code={`
-    <formik.Formik initialValues={{ firstName: 'Nick' }} onSubmit={() => {}}>
-      {(bag) => (
-        <>
-          <formik.Field
-            name="firstName"
-            validate={(value: string) =>
-              value !== 'Nick' ? 'That name isn’t Nick!' : undefined
-            }
-            as={Text}
-            sizer={Text.sizer.medium}
-            label="First name"
-            hint="Try editting!"
-            error={bag.errors.firstName}
-          />
-          <pre className="mt-6 bg-amber-100 p-3 font-mono text-xs">
-            {JSON.stringify(bag, null, 2)}
-          </pre>
-        </>
-      )}
-    </formik.Formik>
+    const {
+      register,
+      formState: { errors },
+    } = useForm<{ firstName: string }>({
+      mode: 'all',
+      defaultValues: { firstName: 'Nick' },
+    });
+  
+    return (
+      <Text
+        {...register('firstName', {
+          validate: (value) => value === 'Nick' || 'That name isn’t Nick!',
+        })}
+        sizer={Text.sizer.medium}
+        label="First name"
+        hint="Try editting!"
+        error={errors.firstName?.message}
+      />
+    );
   `}
+/>
+
+<FormikDemo
+  fieldName="firstName"
+  initialValue="Nick"
+  component={Text}
+  componentProps={{
+    label: 'First name',
+    hint: 'Try editting me!',
+    sizer: Text.sizer.medium,
+  }}
 />
