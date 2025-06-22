@@ -1,6 +1,7 @@
 import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
 import { FieldControl } from '@/components/FieldControl';
+import { FormikDemo } from '@/docs/FormikDemo';
 
 import { Checkboxes } from './Checkboxes';
 import * as Stories from './Checkboxes.stories';
@@ -92,3 +93,23 @@ In keeping with the mobile-first philosophy of Tailwind, the default size is
 "small".
 
 <Canvas of={Stories.AllSizes} />
+
+<FormikDemo
+  fieldName="fullName"
+  initialValue="nick,dunkman"
+  component={Checkboxes}
+  componentProps={{
+    label: 'Full name',
+    hint: 'Try editting me!',
+    options: [
+      {
+        value: 'nick',
+        label: 'Nick',
+      },
+      {
+        value: 'dunkman',
+        label: 'Dunkman',
+      },
+    ],
+  }}
+/>

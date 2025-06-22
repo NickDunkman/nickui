@@ -81,9 +81,7 @@ return (
     onBlur={form.handleBlur}
     value={form.values.${fieldName}}
     error={form.errors.${fieldName}}
-    ${Object.keys(componentProps)
-      .map((key) => `${key}="${componentProps[key]?.toString()}"`)
-      .join('\n    ')}
+    // ...
   />
 );
           `}

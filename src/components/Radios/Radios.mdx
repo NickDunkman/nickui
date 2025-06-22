@@ -1,5 +1,7 @@
 import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
+import { FormikDemo } from '@/docs/FormikDemo';
+
 import { Radios } from './Radios';
 import * as Stories from './Radios.stories';
 
@@ -75,3 +77,23 @@ In keeping with the mobile-first philosophy of Tailwind, the default size is
 "small".
 
 <Canvas of={Stories.AllSizes} />
+
+<FormikDemo
+  fieldName="firstName"
+  initialValue="nick"
+  component={Radios}
+  componentProps={{
+    label: 'First name',
+    hint: 'Try editting me!',
+    options: [
+      {
+        value: 'nick',
+        label: 'Nick',
+      },
+      {
+        value: 'dunkman',
+        label: 'Dunkman',
+      },
+    ],
+  }}
+/>
