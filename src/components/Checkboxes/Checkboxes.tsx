@@ -65,6 +65,7 @@ export function Checkboxes({
   sizer,
   ...otherFieldsetProps
 }: CheckboxesProps & Omit<React.ComponentProps<typeof Fieldset>, 'children'>) {
+  const containerRef = React.createRef<HTMLDivElement>();
   const hiddenInputRef = React.createRef<HTMLInputElement>();
 
   // track a value for *uncontrolled* mode, if necessary
@@ -80,7 +81,12 @@ export function Checkboxes({
     const newValues = event.target.checked
       ? [...values, event.target.value]
       : values.filter((v) => v !== event.target.value);
-    const newValue = newValues.sort().join(delimiter);
+
+    // Sub-values within the value should be sorted according to the order
+    // their corresponding checkbox appears in the DOM!
+    const newValue = newValues
+      .sort(sortValuesByDOMOrder(containerRef))
+      .join(delimiter);
 
     if (!isControlledComponent) {
       setUncontrolledValue(newValue);
@@ -98,7 +104,7 @@ export function Checkboxes({
     }
   }
 
-  // This function will generate Props to pass to each checkbox
+  // This function will generate props to pass to each checkbox
   function checkbox({
     value: checkboxValue,
     disabled: checkboxDisabled = false,
@@ -107,6 +113,7 @@ export function Checkboxes({
     disabled?: boolean;
   }) {
     return {
+      name,
       value: checkboxValue,
       checked: values.includes(checkboxValue),
       onChange: handleCheckboxChange,
@@ -117,6 +124,7 @@ export function Checkboxes({
   return (
     <Fieldset sizer={sizer} {...otherFieldsetProps}>
       <div
+        ref={containerRef}
         className={
           // create a standard layout when self-rendering the Checkboxes
           // (otherwise, the caller should manage the layout within `children`)
@@ -166,3 +174,35 @@ export function Checkboxes({
 }
 
 Checkboxes.sizer = FieldSizer;
+
+// This function can be used with Array.sort to sort checkbox values according
+// to the order the corresponding checkboxes appear in the DOM.
+function sortValuesByDOMOrder(
+  checkboxesContainer: React.RefObject<HTMLElement | null>,
+) {
+  // Get the order the checkbox values as they appear in the DOM, so we can
+  // order the new combined value accordingly
+  const orderInDOM = [
+    ...(checkboxesContainer.current?.getElementsByTagName('input') || []),
+  ]
+    .filter((input) => input.type === 'checkbox')
+    .map((input) => input.value);
+
+  return (a: string, b: string) => {
+    const aIndex = orderInDOM.indexOf(a);
+    const bIndex = orderInDOM.indexOf(b);
+
+    // If B is not in the DOM, sort A to the front
+    if (bIndex === -1) {
+      return -1;
+    }
+
+    // else if A is not in the DOM, sort B to the front
+    if (aIndex === -1) {
+      return 1;
+    }
+
+    // else, sort according to their positions
+    return aIndex - bIndex;
+  };
+}
