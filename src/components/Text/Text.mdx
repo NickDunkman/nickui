@@ -1,6 +1,7 @@
 import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
 import { FormikDemo } from '@/docs/FormikDemo';
+import { ReactHookFormDemo } from '@/docs/ReactHookFormDemo';
 
 import { FieldControl } from '../FieldControl/FieldControl';
 
@@ -49,36 +50,15 @@ In keeping with the mobile-first philosophy of Tailwind, the default size is
 
 <Canvas of={Stories.AllSizes} sourceState="shown" />
 
-## React Hook Form compatibility
-
-The Text component also works with react-hook-form!
-
-<Canvas of={Stories.ReactHookForm} sourceState="none" />
-
-<Source
-  dark
-  language="tsx"
-  code={`
-    const {
-      register,
-      formState: { errors },
-    } = useForm<{ firstName: string }>({
-      mode: 'all',
-      defaultValues: { firstName: 'Nick' },
-    });
-  
-    return (
-      <Text
-        {...register('firstName', {
-          validate: (value) => value === 'Nick' || 'That name isn’t Nick!',
-        })}
-        sizer={Text.sizer.medium}
-        label="First name"
-        hint="Try editting!"
-        error={errors.firstName?.message}
-      />
-    );
-  `}
+<ReactHookFormDemo
+  fieldName="firstName"
+  initialValue="Nick"
+  component={Text}
+  componentProps={{
+    label: 'First name',
+    hint: 'Try editting me!',
+    sizer: Text.sizer.medium,
+  }}
 />
 
 <FormikDemo

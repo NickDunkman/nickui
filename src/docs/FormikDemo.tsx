@@ -22,7 +22,6 @@ export function FormikDemo<P extends Record<string, unknown>>({
   fieldName: string;
   initialValue: string;
   component: React.ComponentType<P>;
-  validate?: formik.FieldValidator;
   componentProps: P;
 }) {
   const form = formik.useFormik({

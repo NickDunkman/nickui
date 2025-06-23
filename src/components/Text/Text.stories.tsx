@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { useForm } from 'react-hook-form';
 
 import { Text } from './Text';
 
@@ -100,55 +99,4 @@ export const AllSizes: Story = {
       <Text {...Large.args} />
     </div>
   ),
-};
-
-function RHFExample() {
-  const {
-    register,
-    watch,
-    formState: {
-      defaultValues,
-      errors,
-      dirtyFields,
-      isDirty,
-      isValid,
-      touchedFields,
-    },
-  } = useForm<{ firstName: string }>({
-    mode: 'all',
-    defaultValues: { firstName: 'Nick' },
-  });
-
-  return (
-    <>
-      <Text
-        {...register('firstName', {
-          validate: (value) => value === 'Nick' || 'That name isn’t Nick!',
-        })}
-        sizer={Text.sizer.medium}
-        label="First name"
-        hint="Try editting!"
-        error={errors.firstName?.message}
-      />
-      <pre className="mt-6 bg-amber-100 p-3 font-mono text-xs">
-        {JSON.stringify(
-          {
-            defaultValues,
-            dirtyFields,
-            isDirty,
-            isValid,
-            touchedFields,
-            watch: watch(),
-          },
-          null,
-          2,
-        )}
-      </pre>
-    </>
-  );
-}
-
-export const ReactHookForm: Story = {
-  tags: ['!dev', '!test'],
-  render: () => <RHFExample />,
 };
