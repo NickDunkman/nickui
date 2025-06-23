@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { FieldControl } from '@/components/FieldControl';
 import { Fieldset } from '@/components/Fieldset';
 import { Radio } from '@/components/Radio';
 import { FieldSizer } from '@/constants';
@@ -59,11 +60,7 @@ export function Radios({
   sizer,
   // The rest are those brought in from React.CopponentProps<'input'>
   ...otherHiddenInputProps
-}: RadiosProps &
-  Pick<
-    React.ComponentProps<typeof Fieldset>,
-    'className' | 'sizer' | 'label' | 'explainer' | 'hint' | 'error'
-  >) {
+}: RadiosProps & React.ComponentProps<typeof FieldControl>) {
   const containerRef = React.createRef<HTMLDivElement>();
 
   const [radioName] = React.useState(randomId());

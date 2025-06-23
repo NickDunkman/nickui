@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Checkbox } from '@/components/Checkbox';
+import { FieldControl } from '@/components/FieldControl';
 import { Fieldset } from '@/components/Fieldset';
 import { FieldSizer } from '@/constants';
 import { clsw } from '@/utils/clsw';
@@ -74,11 +75,7 @@ export function Checkboxes({
   sizer,
   // The rest are those brought in from React.CopponentProps<'input'>
   ...otherHiddenInputProps
-}: CheckboxesProps &
-  Pick<
-    React.ComponentProps<typeof Fieldset>,
-    'className' | 'sizer' | 'label' | 'explainer' | 'hint' | 'error'
-  >) {
+}: CheckboxesProps & React.ComponentProps<typeof FieldControl>) {
   const containerRef = React.createRef<HTMLDivElement>();
 
   // track a value for *uncontrolled* mode, if necessary
