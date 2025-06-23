@@ -5,7 +5,8 @@ import { Fieldset } from '@/components/Fieldset';
 import { FieldSizer } from '@/constants';
 import { clsw } from '@/utils/clsw';
 
-interface CheckboxesProps {
+interface CheckboxesProps
+  extends Omit<React.ComponentProps<'input'>, 'children' | 'className'> {
   /** The name fot the field */
   name?: React.ComponentProps<'input'>['name'];
   /**
@@ -54,19 +55,31 @@ interface CheckboxesProps {
  * toggling the checked status.
  */
 export function Checkboxes({
+  // Input props
   name,
   children,
   options,
   disabled = false,
   onChange,
+  onBlur,
   value: controlledValue,
   defaultValue,
   delimiter = ',',
+  // Fieldset props
+  className,
+  label,
+  explainer,
+  hint,
+  error,
   sizer,
-  ...otherFieldsetProps
-}: CheckboxesProps & Omit<React.ComponentProps<typeof Fieldset>, 'children'>) {
+  // The rest are those brought in from React.CopponentProps<'input'>
+  ...otherHiddenInputProps
+}: CheckboxesProps &
+  Pick<
+    React.ComponentProps<typeof Fieldset>,
+    'className' | 'sizer' | 'label' | 'explainer' | 'hint' | 'error'
+  >) {
   const containerRef = React.createRef<HTMLDivElement>();
-  const hiddenInputRef = React.createRef<HTMLInputElement>();
 
   // track a value for *uncontrolled* mode, if necessary
   const [uncontrolledValue, setUncontrolledValue] =
@@ -92,16 +105,26 @@ export function Checkboxes({
       setUncontrolledValue(newValue);
     }
 
-    if (hiddenInputRef.current) {
-      hiddenInputRef.current.value = newValue;
-      onChange?.({
-        ...event,
-        // The onChange events are originally triggered by the checkboxes, but
-        // libraries like Formik behave differently when the event.target is a
-        // checkbox. So swap in the hidden input.
-        target: hiddenInputRef.current,
-      });
-    }
+    const hiddenInput = getHiddenInput(containerRef);
+    hiddenInput.value = newValue;
+    onChange?.({
+      ...event,
+      // The onChange events are originally triggered by the checkboxes, but
+      // libraries like Formik behave differently when the event.target is a
+      // checkbox.
+      target: hiddenInput,
+    });
+  }
+
+  // Simulate a blur on the hidden input when a checkbox is blurred. This allows
+  // form libraries like Formik to know that the field has been "touched".
+  function handleCheckboxBlur(event: React.FocusEvent<HTMLInputElement>) {
+    const hiddenInput = getHiddenInput(containerRef);
+
+    onBlur?.({
+      ...event,
+      target: hiddenInput,
+    });
   }
 
   // This function will generate props to pass to each checkbox
@@ -113,16 +136,40 @@ export function Checkboxes({
     disabled?: boolean;
   }) {
     return {
-      name,
       value: checkboxValue,
       checked: values.includes(checkboxValue),
       onChange: handleCheckboxChange,
+      onBlur: handleCheckboxBlur,
       disabled: disabled || checkboxDisabled,
     };
   }
 
+  // React Hook Form sets the inital field value by using the `ref` prop to
+  // programmatically set the `value` on the hidden input element. So when
+  // the caller isn't using the `value` or `defaultValue` props, we should
+  // inspect the hidden input, and if something has magically set its value,
+  // use that as the defaultValue for this component -- allowing the checkboxes
+  // to be properly checked or unchecked after mount.
+  React.useLayoutEffect(() => {
+    if (value === undefined && defaultValue === undefined) {
+      const hiddenInput = getHiddenInput(containerRef);
+      if (hiddenInput.value) {
+        setUncontrolledValue(hiddenInput.value);
+      }
+    }
+    // We only want to run this effect once after mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <Fieldset sizer={sizer} {...otherFieldsetProps}>
+    <Fieldset
+      className={className}
+      sizer={sizer}
+      label={label}
+      explainer={explainer}
+      hint={hint}
+      error={error}
+    >
       <div
         ref={containerRef}
         className={
@@ -162,11 +209,10 @@ export function Checkboxes({
           value. See the component description for an explanation.
         */}
         <input
-          ref={hiddenInputRef}
           name={name}
           type="hidden"
-          value={value || ''}
-          className="hidden"
+          className="the-hidden-checkboxes-input hidden"
+          {...otherHiddenInputProps}
         />
       </div>
     </Fieldset>
@@ -205,4 +251,14 @@ function sortValuesByDOMOrder(
     // else, sort according to their positions
     return aIndex - bIndex;
   };
+}
+
+function getHiddenInput(
+  checkboxesContainer: React.RefObject<HTMLElement | null>,
+) {
+  return [
+    ...(checkboxesContainer.current?.getElementsByClassName(
+      'the-hidden-checkboxes-input',
+    ) || []),
+  ][0] as HTMLInputElement;
 }
