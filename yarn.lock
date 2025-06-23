@@ -4722,9 +4722,9 @@ __metadata:
     react-dom: "npm:^19.1.0"
     react-hook-form: "npm:^7.58.1"
     storybook: "npm:^9.0.12"
-    tailwind-merge: "npm:^3.3.0"
+    tailwind-merge: "npm:^3.3.1"
     tailwind-variants: "npm:^1.0.0"
-    tailwindcss: "npm:^4.1.8"
+    tailwindcss: "npm:^4.1.10"
     typescript: "npm:^5.8.3"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^3.1.4"
@@ -5998,10 +5998,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "tailwind-merge@npm:3.3.0"
-  checksum: 10c0/a50cd141100486f98541dfab3705712af5860556689b7496dc6b0284374f02d12d5471f0f40035f6bb8b1c749c422060a1f3e5f8900057d8a7786b111c8472e6
+"tailwind-merge@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "tailwind-merge@npm:3.3.1"
+  checksum: 10c0/b84c6a78d4669fa12bf5ab8f0cdc4400a3ce0a7c006511af4af4be70bb664a27466dbe13ee9e3b31f50ddf6c51d380e8192ce0ec9effce23ca729d71a9f63818
   languageName: node
   linkType: hard
 
@@ -6016,10 +6016,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:4.1.8, tailwindcss@npm:^4.1.8":
+"tailwindcss@npm:4.1.8":
   version: 4.1.8
   resolution: "tailwindcss@npm:4.1.8"
   checksum: 10c0/a566d049ee313f9c1638fd2a5fe95ae7e40bb35b58e92ed8d7c51880e71dff2a423dd430ff97444e2496c9c77b3f44ad4df48110b11484133019c1a8520d7bce
+  languageName: node
+  linkType: hard
+
+"tailwindcss@npm:^4.1.10":
+  version: 4.1.10
+  resolution: "tailwindcss@npm:4.1.10"
+  checksum: 10c0/9da74ee1f25d6065150f132a3eb18caad82cd9902b7c552278eb627266c68b12990a22bb4b6169d04ce775c058a8d2638a5051be905be99961889c572e2aeab8
   languageName: node
   linkType: hard
 
