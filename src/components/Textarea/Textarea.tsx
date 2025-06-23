@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { FieldControl } from '@/components/FieldControl';
 import { FieldSizer } from '@/constants';
+import type { FieldControlProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 
 import { styles } from './styles';
@@ -17,8 +17,6 @@ interface TextareaProps extends React.ComponentProps<'textarea'> {
    * Sets the value of the Textarea when using it as an uncontrolled component
    */
   defaultValue?: string;
-  /** Prevents the user from interacting with the Textarea */
-  disabled?: boolean;
   /**
    * The number of rows of text tall the Textarea should be (the Textarea will
    * use a scrollbar when necessary)
@@ -47,30 +45,34 @@ interface TextareaProps extends React.ComponentProps<'textarea'> {
 }
 
 /**
- * TextInput allows users to enter & edit text.
- * @param props {@link TextareaProps}
+ * Textarea is a form control that allows users to enter & edit a mass of text
+ * @param props {@link TextareaProps} + {@link FieldControlProps}
  */
 export function Textarea({
+  // Field props
   className,
   sizer,
   label,
   explainer,
   hint,
   error,
+  disabled,
   required,
+  // Textarea-specific props
+  id: controlledId,
   defaultValue,
   value: controlledValue,
-  autoResize,
-  disableManualResize,
-  rows = 2,
-  maxRows = Infinity,
   onChange,
-  id: controlledId,
+  rows = 2,
+  autoResize,
+  maxRows = Infinity,
+  disableManualResize,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
   'aria-invalid': ariaInvalid,
+  // The rest are brought in from <textarea>
   ...otherTextareaProps
-}: TextareaProps & React.ComponentProps<typeof FieldControl>) {
+}: TextareaProps & FieldControlProps) {
   const hiddenTextarea = React.useRef<HTMLTextAreaElement>(null);
   const [autoHeight, setAutoHeight] = React.useState<number>(0);
 
@@ -153,6 +155,7 @@ export function Textarea({
       error={error !== true ? error : undefined}
       controlId={id}
       errorId={ariaErrorMessage}
+      disabled={disabled}
       required={required}
     >
       <div className={s.root()}>
@@ -175,6 +178,7 @@ export function Textarea({
           className={s.textarea()}
           value={value}
           onChange={handleChange}
+          disabled={disabled}
           required={required}
           aria-describedby={ariaDescribedBy}
           aria-errormessage={ariaErrorMessage}

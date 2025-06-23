@@ -1,15 +1,13 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { FieldControl } from '@/components/FieldControl';
 import { FieldSizer } from '@/constants';
+import type { FieldControlProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 
 import { styles } from './styles';
 
 interface SelectProps extends React.ComponentProps<'select'> {
-  /** Prevents the user from interacting with the Select */
-  disabled?: boolean;
   /** Called when the value of the Select changes */
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   /**
@@ -23,23 +21,26 @@ interface SelectProps extends React.ComponentProps<'select'> {
 
 /**
  * Select allows users to choose from a list of options.
- * @param props {@link SelectProps}
+ * @param props {@link SelectProps} + {@link FieldControlProps}
  */
 export function Select({
+  // Field props
   className,
   sizer,
   label,
   explainer,
   hint,
   error,
-  required,
   disabled,
+  required,
+  // Select-specific props
   id: controlledId,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
   'aria-invalid': ariaInvalid,
+  // The rest are brought in from <select>
   ...otherSelectProps
-}: SelectProps & React.ComponentProps<typeof FieldControl>) {
+}: SelectProps & FieldControlProps) {
   // Generate some ids for accessibility, in case they aren't provided as props
   const [uncontrolledId] = React.useState(randomId());
   const [uncontrolledAriaDescribedBy] = React.useState(randomId());
@@ -76,6 +77,7 @@ export function Select({
       error={error !== true ? error : undefined}
       controlId={id}
       errorId={ariaErrorMessage}
+      disabled={disabled}
       required={required}
     >
       <div className={s.root()}>

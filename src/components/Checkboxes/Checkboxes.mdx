@@ -1,7 +1,6 @@
-import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
-import { FieldControl } from '@/components/FieldControl';
-import { FormikDemo, ReactHookFormDemo } from '@/docs';
+import { FieldArgTypes, FormikDemo, ReactHookFormDemo } from '@/docs';
 
 import { Checkboxes } from './Checkboxes';
 import * as Stories from './Checkboxes.stories';
@@ -20,16 +19,7 @@ that is managed using a `<input type="hidden">`. Each checkbox represents a
 substring that can be added to or removed from the delimited-string by toggling
 the checked status.
 
-## Checkboxes-specific props
-
-<ArgTypes of={Stories} sort="requiredFirst" />
-
-## Common field props
-
-Text also accepts all of the common [Fieldset](/docs/forms-fieldset--docs)
-props.
-
-<ArgTypes of={FieldControl} sort="requiredFirst" />
+<FieldArgTypes of={Checkboxes} reactDocs="input" wrapper="Fieldset" />
 
 ## Adding checkboxes
 

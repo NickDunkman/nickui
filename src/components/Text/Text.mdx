@@ -1,7 +1,6 @@
-import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FieldControl } from '@/components/FieldControl';
-import { FormikDemo, ReactHookFormDemo } from '@/docs';
+import { FieldArgTypes, FormikDemo, ReactHookFormDemo } from '@/docs';
 
 import { Text } from './Text';
 import * as Stories from './Text.stories';
@@ -12,19 +11,7 @@ import * as Stories from './Text.stories';
 
 Text is a form control that allows users to enter & edit text.
 
-## Text-specific props
-
-Text takes all the props that can be used with
-[&lt;input&gt;](https://react.dev/reference/react-dom/components/input). Here
-are some of the most commonly used:
-
-<ArgTypes of={Stories} sort="requiredFirst" />
-
-## Common field props
-
-Text also accepts all of the common [Field](/docs/forms-field--docs) props.
-
-<ArgTypes of={FieldControl} sort="requiredFirst" />
+<FieldArgTypes of={Text} reactDocs="input" wrapper="Field" />
 
 ## Control states
 

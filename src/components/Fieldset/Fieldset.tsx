@@ -27,6 +27,8 @@ export interface FieldsetProps extends React.ComponentProps<'fieldset'> {
   hint?: React.ReactNode;
   /** Error message to show along with the field */
   error?: React.ReactNode;
+  /** Set to `true` when the fieldset is disabled */
+  disabled?: boolean;
   /** When `true`, adds an asterisk to the label */
   required?: boolean;
 }
@@ -42,6 +44,7 @@ export function Fieldset({
   error,
   hint,
   sizer,
+  disabled: _disabled,
   required = false,
   'aria-labelledby': ariaLabeledBy,
   'aria-describedby': ariaDescribedBy,

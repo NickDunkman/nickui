@@ -1,7 +1,6 @@
-import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FieldControl } from '@/components/FieldControl';
-import { FormikDemo, ReactHookFormDemo } from '@/docs';
+import { FieldArgTypes, FormikDemo, ReactHookFormDemo } from '@/docs';
 
 import { Select } from './Select';
 import * as Stories from './Select.stories';
@@ -12,19 +11,7 @@ import * as Stories from './Select.stories';
 
 Select is a form control that allows users to choose an option using a menu.
 
-## Select-specific props
-
-Select takes all the props that can be used with
-[&lt;select&gt;](https://react.dev/reference/react-dom/components/select). Here
-are some of the most commonly used:
-
-<ArgTypes of={Stories} sort="requiredFirst" />
-
-## Common field props
-
-Select also accepts all of the common [Field](/docs/forms-field--docs) props.
-
-<ArgTypes of={FieldControl} sort="requiredFirst" />
+<FieldArgTypes of={Select} reactDocs="select" wrapper="Field" />
 
 ## Control states
 

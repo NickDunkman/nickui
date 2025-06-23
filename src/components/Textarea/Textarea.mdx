@@ -1,7 +1,6 @@
-import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FieldControl } from '@/components/FieldControl';
-import { FormikDemo, ReactHookFormDemo } from '@/docs';
+import { FieldArgTypes, FormikDemo, ReactHookFormDemo } from '@/docs';
 
 import { Textarea } from './Textarea';
 import * as Stories from './Textarea.stories';
@@ -10,21 +9,9 @@ import * as Stories from './Textarea.stories';
 
 # `<Textarea>`
 
-Textarea is a form control that allows users to enter & edit text.
+Textarea is a form control that allows users to enter & edit a mass of text.
 
-## Textarea-specific props
-
-Textarea takes some custom props, plus all the props that can be used with
-[&lt;textarea&gt;](https://react.dev/reference/react-dom/components/textarea).
-Here are some of the most commonly used:
-
-<ArgTypes of={Textarea} sort="requiredFirst" />
-
-## Common field props
-
-Textarea also accepts all of the common [Field](/docs/forms-field--docs) props.
-
-<ArgTypes of={FieldControl} sort="requiredFirst" />
+<FieldArgTypes of={Textarea} reactDocs="textarea" wrapper="Field" />
 
 ## Control states
 

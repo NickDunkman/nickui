@@ -1,10 +1,11 @@
 import * as React from 'react';
 
 import { Checkbox } from '@/components/Checkbox';
-import { FieldControl } from '@/components/FieldControl';
 import { Fieldset } from '@/components/Fieldset';
 import { FieldSizer } from '@/constants';
+import type { FieldControlProps } from '@/types';
 import { clsw } from '@/utils/clsw';
+import { randomId } from '@/utils/randomId';
 
 interface CheckboxesProps
   extends Omit<React.ComponentProps<'input'>, 'children' | 'className'> {
@@ -26,8 +27,6 @@ interface CheckboxesProps
     label: React.ReactNode;
     disabled?: boolean;
   }[];
-  /** Disables all of the checkboxes */
-  disabled?: boolean;
   /** Called when the value changes */
   onChange?: React.ComponentProps<'input'>['onChange'];
   /**
@@ -54,29 +53,34 @@ interface CheckboxesProps
  * is managed using a `<input type="hidden">`. Each checkbox represents a
  * substring that can be added to or removed from the delimited-string by
  * toggling the checked status.
+ *
+ * @props {@link CheckboxesProps} + {@link FieldControlProps}
  */
 export function Checkboxes({
-  // input props
-  name,
-  children,
-  options,
-  disabled = false,
-  onChange,
-  onBlur,
-  value: controlledValue,
-  defaultValue,
-  delimiter = ',',
   // Fieldset props
   className,
+  sizer,
   label,
   explainer,
   hint,
   error,
-  sizer,
-  // The rest are those brought in from React.CopponentProps<'input'>
+  disabled,
+  required,
+  // Checkboxes-specific props
+  name,
+  value: controlledValue,
+  defaultValue,
+  options,
+  children,
+  onChange,
+  onBlur,
+  delimiter = ',',
+  // The rest are brought in from <'input'>
   ...otherHiddenInputProps
-}: CheckboxesProps & React.ComponentProps<typeof FieldControl>) {
+}: CheckboxesProps & FieldControlProps) {
   const containerRef = React.createRef<HTMLDivElement>();
+
+  const [checkboxName] = React.useState(randomId());
 
   // track a value for *uncontrolled* mode, if necessary
   const [uncontrolledValue, setUncontrolledValue] =
@@ -133,6 +137,7 @@ export function Checkboxes({
     disabled?: boolean;
   }) {
     return {
+      name: checkboxName,
       value: checkboxValue,
       checked: values.includes(checkboxValue),
       onChange: handleCheckboxChange,
@@ -166,6 +171,8 @@ export function Checkboxes({
       explainer={explainer}
       hint={hint}
       error={error}
+      disabled={disabled}
+      required={required}
     >
       <div
         ref={containerRef}
@@ -209,6 +216,8 @@ export function Checkboxes({
           name={name}
           type="hidden"
           className="the-hidden-checkboxes-input hidden"
+          disabled={disabled}
+          required={required}
           {...otherHiddenInputProps}
         />
       </div>

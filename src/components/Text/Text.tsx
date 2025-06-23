@@ -1,15 +1,13 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { FieldControl } from '@/components/FieldControl';
 import { FieldSizer } from '@/constants';
+import type { FieldControlProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 
 import { styles } from './styles';
 
 interface TextProps extends React.ComponentProps<'input'> {
-  /** Prevents the user from interacting with the Text */
-  disabled?: boolean;
   /** Called when the value of the Text changes */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /**
@@ -50,9 +48,10 @@ interface TextProps extends React.ComponentProps<'input'> {
 
 /**
  * Text allows users to enter & edit text.
- * @param props {@link TextProps}
+ * @param props {@link TextProps} + {@link FieldControlProps}
  */
 export function Text({
+  // Field props
   className,
   sizer,
   label,
@@ -60,12 +59,15 @@ export function Text({
   hint,
   error,
   required,
+  disabled,
+  // Text-specific props
   id: controlledId,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
   'aria-invalid': ariaInvalid,
+  // The rest are brought in from <input>
   ...otherInputProps
-}: TextProps & React.ComponentProps<typeof FieldControl>) {
+}: TextProps & FieldControlProps) {
   // Generate some ids for accessibility, in case they aren't provided as props
   const [uncontrolledId] = React.useState(randomId());
   const [uncontrolledAriaDescribedBy] = React.useState(randomId());
@@ -98,12 +100,14 @@ export function Text({
       error={error !== true ? error : undefined}
       controlId={id}
       errorId={ariaErrorMessage}
+      disabled={disabled}
       required={required}
     >
       <input
         {...otherInputProps}
         id={id}
         className={s}
+        disabled={disabled}
         required={required}
         aria-describedby={ariaDescribedBy}
         aria-errormessage={ariaErrorMessage}

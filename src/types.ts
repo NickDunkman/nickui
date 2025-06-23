@@ -2,11 +2,7 @@ import * as React from 'react';
 
 import { FieldSizer } from '@/constants';
 
-/**
- * Do not use this component. It only exists so that we can render an
- * "ArgsTable" in Storybook that shows the FieldControlProps.
- */
-export function FieldControl(_props: {
+export type FieldControlProps = {
   /** Optionally add utility classes to the root element */
   className?: string;
   /** Changes the size of the field ("small", "medium", "large") */
@@ -30,6 +26,6 @@ export function FieldControl(_props: {
   error?: boolean | React.ReactNode;
   /** When `true`, adds an asterisk to the label */
   required?: boolean;
-}) {
-  return <>This component should never be rendered.</>;
-}
+  /** Prevents the user from interacting with the control */
+  disabled?: boolean;
+};

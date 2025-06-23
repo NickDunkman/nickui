@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { FieldControl } from '@/components/FieldControl';
 import { Fieldset } from '@/components/Fieldset';
 import { Radio } from '@/components/Radio';
 import { FieldSizer } from '@/constants';
+import type { FieldControlProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 
@@ -27,8 +27,6 @@ interface RadiosProps
     label: React.ReactNode;
     disabled?: boolean;
   }[];
-  /** Disables all of the radios */
-  disabled?: boolean;
   /** Called when the value changes */
   onChange?: React.ComponentProps<'input'>['onChange'];
   /**
@@ -40,17 +38,11 @@ interface RadiosProps
   defaultValue?: React.ComponentProps<'input'>['defaultValue'];
 }
 
-/** Radios renders multiple <Radio> as one field in a Fieldset */
+/**
+ * Radios renders multiple <Radio> as one field in a Fieldset
+ * @props {@link RadiosProps} + {@link FieldControlProps}
+ */
 export function Radios({
-  // input props
-  name: controlledName,
-  children,
-  options,
-  disabled = false,
-  onChange,
-  onBlur,
-  value: controlledValue,
-  defaultValue,
   // Fieldset props
   className,
   label,
@@ -58,9 +50,19 @@ export function Radios({
   hint,
   error,
   sizer,
+  disabled,
+  required,
+  // Radios-specific props
+  name: controlledName,
+  value: controlledValue,
+  defaultValue,
+  options,
+  children,
+  onChange,
+  onBlur,
   // The rest are those brought in from React.CopponentProps<'input'>
   ...otherHiddenInputProps
-}: RadiosProps & React.ComponentProps<typeof FieldControl>) {
+}: RadiosProps & FieldControlProps) {
   const containerRef = React.createRef<HTMLDivElement>();
 
   const [radioName] = React.useState(randomId());
@@ -149,6 +151,8 @@ export function Radios({
       explainer={explainer}
       hint={hint}
       error={error}
+      disabled={disabled}
+      required={required}
     >
       <div
         ref={containerRef}
@@ -193,6 +197,8 @@ export function Radios({
           name={name}
           type="hidden"
           className="the-hidden-radios-input hidden"
+          disabled={disabled}
+          required={required}
           {...otherHiddenInputProps}
         />
       </div>

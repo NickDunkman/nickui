@@ -35,6 +35,8 @@ export interface FieldProps extends React.ComponentProps<'div'> {
   error?: React.ReactNode;
   /** For accessibility purposes: an id to set on the error message element */
   errorId?: string;
+  /** Set to `true` when the field is disabled */
+  disabled?: boolean;
   /** When `true`, adds an asterisk to the label */
   required?: boolean;
 }
@@ -53,6 +55,7 @@ export function Field({
   hintId,
   label,
   sizer,
+  disabled: _disabled,
   required = false,
   ...otherDivProps
 }: FieldProps) {

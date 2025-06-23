@@ -1,6 +1,6 @@
-import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
-import { FormikDemo, ReactHookFormDemo } from '@/docs';
+import { FieldArgTypes, FormikDemo, ReactHookFormDemo } from '@/docs';
 
 import { Radios } from './Radios';
 import * as Stories from './Radios.stories';
@@ -11,9 +11,7 @@ import * as Stories from './Radios.stories';
 
 Radios renders multiple Radio as one field in a Fieldset
 
-## Props
-
-<ArgTypes of={Stories} sort="requiredFirst" />
+<FieldArgTypes of={Radios} reactDocs="input" wrapper="Fieldset" />
 
 ## Adding radios
 
