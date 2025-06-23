@@ -45,7 +45,7 @@ interface TextareaProps extends React.ComponentProps<'textarea'> {
 }
 
 /**
- * Textarea is a form control that allows users to enter & edit a mass of text
+ * A form control that allows users to enter & edit a mass of text
  * @param props {@link TextareaProps} + {@link FieldControlProps}
  */
 export function Textarea({

@@ -29,7 +29,7 @@ interface RadioProps extends Omit<React.ComponentProps<'input'>, 'type'> {
 }
 
 /**
- * Radios allow users to choose one option from a set.
+ * A form control that allow users to choose one option from a set
  * @param props {@link RadioProps}
  */
 export function Radio({

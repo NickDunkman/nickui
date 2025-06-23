@@ -47,7 +47,7 @@ interface TextProps extends React.ComponentProps<'input'> {
 }
 
 /**
- * Text allows users to enter & edit text.
+ * A form control that allows users to enter & edit a single line of text
  * @param props {@link TextProps} + {@link FieldControlProps}
  */
 export function Text({

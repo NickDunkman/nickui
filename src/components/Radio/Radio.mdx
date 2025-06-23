@@ -1,4 +1,6 @@
-import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import { FieldArgTypes } from '@/docs';
 
 import { Radio } from './Radio';
 import * as Stories from './Radio.stories';
@@ -7,11 +9,9 @@ import * as Stories from './Radio.stories';
 
 # `<Radio>`
 
-Radios are form controls that allow users to choose one option from a set.
+A form control that allow users to choose one option from a set.
 
-## Props
-
-<ArgTypes of={Radio} sort="requiredFirst" />
+<FieldArgTypes of={Radio} reactDocs="input" />
 
 ## Control states
 

@@ -1,4 +1,6 @@
-import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import { FieldArgTypes } from '@/docs';
 
 import { Checkbox } from './Checkbox';
 import * as Stories from './Checkbox.stories';
@@ -7,12 +9,9 @@ import * as Stories from './Checkbox.stories';
 
 # `<Checkbox>`
 
-Checkboxes are form controls that allow users to choose zero to many options
-from a set.
+A form control that allow users to choose zero to many options from a set.
 
-## Props
-
-<ArgTypes of={Checkbox} sort="requiredFirst" />
+<FieldArgTypes of={Checkbox} reactDocs="input" />
 
 ## Control states
 
@@ -26,4 +25,4 @@ Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
 In keeping with the mobile-first philosophy of Tailwind, the default size is
 "small".
 
-<Canvas of={Stories.AllSizes} sourceState="shown" />
+<Canvas of={Stories.AllSizes} />

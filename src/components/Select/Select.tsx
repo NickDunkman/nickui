@@ -20,7 +20,7 @@ interface SelectProps extends React.ComponentProps<'select'> {
 }
 
 /**
- * Select allows users to choose from a list of options.
+ * A form control that allows users to choose an option using a menu
  * @param props {@link SelectProps} + {@link FieldControlProps}
  */
 export function Select({

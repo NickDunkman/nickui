@@ -39,7 +39,7 @@ interface RadiosProps
 }
 
 /**
- * Radios renders multiple <Radio> as one field in a Fieldset
+ * Renders multiple radios as one field in a Fieldset.
  * @props {@link RadiosProps} + {@link FieldControlProps}
  */
 export function Radios({

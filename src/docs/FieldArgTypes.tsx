@@ -32,7 +32,7 @@ export function FieldArgTypes({
 }: {
   of: React.ComponentType;
   reactDocs: string;
-  wrapper: 'Field' | 'Fieldset';
+  wrapper?: 'Field' | 'Fieldset';
 }) {
   const componentName = getComponentName(Component);
 
@@ -40,9 +40,9 @@ export function FieldArgTypes({
     <>
       <Markdown>
         {`
-## ${componentName}-specific props
+## ${wrapper ? `${componentName}-specific p` : 'P'}rops
 
-${componentName} takes some custom props, plus all the props that can be used
+In addition to some custom props, ${componentName} takes all the props that can be used
 with the native [&lt;${reactDocs}&gt;](https://react.dev/reference/react-dom/components/${allReactDocs.includes(reactDocs) ? reactDocs : 'common'}).
 Here are some of the most commonly used:
         `}
@@ -50,23 +50,27 @@ Here are some of the most commonly used:
 
       <ArgTypes
         of={Component}
-        exclude={fieldControlProps}
+        exclude={wrapper && fieldControlProps}
         sort="requiredFirst"
       />
 
-      <Markdown>
-        {`
+      {wrapper && (
+        <>
+          <Markdown>
+            {`
 ## Common ${wrapper} props
 
 ${componentName} also accepts some of the [${wrapper}](/docs/forms-${wrapper.toLowerCase()}--docs) props:
         `}
-      </Markdown>
+          </Markdown>
 
-      <ArgTypes
-        of={Component}
-        include={fieldControlProps}
-        sort="requiredFirst"
-      />
+          <ArgTypes
+            of={Component}
+            include={fieldControlProps}
+            sort="requiredFirst"
+          />
+        </>
+      )}
     </>
   );
 }
