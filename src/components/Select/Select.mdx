@@ -1,7 +1,7 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 
 import { FieldControl } from '@/components/FieldControl';
-import { FormikDemo } from '@/docs/FormikDemo';
+import { FormikDemo, ReactHookFormDemo } from '@/docs';
 
 import { Select } from './Select';
 import * as Stories from './Select.stories';
@@ -47,6 +47,25 @@ In keeping with the mobile-first philosophy of Tailwind, the default size is
 "small".
 
 <Canvas of={Stories.AllSizes} sourceState="shown" />
+
+<ReactHookFormDemo
+  fieldName="firstName"
+  initialValue="nick"
+  component={Select}
+  componentProps={{
+    label: 'First name',
+    hint: 'Try editting me!',
+    sizer: Select.sizer.medium,
+    children: [
+      <option value="nick" key="nick">
+        Nick
+      </option>,
+      <option value="dunkman" key="dunkman">
+        Dunkman
+      </option>,
+    ],
+  }}
+/>
 
 <FormikDemo
   fieldName="firstName"

@@ -83,8 +83,7 @@ export function Textarea({
   const [uncontrolledValue, setUncontrolledValue] =
     React.useState(defaultValue);
   const isControlledComponent = controlledValue !== undefined;
-  const value =
-    (isControlledComponent ? controlledValue : uncontrolledValue) || '';
+  const value = isControlledComponent ? controlledValue : uncontrolledValue;
 
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     if (!isControlledComponent) {
@@ -97,7 +96,7 @@ export function Textarea({
   React.useLayoutEffect(() => {
     if (autoResize && hiddenTextarea.current) {
       // Measure the height of the hidden textarea with the new value
-      hiddenTextarea.current.value = value;
+      hiddenTextarea.current.value = value || '';
       const computedStyle = getComputedStyle(hiddenTextarea.current);
       const lineHeight = noPx(computedStyle.lineHeight);
       const yPadding =

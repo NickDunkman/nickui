@@ -1,6 +1,6 @@
 import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
-import { FormikDemo } from '@/docs/FormikDemo';
+import { FormikDemo, ReactHookFormDemo } from '@/docs';
 
 import { Radios } from './Radios';
 import * as Stories from './Radios.stories';
@@ -78,8 +78,28 @@ In keeping with the mobile-first philosophy of Tailwind, the default size is
 
 <Canvas of={Stories.AllSizes} />
 
+<ReactHookFormDemo
+  fieldName="firstNameRHF"
+  initialValue="nick"
+  component={Radios}
+  componentProps={{
+    label: 'First name',
+    hint: 'Try editting me!',
+    options: [
+      {
+        value: 'nick',
+        label: 'Nick',
+      },
+      {
+        value: 'dunkman',
+        label: 'Dunkman',
+      },
+    ],
+  }}
+/>
+
 <FormikDemo
-  fieldName="firstName"
+  fieldName="firstNameFormik"
   initialValue="nick"
   component={Radios}
   componentProps={{

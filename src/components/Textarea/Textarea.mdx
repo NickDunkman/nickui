@@ -1,6 +1,6 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FormikDemo } from '@/docs/FormikDemo';
+import { FormikDemo, ReactHookFormDemo } from '@/docs';
 
 import { FieldControl } from '../FieldControl/FieldControl';
 
@@ -66,6 +66,17 @@ To prevent the user from being able to resize the Textarea manually, use the
 `disableManualResize` prop.
 
 <Canvas of={Stories.DisableManualResize} sourceState="shown" />
+
+<ReactHookFormDemo
+  fieldName="aboutMe"
+  initialValue="I am Nick"
+  component={Textarea}
+  componentProps={{
+    label: 'About me',
+    hint: 'Try editting me!',
+    autoResize: true,
+  }}
+/>
 
 <FormikDemo
   fieldName="aboutMe"
