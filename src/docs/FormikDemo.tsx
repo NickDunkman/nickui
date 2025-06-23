@@ -1,5 +1,5 @@
 import { Markdown, Source } from '@storybook/addon-docs/blocks';
-import * as formik from 'formik';
+import { useFormik } from 'formik';
 import * as React from 'react';
 
 import { getComponentName } from '@/utils/getComponentName';
@@ -24,7 +24,7 @@ export function FormikDemo<P extends Record<string, unknown>>({
   component: React.ComponentType<P>;
   componentProps: P;
 }) {
-  const form = formik.useFormik({
+  const form = useFormik({
     initialValues: {
       [fieldName]: initialValue,
     },
@@ -63,6 +63,8 @@ as a [Formik field](https://formik.org/docs/api/field)!
         dark
         language="tsx"
         code={`
+import { useFormik } from 'formik';
+
 const form = useFormik({
   initialValues: { ${fieldName}: '${initialValue}' },
   onSubmit: () => {},
@@ -75,7 +77,7 @@ const form = useFormik({
 
 return (
   <${componentName}
-    name={${fieldName}}
+    name="${fieldName}"
     onChange={form.handleChange}
     onBlur={form.handleBlur}
     value={form.values.${fieldName}}

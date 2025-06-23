@@ -78,6 +78,8 @@ with [React Hook Form](https://react-hook-form.com/)!
         dark
         language="tsx"
         code={`
+import { useForm } from 'react-hook-form';
+
 const form = useForm<{ ${fieldName}: string }>({
   mode: 'all',
   defaultValues: { ${fieldName}: '${initialValue}' },
