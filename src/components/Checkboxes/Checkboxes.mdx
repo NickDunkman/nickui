@@ -1,7 +1,7 @@
 import { ArgTypes, Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
 import { FieldControl } from '@/components/FieldControl';
-import { FormikDemo } from '@/docs/FormikDemo';
+import { FormikDemo, ReactHookFormDemo } from '@/docs';
 
 import { Checkboxes } from './Checkboxes';
 import * as Stories from './Checkboxes.stories';
@@ -94,8 +94,28 @@ In keeping with the mobile-first philosophy of Tailwind, the default size is
 
 <Canvas of={Stories.AllSizes} />
 
+<ReactHookFormDemo
+  fieldName="fullNameRHF"
+  initialValue="nick,dunkman"
+  component={Checkboxes}
+  componentProps={{
+    label: 'Full name',
+    hint: 'Try editting me!',
+    options: [
+      {
+        value: 'nick',
+        label: 'Nick',
+      },
+      {
+        value: 'dunkman',
+        label: 'Dunkman',
+      },
+    ],
+  }}
+/>
+
 <FormikDemo
-  fieldName="fullName"
+  fieldName="fullNameFormik"
   initialValue="nick,dunkman"
   component={Checkboxes}
   componentProps={{

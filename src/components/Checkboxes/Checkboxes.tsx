@@ -55,7 +55,7 @@ interface CheckboxesProps
  * toggling the checked status.
  */
 export function Checkboxes({
-  // Input props
+  // input props
   name,
   children,
   options,
