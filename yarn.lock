@@ -4215,6 +4215,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"keycode@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "keycode@npm:2.2.1"
+  checksum: 10c0/e38ecbdc62f57e18ef9f7ad88aefded84e05b89115a40eea3081a7002d7c055765ddb5f5c3e2dd36ac2b2ab3901053c8286c9db082fd807b3abeb7e44034d96a
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^4.5.4":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -4714,6 +4721,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^5.2.0"
     eslint-plugin-storybook: "npm:^9.0.12"
     formik: "npm:^2.4.6"
+    keycode: "npm:^2.2.1"
     playwright: "npm:^1.52.0"
     postcss: "npm:^8.5.6"
     prettier: "npm:^3.6.0"
