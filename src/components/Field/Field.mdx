@@ -1,5 +1,7 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 
+import { FakeCanvas } from '@/docs';
+
 import { Field } from './Field';
 import * as Stories from './Field.stories';
 
@@ -9,6 +11,19 @@ import * as Stories from './Field.stories';
 
 Field wraps one form control in a standard field layout (label, hint, error
 message, etc).
+
+<FakeCanvas>
+  <Field
+    label="A label"
+    explainer="An explainer"
+    error="An error message!"
+    hint="A hint"
+  >
+    <div className="rounded-sm border-1 border-dashed border-blue-300 bg-blue-50 p-3 text-xs text-blue-400">
+      A form control
+    </div>
+  </Field>
+</FakeCanvas>
 
 ## Props
 

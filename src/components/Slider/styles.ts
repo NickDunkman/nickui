@@ -14,7 +14,7 @@ export const styles = tv({
     `,
     fill: 'bg-emerald-500 absolute top-0 left-0 bottom-0 right-0',
     thumb: `
-      rounded-full bg-white border-2 shadow-lg/20
+      rounded-full bg-white border-2 shadow-md/15
       absolute top-1/2 -translate-x-1/2 -translate-y-1/2
     `,
     input: 'hidden',
@@ -62,7 +62,7 @@ export const styles = tv({
         root: 'cursor-not-allowed',
         track: 'bg-gray-100 before:bg-gray-300',
         fill: 'bg-gray-300',
-        thumb: 'bg-gray-100 border-gray-300',
+        thumb: 'bg-gray-100 border-gray-300 shadow-none',
       },
     },
     hasError: {

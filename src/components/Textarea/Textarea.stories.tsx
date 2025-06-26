@@ -98,43 +98,26 @@ export const AllSizes: Story = {
   ),
 };
 
-export const MinimumHeight: Story = {
-  args: {
-    defaultValue: 'Some minimal text',
-    'aria-label': 'Example Textarea using its minimum height',
-    rows: 3,
-  },
-};
-
-export const AutoResize: Story = {
+export const AutoResizableHeight: Story = {
   args: {
     'aria-label': 'Example Textarea using autoResize',
     defaultValue:
       'In quis convallis felis. In efficitur aliquam lobortis. Curabitur venenatis ut justo vitae tincidunt. Morbi vel commodo sapien. Maecenas tincidunt, leo in maximus posuere, metus neque auctor elit, congue rutrum tellus tellus a magna. Ut leo est, auctor et purus non, pellentesque pellentesque libero. Quisque at maximus risus, mollis tempus justo. Donec venenatis quam ac risus auctor pellentesque. Aenean ex quam, facilisis at pharetra ut, sollicitudin et urna. Nullam bibendum nibh sed leo convallis, eu vestibulum purus gravida. Fusce elementum nulla in ornare bibendum. In euismod diam ut nisl tristique, in ornare turpis tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer finibus mauris risus, quis aliquet dolor vehicula ut. Suspendisse id dolor felis.',
-    autoResize: true,
     lang: 'la',
+    rows: 2,
+    maxRows: 10,
   },
 };
 
-export const MaximumHeight: Story = {
+export const FixedHeight: Story = {
   args: {
     'aria-label': 'Example Textarea using autoResize + maxRows',
     defaultValue:
       'In quis convallis felis. In efficitur aliquam lobortis. Curabitur venenatis ut justo vitae tincidunt. Morbi vel commodo sapien. Maecenas tincidunt, leo in maximus posuere, metus neque auctor elit, congue rutrum tellus tellus a magna. Ut leo est, auctor et purus non, pellentesque pellentesque libero. Quisque at maximus risus, mollis tempus justo. Donec venenatis quam ac risus auctor pellentesque. Aenean ex quam, facilisis at pharetra ut, sollicitudin et urna. Nullam bibendum nibh sed leo convallis, eu vestibulum purus gravida. Fusce elementum nulla in ornare bibendum. In euismod diam ut nisl tristique, in ornare turpis tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer finibus mauris risus, quis aliquet dolor vehicula ut. Suspendisse id dolor felis.',
-    autoResize: true,
-    maxRows: 3,
+    rows: 4,
+    maxRows: 4,
     lang: 'la',
   },
-};
-
-export const AllResizables: Story = {
-  tags: ['!dev', '!test'],
-  render: (_args) => (
-    <div className="flex flex-col gap-4">
-      <Textarea {...AutoResize.args} />
-      <Textarea {...MaximumHeight.args} />
-    </div>
-  ),
 };
 
 export const DisableManualResize: Story = {

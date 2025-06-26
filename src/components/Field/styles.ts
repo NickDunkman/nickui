@@ -5,7 +5,7 @@ import { FieldSizer } from '@/constants';
 /** tailwind-variants styles for the Field component */
 export const styles = tv({
   slots: {
-    heading: 'block',
+    heading: 'flex flex-col',
     label: 'font-bold',
     explainer: 'text-gray-500',
     error: 'before:content-["✘"] before:mr-1 text-rose-800',

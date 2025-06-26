@@ -23,18 +23,12 @@ interface TextareaProps extends React.ComponentProps<'textarea'> {
    */
   rows?: number;
   /**
-   * Set to `true` to have the Textarea automatically expand vertically
-   * instead of using a scrollbar (up to the maximum specified in the `maxRows`
-   * prop)
-   */
-  autoResize?: boolean;
-  /** Set to `true` to remove the resize handle from the bottom right */
-  disableManualResize?: boolean;
-  /**
-   * Used to put an upper constraint on the Textarea height when `autoResize
-   * is used
+   * The textarea will automatically grow in height as the user types, up to
+   * this number of rows.
    */
   maxRows?: number;
+  /** Set to `true` to remove the resize handle from the bottom right */
+  disableManualResize?: boolean;
   /** Called when the value of the Textarea changes */
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   /**
@@ -64,8 +58,7 @@ export function Textarea({
   value: controlledValue,
   onChange,
   rows = 2,
-  autoResize,
-  maxRows = Infinity,
+  maxRows = 10,
   disableManualResize,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
@@ -91,7 +84,7 @@ export function Textarea({
 
   // Compute the height to use when autoResize applies
   React.useLayoutEffect(() => {
-    if (autoResize && hiddenTextarea.current) {
+    if (maxRows > rows && hiddenTextarea.current) {
       // Measure the height of the hidden textarea with the new value
       hiddenTextarea.current.value = value || '';
       const computedStyle = getComputedStyle(hiddenTextarea.current);
@@ -119,7 +112,7 @@ export function Textarea({
         setAutoHeight(newAutoHeight);
       }
     }
-  }, [value, autoResize, rows, maxRows, autoHeight]);
+  }, [value, rows, maxRows, autoHeight]);
 
   const [uncontrolledId] = React.useState(randomId());
   const id = controlledId || (label ? uncontrolledId : undefined);
@@ -134,7 +127,8 @@ export function Textarea({
     controlledAriaErrorMessage ||
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
-  const heightProps = autoResize ? { style: { height: autoHeight } } : { rows };
+  const heightProps =
+    maxRows > rows ? { style: { height: autoHeight } } : { rows };
   const s = styles({ sizer, hasError: !!error, disableManualResize });
 
   return (

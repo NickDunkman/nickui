@@ -11,16 +11,18 @@ export const styles = tv({
     border-1 rounded-sm
     text-center
     cursor-pointer select-none
+    shadow-md/15
     transition-all duration-8 ease-out
 
-    disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-600 disabled:opacity-100 disabled:cursor-not-allowed
+    disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-600 disabled:opacity-100 disabled:cursor-not-allowed disabled:shadow-none
 
-    hover:shadow-xl hover:-translate-y-0.5 hover:scale-101.5
-    focus:shadow-xl focus:-translate-y-0.5 focus:scale-101.5
 
-    active:shadow-none active:translate-y-0 active:scale-100
-    pointer-coarse:hover:shadow-none pointer-coarse:translate-y-0 pointer-coarse:scale-100
-    disabled:hover:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100
+    hover:shadow-xl/15 hover:-translate-y-0.5 hover:scale-101.5
+    focus:shadow-xl/15 focus:-translate-y-0.5 focus:scale-101.5
+
+    active:shadow-md/15 active:translate-y-0 active:scale-100
+    pointer-coarse:hover:shadow-md/15 pointer-coarse:translate-y-0 pointer-coarse:scale-100
+    disabled:hover:shadow-md/15 disabled:hover:translate-y-0 disabled:hover:scale-100
   `,
 
   variants: {

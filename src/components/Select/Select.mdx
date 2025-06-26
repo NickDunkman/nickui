@@ -1,6 +1,11 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FieldArgTypes, FormikDemo, ReactHookFormDemo } from '@/docs';
+import {
+  FakeCanvas,
+  FieldArgTypes,
+  FormikDemo,
+  ReactHookFormDemo,
+} from '@/docs';
 
 import { Select } from './Select';
 import * as Stories from './Select.stories';
@@ -10,6 +15,14 @@ import * as Stories from './Select.stories';
 # `<Select>`
 
 A form control that allows users to choose an option using a menu.
+
+<FakeCanvas>
+  <Select label="Choose a bloop">
+    <option value="bleep">Bleep</option>
+    <option value="bloop">Bloop</option>
+    <option value="blap">Blap</option>
+  </Select>
+</FakeCanvas>
 
 <FieldArgTypes of={Select} reactDocs="select" wrapper="Field" />
 

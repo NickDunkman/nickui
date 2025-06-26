@@ -1,5 +1,9 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 
+import { FakeCanvas } from '@/docs';
+
+import { Radios } from '@/components/Radios';
+
 import { Fieldset } from './Fieldset';
 import * as Stories from './Fieldset.stories';
 
@@ -9,6 +13,27 @@ import * as Stories from './Fieldset.stories';
 
 Fieldset wraps multiple form controls in a standard field layout (label, hint,
 error message, etc).
+
+<FakeCanvas>
+  <Fieldset
+    label="A label"
+    explainer="An explainer"
+    error="An error message!"
+    hint="A hint"
+  >
+    <div className="flex flex-col gap-3">
+      <div className="rounded-sm border-1 border-dashed border-blue-300 bg-blue-50 p-3 text-xs text-blue-400">
+        One form control
+      </div>
+      <div className="rounded-sm border-1 border-dashed border-blue-300 bg-blue-50 p-3 text-xs text-blue-400">
+        Another form control
+      </div>
+      <div className="rounded-sm border-1 border-dashed border-blue-300 bg-blue-50 p-3 text-xs text-blue-400">
+        And so on ...
+      </div>
+    </div>
+  </Fieldset>
+</FakeCanvas>
 
 ## Props
 

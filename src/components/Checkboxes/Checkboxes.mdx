@@ -1,6 +1,11 @@
 import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
-import { FieldArgTypes, FormikDemo, ReactHookFormDemo } from '@/docs';
+import {
+  FakeCanvas,
+  FieldArgTypes,
+  FormikDemo,
+  ReactHookFormDemo,
+} from '@/docs';
 
 import { Checkboxes } from './Checkboxes';
 import * as Stories from './Checkboxes.stories';
@@ -18,6 +23,17 @@ currently checked checkboxes, the component's value is a single delimited-string
 that is managed using a `<input type="hidden">`. Each checkbox represents a
 substring that can be added to or removed from the delimited-string by toggling
 the checked status.
+
+<FakeCanvas>
+  <Checkboxes
+    label="Toppings"
+    options={[
+      { value: 'sprinkles', label: 'Sprinkles' },
+      { value: 'crumbs', label: 'Crumbs' },
+      { value: 'chocolate', label: 'Chocolate' },
+    ]}
+  />
+</FakeCanvas>
 
 <FieldArgTypes of={Checkboxes} reactDocs="input" wrapper="Fieldset" />
 

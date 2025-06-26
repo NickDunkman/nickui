@@ -1,6 +1,11 @@
 import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
-import { FieldArgTypes, FormikDemo, ReactHookFormDemo } from '@/docs';
+import {
+  FakeCanvas,
+  FieldArgTypes,
+  FormikDemo,
+  ReactHookFormDemo,
+} from '@/docs';
 
 import { Radios } from './Radios';
 import * as Stories from './Radios.stories';
@@ -10,6 +15,17 @@ import * as Stories from './Radios.stories';
 # `<Radios>`
 
 Radios renders multiple Radio as one field in a Fieldset.
+
+<FakeCanvas>
+  <Radios
+    label="Quel numéro?"
+    options={[
+      { value: 'un', label: 'Un' },
+      { value: 'deux', label: 'Deux' },
+      { value: 'trois', label: 'Trois' },
+    ]}
+  />
+</FakeCanvas>
 
 <FieldArgTypes of={Radios} reactDocs="input" wrapper="Fieldset" />
 

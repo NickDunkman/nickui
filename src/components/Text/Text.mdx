@@ -1,6 +1,11 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FieldArgTypes, FormikDemo, ReactHookFormDemo } from '@/docs';
+import {
+  FakeCanvas,
+  FieldArgTypes,
+  FormikDemo,
+  ReactHookFormDemo,
+} from '@/docs';
 
 import { Text } from './Text';
 import * as Stories from './Text.stories';
@@ -10,6 +15,10 @@ import * as Stories from './Text.stories';
 # `<Text>`
 
 A form control that allows users to enter & edit a single line of text.
+
+<FakeCanvas>
+  <Text placeholder="Type something!" />
+</FakeCanvas>
 
 <FieldArgTypes of={Text} reactDocs="input" wrapper="Field" />
 
