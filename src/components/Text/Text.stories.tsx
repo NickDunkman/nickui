@@ -53,17 +53,14 @@ export const AllControlStates: Story = {
   ),
 };
 
-export const Field: Story = {
-  tags: ['!dev', '!test'],
-  render: (_args) => (
-    <Text
-      label="A label"
-      explainer="An explainer"
-      error="An error message"
-      hint="A hint"
-      defaultValue="A problematic value"
-    />
-  ),
+export const FieldLayout: Story = {
+  args: {
+    label: 'A label',
+    explainer: 'An explainer',
+    error: 'An error message',
+    hint: 'A hint',
+    defaultValue: 'A problematic value',
+  },
 };
 
 export const Small: Story = {

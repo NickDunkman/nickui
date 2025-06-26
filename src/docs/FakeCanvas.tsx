@@ -13,6 +13,7 @@ export function FakeCanvas({ children }: { children?: React.ReactNode }) {
         border: '1px solid rgba(38, 85, 115, 0.15)',
         borderRadius: 4,
         padding: 32,
+        margin: '25px 0 40px',
       }}
     >
       {children}

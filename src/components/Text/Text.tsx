@@ -40,9 +40,7 @@ interface TextProps extends React.ComponentProps<'input'> {
    * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
    */
   value?: string;
-  /**
-   * Sets the value of the Text when using it as an uncontrolled component
-   */
+  /** Sets the value of the Text when using it as an uncontrolled component */
   defaultValue?: string;
 }
 

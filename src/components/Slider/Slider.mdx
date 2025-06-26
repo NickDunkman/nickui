@@ -1,23 +1,39 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FieldArgTypes, FormikDemo, ReactHookFormDemo } from '@/docs';
+import {
+  FakeCanvas,
+  FieldArgTypes,
+  FormikDemo,
+  ReactHookFormDemo,
+} from '@/docs';
 
-import { Text } from './Text';
-import * as Stories from './Text.stories';
+import { Slider } from './Slider';
+import * as Stories from './Slider.stories';
 
 <Meta of={Stories} />
 
-# `<Text>`
+# `<Slider>`
 
 A form control that allows users to enter & edit a single line of text.
 
-<FieldArgTypes of={Text} reactDocs="input" wrapper="Field" />
+<FakeCanvas>
+  <Slider defaultValue={50} />
+</FakeCanvas>
+
+<FieldArgTypes of={Slider} reactDocs="div" wrapper="Field" />
 
 ## Control states
 
 These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
+
+## Customizing the value range
+
+Use the `min`, `max`, and `step` props to customize the bounds of the range, and
+the granularity of values within it.
+
+<Canvas of={Stories.CustomRange} sourceState="shown" />
 
 ## Field layout
 
@@ -33,26 +49,24 @@ Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
 In keeping with the mobile-first philosophy of Tailwind, the default size is
 "small".
 
-<Canvas of={Stories.AllSizes} sourceState="shown" />
+<Canvas of={Stories.AllSizes} />
 
 <ReactHookFormDemo
-  fieldName="firstName"
-  initialValue="Nick"
-  component={Text}
+  fieldName="favoriteNumber"
+  initialValue="20"
+  component={Slider}
   componentProps={{
-    label: 'First name',
+    label: 'Favorite number',
     hint: 'Try editting me!',
-    sizer: Text.sizer.medium,
   }}
 />
 
 <FormikDemo
-  fieldName="firstName"
-  initialValue="Nick"
-  component={Text}
+  fieldName="favoriteNumber"
+  initialValue="20"
+  component={Slider}
   componentProps={{
-    label: 'First name',
+    label: 'Favorite number',
     hint: 'Try editting me!',
-    sizer: Text.sizer.medium,
   }}
 />

@@ -59,7 +59,7 @@ export const CustomLayout: Story = {
   },
 };
 
-export const Fieldset: Story = {
+export const FieldsetLayout: Story = {
   args: {
     label: 'A label',
     explainer: 'An explainer',
