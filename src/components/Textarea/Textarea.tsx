@@ -76,11 +76,6 @@ export function Textarea({
   const hiddenTextarea = React.useRef<HTMLTextAreaElement>(null);
   const [autoHeight, setAutoHeight] = React.useState<number>(0);
 
-  // Generate some ids for accessibility, in case they aren't provided as props
-  const [uncontrolledId] = React.useState(randomId());
-  const [uncontrolledAriaDescribedBy] = React.useState(randomId());
-  const [uncontrolledAriaErrorMessage] = React.useState(randomId());
-
   // track a value for *uncontrolled* mode, if necessary
   const [uncontrolledValue, setUncontrolledValue] =
     React.useState(defaultValue);
@@ -126,22 +121,20 @@ export function Textarea({
     }
   }, [value, autoResize, rows, maxRows, autoHeight]);
 
-  const heightProps = autoResize ? { style: { height: autoHeight } } : { rows };
-
-  // To make the label/hint/error accessible, create some IDs to use for
-  // associating the input with those elements. Use the IDs specified via
-  // props if they are provided, otherwise use some auto-generated IDs. Note:
-  // don't use auto-generated IDs unless the associated content exists (e.g.
-  // don't specify an aria-describedby on the input unless there is hint
-  // content).
+  const [uncontrolledId] = React.useState(randomId());
   const id = controlledId || (label ? uncontrolledId : undefined);
+
+  const [uncontrolledAriaDescribedBy] = React.useState(randomId());
   const ariaDescribedBy =
     controlledAriaDescribedBy ||
     (hint ? uncontrolledAriaDescribedBy : undefined);
+
+  const [uncontrolledAriaErrorMessage] = React.useState(randomId());
   const ariaErrorMessage =
     controlledAriaErrorMessage ||
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
+  const heightProps = autoResize ? { style: { height: autoHeight } } : { rows };
   const s = styles({ sizer, hasError: !!error, disableManualResize });
 
   return (

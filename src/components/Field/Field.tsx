@@ -13,6 +13,8 @@ export interface FieldProps extends React.ComponentProps<'div'> {
   sizer?: FieldSizer;
   /** The main label to show above the form control, naming the field */
   label?: React.ReactNode;
+  /** For accessibility purposes: an id to set on the label element */
+  labelId?: string;
   /**
    * A more detailed label explaining the purpose of the field, placed
    * directly the main label
@@ -54,6 +56,7 @@ export function Field({
   hint,
   hintId,
   label,
+  labelId,
   sizer,
   disabled: _disabled,
   required = false,
@@ -64,7 +67,7 @@ export function Field({
   return (
     <div {...otherDivProps}>
       {(label || explainer) && (
-        <label className={s.heading()} htmlFor={controlId}>
+        <label id={labelId} className={s.heading()} htmlFor={controlId}>
           {label && (
             <div className={s.label()}>
               {label}

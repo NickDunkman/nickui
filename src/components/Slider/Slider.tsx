@@ -5,6 +5,7 @@ import { Field } from '@/components/Field';
 import { FieldSizer } from '@/constants';
 import { FieldControlProps } from '@/types';
 import { debounceToRepaint } from '@/utils/debounceToRepaint';
+import { randomId } from '@/utils/randomId';
 
 import { styles } from './styles';
 
@@ -93,6 +94,10 @@ export function Slider({
   onKeyDown,
   onFocus,
   onBlur,
+  'aria-labelledby': controlledAriaLabelledBy,
+  'aria-describedby': controlledAriaDescribedBy,
+  'aria-errormessage': controlledAriaErrorMessage,
+  'aria-invalid': ariaInvalid,
   // The rest are brought in from <div>
   ...otherDivProps
 }: SliderProps & FieldControlProps) {
@@ -333,6 +338,21 @@ export function Slider({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const [uncontrolledAriaLabelledBy] = React.useState(randomId());
+  const ariaLabelledBy =
+    controlledAriaLabelledBy ||
+    (label ? uncontrolledAriaLabelledBy : undefined);
+
+  const [uncontrolledAriaDescribedBy] = React.useState(randomId());
+  const ariaDescribedBy =
+    controlledAriaDescribedBy ||
+    (hint ? uncontrolledAriaDescribedBy : undefined);
+
+  const [uncontrolledAriaErrorMessage] = React.useState(randomId());
+  const ariaErrorMessage =
+    controlledAriaErrorMessage ||
+    (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
+
   const percentage = valueToRangePercentage(implicitValue, min, max);
 
   const s = styles({
@@ -347,18 +367,22 @@ export function Slider({
   const control = (
     <div
       {...otherDivProps}
+      ref={rootRef}
       className={s.root()}
       role="slider"
-      aria-valuemax={max}
-      aria-valuemin={min}
-      aria-valuenow={implicitValue}
-      ref={rootRef}
       tabIndex={disabled ? -1 : tabIndex}
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
       onFocus={handleFocus}
       onBlur={handleBlur}
       onKeyDown={handleKeyDown}
+      aria-valuemax={max}
+      aria-valuemin={min}
+      aria-valuenow={implicitValue}
+      aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
+      aria-errormessage={ariaErrorMessage}
+      aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
     >
       <div ref={trackRef} className={s.track()}>
         <div className={s.fill()} style={{ right: `${100 - percentage}%` }} />
@@ -372,9 +396,12 @@ export function Slider({
       className={className}
       sizer={sizer}
       label={label}
+      labelId={ariaLabelledBy}
       explainer={explainer}
       hint={hint}
+      hintId={ariaDescribedBy}
       error={error}
+      errorId={ariaErrorMessage}
       disabled={disabled}
       required={required}
     >
