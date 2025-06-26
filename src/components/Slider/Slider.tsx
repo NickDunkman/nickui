@@ -21,17 +21,14 @@ interface SliderProps
   /**
    * Optional render function that can be used to customize the presentation
    * of the Slider control within the Field, such as to show the current value.
+   * The `control` argument contains the slider control element—you’ll need to
+   * include it in the rendering somewhere, but have control of the placement.
    */
   children?: (renderArgs: {
-    /** Use this Component to render the Slider control where you want it  */
-    Control: React.ComponentType;
-    /** The current value of the Slider */
+    control: React.ReactNode;
     value: number;
-    /** The minimum allowed value */
     min: number;
-    /** The maximum allowed value */
     max: number;
-    /** Indicates the step by which the Slider's value can change */
     step: number;
   }) => React.ReactNode;
   /** Called when the value of the Slider changes */
@@ -48,6 +45,11 @@ interface SliderProps
    *   `<Slider min={1} max={9} step={2} />`
    */
   step?: number;
+  /**
+   * The number of steps to move when the shift key is held while adjusting
+   * the value via the keyboard, defaults to 10
+   */
+  shiftSteps?: number;
   /** The field name */
   name?: string;
   /**
@@ -66,7 +68,6 @@ interface SliderProps
  */
 export function Slider({
   // Field props
-  ref: controlledInputRef,
   className,
   sizer,
   label,
@@ -76,11 +77,13 @@ export function Slider({
   disabled,
   required,
   // Slider-specific props
+  ref: controlledInputRef,
   children,
   name,
   max = 100,
   min = 0,
   step = 1,
+  shiftSteps = 10,
   tabIndex = 0,
   value: controlledValue,
   defaultValue,
@@ -96,7 +99,12 @@ export function Slider({
   const rootRef = React.useRef<HTMLDivElement>(null);
   const trackRef = React.useRef<HTMLDivElement>(null);
 
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  // This component needs a ref to the hidden <input> for its internal
+  // mechanisms. There may also be a `ref` prop provided, such as by React Form
+  // Hook for managing the field, and that may be a RefCallback or a RefObject.
+  // So for internal convenience, we install a managed RefObject on the hidden
+  // <input> in addition to the `ref` prop.
+  const internalInputRef = React.useRef<HTMLInputElement>(null);
 
   const [isClicked, setIsClicked] = React.useState<boolean>(false);
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
@@ -128,7 +136,7 @@ export function Slider({
     // allows the callback to be called with a full SyntheticEvent from
     // an HTMLInputElement, which helps make the component compatible with
     // form libraries like React Hook Form.
-    if (inputRef.current) {
+    if (internalInputRef.current) {
       const inputProto = window.HTMLInputElement.prototype;
       const descriptor = Object.getOwnPropertyDescriptor(
         inputProto,
@@ -137,8 +145,8 @@ export function Slider({
       const setValue = descriptor.set;
       if (setValue) {
         const event = new Event('input', { bubbles: true });
-        setValue.call(inputRef.current, cleanedNewValue);
-        inputRef.current.dispatchEvent(event);
+        setValue.call(internalInputRef.current, cleanedNewValue);
+        internalInputRef.current.dispatchEvent(event);
       }
     }
   }
@@ -233,16 +241,24 @@ export function Slider({
     if (!disabled) {
       let newValue: number;
 
+      const shiftKeyHeld = event.nativeEvent.shiftKey;
+
       switch (keycode(event.nativeEvent)) {
         case 'right':
         case 'up':
         case 'page up':
-          newValue = Math.min(max, implicitValue + step);
+          newValue = Math.min(
+            max,
+            implicitValue + (shiftKeyHeld ? step * shiftSteps : step),
+          );
           break;
         case 'left':
         case 'down':
         case 'page down':
-          newValue = Math.max(min, implicitValue - step);
+          newValue = Math.max(
+            min,
+            implicitValue - (shiftKeyHeld ? step * shiftSteps : step),
+          );
           break;
         case 'home':
           newValue = min;
@@ -291,11 +307,11 @@ export function Slider({
       if (isFocused) {
         setIsFocused(false);
       }
-      if (inputRef.current) {
+      if (internalInputRef.current) {
         onBlur?.({
           ...event,
-          target: inputRef.current,
-          currentTarget: inputRef.current,
+          target: internalInputRef.current,
+          currentTarget: internalInputRef.current,
         });
       }
     }
@@ -309,8 +325,8 @@ export function Slider({
   // to be properly checked or unchecked after mount.
   React.useLayoutEffect(() => {
     if (value === undefined && defaultValue === undefined) {
-      if (inputRef.current?.value != null) {
-        setUncontrolledValue(Number(inputRef.current.value));
+      if (internalInputRef.current?.value != null) {
+        setUncontrolledValue(Number(internalInputRef.current.value));
       }
     }
     // We only want to run this effect once after mount
@@ -328,31 +344,28 @@ export function Slider({
     atMax: percentage === 100,
   });
 
-  // Renders the actual control
-  function Control() {
-    return (
-      <div
-        {...otherDivProps}
-        className={s.root()}
-        role="slider"
-        aria-valuemax={max}
-        aria-valuemin={min}
-        aria-valuenow={implicitValue}
-        ref={rootRef}
-        tabIndex={disabled ? -1 : tabIndex}
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleTouchStart}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onKeyDown={handleKeyDown}
-      >
-        <div ref={trackRef} className={s.track()}>
-          <div className={s.fill()} style={{ right: `${100 - percentage}%` }} />
-          <div className={s.thumb()} style={{ left: `${percentage}%` }} />
-        </div>
+  const control = (
+    <div
+      {...otherDivProps}
+      className={s.root()}
+      role="slider"
+      aria-valuemax={max}
+      aria-valuemin={min}
+      aria-valuenow={implicitValue}
+      ref={rootRef}
+      tabIndex={disabled ? -1 : tabIndex}
+      onMouseDown={handleMouseDown}
+      onTouchStart={handleTouchStart}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onKeyDown={handleKeyDown}
+    >
+      <div ref={trackRef} className={s.track()}>
+        <div className={s.fill()} style={{ right: `${100 - percentage}%` }} />
+        <div className={s.thumb()} style={{ left: `${percentage}%` }} />
       </div>
-    );
-  }
+    </div>
+  );
 
   return (
     <Field
@@ -365,11 +378,9 @@ export function Slider({
       disabled={disabled}
       required={required}
     >
-      {children ? (
-        children({ Control, value: implicitValue, min, max, step })
-      ) : (
-        <Control />
-      )}
+      {!children
+        ? control
+        : children({ control, value: implicitValue, min, max, step })}
 
       {/*
         This <input> is hidden from the user, and is used to have the onChange
@@ -379,7 +390,7 @@ export function Slider({
       */}
       <input
         ref={(el) => {
-          inputRef.current = el;
+          internalInputRef.current = el;
 
           if (typeof controlledInputRef === 'function') {
             controlledInputRef(el);

@@ -16,9 +16,9 @@ function renderWithMetadata(
 ): Partial<React.ComponentProps<typeof Slider>> {
   return {
     'aria-label': ariaLabel,
-    children: ({ Control, value }) => (
+    children: ({ control, value }) => (
       <>
-        <Control />
+        {control}
         <div className="flex text-xs text-gray-600">
           <div>{ariaLabel}</div>
           <div className="ml-auto">{value}</div>
@@ -28,7 +28,7 @@ function renderWithMetadata(
   };
 }
 
-export const Default: Story = {
+export const NoValue: Story = {
   args: renderWithMetadata('Slider with no valueish prop'),
 };
 
@@ -58,12 +58,23 @@ export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
-      <Slider {...Default.args} />
+      <Slider {...NoValue.args} />
       <Slider {...Controlled.args} />
       <Slider {...Uncontrolled.args} />
       <Slider {...Disabled.args} />
     </div>
   ),
+};
+
+export const CustomRange: Story = {
+  args: {
+    defaultValue: '0',
+    min: -1000,
+    max: 1000,
+    step: 0.01,
+    shiftSteps: 500,
+    ...renderWithMetadata('Slider with custom range'),
+  },
 };
 
 export const FieldLayout: Story = {
@@ -109,14 +120,4 @@ export const AllSizes: Story = {
       <Slider {...Large.args} />
     </div>
   ),
-};
-
-export const CustomRange: Story = {
-  args: {
-    defaultValue: '0',
-    min: -1000,
-    max: 1000,
-    step: 0.01,
-    ...renderWithMetadata('Slider with custom range'),
-  },
 };

@@ -31,7 +31,9 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 ## Customizing the value range
 
 Use the `min`, `max`, and `step` props to customize the bounds of the range, and
-the granularity of values within it.
+the granularity of values within it. You can also use `shiftSteps` to control
+how many steps are moved when the user is holding the shift key while using the
+keyboard to interact with the Slider.
 
 <Canvas of={Stories.CustomRange} sourceState="shown" />
 
