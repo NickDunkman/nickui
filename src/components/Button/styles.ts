@@ -22,7 +22,7 @@ export const styles = tv({
 
     active:shadow-md/15 active:translate-y-0 active:scale-100
     pointer-coarse:hover:shadow-md/15 pointer-coarse:translate-y-0 pointer-coarse:scale-100
-    disabled:hover:shadow-md/15 disabled:hover:translate-y-0 disabled:hover:scale-100
+    disabled:hover:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100
   `,
 
   variants: {

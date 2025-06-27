@@ -3,6 +3,7 @@ import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 import {
   FakeCanvas,
   FieldArgTypes,
+  FieldLayoutAndSizing,
   FormikDemo,
   ReactHookFormDemo,
 } from '@/docs';
@@ -31,8 +32,9 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 ## Controlling the height
 
 Minimum vertical sizing of textareas is done via the `rows` prop (the default is
-2 rows). The Textarea will automatically grow (& shrink) up to the `maxRows`
-prop to accomodate the value (the default is 10 rows).
+2 rows). The Textarea will automatically grow up to the `maxRows` prop to
+accomodate the value (the default is 10 rows). For an unbounded height, you can
+use `maxRows={Infinity}`.
 
 <Canvas of={Stories.AutoResizableHeight} sourceState="shown" />
 
@@ -45,21 +47,7 @@ To prevent the user from being able to resize the Textarea manually, use the
 
 <Canvas of={Stories.DisableManualResize} sourceState="shown" />
 
-## Field layout
-
-Textareas can optionally have each of the components of a standard
-[Field](/docs/forms-field--docs): label, explainer, hint, and error. Textarea
-automatically handles the accessibility of these pieces for you!
-
-<Canvas of={Stories.FieldLayout} />
-
-## Sizing
-
-Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
-In keeping with the mobile-first philosophy of Tailwind, the default size is
-"small".
-
-<Canvas of={Stories.AllSizes} />
+<FieldLayoutAndSizing of={Textarea} wrapper="Field" stories={Stories} />
 
 <ReactHookFormDemo
   fieldName="aboutMe"

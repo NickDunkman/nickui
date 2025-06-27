@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 
-import { Select } from '@/components/Select/Select';
-import { Text } from '@/components/Text/Text';
+import { FormControlPlaceholder } from '@/docs';
 
 import { Fieldset } from './Fieldset';
 
@@ -18,17 +17,8 @@ export const Basic: Story = {
   tags: ['!dev', '!test'],
   args: {
     children: [
-      <Text
-        className="mb-2"
-        placeholder="First field"
-        aria-label="First field"
-        key="first"
-      />,
-      <Text
-        placeholder="Second field"
-        aria-label="Second field"
-        key="second"
-      />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'A label for the fieldset',
     explainer: 'An explanation about the fieldset',
@@ -40,17 +30,8 @@ export const Small: Story = {
   args: {
     sizer: Fieldset.sizer.small,
     children: [
-      <Text
-        className="mb-2"
-        placeholder="First field"
-        aria-label="First field"
-        key="first"
-      />,
-      <Text
-        placeholder="Second field"
-        aria-label="Second field"
-        key="second"
-      />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Small label',
     explainer: 'Small explanation',
@@ -62,19 +43,8 @@ export const Medium: Story = {
   args: {
     sizer: Fieldset.sizer.medium,
     children: [
-      <Text
-        className="mb-2"
-        placeholder="First field"
-        aria-label="First field"
-        sizer={Text.sizer.medium}
-        key="first"
-      />,
-      <Text
-        placeholder="Second field"
-        aria-label="Second field"
-        sizer={Text.sizer.medium}
-        key="second"
-      />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Medium label',
     explainer: 'Medium explanation',
@@ -86,19 +56,8 @@ export const Large: Story = {
   args: {
     sizer: Fieldset.sizer.large,
     children: [
-      <Text
-        className="mb-2"
-        placeholder="First field"
-        aria-label="First field"
-        sizer={Text.sizer.large}
-        key="first"
-      />,
-      <Text
-        placeholder="Second field"
-        aria-label="Second field"
-        sizer={Text.sizer.large}
-        key="second"
-      />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Large label',
     explainer: 'Large explanation',
@@ -110,9 +69,15 @@ export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-5 md:flex-row">
-      <Fieldset {...Small.args} />
-      <Fieldset {...Medium.args} />
-      <Fieldset {...Large.args} />
+      <div className="flex-1">
+        <Fieldset {...Small.args} />
+      </div>
+      <div className="flex-1">
+        <Fieldset {...Medium.args} />
+      </div>
+      <div className="flex-1">
+        <Fieldset {...Large.args} />
+      </div>
     </div>
   ),
 };
@@ -120,12 +85,8 @@ export const AllSizes: Story = {
 export const Error: Story = {
   args: {
     children: [
-      <Select key="apples" className="mb-2" error aria-label="First comparable">
-        <option>Apples</option>
-      </Select>,
-      <Select key="oranges" error aria-label="Second comparable">
-        <option>Oranges</option>
-      </Select>,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Select some comparables',
     error: 'These cannot be compared',
@@ -135,19 +96,8 @@ export const Error: Story = {
 export const Required: Story = {
   args: {
     children: [
-      <Text
-        className="mb-2"
-        placeholder="First name"
-        required
-        aria-label="First name"
-        key="first"
-      />,
-      <Text
-        placeholder="Last name"
-        required
-        aria-label="Last name"
-        key="last"
-      />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Your name',
     required: true,

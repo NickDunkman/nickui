@@ -3,6 +3,7 @@ import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 import {
   FakeCanvas,
   FieldArgTypes,
+  FieldLayoutAndSizing,
   FormikDemo,
   ReactHookFormDemo,
 } from '@/docs';
@@ -84,21 +85,7 @@ pass a render function as the `children`.
   `}
 />
 
-## Fieldset layout
-
-Checkboxes can optionally have each of the components of a standard
-[Fieldset](/docs/forms-fieldset--docs): label, explainer, hint, and error. The
-accessibility of all these pieces is automatically handled for you!
-
-<Canvas of={Stories.FieldsetLayout} />
-
-## Sizing
-
-Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
-In keeping with the mobile-first philosophy of Tailwind, the default size is
-"small".
-
-<Canvas of={Stories.AllSizes} />
+<FieldLayoutAndSizing of={Checkboxes} wrapper="Fieldset" stories={Stories} />
 
 <ReactHookFormDemo
   fieldName="fullNameRHF"

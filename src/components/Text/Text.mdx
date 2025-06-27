@@ -3,6 +3,7 @@ import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 import {
   FakeCanvas,
   FieldArgTypes,
+  FieldLayoutAndSizing,
   FormikDemo,
   ReactHookFormDemo,
 } from '@/docs';
@@ -28,21 +29,7 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
-## Field layout
-
-Text can optionally have each of the components of a standard
-[Field](/docs/forms-field--docs): label, explainer, hint, and error. Text
-automatically handles the accessibility of these pieces for you!
-
-<Canvas of={Stories.FieldLayout} sourceState="shown" />
-
-## Sizing
-
-Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
-In keeping with the mobile-first philosophy of Tailwind, the default size is
-"small".
-
-<Canvas of={Stories.AllSizes} sourceState="shown" />
+<FieldLayoutAndSizing of={Text} wrapper="Field" stories={Stories} />
 
 <ReactHookFormDemo
   fieldName="firstName"

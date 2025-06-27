@@ -1,6 +1,6 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FakeCanvas, FieldArgTypes } from '@/docs';
+import { FakeCanvas, FieldArgTypes, FieldLayoutAndSizing } from '@/docs';
 
 import { Radio } from './Radio';
 import * as Stories from './Radio.stories';
@@ -23,10 +23,4 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
-## Sizing
-
-Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
-In keeping with the mobile-first philosophy of Tailwind, the default size is
-"small".
-
-<Canvas of={Stories.AllSizes} sourceState="shown" />
+<FieldLayoutAndSizing of={Radio} stories={Stories} />

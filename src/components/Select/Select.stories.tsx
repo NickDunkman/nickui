@@ -98,10 +98,16 @@ export const Large: Story = {
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4">
-      <Select {...Small.args} />
-      <Select {...Medium.args} />
-      <Select {...Large.args} />
+    <div className="flex flex-col gap-4 sm:flex-row">
+      <div className="flex-1">
+        <Select {...Small.args} />
+      </div>
+      <div className="flex-1">
+        <Select {...Medium.args} />
+      </div>
+      <div className="flex-1">
+        <Select {...Large.args} />
+      </div>
     </div>
   ),
 };

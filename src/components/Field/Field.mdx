@@ -1,6 +1,6 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FakeCanvas } from '@/docs';
+import { FakeCanvas, FormControlPlaceholder } from '@/docs';
 
 import { Field } from './Field';
 import * as Stories from './Field.stories';
@@ -19,9 +19,7 @@ message, etc).
     error="An error message!"
     hint="A hint"
   >
-    <div className="rounded-sm border-1 border-dashed border-blue-300 bg-blue-50 p-3 text-xs text-blue-400">
-      A form control
-    </div>
+    <FormControlPlaceholder />
   </Field>
 </FakeCanvas>
 
