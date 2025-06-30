@@ -34,7 +34,7 @@ after:m-0.5
           'w-10 h-6 after:size-5 after:border-6 peer-checked:after:translate-x-4',
       },
       [FieldSizer.large]: {
-        root: 'min-h-7 pl-12 pt-0.5 gap-3 text-md',
+        root: 'min-h-7 pl-12 pt-0.5 gap-3 text-base',
         indicator:
           'w-12 h-7 after:size-6 after:border-7 peer-checked:after:translate-x-5',
       },

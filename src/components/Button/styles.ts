@@ -28,7 +28,7 @@ export const styles = tv({
   variants: {
     sizer: {
       [FieldSizer.small]: 'text-sm py-1.75 px-3',
-      [FieldSizer.medium]: 'text-md py-2.75 px-4.5',
+      [FieldSizer.medium]: 'text-base py-2.75 px-4.5',
       [FieldSizer.large]: 'text-lg py-3.75 px-5.5',
     },
     flavor: {

@@ -66,19 +66,21 @@ pass a render function as the `children`.
     >
       {(checkbox) => (
         <div className="flex flex-row items-baseline gap-x-4">
-          <Checkbox {...checkbox({ value: 'kinda' })}>A little custom</Checkbox>
+          <Checkbox {...checkbox({ value: 'kinda' })} label="A little custom" />
           <span className="text-xs text-gray-500">or</span>
-          <Checkbox {...checkbox({ value: 'pretty' })}>
-            <div className="font-bold text-blue-500">Pretty custom</div>
-          </Checkbox>
+          <Checkbox
+            {...checkbox({ value: 'pretty' })}>
+            label={
+              <div className="font-bold text-blue-500">Pretty custom</div>
+            }
+          />
           <span className="text-xs text-gray-500">or</span>
           <Checkbox
             {...checkbox({ value: 'too', disabled: true })}
             className="-rotate-30"
             sizer={Checkbox.sizer.large}
-          >
-            Too custom
-          </Checkbox>
+            label="Too custom"
+          />
         </div>
       )}
     </Checkboxes>

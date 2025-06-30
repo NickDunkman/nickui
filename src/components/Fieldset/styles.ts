@@ -36,7 +36,7 @@ export const styles = tv({
         label: 'text-lg',
         footer: 'mt-3.5 gap-2',
         explainer: 'text-sm',
-        error: 'text-md',
+        error: 'text-base',
         hint: 'text-sm',
       },
     },

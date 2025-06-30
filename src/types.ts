@@ -2,7 +2,10 @@ import * as React from 'react';
 
 import { FieldSizer } from '@/constants';
 
-export type FieldControlProps = {
+/**
+ * Any component which uses Field or Fieldset as a wrapper take these props!
+ */
+export type CommonFieldProps = {
   /** Optionally add utility classes to the root element */
   className?: string;
   /** Changes the size of the field ("small", "medium", "large") */
@@ -26,6 +29,23 @@ export type FieldControlProps = {
   error?: boolean | React.ReactNode;
   /** When `true`, adds an asterisk to the label */
   required?: boolean;
+  /** Prevents the user from interacting with the control */
+  disabled?: boolean;
+};
+
+/** Any component which uses CheckedField as a wrapper take these props! */
+export type CommonCheckedFieldProps = {
+  /** Optionally add utility classes to the root element */
+  className?: string;
+  /** Changes the size of the field ("small", "medium", "large") */
+  sizer?: FieldSizer;
+  /** The main label to to the right of the form control, naming the field */
+  label?: React.ReactNode;
+  /**
+   * A more detailed label explaining the purpose of the field, placed
+   * directly below the main label
+   */
+  explainer?: React.ReactNode;
   /** Prevents the user from interacting with the control */
   disabled?: boolean;
 };

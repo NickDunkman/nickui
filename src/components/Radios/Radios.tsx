@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Fieldset } from '@/components/Fieldset';
 import { Radio } from '@/components/Radio';
 import { FieldSizer } from '@/constants';
-import type { FieldControlProps } from '@/types';
+import type { CommonFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 
@@ -40,7 +40,7 @@ interface RadiosProps
 
 /**
  * Renders multiple radios as one field in a Fieldset.
- * @props {@link RadiosProps} + {@link FieldControlProps}
+ * @props {@link RadiosProps} + {@link CommonFieldProps}
  */
 export function Radios({
   // Fieldset props
@@ -62,7 +62,7 @@ export function Radios({
   onBlur,
   // The rest are those brought in from React.CopponentProps<'input'>
   ...otherHiddenInputProps
-}: RadiosProps & FieldControlProps) {
+}: RadiosProps & CommonFieldProps) {
   const containerRef = React.createRef<HTMLDivElement>();
 
   const [radioName] = React.useState(randomId());

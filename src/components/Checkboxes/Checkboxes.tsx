@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Checkbox } from '@/components/Checkbox';
 import { Fieldset } from '@/components/Fieldset';
 import { FieldSizer } from '@/constants';
-import type { FieldControlProps } from '@/types';
+import type { CommonFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 
@@ -25,6 +25,7 @@ interface CheckboxesProps
   options?: {
     value: string;
     label: React.ReactNode;
+    explainer?: React.ReactNode;
     disabled?: boolean;
   }[];
   /** Called when the value changes */
@@ -54,7 +55,7 @@ interface CheckboxesProps
  * substring that can be added to or removed from the delimited-string by
  * toggling the checked status.
  *
- * @props {@link CheckboxesProps} + {@link FieldControlProps}
+ * @props {@link CheckboxesProps} + {@link CommonFieldProps}
  */
 export function Checkboxes({
   // Fieldset props
@@ -77,7 +78,7 @@ export function Checkboxes({
   delimiter = ',',
   // The rest are brought in from <'input'>
   ...otherHiddenInputProps
-}: CheckboxesProps & FieldControlProps) {
+}: CheckboxesProps & CommonFieldProps) {
   const containerRef = React.createRef<HTMLDivElement>();
 
   const [checkboxName] = React.useState(randomId());
@@ -198,9 +199,9 @@ export function Checkboxes({
                   value: option.value,
                   disabled: option.disabled,
                 })}
-              >
-                {option.label}
-              </Checkbox>
+                label={option.label}
+                explainer={option.explainer}
+              />
             ))}
           </>
         )}

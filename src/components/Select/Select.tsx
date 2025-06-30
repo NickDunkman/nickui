@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Field } from '@/components/Field';
 import { FieldSizer } from '@/constants';
-import type { FieldControlProps } from '@/types';
+import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 
 import { styles } from './styles';
@@ -21,7 +21,7 @@ interface SelectProps extends React.ComponentProps<'select'> {
 
 /**
  * A form control that allows users to choose an option using a menu
- * @param props {@link SelectProps} + {@link FieldControlProps}
+ * @param props {@link SelectProps} + {@link CommonFieldProps}
  */
 export function Select({
   // Field props
@@ -40,7 +40,7 @@ export function Select({
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <select>
   ...otherSelectProps
-}: SelectProps & FieldControlProps) {
+}: SelectProps & CommonFieldProps) {
   const [uncontrolledId] = React.useState(randomId());
   const id = controlledId || (label ? uncontrolledId : undefined);
 

@@ -15,7 +15,7 @@ export function FieldLayoutAndSizing({
 }: {
   of: React.ComponentType;
   reactDocs: string;
-  wrapper?: 'Field' | 'Fieldset';
+  wrapper?: 'Field' | 'Fieldset' | 'CheckedField';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   stories: any;
 }) {
@@ -26,7 +26,9 @@ export function FieldLayoutAndSizing({
       ? stories.FieldLayout
       : wrapper === 'Fieldset'
         ? stories.FieldsetLayout
-        : null;
+        : wrapper === 'CheckedField'
+          ? stories.CheckedFieldLayout
+          : null;
 
   return (
     <>
@@ -41,8 +43,9 @@ export function FieldLayoutAndSizing({
             {`
 ${componentName} can optionally have each of the elements of a standard
 [${wrapper}](/docs/forms-${wrapper.toLowerCase()}--docs): \`label\`,
-\`explainer\`, \`hint\`, and \`error\`. ${componentName} automatically handles
-the accessibility of these elements for you!
+\`explainer\`${wrapper !== 'CheckedField' ? ', `hint`, `error`' : ''}.
+${componentName} automatically handles the accessibility of these elements for
+you!
         `}
           </Markdown>
 

@@ -32,7 +32,7 @@ export const styles = tv({
         heading: 'mb-2',
         label: 'text-lg',
         explainer: 'text-sm',
-        error: 'text-md mt-2',
+        error: 'text-base mt-2',
         hint: 'text-sm mt-2',
       },
     },

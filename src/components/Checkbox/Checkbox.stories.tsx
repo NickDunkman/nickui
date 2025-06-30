@@ -13,13 +13,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Unchecked: Story = {
   args: {
-    children: 'Unchecked Checkbox',
+    label: 'Unchecked Checkbox',
   },
 };
 
 export const Controlled: Story = {
   args: {
-    children: 'Controlled Checkbox',
+    label: 'Controlled Checkbox',
     checked: true,
     onChange: () => {},
   },
@@ -27,21 +27,21 @@ export const Controlled: Story = {
 
 export const Uncontrolled: Story = {
   args: {
-    children: 'Uncontrolled Checkbox',
+    label: 'Uncontrolled Checkbox',
     defaultChecked: true,
   },
 };
 
 export const Disabled: Story = {
   args: {
-    children: 'Disabled Checkbox',
+    label: 'Disabled Checkbox',
     disabled: true,
   },
 };
 
 export const DisabledChecked: Story = {
   args: {
-    children: 'Disabled & checked Checkbox',
+    label: 'Disabled & checked Checkbox',
     disabled: true,
     defaultChecked: true,
   },
@@ -62,7 +62,8 @@ export const AllControlStates: Story = {
 
 export const Small: Story = {
   args: {
-    children: 'Small Checkbox (default)',
+    label: 'Small Checkbox (default)',
+    explainer: 'Optional explaner',
     defaultChecked: true,
   },
 };
@@ -70,7 +71,8 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     sizer: Checkbox.sizer.medium,
-    children: 'Medium Checkbox',
+    label: 'Medium Checkbox',
+    explainer: 'Optional explaner',
     defaultChecked: true,
   },
 };
@@ -78,7 +80,8 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     sizer: Checkbox.sizer.large,
-    children: 'Large Checkbox',
+    label: 'Large Checkbox',
+    explainer: 'Optional explaner',
     defaultChecked: true,
   },
 };
@@ -86,10 +89,10 @@ export const Large: Story = {
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col items-baseline gap-5 md:flex-row">
-      <Checkbox {...Small.args} />
-      <Checkbox {...Medium.args} />
-      <Checkbox {...Large.args} />
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
+      <Checkbox {...Small.args} className="sm:flex-1" />
+      <Checkbox {...Medium.args} className="sm:flex-1" />
+      <Checkbox {...Large.args} className="sm:flex-1" />
     </div>
   ),
 };

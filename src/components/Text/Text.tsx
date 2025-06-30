@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Field } from '@/components/Field';
 import { FieldSizer } from '@/constants';
-import type { FieldControlProps } from '@/types';
+import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 
 import { styles } from './styles';
@@ -46,7 +46,7 @@ interface TextProps extends React.ComponentProps<'input'> {
 
 /**
  * A form control that allows users to enter & edit a single line of text
- * @param props {@link TextProps} + {@link FieldControlProps}
+ * @param props {@link TextProps} + {@link CommonFieldProps}
  */
 export function Text({
   // Field props
@@ -65,7 +65,7 @@ export function Text({
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <input>
   ...otherInputProps
-}: TextProps & FieldControlProps) {
+}: TextProps & CommonFieldProps) {
   const [uncontrolledId] = React.useState(randomId());
   const id = controlledId || (label ? uncontrolledId : undefined);
 

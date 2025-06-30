@@ -32,7 +32,7 @@ export const styles = tv({
         indicator: 'size-4 top-0.75 peer-checked:after:size-1.5',
       },
       [FieldSizer.large]: {
-        root: 'gap-3 pl-5 text-md',
+        root: 'gap-3 pl-5 text-base',
         indicator: 'size-5 top-0.75 peer-checked:after:size-2',
       },
     },

@@ -1,15 +1,12 @@
 import * as React from 'react';
 
+import { CheckedField } from '@/components/CheckedField';
 import { FieldSizer } from '@/constants';
-import { clsw } from '@/utils/clsw';
+import { CommonCheckedFieldProps } from '@/types';
 
 import { styles } from './styles';
 
 interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
-  /** Adds a label to the right of the control */
-  children?: React.ReactNode;
-  /** Add utility classes */
-  className?: string;
   /**
    * Sets the checked state of the Checkbox when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
@@ -20,45 +17,44 @@ interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
    * component
    */
   defaultChecked?: boolean;
-  /** Prevents the user from interacting with the Checkbox */
-  disabled?: boolean;
   /** Called when the checked state changes  */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  /** Changes the size of the field ("small", "medium", "large") */
-  sizer?: FieldSizer;
 }
 
 /**
  * A form control that allow users to choose zero to many options from a set
- * @param props {@link CheckboxProps}
+ * @param props {@link CheckboxProps} {@link CommonCheckedFieldProps}
  */
 export function Checkbox({
-  children,
+  // CheckedField props
   className,
-  disabled = false,
-  sizer = FieldSizer.small,
+  sizer,
+  label,
+  explainer,
+  disabled,
+  // Checkbox-specific props
   ...inputProps
-}: CheckboxProps) {
-  const s = styles({ sizer, isDisabled: disabled });
+}: CheckboxProps & CommonCheckedFieldProps) {
+  const indicatorRef = React.useRef<HTMLDivElement>(null);
+  const s = styles({ sizer });
 
   return (
-    <label className={clsw(s.root(), className)}>
+    <CheckedField
+      className={className}
+      label={label}
+      explainer={explainer}
+      controlVisualRef={indicatorRef}
+      sizer={sizer}
+      disabled={disabled}
+    >
       <input
         type="checkbox"
         className={s.input()}
         disabled={disabled}
         {...inputProps}
       />
-      <span className={s.indicator()} />
-      {/*
-        This empty element exists to create an extra flex-gap between the
-        absolutely-positioned indicator & the label. It contains a zero-width
-        character so that it doesn’t affect vertical alignment, such as when
-        the Checkbox is inside a `flex items-baseline` parent.
-      */}
-      <span>&#8203;</span>
-      {children && <span className={s.label()}>{children}</span>}
-    </label>
+      <div ref={indicatorRef} className={s.indicator()} />
+    </CheckedField>
   );
 }
 

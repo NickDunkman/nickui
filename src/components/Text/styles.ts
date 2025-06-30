@@ -14,7 +14,7 @@ export const styles = tv({
   variants: {
     sizer: {
       [FieldSizer.small]: 'text-sm py-1.5 px-2',
-      [FieldSizer.medium]: 'text-md py-2.5 px-3.5',
+      [FieldSizer.medium]: 'text-base py-2.5 px-3.5',
       [FieldSizer.large]: 'text-lg py-3.5 px-4.5',
     },
     hasError: {

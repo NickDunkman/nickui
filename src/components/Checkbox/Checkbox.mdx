@@ -12,10 +12,10 @@ import * as Stories from './Checkbox.stories';
 A form control that allow users to choose zero to many options from a set.
 
 <FakeCanvas>
-  <Checkbox>Vote for me!</Checkbox>
+  <Checkbox label="Vote for me!" />
 </FakeCanvas>
 
-<FieldArgTypes of={Checkbox} reactDocs="input" />
+<FieldArgTypes of={Checkbox} wrapper="CheckedField" reactDocs="input" />
 
 ## Control states
 
@@ -23,4 +23,4 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
-<FieldLayoutAndSizing of={Checkbox} stories={Stories} />
+<FieldLayoutAndSizing of={Checkbox} wrapper="CheckedField" stories={Stories} />

@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { Field } from '@/components/Field';
 import { FieldSizer } from '@/constants';
-import { FieldControlProps } from '@/types';
+import { CommonFieldProps } from '@/types';
 import { debounceToRepaint } from '@/utils/debounceToRepaint';
 import { randomId } from '@/utils/randomId';
 
@@ -65,7 +65,7 @@ interface SliderProps
 
 /**
  * A form control that allows users to choose a number within a range.
- * @param props {@link SliderProps} + {@link FieldControlProps}
+ * @param props {@link SliderProps} + {@link CommonFieldProps}
  */
 export function Slider({
   // Field props
@@ -100,7 +100,7 @@ export function Slider({
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <div>
   ...otherDivProps
-}: SliderProps & FieldControlProps) {
+}: SliderProps & CommonFieldProps) {
   const rootRef = React.useRef<HTMLDivElement>(null);
   const trackRef = React.useRef<HTMLDivElement>(null);
 

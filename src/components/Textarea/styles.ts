@@ -30,7 +30,7 @@ export const styles = tv({
     {
       slots: ['textarea', 'hiddenTextarea'],
       sizer: FieldSizer.medium,
-      className: 'text-md py-2.5 px-3.5',
+      className: 'text-base py-2.5 px-3.5',
     },
     {
       slots: ['textarea', 'hiddenTextarea'],

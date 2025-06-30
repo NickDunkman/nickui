@@ -34,7 +34,7 @@ export const styles = tv({
         root: `after:w-[7px] after:h-[13px] after:right-3 ${arrowIcons.sm}`,
       },
       [FieldSizer.medium]: {
-        select: 'text-md py-2.5 pl-3.5 pr-10',
+        select: 'text-base py-2.5 pl-3.5 pr-10',
         root: `after:w-[12px] after:h-[16px] after:right-3.75 ${arrowIcons.md}`,
       },
       [FieldSizer.large]: {

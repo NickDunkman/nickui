@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { getComponentName } from '@/utils/getComponentName';
 
-const fieldControlProps = [
+const commonFieldProps = [
   'className',
   'sizer',
   'label',
@@ -32,7 +32,7 @@ export function FieldArgTypes({
 }: {
   of: React.ComponentType;
   reactDocs: string;
-  wrapper?: 'Field' | 'Fieldset';
+  wrapper?: 'Field' | 'Fieldset' | 'CheckedField';
 }) {
   const componentName = getComponentName(Component);
 
@@ -50,7 +50,7 @@ Here are some of the most commonly used:
 
       <ArgTypes
         of={Component}
-        exclude={wrapper && fieldControlProps}
+        exclude={wrapper && commonFieldProps}
         sort="requiredFirst"
       />
 
@@ -66,7 +66,7 @@ ${componentName} also accepts some of the [${wrapper}](/docs/forms-${wrapper.toL
 
           <ArgTypes
             of={Component}
-            include={fieldControlProps}
+            include={commonFieldProps}
             sort="requiredFirst"
           />
         </>

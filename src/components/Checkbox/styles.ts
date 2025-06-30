@@ -8,12 +8,9 @@ const checkedBg = `peer-checked:bg-[url("data:image/svg+xml;charset=utf8,%3Csvg%
 /** tailwind-variants styles for the Checkbox component */
 export const styles = tv({
   slots: {
-    root: 'flex relative',
     input: 'peer opacity-0 absolute -z-1',
-    label: ' peer-disabled:text-gray-400',
     indicator: `
-      inline-block absolute left-0
-      bg-white
+      bg-white relative
       border-2 border-black rounded-[3px]
       bg-no-repeat bg-center
       pointer-events-none select-none
@@ -27,26 +24,17 @@ export const styles = tv({
   variants: {
     sizer: {
       [FieldSizer.small]: {
-        root: 'gap-2 pl-3.5 text-xs',
         indicator: 'size-3.5 top-0.25 bg-size-[8px_8px]',
       },
       [FieldSizer.medium]: {
-        root: 'gap-2.5 pl-4 text-sm',
         indicator: 'size-4 top-0.75 bg-size-[10px_10px]',
       },
       [FieldSizer.large]: {
-        root: 'gap-3 pl-5 text-md',
         indicator: 'size-5 top-0.75 bg-size-[13px_13px]',
-      },
-    },
-    isDisabled: {
-      true: {
-        root: 'cursor-not-allowed',
       },
     },
   },
   defaultVariants: {
     sizer: FieldSizer.small,
-    isDisabled: false,
   },
 });

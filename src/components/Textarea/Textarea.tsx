@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Field } from '@/components/Field';
 import { FieldSizer } from '@/constants';
-import type { FieldControlProps } from '@/types';
+import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 
 import { styles } from './styles';
@@ -40,7 +40,7 @@ interface TextareaProps extends React.ComponentProps<'textarea'> {
 
 /**
  * A form control that allows users to enter & edit a mass of text
- * @param props {@link TextareaProps} + {@link FieldControlProps}
+ * @param props {@link TextareaProps} + {@link CommonFieldProps}
  */
 export function Textarea({
   // Field props
@@ -65,7 +65,7 @@ export function Textarea({
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <textarea>
   ...otherTextareaProps
-}: TextareaProps & FieldControlProps) {
+}: TextareaProps & CommonFieldProps) {
   const hiddenTextarea = React.useRef<HTMLTextAreaElement>(null);
   const [autoHeight, setAutoHeight] = React.useState<number>(0);
 
