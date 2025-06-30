@@ -1,25 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 
-import { Radio } from './Radio';
+import { Switch } from './Switch';
 
 const meta = {
-  title: 'Forms/Radio',
-  component: Radio,
-} satisfies Meta<typeof Radio>;
+  title: 'Forms/Switch',
+  component: Switch,
+} satisfies Meta<typeof Switch>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Unchecked: Story = {
   args: {
-    children: 'Unchecked Radio',
+    children: 'Unchecked Switch',
   },
 };
 
 export const Controlled: Story = {
   args: {
-    children: 'Controlled Radio',
+    children: 'Controlled Switch',
     checked: true,
     onChange: () => {},
   },
@@ -27,21 +27,21 @@ export const Controlled: Story = {
 
 export const Uncontrolled: Story = {
   args: {
-    children: 'Uncontrolled Radio',
+    children: 'Uncontrolled Switch',
     defaultChecked: true,
   },
 };
 
 export const Disabled: Story = {
   args: {
-    children: 'Disabled Radio',
+    children: 'Disabled Switch',
     disabled: true,
   },
 };
 
 export const DisabledChecked: Story = {
   args: {
-    children: 'Disabled & checked Radio',
+    children: 'Disabled & checked Switch',
     disabled: true,
     defaultChecked: true,
   },
@@ -51,34 +51,34 @@ export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
-      <Radio {...Unchecked.args} />
-      <Radio {...Controlled.args} />
-      <Radio {...Uncontrolled.args} />
-      <Radio {...Disabled.args} />
-      <Radio {...DisabledChecked.args} />
+      <Switch {...Unchecked.args} />
+      <Switch {...Controlled.args} />
+      <Switch {...Uncontrolled.args} />
+      <Switch {...Disabled.args} />
+      <Switch {...DisabledChecked.args} />
     </div>
   ),
 };
 
 export const Small: Story = {
   args: {
-    children: 'Small Radio (default)',
+    children: 'Small Switch (default)',
     defaultChecked: true,
   },
 };
 
 export const Medium: Story = {
   args: {
-    sizer: Radio.sizer.medium,
-    children: 'Medium Radio',
+    sizer: Switch.sizer.medium,
+    children: 'Medium Switch',
     defaultChecked: true,
   },
 };
 
 export const Large: Story = {
   args: {
-    sizer: Radio.sizer.large,
-    children: 'Large Radio',
+    sizer: Switch.sizer.large,
+    children: 'Large Switch',
     defaultChecked: true,
   },
 };
@@ -87,9 +87,9 @@ export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col items-baseline gap-5 md:flex-row">
-      <Radio {...Small.args} />
-      <Radio {...Medium.args} />
-      <Radio {...Large.args} />
+      <Switch {...Small.args} />
+      <Switch {...Medium.args} />
+      <Switch {...Large.args} />
     </div>
   ),
 };

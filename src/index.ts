@@ -6,5 +6,7 @@ export { Fieldset } from '@/components/Fieldset';
 export { Radio } from '@/components/Radio';
 export { Radios } from '@/components/Radios';
 export { Select } from '@/components/Select';
+export { Slider } from '@/components/Slider';
+export { Switch } from '@/components/Switch';
 export { Text } from '@/components/Text';
 export { Textarea } from '@/components/Textarea';

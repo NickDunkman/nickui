@@ -62,7 +62,7 @@ export const AllControlStates: Story = {
 
 export const Small: Story = {
   args: {
-    children: 'Small checkbox (default)',
+    children: 'Small Checkbox (default)',
     defaultChecked: true,
   },
 };
@@ -70,7 +70,7 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     sizer: Checkbox.sizer.medium,
-    children: 'Medium checkbox',
+    children: 'Medium Checkbox',
     defaultChecked: true,
   },
 };
@@ -78,7 +78,7 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     sizer: Checkbox.sizer.large,
-    children: 'Large checkbox',
+    children: 'Large Checkbox',
     defaultChecked: true,
   },
 };
@@ -86,7 +86,7 @@ export const Large: Story = {
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-5 md:flex-row">
+    <div className="flex flex-col items-baseline gap-5 md:flex-row">
       <Checkbox {...Small.args} />
       <Checkbox {...Medium.args} />
       <Checkbox {...Large.args} />

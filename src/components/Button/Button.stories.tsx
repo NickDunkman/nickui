@@ -58,7 +58,7 @@ export const Large: Story = {
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-wrap items-start gap-4">
+    <div className="flex flex-wrap items-baseline gap-4">
       <Button {...Small.args} />
       <Button {...Medium.args} />
       <Button {...Large.args} />

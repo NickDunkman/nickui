@@ -6,7 +6,7 @@ import { clsw } from '@/utils/clsw';
 import { styles } from './styles';
 
 interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
-  /** Adds a label to the right of the checkbox */
+  /** Adds a label to the right of the control */
   children?: React.ReactNode;
   /** Add utility classes */
   className?: string;
