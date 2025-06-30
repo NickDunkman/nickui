@@ -12,10 +12,10 @@ import * as Stories from './Radio.stories';
 A form control that allow users to choose one option from a set.
 
 <FakeCanvas>
-  <Radio>I hope you don’t regret checking me</Radio>
+  <Radio label="I hope you don’t regret checking me" />
 </FakeCanvas>
 
-<FieldArgTypes of={Radio} reactDocs="input" />
+<FieldArgTypes of={Radio} wrapper="CheckedField" reactDocs="input" />
 
 ## Control states
 
@@ -23,4 +23,4 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
-<FieldLayoutAndSizing of={Radio} stories={Stories} />
+<FieldLayoutAndSizing of={Radio} wrapper="CheckedField" stories={Stories} />

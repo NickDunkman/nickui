@@ -13,13 +13,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Unchecked: Story = {
   args: {
-    children: 'Unchecked Radio',
+    label: 'Unchecked Radio',
   },
 };
 
 export const Controlled: Story = {
   args: {
-    children: 'Controlled Radio',
+    label: 'Controlled Radio',
     checked: true,
     onChange: () => {},
   },
@@ -27,21 +27,21 @@ export const Controlled: Story = {
 
 export const Uncontrolled: Story = {
   args: {
-    children: 'Uncontrolled Radio',
+    label: 'Uncontrolled Radio',
     defaultChecked: true,
   },
 };
 
 export const Disabled: Story = {
   args: {
-    children: 'Disabled Radio',
+    label: 'Disabled Radio',
     disabled: true,
   },
 };
 
 export const DisabledChecked: Story = {
   args: {
-    children: 'Disabled & checked Radio',
+    label: 'Disabled & checked Radio',
     disabled: true,
     defaultChecked: true,
   },
@@ -62,7 +62,8 @@ export const AllControlStates: Story = {
 
 export const Small: Story = {
   args: {
-    children: 'Small Radio (default)',
+    label: 'Small Radio (default)',
+    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };
@@ -70,7 +71,8 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     sizer: Radio.sizer.medium,
-    children: 'Medium Radio',
+    label: 'Medium Radio',
+    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };
@@ -78,7 +80,8 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     sizer: Radio.sizer.large,
-    children: 'Large Radio',
+    label: 'Large Radio',
+    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };
@@ -86,10 +89,10 @@ export const Large: Story = {
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col items-baseline gap-5 md:flex-row">
-      <Radio {...Small.args} />
-      <Radio {...Medium.args} />
-      <Radio {...Large.args} />
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
+      <Radio {...Small.args} className="sm:flex-1" />
+      <Radio {...Medium.args} className="sm:flex-1" />
+      <Radio {...Large.args} className="sm:flex-1" />
     </div>
   ),
 };

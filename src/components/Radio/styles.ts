@@ -5,12 +5,10 @@ import { FieldSizer } from '@/constants';
 /** tailwind-variants styles for the Radio component */
 export const styles = tv({
   slots: {
-    root: 'flex relative',
     input: 'peer opacity-0 absolute -z-1',
-    label: ' peer-disabled:text-gray-400',
     indicator: `
-      inline-flex justify-center items-center absolute left-0
-      bg-white
+      inline-flex justify-center items-center
+      bg-white absolute
       border-2 border-black rounded-full
       pointer-events-none select-none
       peer-focus:border-indigo-800 peer-focus:shadow-[0_0_11px] peer-focus:shadow-indigo-300 peer-focus:outline-0 
@@ -24,27 +22,17 @@ export const styles = tv({
   variants: {
     sizer: {
       [FieldSizer.small]: {
-        root: 'gap-2 pl-3.5 text-xs',
         indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.5',
       },
       [FieldSizer.medium]: {
-        root: 'gap-2.5 pl-4 text-sm',
         indicator: 'size-4 top-0.75 peer-checked:after:size-1.5',
       },
       [FieldSizer.large]: {
-        root: 'gap-3 pl-5 text-base',
         indicator: 'size-5 top-0.75 peer-checked:after:size-2',
-      },
-    },
-    isDisabled: {
-      false: '',
-      true: {
-        root: 'cursor-not-allowed',
       },
     },
   },
   defaultVariants: {
     sizer: FieldSizer.small,
-    isDisabled: false,
   },
 });

@@ -41,19 +41,21 @@ export const CustomLayout: Story = {
     defaultValue: 'pretty',
     children: (radio) => (
       <div className="flex flex-row items-baseline gap-x-4">
-        <Radio {...radio({ value: 'kinda' })}>A little custom</Radio>
+        <Radio {...radio({ value: 'kinda' })} label="A little custom" />
         <span className="text-xs text-gray-500">or</span>
-        <Radio {...radio({ value: 'pretty' })}>
-          <div className="font-bold text-blue-500">Pretty custom 👨‍🎨</div>
-        </Radio>
+        <Radio
+          {...radio({ value: 'pretty' })}
+          label={
+            <div className="font-bold text-blue-500">Pretty custom 👨‍🎨</div>
+          }
+        />
         <span className="text-xs text-gray-500">or</span>
         <Radio
           {...radio({ value: 'too', disabled: true })}
           className="-rotate-30"
           sizer={Radio.sizer.large}
-        >
-          Too custom
-        </Radio>
+          label="Too custom"
+        />
       </div>
     ),
   },

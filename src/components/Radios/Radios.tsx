@@ -25,6 +25,7 @@ interface RadiosProps
   options?: {
     value: React.ComponentProps<'input'>['value'];
     label: React.ReactNode;
+    explainer?: React.ReactNode;
     disabled?: boolean;
   }[];
   /** Called when the value changes */
@@ -178,9 +179,9 @@ export function Radios({
                   value: option.value,
                   disabled: option.disabled,
                 })}
-              >
-                {option.label}
-              </Radio>
+                label={option.label}
+                explainer={option.explainer}
+              />
             ))}
           </>
         )}
