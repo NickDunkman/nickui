@@ -1,6 +1,11 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FakeCanvas, FieldArgTypes, FieldLayoutAndSizing } from '@/docs';
+import {
+  FakeCanvas,
+  FieldArgTypes,
+  FieldLayoutAndSizing,
+  TableOfContents,
+} from '@/docs';
 
 import { Checkbox } from './Checkbox';
 import * as Stories from './Checkbox.stories';
@@ -14,6 +19,8 @@ A form control that allow users to choose zero to many options from a set.
 <FakeCanvas>
   <Checkbox label="Vote for me!" sizer={Checkbox.sizer.medium} />
 </FakeCanvas>
+
+<TableOfContents />
 
 <FieldArgTypes of={Checkbox} wrapper="CheckedField" reactDocs="input" />
 

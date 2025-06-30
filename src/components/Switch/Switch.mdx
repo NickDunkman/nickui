@@ -1,6 +1,11 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FakeCanvas, FieldArgTypes, FieldLayoutAndSizing } from '@/docs';
+import {
+  FakeCanvas,
+  FieldArgTypes,
+  FieldLayoutAndSizing,
+  TableOfContents,
+} from '@/docs';
 
 import { Switch } from './Switch';
 import * as Stories from './Switch.stories';
@@ -17,6 +22,8 @@ more like discrete fields under a common category.
 <FakeCanvas>
   <Switch sizer={Switch.sizer.medium}>Switch me</Switch>
 </FakeCanvas>
+
+<TableOfContents />
 
 <FieldArgTypes of={Switch} reactDocs="input" />
 

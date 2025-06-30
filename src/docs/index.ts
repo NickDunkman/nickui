@@ -5,3 +5,4 @@ export { FormControlPlaceholder } from './FormControlPlaceholder';
 export { FormikDemo } from './FormikDemo';
 export { PrettyPrint } from './PrettyPrint';
 export { ReactHookFormDemo } from './ReactHookFormDemo';
+export { TableOfContents } from './TableOfContents';
