@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { FieldSizer } from '@/constants';
+import { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 
 import { styles } from './styles';
@@ -9,33 +10,12 @@ import { styles } from './styles';
 export interface FieldsetProps extends React.ComponentProps<'fieldset'> {
   /** The content of the form-controls section of the Fieldset */
   children?: React.ReactNode;
-  /** Optionally add utility classes */
-  className?: string;
-  /** Changes the size of the field ("small", "medium", "large") */
-  sizer?: FieldSizer;
-  /** The main label to show above the form control, naming the field */
-  label?: React.ReactNode;
-  /**
-   * A more detailed label explaining the purpose of the field, placed
-   * directly the main label
-   */
-  explainer?: React.ReactNode;
-  /**
-   * A hint about what kind of value the control accepts, such as a phone
-   * number format
-   */
-  hint?: React.ReactNode;
-  /** Error message to show along with the field */
-  error?: React.ReactNode;
-  /** Set to `true` when the fieldset is disabled */
-  disabled?: boolean;
-  /** When `true`, adds an asterisk to the label */
-  required?: boolean;
 }
 
 /**
  * Fieldset wraps multiple form controls in a standard field layout (label,
  * hint, error message, etc).
+ * @props {@link FieldsetProps} {@link CommonFieldProps}
  */
 export function Fieldset({
   children: formControls,
@@ -50,7 +30,7 @@ export function Fieldset({
   'aria-describedby': ariaDescribedBy,
   'aria-errormessage': ariaErrorMessage,
   ...otherFieldsetProps
-}: FieldsetProps) {
+}: FieldsetProps & CommonFieldProps) {
   const [legendId] = React.useState<string>(randomId());
   const [hintId] = React.useState<string>(randomId());
   const [errorId] = React.useState<string>(randomId());
