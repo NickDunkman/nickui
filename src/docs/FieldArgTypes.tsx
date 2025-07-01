@@ -29,10 +29,12 @@ export function FieldArgTypes({
   of: Component,
   reactDocs,
   wrapper,
+  exclude,
 }: {
   of: React.ComponentType;
   reactDocs: string;
   wrapper?: 'Field' | 'Fieldset' | 'CheckedField';
+  exclude?: string[];
 }) {
   const componentName = getComponentName(Component);
 
@@ -50,7 +52,7 @@ Here are some of the most commonly used:
 
       <ArgTypes
         of={Component}
-        exclude={wrapper && commonFieldProps}
+        exclude={[...(wrapper ? commonFieldProps : []), ...(exclude || [])]}
         sort="requiredFirst"
       />
 
@@ -67,6 +69,7 @@ ${componentName} also accepts some of the [${wrapper}](/docs/forms-${wrapper.toL
           <ArgTypes
             of={Component}
             include={commonFieldProps}
+            exclude={exclude}
             sort="requiredFirst"
           />
         </>
