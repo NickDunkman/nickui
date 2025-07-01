@@ -1,0 +1,1 @@
+function s(e,n){if(!e)return!1;const t=Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,"value").set;if(!t)return!1;const r=new Event("input",{bubbles:!0});return t.call(e,n),e.dispatchEvent(r),!0}export{s as f};
