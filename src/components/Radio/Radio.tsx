@@ -1,9 +1,8 @@
 import * as React from 'react';
 
+import { Checkable } from '@/components/Checkbox';
 import { FieldSizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
-
-import { CheckedField } from '../CheckedField';
 
 import { styles } from './styles';
 
@@ -26,35 +25,8 @@ interface RadioProps extends Omit<React.ComponentProps<'input'>, 'type'> {
  * A form control that allow users to choose one option from a set
  * @param props {@link RadioProps} {@link CommonCheckedFieldProps}
  */
-export function Radio({
-  // CheckedField props
-  className,
-  label,
-  explainer,
-  sizer,
-  disabled,
-  // Radio-specific props
-  ...inputProps
-}: RadioProps & CommonCheckedFieldProps) {
-  const s = styles({ sizer });
-
-  return (
-    <CheckedField
-      className={className}
-      label={label}
-      explainer={explainer}
-      sizer={sizer}
-      disabled={disabled}
-    >
-      <input
-        type="radio"
-        className={s.input()}
-        disabled={disabled}
-        {...inputProps}
-      />
-      <div className={s.indicator()} />
-    </CheckedField>
-  );
+export function Radio(props: RadioProps & CommonCheckedFieldProps) {
+  return <Checkable {...props} type="radio" styler={styles} />;
 }
 
 Radio.sizer = FieldSizer;

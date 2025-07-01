@@ -1,9 +1,8 @@
 import * as React from 'react';
 
+import { Checkable } from '@/components/Checkbox';
 import { FieldSizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
-
-import { CheckboxBase } from '../Checkbox/Checkbox';
 
 import { styles } from './styles';
 
@@ -30,7 +29,7 @@ interface SwitchProps extends Omit<React.ComponentProps<'input'>, 'type'> {
  * @props {@link SwitchProps}
  */
 export function Switch(props: SwitchProps & CommonCheckedFieldProps) {
-  return <CheckboxBase {...props} styler={styles} />;
+  return <Checkable {...props} type="checkbox" styler={styles} />;
 }
 
 Switch.sizer = FieldSizer;

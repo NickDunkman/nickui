@@ -16,8 +16,6 @@ export const styles = tv({
       bg-no-repeat bg-center
       pointer-events-none select-none
       peer-checked:bg-black ${checkedBg}
-      peer-disabled:bg-gray-100 peer-disabled:border-gray-300
-      peer-disabled:peer-checked:bg-gray-400 peer-disabled:peer-checked:border-gray-400
     `,
   },
   variants: {

@@ -27,17 +27,17 @@ interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
  * @param props {@link CheckboxProps} {@link CommonCheckedFieldProps}
  */
 export function Checkbox(props: CheckboxProps & CommonCheckedFieldProps) {
-  return <CheckboxBase {...props} />;
+  return <Checkable {...props} type="checkbox" styler={checkboxStyles} />;
 }
 
 Checkbox.sizer = FieldSizer;
 
 /**
- * This component is the engine of the Checkbox component. You can pass in
- * alternate styles if you want the control to look different (such as for
- * the Switch component!)
+ * This component is the engine of the form controls that use a checkable
+ * input with a custom indicator. You can pass in alternate styles if you want
+ * the control to look different (such as for the Radio or Switch component!)
  */
-export function CheckboxBase({
+export function Checkable({
   // CheckedField props
   className,
   sizer,
@@ -45,13 +45,16 @@ export function CheckboxBase({
   explainer,
   disabled,
   // styler should be in the shape of Checkbox's tailwind-variants styler
-  styler = checkboxStyles,
-  // Checkbox-specific props
+  styler,
+  // Checkable-specific props
   onBlur,
   onFocus,
+  type,
   ...inputProps
+}: CheckboxProps &
+  CommonCheckedFieldProps &
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-}: CheckboxProps & CommonCheckedFieldProps & { styler?: any }) {
+  { styler?: any; type: 'checkbox' | 'radio' }) {
   const [isClicked, setIsClicked] = React.useState<boolean>(false);
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
@@ -107,7 +110,7 @@ export function CheckboxBase({
       onMouseDown={handleRootMouseDown}
     >
       <input
-        type="checkbox"
+        type={type}
         className={s.input()}
         disabled={disabled}
         onFocus={handleInputFocus}

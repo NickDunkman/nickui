@@ -54,5 +54,6 @@ export const styles = tv({
   defaultVariants: {
     sizer: FieldSizer.small,
     isDisabled: false,
+    isFocused: false,
   },
 });
