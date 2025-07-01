@@ -7,8 +7,8 @@ export const styles = tv({
   slots: {
     input: 'peer opacity-0 absolute -z-1',
     indicator: `
-      inline-flex justify-center items-center
-      bg-white absolute
+      flex justify-center items-center
+      bg-white relative
       border-2 border-black rounded-full
       pointer-events-none select-none
       peer-focus:border-indigo-800 peer-focus:shadow-[0_0_11px] peer-focus:shadow-indigo-300 peer-focus:outline-0 

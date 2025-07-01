@@ -10,14 +10,6 @@ import { styles } from './styles';
 export interface CheckedFieldProps extends React.ComponentProps<'label'> {
   /** The content of the form-control section of the Field */
   children?: React.ReactNode;
-  /**
-   * A RefObject installed on the root element of the control's visual. For
-   * example, the Checkbox component hides the <input> element and uses
-   * custom-styled <div> to represent the checkbox visually. The
-   * `controlVisualRef` would be installed on that div. CheckedField uses this
-   * for horizontal spacing considerations.
-   * */
-  controlVisualRef: React.RefObject<HTMLElement | null>;
 }
 
 /**
@@ -35,24 +27,25 @@ export function CheckedField({
   label,
   sizer,
   disabled: disabled,
-  controlVisualRef,
   ...labelProps
 }: CheckedFieldProps & CommonCheckedFieldProps) {
-  const controlVisualBounds = useElementBounds(controlVisualRef);
+  const controlRef = React.useRef<HTMLDivElement>(null);
+  const controlBounds = useElementBounds(controlRef);
+
   const s = styles({ sizer, isDisabled: disabled });
 
   return (
     <label {...labelProps} className={clsw(s.root(), className)}>
-      <div className={s.control()}>{formControl}</div>
+      <div className={s.control()} ref={controlRef}>
+        {formControl}
+      </div>
       {/*
         This empty element exists to create an extra flex-gap between the
         absolutely-positioned control & the label. It contains a zero-width
         character so that it doesn’t affect vertical alignment, such as when
         the field is inside a `flex items-baseline` parent.
       */}
-      <span style={{ paddingLeft: controlVisualBounds?.width || 0 }}>
-        &#8203;
-      </span>
+      <span style={{ paddingLeft: controlBounds?.width || 0 }}>&#8203;</span>
       {(label || explainer) && (
         <div className={s.labelese()}>
           {label && <div className={s.label()}>{label}</div>}

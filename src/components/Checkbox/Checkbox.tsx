@@ -52,7 +52,6 @@ export function CheckboxBase({
   ...inputProps
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: CheckboxProps & CommonCheckedFieldProps & { styler?: any }) {
-  const indicatorRef = React.useRef<HTMLDivElement>(null);
   const [isClicked, setIsClicked] = React.useState<boolean>(false);
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
@@ -103,7 +102,6 @@ export function CheckboxBase({
       className={clsw(s.root(), className)}
       label={label}
       explainer={explainer}
-      controlVisualRef={indicatorRef}
       sizer={sizer}
       disabled={disabled}
       onMouseDown={handleRootMouseDown}
@@ -116,7 +114,7 @@ export function CheckboxBase({
         onBlur={handleInputBlur}
         {...inputProps}
       />
-      <div ref={indicatorRef} className={s.indicator()} />
+      <div className={s.indicator()} />
     </CheckedField>
   );
 }

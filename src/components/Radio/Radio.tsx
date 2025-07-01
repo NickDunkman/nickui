@@ -36,7 +36,6 @@ export function Radio({
   // Radio-specific props
   ...inputProps
 }: RadioProps & CommonCheckedFieldProps) {
-  const indicatorRef = React.useRef<HTMLDivElement>(null);
   const s = styles({ sizer });
 
   return (
@@ -44,7 +43,6 @@ export function Radio({
       className={className}
       label={label}
       explainer={explainer}
-      controlVisualRef={indicatorRef}
       sizer={sizer}
       disabled={disabled}
     >
@@ -54,7 +52,7 @@ export function Radio({
         disabled={disabled}
         {...inputProps}
       />
-      <span ref={indicatorRef} className={s.indicator()} />
+      <div className={s.indicator()} />
     </CheckedField>
   );
 }

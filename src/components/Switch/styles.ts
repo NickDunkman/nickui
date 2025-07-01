@@ -8,7 +8,7 @@ export const styles = tv({
     root: 'pt-0.5',
     input: 'peer opacity-0 absolute -z-1',
     indicator: `
-      absolute left-0 top-0 rounded-l-full rounded-r-full bg-gray-300
+      relative rounded-l-full rounded-r-full bg-gray-300
       peer-checked:bg-emerald-500
       transition-colors duration-100 east-out
       after:border-transparent
