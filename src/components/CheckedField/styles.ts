@@ -5,8 +5,8 @@ import { FieldSizer } from '@/constants';
 /** tailwind-variants styles for the CheckedField component */
 export const styles = tv({
   slots: {
-    root: 'flex relative',
-    control: 'absolute',
+    root: 'flex relative cursor-pointer',
+    control: 'absolute top-0',
     labelese: 'flex flex-col',
     label: '',
     explainer: 'text-gray-500',

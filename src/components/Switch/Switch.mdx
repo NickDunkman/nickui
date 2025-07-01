@@ -20,12 +20,12 @@ feels more like multiple options for one field, a group of Switch fields feels
 more like discrete fields under a common category.
 
 <FakeCanvas>
-  <Switch sizer={Switch.sizer.medium}>Switch me</Switch>
+  <Switch sizer={Switch.sizer.medium} label="Switch me" />
 </FakeCanvas>
 
 <TableOfContents />
 
-<FieldArgTypes of={Switch} reactDocs="input" />
+<FieldArgTypes of={Switch} wrapper="CheckedField" reactDocs="input" />
 
 ## Control states
 
@@ -33,4 +33,4 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
-<FieldLayoutAndSizing of={Switch} stories={Stories} />
+<FieldLayoutAndSizing of={Switch} wrapper="CheckedField" stories={Stories} />

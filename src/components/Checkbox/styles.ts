@@ -8,15 +8,14 @@ const checkedBg = `peer-checked:bg-[url("data:image/svg+xml;charset=utf8,%3Csvg%
 /** tailwind-variants styles for the Checkbox component */
 export const styles = tv({
   slots: {
+    root: '',
     input: 'peer opacity-0 absolute -z-1',
     indicator: `
       bg-white relative
       border-2 border-black rounded-[3px]
       bg-no-repeat bg-center
       pointer-events-none select-none
-      peer-focus:border-indigo-800 peer-focus:shadow-[0_0_11px] peer-focus:shadow-indigo-300 peer-focus:outline-0 
       peer-checked:bg-black ${checkedBg}
-      peer-focus:peer-checked:bg-indigo-800
       peer-disabled:bg-gray-100 peer-disabled:border-gray-300
       peer-disabled:peer-checked:bg-gray-400 peer-disabled:peer-checked:border-gray-400
     `,
@@ -33,8 +32,26 @@ export const styles = tv({
         indicator: 'size-5 top-0.75 bg-size-[13px_13px]',
       },
     },
+    isDisabled: {
+      true: {
+        indicator: `
+          bg-gray-100 border-gray-300
+          peer-checked:bg-gray-400 peer-checked:border-gray-400
+        `,
+      },
+    },
+    isFocused: {
+      true: {
+        indicator: `
+          border-indigo-800 shadow-[0_0_11px] shadow-indigo-300 outline-0 
+          peer-checked:bg-indigo-800
+        `,
+      },
+    },
   },
   defaultVariants: {
     sizer: FieldSizer.small,
+    isDisabled: false,
+    isFocused: false,
   },
 });

@@ -13,13 +13,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Unchecked: Story = {
   args: {
-    children: 'Unchecked Switch',
+    label: 'Unchecked Switch',
   },
 };
 
 export const Controlled: Story = {
   args: {
-    children: 'Controlled Switch',
+    label: 'Controlled Switch',
     checked: true,
     onChange: () => {},
   },
@@ -27,21 +27,21 @@ export const Controlled: Story = {
 
 export const Uncontrolled: Story = {
   args: {
-    children: 'Uncontrolled Switch',
+    label: 'Uncontrolled Switch',
     defaultChecked: true,
   },
 };
 
 export const Disabled: Story = {
   args: {
-    children: 'Disabled Switch',
+    label: 'Disabled Switch',
     disabled: true,
   },
 };
 
 export const DisabledChecked: Story = {
   args: {
-    children: 'Disabled & checked Switch',
+    label: 'Disabled & checked Switch',
     disabled: true,
     defaultChecked: true,
   },
@@ -62,7 +62,8 @@ export const AllControlStates: Story = {
 
 export const Small: Story = {
   args: {
-    children: 'Small Switch (default)',
+    label: 'Small Switch (default)',
+    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };
@@ -70,7 +71,8 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     sizer: Switch.sizer.medium,
-    children: 'Medium Switch',
+    label: 'Medium Switch',
+    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };
@@ -78,7 +80,8 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     sizer: Switch.sizer.large,
-    children: 'Large Switch',
+    label: 'Large Switch',
+    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };
@@ -86,10 +89,10 @@ export const Large: Story = {
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col items-baseline gap-5 md:flex-row">
-      <Switch {...Small.args} />
-      <Switch {...Medium.args} />
-      <Switch {...Large.args} />
+    <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
+      <Switch {...Small.args} className="sm:flex-1" />
+      <Switch {...Medium.args} className="sm:flex-1" />
+      <Switch {...Large.args} className="sm:flex-1" />
     </div>
   ),
 };
