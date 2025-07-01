@@ -3,25 +3,25 @@ import * as React from 'react';
 import { Checkbox } from '@/components/Checkbox';
 import { Fieldset } from '@/components/Fieldset';
 import { FieldSizer } from '@/constants';
-import type { CommonFieldProps } from '@/types';
+import type { CommonCheckedFieldProps, CommonFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 
-interface CheckboxesProps
+interface CheckablesProps
   extends Omit<React.ComponentProps<'input'>, 'children' | 'className'> {
-  /** The name fot the field */
-  name?: React.ComponentProps<'input'>['name'];
+  /** The name for the field */
+  name?: string;
   /**
-   * Render function used to render customized checkboxes. Call the provided
-   * callback to get props to pass down to each checkbox.
+   * Render function used to render customized checkable inputs. Call the
+   * provided callback to get props to pass down to each input.
    */
   children?: (
-    checkbox: (checkbox: {
+    inputProps: (control: {
       value: string;
       disabled?: boolean;
     }) => React.ComponentProps<'input'>,
   ) => React.ReactNode;
-  /** Adds checkboxes in the standard layout */
+  /** Adds the controls in the standard layout */
   options?: {
     value: string;
     label: React.ReactNode;
@@ -29,7 +29,7 @@ interface CheckboxesProps
     disabled?: boolean;
   }[];
   /** Called when the value changes */
-  onChange?: React.ComponentProps<'input'>['onChange'];
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   /**
    * Sets the value when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
@@ -39,7 +39,7 @@ interface CheckboxesProps
   defaultValue?: string;
   /**
    * Optionally override the delimiter used to split the value into individual
-   * checkbox values
+   * checkable values
    */
   delimiter?: string;
 }
@@ -55,9 +55,26 @@ interface CheckboxesProps
  * substring that can be added to or removed from the delimited-string by
  * toggling the checked status.
  *
- * @props {@link CheckboxesProps} + {@link CommonFieldProps}
+ * @props {@link CheckablesProps} + {@link CommonFieldProps}
  */
 export function Checkboxes({
+  delimiter = ',',
+  ...otherProps
+}: CheckablesProps & CommonFieldProps) {
+  return (
+    <Checkables {...otherProps} delimiter={delimiter} Checkable={Checkbox} />
+  );
+}
+
+Checkboxes.sizer = FieldSizer;
+
+/**
+ * This component is the engine for the components that render multiple
+ * checkables in a <Fieldset>, such as <Checkboxes>. It can handle both
+ * multiValue behavior (such as when using checkboxes) and singleValue behavior
+ * (such as when using radios).,
+ */
+export function Checkables({
   // Fieldset props
   className,
   sizer,
@@ -67,7 +84,8 @@ export function Checkboxes({
   error,
   disabled,
   required,
-  // Checkboxes-specific props
+  // Checkables-specific props
+  Checkable,
   name,
   value: controlledValue,
   defaultValue,
@@ -75,13 +93,17 @@ export function Checkboxes({
   children,
   onChange,
   onBlur,
-  delimiter = ',',
+  delimiter,
   // The rest are brought in from <'input'>
   ...otherHiddenInputProps
-}: CheckboxesProps & CommonFieldProps) {
+}: CheckablesProps &
+  CommonFieldProps & {
+    Checkable: React.ComponentType<
+      React.ComponentProps<'input'> & CommonCheckedFieldProps
+    >;
+  }) {
   const containerRef = React.createRef<HTMLDivElement>();
-
-  const [checkboxName] = React.useState(randomId());
+  const [checkableName] = React.useState(randomId());
 
   // track a value for *uncontrolled* mode, if necessary
   const [uncontrolledValue, setUncontrolledValue] =
@@ -89,16 +111,17 @@ export function Checkboxes({
 
   const isControlledComponent = controlledValue !== undefined;
   const value = isControlledComponent ? controlledValue : uncontrolledValue;
-  const values = value === '' ? [] : value?.split(delimiter) || [];
+  const values =
+    !value || value === '' ? [] : delimiter ? value.split(delimiter) : [value];
 
-  // Callback to use for the onChange prop of each checkbox
-  function handleCheckboxChange(event: React.ChangeEvent<HTMLInputElement>) {
+  // Callback to use for the onChange prop of each checkable
+  function handleCheckableChange(event: React.ChangeEvent<HTMLInputElement>) {
     const newValues = event.target.checked
       ? [...values, event.target.value]
       : values.filter((v) => v !== event.target.value);
 
     // Sub-values within the value should be sorted according to the order
-    // their corresponding checkbox appears in the DOM!
+    // their corresponding checkable appears in the DOM!
     const newValue = newValues
       .sort(sortValuesByDOMOrder(containerRef))
       .join(delimiter);
@@ -111,16 +134,17 @@ export function Checkboxes({
     hiddenInput.value = newValue;
     onChange?.({
       ...event,
-      // The onChange events are originally triggered by the checkboxes, but
+      // The onChange events are originally triggered by the checkables, but
       // libraries like Formik behave differently when the event.target is a
-      // checkbox.
+      // checkbox or radio.
       target: hiddenInput,
     });
   }
 
-  // Simulate a blur on the hidden input when a checkbox is blurred. This allows
-  // form libraries like Formik to know that the field has been "touched".
-  function handleCheckboxBlur(event: React.FocusEvent<HTMLInputElement>) {
+  // Simulate a blur on the hidden input when a checkable is blurred. This
+  // allows form libraries like Formik to know that the field has been
+  // "touched".
+  function handleCheckableBlur(event: React.FocusEvent<HTMLInputElement>) {
     const hiddenInput = getHiddenInput(containerRef);
 
     onBlur?.({
@@ -129,21 +153,21 @@ export function Checkboxes({
     });
   }
 
-  // This function will generate props to pass to each checkbox
-  function checkbox({
-    value: checkboxValue,
-    disabled: checkboxDisabled = false,
+  // This function will generate props to pass to each checkable's input
+  function inputProps({
+    value: checkableValue,
+    disabled: checkableDisabled = false,
   }: {
     value: string;
     disabled?: boolean;
   }) {
     return {
-      name: checkboxName,
-      value: checkboxValue,
-      checked: values.includes(checkboxValue),
-      onChange: handleCheckboxChange,
-      onBlur: handleCheckboxBlur,
-      disabled: disabled || checkboxDisabled,
+      name: checkableName,
+      value: checkableValue,
+      checked: values.includes(checkableValue),
+      onChange: handleCheckableChange,
+      onBlur: handleCheckableBlur,
+      disabled: disabled || checkableDisabled,
     };
   }
 
@@ -151,7 +175,7 @@ export function Checkboxes({
   // programmatically set the `value` on the hidden input element. So when
   // the caller isn't using the `value` or `defaultValue` props, we should
   // inspect the hidden input, and if something has magically set its value,
-  // use that as the defaultValue for this component -- allowing the checkboxes
+  // use that as the defaultValue for this component -- allowing the checkables
   // to be properly checked or unchecked after mount.
   React.useLayoutEffect(() => {
     if (value === undefined && defaultValue === undefined) {
@@ -178,7 +202,7 @@ export function Checkboxes({
       <div
         ref={containerRef}
         className={
-          // create a standard layout when self-rendering the Checkboxes
+          // create a standard layout when self-rendering the checkables
           // (otherwise, the caller should manage the layout within `children`)
           options &&
           clsw('flex flex-col', {
@@ -192,10 +216,10 @@ export function Checkboxes({
         {options && (
           <>
             {options.map((option) => (
-              <Checkbox
+              <Checkable
                 key={option.value?.toString()}
                 sizer={sizer}
-                {...checkbox({
+                {...inputProps({
                   value: option.value,
                   disabled: option.disabled,
                 })}
@@ -207,38 +231,35 @@ export function Checkboxes({
         )}
 
         {/* Customized layout using `children` */}
-        {!options && children?.(checkbox)}
+        {!options && children?.(inputProps)}
 
         {/*
-          This hidden input manages the component’s composite delimited-string
-          value. See the component description for an explanation.
+          This hidden input manages the component’s value. See the component
+          description for an explanation.
         */}
         <input
+          {...otherHiddenInputProps}
           name={name}
           type="hidden"
-          className="the-hidden-checkboxes-input hidden"
+          className="the-hidden-input hidden"
           disabled={disabled}
           required={required}
-          {...otherHiddenInputProps}
         />
       </div>
     </Fieldset>
   );
 }
 
-Checkboxes.sizer = FieldSizer;
-
-// This function can be used with Array.sort to sort checkbox values according
-// to the order the corresponding checkboxes appear in the DOM.
+// This function can be used with Array.sort to sort the sub-values according
+// to the order the corresponding checkables appear in the DOM.
 function sortValuesByDOMOrder(
-  checkboxesContainer: React.RefObject<HTMLElement | null>,
+  checkablesContainer: React.RefObject<HTMLElement | null>,
 ) {
-  // Get the order the checkbox values as they appear in the DOM, so we can
-  // order the new combined value accordingly
+  // Get the order of all possible sub-values as they appear in the DOM
   const orderInDOM = [
-    ...(checkboxesContainer.current?.getElementsByTagName('input') || []),
+    ...(checkablesContainer.current?.getElementsByTagName('input') || []),
   ]
-    .filter((input) => input.type === 'checkbox')
+    .filter((input) => input.type === 'checkbox' || input.type === 'radio')
     .map((input) => input.value);
 
   return (a: string, b: string) => {
@@ -261,11 +282,11 @@ function sortValuesByDOMOrder(
 }
 
 function getHiddenInput(
-  checkboxesContainer: React.RefObject<HTMLElement | null>,
+  checkablesContainer: React.RefObject<HTMLElement | null>,
 ) {
   return [
-    ...(checkboxesContainer.current?.getElementsByClassName(
-      'the-hidden-checkboxes-input',
+    ...(checkablesContainer.current?.getElementsByClassName(
+      'the-hidden-input',
     ) || []),
   ][0] as HTMLInputElement;
 }
