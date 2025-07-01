@@ -13,12 +13,15 @@ export interface CheckedFieldProps extends React.ComponentProps<'label'> {
 }
 
 /**
- * Wraps a checkable form control (such as a checkbox or radio) with a standard
- * layout (label & explainer, to the right of the control).
+ * Wraps a single checkable form control with a standard layout (label &
+ * explainer, to the right of the control).
  *
- * This is simpler than the Field component -- since the value is a binary,
- * there is no hint (unnecessary) or error message (you wouldn't have the field
- * if there was only one valid value).
+ * This is simpler than the Field component. There’s no hint, since a field with
+ * only 2 possible values is too simple for it. And there’s no error message,
+ * since if one or both possible values is invalid, the field has no purpose.
+ *
+ * Note: this layout is already built-into Checkbox, Radio, and Switch—you can
+ * use this component to create a custom form control that behaves the same way.
  */
 export function CheckedField({
   children: formControl,

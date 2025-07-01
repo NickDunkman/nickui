@@ -1,0 +1,57 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import { FakeCanvas, FormControlPlaceholder, TableOfContents } from '@/docs';
+
+import { CheckedField } from './CheckedField';
+import * as Stories from './CheckedField.stories';
+
+<Meta of={Stories} />
+
+# `<CheckedField>`
+
+Wraps a single checkable form control with a standard layout (label & explainer,
+to the right of the control).
+
+This is simpler than the [Field](/docs/form-field--docs/) component. There’s no
+hint, since a field with only 2 possible values is too simple for it. And
+there’s no error message, since if one or both possible values is invalid, the
+field has no purpose.
+
+Note: this layout is already built-into [Checkbox](/docs/forms-checkbox--docs/),
+[Radio](/docs/forms-radio--docs/), and [Switch](/docs/forms-switch--docs/)—you
+can use this component to create a custom form control that behaves the same
+way.
+
+<FakeCanvas>
+  <CheckedField
+    label="A label"
+    explainer="An explainer"
+    sizer={CheckedField.sizer.medium}
+  >
+    <FormControlPlaceholder tiny />
+  </CheckedField>
+</FakeCanvas>
+
+<TableOfContents />
+
+## Props
+
+In addition to the commonly used props below, you can pass any prop accepted by
+the [&lt;div&gt;](htps://react.dev/reference/react-dom/components/common)
+element, which will be applied to the CheckedField's root div.
+
+<ArgTypes of={CheckedField} sort="requiredFirst" />
+
+## Basic elements
+
+These elements are controlled using the `label`, `explainer`, and `hint` props.
+
+<Canvas of={Stories.Basic} sourceState="shown" />
+
+## Sizing
+
+Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
+In keeping with the mobile-first philosophy of Tailwind, the default size is
+"small".
+
+<Canvas of={Stories.AllSizes} />
