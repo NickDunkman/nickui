@@ -7,7 +7,7 @@ import type { CommonCheckedFieldProps, CommonFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 
-interface CheckablesProps
+export interface CheckablesProps
   extends Omit<React.ComponentProps<'input'>, 'children' | 'className'> {
   /** The name for the field */
   name?: string;
@@ -116,15 +116,20 @@ export function Checkables({
 
   // Callback to use for the onChange prop of each checkable
   function handleCheckableChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const newValues = event.target.checked
-      ? [...values, event.target.value]
-      : values.filter((v) => v !== event.target.value);
+    let newValue: string;
+    if (!delimiter) {
+      newValue = event.target.checked ? event.target.value : '';
+    } else {
+      const newValues = event.target.checked
+        ? [...values, event.target.value]
+        : values.filter((v) => v !== event.target.value);
 
-    // Sub-values within the value should be sorted according to the order
-    // their corresponding checkable appears in the DOM!
-    const newValue = newValues
-      .sort(sortValuesByDOMOrder(containerRef))
-      .join(delimiter);
+      // Sub-values within the value should be sorted according to the order
+      // their corresponding checkable appears in the DOM!
+      newValue = newValues
+        .sort(sortValuesByDOMOrder(containerRef))
+        .join(delimiter);
+    }
 
     if (!isControlledComponent) {
       setUncontrolledValue(newValue);
