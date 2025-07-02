@@ -1,31 +1,26 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import {
-  FakeCanvas,
-  FieldArgTypes,
-  FieldLayoutAndSizing,
-  TableOfContents,
-} from '@/docs';
+import Docs from '@/docs';
 
 import { Switch } from './Switch';
 import * as Stories from './Switch.stories';
 
 <Meta of={Stories} />
 
-# `<Switch>`
+# <Docs.Name of="Switch" />
 
-A variation of the [Checkbox](/docs/form-controls-checkbox--docs) component that
-has a more explict-feeling "off" state. Whereas a group of co-located Checkbox
-fields feels more like multiple options for one field, a group of Switch fields
-feels more like discrete fields under a common category.
+A variation of <Docs of="Checkbox" /> that has a more explict-feeling "off"
+state. Whereas a group of co-located <Docs.Name of="Checkbox" /> feels more like
+multiple options for one field, a group of <Docs.Name of="Switch" /> feels more
+like discrete fields under a common category.
 
-<FakeCanvas>
+<Docs.FakeCanvas>
   <Switch sizer={Switch.sizer.medium} label="Switch me" />
-</FakeCanvas>
+</Docs.FakeCanvas>
 
-<TableOfContents />
+<Docs.TableOfContents />
 
-<FieldArgTypes of={Switch} wrapper="CheckedField" reactDocs="input" />
+<Docs.Props of={Stories} wrapper="CheckedField" nativeBase="input" />
 
 ## Control states
 
@@ -33,4 +28,4 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
-<FieldLayoutAndSizing of={Switch} wrapper="CheckedField" stories={Stories} />
+<Docs.Sizing of={Stories} wrapper="CheckedField" />

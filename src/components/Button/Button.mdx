@@ -1,27 +1,28 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FakeCanvas, FieldLayoutAndSizing, TableOfContents } from '@/docs';
+import Docs from '@/docs';
 
 import { Button } from './Button';
 import * as Stories from './Button.stories';
 
 <Meta of={Stories} />
 
-# `<Button>`
+# <Docs.Name of="Button" />
 
-Buttons allow the user to trigger an action, such as submitting a form.
+Allows the user to trigger an action, such as submitting a form.
 
-<FakeCanvas>
+<Docs.FakeCanvas>
   <Button sizer={Button.sizer.medium}>Click me!</Button>
-</FakeCanvas>
+</Docs.FakeCanvas>
 
-<TableOfContents />
+<Docs.TableOfContents />
 
 ## Props
 
-Button takes some custom props, plus all the props that can be used with
-[&lt;button&gt;](https://react.dev/reference/react-dom/components/common). Here
-are some of the most commonly used:
+<Docs.Name of="Button" /> takes some custom props, plus all the props that can
+be used with
+[HTMLButtonElement](https://react.dev/reference/react-dom/components/common).
+Here are some of the most commonly used:
 
 <ArgTypes of={Button} sort="requiredFirst" />
 
@@ -31,7 +32,7 @@ These are handled via the `disabled` prop.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
-<FieldLayoutAndSizing of={Button} stories={Stories} />
+<Docs.Sizing of={Stories} />
 
 ## Flavors
 

@@ -85,7 +85,7 @@ export function Slider({
   min = 0,
   step = 1,
   shiftSteps = 10,
-  tabIndex = 0,
+  tabIndex,
   value: controlledValue,
   defaultValue,
   onChange,
@@ -370,7 +370,7 @@ export function Slider({
       ref={rootRef}
       className={s.root()}
       role="slider"
-      tabIndex={disabled ? -1 : tabIndex}
+      tabIndex={disabled ? -1 : tabIndex || 0}
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
       onFocus={handleFocus}

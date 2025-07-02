@@ -11,6 +11,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const CheckedFieldLayout: Story = {
+  tags: ['!dev', '!test'],
+  args: {
+    label: 'A label',
+    explainer: 'An explainer',
+  },
+};
+
 export const Unchecked: Story = {
   args: {
     label: 'Unchecked Checkbox',
@@ -62,8 +70,8 @@ export const AllControlStates: Story = {
 
 export const Small: Story = {
   args: {
+    sizer: Checkbox.sizer.small,
     label: 'Small Checkbox (default)',
-    explainer: 'Optional explaner',
     defaultChecked: true,
   },
 };
@@ -72,7 +80,6 @@ export const Medium: Story = {
   args: {
     sizer: Checkbox.sizer.medium,
     label: 'Medium Checkbox',
-    explainer: 'Optional explaner',
     defaultChecked: true,
   },
 };
@@ -81,7 +88,6 @@ export const Large: Story = {
   args: {
     sizer: Checkbox.sizer.large,
     label: 'Large Checkbox',
-    explainer: 'Optional explaner',
     defaultChecked: true,
   },
 };

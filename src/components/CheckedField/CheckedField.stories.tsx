@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 
-import { FormControlPlaceholder } from '@/docs';
+import Docs from '@/docs';
 
 import { CheckedField } from './CheckedField';
 
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 export const Basic: Story = {
   tags: ['!dev', '!test'],
   args: {
-    children: <FormControlPlaceholder tiny />,
+    children: <Docs.FormControlPlaceholder tiny />,
     label: 'A label for the field',
     explainer: 'An explanation about the field',
   },
@@ -25,7 +25,7 @@ export const Basic: Story = {
 export const Small: Story = {
   args: {
     sizer: CheckedField.sizer.small,
-    children: <FormControlPlaceholder tiny />,
+    children: <Docs.FormControlPlaceholder tiny />,
     label: 'Small label',
     explainer: 'Small explanation',
   },
@@ -34,7 +34,7 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     sizer: CheckedField.sizer.medium,
-    children: <FormControlPlaceholder tiny />,
+    children: <Docs.FormControlPlaceholder tiny />,
     label: 'Medium label',
     explainer: 'Medium explanation',
   },
@@ -43,7 +43,7 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     sizer: CheckedField.sizer.large,
-    children: <FormControlPlaceholder tiny />,
+    children: <Docs.FormControlPlaceholder tiny />,
     label: 'Large label',
     explainer: 'Large explanation',
   },

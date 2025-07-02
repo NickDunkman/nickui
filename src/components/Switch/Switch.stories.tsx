@@ -11,6 +11,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const CheckedFieldLayout: Story = {
+  tags: ['!dev', '!test'],
+  args: {
+    label: 'A label',
+    explainer: 'An explainer',
+  },
+};
+
 export const Unchecked: Story = {
   args: {
     label: 'Unchecked Switch',
@@ -63,7 +71,6 @@ export const AllControlStates: Story = {
 export const Small: Story = {
   args: {
     label: 'Small Switch (default)',
-    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };
@@ -72,7 +79,6 @@ export const Medium: Story = {
   args: {
     sizer: Switch.sizer.medium,
     label: 'Medium Switch',
-    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };
@@ -81,7 +87,6 @@ export const Large: Story = {
   args: {
     sizer: Switch.sizer.large,
     label: 'Large Switch',
-    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };

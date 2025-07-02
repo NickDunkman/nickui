@@ -1,34 +1,27 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import {
-  FakeCanvas,
-  FieldArgTypes,
-  FieldLayoutAndSizing,
-  FormikDemo,
-  ReactHookFormDemo,
-  TableOfContents,
-} from '@/docs';
+import Docs from '@/docs';
 
 import { Select } from './Select';
 import * as Stories from './Select.stories';
 
 <Meta of={Stories} />
 
-# `<Select>`
+# <Docs.Name of="Select" />
 
 A form control that allows users to choose an option using a menu.
 
-<FakeCanvas>
+<Docs.FakeCanvas>
   <Select label="Choose a bloop" sizer={Select.sizer.medium}>
     <option value="bleep">Bleep</option>
     <option value="bloop">Bloop</option>
     <option value="blap">Blap</option>
   </Select>
-</FakeCanvas>
+</Docs.FakeCanvas>
 
-<TableOfContents />
+<Docs.TableOfContents />
 
-<FieldArgTypes of={Select} reactDocs="select" wrapper="Field" />
+<Docs.Props of={Stories} nativeBase="select" wrapper="Field" />
 
 ## Control states
 
@@ -36,9 +29,9 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
-<FieldLayoutAndSizing of={Select} wrapper="Field" stories={Stories} />
+<Docs.Sizing of={Stories} wrapper="Field" />
 
-<ReactHookFormDemo
+<Docs.ReactHookFormDemo
   fieldName="firstName"
   initialValue="nick"
   component={Select}
@@ -57,7 +50,7 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
   }}
 />
 
-<FormikDemo
+<Docs.FormikDemo
   fieldName="firstName"
   initialValue="nick"
   component={Select}

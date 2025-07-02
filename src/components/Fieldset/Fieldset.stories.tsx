@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 
-import { FormControlPlaceholder } from '@/docs';
+import Docs from '@/docs';
 
 import { Fieldset } from './Fieldset';
 
@@ -17,8 +17,8 @@ export const Basic: Story = {
   tags: ['!dev', '!test'],
   args: {
     children: [
-      <FormControlPlaceholder key="first" className="mb-2" />,
-      <FormControlPlaceholder key="second" />,
+      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
+      <Docs.FormControlPlaceholder key="second" />,
     ],
     label: 'A label for the fieldset',
     explainer: 'An explanation about the fieldset',
@@ -30,8 +30,8 @@ export const Small: Story = {
   args: {
     sizer: Fieldset.sizer.small,
     children: [
-      <FormControlPlaceholder key="first" className="mb-2" />,
-      <FormControlPlaceholder key="second" />,
+      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
+      <Docs.FormControlPlaceholder key="second" />,
     ],
     label: 'Small label',
     explainer: 'Small explanation',
@@ -43,8 +43,8 @@ export const Medium: Story = {
   args: {
     sizer: Fieldset.sizer.medium,
     children: [
-      <FormControlPlaceholder key="first" className="mb-2" />,
-      <FormControlPlaceholder key="second" />,
+      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
+      <Docs.FormControlPlaceholder key="second" />,
     ],
     label: 'Medium label',
     explainer: 'Medium explanation',
@@ -56,8 +56,8 @@ export const Large: Story = {
   args: {
     sizer: Fieldset.sizer.large,
     children: [
-      <FormControlPlaceholder key="first" className="mb-2" />,
-      <FormControlPlaceholder key="second" />,
+      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
+      <Docs.FormControlPlaceholder key="second" />,
     ],
     label: 'Large label',
     explainer: 'Large explanation',
@@ -79,8 +79,8 @@ export const AllSizes: Story = {
 export const Error: Story = {
   args: {
     children: [
-      <FormControlPlaceholder key="first" className="mb-2" />,
-      <FormControlPlaceholder key="second" />,
+      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
+      <Docs.FormControlPlaceholder key="second" />,
     ],
     label: 'Select some comparables',
     error: 'These cannot be compared',
@@ -90,8 +90,8 @@ export const Error: Story = {
 export const Required: Story = {
   args: {
     children: [
-      <FormControlPlaceholder key="first" className="mb-2" />,
-      <FormControlPlaceholder key="second" />,
+      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
+      <Docs.FormControlPlaceholder key="second" />,
     ],
     label: 'Your name',
     required: true,

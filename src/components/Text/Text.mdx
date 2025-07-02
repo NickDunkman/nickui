@@ -1,30 +1,23 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import {
-  FakeCanvas,
-  FieldArgTypes,
-  FieldLayoutAndSizing,
-  FormikDemo,
-  ReactHookFormDemo,
-  TableOfContents,
-} from '@/docs';
+import Docs from '@/docs';
 
 import { Text } from './Text';
 import * as Stories from './Text.stories';
 
 <Meta of={Stories} />
 
-# `<Text>`
+# <Docs.Name of="Text" />
 
 A form control that allows users to enter & edit a single line of text.
 
-<FakeCanvas>
+<Docs.FakeCanvas>
   <Text placeholder="Type something!" sizer={Text.sizer.medium} />
-</FakeCanvas>
+</Docs.FakeCanvas>
 
-<TableOfContents />
+<Docs.TableOfContents />
 
-<FieldArgTypes of={Text} reactDocs="input" wrapper="Field" />
+<Docs.Props of={Stories} nativeBase="input" wrapper="Field" />
 
 ## Control states
 
@@ -32,9 +25,9 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
-<FieldLayoutAndSizing of={Text} wrapper="Field" stories={Stories} />
+<Docs.Sizing of={Stories} wrapper="Field" />
 
-<ReactHookFormDemo
+<Docs.ReactHookFormDemo
   fieldName="firstName"
   initialValue="Nick"
   component={Text}
@@ -45,7 +38,7 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
   }}
 />
 
-<FormikDemo
+<Docs.FormikDemo
   fieldName="firstName"
   initialValue="Nick"
   component={Text}

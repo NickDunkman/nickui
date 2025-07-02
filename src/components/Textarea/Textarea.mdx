@@ -1,30 +1,23 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import {
-  FakeCanvas,
-  FieldArgTypes,
-  FieldLayoutAndSizing,
-  FormikDemo,
-  ReactHookFormDemo,
-  TableOfContents,
-} from '@/docs';
+import Docs from '@/docs';
 
 import { Textarea } from './Textarea';
 import * as Stories from './Textarea.stories';
 
 <Meta of={Stories} />
 
-# `<Textarea>`
+# <Docs.Name of="Textarea" />
 
 A form control that allows users to enter & edit a mass of text.
 
-<FakeCanvas>
+<Docs.FakeCanvas>
   <Textarea placeholder="Type something!" sizer={Textarea.sizer.medium} />
-</FakeCanvas>
+</Docs.FakeCanvas>
 
-<TableOfContents />
+<Docs.TableOfContents />
 
-<FieldArgTypes of={Textarea} reactDocs="textarea" wrapper="Field" />
+<Docs.Props of={Stories} nativeBase="textarea" wrapper="Field" />
 
 ## Control states
 
@@ -35,9 +28,9 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 ## Controlling the height
 
 Minimum vertical sizing of textareas is done via the `rows` prop (the default is
-2 rows). The Textarea will automatically grow up to the `maxRows` prop to
-accomodate the value (the default is 10 rows). For an unbounded height, you can
-use `maxRows={Infinity}`.
+2 rows). The <Docs.Name of="Textarea" /> will automatically grow up to the
+`maxRows` prop to accomodate the value (the default is 10 rows). For an
+unbounded height, you can use `maxRows={Infinity}`.
 
 <Canvas of={Stories.AutoResizableHeight} sourceState="shown" />
 
@@ -45,14 +38,14 @@ For a fixed height, use the same value for `rows` and `maxRows`.
 
 <Canvas of={Stories.FixedHeight} sourceState="shown" />
 
-To prevent the user from being able to resize the Textarea manually, use the
-`disableManualResize` prop.
+To prevent the user from being able to resize the <Docs.Name of="Textarea" />
+manually, use the `disableManualResize` prop.
 
 <Canvas of={Stories.DisableManualResize} sourceState="shown" />
 
-<FieldLayoutAndSizing of={Textarea} wrapper="Field" stories={Stories} />
+<Docs.Sizing of={Stories} wrapper="Field" />
 
-<ReactHookFormDemo
+<Docs.ReactHookFormDemo
   fieldName="aboutMe"
   initialValue="I am Nick"
   component={Textarea}
@@ -62,7 +55,7 @@ To prevent the user from being able to resize the Textarea manually, use the
   }}
 />
 
-<FormikDemo
+<Docs.FormikDemo
   fieldName="aboutMe"
   initialValue="I am Nick"
   component={Textarea}

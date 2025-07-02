@@ -1,22 +1,18 @@
 import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
-import {
-  FakeCanvas,
-  FieldArgTypes,
-  FieldLayoutAndSizing,
-  FormikDemo,
-  ReactHookFormDemo,
-  TableOfContents,
-} from '@/docs';
+import Docs from '@/docs';
 
 import { Checkboxes } from './Checkboxes';
 import * as Stories from './Checkboxes.stories';
 
 <Meta of={Stories} />
 
-# `<Checkboxes>`
+# <Docs.Name of="Checkboxes" />
 
-Renders multiple checkboxes as one field in a Fieldset.
+<div>
+  Renders multiple <Docs of="Checkbox" /> that perform as one field in a{' '}
+  <Docs of="Fieldset" />.
+</div>
 
 Form libraries like [Formik](https://formik.org/) rely on `onChange` events to
 trigger updates to field values, and such events cannot have multiple targets.
@@ -26,7 +22,7 @@ that is managed using a `<input type="hidden">`. Each checkbox represents a
 substring that can be added to or removed from the delimited-string by toggling
 the checked status.
 
-<FakeCanvas>
+<Docs.FakeCanvas>
   <Checkboxes
     label="Toppings"
     sizer={Checkboxes.sizer.medium}
@@ -36,11 +32,11 @@ the checked status.
       { value: 'chocolate', label: 'Chocolate' },
     ]}
   />
-</FakeCanvas>
+</Docs.FakeCanvas>
 
-<TableOfContents />
+<Docs.TableOfContents />
 
-<FieldArgTypes of={Checkboxes} reactDocs="input" wrapper="Fieldset" />
+<Docs.Props of={Stories} nativeBase="input" wrapper="Fieldset" />
 
 ## Adding checkboxes
 
@@ -91,9 +87,9 @@ pass a render function as the `children`.
   `}
 />
 
-<FieldLayoutAndSizing of={Checkboxes} wrapper="Fieldset" stories={Stories} />
+<Docs.Sizing of={Stories} wrapper="Fieldset" />
 
-<ReactHookFormDemo
+<Docs.ReactHookFormDemo
   fieldName="fullNameRHF"
   initialValue="nick,dunkman"
   component={Checkboxes}
@@ -113,7 +109,7 @@ pass a render function as the `children`.
   }}
 />
 
-<FormikDemo
+<Docs.FormikDemo
   fieldName="fullNameFormik"
   initialValue="nick,dunkman"
   component={Checkboxes}

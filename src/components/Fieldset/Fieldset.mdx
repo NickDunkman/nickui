@@ -1,6 +1,6 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FakeCanvas, FormControlPlaceholder, TableOfContents } from '@/docs';
+import Docs from '@/docs';
 
 import { Radios } from '@/components/Radios';
 
@@ -9,17 +9,18 @@ import * as Stories from './Fieldset.stories';
 
 <Meta of={Stories} />
 
-# `<Fieldset>`
+# <Docs.Name of="Fieldset" />
 
 Wraps multiple form controls in a standard field layout (label, hint, error
 message, etc).
 
-Note: this layout is already built-into
-[Checkboxes](/docs/form-controls-checkboxes--docs/) and
-[Radios](/docs/form-controls-radios--docs/)—you can use this component to create
-custom form controls that behave the same way.
+<div>
+  Note: this layout is already built-into <Docs of="Checkboxes" />,
+  <Docs of="Radios" />, and <Docs of="Switches" />. You can use this component
+  to create custom form controls that behave the same way.
+</div>
 
-<FakeCanvas>
+<Docs.FakeCanvas>
   <Fieldset
     label="A label"
     explainer="An explainer"
@@ -28,14 +29,18 @@ custom form controls that behave the same way.
     sizer={Fieldset.sizer.medium}
   >
     <div className="flex flex-col gap-3">
-      <FormControlPlaceholder>One form control</FormControlPlaceholder>
-      <FormControlPlaceholder>Another form control</FormControlPlaceholder>
-      <FormControlPlaceholder>And so on ...</FormControlPlaceholder>
+      <Docs.FormControlPlaceholder>
+        One form control
+      </Docs.FormControlPlaceholder>
+      <Docs.FormControlPlaceholder>
+        Another form control
+      </Docs.FormControlPlaceholder>
+      <Docs.FormControlPlaceholder>And so on ...</Docs.FormControlPlaceholder>
     </div>
   </Fieldset>
-</FakeCanvas>
+</Docs.FakeCanvas>
 
-<TableOfContents />
+<Docs.TableOfContents />
 
 ## Props
 

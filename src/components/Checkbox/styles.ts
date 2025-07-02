@@ -11,7 +11,7 @@ export const styles = tv({
     root: '',
     input: 'peer opacity-0 absolute -z-1',
     indicator: `
-      bg-white relative
+      relative
       border-2 border-black rounded-[3px]
       bg-no-repeat bg-center
       pointer-events-none select-none
@@ -21,13 +21,13 @@ export const styles = tv({
   variants: {
     sizer: {
       [FieldSizer.small]: {
-        indicator: 'size-3.5 top-0.25 bg-size-[8px_8px]',
+        indicator: 'size-3.5 top-0.25 bg-size-[8px_8px] bg-white',
       },
       [FieldSizer.medium]: {
-        indicator: 'size-4 top-0.75 bg-size-[10px_10px]',
+        indicator: 'size-4 top-0.75 bg-size-[10px_10px] bg-white',
       },
       [FieldSizer.large]: {
-        indicator: 'size-5 top-0.75 bg-size-[13px_13px]',
+        indicator: 'size-5 top-0.75 bg-size-[13px_13px] bg-white',
       },
     },
     isDisabled: {

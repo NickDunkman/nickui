@@ -49,3 +49,7 @@ export type CommonCheckedFieldProps = {
   /** Prevents the user from interacting with the control */
   disabled?: boolean;
 };
+
+// (This is how Storybook types its "of" props)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type StoriesModule = Record<string, any>;

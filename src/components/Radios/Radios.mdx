@@ -1,24 +1,20 @@
 import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
-import {
-  FakeCanvas,
-  FieldArgTypes,
-  FieldLayoutAndSizing,
-  FormikDemo,
-  ReactHookFormDemo,
-  TableOfContents,
-} from '@/docs';
+import Docs from '@/docs';
 
 import { Radios } from './Radios';
 import * as Stories from './Radios.stories';
 
 <Meta of={Stories} />
 
-# `<Radios>`
+# <Docs.Name of="Radios" />
 
-Radios renders multiple Radio as one field in a Fieldset.
+<div>
+  Renders multiple <Docs of="Radio" /> that perform as one field in a{' '}
+  <Docs of="Fieldset" />.
+</div>
 
-<FakeCanvas>
+<Docs.FakeCanvas>
   <Radios
     label="Quel numéro?"
     options={[
@@ -28,13 +24,13 @@ Radios renders multiple Radio as one field in a Fieldset.
     ]}
     sizer={Radios.sizer.medium}
   />
-</FakeCanvas>
+</Docs.FakeCanvas>
 
-<TableOfContents />
+<Docs.TableOfContents />
 
-<FieldArgTypes
-  of={Radios}
-  reactDocs="input"
+<Docs.Props
+  of={Stories}
+  nativeBase="input"
   wrapper="Fieldset"
   exclude={['delimiter']}
 />
@@ -88,9 +84,9 @@ a render function as the `children`.
   `}
 />
 
-<FieldLayoutAndSizing of={Radios} wrapper="Fieldset" stories={Stories} />
+<Docs.Sizing of={Stories} wrapper="Fieldset" />
 
-<ReactHookFormDemo
+<Docs.ReactHookFormDemo
   fieldName="firstNameRHF"
   initialValue="nick"
   component={Radios}
@@ -110,7 +106,7 @@ a render function as the `children`.
   }}
 />
 
-<FormikDemo
+<Docs.FormikDemo
   fieldName="firstNameFormik"
   initialValue="nick"
   component={Radios}

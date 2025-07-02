@@ -13,6 +13,26 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const FieldsetLayout: Story = {
+  args: {
+    required: true,
+    label: 'A label',
+    explainer: 'An explainer',
+    error: 'An error message',
+    hint: 'A hint',
+    options: [
+      {
+        value: 'one',
+        label: 'Option one',
+      },
+      {
+        value: 'two',
+        label: 'Option two',
+      },
+    ],
+  },
+};
+
 export const StandardLayout: Story = {
   args: {
     label: 'Please select a standard',
@@ -58,25 +78,6 @@ export const CustomLayout: Story = {
         />
       </div>
     ),
-  },
-};
-
-export const FieldsetLayout: Story = {
-  args: {
-    label: 'A label',
-    explainer: 'An explainer',
-    error: 'An error message',
-    hint: 'A hint',
-    options: [
-      {
-        value: 'one',
-        label: 'Option one',
-      },
-      {
-        value: 'two',
-        label: 'Option two',
-      },
-    ],
   },
 };
 

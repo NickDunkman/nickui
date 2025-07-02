@@ -11,6 +11,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const CheckedFieldLayout: Story = {
+  tags: ['!dev', '!test'],
+  args: {
+    label: 'A label',
+    explainer: 'An explainer',
+  },
+};
+
 export const Unchecked: Story = {
   args: {
     label: 'Unchecked Radio',
@@ -63,7 +71,6 @@ export const AllControlStates: Story = {
 export const Small: Story = {
   args: {
     label: 'Small Radio (default)',
-    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };
@@ -72,7 +79,6 @@ export const Medium: Story = {
   args: {
     sizer: Radio.sizer.medium,
     label: 'Medium Radio',
-    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };
@@ -81,7 +87,6 @@ export const Large: Story = {
   args: {
     sizer: Radio.sizer.large,
     label: 'Large Radio',
-    explainer: 'Optional explainer',
     defaultChecked: true,
   },
 };

@@ -1,28 +1,23 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import {
-  FakeCanvas,
-  FieldArgTypes,
-  FieldLayoutAndSizing,
-  TableOfContents,
-} from '@/docs';
+import Docs from '@/docs';
 
 import { Checkbox } from './Checkbox';
 import * as Stories from './Checkbox.stories';
 
 <Meta of={Stories} />
 
-# `<Checkbox>`
+# <Docs.Name of="Checkbox" />
 
 A form control that allow users to choose zero to many options from a set.
 
-<FakeCanvas>
+<Docs.FakeCanvas>
   <Checkbox label="Vote for me!" sizer={Checkbox.sizer.medium} />
-</FakeCanvas>
+</Docs.FakeCanvas>
 
-<TableOfContents />
+<Docs.TableOfContents />
 
-<FieldArgTypes of={Checkbox} wrapper="CheckedField" reactDocs="input" />
+<Docs.Props of={Stories} wrapper="CheckedField" nativeBase="input" />
 
 ## Control states
 
@@ -30,4 +25,4 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
-<FieldLayoutAndSizing of={Checkbox} wrapper="CheckedField" stories={Stories} />
+<Docs.Sizing of={Stories} wrapper="CheckedField" />

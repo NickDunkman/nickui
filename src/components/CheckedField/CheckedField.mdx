@@ -1,39 +1,39 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import { FakeCanvas, FormControlPlaceholder, TableOfContents } from '@/docs';
+import Docs from '@/docs';
 
 import { CheckedField } from './CheckedField';
 import * as Stories from './CheckedField.stories';
 
 <Meta of={Stories} />
 
-# `<CheckedField>`
+# <Docs.Name of="CheckedField" />
 
 Wraps a single checkable form control with a standard layout (label & explainer,
 to the right of the control).
 
-This is simpler than the [Field](/docs/field-layouts-field--docs/) component.
-There’s no hint, since a field with only 2 possible values is too simple for it.
-And there’s no error message, since if one or both possible values is invalid,
-the field has no purpose.
+This is simpler than the <Docs of="Field" /> component. There’s no hint, since a
+field with only 2 possible values is too simple for it. And there’s no error
+message, since if one or both possible values is invalid, the field has no
+purpose.
 
-Note: this layout is already built-into
-[Checkbox](/docs/form-controls-checkbox--docs/),
-[Radio](/docs/form-controls-radio--docs/), and
-[Switch](/docs/form-controls-switch--docs/)—you can use this component to create
-a custom form control that behaves the same way.
+<div>
+  Note: this layout is already built-into <Docs of="Checkbox" />,{' '}
+  <Docs of="Radio" />, and <Docs of="Switch" />. You can use this component to
+  create a custom form control that behaves the same way.
+</div>
 
-<FakeCanvas>
+<Docs.FakeCanvas>
   <CheckedField
     label="A label"
     explainer="An explainer"
     sizer={CheckedField.sizer.medium}
   >
-    <FormControlPlaceholder tiny />
+    <Docs.FormControlPlaceholder tiny />
   </CheckedField>
-</FakeCanvas>
+</Docs.FakeCanvas>
 
-<TableOfContents />
+<Docs.TableOfContents />
 
 ## Props
 

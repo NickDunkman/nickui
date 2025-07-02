@@ -1,4 +1,5 @@
 export { Button } from '@/components/Button';
+export { CheckedField } from '@/components/CheckedField';
 export { Checkbox } from '@/components/Checkbox';
 export { Checkboxes } from '@/components/Checkboxes';
 export { Field } from '@/components/Field';

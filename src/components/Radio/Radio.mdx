@@ -1,31 +1,26 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import {
-  FakeCanvas,
-  FieldArgTypes,
-  FieldLayoutAndSizing,
-  TableOfContents,
-} from '@/docs';
+import Docs from '@/docs';
 
 import { Radio } from './Radio';
 import * as Stories from './Radio.stories';
 
 <Meta of={Stories} />
 
-# `<Radio>`
+# <Docs.Name of="Radio" />
 
 A form control that allow users to choose one option from a set.
 
-<FakeCanvas>
+<Docs.FakeCanvas>
   <Radio
     label="I hope you don’t regret checking me"
     sizer={Radio.sizer.medium}
   />
-</FakeCanvas>
+</Docs.FakeCanvas>
 
-<TableOfContents />
+<Docs.TableOfContents />
 
-<FieldArgTypes of={Radio} wrapper="CheckedField" reactDocs="input" />
+<Docs.Props of={Stories} wrapper="CheckedField" nativeBase="input" />
 
 ## Control states
 
@@ -33,4 +28,4 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
-<FieldLayoutAndSizing of={Radio} wrapper="CheckedField" stories={Stories} />
+<Docs.Sizing of={Stories} wrapper="CheckedField" />

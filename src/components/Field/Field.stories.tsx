@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 
-import { FormControlPlaceholder } from '@/docs';
+import Docs from '@/docs';
 
 import { Field } from './Field';
 
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 export const Basic: Story = {
   tags: ['!dev', '!test'],
   args: {
-    children: <FormControlPlaceholder />,
+    children: <Docs.FormControlPlaceholder />,
     label: 'A label for the field',
     explainer: 'An explanation about the field',
     hint: 'A hint about the field’s value',
@@ -27,7 +27,7 @@ export const Basic: Story = {
 export const Small: Story = {
   args: {
     sizer: Field.sizer.small,
-    children: <FormControlPlaceholder />,
+    children: <Docs.FormControlPlaceholder />,
     label: 'Small label',
     explainer: 'Small explanation',
     hint: 'Small hint',
@@ -38,7 +38,7 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     sizer: Field.sizer.medium,
-    children: <FormControlPlaceholder />,
+    children: <Docs.FormControlPlaceholder />,
     label: 'Medium label',
     explainer: 'Medium explanation',
     hint: 'Medium hint',
@@ -49,7 +49,7 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     sizer: Field.sizer.large,
-    children: <FormControlPlaceholder />,
+    children: <Docs.FormControlPlaceholder />,
     label: 'Large label',
     explainer: 'Large explanation',
     hint: 'Large hint',
@@ -70,7 +70,7 @@ export const AllSizes: Story = {
 
 export const Error: Story = {
   args: {
-    children: <FormControlPlaceholder />,
+    children: <Docs.FormControlPlaceholder />,
     label: 'Phone number',
     error: 'That is not a valid phone number',
     errorId: 'error-message-id',
@@ -80,7 +80,7 @@ export const Error: Story = {
 
 export const Required: Story = {
   args: {
-    children: <FormControlPlaceholder />,
+    children: <Docs.FormControlPlaceholder />,
     label: 'Necessary information',
     controlId: 'required-input',
     required: true,
