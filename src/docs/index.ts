@@ -1,3 +1,4 @@
+export { ComponentLink } from './ComponentLink';
 export { FakeCanvas } from './FakeCanvas';
 export { FieldArgTypes } from './FieldArgTypes';
 export { FieldLayoutAndSizing } from './FieldLayoutAndSizing';
