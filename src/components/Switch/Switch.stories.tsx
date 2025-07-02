@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Switch } from './Switch';
 
 const meta = {
-  title: 'Forms/Switch',
+  title: 'Form controls/Switch',
   component: Switch,
 } satisfies Meta<typeof Switch>;
 

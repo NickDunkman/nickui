@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Button } from './Button';
 
 const meta = {
-  title: 'Forms/Button',
+  title: 'Form controls/Button',
   component: Button,
 } satisfies Meta<typeof Button>;
 

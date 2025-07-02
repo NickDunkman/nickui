@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Radio } from './Radio';
 
 const meta = {
-  title: 'Forms/Radio',
+  title: 'Form controls/Radio',
   component: Radio,
 } satisfies Meta<typeof Radio>;
 

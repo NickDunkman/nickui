@@ -62,7 +62,7 @@ Here are some of the most commonly used:
             {`
 ## Common ${wrapper} props
 
-${componentName} also accepts some of the [${wrapper}](/docs/forms-${wrapper.toLowerCase()}--docs) props:
+${componentName} also accepts some of the [${wrapper}](/docs/field-layouts-${wrapper.toLowerCase()}--docs) props:
         `}
           </Markdown>
 

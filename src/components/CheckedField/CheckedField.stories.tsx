@@ -6,7 +6,7 @@ import { FormControlPlaceholder } from '@/docs';
 import { CheckedField } from './CheckedField';
 
 const meta = {
-  title: 'Forms/CheckedField',
+  title: 'Field layouts/CheckedField',
   component: CheckedField,
 } satisfies Meta<typeof CheckedField>;
 

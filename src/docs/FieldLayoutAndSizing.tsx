@@ -42,7 +42,7 @@ export function FieldLayoutAndSizing({
           <Markdown>
             {`
 ${componentName} can optionally have each of the elements of a standard
-[${wrapper}](/docs/forms-${wrapper.toLowerCase()}--docs): \`label\`,
+[${wrapper}](/docs/field-layouts-${wrapper.toLowerCase()}--docs): \`label\`,
 \`explainer\`${wrapper !== 'CheckedField' ? ', `hint`, `error`' : ''}.
 ${componentName} automatically handles the accessibility of these elements for
 you!

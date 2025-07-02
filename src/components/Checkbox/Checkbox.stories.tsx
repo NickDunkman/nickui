@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Checkbox } from './Checkbox';
 
 const meta = {
-  title: 'Forms/Checkbox',
+  title: 'Form controls/Checkbox',
   component: Checkbox,
 } satisfies Meta<typeof Checkbox>;
 

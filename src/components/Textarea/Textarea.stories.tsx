@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Textarea } from './Textarea';
 
 const meta = {
-  title: 'Forms/Textarea',
+  title: 'Form controls/Textarea',
   component: Textarea,
 } satisfies Meta<typeof Textarea>;
 

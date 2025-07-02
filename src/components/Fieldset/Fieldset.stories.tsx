@@ -6,7 +6,7 @@ import { FormControlPlaceholder } from '@/docs';
 import { Fieldset } from './Fieldset';
 
 const meta = {
-  title: 'Forms/Fieldset',
+  title: 'Field layouts/Fieldset',
   component: Fieldset,
 } satisfies Meta<typeof Fieldset>;
 

@@ -6,7 +6,7 @@ import { FormControlPlaceholder } from '@/docs';
 import { Field } from './Field';
 
 const meta = {
-  title: 'Forms/Field',
+  title: 'Field layouts/Field',
   component: Field,
 } satisfies Meta<typeof Field>;
 

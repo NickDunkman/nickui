@@ -6,7 +6,7 @@ import { Radio } from '@/components/Radio';
 import { Radios } from './Radios';
 
 const meta = {
-  title: 'Forms/Radios',
+  title: 'Form controls/Radios',
   component: Radios,
 } satisfies Meta<typeof Radios>;
 
