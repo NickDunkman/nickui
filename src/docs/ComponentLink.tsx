@@ -7,7 +7,10 @@ export function ComponentLink({ of }: { of: string }) {
 
   React.useEffect(() => {
     const componentStoriesPath = `../components/${of}/${of}.stories`;
-    import(componentStoriesPath).then((stories) => {
+    import(
+      /* @vite-ignore */
+      componentStoriesPath
+    ).then((stories) => {
       setDocsTitle(stories.default.title);
     });
   }, [of]);
