@@ -29,7 +29,6 @@ interface SwitchProps extends Omit<React.ComponentProps<'input'>, 'type'> {
  * @props {@link SwitchProps}
  */
 export function Switch(props: SwitchProps & CommonCheckedFieldProps) {
-  const lol = 'what';
   return <Checkable {...props} type="checkbox" styler={styles} />;
 }
 
