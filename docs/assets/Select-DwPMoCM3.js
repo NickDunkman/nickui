@@ -1,0 +1,12 @@
+import{j as e,M as c,C as m}from"./blocks-D2F_NW0t.js";import{useMDXComponents as l}from"./index-DwXBoJ7S.js";import{D as n}from"./index-DiemKipG.js";import{S as s,a as r,A as d}from"./Select.stories-B0ZpwpH6.js";import"./iframe-B-MmJHH3.js";import"./index-DR5r5e_J.js";import"./clsw-D-KgF5mV.js";import"./Field-Blg31V1w.js";import"./index-Czi7Upa3.js";import"./randomId-Dfhrkieu.js";function a(i){const o={code:"code",h1:"h1",h2:"h2",option:"option",p:"p",...l(),...i.components};return n||t("Docs",!1),n.FakeCanvas||t("Docs.FakeCanvas",!0),n.FormikDemo||t("Docs.FormikDemo",!0),n.Name||t("Docs.Name",!0),n.Props||t("Docs.Props",!0),n.ReactHookFormDemo||t("Docs.ReactHookFormDemo",!0),n.Sizing||t("Docs.Sizing",!0),n.TableOfContents||t("Docs.TableOfContents",!0),e.jsxs(e.Fragment,{children:[e.jsx(c,{of:s}),`
+`,e.jsx(o.h1,{id:"",children:e.jsx(n.Name,{of:"Select"})}),`
+`,e.jsx(o.p,{children:"A form control that allows users to choose an option using a menu."}),`
+`,e.jsx(n.FakeCanvas,{children:e.jsxs(r,{label:"Choose a bloop",sizer:r.sizer.medium,children:[e.jsx("option",{value:"bleep",children:"Bleep"}),e.jsx("option",{value:"bloop",children:"Bloop"}),e.jsx("option",{value:"blap",children:"Blap"})]})}),`
+`,e.jsx(n.TableOfContents,{}),`
+`,e.jsx(n.Props,{of:s,nativeBase:"select",wrapper:"Field"}),`
+`,e.jsx(o.h2,{id:"control-states",children:"Control states"}),`
+`,e.jsxs(o.p,{children:["These are handled via the ",e.jsx(o.code,{children:"value"}),", ",e.jsx(o.code,{children:"defaultValue"}),", & ",e.jsx(o.code,{children:"disabled"})," props."]}),`
+`,e.jsx(m,{of:d,sourceState:"shown"}),`
+`,e.jsx(n.Sizing,{of:s,wrapper:"Field"}),`
+`,e.jsx(n.ReactHookFormDemo,{of:s,fieldName:"firstName",initialValue:"nick",componentProps:{label:"First name",hint:"Try editting me!",sizer:r.sizer.medium,children:[e.jsx(o.option,{value:"nick",children:"Nick"},"nick"),e.jsx(o.option,{value:"dunkman",children:"Dunkman"},"dunkman")]}}),`
+`,e.jsx(n.FormikDemo,{of:s,fieldName:"firstName",initialValue:"nick",componentProps:{label:"First name",hint:"Try editting me!",sizer:r.sizer.medium,children:[e.jsx(o.option,{value:"nick",children:"Nick"},"nick"),e.jsx(o.option,{value:"dunkman",children:"Dunkman"},"dunkman")]}})]})}function F(i={}){const{wrapper:o}={...l(),...i.components};return o?e.jsx(o,{...i,children:e.jsx(a,{...i})}):a(i)}function t(i,o){throw new Error("Expected "+(o?"component":"object")+" `"+i+"` to be defined: you likely forgot to import, pass, or provide it.")}export{F as default};
