@@ -29,15 +29,6 @@ jobs:
         run: |
           corepack enable
           yarn install
-          npm install @microsoft/eslint-formatter-sarif
 
       - name: Run ESLint
-        env:
-          SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
-        run: npm run check:eslint -- --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif
-
-      - name: Upload analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: eslint-results.sarif
-          wait-for-processing: true
+        run: npm run check:eslint
