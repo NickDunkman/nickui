@@ -27,6 +27,7 @@ jobs:
 
       - name: Install npm dependencies
         run: |
+          corepack enable
           yarn install
           npm install @microsoft/eslint-formatter-sarif
 
