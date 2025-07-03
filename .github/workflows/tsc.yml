@@ -1,4 +1,4 @@
-name: eslint
+name: tsc
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  eslint:
-    name: Run eslint
+  tsc:
+    name: Run tsc
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -28,5 +28,5 @@ jobs:
           corepack enable
           yarn install
 
-      - name: Run ESLint
-        run: npm run check:eslint
+      - name: Run tsc
+        run: npm run check:tsc
