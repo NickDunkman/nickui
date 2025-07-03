@@ -50,25 +50,5 @@ export default defineConfig({
     ...storybookPlugin.configs.recommended.rules,
     'prettier/prettier': 'error',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    //      "import/no-unresolved": "error",
-    //      //"import/default": "off",
-    //      //"import/no-named-as-default": "off",
-    //      //"import/no-named-as-default-member": "off",
-    //      "import/order": [
-    //        "error",
-    //        {
-    //          groups: [
-    //            "builtin",
-    //            "external",
-    //            "internal",
-    //            "parent",
-    //            "sibling",
-    //            "index",
-    //          ],
-    //          "newlines-between": "always",
-    //          alphabetize: { order: "asc", caseInsensitive: true },
-    //        },
-    //      ],
-    //    },
   },
 });
