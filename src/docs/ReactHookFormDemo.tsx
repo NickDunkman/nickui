@@ -2,9 +2,10 @@ import { Markdown, Source } from '@storybook/addon-docs/blocks';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { getComponentName } from '@/utils/getComponentName';
+import { StoriesModule } from '@/types';
 
 import { FakeCanvas } from './FakeCanvas';
+import { Name } from './Name';
 import { PrettyPrint } from './PrettyPrint';
 
 /**
@@ -13,17 +14,19 @@ import { PrettyPrint } from './PrettyPrint';
  * a FakeCanvas, and then a code snippet which shows how to integrate RHF
  * into the component.
  */
-export function ReactHookFormDemo<P extends Record<string, unknown>>({
+export function ReactHookFormDemo({
+  of,
   fieldName,
   initialValue,
-  component: Component,
   componentProps,
 }: {
+  of: StoriesModule;
   fieldName: string;
-  initialValue: string;
-  component: React.ComponentType<P>;
-  componentProps: P;
+  initialValue?: string | boolean;
+  componentProps: object;
 }) {
+  const addValidation = initialValue && typeof initialValue !== 'boolean';
+
   const {
     register,
     watch,
@@ -40,23 +43,25 @@ export function ReactHookFormDemo<P extends Record<string, unknown>>({
     defaultValues: { [fieldName]: initialValue },
   });
 
-  const componentName = getComponentName(Component);
+  const Component = of.default.component;
+  const componentName = of.default.title.split('/').pop();
 
   return (
     <>
-      <Markdown>
+      <Markdown options={{ overrides: { Name } }}>
         {`
 ## React Hook Form compatibility
 
-The ${componentName} component implements all of the necessary props to be used
+&nbsp;<Name of="${componentName}" /> implements all of the necessary props to be used
 with [React Hook Form](https://react-hook-form.com/)!
         `}
       </Markdown>
       <FakeCanvas>
         <Component
           {...register(fieldName, {
-            validate: (value) =>
-              value === initialValue || 'Heyyyy, change that back',
+            validate: !addValidation
+              ? undefined
+              : (value) => value === initialValue || 'Heyyyy, change that back',
           })}
           error={errors[fieldName]?.message}
           {...componentProps}
@@ -86,10 +91,15 @@ const form = useForm<{ ${fieldName}: string }>({
 });
 
 return (
-  <${componentName}
+  <${componentName}${
+    addValidation
+      ? `
     {...register('${fieldName}', {
       validate: (value) => value === '${initialValue}' || 'Heyyy, change that back', 
-    })}
+    })}`
+      : `
+    {...register('${fieldName}')}`
+  }
     error={errors.${fieldName}?.message}
     // ...
   />

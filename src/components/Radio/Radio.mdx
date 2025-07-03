@@ -29,3 +29,16 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
 <Docs.Sizing of={Stories} wrapper="CheckedField" />
+
+<Docs.ReactHookFormDemo
+  of={Stories}
+  fieldName="noMulligans-RHF"
+  componentProps={{ label: 'No mulligans', value: 'stroke taken' }}
+/>
+
+<Docs.FormikDemo
+  of={Stories}
+  fieldName="noMulligans-Formik"
+  radioWithValue="stroke taken"
+  componentProps={{ label: 'No mulligans' }}
+/>

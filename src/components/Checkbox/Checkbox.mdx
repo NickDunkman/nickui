@@ -26,3 +26,18 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
 <Docs.Sizing of={Stories} wrapper="CheckedField" />
+
+<Docs.ReactHookFormDemo
+  of={Stories}
+  fieldName="itsInTheHole"
+  initialValue={true}
+  componentProps={{ label: 'It’s in the hole' }}
+/>
+
+<Docs.FormikDemo
+  of={Stories}
+  fieldName="itsInTheHole"
+  initialValue={true}
+  inputType="checkbox"
+  componentProps={{ label: 'It’s in the hole' }}
+/>

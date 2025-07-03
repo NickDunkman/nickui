@@ -2,9 +2,10 @@ import { Markdown, Source } from '@storybook/addon-docs/blocks';
 import { useFormik } from 'formik';
 import * as React from 'react';
 
-import { getComponentName } from '@/utils/getComponentName';
+import { StoriesModule } from '@/types';
 
 import { FakeCanvas } from './FakeCanvas';
+import { Name } from './Name';
 import { PrettyPrint } from './PrettyPrint';
 
 /**
@@ -13,52 +14,64 @@ import { PrettyPrint } from './PrettyPrint';
  * a FakeCanvas, and then a code snippet which shows how to integrate Formik
  * into the component.
  */
-export function FormikDemo<P extends Record<string, unknown>>({
+export function FormikDemo({
+  of,
   fieldName,
   initialValue,
-  component: Component,
+  checkbox,
+  radioWithValue,
   componentProps,
 }: {
+  of: StoriesModule;
   fieldName: string;
   initialValue: string;
-  component: React.ComponentType<P>;
-  componentProps: P;
+  checkbox?: boolean;
+  radioWithValue?: string;
+  componentProps?: object;
 }) {
+  const addValidation = !checkbox && !radioWithValue;
+
   const form = useFormik({
     initialValues: {
-      [fieldName]: initialValue,
+      [fieldName]: initialValue ?? '',
     },
     onSubmit: () => {},
-    validate: (values) => {
-      if (values[fieldName] !== initialValue) {
-        return { [fieldName]: 'Heyyyy, change that back' };
-      }
-    },
+    validate: !addValidation
+      ? undefined
+      : (values) => {
+          if (values[fieldName] !== initialValue) {
+            return { [fieldName]: 'Heyyyy, change that back' };
+          }
+        },
   });
 
-  const componentName = getComponentName(Component);
+  const Component = of.default.component;
+  const componentName = of.default.title.split('/').pop();
 
   return (
     <>
-      <Markdown>
+      <Markdown options={{ overrides: { Name } }}>
         {`
 ## Formik compatibility
 
-The ${componentName} component implements all of the necessary props to be used
-as a [Formik field](https://formik.org/docs/api/field)!
+&nbsp;<Name of="${componentName}" /> implements all of the necessary
+props to be used as a [Formik field](https://formik.org/docs/api/field)!
         `}
       </Markdown>
+
       <FakeCanvas>
         <Component
-          name={fieldName}
-          onChange={form.handleChange}
-          onBlur={form.handleBlur}
-          value={form.values[fieldName]}
+          {...form.getFieldProps({
+            name: fieldName,
+            type: checkbox ? 'checkbox' : radioWithValue ? 'radio' : undefined,
+            value: radioWithValue,
+          })}
           error={form.errors[fieldName]}
           {...componentProps}
         />
         <PrettyPrint data={form} title="Formik context" className="mt-6" />
       </FakeCanvas>
+
       <Source
         dark
         language="tsx"
@@ -66,21 +79,22 @@ as a [Formik field](https://formik.org/docs/api/field)!
 import { useFormik } from 'formik';
 
 const form = useFormik({
-  initialValues: { ${fieldName}: '${initialValue}' },
-  onSubmit: () => {},
+  initialValues: { ${fieldName}: ${typeof initialValue === 'boolean' ? initialValue : `'${initialValue}'`} },
+  onSubmit: () => {},${
+    !addValidation
+      ? ''
+      : `
   validate: (values) => {
     if (values.${fieldName} !== '${initialValue}') {
       return { ${fieldName}: 'Heyyyy, change that back' };
     }
-  },
+  },`
+  }
 });
 
 return (
   <${componentName}
-    name="${fieldName}"
-    onChange={form.handleChange}
-    onBlur={form.handleBlur}
-    value={form.values.${fieldName}}
+    {...form.getFieldProps({ name: '${fieldName}'${checkbox ? ", type: 'checkbox'" : radioWithValue ? ", type: 'radio'" : ''})}
     error={form.errors.${fieldName}}
     // ...
   />

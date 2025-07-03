@@ -29,3 +29,18 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 <Canvas of={Stories.AllControlStates} sourceState="shown" />
 
 <Docs.Sizing of={Stories} wrapper="CheckedField" />
+
+<Docs.ReactHookFormDemo
+  of={Stories}
+  fieldName="liftCleanAndPlace"
+  initialValue={true}
+  componentProps={{ label: 'Lift, clean, and place in effect' }}
+/>
+
+<Docs.FormikDemo
+  of={Stories}
+  fieldName="liftCleanAndPlace"
+  checkbox
+  initialValue={true}
+  componentProps={{ label: 'Lift, clean, and place in effect' }}
+/>

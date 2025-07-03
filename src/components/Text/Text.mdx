@@ -28,6 +28,7 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 <Docs.Sizing of={Stories} wrapper="Field" />
 
 <Docs.ReactHookFormDemo
+  of={Stories}
   fieldName="firstName"
   initialValue="Nick"
   component={Text}
@@ -39,9 +40,9 @@ These are handled via the `value`, `defaultValue`, & `disabled` props.
 />
 
 <Docs.FormikDemo
+  of={Stories}
   fieldName="firstName"
   initialValue="Nick"
-  component={Text}
   componentProps={{
     label: 'First name',
     hint: 'Try editting me!',
