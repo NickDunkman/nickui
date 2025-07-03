@@ -13,9 +13,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const lol: number = 'what';
-console.log(lol);
-
 export const FieldsetLayout: Story = {
   args: {
     required: true,
