@@ -9,5 +9,6 @@ export { Radios } from '@/components/Radios';
 export { Select } from '@/components/Select';
 export { Slider } from '@/components/Slider';
 export { Switch } from '@/components/Switch';
+export { Switches } from '@/components/Switches';
 export { Text } from '@/components/Text';
 export { Textarea } from '@/components/Textarea';
