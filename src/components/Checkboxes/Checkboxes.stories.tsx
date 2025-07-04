@@ -59,7 +59,7 @@ export const CustomLayout: Story = {
   args: {
     label: 'How custom do you like it?',
     defaultValue: 'pretty',
-    children: (checkbox) => (
+    render: (checkbox) => (
       <div className="flex flex-row items-baseline gap-x-4">
         <Checkbox {...checkbox({ value: 'kinda' })} label="A little custom" />
         <span className="text-xs text-gray-500">or</span>

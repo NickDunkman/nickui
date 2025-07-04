@@ -34,7 +34,8 @@ export const styles = tv({
     flavor: {
       [ButtonFlavor.primary]:
         'bg-indigo-600 border-indigo-600 text-white font-medium',
-      [ButtonFlavor.secondary]: 'border-gray-600 bg-gray-100',
+      // The border on the secondary accentuates the shadow, so lighten it a bit
+      [ButtonFlavor.secondary]: 'border-gray-500 bg-gray-100 shadow-md/8',
       [ButtonFlavor.danger]:
         'bg-rose-700 border-rose-700 text-white font-medium',
     },

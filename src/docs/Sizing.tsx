@@ -15,9 +15,8 @@ export function Sizing({ of }: { of: StoriesModule }) {
         {`
 ## Standard sizing options
 
-Sizing is done via the \`sizer\` prop. You can pass \`“small”\`, \`“medium”\`,
-or \`“large”\`. In keeping with the mobile-first philosophy of Tailwind, small
-is the default size.
+Sizing is done via the \`sizer\` prop. You can pass \`“small”\` (the default),
+\`“medium”\`, or \`“large”\`.
         `}
       </Markdown>
 

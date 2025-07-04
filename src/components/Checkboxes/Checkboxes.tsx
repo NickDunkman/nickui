@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Checkbox } from '@/components/Checkbox';
 import { Fieldset } from '@/components/Fieldset';
 import { FieldSizer } from '@/constants';
-import type { CommonCheckedFieldProps, CommonFieldProps } from '@/types';
+import type { CommonCheckedFieldProps, CommonFieldsetProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 
@@ -15,7 +15,7 @@ export interface CheckablesProps
    * Render function used to render customized checkable inputs. Call the
    * provided callback to get props to pass down to each input.
    */
-  children?: (
+  render?: (
     inputProps: (control: {
       value: string;
       disabled?: boolean;
@@ -55,12 +55,12 @@ export interface CheckablesProps
  * substring that can be added to or removed from the delimited-string by
  * toggling the checked status.
  *
- * @props {@link CheckablesProps} + {@link CommonFieldProps}
+ * @props {@link CheckablesProps} + {@link CommonFieldsetProps}
  */
 export function Checkboxes({
   delimiter = ',',
   ...otherProps
-}: CheckablesProps & CommonFieldProps) {
+}: CheckablesProps & CommonFieldsetProps) {
   return (
     <Checkables {...otherProps} delimiter={delimiter} Checkable={Checkbox} />
   );
@@ -90,14 +90,14 @@ export function Checkables({
   value: controlledValue,
   defaultValue,
   options,
-  children,
+  render,
   onChange,
   onBlur,
   delimiter,
   // The rest are brought in from <'input'>
   ...otherHiddenInputProps
 }: CheckablesProps &
-  CommonFieldProps & {
+  CommonFieldsetProps & {
     Checkable: React.ComponentType<
       React.ComponentProps<'input'> & CommonCheckedFieldProps
     >;
@@ -208,7 +208,7 @@ export function Checkables({
         ref={containerRef}
         className={
           // create a standard layout when self-rendering the checkables
-          // (otherwise, the caller should manage the layout within `children`)
+          // (otherwise, the caller should manage the layout within `render`)
           options &&
           clsw('flex flex-col', {
             'gap-y-2': !sizer || sizer === FieldSizer.small,
@@ -235,8 +235,8 @@ export function Checkables({
           </>
         )}
 
-        {/* Customized layout using `children` */}
-        {!options && children?.(inputProps)}
+        {/* Customized layout using `render` */}
+        {!options && render?.(inputProps)}
 
         {/*
           This hidden input manages the component’s value. See the component

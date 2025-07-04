@@ -1,4 +1,4 @@
-import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/docs';
 
@@ -12,31 +12,18 @@ import * as Stories from './Button.stories';
 Allows the user to trigger an action, such as submitting a form.
 
 <Docs.FakeCanvas>
-  <Button sizer={Button.sizer.medium}>Click me!</Button>
+  <Button sizer={Button.sizer.medium}>Click me?</Button>
 </Docs.FakeCanvas>
 
 <Docs.TableOfContents />
 
-## Props
-
-<Docs.Name of="Button" /> takes some custom props, plus all the props that can
-be used with
-[HTMLButtonElement](https://react.dev/reference/react-dom/components/common).
-Here are some of the most commonly used:
-
-<ArgTypes of={Button} sort="requiredFirst" />
-
-## Control states
-
-These are handled via the `disabled` prop.
-
-<Canvas of={Stories.AllControlStates} sourceState="shown" />
-
+<Docs.Props of={Stories} nativeBase="button" />
+<Docs.ControlStates of={Stories} />
 <Docs.Sizing of={Stories} />
 
 ## Flavors
 
-Coloring is done via the `flavor` prop. You can pass "primary", "secondary", or
-"danger". The default flavor is "primary".
+Coloring is done via the `flavor` prop. You can pass `"primary"` (the default),
+`"secondary"`, or `"danger"`.
 
-<Canvas of={Stories.AllFlavors} sourceState="shown" />
+<Canvas of={Stories.AllFlavors} />

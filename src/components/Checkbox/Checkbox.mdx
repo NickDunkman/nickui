@@ -12,19 +12,16 @@ import * as Stories from './Checkbox.stories';
 A form control that allow users to choose zero to many options from a set.
 
 <Docs.FakeCanvas>
-  <Checkbox label="Vote for me!" sizer={Checkbox.sizer.medium} />
+  <Checkbox
+    label="Don’t not opt out of my newsletter 😈"
+    sizer={Checkbox.sizer.medium}
+  />
 </Docs.FakeCanvas>
 
 <Docs.TableOfContents />
 
 <Docs.Props of={Stories} wrapper="CheckedField" nativeBase="input" />
-
-## Control states
-
-These are handled via the `value`, `defaultValue`, & `disabled` props.
-
-<Canvas of={Stories.AllControlStates} sourceState="shown" />
-
+<Docs.ControlStates of={Stories} />
 <Docs.Sizing of={Stories} wrapper="CheckedField" />
 
 <Docs.ReactHookFormDemo

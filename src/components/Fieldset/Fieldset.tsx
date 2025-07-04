@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { FieldSizer } from '@/constants';
-import { CommonFieldProps } from '@/types';
+import { CommonFieldsetProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 
 import { styles } from './styles';
@@ -15,7 +15,7 @@ export interface FieldsetProps extends React.ComponentProps<'fieldset'> {
 /**
  * Fieldset wraps multiple form controls in a standard field layout (label,
  * hint, error message, etc).
- * @props {@link FieldsetProps} {@link CommonFieldProps}
+ * @props {@link FieldsetProps} {@link CommonFieldsetProps}
  */
 export function Fieldset({
   children: formControls,
@@ -30,7 +30,7 @@ export function Fieldset({
   'aria-describedby': ariaDescribedBy,
   'aria-errormessage': ariaErrorMessage,
   ...otherFieldsetProps
-}: FieldsetProps & CommonFieldProps) {
+}: FieldsetProps & CommonFieldsetProps) {
   const [legendId] = React.useState<string>(randomId());
   const [hintId] = React.useState<string>(randomId());
   const [errorId] = React.useState<string>(randomId());

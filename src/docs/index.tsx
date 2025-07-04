@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { ControlStates } from './ControlStates';
 import { DocsLink } from './DocsLink';
 import { FakeCanvas } from './FakeCanvas';
 import { FormControlPlaceholder } from './FormControlPlaceholder';
@@ -34,6 +35,7 @@ export default function Docs(props: React.ComponentProps<typeof DocsLink>) {
   return <DocsLink {...props} />;
 }
 
+Docs.ControlStates = ControlStates;
 Docs.DocsLink = DocsLink;
 Docs.FakeCanvas = FakeCanvas;
 Docs.FormControlPlaceholder = FormControlPlaceholder;
