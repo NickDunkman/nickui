@@ -1,0 +1,36 @@
+import{r as e}from"./iframe-CNIcN4QC.js";import{D as n}from"./index-DyQ04SzZ.js";import{C as r}from"./CheckedField-B5O60lpI.js";const y={title:"Field layouts/CheckedField",component:r},o={tags:["!dev","!test"],args:{children:e.createElement(n.FormControlPlaceholder,{tiny:!0}),label:"A label for the field",explainer:"An explanation about the field"}},a={args:{sizer:r.sizer.small,children:e.createElement(n.FormControlPlaceholder,{tiny:!0}),label:"Small label",explainer:"Small explanation"}},l={args:{sizer:r.sizer.medium,children:e.createElement(n.FormControlPlaceholder,{tiny:!0}),label:"Medium label",explainer:"Medium explanation"}},s={args:{sizer:r.sizer.large,children:e.createElement(n.FormControlPlaceholder,{tiny:!0}),label:"Large label",explainer:"Large explanation"}},t={tags:["!dev","!test"],render:P=>e.createElement("div",{className:"flex flex-col gap-5 sm:flex-row sm:items-baseline"},e.createElement(r,{...a.args,className:"sm:flex-1"}),e.createElement(r,{...l.args,className:"sm:flex-1"}),e.createElement(r,{...s.args,className:"sm:flex-1"}))};var i,c,m;o.parameters={...o.parameters,docs:{...(i=o.parameters)==null?void 0:i.docs,source:{originalSource:`{
+  tags: ['!dev', '!test'],
+  args: {
+    children: <Docs.FormControlPlaceholder tiny />,
+    label: 'A label for the field',
+    explainer: 'An explanation about the field'
+  }
+}`,...(m=(c=o.parameters)==null?void 0:c.docs)==null?void 0:m.source}}};var d,p,g;a.parameters={...a.parameters,docs:{...(d=a.parameters)==null?void 0:d.docs,source:{originalSource:`{
+  args: {
+    sizer: CheckedField.sizer.small,
+    children: <Docs.FormControlPlaceholder tiny />,
+    label: 'Small label',
+    explainer: 'Small explanation'
+  }
+}`,...(g=(p=a.parameters)==null?void 0:p.docs)==null?void 0:g.source}}};var u,x,h;l.parameters={...l.parameters,docs:{...(u=l.parameters)==null?void 0:u.docs,source:{originalSource:`{
+  args: {
+    sizer: CheckedField.sizer.medium,
+    children: <Docs.FormControlPlaceholder tiny />,
+    label: 'Medium label',
+    explainer: 'Medium explanation'
+  }
+}`,...(h=(x=l.parameters)==null?void 0:x.docs)==null?void 0:h.source}}};var f,b,S;s.parameters={...s.parameters,docs:{...(f=s.parameters)==null?void 0:f.docs,source:{originalSource:`{
+  args: {
+    sizer: CheckedField.sizer.large,
+    children: <Docs.FormControlPlaceholder tiny />,
+    label: 'Large label',
+    explainer: 'Large explanation'
+  }
+}`,...(S=(b=s.parameters)==null?void 0:b.docs)==null?void 0:S.source}}};var C,F,z;t.parameters={...t.parameters,docs:{...(C=t.parameters)==null?void 0:C.docs,source:{originalSource:`{
+  tags: ['!dev', '!test'],
+  render: _args => <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
+      <CheckedField {...Small.args} className="sm:flex-1" />
+      <CheckedField {...Medium.args} className="sm:flex-1" />
+      <CheckedField {...Large.args} className="sm:flex-1" />
+    </div>
+}`,...(z=(F=t.parameters)==null?void 0:F.docs)==null?void 0:z.source}}};const E=["Basic","Small","Medium","Large","AllSizes"],N=Object.freeze(Object.defineProperty({__proto__:null,AllSizes:t,Basic:o,Large:s,Medium:l,Small:a,__namedExportsOrder:E,default:y},Symbol.toStringTag,{value:"Module"}));export{o as B,N as S};
