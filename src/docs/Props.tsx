@@ -3,8 +3,7 @@ import * as React from 'react';
 
 import { StoriesModule } from '@/types';
 
-import { DocsLink } from './DocsLink';
-import { Name } from './Name';
+import { ComponentName } from './ComponentName';
 
 const commonFieldProps = ['label', 'explainer', 'hint', 'error', 'required'];
 
@@ -46,12 +45,12 @@ export function Props({
 
   return (
     <>
-      <Markdown options={{ overrides: { Name } }}>
+      <Markdown options={{ overrides: { ComponentName } }}>
         {`
 ## ${wrapper ? `${componentName}-specific p` : 'P'}rops
 
-In addition to some custom props, <Name of="${componentName}" /> takes all the
-props that can be used with
+In addition to some custom props, <ComponentName of="${componentName}" /> takes all
+the props that can be used with
 [HTML${ucFirst(nativeBase)}Element](https://react.dev/reference/react-dom/components/${allReactDocs.includes(nativeBase) ? nativeBase : 'common'}).
 Here are some of the most commonly used:
         `}
@@ -65,13 +64,13 @@ Here are some of the most commonly used:
 
       {wrapper && (
         <>
-          <Markdown options={{ overrides: { DocsLink, Name } }}>
+          <Markdown options={{ overrides: { ComponentName } }}>
             {`
 ## Standard ${wrapper} layout
 
-Instead of wrapping with a <DocsLink of="${wrapper}" /> manually, you can just
-pass these props directly to <Name of="${componentName}" />. Accessibility
-is handled for you.
+Instead of wrapping with a <ComponentName of="${wrapper}" /> manually, you can
+just pass these props directly to <ComponentName of="${componentName}" />.
+Accessibility is handled for you.
         `}
           </Markdown>
 

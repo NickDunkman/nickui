@@ -7,7 +7,7 @@ import * as Stories from './Textarea.stories';
 
 <Meta of={Stories} />
 
-# <Docs.Name of="Textarea" />
+# <Docs.ComponentName of="Textarea" />
 
 A form control that allows users to enter & edit a mass of text.
 
@@ -23,9 +23,9 @@ A form control that allows users to enter & edit a mass of text.
 ## Controlling the height
 
 Minimum vertical sizing of textareas is done via the `rows` prop (the default is
-2 rows). The <Docs.Name of="Textarea" /> will automatically grow up to the
-`maxRows` prop to accomodate the value (the default is 10 rows). For an
-unbounded height, you can use `maxRows={Infinity}`.
+2 rows). The <Docs of="Textarea" /> will automatically grow up to the `maxRows`
+prop to accomodate the value (the default is 10 rows). For an unbounded height,
+you can use `maxRows={Infinity}`.
 
 <Canvas of={Stories.AutoResizableHeight} sourceState="shown" />
 
@@ -33,7 +33,7 @@ For a fixed height, use the same value for `rows` and `maxRows`.
 
 <Canvas of={Stories.FixedHeight} sourceState="shown" />
 
-To prevent the user from being able to resize the <Docs.Name of="Textarea" />
+To prevent the user from being able to resize the <Docs of="Textarea" />
 manually, use the `disableManualResize` prop.
 
 <Canvas of={Stories.DisableManualResize} sourceState="shown" />

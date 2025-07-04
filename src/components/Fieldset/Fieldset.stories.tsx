@@ -22,6 +22,7 @@ export const Basic: Story = {
     ],
     label: 'A label for the fieldset',
     explainer: 'An explanation about the fieldset',
+    error: 'An error message',
     hint: 'A hint about the fieldset’s values',
   },
 };

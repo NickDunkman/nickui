@@ -1,11 +1,10 @@
 import * as React from 'react';
 
+import { ComponentName } from './ComponentName';
 import { ControlStates } from './ControlStates';
-import { DocsLink } from './DocsLink';
 import { FakeCanvas } from './FakeCanvas';
 import { FormControlPlaceholder } from './FormControlPlaceholder';
 import { FormikDemo } from './FormikDemo';
-import { Name } from './Name';
 import { PrettyPrint } from './PrettyPrint';
 import { Props } from './Props';
 import { ReactHookFormDemo } from './ReactHookFormDemo';
@@ -27,20 +26,21 @@ import { TableOfContents } from './TableOfContents';
  *
  * # My docs!
  *
- * Go to <Docs of="Button" />.  <- Docs itself is a shortcut to Docs.DocsLink!
+ * Go to <Docs of="Button" />.  <- Docs is a shortcut to Docs.ComponentName!
  *
  * <Docs.TableOfContents />
  */
-export default function Docs(props: React.ComponentProps<typeof DocsLink>) {
-  return <DocsLink {...props} />;
+export default function Docs(
+  props: React.ComponentProps<typeof ComponentName>,
+) {
+  return <ComponentName {...props} />;
 }
 
 Docs.ControlStates = ControlStates;
-Docs.DocsLink = DocsLink;
+Docs.ComponentName = ComponentName;
 Docs.FakeCanvas = FakeCanvas;
 Docs.FormControlPlaceholder = FormControlPlaceholder;
 Docs.FormikDemo = FormikDemo;
-Docs.Name = Name;
 Docs.PrettyPrint = PrettyPrint;
 Docs.Props = Props;
 Docs.ReactHookFormDemo = ReactHookFormDemo;

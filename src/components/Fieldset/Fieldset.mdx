@@ -1,4 +1,4 @@
-import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/docs';
 
@@ -9,7 +9,7 @@ import * as Stories from './Fieldset.stories';
 
 <Meta of={Stories} />
 
-# <Docs.Name of="Fieldset" />
+# <Docs.ComponentName of="Fieldset" />
 
 Wraps multiple form controls in a standard field layout (label, hint, error
 message, etc).
@@ -41,34 +41,16 @@ message, etc).
 </Docs.FakeCanvas>
 
 <Docs.TableOfContents />
-
-## Props
-
-In addition to the commonly used props below, you can pass any prop accepted by
-the [&lt;fieldset&gt;](htps://react.dev/reference/react-dom/components/common)
-element, which will be applied to the Field's root element.
-
-<ArgTypes of={Fieldset} sort="requiredFirst" />
+<Docs.Props of={Stories} nativeBase="fieldset" />
 
 ## Basic elements
 
-These elements are controlled using the `label`, `explainer`, and `hint` props.
+These elements are controlled using the `label`, `explainer`, `error`, and
+`hint` props.
 
 <Canvas of={Stories.Basic} sourceState="shown" />
 
-## Sizing
-
-Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
-In keeping with the mobile-first philosophy of Tailwind, the default size is
-"small".
-
-<Canvas of={Stories.AllSizes} />
-
-## Errors
-
-To add an error message, use the `error` prop.
-
-<Canvas of={Stories.Error} />
+<Docs.Sizing of={Stories} />
 
 ## Required fields
 

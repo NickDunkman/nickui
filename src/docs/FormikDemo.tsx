@@ -4,8 +4,8 @@ import * as React from 'react';
 
 import { StoriesModule } from '@/types';
 
+import { ComponentName } from './ComponentName';
 import { FakeCanvas } from './FakeCanvas';
-import { Name } from './Name';
 import { PrettyPrint } from './PrettyPrint';
 
 /**
@@ -50,11 +50,11 @@ export function FormikDemo({
 
   return (
     <>
-      <Markdown options={{ overrides: { Name } }}>
+      <Markdown options={{ overrides: { ComponentName } }}>
         {`
 ## Formik compatibility
 
-&nbsp;<Name of="${componentName}" /> implements all of the necessary
+&nbsp;<ComponentName of="${componentName}" /> implements all of the necessary
 props to be used as a [Formik field](https://formik.org/docs/api/field)!
         `}
       </Markdown>

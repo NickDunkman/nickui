@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 
 import { StoriesModule } from '@/types';
 
+import { ComponentName } from './ComponentName';
 import { FakeCanvas } from './FakeCanvas';
-import { Name } from './Name';
 import { PrettyPrint } from './PrettyPrint';
 
 /**
@@ -48,12 +48,12 @@ export function ReactHookFormDemo({
 
   return (
     <>
-      <Markdown options={{ overrides: { Name } }}>
+      <Markdown options={{ overrides: { ComponentName } }}>
         {`
 ## React Hook Form compatibility
 
-&nbsp;<Name of="${componentName}" /> implements all of the necessary props to be used
-with [React Hook Form](https://react-hook-form.com/)!
+&nbsp;<ComponentName of="${componentName}" /> implements all of the necessary
+props to be used with [React Hook Form](https://react-hook-form.com/)!
         `}
       </Markdown>
       <FakeCanvas>

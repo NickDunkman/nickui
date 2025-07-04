@@ -1,4 +1,4 @@
-import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/docs';
 
@@ -7,7 +7,7 @@ import * as Stories from './Field.stories';
 
 <Meta of={Stories} />
 
-# <Docs.Name of="Field" />
+# <Docs.ComponentName of="Field" />
 
 Wraps one form control in a standard field layout (label, hint, error message,
 etc).
@@ -31,34 +31,16 @@ etc).
 </Docs.FakeCanvas>
 
 <Docs.TableOfContents />
-
-## Props
-
-In addition to the commonly used props below, you can pass any prop accepted by
-the [&lt;div&gt;](htps://react.dev/reference/react-dom/components/common)
-element, which will be applied to the Field's root div.
-
-<ArgTypes of={Field} sort="requiredFirst" />
+<Docs.Props of={Stories} nativeBase="div" />
 
 ## Basic elements
 
-These elements are controlled using the `label`, `explainer`, and `hint` props.
+These elements are controlled using the `label`, `explainer`, `error`, and
+`hint` props.
 
 <Canvas of={Stories.Basic} sourceState="shown" />
 
-## Sizing
-
-Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
-In keeping with the mobile-first philosophy of Tailwind, the default size is
-"small".
-
-<Canvas of={Stories.AllSizes} />
-
-## Errors
-
-To add an error message, use the `error` prop.
-
-<Canvas of={Stories.Error} />
+<Docs.Sizing of={Stories} />
 
 ## Required fields
 

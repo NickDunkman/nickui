@@ -1,4 +1,4 @@
-import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/docs';
 
@@ -7,12 +7,12 @@ import * as Stories from './Switch.stories';
 
 <Meta of={Stories} />
 
-# <Docs.Name of="Switch" />
+# <Docs.ComponentName of="Switch" />
 
 A variation of <Docs of="Checkbox" /> that has a more explict-feeling "off"
-state. Whereas a group of co-located <Docs.Name of="Checkbox" /> feels more like
-multiple options for one field, a group of <Docs.Name of="Switch" /> feels more
-like discrete fields under a common category.
+state. Whereas a group of co-located <Docs of="Checkbox" /> feels more like
+multiple options for one field, a group of <Docs of="Switch" /> feels more like
+discrete fields under a common category.
 
 <Docs.FakeCanvas>
   <Switch sizer={Switch.sizer.medium} label="Switch me" />

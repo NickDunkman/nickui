@@ -19,8 +19,8 @@ export const Basic: Story = {
     children: <Docs.FormControlPlaceholder />,
     label: 'A label for the field',
     explainer: 'An explanation about the field',
+    error: 'An error message',
     hint: 'A hint about the field’s value',
-    controlId: 'basic-input',
   },
 };
 
@@ -66,16 +66,6 @@ export const AllSizes: Story = {
       <Field {...Large.args} className="sm:flex-1" />
     </div>
   ),
-};
-
-export const Error: Story = {
-  args: {
-    children: <Docs.FormControlPlaceholder />,
-    label: 'Phone number',
-    error: 'That is not a valid phone number',
-    errorId: 'error-message-id',
-    controlId: 'input-with-error',
-  },
 };
 
 export const Required: Story = {

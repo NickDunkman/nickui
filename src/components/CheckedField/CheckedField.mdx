@@ -1,4 +1,4 @@
-import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/docs';
 
@@ -7,7 +7,7 @@ import * as Stories from './CheckedField.stories';
 
 <Meta of={Stories} />
 
-# <Docs.Name of="CheckedField" />
+# <Docs.ComponentName of="CheckedField" />
 
 Wraps a single checkable form control with a standard layout (label & explainer,
 to the right of the control).
@@ -34,14 +34,7 @@ purpose.
 </Docs.FakeCanvas>
 
 <Docs.TableOfContents />
-
-## Props
-
-In addition to the commonly used props below, you can pass any prop accepted by
-the [&lt;div&gt;](htps://react.dev/reference/react-dom/components/common)
-element, which will be applied to the CheckedField's root div.
-
-<ArgTypes of={CheckedField} sort="requiredFirst" />
+<Docs.Props of={Stories} nativeBase="label" />
 
 ## Basic elements
 
@@ -49,10 +42,4 @@ These elements are controlled using the `label`, `explainer`, and `hint` props.
 
 <Canvas of={Stories.Basic} sourceState="shown" />
 
-## Sizing
-
-Sizing is done via the `sizer` prop. You can pass "small", "medium", or "large".
-In keeping with the mobile-first philosophy of Tailwind, the default size is
-"small".
-
-<Canvas of={Stories.AllSizes} />
+<Docs.Sizing of={Stories} />
