@@ -17,5 +17,6 @@ const config: StorybookConfig = {
     ...config,
     plugins: [...(config.plugins || []), tsconfigPaths()],
   }),
+  staticDirs: ['./assets'],
 };
 export default config;

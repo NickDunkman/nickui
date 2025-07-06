@@ -5,13 +5,12 @@ import { useForm } from 'react-hook-form';
 import { StoriesModule } from '@/types';
 
 import { ComponentName } from './ComponentName';
-import { FakeCanvas } from './FakeCanvas';
-import { PrettyPrint } from './PrettyPrint';
+import { FauxCanvas } from './FauxCanvas';
 
 /**
  * Helper for easily demonstrating RHF compatibility within a component's
  * docs. Shows the working component + realtime-updating RHF context within
- * a FakeCanvas, and then a code snippet which shows how to integrate RHF
+ * a FauxCanvas, and then a code snippet which shows how to integrate RHF
  * into the component.
  */
 export function ReactHookFormDemo({
@@ -56,7 +55,19 @@ export function ReactHookFormDemo({
 props to be used with [React Hook Form](https://react-hook-form.com/)!
         `}
       </Markdown>
-      <FakeCanvas>
+      <FauxCanvas
+        prettyPrint={{
+          title: 'React Hook Form context',
+          data: {
+            defaultValues,
+            dirtyFields,
+            isDirty,
+            isValid,
+            touchedFields,
+            watch: watch(),
+          },
+        }}
+      >
         <Component
           {...register(fieldName, {
             validate: !addValidation
@@ -66,19 +77,7 @@ props to be used with [React Hook Form](https://react-hook-form.com/)!
           error={errors[fieldName]?.message}
           {...componentProps}
         />
-        <PrettyPrint
-          data={{
-            defaultValues,
-            dirtyFields,
-            isDirty,
-            isValid,
-            touchedFields,
-            watch: watch(),
-          }}
-          title="React Hook Form context"
-          className="mt-6"
-        />
-      </FakeCanvas>
+      </FauxCanvas>
       <Source
         dark
         language="tsx"

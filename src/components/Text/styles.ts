@@ -7,6 +7,7 @@ export const styles = tv({
   base: `
     w-full
     border-2 rounded-sm
+    bg-white
     placeholder:opacity-100 placeholder:text-gray-400
     focus:border-indigo-800 focus:shadow-[0_0_11px] focus:shadow-indigo-300 focus:outline-0 
     disabled:bg-gray-100 disabled:border-gray-300 disabled:text-gray-400 disabled:placeholder:text-gray-300 disabled:cursor-not-allowed disabled:opacity-100

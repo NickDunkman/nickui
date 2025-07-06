@@ -1,0 +1,23 @@
+<style type="text/css">
+  /* Add checkered-background to docs canvases to show how components control the background */
+
+  .docs-story,
+  .docs-faux-canvas {
+    position: relative;
+    z-index: 1;
+  }
+
+  .docs-story:before,
+  .docs-faux-canvas:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background: url('/transparency-checker.png');
+    background-size: 30px 30px;
+    opacity: 0.025;
+  }
+</style>

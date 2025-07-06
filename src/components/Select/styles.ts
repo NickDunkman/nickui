@@ -15,6 +15,7 @@ export const styles = tv({
       appearance-none
       w-full
       border-2 rounded-sm
+      bg-white
       focus:border-indigo-800 focus:shadow-[0_0_11px] focus:shadow-indigo-300 focus:outline-0 
       disabled:bg-gray-100 disabled:border-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed disabled:opacity-100
     `,

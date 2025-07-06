@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { ComponentName } from './ComponentName';
 import { ControlStates } from './ControlStates';
-import { FakeCanvas } from './FakeCanvas';
+import { FauxCanvas } from './FauxCanvas';
 import { FormControlPlaceholder } from './FormControlPlaceholder';
 import { FormikDemo } from './FormikDemo';
 import { PrettyPrint } from './PrettyPrint';
@@ -38,7 +38,7 @@ export default function Docs(
 
 Docs.ControlStates = ControlStates;
 Docs.ComponentName = ComponentName;
-Docs.FakeCanvas = FakeCanvas;
+Docs.FauxCanvas = FauxCanvas;
 Docs.FormControlPlaceholder = FormControlPlaceholder;
 Docs.FormikDemo = FormikDemo;
 Docs.PrettyPrint = PrettyPrint;
