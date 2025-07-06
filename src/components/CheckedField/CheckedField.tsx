@@ -39,22 +39,24 @@ export function CheckedField({
 
   return (
     <label {...labelProps} className={clsw(s.root(), className)}>
-      <div className={s.control()} ref={controlRef}>
-        {formControl}
-      </div>
-      {/*
+      <div className={s.contentRoot()}>
+        <div className={s.control()} ref={controlRef}>
+          {formControl}
+        </div>
+        {/*
         This empty element exists to create an extra flex-gap between the
         absolutely-positioned control & the label. It contains a zero-width
         character so that it doesn’t affect vertical alignment, such as when
         the field is inside a `flex items-baseline` parent.
       */}
-      <span style={{ paddingLeft: controlBounds?.width || 0 }}>&#8203;</span>
-      {(label || explainer) && (
-        <div className={s.labelese()}>
-          {label && <div className={s.label()}>{label}</div>}
-          {explainer && <div className={s.explainer()}>{explainer}</div>}
-        </div>
-      )}
+        <span style={{ paddingLeft: controlBounds?.width || 0 }}>&#8203;</span>
+        {(label || explainer) && (
+          <div className={s.labelese()}>
+            {label && <div className={s.label()}>{label}</div>}
+            {explainer && <div className={s.explainer()}>{explainer}</div>}
+          </div>
+        )}
+      </div>
     </label>
   );
 }

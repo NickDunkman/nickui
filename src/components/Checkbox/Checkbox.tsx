@@ -100,10 +100,15 @@ export function Checkable({
     isFocused: isFocused && !disabled && !isClicked,
   });
 
+  const labelWithOffset =
+    label || explainer ? (
+      <div className={s.labelWithOffset()}>{label}</div>
+    ) : null;
+
   return (
     <CheckedField
       className={clsw(s.root(), className)}
-      label={label}
+      label={labelWithOffset}
       explainer={explainer}
       sizer={sizer}
       disabled={disabled}

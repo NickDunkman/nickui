@@ -56,24 +56,22 @@ can pass a `render` function instead of using `options`.
   code={`
     <Checkboxes
       label="How custom do you like it?"
-      defaultValue="pretty"
+      defaultValue="colorful,embiggened"
       render={(checkbox) => (
-        <div className="flex flex-row items-baseline gap-x-4">
-          <Checkbox {...checkbox({ value: 'kinda' })} label="A little custom" />
-          <span className="text-xs text-gray-500">or</span>
+        <div className="flex flex-row items-baseline gap-x-6">
           <Checkbox
-            {...checkbox({ value: 'pretty' })}>
-            label={
-              <div className="font-bold text-blue-500">Pretty custom</div>
-            }
+            {...checkbox({ value: 'colorful' })}
+            label={<span className="text-blue-500 font-bold">Colorful</span>}
+            className="rounded-sm bg-rose-200 p-2"
           />
-          <span className="text-xs text-gray-500">or</span>
           <Checkbox
-            {...checkbox({ value: 'too', disabled: true })}
-            className="-rotate-30"
+            {...checkbox({ value: 'embiggened' })}
             sizer={Checkbox.sizer.large}
-            label="Too custom"
+            label="Embiggened"
           />
+          <div>
+            <input type="checkbox" {...checkbox({ value: 'native' })} /> Native
+          </div>
         </div>
       )}
     />
@@ -116,19 +114,23 @@ example:
 
 <Docs.ReactHookFormDemo
   of={Stories}
-  fieldName="fullNameRHF"
-  initialValue="nick,dunkman"
+  fieldName="courseFeatures"
+  initialValue="pot-bunkers,undulated-greens"
   componentProps={{
-    label: 'Full name',
+    label: 'Course features',
     hint: 'Try editting me!',
     options: [
       {
-        value: 'nick',
-        label: 'Nick',
+        value: 'pot-bunkers',
+        label: 'Pot bunkers',
       },
       {
-        value: 'dunkman',
-        label: 'Dunkman',
+        value: 'water',
+        label: 'Water hazards',
+      },
+      {
+        value: 'undulated-greens',
+        label: 'Undulated greens',
       },
     ],
   }}
@@ -136,19 +138,23 @@ example:
 
 <Docs.FormikDemo
   of={Stories}
-  fieldName="fullNameFormik"
-  initialValue="nick,dunkman"
+  fieldName="courseFeatures"
+  initialValue="pot-bunkers,undulated-greens"
   componentProps={{
-    label: 'Full name',
+    label: 'Course features',
     hint: 'Try editting me!',
     options: [
       {
-        value: 'nick',
-        label: 'Nick',
+        value: 'pot-bunkers',
+        label: 'Pot bunkers',
       },
       {
-        value: 'dunkman',
-        label: 'Dunkman',
+        value: 'water',
+        label: 'Water hazards',
+      },
+      {
+        value: 'undulated-greens',
+        label: 'Undulated greens',
       },
     ],
   }}

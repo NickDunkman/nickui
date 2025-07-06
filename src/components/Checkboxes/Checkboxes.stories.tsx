@@ -35,7 +35,7 @@ export const FieldsetLayout: Story = {
 
 export const StandardLayout: Story = {
   args: {
-    label: 'Please select a standard',
+    label: 'Please select some standards',
     defaultValue: '8601',
     options: [
       {
@@ -57,25 +57,23 @@ export const StandardLayout: Story = {
 
 export const CustomLayout: Story = {
   args: {
-    label: 'How custom do you like it?',
-    defaultValue: 'pretty',
+    label: 'Please select some customizations',
+    defaultValue: 'colorful,embiggened',
     render: (checkbox) => (
-      <div className="flex flex-row items-baseline gap-x-4">
-        <Checkbox {...checkbox({ value: 'kinda' })} label="A little custom" />
-        <span className="text-xs text-gray-500">or</span>
+      <div className="flex flex-row items-baseline gap-x-6">
         <Checkbox
-          {...checkbox({ value: 'pretty' })}
-          label={
-            <div className="font-bold text-blue-500">Pretty custom 👨‍🎨</div>
-          }
+          {...checkbox({ value: 'colorful' })}
+          label={<span className="font-bold text-blue-500">Colorful</span>}
+          className="rounded-sm bg-rose-200 p-2"
         />
-        <span className="text-xs text-gray-500">or</span>
         <Checkbox
-          {...checkbox({ value: 'too', disabled: true })}
-          className="-rotate-30"
+          {...checkbox({ value: 'embiggened' })}
           sizer={Checkbox.sizer.large}
-          label="Too custom"
+          label="Embiggened"
         />
+        <div>
+          <input type="checkbox" {...checkbox({ value: 'native' })} /> Native
+        </div>
       </div>
     ),
   },
@@ -138,10 +136,10 @@ export const Large: Story = {
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-x-12 gap-y-8 md:flex-row">
-      <Checkboxes {...Small.args} />
-      <Checkboxes {...Medium.args} />
-      <Checkboxes {...Large.args} />
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+      <Checkboxes {...Small.args} className="sm:flex-1" />
+      <Checkboxes {...Medium.args} className="sm:flex-1" />
+      <Checkboxes {...Large.args} className="sm:flex-1" />
     </div>
   ),
 };

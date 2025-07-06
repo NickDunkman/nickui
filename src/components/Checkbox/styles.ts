@@ -9,6 +9,7 @@ const checkedBg = `peer-checked:bg-[url("data:image/svg+xml;charset=utf8,%3Csvg%
 export const styles = tv({
   slots: {
     root: '',
+    labelWithOffset: '',
     input: 'peer opacity-0 absolute -z-1',
     indicator: `
       relative

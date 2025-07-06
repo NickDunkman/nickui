@@ -5,7 +5,8 @@ import { FieldSizer } from '@/constants';
 /** tailwind-variants styles for the Switch component */
 export const styles = tv({
   slots: {
-    root: 'pt-0.5',
+    root: '',
+    labelWithOffset: 'pt-0.5',
     input: 'peer opacity-0 absolute -z-1',
     indicator: `
       relative rounded-l-full rounded-r-full bg-gray-300
