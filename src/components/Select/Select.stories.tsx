@@ -11,6 +11,18 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const FieldLayout: Story = {
+  tags: ['!dev', '!test'],
+  args: {
+    required: true,
+    label: 'A label',
+    explainer: 'An explainer',
+    error: 'An error message',
+    hint: 'A hint',
+    children: <option>An option</option>,
+  },
+};
+
 export const Controlled: Story = {
   args: {
     value: 'controlled',
@@ -59,16 +71,6 @@ export const AllControlStates: Story = {
       <Select {...Disabled.args} />
     </div>
   ),
-};
-
-export const FieldLayout: Story = {
-  args: {
-    label: 'A label',
-    explainer: 'An explainer',
-    error: 'An error message',
-    hint: 'A hint',
-    children: <option>An option</option>,
-  },
 };
 
 export const Small: Story = {

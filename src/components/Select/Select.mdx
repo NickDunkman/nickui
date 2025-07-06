@@ -27,38 +27,58 @@ A form control that allows users to choose an option using a menu.
 
 <Docs.ReactHookFormDemo
   of={Stories}
-  fieldName="firstName"
-  initialValue="nick"
+  fieldName="format"
+  initialValue="scramble"
   componentProps={{
-    label: 'First name',
+    label: 'Select a format',
     hint: 'Try editting me!',
     sizer: Select.sizer.medium,
     children: [
-      <option value="nick" key="nick">
-        Nick
-      </option>,
-      <option value="dunkman" key="dunkman">
-        Dunkman
-      </option>,
-    ],
+      'Chapman',
+      'Foursomes',
+      'Match play',
+      'Scramble',
+      'Shamble',
+      'Sixes',
+      'Skins',
+      'Stroke',
+      'Two ball',
+      'Vegas',
+      'Wolf',
+      'Worst ball',
+    ].map((name) => (
+      <option value={name.toLowerCase().replace(/\W+/g, '-')} key={name}>
+        {name}
+      </option>
+    )),
   }}
 />
 
 <Docs.FormikDemo
   of={Stories}
-  fieldName="firstName"
-  initialValue="nick"
+  fieldName="format"
+  initialValue="scramble"
   componentProps={{
-    label: 'First name',
+    label: 'Select a format',
     hint: 'Try editting me!',
     sizer: Select.sizer.medium,
     children: [
-      <option value="nick" key="nick">
-        Nick
-      </option>,
-      <option value="dunkman" key="dunkman">
-        Dunkman
-      </option>,
-    ],
+      'Chapman',
+      'Foursomes',
+      'Match play',
+      'Scramble',
+      'Shamble',
+      'Sixes',
+      'Skins',
+      'Stroke',
+      'Two ball',
+      'Vegas',
+      'Wolf',
+      'Worst ball',
+    ].map((name) => (
+      <option value={name.toLowerCase().replace(/\W+/g, '-')} key={name}>
+        {name}
+      </option>
+    )),
   }}
 />
