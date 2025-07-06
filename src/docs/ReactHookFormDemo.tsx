@@ -17,14 +17,23 @@ export function ReactHookFormDemo({
   of,
   fieldName,
   initialValue,
+  checkbox,
+  radioWithValue,
   componentProps,
 }: {
   of: StoriesModule;
   fieldName: string;
   initialValue?: string | boolean;
+  checkbox?: boolean;
+  radioWithValue?: string;
   componentProps: object;
 }) {
-  const addValidation = initialValue && typeof initialValue !== 'boolean';
+  const addValidation = !checkbox && !radioWithValue;
+  const theInitialValue = checkbox ? !!initialValue : (initialValue ?? '');
+  const theInitialValueDisplay =
+    typeof theInitialValue === 'boolean'
+      ? theInitialValue.toString()
+      : `'${theInitialValue}'`;
 
   const {
     register,
@@ -39,7 +48,7 @@ export function ReactHookFormDemo({
     },
   } = useForm({
     mode: 'all',
-    defaultValues: { [fieldName]: initialValue },
+    defaultValues: { [fieldName]: theInitialValue },
   });
 
   const Component = of.default.component;
@@ -72,7 +81,8 @@ props to be used with [React Hook Form](https://react-hook-form.com/)!
           {...register(fieldName, {
             validate: !addValidation
               ? undefined
-              : (value) => value === initialValue || 'Heyyyy, change that back',
+              : (value) =>
+                  value === theInitialValue || 'Heyyyy, change that back',
           })}
           error={errors[fieldName]?.message}
           {...componentProps}
@@ -86,7 +96,7 @@ import { useForm } from 'react-hook-form';
 
 const form = useForm<{ ${fieldName}: string }>({
   mode: 'all',
-  defaultValues: { ${fieldName}: '${initialValue}' },
+  defaultValues: { ${fieldName}: ${theInitialValueDisplay} },
 });
 
 return (
@@ -94,10 +104,15 @@ return (
     addValidation
       ? `
     {...register('${fieldName}', {
-      validate: (value) => value === '${initialValue}' || 'Heyyy, change that back', 
+      validate: (value) => value === ${theInitialValueDisplay} || 'Heyyy, change that back', 
     })}`
       : `
     {...register('${fieldName}')}`
+  }${
+    radioWithValue
+      ? `
+    value="${radioWithValue}"`
+      : ''
   }
     error={errors.${fieldName}?.message}
     // ...

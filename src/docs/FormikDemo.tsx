@@ -29,16 +29,21 @@ export function FormikDemo({
   componentProps?: object;
 }) {
   const addValidation = !checkbox && !radioWithValue;
+  const theInitialValue = checkbox ? !!initialValue : (initialValue ?? '');
+  const theInitialValueDisplay =
+    typeof theInitialValue === 'boolean'
+      ? theInitialValue.toString()
+      : `'${theInitialValue}'`;
 
   const form = useFormik({
     initialValues: {
-      [fieldName]: initialValue ?? '',
+      [fieldName]: theInitialValue,
     },
     onSubmit: () => {},
     validate: !addValidation
       ? undefined
       : (values) => {
-          if (values[fieldName] !== initialValue) {
+          if (values[fieldName] !== theInitialValue) {
             return { [fieldName]: 'Heyyyy, change that back' };
           }
         },
@@ -77,13 +82,13 @@ props to be used as a [Formik field](https://formik.org/docs/api/field)!
 import { useFormik } from 'formik';
 
 const form = useFormik({
-  initialValues: { ${fieldName}: ${typeof initialValue === 'boolean' ? initialValue : `'${initialValue}'`} },
+  initialValues: { ${fieldName}: ${theInitialValueDisplay} },
   onSubmit: () => {},${
     !addValidation
       ? ''
       : `
   validate: (values) => {
-    if (values.${fieldName} !== '${initialValue}') {
+    if (values.${fieldName} !== ${theInitialValueDisplay}) {
       return { ${fieldName}: 'Heyyyy, change that back' };
     }
   },`
@@ -91,8 +96,26 @@ const form = useFormik({
 });
 
 return (
-  <${componentName}
-    {...form.getFieldProps({ name: '${fieldName}'${checkbox ? ", type: 'checkbox'" : radioWithValue ? ", type: 'radio'" : ''})}
+  <${componentName}${
+    !checkbox && !radioWithValue
+      ? `
+    {...form.getFieldProps('${fieldName}')}`
+      : `
+    {...form.getFieldProps({
+      name: '${fieldName}',${
+        checkbox
+          ? `
+      type: 'checkbox',`
+          : ''
+      }${
+        radioWithValue
+          ? `
+      type: 'radio',
+      value: '${radioWithValue}',`
+          : ''
+      }
+    )}`
+  }
     error={form.errors.${fieldName}}
     // ...
   />
