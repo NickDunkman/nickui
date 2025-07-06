@@ -35,6 +35,7 @@ export const FieldsetLayout: Story = {
 
 export const StandardLayout: Story = {
   args: {
+    name: 'standard',
     label: 'Please select a standard',
     defaultValue: '8601',
     options: [
@@ -57,16 +58,22 @@ export const StandardLayout: Story = {
 
 export const CustomLayout: Story = {
   args: {
+    name: 'how-custom',
     label: 'How custom do you like it?',
-    defaultValue: 'pretty',
+    defaultValue: 'nice-and-custom',
     render: (radio) => (
-      <div className="flex flex-row items-baseline gap-x-4">
-        <Radio {...radio({ value: 'kinda' })} label="A little custom" />
+      <div className="flex items-baseline gap-4">
+        <Radio {...radio({ value: 'plain' })} label="Just plain" />
         <span className="text-xs text-gray-500">or</span>
         <Radio
-          {...radio({ value: 'pretty' })}
+          {...radio({ value: 'nice-and-custom' })}
+          sizer={Radio.sizer.medium}
           label={
-            <div className="font-bold text-blue-500">Pretty custom 👨‍🎨</div>
+            <div className="font-bold">
+              👨‍🎨 <span className="text-blue-500">Nice</span>{' '}
+              <span className="text-green-600">and</span>{' '}
+              <span className="text-rose-500">custom</span>
+            </div>
           }
         />
         <span className="text-xs text-gray-500">or</span>

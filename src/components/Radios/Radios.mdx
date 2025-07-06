@@ -37,18 +37,18 @@ import * as Stories from './Radios.stories';
 
 ## Adding radios
 
-In most situations, you can just use the `options` prop to configure the
-individual radios. The Radios component will manage the interior layout.
+For the standard look & feel, use the `options` prop to configure the individual
+radios. <Docs of="Radios" /> will manage the interior layout.
 
 <Canvas of={Stories.StandardLayout} sourceState="shown" />
 
-For more fine-grained control of the individual radios, such as to add
-additional elements, or take control of the individual Radio props, you can pass
-a render function as the `children`.
+To customize the radio controls, such as to use a different component for the
+individual radios, call the props differently, or add other elements, you can
+pass a `render` function instead of using `options`.
 
 <strong>
-  As shown, it’s important to use the callback provided to pass props down to
-  the individual radios, so that group is functional.
+  As shown, it’s important to use the props callback provided for the field to
+  behave properly.
 </strong>
 
 <Canvas of={Stories.CustomLayout} sourceState="none" />
@@ -58,16 +58,22 @@ a render function as the `children`.
   language="tsx"
   code={`
     <Radios
+      name="how-custom"
       label="How custom do you like it?"
-      defaultValue="pretty"
+      defaultValue="nice-and-custom"
       render={(radio) => (
-        <div className="flex flex-row items-baseline gap-x-4">
-          <Radio {...radio({ value: 'kinda' })} label="A little custom" />
+        <div className="flex items-baseline gap-4">
+          <Radio {...radio({ value: 'plain' })} label="Just plain" />
           <span className="text-xs text-gray-500">or</span>
           <Radio
-            {...radio({ value: 'pretty' })}>
+            {...radio({ value: 'nice-and-custom' })}
+            sizer={Radio.sizer.medium}
             label={
-              <div className="font-bold text-blue-500">Pretty custom</div>
+              <div className="font-bold">
+                👨‍🎨 <span className="text-blue-500">Nice</span>{' '}
+                <span className="text-green-600">and</span>{' '}
+                <span className="text-rose-500">custom</span>
+              </div>
             }
           />
           <span className="text-xs text-gray-500">or</span>
@@ -87,19 +93,25 @@ a render function as the `children`.
 
 <Docs.ReactHookFormDemo
   of={Stories}
-  fieldName="firstNameRHF"
-  initialValue="nick"
+  fieldName="pinPositionRHF"
+  initialValue="front"
   componentProps={{
-    label: 'First name',
+    sizer: Radios.sizer.medium,
+    label: 'Today’s pin positioning',
+    explainer: 'Starting from the first hole',
     hint: 'Try editting me!',
     options: [
       {
-        value: 'nick',
-        label: 'Nick',
+        value: 'front',
+        label: 'front, middle, back',
       },
       {
-        value: 'dunkman',
-        label: 'Dunkman',
+        value: 'middle',
+        label: 'middle, back, front',
+      },
+      {
+        value: 'back',
+        label: 'back, front, middle',
       },
     ],
   }}
@@ -107,19 +119,25 @@ a render function as the `children`.
 
 <Docs.FormikDemo
   of={Stories}
-  fieldName="firstNameFormik"
-  initialValue="nick"
+  fieldName="pinPositionFormik"
+  initialValue="front"
   componentProps={{
-    label: 'First name',
+    sizer: Radios.sizer.medium,
+    label: 'Today’s pin positioning',
+    explainer: 'Starting from the first hole',
     hint: 'Try editting me!',
     options: [
       {
-        value: 'nick',
-        label: 'Nick',
+        value: 'front',
+        label: 'front, middle, back',
       },
       {
-        value: 'dunkman',
-        label: 'Dunkman',
+        value: 'middle',
+        label: 'middle, back, front',
+      },
+      {
+        value: 'back',
+        label: 'back, front, middle',
       },
     ],
   }}
