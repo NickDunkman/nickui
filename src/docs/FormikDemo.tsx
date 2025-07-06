@@ -58,7 +58,7 @@ props to be used as a [Formik field](https://formik.org/docs/api/field)!
         `}
       </Markdown>
 
-      <FauxCanvas prettyPrint={{ data: form, title: 'Formik context' }}>
+      <FauxCanvas meta={{ data: form, title: 'Formik context' }}>
         <Component
           {...form.getFieldProps({
             name: fieldName,

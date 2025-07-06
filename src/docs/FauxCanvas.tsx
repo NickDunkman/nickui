@@ -11,10 +11,10 @@ import { PrettyPrint } from './PrettyPrint';
  */
 export function FauxCanvas({
   children,
-  prettyPrint,
+  meta,
 }: {
   children?: React.ReactNode;
-  prettyPrint?: React.ComponentProps<typeof PrettyPrint>;
+  meta?: React.ComponentProps<typeof PrettyPrint>;
 }) {
   // The checkered background is added in /.storybook/preview-head.html
   return (
@@ -25,7 +25,7 @@ export function FauxCanvas({
           border: '1px solid rgba(38, 85, 115, 0.15)',
           borderRadius: 4,
           padding: 32,
-          ...(prettyPrint
+          ...(meta
             ? {
                 borderRadius: '4px 4px 0 0',
                 borderBottom: 0,
@@ -35,10 +35,10 @@ export function FauxCanvas({
       >
         {children}
       </div>
-      {prettyPrint && (
+      {meta && (
         <PrettyPrint
-          {...prettyPrint}
-          className={clsw('rounded-t-none', prettyPrint.className)}
+          {...meta}
+          className={clsw('rounded-t-none', meta.className)}
         />
       )}
     </div>

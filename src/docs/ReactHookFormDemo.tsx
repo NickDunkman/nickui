@@ -56,7 +56,7 @@ props to be used with [React Hook Form](https://react-hook-form.com/)!
         `}
       </Markdown>
       <FauxCanvas
-        prettyPrint={{
+        meta={{
           title: 'React Hook Form context',
           data: {
             defaultValues,
