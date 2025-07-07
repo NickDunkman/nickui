@@ -25,6 +25,17 @@ function withMetaHint(
   };
 }
 
+export const FieldLayout: Story = {
+  tags: ['!dev', '!test'],
+  args: {
+    label: 'A label',
+    explainer: 'An explainer',
+    error: 'An error message',
+    hint: 'A hint',
+    defaultValue: '50',
+  },
+};
+
 export const NoValue: Story = {
   args: withMetaHint('Slider with no valueish prop'),
 };
@@ -71,16 +82,6 @@ export const CustomRange: Story = {
     step: 0.01,
     shiftSteps: 500,
     ...withMetaHint('Slider with custom range'),
-  },
-};
-
-export const FieldLayout: Story = {
-  args: {
-    label: 'A label',
-    explainer: 'An explainer',
-    error: 'An error message',
-    hint: 'A hint',
-    defaultValue: '50',
   },
 };
 
