@@ -33,7 +33,7 @@ export function FormikDemo({
   const theInitialValueDisplay =
     typeof theInitialValue === 'boolean'
       ? theInitialValue.toString()
-      : `'${theInitialValue}'`;
+      : `'${theInitialValue.replace(/[\n]/g, '\\n')}'`;
 
   const form = useFormik({
     initialValues: {

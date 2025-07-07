@@ -66,6 +66,7 @@ export function Textarea({
   // The rest are brought in from <textarea>
   ...otherTextareaProps
 }: TextareaProps & CommonFieldProps) {
+  const containerRef = React.createRef<HTMLDivElement>();
   const hiddenTextarea = React.useRef<HTMLTextAreaElement>(null);
   const [autoHeight, setAutoHeight] = React.useState<number>(0);
 
@@ -114,6 +115,22 @@ export function Textarea({
     }
   }, [value, rows, maxRows, autoHeight]);
 
+  // React Hook Form sets the inital field value by using the `ref` prop to
+  // programmatically set the `value` on the textarea. So when the caller isn't
+  // using the `value` or `defaultValue` props, we should inspect the textarea,
+  // and if something has magically set its value, use that as the defaultValue
+  // for this component -- allowing the textarea to set its initial auto height.
+  React.useLayoutEffect(() => {
+    if (controlledValue === undefined && defaultValue === undefined) {
+      const interativeTextarea = getInteractiveTextarea(containerRef);
+      if (interativeTextarea.value) {
+        setUncontrolledValue(interativeTextarea.value);
+      }
+    }
+    // We only want to run this effect once after mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const [uncontrolledId] = React.useState(randomId());
   const id = controlledId || (label ? uncontrolledId : undefined);
 
@@ -145,7 +162,7 @@ export function Textarea({
       disabled={disabled}
       required={required}
     >
-      <div className={s.root()}>
+      <div ref={containerRef} className={s.root()}>
         {/*
           This <textarea> is hidden & used to calculate how tall the other
           textarea should be if it wants to make the value fully visible.
@@ -181,4 +198,12 @@ Textarea.sizer = FieldSizer;
 /** Converts a px string to a number (e.g. "20px" -> 20) */
 function noPx(px: string): number {
   return Number(px.slice(0, -2));
+}
+
+function getInteractiveTextarea(
+  container: React.RefObject<HTMLElement | null>,
+) {
+  return [
+    ...(container.current?.getElementsByTagName('textarea') || []),
+  ][1] as HTMLTextAreaElement;
 }
