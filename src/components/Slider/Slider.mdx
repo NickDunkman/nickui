@@ -39,20 +39,28 @@ keyboard to interact with the <Docs of="Slider" />.
 
 <Docs.ReactHookFormDemo
   of={Stories}
-  fieldName="favoriteNumber"
-  initialValue="20"
+  fieldName="index"
+  initialValue="8.9"
   componentProps={{
-    label: 'Favorite number',
-    hint: 'Try editting me!',
+    label: 'Handicap index',
+    hint: ({ value }) =>
+      value === 0 ? 'scratch' : value < 0 ? `+${value * -1}` : value,
+    min: -11.1,
+    max: 54,
+    step: 0.1,
   }}
 />
 
 <Docs.FormikDemo
   of={Stories}
-  fieldName="favoriteNumber"
-  initialValue="20"
+  fieldName="index"
+  initialValue="8.9"
   componentProps={{
-    label: 'Favorite number',
-    hint: 'Try editting me!',
+    label: 'Handicap index',
+    hint: ({ value }) =>
+      value === 0 ? 'scratch' : value < 0 ? `+${value * -1}` : value,
+    min: -11.1,
+    max: 54,
+    step: 0.1,
   }}
 />

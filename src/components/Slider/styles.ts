@@ -22,7 +22,7 @@ export const styles = tv({
   variants: {
     sizer: {
       [FieldSizer.small]: {
-        root: 'h-5 my-2', // same aggregate height as small Text
+        root: 'h-5', // same aggregate height as small Text
         track: `
           h-1 left-2.5 right-2.5
           before:w-2.5 before:-left-2.5 
@@ -31,7 +31,7 @@ export const styles = tv({
         thumb: 'size-5',
       },
       [FieldSizer.medium]: {
-        root: 'h-6 my-3', // same aggregate height as medium Text
+        root: 'h-6', // same aggregate height as medium Text
         track: `
           h-1.5 left-3 right-3
           before:w-3 before:-left-3
@@ -40,7 +40,7 @@ export const styles = tv({
         thumb: 'size-6',
       },
       [FieldSizer.large]: {
-        root: 'h-7 my-4', // same aggregate height as large Text
+        root: 'h-7', // same aggregate height as large Text
         track: `
           h-2 left-3.5 right-3.5
           before:w-3.5 before:-left-3.5
@@ -72,6 +72,8 @@ export const styles = tv({
         thumb: 'border-rose-800',
       },
     },
+    hasFieldHeader: { true: {} },
+    hasFieldFooter: { true: {} },
     // When the thumb is all the way to the right or left, hide the
     // corresponding end-piece of the track so that it doesn't peak out from
     // under the curvature of the thumb. It's only half the width of the thumb,
@@ -86,6 +88,36 @@ export const styles = tv({
       className: {
         thumb: 'after:bg-rose-800',
       },
+    },
+    {
+      hasFieldHeader: true,
+      sizer: FieldSizer.small,
+      className: { root: 'mt-2' },
+    },
+    {
+      hasFieldHeader: true,
+      sizer: FieldSizer.medium,
+      className: { root: 'mt-3' },
+    },
+    {
+      hasFieldHeader: true,
+      sizer: FieldSizer.large,
+      className: { root: 'mt-4' },
+    },
+    {
+      hasFieldFooter: true,
+      sizer: FieldSizer.small,
+      className: { root: 'mb-2' },
+    },
+    {
+      hasFieldFooter: true,
+      sizer: FieldSizer.medium,
+      className: { root: 'mb-3' },
+    },
+    {
+      hasFieldFooter: true,
+      sizer: FieldSizer.large,
+      className: { root: 'mb-4' },
     },
   ],
   defaultVariants: {

@@ -14,24 +14,22 @@ function valueToRangePercentage(value: number, min: number, max: number) {
   return percentage * 100;
 }
 
+type SliderFieldDescriptor =
+  | React.ReactNode
+  | ((state: {
+      value: number;
+      min: number;
+      max: number;
+      step: number;
+    }) => React.ReactNode);
+
 interface SliderProps
   extends Omit<
     React.ComponentProps<'div'>,
     'onChange' | 'onBlur' | 'children' | 'ref'
   > {
-  /**
-   * Optional render function that can be used to customize the presentation
-   * of the Slider control within the Field, such as to show the current value.
-   * The `control` argument contains the slider control element—you’ll need to
-   * include it in the rendering somewhere, but have control of the placement.
-   */
-  children?: (renderArgs: {
-    control: React.ReactNode;
-    value: number;
-    min: number;
-    max: number;
-    step: number;
-  }) => React.ReactNode;
+  /** Optionally add utility classes to the root element */
+  className?: string;
   /** Called when the value of the Slider changes */
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   /** Called when the Slider is unfocused */
@@ -60,26 +58,28 @@ interface SliderProps
   value?: number | string;
   /** Sets the value of the Slider when using it as an uncontrolled component */
   defaultValue?: number | string;
+  /** The `ref` is for the hidden input */
   ref?: React.Ref<HTMLInputElement>;
 }
 
+type SliderFieldProps = CommonFieldProps<SliderFieldDescriptor>;
+
 /**
  * A form control that allows users to choose a number within a range.
- * @param props {@link SliderProps} + {@link CommonFieldProps}
+ * @param props {@link SliderProps} + {@link SliderFieldProps}
  */
 export function Slider({
   // Field props
   className,
   sizer,
-  label,
-  explainer,
-  hint,
-  error,
+  label: labelOrFn,
+  explainer: explainerOrFn,
+  error: errorOrFn,
+  hint: hintOrFn,
   disabled,
   required,
   // Slider-specific props
   ref: controlledInputRef,
-  children,
   name,
   max = 100,
   min = 0,
@@ -100,7 +100,7 @@ export function Slider({
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <div>
   ...otherDivProps
-}: SliderProps & CommonFieldProps) {
+}: SliderProps & SliderFieldProps) {
   const rootRef = React.useRef<HTMLDivElement>(null);
   const trackRef = React.useRef<HTMLDivElement>(null);
 
@@ -338,6 +338,18 @@ export function Slider({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  function descriptorOrFnToNode(
+    descriptorOrFn: SliderFieldDescriptor | undefined,
+  ) {
+    return typeof descriptorOrFn === 'function'
+      ? descriptorOrFn({ value: implicitValue, min, max, step })
+      : descriptorOrFn;
+  }
+  const label = descriptorOrFnToNode(labelOrFn);
+  const explainer = descriptorOrFnToNode(explainerOrFn);
+  const error = descriptorOrFnToNode(errorOrFn);
+  const hint = descriptorOrFnToNode(hintOrFn);
+
   const [uncontrolledAriaLabelledBy] = React.useState(randomId());
   const ariaLabelledBy =
     controlledAriaLabelledBy ||
@@ -359,37 +371,12 @@ export function Slider({
     sizer,
     isDisabled: disabled,
     isFocused: isFocused && !disabled && !isClicked,
+    hasFieldHeader: !!(label || explainer),
+    hasFieldFooter: !!((error && error !== true) || hint),
     hasError: !!error,
     atMin: percentage === 0,
     atMax: percentage === 100,
   });
-
-  const control = (
-    <div
-      {...otherDivProps}
-      ref={rootRef}
-      className={s.root()}
-      role="slider"
-      tabIndex={disabled ? -1 : tabIndex || 0}
-      onMouseDown={handleMouseDown}
-      onTouchStart={handleTouchStart}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      onKeyDown={handleKeyDown}
-      aria-valuemax={max}
-      aria-valuemin={min}
-      aria-valuenow={implicitValue}
-      aria-labelledby={ariaLabelledBy}
-      aria-describedby={ariaDescribedBy}
-      aria-errormessage={ariaErrorMessage}
-      aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
-    >
-      <div ref={trackRef} className={s.track()}>
-        <div className={s.fill()} style={{ right: `${100 - percentage}%` }} />
-        <div className={s.thumb()} style={{ left: `${percentage}%` }} />
-      </div>
-    </div>
-  );
 
   return (
     <Field
@@ -405,9 +392,30 @@ export function Slider({
       disabled={disabled}
       required={required}
     >
-      {!children
-        ? control
-        : children({ control, value: implicitValue, min, max, step })}
+      <div
+        {...otherDivProps}
+        ref={rootRef}
+        className={s.root()}
+        role="slider"
+        tabIndex={disabled ? -1 : tabIndex || 0}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
+        aria-valuemax={max}
+        aria-valuemin={min}
+        aria-valuenow={implicitValue}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
+        aria-errormessage={ariaErrorMessage}
+        aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
+      >
+        <div ref={trackRef} className={s.track()}>
+          <div className={s.fill()} style={{ right: `${100 - percentage}%` }} />
+          <div className={s.thumb()} style={{ left: `${percentage}%` }} />
+        </div>
+      </div>
 
       {/*
         This <input> is hidden from the user, and is used to have the onChange

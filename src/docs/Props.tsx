@@ -18,6 +18,12 @@ function ucFirst(str: string) {
 }
 
 /**
+ * These props are weedsy -- they may need to be tinkered with in a component's
+ * props, but they don't need to appear in the docs.
+ */
+const alwaysExclude = ['onBlur', 'ref'];
+
+/**
  * Helper for easily documenting the props for a component, especially for
  * breaking out props from a wrapper component in a separate section.
  */
@@ -58,7 +64,11 @@ Here are some of the most commonly used:
 
       <ArgTypes
         of={of}
-        exclude={[...(wrapper ? commonFieldProps : []), ...(exclude || [])]}
+        exclude={[
+          ...(wrapper ? commonFieldProps : []),
+          ...(exclude || []),
+          ...alwaysExclude,
+        ]}
         sort="requiredFirst"
       />
 
@@ -79,7 +89,7 @@ Accessibility is handled for you.
           <ArgTypes
             of={of}
             include={commonFieldProps}
-            exclude={exclude}
+            exclude={[...(exclude || []), ...alwaysExclude]}
             sort="requiredFirst"
           />
         </>

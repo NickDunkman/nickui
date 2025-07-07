@@ -11,38 +11,35 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function renderWithMetadata(
-  ariaLabel: string,
+function withMetaHint(
+  hint: string,
 ): Partial<React.ComponentProps<typeof Slider>> {
   return {
-    'aria-label': ariaLabel,
-    children: ({ control, value }) => (
-      <>
-        {control}
-        <div className="flex text-xs text-gray-600">
-          <div>{ariaLabel}</div>
-          <div className="ml-auto">{value}</div>
-        </div>
-      </>
+    hint: ({ value }) => (
+      <div className="flex">
+        <div>{hint}</div>
+        <div className="ml-auto">{value}</div>
+      </div>
     ),
+    'aria-label': hint,
   };
 }
 
 export const NoValue: Story = {
-  args: renderWithMetadata('Slider with no valueish prop'),
+  args: withMetaHint('Slider with no valueish prop'),
 };
 
 export const Controlled: Story = {
   args: {
     value: '50',
-    ...renderWithMetadata('Slider with controlled value'),
+    ...withMetaHint('Slider with controlled value'),
   },
 };
 
 export const Uncontrolled: Story = {
   args: {
     defaultValue: '50',
-    ...renderWithMetadata('Slider with uncontrolled value'),
+    ...withMetaHint('Slider with uncontrolled value'),
   },
 };
 
@@ -50,7 +47,7 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     defaultValue: '50',
-    ...renderWithMetadata('Disabled Slider'),
+    ...withMetaHint('Disabled Slider'),
   },
 };
 
@@ -73,7 +70,7 @@ export const CustomRange: Story = {
     max: 1000,
     step: 0.01,
     shiftSteps: 500,
-    ...renderWithMetadata('Slider with custom range'),
+    ...withMetaHint('Slider with custom range'),
   },
 };
 
@@ -91,7 +88,7 @@ export const Small: Story = {
   args: {
     sizer: Slider.sizer.small,
     defaultValue: '50',
-    'aria-label': 'Small Slider',
+    ...withMetaHint('Small Slider (default)'),
   },
 };
 
@@ -99,7 +96,7 @@ export const Medium: Story = {
   args: {
     sizer: Slider.sizer.medium,
     defaultValue: '50',
-    'aria-label': 'Medium Slider',
+    ...withMetaHint('Medium Slider'),
   },
 };
 
@@ -107,7 +104,7 @@ export const Large: Story = {
   args: {
     sizer: Slider.sizer.large,
     defaultValue: '50',
-    'aria-label': 'Large Slider',
+    ...withMetaHint('Large Slider'),
   },
 };
 
@@ -115,15 +112,9 @@ export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col items-center gap-5 sm:flex-row">
-      <div className="flex-1">
-        <Slider {...Small.args} />
-      </div>
-      <div className="flex-1">
-        <Slider {...Medium.args} />
-      </div>
-      <div className="flex-1">
-        <Slider {...Large.args} />
-      </div>
+      <Slider {...Small.args} className="sm:flex-1" />
+      <Slider {...Medium.args} className="sm:flex-1" />
+      <Slider {...Large.args} className="sm:flex-1" />
     </div>
   ),
 };
