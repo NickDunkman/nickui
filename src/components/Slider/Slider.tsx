@@ -73,7 +73,6 @@ export function Slider({
   className,
   sizer,
   label: labelOrFn,
-  explainer: explainerOrFn,
   error: errorOrFn,
   hint: hintOrFn,
   disabled,
@@ -346,7 +345,6 @@ export function Slider({
       : descriptorOrFn;
   }
   const label = descriptorOrFnToNode(labelOrFn);
-  const explainer = descriptorOrFnToNode(explainerOrFn);
   const error = descriptorOrFnToNode(errorOrFn);
   const hint = descriptorOrFnToNode(hintOrFn);
 
@@ -371,7 +369,7 @@ export function Slider({
     sizer,
     isDisabled: disabled,
     isFocused: isFocused && !disabled && !isClicked,
-    hasFieldHeader: !!(label || explainer),
+    hasFieldHeader: !!label,
     hasFieldFooter: !!((error && error !== true) || hint),
     hasError: !!error,
     atMin: percentage === 0,
@@ -384,7 +382,6 @@ export function Slider({
       sizer={sizer}
       label={label}
       labelId={ariaLabelledBy}
-      explainer={explainer}
       hint={hint}
       hintId={ariaDescribedBy}
       error={error}

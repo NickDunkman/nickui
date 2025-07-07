@@ -20,7 +20,6 @@ export interface FieldsetProps extends React.ComponentProps<'fieldset'> {
 export function Fieldset({
   children: formControls,
   label,
-  explainer,
   error,
   hint,
   sizer,
@@ -35,9 +34,6 @@ export function Fieldset({
   const [hintId] = React.useState<string>(randomId());
   const [errorId] = React.useState<string>(randomId());
 
-  // Show the legend if we have at least one of the label or explainer
-  const showLegend = !!(label || explainer);
-
   const s = styles({ sizer });
 
   return (
@@ -45,7 +41,7 @@ export function Fieldset({
       {...otherFieldsetProps}
       aria-labelledby={clsx(
         // Connect the internally managed legend to the fieldset
-        showLegend && legendId,
+        label && legendId,
         // Also allow the caller to manage an external label
         ariaLabeledBy,
       )}
@@ -62,19 +58,16 @@ export function Fieldset({
         ariaErrorMessage,
       )}
     >
-      {showLegend && (
+      {label && (
         <legend id={legendId} className={s.legend()}>
-          {label && (
-            <div className={s.label()}>
-              {label}
-              {required && (
-                <abbr className={s.requiredAsterisk()} title="required">
-                  *
-                </abbr>
-              )}
-            </div>
-          )}
-          {explainer && <div className={s.explainer()}>{explainer}</div>}
+          <div className={s.label()}>
+            {label}
+            {required && (
+              <abbr className={s.requiredAsterisk()} title="required">
+                *
+              </abbr>
+            )}
+          </div>
         </legend>
       )}
 

@@ -5,7 +5,7 @@ import { StoriesModule } from '@/types';
 
 import { ComponentName } from './ComponentName';
 
-const commonFieldProps = ['label', 'explainer', 'hint', 'error', 'required'];
+const commonFieldProps = ['label', 'hint', 'error', 'required'];
 
 /**
  * These are the elements that React has custom docs for at

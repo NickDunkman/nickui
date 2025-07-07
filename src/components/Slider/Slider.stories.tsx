@@ -29,7 +29,6 @@ export const FieldLayout: Story = {
   tags: ['!dev', '!test'],
   args: {
     label: 'A label',
-    explainer: 'An explainer',
     error: 'An error message',
     hint: 'A hint',
     defaultValue: '50',

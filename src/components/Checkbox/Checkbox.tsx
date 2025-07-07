@@ -42,7 +42,7 @@ export function Checkable({
   className,
   sizer,
   label,
-  explainer,
+  hint,
   disabled,
   // styler should be in the shape of Checkbox's tailwind-variants styler
   styler,
@@ -101,15 +101,13 @@ export function Checkable({
   });
 
   const labelWithOffset =
-    label || explainer ? (
-      <div className={s.labelWithOffset()}>{label}</div>
-    ) : null;
+    label || hint ? <div className={s.labelWithOffset()}>{label}</div> : null;
 
   return (
     <CheckedField
       className={clsw(s.root(), className)}
       label={labelWithOffset}
-      explainer={explainer}
+      hint={hint}
       sizer={sizer}
       disabled={disabled}
       onMouseDown={handleRootMouseDown}

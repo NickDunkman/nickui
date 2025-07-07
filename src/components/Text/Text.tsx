@@ -53,7 +53,6 @@ export function Text({
   className,
   sizer,
   label,
-  explainer,
   hint,
   error,
   required,
@@ -86,7 +85,6 @@ export function Text({
       className={className}
       sizer={sizer}
       label={label}
-      explainer={explainer}
       controlId={id}
       hint={hint}
       hintId={ariaDescribedBy}

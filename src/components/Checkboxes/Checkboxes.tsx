@@ -25,7 +25,7 @@ export interface CheckablesProps
   options?: {
     value: string;
     label: React.ReactNode;
-    explainer?: React.ReactNode;
+    hint?: React.ReactNode;
     disabled?: boolean;
   }[];
   /** Called when the value changes */
@@ -79,7 +79,6 @@ export function Checkables({
   className,
   sizer,
   label,
-  explainer,
   hint,
   error,
   disabled,
@@ -198,7 +197,6 @@ export function Checkables({
       className={className}
       sizer={sizer}
       label={label}
-      explainer={explainer}
       hint={hint}
       error={error}
       disabled={disabled}
@@ -229,7 +227,7 @@ export function Checkables({
                   disabled: option.disabled,
                 })}
                 label={option.label}
-                explainer={option.explainer}
+                hint={option.hint}
               />
             ))}
           </>

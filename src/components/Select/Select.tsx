@@ -28,7 +28,6 @@ export function Select({
   className,
   sizer,
   label,
-  explainer,
   hint,
   error,
   disabled,
@@ -65,7 +64,6 @@ export function Select({
       className={className}
       sizer={sizer}
       label={label}
-      explainer={explainer}
       hint={hint}
       hintId={ariaDescribedBy}
       error={error !== true ? error : undefined}

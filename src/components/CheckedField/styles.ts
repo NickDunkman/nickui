@@ -10,7 +10,7 @@ export const styles = tv({
     control: 'absolute top-0',
     labelese: 'flex flex-col',
     label: '',
-    explainer: 'text-gray-500',
+    hint: 'text-gray-500',
   },
   variants: {
     sizer: {
@@ -20,19 +20,19 @@ export const styles = tv({
       [FieldSizer.medium]: {
         contentRoot: 'gap-2.5 text-sm',
         label: 'text-sm',
-        explainer: 'text-xs',
+        hint: 'text-xs',
       },
       [FieldSizer.large]: {
         contentRoot: 'gap-3 text-base',
         label: 'text-base',
-        explainer: 'text-sm',
+        hint: 'text-sm',
       },
     },
     isDisabled: {
       true: {
         root: 'cursor-not-allowed',
         label: 'text-gray-400',
-        explainer: 'text-gray-300',
+        hint: 'text-gray-300',
       },
     },
   },

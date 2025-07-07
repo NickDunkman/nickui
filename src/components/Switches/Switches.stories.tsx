@@ -62,7 +62,6 @@ export const CustomLayout: Story = {
 export const FieldsetLayout: Story = {
   args: {
     label: 'A label',
-    explainer: 'An explainer',
     error: 'An error message',
     hint: 'A hint',
     options: [

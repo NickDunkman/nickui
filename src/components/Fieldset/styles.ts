@@ -7,7 +7,6 @@ export const styles = tv({
   slots: {
     legend: 'block',
     label: 'font-bold',
-    explainer: 'text-gray-500',
     footer: 'flex flex-col',
     error: 'before:content-["✘"] before:mr-1 text-rose-800',
     hint: 'text-gray-500',
@@ -18,7 +17,6 @@ export const styles = tv({
       [FieldSizer.small]: {
         legend: 'mb-2.5',
         label: 'text-xs',
-        explainer: 'text-xs',
         footer: 'mt-2.5 gap-1.5',
         error: 'text-xs',
         hint: 'text-xs',
@@ -26,7 +24,6 @@ export const styles = tv({
       [FieldSizer.medium]: {
         legend: 'mb-3',
         label: 'text-sm',
-        explainer: 'text-xs',
         footer: 'mt-3 gap-2',
         error: 'text-sm',
         hint: 'text-xs',
@@ -35,7 +32,6 @@ export const styles = tv({
         legend: 'mb-3.5',
         label: 'text-lg',
         footer: 'mt-3.5 gap-2',
-        explainer: 'text-sm',
         error: 'text-base',
         hint: 'text-sm',
       },

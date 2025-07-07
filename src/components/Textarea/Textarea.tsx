@@ -47,7 +47,6 @@ export function Textarea({
   className,
   sizer,
   label,
-  explainer,
   hint,
   error,
   disabled,
@@ -153,7 +152,6 @@ export function Textarea({
       className={className}
       sizer={sizer}
       label={label}
-      explainer={explainer}
       hint={hint}
       hintId={ariaDescribedBy}
       error={error !== true ? error : undefined}

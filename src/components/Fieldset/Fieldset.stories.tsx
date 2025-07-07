@@ -21,7 +21,6 @@ export const Basic: Story = {
       <Docs.FormControlPlaceholder key="second" />,
     ],
     label: 'A label for the fieldset',
-    explainer: 'An explanation about the fieldset',
     error: 'An error message',
     hint: 'A hint about the fieldset’s values',
   },
@@ -35,7 +34,6 @@ export const Small: Story = {
       <Docs.FormControlPlaceholder key="second" />,
     ],
     label: 'Small label',
-    explainer: 'Small explanation',
     hint: 'Small hint',
   },
 };
@@ -48,7 +46,6 @@ export const Medium: Story = {
       <Docs.FormControlPlaceholder key="second" />,
     ],
     label: 'Medium label',
-    explainer: 'Medium explanation',
     hint: 'Medium hint',
   },
 };
@@ -61,7 +58,6 @@ export const Large: Story = {
       <Docs.FormControlPlaceholder key="second" />,
     ],
     label: 'Large label',
-    explainer: 'Large explanation',
     hint: 'Large hint',
   },
 };

@@ -13,11 +13,6 @@ export type CommonFieldProps<ReactNode = React.ReactNode> = {
   /** The main label to show above the form control, naming the field */
   label?: ReactNode;
   /**
-   * A more detailed label explaining the purpose of the field, placed
-   * directly below the main label
-   */
-  explainer?: ReactNode;
-  /**
    * A hint about what kind of value the control accepts, such as a phone
    * number format
    */
@@ -44,11 +39,6 @@ export type CommonFieldsetProps = {
   /** The main label to show above the form control, naming the field */
   label?: React.ReactNode;
   /**
-   * A more detailed label explaining the purpose of the field, placed
-   * directly below the main label
-   */
-  explainer?: React.ReactNode;
-  /**
    * A hint about what kind of value the control accepts, such as a phone
    * number format
    */
@@ -69,11 +59,8 @@ export type CommonCheckedFieldProps = {
   sizer?: FieldSizer;
   /** The main label to to the right of the form control, naming the field */
   label?: React.ReactNode;
-  /**
-   * A more detailed label explaining the purpose of the field, placed
-   * directly below the main label
-   */
-  explainer?: React.ReactNode;
+  /** Additional detail about the field, placed directly below the label */
+  hint?: React.ReactNode;
   /** Prevents the user from interacting with the control */
   disabled?: boolean;
 };

@@ -14,11 +14,12 @@ export interface CheckedFieldProps extends React.ComponentProps<'label'> {
 
 /**
  * Wraps a single checkable form control with a standard layout (label &
- * explainer, to the right of the control).
+ * hint, to the right of the control).
  *
- * This is simpler than the Field component. There’s no hint, since a field with
- * only 2 possible values is too simple for it. And there’s no error message,
- * since if one or both possible values is invalid, the field has no purpose.
+ * This is simpler than the Field component. There’s no `error` message, since
+ * if one or both possible values is invalid, the field has no purpose. And
+ * there’s no `required` state, since that would make the unchecked state
+ * invalid.
  *
  * Note: this layout is already built-into Checkbox, Radio, and Switch—you can
  * use this component to create a custom form control that behaves the same way.
@@ -26,7 +27,7 @@ export interface CheckedFieldProps extends React.ComponentProps<'label'> {
 export function CheckedField({
   children: formControl,
   className,
-  explainer,
+  hint,
   label,
   sizer,
   disabled: disabled,
@@ -50,10 +51,10 @@ export function CheckedField({
         the field is inside a `flex items-baseline` parent.
       */}
         <span style={{ paddingLeft: controlBounds?.width || 0 }}>&#8203;</span>
-        {(label || explainer) && (
+        {(label || hint) && (
           <div className={s.labelese()}>
             {label && <div className={s.label()}>{label}</div>}
-            {explainer && <div className={s.explainer()}>{explainer}</div>}
+            {hint && <div className={s.hint()}>{hint}</div>}
           </div>
         )}
       </div>

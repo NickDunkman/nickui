@@ -15,7 +15,7 @@ export const CheckedFieldLayout: Story = {
   tags: ['!dev', '!test'],
   args: {
     label: 'A label',
-    explainer: 'An explainer',
+    hint: 'A hint',
   },
 };
 

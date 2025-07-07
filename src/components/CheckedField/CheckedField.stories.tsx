@@ -18,7 +18,7 @@ export const Basic: Story = {
   args: {
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'A label for the field',
-    explainer: 'An explanation about the field',
+    hint: 'A hint for the field',
   },
 };
 
@@ -27,7 +27,7 @@ export const Small: Story = {
     sizer: CheckedField.sizer.small,
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Small label',
-    explainer: 'Small explanation',
+    hint: 'Small hint',
   },
 };
 
@@ -36,7 +36,7 @@ export const Medium: Story = {
     sizer: CheckedField.sizer.medium,
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Medium label',
-    explainer: 'Medium explanation',
+    hint: 'Medium hint',
   },
 };
 
@@ -45,7 +45,7 @@ export const Large: Story = {
     sizer: CheckedField.sizer.large,
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Large label',
-    explainer: 'Large explanation',
+    hint: 'Large hint',
   },
 };
 

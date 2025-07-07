@@ -9,13 +9,13 @@ import * as Stories from './CheckedField.stories';
 
 # <Docs.ComponentName of="CheckedField" />
 
-Wraps a single checkable form control with a standard layout (label & explainer,
-to the right of the control).
+Wraps a single checkable form control with a standard layout (label & hint, to
+the right of the control).
 
-This is simpler than the <Docs of="Field" /> component. There’s no hint, since a
-field with only 2 possible values is too simple for it. And there’s no error
+This is simpler than the <Docs of="Field" /> component. There’s no `error`
 message, since if one or both possible values is invalid, the field has no
-purpose.
+purpose. And there’s no `required` state, since that would make the unchecked
+state invalid.
 
 <div>
   Note: this layout is already built-into <Docs of="Checkbox" />,{' '}
@@ -24,11 +24,7 @@ purpose.
 </div>
 
 <Docs.FauxCanvas>
-  <CheckedField
-    label="A label"
-    explainer="An explainer"
-    sizer={CheckedField.sizer.medium}
-  >
+  <CheckedField label="A label" hint="A hint" sizer={CheckedField.sizer.medium}>
     <Docs.FormControlPlaceholder tiny />
   </CheckedField>
 </Docs.FauxCanvas>
@@ -38,7 +34,7 @@ purpose.
 
 ## Basic elements
 
-These elements are controlled using the `label`, `explainer`, and `hint` props.
+These elements are controlled using the `label` and `hint` props.
 
 <Canvas of={Stories.Basic} sourceState="shown" />
 

@@ -30,7 +30,6 @@ export interface FieldProps extends React.ComponentProps<'div'> {
 export function Field({
   children: formControl,
   controlId,
-  explainer,
   error,
   errorId,
   hint,
@@ -46,19 +45,16 @@ export function Field({
 
   return (
     <div {...otherDivProps}>
-      {(label || explainer) && (
+      {label && (
         <label id={labelId} className={s.heading()} htmlFor={controlId}>
-          {label && (
-            <div className={s.label()}>
-              {label}
-              {required && (
-                <abbr className={s.requiredAsterisk()} title="required">
-                  *
-                </abbr>
-              )}
-            </div>
-          )}
-          {explainer && <div className={s.explainer()}>{explainer}</div>}
+          <div className={s.label()}>
+            {label}
+            {required && (
+              <abbr className={s.requiredAsterisk()} title="required">
+                *
+              </abbr>
+            )}
+          </div>
         </label>
       )}
 
