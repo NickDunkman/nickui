@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { StoriesModule } from '@/types';
 
 import { FauxCanvas } from './FauxCanvas';
+import { PrettyPrint } from './PrettyPrint';
 
 /**
  * Helper for easily demonstrating RHF compatibility within a component's
@@ -37,14 +38,7 @@ export function ReactHookFormDemo({
   const {
     register,
     watch,
-    formState: {
-      defaultValues,
-      errors,
-      dirtyFields,
-      isDirty,
-      isValid,
-      touchedFields,
-    },
+    formState: { errors, dirtyFields, isDirty, isValid, touchedFields },
   } = useForm({
     mode: 'all',
     defaultValues: { [fieldName]: theInitialValue },
@@ -55,19 +49,7 @@ export function ReactHookFormDemo({
 
   return (
     <>
-      <FauxCanvas
-        meta={{
-          title: 'React Hook Form context',
-          data: {
-            defaultValues,
-            dirtyFields,
-            isDirty,
-            isValid,
-            touchedFields,
-            watch: watch(),
-          },
-        }}
-      >
+      <FauxCanvas>
         <Component
           {...register(fieldName, {
             validate: !addValidation
@@ -78,11 +60,24 @@ export function ReactHookFormDemo({
           error={errors[fieldName]?.message}
           {...componentProps}
         />
+        <PrettyPrint
+          className="-mx-5 mt-8 -mb-5"
+          title="React Hook Form context"
+          data={{
+            dirtyFields,
+            isDirty,
+            isValid,
+            touchedFields,
+            watch: watch(),
+          }}
+        />
       </FauxCanvas>
-      <Source
-        dark
-        language="tsx"
-        code={`
+
+      <div style={{ marginTop: -20 }}>
+        <Source
+          dark
+          language="tsx"
+          code={`
 import { useForm } from 'react-hook-form';
 
 const form = useForm<{ ${fieldName}: string }>({
@@ -110,7 +105,8 @@ return (
   />
 );
           `}
-      />
+        />
+      </div>
     </>
   );
 }

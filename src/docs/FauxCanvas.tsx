@@ -1,21 +1,11 @@
 import * as React from 'react';
 
-import { clsw } from '@/utils/clsw';
-
-import { PrettyPrint } from './PrettyPrint';
-
 /**
  * Displays children inside of a card that appears to be a Storybook <Canvas />,
  * without the "show code" feature. This is useful when you want to display
  * something in a doc without creating a story for it, which Canvas requires.
  */
-export function FauxCanvas({
-  children,
-  meta,
-}: {
-  children?: React.ReactNode;
-  meta?: React.ComponentProps<typeof PrettyPrint>;
-}) {
+export function FauxCanvas({ children }: { children?: React.ReactNode }) {
   // The checkered background is added in /.storybook/preview-head.html
   return (
     <div className="sb-unstyled" style={{ margin: '25px 0 40px' }}>
@@ -25,22 +15,10 @@ export function FauxCanvas({
           border: '1px solid rgba(38, 85, 115, 0.15)',
           borderRadius: 4,
           padding: 32,
-          ...(meta
-            ? {
-                borderRadius: '4px 4px 0 0',
-                borderBottom: 0,
-              }
-            : {}),
         }}
       >
         {children}
       </div>
-      {meta && (
-        <PrettyPrint
-          {...meta}
-          className={clsw('rounded-t-none', meta.className)}
-        />
-      )}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import * as React from 'react';
 import { StoriesModule } from '@/types';
 
 import { FauxCanvas } from './FauxCanvas';
+import { PrettyPrint } from './PrettyPrint';
 
 /**
  * Helper for easily demonstrating Formik compatibility within a component's
@@ -53,7 +54,7 @@ export function FormikDemo({
 
   return (
     <>
-      <FauxCanvas meta={{ data: form, title: 'Formik context' }}>
+      <FauxCanvas>
         <Component
           {...form.getFieldProps({
             name: fieldName,
@@ -63,12 +64,24 @@ export function FormikDemo({
           error={form.errors[fieldName]}
           {...componentProps}
         />
+        <PrettyPrint
+          className="-mx-5 mt-8 -mb-5"
+          title="Formik context"
+          data={{
+            values: form.values,
+            errors: form.errors,
+            touched: form.touched,
+            isValid: form.isValid,
+            dirty: form.dirty,
+          }}
+        />
       </FauxCanvas>
 
-      <Source
-        dark
-        language="tsx"
-        code={`
+      <div style={{ marginTop: -20 }}>
+        <Source
+          dark
+          language="tsx"
+          code={`
 import { useFormik } from 'formik';
 
 const form = useFormik({
@@ -111,7 +124,8 @@ return (
   />
 );
           `}
-      />
+        />
+      </div>
     </>
   );
 }

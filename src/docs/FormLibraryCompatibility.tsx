@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import * as React from 'react';
 
-import { Select } from '@/components/Select';
+import { Button } from '@/components/Button';
 import { StoriesModule } from '@/types';
 
 import { ComponentName } from './ComponentName';
@@ -44,15 +44,33 @@ props to be used with [React Hook Form](https://react-hook-form.com/) and
         `}
       </Markdown>
 
-      <div className="sb-unstyled flex gap-2">
-        <Select
-          onChange={(event) => {
-            setLibrary(event.target.value);
+      <div className="sb-unstyled relative z-2 -mb-7 flex gap-2 rounded-t-sm bg-gray-200 p-3">
+        <Button
+          onClick={() => {
+            setLibrary('rhf');
           }}
+          flavor={
+            library === 'rhf' ? Button.flavor.primary : Button.flavor.secondary
+          }
         >
-          <option value="rhf">React Hook Form</option>
-          <option value="formik">Formik</option>
-        </Select>
+          React Hook Form
+        </Button>
+        <Button
+          onClick={() => {
+            setLibrary('formik');
+          }}
+          flavor={
+            library === 'formik'
+              ? Button.flavor.primary
+              : Button.flavor.secondary
+          }
+        >
+          Formik
+        </Button>
+        <div className="ml-auto">
+          <span className="relative -top-4 -mt-2 mr-3 blur-[0.5px]">⛳️</span>
+          <span className="text-3xl">🏌️‍♂️</span>
+        </div>
       </div>
 
       {library === 'rhf' && (
