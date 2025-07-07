@@ -5,10 +5,8 @@ import { ControlStates } from './ControlStates';
 import { FauxCanvas } from './FauxCanvas';
 import { FormControlPlaceholder } from './FormControlPlaceholder';
 import { FormLibraryCompatibility } from './FormLibraryCompatibility';
-import { FormikDemo } from './FormikDemo';
 import { PrettyPrint } from './PrettyPrint';
 import { Props } from './Props';
-import { ReactHookFormDemo } from './ReactHookFormDemo';
 import { Sizing } from './Sizing';
 import { TableOfContents } from './TableOfContents';
 
