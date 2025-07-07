@@ -91,33 +91,7 @@ pass a `render` function instead of using `options`.
 
 <Docs.Sizing of={Stories} wrapper="Fieldset" />
 
-<Docs.ReactHookFormDemo
-  of={Stories}
-  fieldName="pinPositionRHF"
-  initialValue="front"
-  componentProps={{
-    sizer: Radios.sizer.medium,
-    label: 'Today’s pin positioning',
-    explainer: 'Starting from the first hole',
-    hint: 'Try editting me!',
-    options: [
-      {
-        value: 'front',
-        label: 'front, middle, back',
-      },
-      {
-        value: 'middle',
-        label: 'middle, back, front',
-      },
-      {
-        value: 'back',
-        label: 'back, front, middle',
-      },
-    ],
-  }}
-/>
-
-<Docs.FormikDemo
+<Docs.FormLibraryCompatibility
   of={Stories}
   fieldName="pinPositionFormik"
   initialValue="front"

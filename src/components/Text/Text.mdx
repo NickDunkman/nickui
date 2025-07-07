@@ -20,23 +20,11 @@ A form control that allows users to enter & edit a single line of text.
 <Docs.Props of={Stories} nativeBase="input" wrapper="Field" />
 <Docs.ControlStates of={Stories} />
 <Docs.Sizing of={Stories} wrapper="Field" />
-
-<Docs.ReactHookFormDemo
+<Docs.FormLibraryCompatibility
   of={Stories}
   fieldName="player"
   initialValue="Nick"
   component={Text}
-  componentProps={{
-    label: 'Player name',
-    hint: 'Try editting me!',
-    sizer: Text.sizer.medium,
-  }}
-/>
-
-<Docs.FormikDemo
-  of={Stories}
-  fieldName="player"
-  initialValue="Nick"
   componentProps={{
     label: 'Player name',
     hint: 'Try editting me!',

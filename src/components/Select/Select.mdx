@@ -24,37 +24,7 @@ A form control that allows users to choose an option using a menu.
 <Docs.Props of={Stories} nativeBase="select" wrapper="Field" />
 <Docs.ControlStates of={Stories} />
 <Docs.Sizing of={Stories} wrapper="Field" />
-
-<Docs.ReactHookFormDemo
-  of={Stories}
-  fieldName="format"
-  initialValue="scramble"
-  componentProps={{
-    label: 'Select a format',
-    hint: 'Try editting me!',
-    sizer: Select.sizer.medium,
-    children: [
-      'Chapman',
-      'Foursomes',
-      'Match play',
-      'Scramble',
-      'Shamble',
-      'Sixes',
-      'Skins',
-      'Stroke',
-      'Two ball',
-      'Vegas',
-      'Wolf',
-      'Worst ball',
-    ].map((name) => (
-      <option value={name.toLowerCase().replace(/\W+/g, '-')} key={name}>
-        {name}
-      </option>
-    )),
-  }}
-/>
-
-<Docs.FormikDemo
+<Docs.FormLibraryCompatibility
   of={Stories}
   fieldName="format"
   initialValue="scramble"

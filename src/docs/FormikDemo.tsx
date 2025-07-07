@@ -1,10 +1,9 @@
-import { Markdown, Source } from '@storybook/addon-docs/blocks';
+import { Source } from '@storybook/addon-docs/blocks';
 import { useFormik } from 'formik';
 import * as React from 'react';
 
 import { StoriesModule } from '@/types';
 
-import { ComponentName } from './ComponentName';
 import { FauxCanvas } from './FauxCanvas';
 
 /**
@@ -54,15 +53,6 @@ export function FormikDemo({
 
   return (
     <>
-      <Markdown options={{ overrides: { ComponentName } }}>
-        {`
-## Formik compatibility
-
-&nbsp;<ComponentName of="${componentName}" /> implements all of the necessary
-props to be used as a [Formik field](https://formik.org/docs/api/field)!
-        `}
-      </Markdown>
-
       <FauxCanvas meta={{ data: form, title: 'Formik context' }}>
         <Component
           {...form.getFieldProps({

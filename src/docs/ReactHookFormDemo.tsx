@@ -1,10 +1,9 @@
-import { Markdown, Source } from '@storybook/addon-docs/blocks';
+import { Source } from '@storybook/addon-docs/blocks';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { StoriesModule } from '@/types';
 
-import { ComponentName } from './ComponentName';
 import { FauxCanvas } from './FauxCanvas';
 
 /**
@@ -26,7 +25,7 @@ export function ReactHookFormDemo({
   initialValue?: string | boolean;
   checkbox?: boolean;
   radioWithValue?: string;
-  componentProps: object;
+  componentProps?: object;
 }) {
   const addValidation = !checkbox && !radioWithValue;
   const theInitialValue = checkbox ? !!initialValue : (initialValue ?? '');
@@ -56,14 +55,6 @@ export function ReactHookFormDemo({
 
   return (
     <>
-      <Markdown options={{ overrides: { ComponentName } }}>
-        {`
-## React Hook Form compatibility
-
-&nbsp;<ComponentName of="${componentName}" /> implements all of the necessary
-props to be used with [React Hook Form](https://react-hook-form.com/)!
-        `}
-      </Markdown>
       <FauxCanvas
         meta={{
           title: 'React Hook Form context',
