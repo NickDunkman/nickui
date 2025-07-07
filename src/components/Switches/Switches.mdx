@@ -69,7 +69,7 @@ import * as Stories from './Switches.stories';
 ## Adding switches
 
 For the standard look & feel, use the `options` prop to configure the individual
-switches. <Docs of="Switchex" /> will manage the interior layout.
+switches. <Docs of="Switches" /> will manage the interior layout.
 
 <Canvas of={Stories.StandardLayout} sourceState="shown" />
 
@@ -89,25 +89,23 @@ pass a `render` function instead of using `options`.
   language="tsx"
   code={`
     <Switches
-      label="How custom do you like it?"
-      defaultValue="pretty"
-      render={(switch) => (
-        <div className="flex flex-row items-baseline gap-x-4">
-          <Switch {...switch({ value: 'kinda' })} label="A little custom" />
-          <span className="text-xs text-gray-500">or</span>
+      label="Please select some customizations"
+      defaultValue="colorful,embiggened"
+      render={(checkbox) => (
+        <div className="flex flex-row items-baseline gap-x-6">
           <Switch
-            {...switch({ value: 'pretty' })}>
-            label={
-              <div className="font-bold text-blue-500">Pretty custom</div>
-            }
+            {...checkbox({ value: 'colorful' })}
+            label={<span className="font-bold text-blue-500">Colorful</span>}
+            className="rounded-sm bg-rose-200 p-2"
           />
-          <span className="text-xs text-gray-500">or</span>
           <Switch
-            {...switch({ value: 'too', disabled: true })}
-            className="-rotate-30"
-            sizer={Checkbox.sizer.large}
-            label="Too custom"
+            {...checkbox({ value: 'embiggened' })}
+            sizer={Switch.sizer.large}
+            label="Embiggened"
           />
+          <div>
+            <input type="checkbox" {...checkbox({ value: 'native' })} /> Native
+          </div>
         </div>
       )}
     />
@@ -150,19 +148,55 @@ example:
 
 <Docs.ReactHookFormDemo
   of={Stories}
-  fieldName="fullNameRHF"
+  fieldName="setup"
   initialValue="nick,dunkman"
   componentProps={{
-    label: 'Full name',
+    label: 'Preshot routine',
     hint: 'Try editting me!',
     options: [
       {
-        value: 'nick',
-        label: 'Nick',
+        value: 'lie',
+        label: '1. Evaluate the lie',
       },
       {
-        value: 'dunkman',
-        label: 'Dunkman',
+        value: 'target',
+        label: '2. Pick a target',
+      },
+      {
+        value: 'imagine',
+        label: '3. Imagine the shot',
+      },
+      {
+        value: 'club',
+        label: '4. Choose club',
+      },
+      {
+        value: 'position',
+        label: '5. Position stance relative to the ball & shot type',
+      },
+      {
+        value: 'align',
+        label: '6. Align feet, hips, shoulders to the target',
+      },
+      {
+        value: 'flare',
+        label: '7. Flare front foot without affecting other body alignment',
+      },
+      {
+        value: 'grip',
+        label: '8. Grip the club according to the shot type',
+      },
+      {
+        value: 'waggle',
+        label: '9. One club-path waggle',
+      },
+      {
+        value: 'fixate',
+        label: '10. Fixate mind on target',
+      },
+      {
+        value: 'go',
+        label: '11. Go',
       },
     ],
   }}
@@ -170,19 +204,55 @@ example:
 
 <Docs.FormikDemo
   of={Stories}
-  fieldName="fullNameFormik"
+  fieldName="setup"
   initialValue="nick,dunkman"
   componentProps={{
-    label: 'Full name',
+    label: 'Preshot routine',
     hint: 'Try editting me!',
     options: [
       {
-        value: 'nick',
-        label: 'Nick',
+        value: 'lie',
+        label: '1. Evaluate the lie',
       },
       {
-        value: 'dunkman',
-        label: 'Dunkman',
+        value: 'target',
+        label: '2. Pick a target',
+      },
+      {
+        value: 'imagine',
+        label: '3. Imagine the shot',
+      },
+      {
+        value: 'club',
+        label: '4. Choose club',
+      },
+      {
+        value: 'position',
+        label: '5. Position stance relative to the ball & shot type',
+      },
+      {
+        value: 'align',
+        label: '6. Align feet, hips, shoulders to the target',
+      },
+      {
+        value: 'flare',
+        label: '7. Flare front foot without affecting other body alignment',
+      },
+      {
+        value: 'grip',
+        label: '8. Grip the club according to the shot type',
+      },
+      {
+        value: 'waggle',
+        label: '9. One club-path waggle',
+      },
+      {
+        value: 'fixate',
+        label: '10. Fixate mind on target',
+      },
+      {
+        value: 'go',
+        label: '11. Go',
       },
     ],
   }}

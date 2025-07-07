@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const StandardLayout: Story = {
   args: {
-    label: 'Please select a standard',
+    label: 'Please select some standards',
     defaultValue: '8601',
     options: [
       {
@@ -37,25 +37,23 @@ export const StandardLayout: Story = {
 
 export const CustomLayout: Story = {
   args: {
-    label: 'How custom do you like it?',
-    defaultValue: 'pretty',
+    label: 'Please select some customizations',
+    defaultValue: 'colorful,embiggened',
     render: (checkbox) => (
-      <div className="flex flex-row items-baseline gap-x-4">
-        <Switch {...checkbox({ value: 'kinda' })} label="A little custom" />
-        <span className="text-xs text-gray-500">or</span>
+      <div className="flex flex-row items-baseline gap-x-6">
         <Switch
-          {...checkbox({ value: 'pretty' })}
-          label={
-            <div className="font-bold text-blue-500">Pretty custom 👨‍🎨</div>
-          }
+          {...checkbox({ value: 'colorful' })}
+          label={<span className="font-bold text-blue-500">Colorful</span>}
+          className="rounded-sm bg-rose-200 p-2"
         />
-        <span className="text-xs text-gray-500">or</span>
         <Switch
-          {...checkbox({ value: 'too', disabled: true })}
-          className="-rotate-30"
+          {...checkbox({ value: 'embiggened' })}
           sizer={Switch.sizer.large}
-          label="Too custom"
+          label="Embiggened"
         />
+        <div>
+          <input type="checkbox" {...checkbox({ value: 'native' })} /> Native
+        </div>
       </div>
     ),
   },
