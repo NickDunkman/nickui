@@ -1,4 +1,4 @@
-name: prettier-1
+name: Prettier formatted
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: ['main']
 
 jobs:
-  prettier-2:
+  prettier:
     name: Run prettier format checking
     runs-on: ubuntu-latest
     permissions:
