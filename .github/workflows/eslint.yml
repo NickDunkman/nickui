@@ -1,4 +1,4 @@
-name: ESLint anlysis
+name: ESLint analysis
 
 on:
   push:
