@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { ComponentHeading } from './ComponentHeading';
 import { ComponentName } from './ComponentName';
 import { ControlStates } from './ControlStates';
 import { FauxCanvas } from './FauxCanvas';
@@ -35,8 +36,9 @@ export default function Docs(
   return <ComponentName {...props} />;
 }
 
-Docs.ControlStates = ControlStates;
+Docs.ComponentHeading = ComponentHeading;
 Docs.ComponentName = ComponentName;
+Docs.ControlStates = ControlStates;
 Docs.FauxCanvas = FauxCanvas;
 Docs.FormControlPlaceholder = FormControlPlaceholder;
 Docs.FormLibraryCompatibility = FormLibraryCompatibility;
