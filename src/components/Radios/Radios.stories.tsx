@@ -70,9 +70,9 @@ export const CustomLayout: Story = {
           sizer={Radio.sizer.medium}
           label={
             <div className="font-bold">
-              👨‍🎨 <span className="text-blue-500">Nice</span>{' '}
-              <span className="text-green-600">and</span>{' '}
-              <span className="text-rose-500">custom</span>
+              👨‍🎨 <span className="text-blue-600">Nice</span>{' '}
+              <span className="text-green-700">and</span>{' '}
+              <span className="text-rose-600">custom</span>
             </div>
           }
         />

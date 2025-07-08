@@ -43,7 +43,7 @@ export const CustomLayout: Story = {
       <div className="flex flex-row items-baseline gap-x-6">
         <Switch
           {...checkbox({ value: 'colorful' })}
-          label={<span className="font-bold text-blue-500">Colorful</span>}
+          label={<span className="font-bold text-blue-700">Colorful</span>}
           className="rounded-sm bg-rose-200 p-2"
         />
         <Switch
@@ -52,7 +52,12 @@ export const CustomLayout: Story = {
           label="Embiggened"
         />
         <div>
-          <input type="checkbox" {...checkbox({ value: 'native' })} /> Native
+          <input
+            type="checkbox"
+            {...checkbox({ value: 'native' })}
+            aria-label="example using different control component"
+          />{' '}
+          Native
         </div>
       </div>
     ),
