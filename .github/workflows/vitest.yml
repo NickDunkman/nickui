@@ -1,4 +1,4 @@
-name: Vitest
+name: Interaction & a11y tests (Vitest)
 
 on:
   push:
