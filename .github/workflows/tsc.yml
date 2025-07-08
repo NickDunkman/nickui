@@ -1,4 +1,4 @@
-name: TypeScript compiler (tsc)
+name: Type checking (tsc)
 
 on:
   push:
