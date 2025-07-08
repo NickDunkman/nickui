@@ -1,7 +1,9 @@
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
 
 const dirname =
@@ -13,6 +15,17 @@ const dirname =
 export default defineConfig({
   test: {
     workspace: [
+      {
+        extends: true,
+        plugins: [tailwindcss(), tsconfigPaths(), react()],
+        test: {
+          include: ['**/*.test.{ts,tsx}'],
+          name: 'unit tests',
+          globals: true,
+          environment: 'jsdom',
+          setupFiles: './src/setupTests.ts',
+        },
+      },
       {
         extends: true,
         plugins: [
