@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
+import { expect, fn } from 'storybook/test';
 
 import { Text } from './Text';
 
@@ -12,12 +13,24 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const FieldLayout: Story = {
-  tags: ['!dev', '!test'],
   args: {
+    required: true,
     label: 'A label',
     hint: 'A hint',
     error: 'An error message',
     defaultValue: 'A problematic value',
+  },
+  play: ({ canvas }) => {
+    const input = canvas.getByRole('textbox');
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAccessibleName('A label*');
+    expect(input).toHaveAccessibleDescription('A hint');
+    expect(input).toHaveAccessibleErrorMessage('An error message');
+    expect(input).toHaveClass('border-rose-800');
+
+    const requiredAsterisk = canvas.getByTitle('required');
+    expect(requiredAsterisk).toBeInTheDocument();
+    expect(requiredAsterisk).toHaveTextContent('*');
   },
 };
 
