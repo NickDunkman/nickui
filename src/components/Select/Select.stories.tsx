@@ -16,8 +16,8 @@ export const FieldLayout: Story = {
   args: {
     required: true,
     label: 'A label',
-    hint: 'A hint',
     error: 'An error message',
+    hint: 'A hint',
     children: <option>An option</option>,
   },
 };

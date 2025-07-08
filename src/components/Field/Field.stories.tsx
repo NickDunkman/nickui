@@ -18,8 +18,9 @@ export const Basic: Story = {
   args: {
     children: <Docs.FormControlPlaceholder />,
     label: 'A label for the field',
-    error: 'An error message',
     hint: 'A hint about the field’s value',
+    error: 'An error message',
+    required: true,
   },
 };
 
@@ -29,7 +30,9 @@ export const Small: Story = {
     children: <Docs.FormControlPlaceholder />,
     label: 'Small label',
     hint: 'Small hint',
+    error: 'Small error',
     controlId: 'small-input',
+    required: true,
   },
 };
 
@@ -39,7 +42,9 @@ export const Medium: Story = {
     children: <Docs.FormControlPlaceholder />,
     label: 'Medium label',
     hint: 'Medium hint',
+    error: 'Medium error',
     controlId: 'medium-input',
+    required: true,
   },
 };
 
@@ -49,7 +54,9 @@ export const Large: Story = {
     children: <Docs.FormControlPlaceholder />,
     label: 'Large label',
     hint: 'Large hint',
+    error: 'Large error',
     controlId: 'large-input',
+    required: true,
   },
 };
 

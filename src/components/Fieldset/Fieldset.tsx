@@ -20,8 +20,8 @@ export interface FieldsetProps extends React.ComponentProps<'fieldset'> {
 export function Fieldset({
   children: formControls,
   label,
-  error,
   hint,
+  error,
   sizer,
   disabled: _disabled,
   required = false,
@@ -73,17 +73,17 @@ export function Fieldset({
 
       <div>{formControls}</div>
 
-      {(!!error || !!hint) && (
+      {(!!hint || !!error) && (
         <div className={s.footer()}>
-          {error && (
-            <div id={errorId} className={s.error()} aria-live="assertive">
-              {error}
-            </div>
-          )}
-
           {hint && (
             <div id={hintId} className={s.hint()}>
               {hint}
+            </div>
+          )}
+
+          {error && (
+            <div id={errorId} className={s.error()} aria-live="assertive">
+              {error}
             </div>
           )}
         </div>

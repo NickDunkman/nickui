@@ -21,8 +21,9 @@ export const Basic: Story = {
       <Docs.FormControlPlaceholder key="second" />,
     ],
     label: 'A label for the fieldset',
-    error: 'An error message',
     hint: 'A hint about the fieldset’s values',
+    error: 'An error message',
+    required: true,
   },
 };
 
@@ -35,6 +36,8 @@ export const Small: Story = {
     ],
     label: 'Small label',
     hint: 'Small hint',
+    error: 'Small error',
+    required: true,
   },
 };
 
@@ -47,6 +50,8 @@ export const Medium: Story = {
     ],
     label: 'Medium label',
     hint: 'Medium hint',
+    error: 'Medium error',
+    required: true,
   },
 };
 
@@ -59,6 +64,8 @@ export const Large: Story = {
     ],
     label: 'Large label',
     hint: 'Large hint',
+    error: 'Large error',
+    required: true,
   },
 };
 

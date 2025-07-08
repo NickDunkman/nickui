@@ -152,10 +152,10 @@ export function Textarea({
       className={className}
       sizer={sizer}
       label={label}
+      controlId={id}
       hint={hint}
       hintId={ariaDescribedBy}
       error={error !== true ? error : undefined}
-      controlId={id}
       errorId={ariaErrorMessage}
       disabled={disabled}
       required={required}

@@ -345,8 +345,8 @@ export function Slider({
       : descriptorOrFn;
   }
   const label = descriptorOrFnToNode(labelOrFn);
-  const error = descriptorOrFnToNode(errorOrFn);
   const hint = descriptorOrFnToNode(hintOrFn);
+  const error = descriptorOrFnToNode(errorOrFn);
 
   const [uncontrolledAriaLabelledBy] = React.useState(randomId());
   const ariaLabelledBy =

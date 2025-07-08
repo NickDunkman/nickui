@@ -30,12 +30,12 @@ export interface FieldProps extends React.ComponentProps<'div'> {
 export function Field({
   children: formControl,
   controlId,
-  error,
-  errorId,
-  hint,
-  hintId,
   label,
   labelId,
+  hint,
+  hintId,
+  error,
+  errorId,
   sizer,
   disabled: _disabled,
   required = false,
@@ -60,15 +60,15 @@ export function Field({
 
       <div>{formControl}</div>
 
-      {error && error !== true && (
-        <div id={errorId} className={s.error()} aria-live="assertive">
-          {error}
-        </div>
-      )}
-
       {hint && (
         <div id={hintId} className={s.hint()}>
           {hint}
+        </div>
+      )}
+
+      {error && error !== true && (
+        <div id={errorId} className={s.error()} aria-live="assertive">
+          {error}
         </div>
       )}
     </div>

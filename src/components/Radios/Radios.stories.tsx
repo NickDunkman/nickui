@@ -18,8 +18,8 @@ export const FieldsetLayout: Story = {
   args: {
     required: true,
     label: 'A label',
-    error: 'An error message',
     hint: 'A hint',
+    error: 'An error message',
     options: [
       {
         value: 'one',
