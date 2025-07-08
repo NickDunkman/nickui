@@ -1,4 +1,4 @@
-name: ESLint analysis
+name: Linting (ESLint)
 
 on:
   push:
