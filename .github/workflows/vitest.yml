@@ -1,4 +1,4 @@
-name: eslint
+name: vitest
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
     branches: ['main']
 
 jobs:
-  eslint:
-    name: Run eslint
+  vitest:
+    name: Run vitest
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -28,5 +28,5 @@ jobs:
           corepack enable
           yarn install
 
-      - name: Run ESLint
-        run: npm run eslint
+      - name: Run vitest
+        run: npm run vitest

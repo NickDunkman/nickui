@@ -2,9 +2,9 @@ name: tsc
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   tsc:
@@ -29,4 +29,4 @@ jobs:
           yarn install
 
       - name: Run tsc
-        run: npm run check:tsc
+        run: npm run tsc

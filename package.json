@@ -15,12 +15,13 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "check": "npm run check:eslint && npm run check:prettier && npm run check:tsc",
-    "check:eslint": "eslint --max-warnings=0 \"**/*.{js,jsx,ts,tsx}\"",
-    "check:prettier": "prettier -c \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
-    "check:tsc": "tsc",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build -o ./docs/"
+    "build-storybook": "storybook build -o ./docs/",
+    "check": "npm run vitest && npm run eslint && npm run prettier && npm run tsc",
+    "eslint": "eslint --max-warnings=0 \"**/*.{js,jsx,ts,tsx}\"",
+    "prettier": "prettier -c \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
+    "vitest": "vitest run",
+    "tsc": "tsc"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.9",
