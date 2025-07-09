@@ -20,35 +20,34 @@ export const FieldLayout: Story = {
     error: 'An error message',
     defaultValue: 'A problematic value',
   },
-  play: async ({ canvas }) => {
+  play: ({ canvas }) => {
     const input = canvas.getByRole('textbox');
-    await expect(input).toBeInTheDocument();
-    await expect(input).toHaveAccessibleName('A label*');
-    await expect(input).toHaveAccessibleDescription('A hint');
-    await expect(input).toHaveAccessibleErrorMessage('An error message');
-    await expect(input).toHaveClass('border-rose-800');
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAccessibleName('A label*');
+    expect(input).toHaveAccessibleDescription('A hint');
+    expect(input).toHaveAccessibleErrorMessage('An error message');
+    expect(input).toHaveClass('border-rose-800');
 
     const requiredAsterisk = canvas.getByTitle('required');
-    await expect(requiredAsterisk).toBeInTheDocument();
-    await expect(requiredAsterisk).toHaveTextContent('*');
+    expect(requiredAsterisk).toBeInTheDocument();
+    expect(requiredAsterisk).toHaveTextContent('*');
   },
 };
 
 export const Empty: Story = {
   args: {
     placeholder: 'Empty Text',
-    'aria-label': 'Empty Text with no set value',
+    'aria-label': 'Empty Text',
   },
   play: async ({ canvas, userEvent }) => {
-    const input = canvas.getByRole<HTMLInputElement>('textbox');
-    await expect(input).toBeInTheDocument();
-    await expect(input).toHaveAccessibleName('Empty Text with no set value');
-
     // The value is controlled, and we don't have a wrapper setup to pass in
     // the new value, so while a change event should be fired, the input's value
     // should not change.
+    const input = canvas.getByLabelText('Empty Text');
     await userEvent.type(input, 'a');
-    await expect(input).toHaveValue('a');
+    expect(input).toHaveValue('a');
+
+    // reset back to original value
     await userEvent.type(input, '{backspace}');
   },
 };
@@ -56,41 +55,31 @@ export const Empty: Story = {
 export const Controlled: Story = {
   args: {
     value: 'Controlled Text',
+    'aria-label': 'Controlled Text',
     onChange: fn(),
-    'aria-label': 'Example Text with a controlled value',
   },
   play: async ({ args, canvas, userEvent }) => {
-    const input = canvas.getByRole<HTMLInputElement>('textbox');
-    await expect(input).toBeInTheDocument();
-    await expect(input).toHaveAccessibleName(
-      'Example Text with a controlled value',
-    );
-
     // The value is controlled, and we don't have a wrapper setup to pass in
     // the new value, so while a change event should be fired, the input's value
     // should not change.
+    const input = canvas.getByLabelText('Controlled Text');
     await userEvent.type(input, 'a');
-    await expect(args.onChange).toHaveBeenCalled();
-    await expect(input).toHaveValue('Controlled Text');
+    expect(args.onChange).toHaveBeenCalled();
+    expect(input).toHaveValue(args.value);
   },
 };
 
 export const Uncontrolled: Story = {
   args: {
     defaultValue: 'Uncontrolled Text',
-    'aria-label': 'Example Text with an uncontrolled value',
+    'aria-label': 'Uncontrolled Text',
   },
   play: async ({ args, canvas, userEvent }) => {
-    const input = canvas.getByRole<HTMLInputElement>('textbox');
-    await expect(input).toBeInTheDocument();
-    await expect(input).toHaveAccessibleName(
-      'Example Text with an uncontrolled value',
-    );
-
     // The value is uncontrolled, so the input's value should update as you
     // type without having any other mechanism for updating the value prop.
+    const input = canvas.getByLabelText('Uncontrolled Text');
     await userEvent.type(input, 'a');
-    await expect(input).toHaveValue(`${args.defaultValue}a`);
+    expect(input).toHaveValue(`${args.defaultValue}a`);
     await userEvent.type(input, '{backspace}');
   },
 };
@@ -100,18 +89,16 @@ export const Disabled: Story = {
     defaultValue: 'Disabled Text',
     disabled: true,
     onChange: fn(),
-    'aria-label': 'Example disabled Text',
+    'aria-label': 'Disabled Text',
   },
   play: async ({ args, canvas, userEvent }) => {
-    const input = canvas.getByRole<HTMLInputElement>('textbox');
-    await expect(input).toBeInTheDocument();
-    await expect(input).toHaveAccessibleName('Example disabled Text');
-    await expect(input).toBeDisabled();
+    const input = canvas.getByLabelText('Disabled Text');
+    expect(input).toBeDisabled();
 
     // Typing should not fire any changes
     await userEvent.type(input, 'a');
-    await expect(args.onChange).not.toHaveBeenCalled();
-    await expect(input).toHaveValue(args.defaultValue);
+    expect(args.onChange).not.toHaveBeenCalled();
+    expect(input).toHaveValue(args.defaultValue);
   },
 };
 
@@ -133,11 +120,11 @@ export const Small: Story = {
     label: 'Small label',
     placeholder: 'Small Text (default)',
   },
-  play: async ({ canvas }) => {
+  play: ({ canvas }) => {
     // The input should have the small sizing
-    await expect(canvas.getByRole('textbox')).toHaveClass('text-sm');
+    expect(canvas.getByLabelText('Small label')).toHaveClass('text-sm');
     // The wrapping Field should have small sizing
-    await expect(canvas.getByText('Small label')).toHaveClass('text-xs');
+    expect(canvas.getByText('Small label')).toHaveClass('text-xs');
   },
 };
 
@@ -147,11 +134,11 @@ export const Medium: Story = {
     label: 'Medium label',
     placeholder: 'Medium Text',
   },
-  play: async ({ canvas }) => {
+  play: ({ canvas }) => {
     // The input should have medium sizing
-    await expect(canvas.getByRole('textbox')).toHaveClass('text-base');
+    expect(canvas.getByLabelText('Medium label')).toHaveClass('text-base');
     // The wrapping Field should have medium sizing
-    await expect(canvas.getByText('Medium label')).toHaveClass('text-sm');
+    expect(canvas.getByText('Medium label')).toHaveClass('text-sm');
   },
 };
 
@@ -161,11 +148,11 @@ export const Large: Story = {
     label: 'Large label',
     placeholder: 'Large Text',
   },
-  play: async ({ canvas }) => {
+  play: ({ canvas }) => {
     // The input should have medium sizing
-    await expect(canvas.getByRole('textbox')).toHaveClass('text-lg');
+    expect(canvas.getByLabelText('Large label')).toHaveClass('text-lg');
     // The wrapping Field should have medium sizing
-    await expect(canvas.getByText('Large label')).toHaveClass('text-lg');
+    expect(canvas.getByText('Large label')).toHaveClass('text-lg');
   },
 };
 
