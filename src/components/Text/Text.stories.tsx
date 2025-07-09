@@ -22,15 +22,12 @@ export const FieldLayout: Story = {
   },
   play: ({ canvas }) => {
     const input = canvas.getByRole('textbox');
-    expect(input).toBeInTheDocument();
     expect(input).toHaveAccessibleName('A label*');
     expect(input).toHaveAccessibleDescription('A hint');
     expect(input).toHaveAccessibleErrorMessage('An error message');
     expect(input).toHaveClass('border-rose-800');
 
-    const requiredAsterisk = canvas.getByTitle('required');
-    expect(requiredAsterisk).toBeInTheDocument();
-    expect(requiredAsterisk).toHaveTextContent('*');
+    expect(canvas.getByTitle('required')).toHaveTextContent('*');
   },
 };
 
@@ -40,9 +37,8 @@ export const Empty: Story = {
     'aria-label': 'Empty Text',
   },
   play: async ({ canvas, userEvent }) => {
-    // The value is controlled, and we don't have a wrapper setup to pass in
-    // the new value, so while a change event should be fired, the input's value
-    // should not change.
+    // When there's no value or defaultValue prop used, it should be able to
+    // track an internal uncontrolled value.
     const input = canvas.getByLabelText('Empty Text');
     await userEvent.type(input, 'a');
     expect(input).toHaveValue('a');

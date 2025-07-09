@@ -28,6 +28,7 @@ export function Fieldset({
   'aria-labelledby': ariaLabeledBy,
   'aria-describedby': ariaDescribedBy,
   'aria-errormessage': ariaErrorMessage,
+  'aria-invalid': ariaInvalid,
   ...otherFieldsetProps
 }: FieldsetProps & CommonFieldsetProps) {
   const [legendId] = React.useState<string>(randomId());
@@ -57,6 +58,7 @@ export function Fieldset({
         // Also allow the caller to manage an external error message
         ariaErrorMessage,
       )}
+      aria-invalid={!!(ariaInvalid || error)}
     >
       {label && (
         <legend id={legendId} className={s.legend()}>

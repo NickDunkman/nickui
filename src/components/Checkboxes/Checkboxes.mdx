@@ -31,6 +31,12 @@ import * as Stories from './Checkboxes.stories';
 <Docs.TableOfContents />
 
 <Docs.Props of={Stories} nativeBase="input" wrapper="Fieldset" />
+<Docs.ControlStates
+  of={Stories}
+  valuable
+  sourceState="hidden"
+  note="Note: while you can disable individual checkboxes as shown in sections below, using `disabled={true}` will disable the entire field by forcing all child checkboxes to be disabled."
+/>
 
 ## Adding checkboxes
 
@@ -69,9 +75,9 @@ can pass a `render` function instead of using `options`.
             sizer={Checkbox.sizer.large}
             label="Embiggened"
           />
-          <div>
+          <label>
             <input type="checkbox" {...checkbox({ value: 'native' })} /> Native
-          </div>
+          </label>
         </div>
       )}
     />
