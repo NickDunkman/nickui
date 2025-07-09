@@ -34,6 +34,7 @@ test('Compatible with React Hook Form', async () => {
   render(<RHFTest />);
 
   const input = screen.getByLabelText('Name');
+  expect(input).toHaveValue('Nick');
   expect(input).toHaveAttribute('data-touched', 'false');
 
   await user.tab();
@@ -80,6 +81,7 @@ test('Compatible with Formik', async () => {
   render(<FormikTest />);
 
   const input = screen.getByLabelText('Name');
+  expect(input).toHaveValue('Nick');
   expect(input).toHaveAttribute('data-touched', 'false');
 
   await user.tab();

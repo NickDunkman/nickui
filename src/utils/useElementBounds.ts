@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ResizeObserver from 'resize-observer-polyfill';
 
 /**
  * A hook that returns an object with information about an element's bounds
