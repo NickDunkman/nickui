@@ -36,7 +36,7 @@ export function FormLibraryCompatibility({
     <>
       <Markdown options={{ overrides: { ComponentName } }}>
         {`
-## React Hook Form & Formik compatibility
+## Compatibility with popular form libraries
 
 &nbsp;<ComponentName of="${componentName}" /> implements all of the necessary
 props to be used with [React Hook Form](https://react-hook-form.com/) and

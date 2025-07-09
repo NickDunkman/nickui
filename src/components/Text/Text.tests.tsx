@@ -1,3 +1,4 @@
+// Note: most tests are in story play functions in Text.stories.tsx
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { useFormik } from 'formik';
