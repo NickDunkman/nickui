@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
+import { expect, fn } from 'storybook/test';
 
 import { Button } from './Button';
 
@@ -14,6 +15,14 @@ type Story = StoryObj<typeof meta>;
 export const Enabled: Story = {
   args: {
     children: 'Enabled Button',
+    onClick: fn(),
+  },
+  play: async ({ args, canvas, userEvent }) => {
+    const button = canvas.getByRole('button');
+    await expect(button).toBeInTheDocument();
+
+    await userEvent.click(button);
+    await expect(args.onClick).toHaveBeenCalled();
   },
 };
 
@@ -21,6 +30,15 @@ export const Disabled: Story = {
   args: {
     children: 'Disabled Button',
     disabled: true,
+    onClick: fn(),
+  },
+  play: async ({ args, canvas, userEvent }) => {
+    const button = canvas.getByRole('button');
+    await expect(button).toBeInTheDocument();
+    await expect(button).toBeDisabled();
+
+    await userEvent.click(button);
+    await expect(args.onClick).not.toHaveBeenCalled();
   },
 };
 
@@ -39,6 +57,9 @@ export const Small: Story = {
     sizer: Button.sizer.small,
     children: 'Small Button (default)',
   },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button')).toHaveClass('text-sm');
+  },
 };
 
 export const Medium: Story = {
@@ -46,12 +67,18 @@ export const Medium: Story = {
     sizer: Button.sizer.medium,
     children: 'Medium Button',
   },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button')).toHaveClass('text-base');
+  },
 };
 
 export const Large: Story = {
   args: {
     sizer: Button.sizer.large,
     children: 'Large Button',
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button')).toHaveClass('text-lg');
   },
 };
 
@@ -70,6 +97,9 @@ export const Primary: Story = {
   args: {
     children: 'Primary Button (default)',
   },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button')).toHaveClass('bg-indigo-600');
+  },
 };
 
 export const Secondary: Story = {
@@ -77,12 +107,18 @@ export const Secondary: Story = {
     flavor: Button.flavor.secondary,
     children: 'Secondary Button',
   },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button')).toHaveClass('bg-gray-100');
+  },
 };
 
 export const Danger: Story = {
   args: {
     flavor: Button.flavor.danger,
     children: 'Danger Button',
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button')).toHaveClass('bg-rose-700');
   },
 };
 
