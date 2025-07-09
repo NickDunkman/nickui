@@ -19,7 +19,7 @@ export default defineConfig({
         extends: true,
         plugins: [tailwindcss(), tsconfigPaths(), react()],
         test: {
-          include: ['**/*.test.{ts,tsx}'],
+          include: ['**/*.tests.{ts,tsx}'],
           name: 'unit tests',
           globals: true,
           environment: 'jsdom',
