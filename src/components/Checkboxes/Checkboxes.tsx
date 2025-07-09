@@ -182,11 +182,14 @@ export function Checkables({
   // use that as the defaultValue for this component -- allowing the checkables
   // to be properly checked or unchecked after mount.
   React.useLayoutEffect(() => {
-    if (value === undefined && defaultValue === undefined) {
+    if (controlledValue === undefined && defaultValue === undefined) {
       const hiddenInput = getHiddenInput(containerRef);
       if (hiddenInput.value) {
         setUncontrolledValue(hiddenInput.value);
       }
+    } else if (value) {
+      const hiddenInput = getHiddenInput(containerRef);
+      hiddenInput.value = value;
     }
     // We only want to run this effect once after mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -247,6 +250,7 @@ export function Checkables({
           className="the-hidden-input hidden"
           disabled={disabled}
           required={required}
+          data-testid="the-hidden-input"
         />
       </div>
     </Fieldset>
