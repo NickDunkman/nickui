@@ -10,6 +10,10 @@ import { styles } from './styles';
 export interface CheckedFieldProps extends React.ComponentProps<'label'> {
   /** The content of the form-control section of the Field */
   children?: React.ReactNode;
+  /** For accessibility purposes: an id to set on the label element */
+  labelId?: string;
+  /** For accessibility purposes: an id to set on the hint element */
+  hintId?: string;
 }
 
 /**
@@ -27,8 +31,10 @@ export interface CheckedFieldProps extends React.ComponentProps<'label'> {
 export function CheckedField({
   children: formControl,
   className,
-  hint,
   label,
+  labelId,
+  hint,
+  hintId,
   sizer,
   disabled: disabled,
   ...labelProps
@@ -53,8 +59,16 @@ export function CheckedField({
         <span style={{ paddingLeft: controlBounds?.width || 0 }}>&#8203;</span>
         {(label || hint) && (
           <div className={s.labelese()}>
-            {label && <div className={s.label()}>{label}</div>}
-            {hint && <div className={s.hint()}>{hint}</div>}
+            {label && (
+              <div className={s.label()} id={labelId}>
+                {label}
+              </div>
+            )}
+            {hint && (
+              <div className={s.hint()} id={hintId}>
+                {hint}
+              </div>
+            )}
           </div>
         )}
       </div>

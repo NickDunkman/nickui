@@ -4,6 +4,7 @@ import { CheckedField } from '@/components/CheckedField';
 import { FieldSizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
+import { randomId } from '@/utils/randomId';
 
 import { styles as checkboxStyles } from './styles';
 
@@ -50,6 +51,8 @@ export function Checkable({
   onBlur,
   onFocus,
   type,
+  'aria-labelledby': controlledAriaLabelledBy,
+  'aria-describedby': controlledAriaDescribedBy,
   ...inputProps
 }: CheckboxProps &
   CommonCheckedFieldProps &
@@ -94,6 +97,16 @@ export function Checkable({
     }
   }
 
+  const [uncontrolledAriaLabelledBy] = React.useState(randomId());
+  const ariaLabelledBy =
+    controlledAriaLabelledBy ||
+    (label ? uncontrolledAriaLabelledBy : undefined);
+
+  const [uncontrolledAriaDescribedBy] = React.useState(randomId());
+  const ariaDescribedBy =
+    controlledAriaDescribedBy ||
+    (hint ? uncontrolledAriaDescribedBy : undefined);
+
   const s = styler({
     sizer,
     isDisabled: !!disabled,
@@ -107,7 +120,9 @@ export function Checkable({
     <CheckedField
       className={clsw(s.root(), className)}
       label={labelWithOffset}
+      labelId={ariaLabelledBy}
       hint={hint}
+      hintId={ariaDescribedBy}
       sizer={sizer}
       disabled={disabled}
       onMouseDown={handleRootMouseDown}
@@ -118,9 +133,11 @@ export function Checkable({
         disabled={disabled}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
         {...inputProps}
       />
-      <div className={s.indicator()} />
+      <div className={s.indicator()} data-testid="indicator" />
     </CheckedField>
   );
 }
