@@ -2,8 +2,54 @@ import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { useFormik } from 'formik';
 import * as React from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Text } from './Text';
+
+test('Compatible with React Hook Form', async () => {
+  function RHFTest() {
+    const {
+      register,
+      formState: { errors, touchedFields },
+    } = useForm({
+      mode: 'all',
+      defaultValues: { name: 'Nick' },
+    });
+
+    return (
+      <Text
+        label="Name"
+        {...register('name', {
+          validate: (value) =>
+            value !== 'erroneous value' || 'That’s erroneous',
+        })}
+        error={errors.name?.message}
+        data-touched={!!touchedFields.name}
+      />
+    );
+  }
+
+  const user = userEvent.setup();
+
+  render(<RHFTest />);
+
+  const input = screen.getByLabelText('Name');
+  expect(input).toHaveAttribute('data-touched', 'false');
+
+  await user.tab();
+  expect(input).toHaveFocus();
+
+  await user.clear(input);
+  expect(input).toHaveValue('');
+
+  await user.type(input, 'erroneous value');
+  expect(input).toHaveAccessibleErrorMessage('That’s erroneous');
+
+  // Ensures that onBlur is functioning properly
+  await user.tab();
+  expect(input).not.toHaveFocus();
+  expect(input).toHaveAttribute('data-touched', 'true');
+});
 
 test('Compatible with Formik', async () => {
   function FormikTest() {
@@ -21,9 +67,10 @@ test('Compatible with Formik', async () => {
 
     return (
       <Text
+        label="Name"
         {...form.getFieldProps('name')}
         error={form.errors.name}
-        data-touched={form.touched.name}
+        data-touched={!!form.touched.name}
       />
     );
   }
@@ -32,8 +79,8 @@ test('Compatible with Formik', async () => {
 
   render(<FormikTest />);
 
-  const input = screen.getByRole('textbox');
-  expect(input).toBeInTheDocument();
+  const input = screen.getByLabelText('Name');
+  expect(input).toHaveAttribute('data-touched', 'false');
 
   await user.tab();
   expect(input).toHaveFocus();
@@ -44,9 +91,8 @@ test('Compatible with Formik', async () => {
   await user.type(input, 'erroneous value');
   expect(input).toHaveAccessibleErrorMessage('That’s erroneous');
 
+  // Ensures that onBlur is functioning properly
   await user.tab();
   expect(input).not.toHaveFocus();
-
-  // This ensures that onBlur is functioning properly
   expect(input).toHaveAttribute('data-touched', 'true');
 });
