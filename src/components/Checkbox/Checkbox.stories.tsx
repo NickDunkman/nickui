@@ -101,7 +101,7 @@ export const Uncontrolled: Story = {
       },
     );
 
-    await step('Reset back to checked state', async () => {
+    await step('Reset to checked state', async () => {
       await userEvent.click(checkbox);
       expect(checkbox).toBeChecked();
     });

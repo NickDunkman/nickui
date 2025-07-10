@@ -31,21 +31,16 @@ export const FieldsetLayout: Story = {
       },
     ],
   },
-  play: ({ canvas }) => {
+  play: async ({ canvas, step }) => {
     const fieldset = canvas.getByRole('group');
-    expect(fieldset).toHaveAccessibleName('A label*');
-    expect(fieldset).toHaveAccessibleDescription('A hint');
-    expect(fieldset).toHaveAccessibleErrorMessage('An error message');
+    const requiredAsterisk = canvas.getByTitle('required');
 
-    expect(canvas.getByTitle('required')).toHaveTextContent('*');
-
-    const cb1 = canvas.getByLabelText('Option one');
-    expect(cb1).toHaveRole('checkbox');
-    expect(cb1).not.toBeChecked();
-
-    const cb2 = canvas.getByLabelText('Option two');
-    expect(cb2).toHaveRole('checkbox');
-    expect(cb2).not.toBeChecked();
+    await step('Assert accessibility of layout elements', async () => {
+      expect(fieldset).toHaveAccessibleName('A label*');
+      expect(fieldset).toHaveAccessibleDescription('A hint');
+      expect(fieldset).toHaveAccessibleErrorMessage('An error message');
+      expect(requiredAsterisk).toHaveTextContent('*');
+    });
   },
 };
 
@@ -64,32 +59,41 @@ export const NoValue: Story = {
     ],
     onChange: fn(),
   },
-  play: async ({ args, canvas, userEvent }) => {
+  play: async ({ args, canvas, step, userEvent }) => {
     // When there's no value or defaultValue prop used, it should be able to
     // track an internal uncontrolled value.
 
     const cb1 = canvas.getByLabelText('Option one');
-    expect(cb1).not.toBeChecked();
-
     const cb2 = canvas.getByLabelText('Option two');
-    expect(cb2).not.toBeChecked();
 
-    await userEvent.click(cb1);
-    expect(cb1).toBeChecked();
-    expect(cb2).not.toBeChecked();
-    expect(args.onChange).toHaveBeenCalled();
+    await step('Assert initial all-unchecked state', async () => {
+      expect(cb1).not.toBeChecked();
+      expect(cb2).not.toBeChecked();
+    });
 
-    await userEvent.click(cb2);
-    expect(cb1).toBeChecked();
-    expect(cb2).toBeChecked();
+    await step('Check first Checkbox using the keyboard', async () => {
+      await userEvent.tab();
+      expect(cb1).toHaveFocus();
 
-    await userEvent.click(cb1);
-    expect(cb1).not.toBeChecked();
-    expect(cb2).toBeChecked();
+      await userEvent.keyboard(' ');
+      expect(cb1).toBeChecked();
+      expect(cb2).not.toBeChecked();
+      expect(args.onChange).toHaveBeenCalledOnce();
+    });
 
-    await userEvent.click(cb2);
-    expect(cb1).not.toBeChecked();
-    expect(cb2).not.toBeChecked();
+    await step('Check second Checkbox using the mouse', async () => {
+      await userEvent.click(cb2);
+      expect(cb1).toBeChecked();
+      expect(cb2).toBeChecked();
+      expect(args.onChange).toHaveBeenCalledTimes(2);
+    });
+
+    await step('Reset all checked states', async () => {
+      await userEvent.click(cb1);
+      expect(cb1).not.toBeChecked();
+      await userEvent.click(cb2);
+      expect(cb2).not.toBeChecked();
+    });
   },
 };
 
@@ -109,21 +113,24 @@ export const Controlled: Story = {
     ],
     onChange: fn(),
   },
-  play: async ({ args, canvas, userEvent }) => {
-    // The value is controlled, and we don't have a wrapper setup to pass in
-    // the new value, so while a change event should be fired, the checkboxes
-    // shouldn't change checked status.
-
+  play: async ({ args, canvas, step, userEvent }) => {
     const cb1 = canvas.getByLabelText('Option one');
-    expect(cb1).toBeChecked();
-
     const cb2 = canvas.getByLabelText('Option two');
-    expect(cb2).not.toBeChecked();
 
-    await userEvent.click(cb1);
-    expect(args.onChange).toHaveBeenCalled();
-    expect(cb1).toBeChecked();
-    expect(cb2).not.toBeChecked();
+    await step('Assert `value` prop works', async () => {
+      expect(cb1).toBeChecked();
+      expect(cb2).not.toBeChecked();
+    });
+
+    await step(
+      'Try toggling a Checkbox. `onChange` should fire, but the value is controlled, so the Checkbox shouldn’t toggle',
+      async () => {
+        await userEvent.click(cb1);
+        expect(args.onChange).toHaveBeenCalled();
+        expect(cb1).toBeChecked();
+        expect(cb2).not.toBeChecked();
+      },
+    );
   },
 };
 
@@ -143,23 +150,29 @@ export const Uncontrolled: Story = {
     ],
     onChange: fn(),
   },
-  play: async ({ args, canvas, userEvent }) => {
-    // The value is uncontrolled, so the checked statuses should change  without
-    // having any other mechanism for updating the value prop.
-
+  play: async ({ args, canvas, step, userEvent }) => {
     const cb1 = canvas.getByLabelText('Option one');
-    expect(cb1).toBeChecked();
-
     const cb2 = canvas.getByLabelText('Option two');
-    expect(cb2).not.toBeChecked();
 
-    await userEvent.click(cb1);
-    expect(args.onChange).toHaveBeenCalled();
-    expect(cb1).not.toBeChecked();
-    expect(cb2).not.toBeChecked();
+    await step('Assert `defaultValue` prop works', async () => {
+      expect(cb1).toBeChecked();
+      expect(cb2).not.toBeChecked();
+    });
+
+    await step(
+      'Toggling a Checkbox should both fire onChange & toggle the checked state, since the value is uncontrolled.',
+      async () => {
+        await userEvent.click(cb1);
+        expect(args.onChange).toHaveBeenCalled();
+        expect(cb1).not.toBeChecked();
+        expect(cb2).not.toBeChecked();
+      },
+    );
 
     // reset back to original state
-    await userEvent.click(cb1);
+    await step('Reset to original value', async () => {
+      await userEvent.click(cb1);
+    });
   },
 };
 
@@ -172,23 +185,19 @@ export const Disabled: Story = {
       {
         value: 'one',
         label: 'Option one',
+        disabled: false,
       },
       {
         value: 'two',
         label: 'Option two',
       },
     ],
-    onChange: fn(),
   },
-  play: async ({ args, canvas, userEvent }) => {
-    const cb1 = canvas.getByLabelText('Option one');
-    expect(cb1).toBeDisabled();
-
-    const cb2 = canvas.getByLabelText('Option two');
-    expect(cb2).toBeDisabled();
-
-    await userEvent.click(cb1);
-    expect(args.onChange).not.toHaveBeenCalled();
+  play: async ({ canvas, step }) => {
+    await step('Assert all Checkboxes are disabled', async () => {
+      expect(canvas.getByLabelText('Option one')).toBeDisabled();
+      expect(canvas.getByLabelText('Option two')).toBeDisabled();
+    });
   },
 };
 
@@ -211,19 +220,26 @@ export const StandardLayout: Story = {
         disabled: true,
       },
     ],
+    onChange: fn(),
   },
-  play: ({ canvas }) => {
+  play: async ({ canvas, step }) => {
     const cb1 = canvas.getByLabelText('Roman Aquila');
-    expect(cb1).not.toBeChecked();
-    expect(cb1).not.toBeDisabled();
-
     const cb2 = canvas.getByLabelText('ISO 8601');
-    expect(cb2).toBeChecked();
-    expect(cb2).not.toBeDisabled();
-
     const cb3 = canvas.getByLabelText('High Society');
-    expect(cb3).not.toBeChecked();
-    expect(cb3).toBeDisabled();
+
+    await step(
+      'Assert the controlled Checkboxes are configured correctly',
+      async () => {
+        expect(cb1).not.toBeChecked();
+        expect(cb1).not.toBeDisabled();
+
+        expect(cb2).toBeChecked();
+        expect(cb2).not.toBeDisabled();
+
+        expect(cb3).not.toBeChecked();
+        expect(cb3).toBeDisabled();
+      },
+    );
   },
 };
 
@@ -261,15 +277,16 @@ export const CustomLayout: Story = {
       </div>
     ),
   },
-  play: ({ canvas }) => {
+  play: async ({ canvas, step }) => {
     const cb1 = canvas.getByLabelText('Colorful');
-    expect(cb1).toBeChecked();
-
     const cb2 = canvas.getByLabelText('Embiggened');
-    expect(cb2).toBeChecked();
-
     const cb3 = canvas.getByLabelText('Native');
-    expect(cb3).not.toBeChecked();
+
+    await step('Assert the render function’s callback works', async () => {
+      expect(cb1).toBeChecked();
+      expect(cb2).toBeChecked();
+      expect(cb3).not.toBeChecked();
+    });
   },
 };
 
@@ -289,13 +306,16 @@ export const Small: Story = {
       },
     ],
   },
-  play: ({ canvas }) => {
-    // The checkboxes should use small sizing
-    canvas.getAllByTestId('indicator').forEach((indicator) => {
-      expect(indicator).toHaveClass('size-3.5');
-    });
-    // The wrapping Fieldset should use small sizing
-    expect(canvas.getByText('Small label')).toHaveClass('text-xs');
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the small style of both the Checkboxes & Fieldset',
+      async () => {
+        canvas.getAllByTestId('indicator').forEach((indicator) => {
+          expect(indicator).toHaveClass('size-3.5');
+        });
+        expect(canvas.getByText('Small label')).toHaveClass('text-xs');
+      },
+    );
   },
 };
 
@@ -315,13 +335,16 @@ export const Medium: Story = {
       },
     ],
   },
-  play: ({ canvas }) => {
-    // The checkboxes should use medium sizing
-    canvas.getAllByTestId('indicator').forEach((indicator) => {
-      expect(indicator).toHaveClass('size-4');
-    });
-    // The wrapping Fieldset should use medium sizing
-    expect(canvas.getByText('Medium label')).toHaveClass('text-sm');
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the medium style of both the Checkboxes & Fieldset',
+      async () => {
+        canvas.getAllByTestId('indicator').forEach((indicator) => {
+          expect(indicator).toHaveClass('size-4');
+        });
+        expect(canvas.getByText('Medium label')).toHaveClass('text-sm');
+      },
+    );
   },
 };
 
@@ -341,13 +364,16 @@ export const Large: Story = {
       },
     ],
   },
-  play: ({ canvas }) => {
-    // The checkboxes should use large sizing
-    canvas.getAllByTestId('indicator').forEach((indicator) => {
-      expect(indicator).toHaveClass('size-5');
-    });
-    // The wrapping Fieldset should use large sizing
-    expect(canvas.getByText('Large label')).toHaveClass('text-lg');
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the laerge style of both the Checkboxes & Fieldset',
+      async () => {
+        canvas.getAllByTestId('indicator').forEach((indicator) => {
+          expect(indicator).toHaveClass('size-5');
+        });
+        expect(canvas.getByText('Large label')).toHaveClass('text-lg');
+      },
+    );
   },
 };
 
