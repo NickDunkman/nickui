@@ -40,8 +40,8 @@
     "@typescript-eslint/eslint-plugin": "^8.33.0",
     "@typescript-eslint/parser": "^8.33.0",
     "@vitejs/plugin-react": "^4.6.0",
-    "@vitest/browser": "^3.1.4",
-    "@vitest/coverage-v8": "^3.1.4",
+    "@vitest/browser": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-import-resolver-typescript": "^4.4.1",
@@ -59,7 +59,7 @@
     "react-hook-form": "^7.58.1",
     "storybook": "^9.0.15",
     "typescript": "^5.8.3",
-    "vitest": "^3.1.4"
+    "vitest": "^3.2.4"
   },
   "packageManager": "yarn@4.9.2",
   "dependencies": {
