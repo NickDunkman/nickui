@@ -53,8 +53,8 @@ function FormikTest() {
 }
 
 test.each([
-  { Component: FormikTest, library: 'Formik' },
   { Component: RHFTest, library: 'React Hook Forms' },
+  { Component: FormikTest, library: 'Formik' },
 ])('Compatible with $library', async ({ Component }) => {
   const user = userEvent.setup();
 
@@ -62,7 +62,6 @@ test.each([
 
   const fieldset = screen.getByRole('group');
   const apple = screen.getByLabelText('Apple');
-  console.log(apple);
   const orange = screen.getByLabelText('Orange');
 
   expect(fieldset).toHaveAttribute('data-touched', 'false');
