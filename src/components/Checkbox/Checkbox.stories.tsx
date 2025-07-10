@@ -16,22 +16,31 @@ export const CheckedFieldLayout: Story = {
   args: {
     label: 'A label',
     hint: 'A hint',
+    onChange: fn(),
   },
-  play: async ({ canvas, userEvent }) => {
-    const checkbox = canvas.getByRole('checkbox');
-    expect(checkbox).toHaveAccessibleName('A label');
-    expect(checkbox).toHaveAccessibleDescription('A hint');
-    expect(checkbox).not.toBeChecked();
+  play: async ({ args, canvas, step, userEvent }) => {
+    const checkbox = canvas.getByLabelText('A label');
 
-    // ensure that you can click the label & hint to toggle the checkbox
+    await step('Assert accessibility of layout elements', async () => {
+      expect(checkbox).toHaveRole('checkbox');
+      expect(checkbox).toHaveAccessibleDescription('A hint');
+    });
 
-    const label = canvas.getByText('A label');
-    await userEvent.click(label);
-    expect(checkbox).toBeChecked();
+    await step('Assert initial unchecked state', async () => {
+      expect(checkbox).not.toBeChecked();
+    });
 
-    const hint = canvas.getByText('A hint');
-    await userEvent.click(hint);
-    expect(checkbox).not.toBeChecked();
+    await step('Toggle the Checkbox by clicking the label', async () => {
+      await userEvent.click(canvas.getByText('A label'));
+      expect(checkbox).toBeChecked();
+      expect(args.onChange).toHaveBeenCalledOnce();
+    });
+
+    await step('Toggle the Checkbox by clicking the label', async () => {
+      await userEvent.click(canvas.getByText('A hint'));
+      expect(checkbox).not.toBeChecked();
+      expect(args.onChange).toHaveBeenCalledTimes(2);
+    });
   },
 };
 
@@ -40,8 +49,7 @@ export const Unchecked: Story = {
     label: 'Unchecked Checkbox',
   },
   play: ({ canvas }) => {
-    const checkbox = canvas.getByLabelText('Unchecked Checkbox');
-    expect(checkbox).not.toBeChecked();
+    expect(canvas.getByLabelText('Unchecked Checkbox')).not.toBeChecked();
   },
 };
 
@@ -51,16 +59,21 @@ export const Controlled: Story = {
     checked: true,
     onChange: fn(),
   },
-  play: async ({ args, canvas, userEvent }) => {
+  play: async ({ args, canvas, step, userEvent }) => {
     const checkbox = canvas.getByLabelText('Controlled Checkbox');
-    expect(checkbox).toBeChecked();
 
-    // The Checkbox is controlled, and we don't have a wrapper setup to pass in
-    // the new checked state, so while a change event should be fired, the
-    // Checkbox should still be checked.
-    await userEvent.click(checkbox);
-    expect(args.onChange).toHaveBeenCalled();
-    expect(checkbox).toBeChecked();
+    await step('Assert `checked` prop works', () => {
+      expect(checkbox).toBeChecked();
+    });
+
+    await step(
+      'Try unchecking the Checkbox. `onChange` should fire, but the checked state is controlled, so it shouldn’t change',
+      async () => {
+        await userEvent.click(checkbox);
+        expect(args.onChange).toHaveBeenCalled();
+        expect(checkbox).toBeChecked();
+      },
+    );
   },
 };
 
@@ -70,59 +83,86 @@ export const Uncontrolled: Story = {
     defaultChecked: true,
     onChange: fn(),
   },
-  play: async ({ args, canvas, userEvent }) => {
+  play: async ({ args, canvas, step, userEvent }) => {
     const checkbox = canvas.getByLabelText('Uncontrolled Checkbox');
-    expect(checkbox).toBeChecked();
+
+    await step('Assert `defaultChecked` prop works', () => {
+      expect(checkbox).toBeChecked();
+    });
 
     // The Checkbox is uncontrolled, so clicking should cause the checked
     // state to change.
-    await userEvent.click(checkbox);
-    expect(args.onChange).toHaveBeenCalled();
-    expect(checkbox).not.toBeChecked();
+    await step(
+      'Clicking the Checkbox should toggle the checked state, since it’s uncontrolled',
+      async () => {
+        await userEvent.click(checkbox);
+        expect(args.onChange).toHaveBeenCalled();
+        expect(checkbox).not.toBeChecked();
+      },
+    );
 
-    // Reset back to checked
-    await userEvent.click(checkbox);
+    await step('Reset back to checked state', async () => {
+      await userEvent.click(checkbox);
+      expect(checkbox).toBeChecked();
+    });
   },
 };
 
-export const Disabled: Story = {
+export const DisabledUnchecked: Story = {
   args: {
-    label: 'Disabled Checkbox',
+    label: 'Disabled & unchecked Checkbox',
     disabled: true,
     onChange: fn(),
   },
-  play: async ({ args, canvas, userEvent }) => {
-    const checkbox = canvas.getByLabelText('Disabled Checkbox');
-    expect(checkbox).toBeDisabled();
+  play: async ({ args, canvas, step, userEvent }) => {
+    const checkbox = canvas.getByLabelText('Disabled & unchecked Checkbox');
 
-    // Disabled style should be activated
-    const indicator = canvas.getByTestId('indicator');
-    expect(indicator).toHaveClass('bg-gray-100');
+    await step('Assert disabled & unchecked state', async () => {
+      expect(checkbox).toBeDisabled();
+      expect(checkbox).not.toBeChecked();
+      expect(canvas.getByTestId('indicator')).toHaveClass('bg-gray-100');
+    });
 
-    // The Checkbox is uncontrolled, so clicking should cause the checked
-    // state to change.
-    await userEvent.click(checkbox);
-    expect(args.onChange).not.toHaveBeenCalled();
+    await step('Clicking the Checkbox should have no effect', async () => {
+      await userEvent.click(checkbox);
+      expect(checkbox).not.toBeChecked();
+      expect(args.onChange).not.toHaveBeenCalled();
+    });
   },
 };
 
 export const DisabledChecked: Story = {
-  tags: ['!test'],
   args: {
     label: 'Disabled & checked Checkbox',
     disabled: true,
     defaultChecked: true,
+    onChange: fn(),
+  },
+  play: async ({ args, canvas, step, userEvent }) => {
+    const checkbox = canvas.getByLabelText('Disabled & checked Checkbox');
+
+    await step('Assert disabled & checked state', async () => {
+      expect(checkbox).toBeDisabled();
+      expect(checkbox).toBeChecked();
+      expect(canvas.getByTestId('indicator')).toHaveClass('bg-gray-100');
+    });
+
+    await step('Clicking the Checkbox should have no effect', async () => {
+      await userEvent.click(checkbox);
+      expect(checkbox).toBeChecked();
+      expect(args.onChange).not.toHaveBeenCalled();
+    });
   },
 };
 
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
-  render: (_args) => (
+  render: () => (
     <div className="flex flex-col gap-4">
       <Checkbox {...Unchecked.args} />
       <Checkbox {...Controlled.args} />
       <Checkbox {...Uncontrolled.args} />
-      <Checkbox {...Disabled.args} />
+      <Checkbox {...DisabledUnchecked.args} />
       <Checkbox {...DisabledChecked.args} />
     </div>
   ),
@@ -134,9 +174,10 @@ export const Small: Story = {
     label: 'Small Checkbox (default)',
     defaultChecked: true,
   },
-  play: ({ canvas }) => {
-    // Small style should be activated
-    expect(canvas.getByTestId('indicator')).toHaveClass('size-3.5');
+  play: async ({ canvas, step }) => {
+    await step('The Checkbox should have the small style', async () => {
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-3.5');
+    });
   },
 };
 
@@ -146,9 +187,10 @@ export const Medium: Story = {
     label: 'Medium Checkbox',
     defaultChecked: true,
   },
-  play: ({ canvas }) => {
-    // Medium style should be activated
-    expect(canvas.getByTestId('indicator')).toHaveClass('size-4');
+  play: async ({ canvas, step }) => {
+    await step('The Checkbox should have the medium style', async () => {
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-4');
+    });
   },
 };
 
@@ -158,15 +200,16 @@ export const Large: Story = {
     label: 'Large Checkbox',
     defaultChecked: true,
   },
-  play: ({ canvas }) => {
-    // Large style should be activated
-    expect(canvas.getByTestId('indicator')).toHaveClass('size-5');
+  play: async ({ canvas, step }) => {
+    await step('The Checkbox should have the large style', async () => {
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-5');
+    });
   },
 };
 
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
-  render: (_args) => (
+  render: () => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
       <Checkbox {...Small.args} className="sm:flex-1" />
       <Checkbox {...Medium.args} className="sm:flex-1" />

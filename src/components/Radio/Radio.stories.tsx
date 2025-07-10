@@ -45,18 +45,16 @@ export const CheckedFieldLayout: Story = {
       expect(radio).not.toBeChecked();
     });
 
-    await step('Toggle the radio by clicking the label', async () => {
-      const label = canvas.getByText('A label');
-      await userEvent.click(label);
+    await step('Toggle the Radio by clicking the label', async () => {
+      await userEvent.click(canvas.getByText('A label'));
       expect(radio).toBeChecked();
       expect(args.onChange).toHaveBeenCalledOnce();
     });
 
     await uncheck(radio, step);
 
-    await step('Toggle the radio by clicking the hint', async () => {
-      const hint = canvas.getByText('A hint');
-      await userEvent.click(hint);
+    await step('Toggle the Radio by clicking the hint', async () => {
+      await userEvent.click(canvas.getByText('A hint'));
       expect(radio).toBeChecked();
       expect(args.onChange).toHaveBeenCalledTimes(2);
     });
@@ -109,8 +107,8 @@ export const DisabledUnchecked: Story = {
     const radio = canvas.getByLabelText('Disabled & unchecked Radio');
 
     await step('Assert disabled & unchecked state', async () => {
-      expect(radio).not.toBeChecked();
       expect(radio).toBeDisabled();
+      expect(radio).not.toBeChecked();
       expect(canvas.getByTestId('indicator')).toHaveClass('bg-gray-100');
     });
 
@@ -133,8 +131,8 @@ export const DisabledChecked: Story = {
     const radio = canvas.getByLabelText('Disabled & checked Radio');
 
     await step('Assert the disabled & checked state', async () => {
-      expect(radio).toBeChecked();
       expect(radio).toBeDisabled();
+      expect(radio).toBeChecked();
       expect(canvas.getByTestId('indicator')).toHaveClass('bg-gray-100');
     });
   },
