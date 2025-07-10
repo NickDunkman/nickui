@@ -57,7 +57,7 @@ export const DisabledChecked: Story = {
 
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
-  render: (_args) => (
+  render: () => (
     <div className="flex flex-col gap-4">
       <Switch {...Unchecked.args} />
       <Switch {...Controlled.args} />
@@ -93,7 +93,7 @@ export const Large: Story = {
 
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
-  render: (_args) => (
+  render: () => (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
       <Switch {...Small.args} className="sm:flex-1" />
       <Switch {...Medium.args} className="sm:flex-1" />

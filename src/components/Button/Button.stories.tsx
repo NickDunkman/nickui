@@ -47,7 +47,7 @@ export const Disabled: Story = {
 
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
-  render: (_args) => (
+  render: () => (
     <div className="flex gap-4">
       <Button {...Enabled.args} />
       <Button {...Disabled.args} />
@@ -93,7 +93,7 @@ export const Large: Story = {
 
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
-  render: (_args) => (
+  render: () => (
     <div className="flex flex-wrap items-baseline gap-4">
       <Button {...Small.args} />
       <Button {...Medium.args} />
@@ -139,7 +139,7 @@ export const Danger: Story = {
 
 export const AllFlavors: Story = {
   tags: ['!dev', '!test'],
-  render: (_args) => (
+  render: () => (
     <div className="flex flex-wrap gap-4">
       <Button {...Primary.args} />
       <Button {...Secondary.args} />

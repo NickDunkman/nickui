@@ -63,7 +63,7 @@ export const Disabled: Story = {
 
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
-  render: (_args) => (
+  render: () => (
     <div className="flex flex-col gap-4">
       <Slider {...NoValue.args} />
       <Slider {...Controlled.args} />
@@ -110,7 +110,7 @@ export const Large: Story = {
 
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
-  render: (_args) => (
+  render: () => (
     <div className="flex flex-col items-center gap-5 sm:flex-row">
       <Slider {...Small.args} className="sm:flex-1" />
       <Slider {...Medium.args} className="sm:flex-1" />

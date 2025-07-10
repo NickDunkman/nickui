@@ -144,7 +144,7 @@ export const Large: Story = {
 
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
-  render: (_args) => (
+  render: () => (
     <div className="flex flex-col gap-x-12 gap-y-8 sm:flex-row">
       <div className="flex-1">
         <Radios {...Small.args} />
