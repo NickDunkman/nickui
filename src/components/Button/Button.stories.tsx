@@ -17,12 +17,11 @@ export const Enabled: Story = {
     children: 'Enabled Button',
     onClick: fn(),
   },
-  play: async ({ args, canvas, userEvent }) => {
-    const button = canvas.getByRole('button');
-    await expect(button).toBeInTheDocument();
-
-    await userEvent.click(button);
-    await expect(args.onClick).toHaveBeenCalled();
+  play: async ({ args, canvas, step, userEvent }) => {
+    await step('Clicking the Button should trigger `onClick`', async () => {
+      await userEvent.click(canvas.getByRole('button'));
+      expect(args.onClick).toHaveBeenCalled();
+    });
   },
 };
 
@@ -32,13 +31,17 @@ export const Disabled: Story = {
     disabled: true,
     onClick: fn(),
   },
-  play: async ({ args, canvas, userEvent }) => {
+  play: async ({ args, canvas, step, userEvent }) => {
     const button = canvas.getByRole('button');
-    await expect(button).toBeInTheDocument();
-    await expect(button).toBeDisabled();
 
-    await userEvent.click(button);
-    await expect(args.onClick).not.toHaveBeenCalled();
+    await step('Assert the disabled state', async () => {
+      await expect(button).toBeDisabled();
+    });
+
+    await step('Clicking the Button should have no effect', async () => {
+      await userEvent.click(button);
+      expect(args.onClick).not.toHaveBeenCalled();
+    });
   },
 };
 
@@ -57,8 +60,10 @@ export const Small: Story = {
     sizer: Button.sizer.small,
     children: 'Small Button (default)',
   },
-  play: async ({ canvas }) => {
-    await expect(canvas.getByRole('button')).toHaveClass('text-sm');
+  play: async ({ canvas, step }) => {
+    await step('Assert the small style', async () => {
+      expect(canvas.getByRole('button')).toHaveClass('text-sm');
+    });
   },
 };
 
@@ -67,8 +72,10 @@ export const Medium: Story = {
     sizer: Button.sizer.medium,
     children: 'Medium Button',
   },
-  play: async ({ canvas }) => {
-    await expect(canvas.getByRole('button')).toHaveClass('text-base');
+  play: async ({ canvas, step }) => {
+    await step('Assert the medium style', async () => {
+      expect(canvas.getByRole('button')).toHaveClass('text-base');
+    });
   },
 };
 
@@ -77,8 +84,10 @@ export const Large: Story = {
     sizer: Button.sizer.large,
     children: 'Large Button',
   },
-  play: async ({ canvas }) => {
-    await expect(canvas.getByRole('button')).toHaveClass('text-lg');
+  play: async ({ canvas, step }) => {
+    await step('Assert the large style', async () => {
+      expect(canvas.getByRole('button')).toHaveClass('text-lg');
+    });
   },
 };
 
@@ -97,8 +106,10 @@ export const Primary: Story = {
   args: {
     children: 'Primary Button (default)',
   },
-  play: async ({ canvas }) => {
-    await expect(canvas.getByRole('button')).toHaveClass('bg-indigo-600');
+  play: async ({ canvas, step }) => {
+    await step('Assert the primary style', async () => {
+      await expect(canvas.getByRole('button')).toHaveClass('bg-indigo-600');
+    });
   },
 };
 
@@ -107,8 +118,10 @@ export const Secondary: Story = {
     flavor: Button.flavor.secondary,
     children: 'Secondary Button',
   },
-  play: async ({ canvas }) => {
-    await expect(canvas.getByRole('button')).toHaveClass('bg-gray-100');
+  play: async ({ canvas, step }) => {
+    await step('Assert the secondary style', async () => {
+      expect(canvas.getByRole('button')).toHaveClass('bg-gray-100');
+    });
   },
 };
 
@@ -117,8 +130,10 @@ export const Danger: Story = {
     flavor: Button.flavor.danger,
     children: 'Danger Button',
   },
-  play: async ({ canvas }) => {
-    await expect(canvas.getByRole('button')).toHaveClass('bg-rose-700');
+  play: async ({ canvas, step }) => {
+    await step('Assert the secondary style', async () => {
+      expect(canvas.getByRole('button')).toHaveClass('bg-rose-700');
+    });
   },
 };
 

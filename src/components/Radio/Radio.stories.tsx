@@ -157,7 +157,7 @@ export const Small: Story = {
     defaultChecked: true,
   },
   play: async ({ canvas, step }) => {
-    await step('The Radio should have the small style', async () => {
+    await step('Assert the small style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('size-3.5');
     });
   },
@@ -170,7 +170,7 @@ export const Medium: Story = {
     defaultChecked: true,
   },
   play: async ({ canvas, step }) => {
-    await step('The Radio should have the medium style', async () => {
+    await step('Assert the medium style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('size-4');
     });
   },
@@ -183,7 +183,7 @@ export const Large: Story = {
     defaultChecked: true,
   },
   play: async ({ canvas, step }) => {
-    await step('The Radio should have the large style', async () => {
+    await step('Assert the large style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('size-5');
     });
   },
