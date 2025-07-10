@@ -14,13 +14,16 @@ const dirname =
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   test: {
-    workspace: [
+    projects: [
       {
         extends: true,
         plugins: [tailwindcss(), tsconfigPaths(), react()],
         test: {
           include: ['**/*.tests.{ts,tsx}'],
-          name: 'unit tests',
+          name: {
+            label: 'unit tests',
+            color: 'magenta',
+          },
           globals: true,
           environment: 'jsdom',
           setupFiles: './src/setupTests.ts',
@@ -35,7 +38,10 @@ export default defineConfig({
           storybookTest({ configDir: path.join(dirname, '.storybook') }),
         ],
         test: {
-          name: 'storybook',
+          name: {
+            label: 'storybook',
+            color: 'cyan',
+          },
           browser: {
             enabled: true,
             headless: true,
