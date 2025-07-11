@@ -35,7 +35,7 @@ function FormikTest() {
     },
     onSubmit: () => {},
     validate: (values) => {
-      if ((values.name = 'erroneous value')) {
+      if (values.name === 'erroneous value') {
         return { name: 'That’s erroneous' };
       }
     },
