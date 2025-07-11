@@ -31,12 +31,12 @@ export const CheckedFieldLayout: Story = {
     });
 
     await step('Toggle the Checkbox by clicking the label', async () => {
-      await userEvent.click(canvas.getByText('A label'));
+      await userEvent.click(checkbox);
       expect(checkbox).toBeChecked();
       expect(args.onChange).toHaveBeenCalledOnce();
     });
 
-    await step('Toggle the Checkbox by clicking the label', async () => {
+    await step('Toggle the Checkbox by clicking the hint', async () => {
       await userEvent.click(canvas.getByText('A hint'));
       expect(checkbox).not.toBeChecked();
       expect(args.onChange).toHaveBeenCalledTimes(2);
