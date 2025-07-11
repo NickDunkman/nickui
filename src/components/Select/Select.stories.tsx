@@ -63,7 +63,7 @@ export const Disabled: Story = {
 
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
-  render: () => (
+  render: (_args) => (
     <div className="flex flex-col gap-4">
       <Select {...Controlled.args} />
       <Select {...Uncontrolled.args} />
@@ -98,7 +98,7 @@ export const Large: Story = {
 
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
-  render: () => (
+  render: (_args) => (
     <div className="flex flex-col items-baseline gap-4 sm:flex-row">
       <div className="flex-1">
         <Select {...Small.args} />

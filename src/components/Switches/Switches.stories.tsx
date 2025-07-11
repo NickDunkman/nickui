@@ -138,7 +138,7 @@ export const Large: Story = {
 
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
-  render: () => (
+  render: (_args) => (
     <div className="flex flex-col gap-x-12 gap-y-8 sm:flex-row sm:items-baseline">
       <Switches {...Small.args} className="sm:flex-1" />
       <Switches {...Medium.args} className="sm:flex-1" />

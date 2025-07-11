@@ -245,7 +245,7 @@ export const StandardLayout: Story = {
 
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
-  render: () => (
+  render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row">
       <Checkboxes {...NoValue.args} className="sm:flex-1" />
       <Checkboxes {...Controlled.args} className="sm:flex-1" />
@@ -379,7 +379,7 @@ export const Large: Story = {
 
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
-  render: () => (
+  render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
       <Checkboxes {...Small.args} className="sm:flex-1" />
       <Checkboxes {...Medium.args} className="sm:flex-1" />

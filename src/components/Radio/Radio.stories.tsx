@@ -140,7 +140,7 @@ export const DisabledChecked: Story = {
 
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
-  render: () => (
+  render: (_args) => (
     <div className="flex flex-col gap-4">
       <Radio {...Unchecked.args} />
       <Radio {...Controlled.args} />
@@ -191,7 +191,7 @@ export const Large: Story = {
 
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
-  render: () => (
+  render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
       <Radio {...Small.args} className="sm:flex-1" />
       <Radio {...Medium.args} className="sm:flex-1" />

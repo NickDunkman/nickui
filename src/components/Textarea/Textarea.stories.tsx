@@ -53,7 +53,7 @@ export const Disabled: Story = {
 
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
-  render: () => (
+  render: (_args) => (
     <div className="flex flex-col gap-4">
       <Textarea {...Empty.args} />
       <Textarea {...Controlled.args} />
@@ -89,7 +89,7 @@ export const Large: Story = {
 
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
-  render: () => (
+  render: (_args) => (
     <div className="flex flex-col gap-4">
       <Textarea {...Small.args} />
       <Textarea {...Medium.args} />
