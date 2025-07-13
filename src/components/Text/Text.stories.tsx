@@ -138,18 +138,6 @@ export const Disabled: Story = {
   },
 };
 
-export const AllControlStates: Story = {
-  tags: ['!dev', '!test'],
-  render: (_args) => (
-    <div className="flex flex-col gap-4">
-      <Text {...Empty.args} />
-      <Text {...Controlled.args} />
-      <Text {...Uncontrolled.args} />
-      <Text {...Disabled.args} />
-    </div>
-  ),
-};
-
 export const Small: Story = {
   args: {
     sizer: Text.sizer.small,
@@ -190,6 +178,18 @@ export const Large: Story = {
       expect(canvas.getByText('Large label')).toHaveClass('text-lg');
     });
   },
+};
+
+export const AllControlStates: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <div className="flex flex-col gap-4">
+      <Text {...Empty.args} />
+      <Text {...Controlled.args} />
+      <Text {...Uncontrolled.args} />
+      <Text {...Disabled.args} />
+    </div>
+  ),
 };
 
 export const AllSizes: Story = {

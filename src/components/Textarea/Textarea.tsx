@@ -18,13 +18,18 @@ interface TextareaProps extends React.ComponentProps<'textarea'> {
    */
   defaultValue?: string;
   /**
-   * The number of rows of text tall the Textarea should be (the Textarea will
-   * use a scrollbar when necessary)
+   * Use this to set a fixed number of visible rows on the Textarea. Causes
+   * the `minRows` & `maxRows` props to be ignored.
    */
   rows?: number;
   /**
-   * The textarea will automatically grow in height as the user types, up to
-   * this number of rows.
+   * When the `rows` prop is not used, sets the minimum rows used by the
+   * auto-resizing Textarea as its value changes. Default is 2.
+   */
+  minRows?: number;
+  /**
+   * When the `rows` prop is not used, sets the maximum rows used by the
+   * auto-resizing Textarea as its value changes. Default is 10.
    */
   maxRows?: number;
   /** Set to `true` to remove the resize handle from the bottom right */
@@ -56,7 +61,8 @@ export function Textarea({
   defaultValue,
   value: controlledValue,
   onChange,
-  rows = 2,
+  rows: controlledRows,
+  minRows = 2,
   maxRows = 10,
   disableManualResize,
   'aria-describedby': controlledAriaDescribedBy,
@@ -67,7 +73,14 @@ export function Textarea({
 }: TextareaProps & CommonFieldProps) {
   const containerRef = React.createRef<HTMLDivElement>();
   const hiddenTextarea = React.useRef<HTMLTextAreaElement>(null);
-  const [autoHeight, setAutoHeight] = React.useState<number>(0);
+  const [autoRows, setAutoRows] = React.useState<number>(0);
+
+  const rows =
+    controlledRows !== undefined
+      ? controlledRows
+      : autoRows > minRows
+        ? autoRows
+        : minRows;
 
   // track a value for *uncontrolled* mode, if necessary
   const [uncontrolledValue, setUncontrolledValue] =
@@ -84,35 +97,29 @@ export function Textarea({
 
   // Compute the height to use when autoResize applies
   React.useLayoutEffect(() => {
-    if (maxRows > rows && hiddenTextarea.current) {
-      // Measure the height of the hidden textarea with the new value
+    if (hiddenTextarea.current) {
+      // Measure the number of rows of the hidden textarea with the new value
       hiddenTextarea.current.value = value || '';
       const computedStyle = getComputedStyle(hiddenTextarea.current);
       const lineHeight = noPx(computedStyle.lineHeight);
       const yPadding =
         noPx(computedStyle.paddingTop) + noPx(computedStyle.paddingBottom);
-      const yBorderHeight =
-        noPx(computedStyle.borderTopWidth) +
-        noPx(computedStyle.borderBottomWidth);
-      const newAutoHeight = hiddenTextarea.current.scrollHeight + yBorderHeight;
+      const newAutoRows = Math.ceil(
+        (hiddenTextarea.current.scrollHeight - yPadding) / lineHeight,
+      );
 
-      // Constraints for the visible textarea
-      const minHeight = rows * lineHeight + yPadding + yBorderHeight;
-      const maxHeight = maxRows * lineHeight + yPadding + yBorderHeight;
+      const newBoundedAutoRows =
+        newAutoRows < minRows
+          ? minRows
+          : newAutoRows > maxRows
+            ? maxRows
+            : newAutoRows;
 
-      if (newAutoHeight > maxHeight) {
-        if (autoHeight !== maxHeight) {
-          setAutoHeight(maxHeight);
-        }
-      } else if (newAutoHeight < minHeight) {
-        if (autoHeight !== minHeight) {
-          setAutoHeight(minHeight);
-        }
-      } else if (autoHeight !== newAutoHeight) {
-        setAutoHeight(newAutoHeight);
+      if (newBoundedAutoRows !== autoRows) {
+        setAutoRows(newBoundedAutoRows);
       }
     }
-  }, [value, rows, maxRows, autoHeight]);
+  }, [value, minRows, maxRows, autoRows]);
 
   // React Hook Form sets the inital field value by using the `ref` prop to
   // programmatically set the `value` on the textarea. So when the caller isn't
@@ -143,8 +150,6 @@ export function Textarea({
     controlledAriaErrorMessage ||
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
-  const heightProps =
-    maxRows > rows ? { style: { height: autoHeight } } : { rows };
   const s = styles({ sizer, hasError: !!error, disableManualResize });
 
   return (
@@ -166,18 +171,19 @@ export function Textarea({
           textarea should be if it wants to make the value fully visible.
         */}
         <textarea
-          aria-hidden
-          disabled
           ref={hiddenTextarea}
           className={s.hiddenTextarea()}
+          rows={minRows}
+          disabled
+          aria-hidden
         />
 
         {/* This is the <textarea> the user sees & interacts with! */}
         <textarea
           {...otherTextareaProps}
-          {...heightProps}
           id={id}
           className={s.textarea()}
+          rows={rows}
           value={value}
           onChange={handleChange}
           disabled={disabled}
