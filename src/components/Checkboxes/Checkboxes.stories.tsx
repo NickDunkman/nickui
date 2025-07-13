@@ -243,18 +243,6 @@ export const StandardLayout: Story = {
   },
 };
 
-export const AllControlStates: Story = {
-  tags: ['!dev', '!test'],
-  render: (_args) => (
-    <div className="flex flex-col gap-4 sm:flex-row">
-      <Checkboxes {...NoValue.args} className="sm:flex-1" />
-      <Checkboxes {...Controlled.args} className="sm:flex-1" />
-      <Checkboxes {...Uncontrolled.args} className="sm:flex-1" />
-      <Checkboxes {...Disabled.args} className="sm:flex-1" />
-    </div>
-  ),
-};
-
 export const CustomLayout: Story = {
   args: {
     label: 'Please select some customizations',
@@ -375,6 +363,18 @@ export const Large: Story = {
       },
     );
   },
+};
+
+export const AllControlStates: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <div className="flex flex-col gap-4 sm:flex-row">
+      <Checkboxes {...NoValue.args} className="sm:flex-1" />
+      <Checkboxes {...Controlled.args} className="sm:flex-1" />
+      <Checkboxes {...Uncontrolled.args} className="sm:flex-1" />
+      <Checkboxes {...Disabled.args} className="sm:flex-1" />
+    </div>
+  ),
 };
 
 export const AllSizes: Story = {

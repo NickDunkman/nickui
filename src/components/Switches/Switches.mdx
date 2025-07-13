@@ -65,6 +65,12 @@ import * as Stories from './Switches.stories';
 <Docs.TableOfContents />
 
 <Docs.Props of={Stories} nativeBase="input" wrapper="Fieldset" />
+<Docs.ControlStates
+  of={Stories}
+  valuable
+  sourceState="hidden"
+  note="Note: while you can disable individual switches as shown in sections below, using `disabled={true}` will disable the entire field by forcing all child switches to be disabled."
+/>
 
 ## Adding switches
 
