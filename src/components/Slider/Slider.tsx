@@ -6,6 +6,7 @@ import { FieldSizer } from '@/constants';
 import { CommonFieldProps } from '@/types';
 import { debounceToRepaint } from '@/utils/debounceToRepaint';
 import { randomId } from '@/utils/randomId';
+import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
 
 import { styles } from './styles';
 
@@ -398,8 +399,9 @@ export function Slider({
 
   const percentage = valueToRangePercentage(implicitValue, min, max);
 
+  const resolvedSizer = useResolvedFieldSizer(sizer);
   const s = styles({
-    sizer,
+    sizer: resolvedSizer,
     isDisabled: disabled,
     isFocused: isFocused && !disabled && !isClicked,
     hasFieldHeader: !!label,

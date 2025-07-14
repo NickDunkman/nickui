@@ -6,6 +6,7 @@ import { FieldSizer } from '@/constants';
 import type { CommonCheckedFieldProps, CommonFieldsetProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
+import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
 
 export interface CheckablesProps
   extends Omit<React.ComponentProps<'input'>, 'children' | 'className'> {
@@ -195,6 +196,8 @@ export function Checkables({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const resolvedSizer = useResolvedFieldSizer(sizer);
+
   return (
     <Fieldset
       className={className}
@@ -212,9 +215,9 @@ export function Checkables({
           // (otherwise, the caller should manage the layout within `render`)
           options &&
           clsw('flex flex-col', {
-            'gap-y-2': !sizer || sizer === FieldSizer.small,
-            'gap-y-2.5': sizer === FieldSizer.medium,
-            'gap-y-3': sizer === FieldSizer.large,
+            'gap-y-2': !resolvedSizer || resolvedSizer === FieldSizer.small,
+            'gap-y-2.5': resolvedSizer === FieldSizer.medium,
+            'gap-y-3': resolvedSizer === FieldSizer.large,
           })
         }
       >

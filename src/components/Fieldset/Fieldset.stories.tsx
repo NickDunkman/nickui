@@ -69,6 +69,24 @@ export const Large: Story = {
   },
 };
 
+export const Responsive: Story = {
+  args: {
+    sizer: [
+      Fieldset.sizer.small,
+      Fieldset.sizer.smMedium,
+      Fieldset.sizer.mdLarge,
+    ],
+    children: [
+      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
+      <Docs.FormControlPlaceholder key="second" />,
+    ],
+    label: 'Responsive label',
+    hint: 'Responsive hint',
+    error: 'Responsive error',
+    required: true,
+  },
+};
+
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
@@ -76,6 +94,7 @@ export const AllSizes: Story = {
       <Fieldset {...Small.args} className="sm:flex-1" />
       <Fieldset {...Medium.args} className="sm:flex-1" />
       <Fieldset {...Large.args} className="sm:flex-1" />
+      <Fieldset {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

@@ -4,6 +4,7 @@ import * as React from 'react';
 import { FieldSizer } from '@/constants';
 import { CommonFieldsetProps } from '@/types';
 import { randomId } from '@/utils/randomId';
+import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
 
 import { styles } from './styles';
 
@@ -35,7 +36,8 @@ export function Fieldset({
   const [hintId] = React.useState<string>(randomId());
   const [errorId] = React.useState<string>(randomId());
 
-  const s = styles({ sizer });
+  const resolvedSizer = useResolvedFieldSizer(sizer);
+  const s = styles({ sizer: resolvedSizer });
 
   return (
     <fieldset

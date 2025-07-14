@@ -4,6 +4,7 @@ import { FieldSizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useElementBounds } from '@/utils/useElementBounds';
+import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
 
 import { styles } from './styles';
 
@@ -42,7 +43,8 @@ export function CheckedField({
   const controlRef = React.useRef<HTMLDivElement>(null);
   const controlBounds = useElementBounds(controlRef);
 
-  const s = styles({ sizer, isDisabled: disabled });
+  const resolvedSizer = useResolvedFieldSizer(sizer);
+  const s = styles({ sizer: resolvedSizer, isDisabled: disabled });
 
   return (
     <label {...labelProps} className={clsw(s.root(), className)}>

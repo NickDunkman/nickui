@@ -53,9 +53,7 @@ export function useBreakpoint() {
 
     // Now that we have the finder installed, we can set the initial breakpoint.
     // The hook below will only update it if/when a window resize occurs.
-    setCurrentBreakpoint(
-      window.getComputedStyle(breakpointFinder, '::before').content,
-    );
+    setCurrentBreakpoint(getBreakpointFromFinder(breakpointFinder));
   }, []);
 
   // Add a window.onresize event that updates the currentBreakpoint value
@@ -68,10 +66,7 @@ export function useBreakpoint() {
     } else {
       const updateBreakpointOnResize = debounceToRepaint(() => {
         if (breakpointFinder) {
-          const newBreakpoint = window.getComputedStyle(
-            breakpointFinder,
-            '::before',
-          ).content;
+          const newBreakpoint = getBreakpointFromFinder(breakpointFinder);
 
           if (newBreakpoint !== currentBreakpoint) {
             setCurrentBreakpoint(newBreakpoint);
@@ -121,4 +116,10 @@ export function useBreakpoint() {
       isXlDown: true,
     };
   }, [currentBreakpoint]);
+}
+
+function getBreakpointFromFinder(breakpointFinder: Element) {
+  // Note: this is mocked to always return '"md"' in unit tests in
+  // vitest.setup.ts
+  return window.getComputedStyle(breakpointFinder, '::before').content;
 }

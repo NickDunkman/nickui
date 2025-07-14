@@ -5,6 +5,7 @@ import { FieldSizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
+import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
 
 import { styles as checkboxStyles } from './styles';
 
@@ -107,8 +108,9 @@ export function Checkable({
     controlledAriaDescribedBy ||
     (hint ? uncontrolledAriaDescribedBy : undefined);
 
+  const resolvedSizer = useResolvedFieldSizer(sizer);
   const s = styler({
-    sizer,
+    sizer: resolvedSizer,
     isDisabled: !!disabled,
     isFocused: isFocused && !disabled && !isClicked,
   });

@@ -4,6 +4,7 @@ import { Field } from '@/components/Field';
 import { FieldSizer } from '@/constants';
 import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
+import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
 
 import { styles } from './styles';
 
@@ -53,8 +54,9 @@ export function Select({
     controlledAriaErrorMessage ||
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
+  const resolvedSizer = useResolvedFieldSizer(sizer);
   const s = styles({
-    sizer,
+    sizer: resolvedSizer,
     hasError: !!error,
     isDisabled: !!disabled,
   });

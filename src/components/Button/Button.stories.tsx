@@ -91,6 +91,13 @@ export const Large: Story = {
   },
 };
 
+export const Responsive: Story = {
+  args: {
+    sizer: [Button.sizer.small, Button.sizer.smMedium, Button.sizer.mdLarge],
+    children: 'Responsive Button',
+  },
+};
+
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
@@ -98,6 +105,7 @@ export const AllSizes: Story = {
       <Button {...Small.args} />
       <Button {...Medium.args} />
       <Button {...Large.args} />
+      <Button {...Responsive.args} />
     </div>
   ),
 };

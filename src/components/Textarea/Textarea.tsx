@@ -4,6 +4,7 @@ import { Field } from '@/components/Field';
 import { FieldSizer } from '@/constants';
 import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
+import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
 
 import { styles } from './styles';
 
@@ -150,7 +151,12 @@ export function Textarea({
     controlledAriaErrorMessage ||
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
-  const s = styles({ sizer, hasError: !!error, disableManualResize });
+  const resolvedSizer = useResolvedFieldSizer(sizer);
+  const s = styles({
+    sizer: resolvedSizer,
+    hasError: !!error,
+    disableManualResize,
+  });
 
   return (
     <Field

@@ -44,8 +44,6 @@ function FormikTest() {
     },
   });
 
-  console.log(form.getFieldProps('language'));
-
   return (
     <Select
       id="formiky"
