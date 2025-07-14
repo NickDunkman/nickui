@@ -35,9 +35,9 @@ interface SliderProps
   /** Called when the Slider is unfocused */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** The minimum allowed value, default is 0 */
-  min?: number;
+  min?: number | string;
   /** The maximum allowed value, default is 100 */
-  max?: number;
+  max?: number | string;
   /**
    * Indicates the step by which the Slider's value can change, default is 1.
    * For example, to have possible values of [1, 3, 5, 7, 9], use:
@@ -80,8 +80,8 @@ export function Slider({
   // Slider-specific props
   ref: controlledInputRef,
   name,
-  max = 100,
-  min = 0,
+  max: rawMax = 100,
+  min: rawMin = 0,
   step = 1,
   shiftSteps = 10,
   tabIndex,
@@ -116,6 +116,9 @@ export function Slider({
   const [uncontrolledValue, setUncontrolledValue] = React.useState(
     defaultValue !== undefined ? Number(defaultValue) : undefined,
   );
+
+  const max = Number(rawMax);
+  const min = Number(rawMin);
 
   const isControlledComponent = controlledValue !== undefined;
   const value = isControlledComponent
