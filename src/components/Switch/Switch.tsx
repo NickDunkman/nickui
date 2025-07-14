@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Checkable } from '@/components/Checkbox';
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
 
 import { styles } from './styles';
@@ -32,4 +32,4 @@ export function Switch(props: SwitchProps & CommonCheckedFieldProps) {
   return <Checkable {...props} type="checkbox" styler={styles} />;
 }
 
-Switch.sizer = FieldSizer;
+Switch.sizer = Sizer;

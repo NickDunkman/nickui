@@ -1,7 +1,7 @@
 /**
  * Standard sizes available in all form field components.
  */
-export enum FieldSizer {
+export enum Sizer {
   small = 'small',
   medium = 'medium',
   large = 'large',

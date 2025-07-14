@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Radio component */
 export const styles = tv({
@@ -19,13 +19,13 @@ export const styles = tv({
   },
   variants: {
     sizer: {
-      [FieldSizer.small]: {
+      [Sizer.small]: {
         indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.5',
       },
-      [FieldSizer.medium]: {
+      [Sizer.medium]: {
         indicator: 'size-4 top-0.75 peer-checked:after:size-1.5',
       },
-      [FieldSizer.large]: {
+      [Sizer.large]: {
         indicator: 'size-5 top-0.75 peer-checked:after:size-2',
       },
     },
@@ -47,7 +47,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: FieldSizer.small,
+    sizer: Sizer.small,
     isDisabled: false,
     isFocused: false,
   },

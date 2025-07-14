@@ -2,11 +2,11 @@ import keycode from 'keycode';
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 import { CommonFieldProps } from '@/types';
 import { debounceToRepaint } from '@/utils/debounceToRepaint';
 import { randomId } from '@/utils/randomId';
-import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
+import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { styles } from './styles';
 
@@ -399,7 +399,7 @@ export function Slider({
 
   const percentage = valueToRangePercentage(implicitValue, min, max);
 
-  const resolvedSizer = useResolvedFieldSizer(sizer);
+  const resolvedSizer = useResolvedSizer(sizer);
   const s = styles({
     sizer: resolvedSizer,
     isDisabled: disabled,
@@ -491,4 +491,4 @@ export function Slider({
   );
 }
 
-Slider.sizer = FieldSizer;
+Slider.sizer = Sizer;

@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useElementBounds } from '@/utils/useElementBounds';
-import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
+import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { styles } from './styles';
 
@@ -43,7 +43,7 @@ export function CheckedField({
   const controlRef = React.useRef<HTMLDivElement>(null);
   const controlBounds = useElementBounds(controlRef);
 
-  const resolvedSizer = useResolvedFieldSizer(sizer);
+  const resolvedSizer = useResolvedSizer(sizer);
   const s = styles({ sizer: resolvedSizer, isDisabled: disabled });
 
   return (
@@ -78,4 +78,4 @@ export function CheckedField({
   );
 }
 
-CheckedField.sizer = FieldSizer;
+CheckedField.sizer = Sizer;

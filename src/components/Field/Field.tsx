@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 import { CommonFieldProps } from '@/types';
-import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
+import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { styles } from './styles';
 
@@ -42,7 +42,7 @@ export function Field({
   required = false,
   ...otherDivProps
 }: FieldProps & CommonFieldProps) {
-  const resolvedSizer = useResolvedFieldSizer(sizer);
+  const resolvedSizer = useResolvedSizer(sizer);
   const s = styles({ sizer: resolvedSizer });
 
   return (
@@ -77,4 +77,4 @@ export function Field({
   );
 }
 
-Field.sizer = FieldSizer;
+Field.sizer = Sizer;

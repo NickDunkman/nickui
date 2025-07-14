@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 
 /**
  * Any component which uses Field or Fieldset as a wrapper take these props!
@@ -9,7 +9,7 @@ export type CommonFieldProps<ReactNode = React.ReactNode> = {
   /** Optionally add utility classes to the root element */
   className?: string;
   /** Changes the size of the field ("small", "medium", "large") */
-  sizer?: FieldSizer | FieldSizer[];
+  sizer?: Sizer | Sizer[];
   /** The main label to show above the form control, naming the field */
   label?: ReactNode;
   /**
@@ -38,7 +38,7 @@ export type CommonFieldsetProps = {
    * Changes the size of the field ("small", "medium", "large", "sm:small",
    * "md:large", etc)
    */
-  sizer?: FieldSizer | FieldSizer[];
+  sizer?: Sizer | Sizer[];
   /** The main label to show above the form control, naming the field */
   label?: React.ReactNode;
   /**
@@ -59,7 +59,7 @@ export type CommonCheckedFieldProps = {
   /** Optionally add utility classes to the root element */
   className?: string;
   /** Changes the size of the field ("small", "medium", "large") */
-  sizer?: FieldSizer | FieldSizer[];
+  sizer?: Sizer | Sizer[];
   /** The main label to to the right of the form control, naming the field */
   label?: React.ReactNode;
   /** Additional detail about the field, placed directly below the label */

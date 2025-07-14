@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { CheckedField } from '@/components/CheckedField';
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
-import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
+import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { styles as checkboxStyles } from './styles';
 
@@ -32,7 +32,7 @@ export function Checkbox(props: CheckboxProps & CommonCheckedFieldProps) {
   return <Checkable {...props} type="checkbox" styler={checkboxStyles} />;
 }
 
-Checkbox.sizer = FieldSizer;
+Checkbox.sizer = Sizer;
 
 /**
  * This component is the engine of the form controls that use a checkable
@@ -108,7 +108,7 @@ export function Checkable({
     controlledAriaDescribedBy ||
     (hint ? uncontrolledAriaDescribedBy : undefined);
 
-  const resolvedSizer = useResolvedFieldSizer(sizer);
+  const resolvedSizer = useResolvedSizer(sizer);
   const s = styler({
     sizer: resolvedSizer,
     isDisabled: !!disabled,

@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Slider component */
 export const styles = tv({
@@ -21,7 +21,7 @@ export const styles = tv({
   },
   variants: {
     sizer: {
-      [FieldSizer.small]: {
+      [Sizer.small]: {
         root: 'h-5', // same aggregate height as small Text
         track: `
           h-1 left-2.5 right-2.5
@@ -30,7 +30,7 @@ export const styles = tv({
         `,
         thumb: 'size-5',
       },
-      [FieldSizer.medium]: {
+      [Sizer.medium]: {
         root: 'h-6', // same aggregate height as medium Text
         track: `
           h-1.5 left-3 right-3
@@ -39,7 +39,7 @@ export const styles = tv({
         `,
         thumb: 'size-6',
       },
-      [FieldSizer.large]: {
+      [Sizer.large]: {
         root: 'h-7', // same aggregate height as large Text
         track: `
           h-2 left-3.5 right-3.5
@@ -91,37 +91,37 @@ export const styles = tv({
     },
     {
       hasFieldHeader: true,
-      sizer: FieldSizer.small,
+      sizer: Sizer.small,
       className: { root: 'mt-2' },
     },
     {
       hasFieldHeader: true,
-      sizer: FieldSizer.medium,
+      sizer: Sizer.medium,
       className: { root: 'mt-3' },
     },
     {
       hasFieldHeader: true,
-      sizer: FieldSizer.large,
+      sizer: Sizer.large,
       className: { root: 'mt-4' },
     },
     {
       hasFieldFooter: true,
-      sizer: FieldSizer.small,
+      sizer: Sizer.small,
       className: { root: 'mb-2' },
     },
     {
       hasFieldFooter: true,
-      sizer: FieldSizer.medium,
+      sizer: Sizer.medium,
       className: { root: 'mb-3' },
     },
     {
       hasFieldFooter: true,
-      sizer: FieldSizer.large,
+      sizer: Sizer.large,
       className: { root: 'mb-4' },
     },
   ],
   defaultVariants: {
-    sizer: FieldSizer.small,
+    sizer: Sizer.small,
     isFocused: false,
     isDisabled: false,
     atMin: true,

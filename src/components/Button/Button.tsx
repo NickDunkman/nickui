@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 import { clsw } from '@/utils/clsw';
-import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
+import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { ButtonFlavor } from './constants';
 import { styles } from './styles';
@@ -19,7 +19,7 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
   /** Controls the behavior of the button */
   type?: 'button' | 'reset' | 'submit';
   /** Changes the size of the button ("small", "medium", "large") */
-  sizer?: FieldSizer | FieldSizer[];
+  sizer?: Sizer | Sizer[];
   /** Changes the color of the button ("primary", "secondary", "danger") */
   flavor?: ButtonFlavor;
 }
@@ -36,7 +36,7 @@ export function Button({
   flavor,
   ...buttonHTMLProps
 }: ButtonProps) {
-  const resolvedSizer = useResolvedFieldSizer(sizer);
+  const resolvedSizer = useResolvedSizer(sizer);
   const s = styles({ sizer: resolvedSizer, flavor });
 
   return (
@@ -50,4 +50,4 @@ export function Button({
 }
 
 Button.flavor = ButtonFlavor;
-Button.sizer = FieldSizer;
+Button.sizer = Sizer;

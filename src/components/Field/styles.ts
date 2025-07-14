@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Field component */
 export const styles = tv({
@@ -13,19 +13,19 @@ export const styles = tv({
   },
   variants: {
     sizer: {
-      [FieldSizer.small]: {
+      [Sizer.small]: {
         heading: 'mb-1.5',
         label: 'text-xs',
         hint: 'text-xs mt-1.5',
         error: 'text-xs mt-1.5',
       },
-      [FieldSizer.medium]: {
+      [Sizer.medium]: {
         heading: 'mb-2',
         label: 'text-sm',
         hint: 'text-xs mt-2',
         error: 'text-sm mt-2',
       },
-      [FieldSizer.large]: {
+      [Sizer.large]: {
         heading: 'mb-2',
         label: 'text-lg',
         hint: 'text-sm mt-2',
@@ -34,6 +34,6 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: FieldSizer.small,
+    sizer: Sizer.small,
   },
 });

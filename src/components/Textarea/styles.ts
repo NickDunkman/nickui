@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Textarea component */
 export const styles = tv({
@@ -25,26 +25,26 @@ export const styles = tv({
     },
     {
       slots: ['textarea', 'hiddenTextarea'],
-      sizer: FieldSizer.small,
+      sizer: Sizer.small,
       className: 'text-sm py-1.5 px-2',
     },
     {
       slots: ['textarea', 'hiddenTextarea'],
-      sizer: FieldSizer.medium,
+      sizer: Sizer.medium,
       className: 'text-base py-2.5 px-3.5',
     },
     {
       slots: ['textarea', 'hiddenTextarea'],
-      sizer: FieldSizer.large,
+      sizer: Sizer.large,
       className: 'text-lg py-3.5 px-4.5',
     },
   ],
 
   variants: {
     sizer: {
-      [FieldSizer.small]: {},
-      [FieldSizer.medium]: {},
-      [FieldSizer.large]: {},
+      [Sizer.small]: {},
+      [Sizer.medium]: {},
+      [Sizer.large]: {},
     },
     hasError: {
       false: {},
@@ -60,7 +60,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: FieldSizer.small,
+    sizer: Sizer.small,
     hasError: false,
   },
 });

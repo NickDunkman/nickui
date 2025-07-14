@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 
 const arrowIcons = {
   sm: `after:bg-[url("data:image/svg+xml;charset=utf8,%3Csvg%20viewBox='0%200%207%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20d='M3.85296%200.645978C3.75915%200.551937%203.63178%200.499084%203.49896%200.499084C3.36613%200.499084%203.23876%200.551937%203.14496%200.645978L0.144956%203.64598C0.00157937%203.78899%20-0.0413739%204.00437%200.0361719%204.19144C0.113718%204.37852%200.296447%204.50034%200.498956%204.49998H6.49896C6.70147%204.50034%206.88419%204.37852%206.96174%204.19144C7.03929%204.00437%206.99633%203.78899%206.85296%203.64598L3.85296%200.645978Z'%20fill='black'%20/%3E%3Cpath%20d='M6.49896%208.5H0.498956C0.296447%208.49964%200.113718%208.62146%200.0361719%208.80854C-0.0413739%208.99561%200.00157937%209.21099%200.144956%209.354L3.14496%2012.354C3.23876%2012.448%203.36613%2012.5009%203.49896%2012.5009C3.63178%2012.5009%203.75915%2012.448%203.85296%2012.354L6.85296%209.354C6.99633%209.21099%207.03929%208.99561%206.96174%208.80854C6.88419%208.62146%206.70147%208.49964%206.49896%208.5Z'%20fill='black'%20/%3E%3C/svg%3E")]`,
@@ -30,15 +30,15 @@ export const styles = tv({
   },
   variants: {
     sizer: {
-      [FieldSizer.small]: {
+      [Sizer.small]: {
         select: 'text-sm py-1.5 pl-2 pr-8',
         root: `after:w-[7px] after:h-[13px] after:right-3 ${arrowIcons.sm}`,
       },
-      [FieldSizer.medium]: {
+      [Sizer.medium]: {
         select: 'text-base py-2.5 pl-3.5 pr-10',
         root: `after:w-[12px] after:h-[16px] after:right-3.75 ${arrowIcons.md}`,
       },
-      [FieldSizer.large]: {
+      [Sizer.large]: {
         select: 'text-lg py-3.5 pl-4.5 pr-12',
         root: `after:w-[12px] after:h-[23px] after:right-4.5 ${arrowIcons.lg}`,
       },
@@ -58,7 +58,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: FieldSizer.small,
+    sizer: Sizer.small,
     hasError: false,
     isDisabled: false,
   },

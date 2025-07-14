@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
-import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
+import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { styles } from './styles';
 
@@ -79,7 +79,7 @@ export function Text({
     controlledAriaErrorMessage ||
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
-  const resolvedSizer = useResolvedFieldSizer(sizer);
+  const resolvedSizer = useResolvedSizer(sizer);
   const s = styles({ sizer: resolvedSizer, hasError: !!error });
 
   return (
@@ -109,4 +109,4 @@ export function Text({
   );
 }
 
-Text.sizer = FieldSizer;
+Text.sizer = Sizer;

@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 
 import { ButtonFlavor } from './constants';
 
@@ -27,9 +27,9 @@ export const styles = tv({
 
   variants: {
     sizer: {
-      [FieldSizer.small]: 'text-sm py-1.75 px-3',
-      [FieldSizer.medium]: 'text-base py-2.75 px-4.5',
-      [FieldSizer.large]: 'text-lg py-3.75 px-5.5',
+      [Sizer.small]: 'text-sm py-1.75 px-3',
+      [Sizer.medium]: 'text-base py-2.75 px-4.5',
+      [Sizer.large]: 'text-lg py-3.75 px-5.5',
     },
     flavor: {
       [ButtonFlavor.primary]:
@@ -41,7 +41,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: FieldSizer.small,
+    sizer: Sizer.small,
     flavor: ButtonFlavor.primary,
   },
 });

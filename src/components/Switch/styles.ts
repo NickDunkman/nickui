@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Switch component */
 export const styles = tv({
@@ -22,17 +22,17 @@ export const styles = tv({
   },
   variants: {
     sizer: {
-      [FieldSizer.small]: {
+      [Sizer.small]: {
         root: 'min-h-5',
         indicator:
           'w-8 h-5 after:size-4 after:border-5 peer-checked:after:translate-x-3',
       },
-      [FieldSizer.medium]: {
+      [Sizer.medium]: {
         root: 'min-h-6',
         indicator:
           'w-10 h-6 after:size-5 after:border-6 peer-checked:after:translate-x-4',
       },
-      [FieldSizer.large]: {
+      [Sizer.large]: {
         root: 'min-h-7',
         indicator:
           'w-12 h-7 after:size-6 after:border-7 peer-checked:after:translate-x-5',
@@ -53,7 +53,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: FieldSizer.small,
+    sizer: Sizer.small,
     isDisabled: false,
     isFocused: false,
   },

@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 
 // Note: classNames must be static strings for Tailwind to pick them up
 const checkedBg = `peer-checked:bg-[url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2010%209'%3E%3Cpolygon%20fill='%23fff'%20fill-opacity='1'%20points='3.5%205.45%201.5%203.45%200%204.95%203.5%208.45%2010%201.95%208.5%20.45'/%3E%3C/svg%3E%0A")]`;
@@ -21,13 +21,13 @@ export const styles = tv({
   },
   variants: {
     sizer: {
-      [FieldSizer.small]: {
+      [Sizer.small]: {
         indicator: 'size-3.5 top-0.25 bg-size-[8px_8px] bg-white',
       },
-      [FieldSizer.medium]: {
+      [Sizer.medium]: {
         indicator: 'size-4 top-0.75 bg-size-[10px_10px] bg-white',
       },
-      [FieldSizer.large]: {
+      [Sizer.large]: {
         indicator: 'size-5 top-0.75 bg-size-[13px_13px] bg-white',
       },
     },
@@ -49,7 +49,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: FieldSizer.small,
+    sizer: Sizer.small,
     isDisabled: false,
     isFocused: false,
   },

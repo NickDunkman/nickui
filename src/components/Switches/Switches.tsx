@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Switch } from '@/components/Switch';
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 import type { CommonFieldsetProps } from '@/types';
 
 import { Checkables, CheckablesProps } from '../Checkboxes/Checkboxes';
@@ -19,4 +19,4 @@ export function Switches({
   );
 }
 
-Switches.sizer = FieldSizer;
+Switches.sizer = Sizer;

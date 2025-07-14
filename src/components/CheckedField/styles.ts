@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the CheckedField component */
 export const styles = tv({
@@ -14,15 +14,15 @@ export const styles = tv({
   },
   variants: {
     sizer: {
-      [FieldSizer.small]: {
+      [Sizer.small]: {
         contentRoot: 'gap-2 text-xs',
       },
-      [FieldSizer.medium]: {
+      [Sizer.medium]: {
         contentRoot: 'gap-2.5 text-sm',
         label: 'text-sm',
         hint: 'text-xs',
       },
-      [FieldSizer.large]: {
+      [Sizer.large]: {
         contentRoot: 'gap-3 text-base',
         label: 'text-base',
         hint: 'text-sm',
@@ -37,7 +37,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: FieldSizer.small,
+    sizer: Sizer.small,
     isDisabled: false,
   },
 });

@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import { Checkbox } from '@/components/Checkbox';
 import { Fieldset } from '@/components/Fieldset';
-import { FieldSizer } from '@/constants';
+import { Sizer } from '@/constants';
 import type { CommonCheckedFieldProps, CommonFieldsetProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
-import { useResolvedFieldSizer } from '@/utils/useResolvedFieldSizer';
+import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 export interface CheckablesProps
   extends Omit<React.ComponentProps<'input'>, 'children' | 'className'> {
@@ -67,7 +67,7 @@ export function Checkboxes({
   );
 }
 
-Checkboxes.sizer = FieldSizer;
+Checkboxes.sizer = Sizer;
 
 /**
  * This component is the engine for the components that render multiple
@@ -196,7 +196,7 @@ export function Checkables({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const resolvedSizer = useResolvedFieldSizer(sizer);
+  const resolvedSizer = useResolvedSizer(sizer);
 
   return (
     <Fieldset
@@ -215,9 +215,9 @@ export function Checkables({
           // (otherwise, the caller should manage the layout within `render`)
           options &&
           clsw('flex flex-col', {
-            'gap-y-2': !resolvedSizer || resolvedSizer === FieldSizer.small,
-            'gap-y-2.5': resolvedSizer === FieldSizer.medium,
-            'gap-y-3': resolvedSizer === FieldSizer.large,
+            'gap-y-2': !resolvedSizer || resolvedSizer === Sizer.small,
+            'gap-y-2.5': resolvedSizer === Sizer.medium,
+            'gap-y-3': resolvedSizer === Sizer.large,
           })
         }
       >
