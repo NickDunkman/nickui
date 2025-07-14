@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { expect, fireEvent, fn } from 'storybook/test';
+import { expect, fn } from 'storybook/test';
 
 import { Slider } from './Slider';
 
@@ -116,6 +116,11 @@ export const NoValue: Story = {
       expect(slider).toHaveValue(0);
       expect(args.onChange).toHaveBeenCalledTimes(12);
     });
+
+    await step('Unfocus the Slider', async () => {
+      await userEvent.tab();
+      expect(slider).not.toHaveFocus();
+    });
   },
 };
 
@@ -132,15 +137,24 @@ export const Controlled: Story = {
       expect(slider).toHaveValue(50);
     });
 
+    await step('Focus the Slider', async () => {
+      await userEvent.tab();
+      expect(slider).toHaveFocus();
+    });
+
     await step(
       'Try increasing the value. `onChange` should fire, but the value is controlled, so it shouldn’t change',
       async () => {
-        await userEvent.tab();
         await userEvent.keyboard('{ArrowRight}');
         expect(args.onChange).toHaveBeenCalledOnce();
         expect(slider).toHaveValue(50);
       },
     );
+
+    await step('Unfocus the Slider', async () => {
+      await userEvent.tab();
+      expect(slider).not.toHaveFocus();
+    });
   },
 };
 
@@ -157,10 +171,14 @@ export const Uncontrolled: Story = {
       expect(slider).toHaveValue(50);
     });
 
+    await step('Focus the Slider', async () => {
+      await userEvent.tab();
+      expect(slider).toHaveFocus();
+    });
+
     await step(
       'Sliding the Slider should change the value, since it’s uncontrolled',
       async () => {
-        await userEvent.tab();
         await userEvent.keyboard('{ArrowRight}');
         expect(slider).toHaveValue(51);
         expect(args.onChange).toHaveBeenCalledOnce();
@@ -170,6 +188,11 @@ export const Uncontrolled: Story = {
     await step('Reset the value', async () => {
       await userEvent.keyboard('{ArrowLeft}');
       expect(slider).toHaveValue(50);
+    });
+
+    await step('Unfocus the Slider', async () => {
+      await userEvent.tab();
+      expect(slider).not.toHaveFocus();
     });
   },
 };
@@ -200,14 +223,16 @@ export const CustomRange: Story = {
     step: 0.01,
     shiftSteps: 500,
   },
-  play: async ({ args, canvas, step, userEvent }) => {
+  play: async ({ canvas, step, userEvent }) => {
     const slider = canvas.getByRole('slider');
+
+    await step('Focus the Slider', async () => {
+      await userEvent.tab();
+      expect(slider).toHaveFocus();
+    });
 
     await step('Increase the value by one step', async () => {
       expect(slider).toHaveValue(0);
-      await userEvent.tab();
-      expect(slider).toHaveFocus();
-
       await userEvent.keyboard('{ArrowRight}');
       expect(slider).toHaveValue(0.01);
     });
@@ -233,6 +258,11 @@ export const CustomRange: Story = {
     await step('Reset back to the initial value', async () => {
       await userEvent.keyboard('{Escape}');
       expect(slider).toHaveValue(0);
+    });
+
+    await step('Unfocus the Slider', async () => {
+      await userEvent.tab();
+      expect(slider).not.toHaveFocus();
     });
   },
 };
