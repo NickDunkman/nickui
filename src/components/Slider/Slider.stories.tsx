@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
+import { expect, fireEvent, fn } from 'storybook/test';
 
 import { Slider } from './Slider';
 
@@ -26,38 +27,272 @@ function withMetaHint(
 }
 
 export const FieldLayout: Story = {
-  tags: ['!dev', '!test'],
   args: {
+    required: true,
     label: 'A label',
     hint: 'A hint',
     error: 'An error message',
     defaultValue: '50',
   },
+  play: async ({ canvas, step }) => {
+    const slider = canvas.getByLabelText('A label*');
+    const requiredAsterisk = canvas.getByTitle('required');
+
+    await step('Assert accessibility of layout elements', async () => {
+      expect(slider).toHaveRole('slider');
+      expect(slider).toHaveAccessibleDescription('A hint');
+      expect(slider).toHaveAccessibleErrorMessage('An error message');
+      expect(slider).toHaveValue(50);
+      expect(slider).toHaveAttribute('aria-valuemin', '0');
+      expect(slider).toHaveAttribute('aria-valuemax', '100');
+      expect(requiredAsterisk).toHaveTextContent('*');
+    });
+
+    await step('Assert the error style', async () => {
+      expect(canvas.getByTestId('fill')).toHaveClass('bg-rose-800');
+    });
+  },
 };
 
 export const NoValue: Story = {
-  args: withMetaHint('Slider with no valueish prop'),
+  args: {
+    ...withMetaHint('Slider with no valueish prop'),
+    onChange: fn(),
+  },
+  play: async ({ args, canvas, step, userEvent }) => {
+    const slider = canvas.getByRole('slider');
+
+    await step('Increase value using right arrow', async () => {
+      expect(slider).toHaveValue(0);
+      await userEvent.tab();
+      expect(slider).toHaveFocus();
+
+      await userEvent.keyboard('{ArrowRight}');
+      expect(slider).toHaveValue(1);
+      expect(args.onChange).toHaveBeenCalledOnce();
+
+      await userEvent.keyboard('{Shift>}{ArrowRight}{/Shift}');
+      expect(slider).toHaveValue(11);
+    });
+
+    await step('Increase value using up arrow', async () => {
+      await userEvent.keyboard('{ArrowUp}');
+      expect(slider).toHaveValue(12);
+      await userEvent.keyboard('{Shift>}{ArrowUp}{/Shift}');
+      expect(slider).toHaveValue(22);
+    });
+
+    await step('Increase value using page up', async () => {
+      await userEvent.keyboard('{PageUp}');
+      expect(slider).toHaveValue(32);
+    });
+
+    await step('Decrease value using left arrow', async () => {
+      await userEvent.keyboard('{ArrowLeft}');
+      expect(slider).toHaveValue(31);
+      await userEvent.keyboard('{Shift>}{ArrowLeft}{/Shift}');
+      expect(slider).toHaveValue(21);
+    });
+
+    await step('Decrease value using down arrow', async () => {
+      await userEvent.keyboard('{ArrowDown}');
+      expect(slider).toHaveValue(20);
+      await userEvent.keyboard('{Shift>}{ArrowDown}{/Shift}');
+      expect(slider).toHaveValue(10);
+    });
+
+    await step('Increase value using page up', async () => {
+      await userEvent.keyboard('{PageDown}');
+      expect(slider).toHaveValue(0);
+    });
+
+    await step('Set value to max using end key', async () => {
+      await userEvent.keyboard('{End}');
+      expect(slider).toHaveValue(100);
+    });
+
+    await step('Set value to min using home key', async () => {
+      await userEvent.keyboard('{Home}');
+      expect(slider).toHaveValue(0);
+      expect(args.onChange).toHaveBeenCalledTimes(12);
+    });
+  },
 };
 
 export const Controlled: Story = {
   args: {
-    value: '50',
     ...withMetaHint('Slider with controlled value'),
+    value: '50',
+    onChange: fn(),
+  },
+  play: async ({ args, canvas, step, userEvent }) => {
+    const slider = canvas.getByRole('slider');
+
+    await step('Assert `value` works', async () => {
+      expect(slider).toHaveValue(50);
+    });
+
+    await step(
+      'Try increasing the value. `onChange` should fire, but the value is controlled, so it shouldn’t change',
+      async () => {
+        await userEvent.tab();
+        await userEvent.keyboard('{ArrowRight}');
+        expect(args.onChange).toHaveBeenCalledOnce();
+        expect(slider).toHaveValue(50);
+      },
+    );
   },
 };
 
 export const Uncontrolled: Story = {
   args: {
-    defaultValue: '50',
     ...withMetaHint('Slider with uncontrolled value'),
+    defaultValue: '50',
+    onChange: fn(),
+  },
+  play: async ({ args, canvas, step, userEvent }) => {
+    const slider = canvas.getByRole('slider');
+
+    await step('Assert `defaultValue` works', async () => {
+      expect(slider).toHaveValue(50);
+    });
+
+    await step(
+      'Sliding the Slider should change the value, since it’s uncontrolled',
+      async () => {
+        await userEvent.tab();
+        await userEvent.keyboard('{ArrowRight}');
+        expect(slider).toHaveValue(51);
+        expect(args.onChange).toHaveBeenCalledOnce();
+      },
+    );
+
+    await step('Reset the value', async () => {
+      await userEvent.keyboard('{ArrowLeft}');
+      expect(slider).toHaveValue(50);
+    });
   },
 };
 
 export const Disabled: Story = {
   args: {
+    ...withMetaHint('Disabled Slider'),
     disabled: true,
     defaultValue: '50',
-    ...withMetaHint('Disabled Slider'),
+  },
+  play: async ({ canvas, step, userEvent }) => {
+    const slider = canvas.getByRole('slider');
+
+    await step('Assert disabled state', async () => {
+      expect(slider).toHaveAttribute('aria-disabled', 'true');
+      await userEvent.tab();
+      expect(slider).not.toHaveFocus();
+    });
+  },
+};
+
+export const CustomRange: Story = {
+  args: {
+    ...withMetaHint('Slider with custom range'),
+    defaultValue: '0',
+    min: -1000,
+    max: 1000,
+    step: 0.01,
+    shiftSteps: 500,
+  },
+  play: async ({ args, canvas, step, userEvent }) => {
+    const slider = canvas.getByRole('slider');
+
+    await step('Increase the value by one step', async () => {
+      expect(slider).toHaveValue(0);
+      await userEvent.tab();
+      expect(slider).toHaveFocus();
+
+      await userEvent.keyboard('{ArrowRight}');
+      expect(slider).toHaveValue(0.01);
+    });
+
+    await step(
+      'Use the shift key to decrease by one "shift step"',
+      async () => {
+        await userEvent.keyboard('{Shift>}{ArrowLeft}{/Shift}');
+        expect(slider).toHaveValue(-4.99);
+      },
+    );
+
+    await step('Go to the max value', async () => {
+      await userEvent.keyboard('{End}');
+      expect(slider).toHaveValue(1000);
+    });
+
+    await step('Go to the min value', async () => {
+      await userEvent.keyboard('{Home}');
+      expect(slider).toHaveValue(-1000);
+    });
+
+    await step('Reset back to the initial value', async () => {
+      await userEvent.keyboard('{Escape}');
+      expect(slider).toHaveValue(0);
+    });
+  },
+};
+
+export const Small: Story = {
+  args: {
+    ...withMetaHint('Small Slider (default)'),
+    sizer: Slider.sizer.small,
+    defaultValue: '50',
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the small style on both the Slider & Field',
+      async () => {
+        expect(canvas.getByLabelText('Small Slider (default)')).toHaveClass(
+          'h-5',
+        );
+        expect(
+          canvas.getByText('Small Slider (default)').parentNode?.parentNode,
+        ).toHaveClass('text-xs');
+      },
+    );
+  },
+};
+
+export const Medium: Story = {
+  args: {
+    ...withMetaHint('Medium Slider'),
+    sizer: Slider.sizer.medium,
+    defaultValue: '50',
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the medium style on both the Slider & Field',
+      async () => {
+        expect(canvas.getByLabelText('Medium Slider')).toHaveClass('h-6');
+        expect(
+          canvas.getByText('Medium Slider').parentNode?.parentNode,
+        ).toHaveClass('text-xs');
+      },
+    );
+  },
+};
+
+export const Large: Story = {
+  args: {
+    ...withMetaHint('Large Slider'),
+    sizer: Slider.sizer.large,
+    defaultValue: '50',
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the large style on both the Slider & Field',
+      async () => {
+        expect(canvas.getByLabelText('Large Slider')).toHaveClass('h-7');
+        expect(
+          canvas.getByText('Large Slider').parentNode?.parentNode,
+        ).toHaveClass('text-sm');
+      },
+    );
   },
 };
 
@@ -71,41 +306,6 @@ export const AllControlStates: Story = {
       <Slider {...Disabled.args} />
     </div>
   ),
-};
-
-export const CustomRange: Story = {
-  args: {
-    defaultValue: '0',
-    min: -1000,
-    max: 1000,
-    step: 0.01,
-    shiftSteps: 500,
-    ...withMetaHint('Slider with custom range'),
-  },
-};
-
-export const Small: Story = {
-  args: {
-    sizer: Slider.sizer.small,
-    defaultValue: '50',
-    ...withMetaHint('Small Slider (default)'),
-  },
-};
-
-export const Medium: Story = {
-  args: {
-    sizer: Slider.sizer.medium,
-    defaultValue: '50',
-    ...withMetaHint('Medium Slider'),
-  },
-};
-
-export const Large: Story = {
-  args: {
-    sizer: Slider.sizer.large,
-    defaultValue: '50',
-    ...withMetaHint('Large Slider'),
-  },
 };
 
 export const AllSizes: Story = {

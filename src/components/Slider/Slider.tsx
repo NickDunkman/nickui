@@ -126,6 +126,13 @@ export function Slider({
   // the current value is set to the mininum end of the range.
   const implicitValue = value === undefined ? min : value;
 
+  // If the user focuses the Slider and changes the value via some key presses,
+  // and then presses the escape key, we'll reset the value back to what it was
+  // on the most recent focus. This is a nice little usability feature, but it’s
+  // also an easy way to reset the value within a test after making some
+  // changes.
+  const [valueOnFocus, setValueOnFocus] = React.useState<number>();
+
   function updateValue(newValue: number) {
     // The value we calculate from the slider position can have a lot of
     // unecessary precision. We can normalize it to a max of 5 significant
@@ -247,29 +254,51 @@ export function Slider({
 
       const shiftKeyHeld = event.nativeEvent.shiftKey;
 
-      switch (keycode(event.nativeEvent)) {
+      switch (keycode(event.nativeEvent) || event.nativeEvent.key) {
         case 'right':
+        case 'ArrowRight':
         case 'up':
-        case 'page up':
+        case 'ArrowUp':
           newValue = Math.min(
             max,
             implicitValue + (shiftKeyHeld ? step * shiftSteps : step),
           );
           break;
+        case 'page up':
+        case 'PageUp':
+          newValue = Math.min(max, implicitValue + step * shiftSteps);
+          break;
         case 'left':
+        case 'ArrowLeft':
         case 'down':
-        case 'page down':
+        case 'ArrowDown':
           newValue = Math.max(
             min,
             implicitValue - (shiftKeyHeld ? step * shiftSteps : step),
           );
           break;
+        case 'page down':
+        case 'PageDown':
+          newValue = Math.max(min, implicitValue - step * shiftSteps);
+          break;
         case 'home':
+        case 'Home':
           newValue = min;
           break;
         case 'end':
+        case 'End':
           newValue = max;
           break;
+        case 'esc':
+        case 'Escape':
+          // On the escape key, revert the value to what it was when it was
+          // last focused.
+          if (valueOnFocus !== undefined) {
+            newValue = valueOnFocus;
+            break;
+          } else {
+            return;
+          }
         default:
           // Any other pressed key should not be considered as targeting
           // the Slider -- exit immediately so none of the behavior below
@@ -298,6 +327,7 @@ export function Slider({
     if (!disabled) {
       if (!isFocused) {
         setIsFocused(true);
+        setValueOnFocus(implicitValue);
       }
       onFocus?.(event);
     }
@@ -400,6 +430,7 @@ export function Slider({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
+        aria-disabled={disabled}
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={implicitValue}
@@ -409,8 +440,16 @@ export function Slider({
         aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
       >
         <div ref={trackRef} className={s.track()}>
-          <div className={s.fill()} style={{ right: `${100 - percentage}%` }} />
-          <div className={s.thumb()} style={{ left: `${percentage}%` }} />
+          <div
+            className={s.fill()}
+            style={{ right: `${100 - percentage}%` }}
+            data-testid="fill"
+          />
+          <div
+            className={s.thumb()}
+            style={{ left: `${percentage}%` }}
+            data-testid="thumb"
+          />
         </div>
       </div>
 

@@ -128,8 +128,3 @@ export const styles = tv({
     atMax: false,
   },
 });
-
-//.Slider--is-disabled {
-//  cursor: not-allowed;
-//  opacity: $alpha-500;
-//}
