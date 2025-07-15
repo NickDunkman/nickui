@@ -24,6 +24,10 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
   flavor?: ButtonFlavor;
 }
 
+// Adding a touchstart event to the <body> allows the :hover styles to apply
+// when an element is tapped on iOS touch screens, which we need for Button
+document.addEventListener('touchstart', () => {}, false);
+
 /**
  * Buttons allow the user to trigger an action, such as submitting a form
  * @param props {@link ButtonProps}
