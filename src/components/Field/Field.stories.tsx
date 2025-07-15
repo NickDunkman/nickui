@@ -31,7 +31,6 @@ export const Small: Story = {
     label: 'Small label',
     hint: 'Small hint',
     error: 'Small error',
-    controlId: 'small-input',
     required: true,
   },
 };
@@ -43,7 +42,6 @@ export const Medium: Story = {
     label: 'Medium label',
     hint: 'Medium hint',
     error: 'Medium error',
-    controlId: 'medium-input',
     required: true,
   },
 };
@@ -55,7 +53,27 @@ export const Large: Story = {
     label: 'Large label',
     hint: 'Large hint',
     error: 'Large error',
-    controlId: 'large-input',
+    required: true,
+  },
+};
+
+export const Responsive: Story = {
+  tags: ['!test'],
+  args: {
+    sizer: [Field.sizer.smMedium, Field.sizer.mdLarge],
+    children: <Docs.FormControlPlaceholder />,
+    label: 'Responsive label',
+    hint: 'Responsive hint',
+    error: 'Responsive error',
+    required: true,
+  },
+};
+
+export const Required: Story = {
+  args: {
+    children: <Docs.FormControlPlaceholder />,
+    label: 'Necessary information',
+    controlId: 'required-input',
     required: true,
   },
 };
@@ -67,15 +85,7 @@ export const AllSizes: Story = {
       <Field {...Small.args} className="sm:flex-1" />
       <Field {...Medium.args} className="sm:flex-1" />
       <Field {...Large.args} className="sm:flex-1" />
+      <Field {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
-};
-
-export const Required: Story = {
-  args: {
-    children: <Docs.FormControlPlaceholder />,
-    label: 'Necessary information',
-    controlId: 'required-input',
-    required: true,
-  },
 };

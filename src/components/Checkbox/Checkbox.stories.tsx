@@ -207,6 +207,15 @@ export const Large: Story = {
   },
 };
 
+export const Responsive: Story = {
+  tags: ['!test'],
+  args: {
+    sizer: [Checkbox.sizer.smMedium, Checkbox.sizer.mdLarge],
+    label: 'Responsive Checkbox',
+    defaultChecked: true,
+  },
+};
+
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
@@ -214,6 +223,7 @@ export const AllSizes: Story = {
       <Checkbox {...Small.args} className="sm:flex-1" />
       <Checkbox {...Medium.args} className="sm:flex-1" />
       <Checkbox {...Large.args} className="sm:flex-1" />
+      <Checkbox {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

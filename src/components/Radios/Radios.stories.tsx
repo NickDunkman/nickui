@@ -318,9 +318,9 @@ export const CustomLayout: Story = {
 
 export const Small: Story = {
   args: {
+    sizer: Radios.sizer.small,
     label: 'Small label',
     hint: 'Small hint',
-    sizer: Radios.sizer.small,
     options: [
       {
         value: 'one',
@@ -347,9 +347,9 @@ export const Small: Story = {
 
 export const Medium: Story = {
   args: {
+    sizer: Radios.sizer.medium,
     label: 'Medium label',
     hint: 'Medium hint',
-    sizer: Radios.sizer.medium,
     options: [
       {
         value: 'one',
@@ -376,9 +376,9 @@ export const Medium: Story = {
 
 export const Large: Story = {
   args: {
+    sizer: Radios.sizer.large,
     label: 'Large label',
     hint: 'Large hint',
-    sizer: Radios.sizer.large,
     options: [
       {
         value: 'one',
@@ -403,19 +403,33 @@ export const Large: Story = {
   },
 };
 
+export const Responsive: Story = {
+  tags: ['!test'],
+  args: {
+    sizer: [Radios.sizer.smMedium, Radios.sizer.mdLarge],
+    label: 'Responsive label',
+    hint: 'Responsive hint',
+    options: [
+      {
+        value: 'one',
+        label: 'Option one',
+      },
+      {
+        value: 'two',
+        label: 'Option two',
+      },
+    ],
+  },
+};
+
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-x-12 gap-y-8 sm:flex-row">
-      <div className="flex-1">
-        <Radios {...Small.args} />
-      </div>
-      <div className="flex-1">
-        <Radios {...Medium.args} />
-      </div>
-      <div className="flex-1">
-        <Radios {...Large.args} />
-      </div>
+    <div className="flex flex-col gap-4 sm:flex-row">
+      <Radios {...Small.args} className="sm:flex-1" />
+      <Radios {...Medium.args} className="sm:flex-1" />
+      <Radios {...Large.args} className="sm:flex-1" />
+      <Radios {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

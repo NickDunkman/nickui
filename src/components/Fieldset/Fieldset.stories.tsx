@@ -71,11 +71,7 @@ export const Large: Story = {
 
 export const Responsive: Story = {
   args: {
-    sizer: [
-      Fieldset.sizer.small,
-      Fieldset.sizer.smMedium,
-      Fieldset.sizer.mdLarge,
-    ],
+    sizer: [Fieldset.sizer.smMedium, Fieldset.sizer.mdLarge],
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,

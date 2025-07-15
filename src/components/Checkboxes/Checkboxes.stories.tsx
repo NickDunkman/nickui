@@ -365,6 +365,25 @@ export const Large: Story = {
   },
 };
 
+export const Responsive: Story = {
+  tags: ['!test'],
+  args: {
+    label: 'Responsive label',
+    hint: 'Responsive hint',
+    sizer: [Checkboxes.sizer.smMedium, Checkboxes.sizer.mdLarge],
+    options: [
+      {
+        value: 'one',
+        label: 'Option one',
+      },
+      {
+        value: 'two',
+        label: 'Option two',
+      },
+    ],
+  },
+};
+
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
@@ -384,6 +403,7 @@ export const AllSizes: Story = {
       <Checkboxes {...Small.args} className="sm:flex-1" />
       <Checkboxes {...Medium.args} className="sm:flex-1" />
       <Checkboxes {...Large.args} className="sm:flex-1" />
+      <Checkboxes {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

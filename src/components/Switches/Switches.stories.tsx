@@ -284,9 +284,9 @@ export const CustomLayout: Story = {
 
 export const Small: Story = {
   args: {
+    sizer: Switches.sizer.small,
     label: 'Small label',
     hint: 'Small hint',
-    sizer: Switches.sizer.small,
     options: [
       {
         value: 'one',
@@ -313,9 +313,9 @@ export const Small: Story = {
 
 export const Medium: Story = {
   args: {
+    sizer: Switches.sizer.medium,
     label: 'Medium label',
     hint: 'Medium hint',
-    sizer: Switches.sizer.medium,
     options: [
       {
         value: 'one',
@@ -342,9 +342,9 @@ export const Medium: Story = {
 
 export const Large: Story = {
   args: {
+    sizer: Switches.sizer.large,
     label: 'Large label',
     hint: 'Large hint',
-    sizer: Switches.sizer.large,
     options: [
       {
         value: 'one',
@@ -369,6 +369,25 @@ export const Large: Story = {
   },
 };
 
+export const Responsive: Story = {
+  tags: ['!test'],
+  args: {
+    sizer: [Switches.sizer.smMedium, Switches.sizer.mdLarge],
+    label: 'Responsive label',
+    hint: 'Responsive hint',
+    options: [
+      {
+        value: 'one',
+        label: 'Option one',
+      },
+      {
+        value: 'two',
+        label: 'Option two',
+      },
+    ],
+  },
+};
+
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
@@ -384,10 +403,11 @@ export const AllControlStates: Story = {
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-x-12 gap-y-8 sm:flex-row sm:items-baseline">
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
       <Switches {...Small.args} className="sm:flex-1" />
       <Switches {...Medium.args} className="sm:flex-1" />
       <Switches {...Large.args} className="sm:flex-1" />
+      <Switches {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

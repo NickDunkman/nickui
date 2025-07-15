@@ -189,6 +189,15 @@ export const Large: Story = {
   },
 };
 
+export const Responsive: Story = {
+  tags: ['!test'],
+  args: {
+    sizer: [Radio.sizer.smMedium, Radio.sizer.mdLarge],
+    label: 'Responsive Radio',
+    defaultChecked: true,
+  },
+};
+
 export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
@@ -196,6 +205,7 @@ export const AllSizes: Story = {
       <Radio {...Small.args} className="sm:flex-1" />
       <Radio {...Medium.args} className="sm:flex-1" />
       <Radio {...Large.args} className="sm:flex-1" />
+      <Radio {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

@@ -180,6 +180,15 @@ export const Large: Story = {
   },
 };
 
+export const Responsive: Story = {
+  tags: ['!test'],
+  args: {
+    sizer: [Text.sizer.smMedium, Text.sizer.mdLarge],
+    label: 'Responsive label',
+    placeholder: 'Responsive Text',
+  },
+};
+
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
@@ -199,6 +208,7 @@ export const AllSizes: Story = {
       <Text {...Small.args} className="sm:flex-1" />
       <Text {...Medium.args} className="sm:flex-1" />
       <Text {...Large.args} className="sm:flex-1" />
+      <Text {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

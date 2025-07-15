@@ -193,6 +193,15 @@ export const Large: Story = {
   },
 };
 
+export const Responsive: Story = {
+  tags: ['!test'],
+  args: {
+    sizer: [Switch.sizer.smMedium, Switch.sizer.mdLarge],
+    label: 'Responsive Switch',
+    defaultChecked: true,
+  },
+};
+
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
@@ -213,6 +222,7 @@ export const AllSizes: Story = {
       <Switch {...Small.args} className="sm:flex-1" />
       <Switch {...Medium.args} className="sm:flex-1" />
       <Switch {...Large.args} className="sm:flex-1" />
+      <Switch {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

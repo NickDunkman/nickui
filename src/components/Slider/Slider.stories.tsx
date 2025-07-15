@@ -269,8 +269,8 @@ export const CustomRange: Story = {
 
 export const Small: Story = {
   args: {
-    ...withMetaHint('Small Slider (default)'),
     sizer: Slider.sizer.small,
+    ...withMetaHint('Small Slider (default)'),
     defaultValue: '50',
   },
   play: async ({ canvas, step }) => {
@@ -290,8 +290,8 @@ export const Small: Story = {
 
 export const Medium: Story = {
   args: {
-    ...withMetaHint('Medium Slider'),
     sizer: Slider.sizer.medium,
+    ...withMetaHint('Medium Slider'),
     defaultValue: '50',
   },
   play: async ({ canvas, step }) => {
@@ -309,8 +309,8 @@ export const Medium: Story = {
 
 export const Large: Story = {
   args: {
-    ...withMetaHint('Large Slider'),
     sizer: Slider.sizer.large,
+    ...withMetaHint('Large Slider'),
     defaultValue: '50',
   },
   play: async ({ canvas, step }) => {
@@ -323,6 +323,15 @@ export const Large: Story = {
         ).toHaveClass('text-sm');
       },
     );
+  },
+};
+
+export const Responsive: Story = {
+  tags: ['!test'],
+  args: {
+    sizer: [Slider.sizer.smMedium, Slider.sizer.mdLarge],
+    ...withMetaHint('Responsive Slider'),
+    defaultValue: '50',
   },
 };
 
@@ -345,6 +354,7 @@ export const AllSizes: Story = {
       <Slider {...Small.args} className="sm:flex-1" />
       <Slider {...Medium.args} className="sm:flex-1" />
       <Slider {...Large.args} className="sm:flex-1" />
+      <Slider {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

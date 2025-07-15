@@ -142,8 +142,8 @@ export const Disabled: Story = {
 
 export const Small: Story = {
   args: {
-    label: 'Small label',
     sizer: Textarea.sizer.small,
+    label: 'Small label',
     placeholder: 'Small Textarea (default)',
   },
   play: async ({ canvas, step }) => {
@@ -159,8 +159,8 @@ export const Small: Story = {
 
 export const Medium: Story = {
   args: {
-    label: 'Medium label',
     sizer: Textarea.sizer.medium,
+    label: 'Medium label',
     placeholder: 'Medium Textarea',
   },
   play: async ({ canvas, step }) => {
@@ -176,8 +176,8 @@ export const Medium: Story = {
 
 export const Large: Story = {
   args: {
-    label: 'Large label',
     sizer: Textarea.sizer.large,
+    label: 'Large label',
     placeholder: 'Large Textarea',
   },
   play: async ({ canvas, step }) => {
@@ -188,6 +188,15 @@ export const Large: Story = {
         expect(canvas.getByText('Large label')).toHaveClass('text-lg');
       },
     );
+  },
+};
+
+export const Responsive: Story = {
+  tags: ['!test'],
+  args: {
+    sizer: [Textarea.sizer.smMedium, Textarea.sizer.mdLarge],
+    label: 'Responsive label',
+    placeholder: 'Responsive Text',
   },
 };
 
@@ -330,6 +339,7 @@ export const AllSizes: Story = {
       <Textarea {...Small.args} />
       <Textarea {...Medium.args} />
       <Textarea {...Large.args} />
+      <Textarea {...Responsive.args} />
     </div>
   ),
 };

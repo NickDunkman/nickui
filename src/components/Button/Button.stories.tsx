@@ -92,8 +92,9 @@ export const Large: Story = {
 };
 
 export const Responsive: Story = {
+  tags: ['!test'],
   args: {
-    sizer: [Button.sizer.small, Button.sizer.smMedium, Button.sizer.mdLarge],
+    sizer: [Button.sizer.smMedium, Button.sizer.mdLarge],
     children: 'Responsive Button',
   },
 };

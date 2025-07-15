@@ -125,8 +125,8 @@ export const Disabled: Story = {
 
 export const Small: Story = {
   args: {
-    label: 'Small label',
     sizer: Select.sizer.small,
+    label: 'Small label',
     children: <option>Small Select (default)</option>,
   },
   play: async ({ canvas, step }) => {
@@ -142,8 +142,8 @@ export const Small: Story = {
 
 export const Medium: Story = {
   args: {
-    label: 'Medium label',
     sizer: Select.sizer.medium,
+    label: 'Medium label',
     children: <option>Medium Select</option>,
   },
   play: async ({ canvas, step }) => {
@@ -159,8 +159,8 @@ export const Medium: Story = {
 
 export const Large: Story = {
   args: {
-    label: 'Large label',
     sizer: Select.sizer.large,
+    label: 'Large label',
     children: <option>Large Select</option>,
   },
   play: async ({ canvas, step }) => {
@@ -171,6 +171,15 @@ export const Large: Story = {
         expect(canvas.getByText('Large label')).toHaveClass('text-lg');
       },
     );
+  },
+};
+
+export const Responsive: Story = {
+  tags: ['!test'],
+  args: {
+    sizer: [Select.sizer.smMedium, Select.sizer.mdLarge],
+    label: 'Responsive label',
+    children: <option>Responsive Select</option>,
   },
 };
 
@@ -189,15 +198,10 @@ export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col items-baseline gap-4 sm:flex-row">
-      <div className="flex-1">
-        <Select {...Small.args} />
-      </div>
-      <div className="flex-1">
-        <Select {...Medium.args} />
-      </div>
-      <div className="flex-1">
-        <Select {...Large.args} />
-      </div>
+      <Select {...Small.args} className="sm:flex-1" />
+      <Select {...Medium.args} className="sm:flex-1" />
+      <Select {...Large.args} className="sm:flex-1" />
+      <Select {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };
