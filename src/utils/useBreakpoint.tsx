@@ -1,125 +1,140 @@
+import memoize from 'just-memoize';
 import * as React from 'react';
+import { singletonHook } from 'react-singleton-hook';
+
+import { BREAKPOINT_MEASURER_ID } from '@/constants';
 
 import { clsw } from './clsw';
-import { debounceToRepaint } from './debounceToRepaint';
 
-const breakpointFinderId = 'nickui-breakpoint-finder';
+type BreakpointType = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
- * A hook that returns an object with information about which Tailwind
- * breakpoints are currently in effect, based on the screen size.
+ * useBreakpoint is a fancy hook that will performantly & synchronously return
+ * an object about the currently active Tailwind breakpoints.
  *
- * Note: as implemented, this only works with Tailwind's default breakpoints
- * (xs, sm, md, lg, xl). However, it *is* able to work with a downstream
- * application codebase's overrides to those breakpoints (such as changing
- * "sm" from 640px to 800px), since it detects the current breakpoint from an
- * element that uses tailwind breakpoint classes.
+ * It currently only works with Tailwind's default breakpoints (xs, sm, md, lg,
+ * xl) -- however, it does account for any custom theming of those breakpoints
+ * (such as if you've changed the minimum screen size of the "md" breakpoint in
+ * your application). It does this by installing a hidden <div> in the DOM
+ * which uses Tailwind breakpoint classes to change itself as the screen size
+ * changes. Then, the hook uses a combination of the ResizeObserver &
+ * react-singleton-hook to update the return value when the screen's breakpoint
+ * changes, in a very performant way.
  *
- * There's probably a smarter way to dynamically load where the config
- * would be located in such a codebase, and load the breakpoint config from
- * there, so that this hook doesn't need to return possibly `undefined` until
- * we install our special element. That would also allow us to include custom
- * breakpoints (such as an "xxxxl" breakpoint).
+ * This could probably be updated to include custom breakpoints added to your
+ * application's Tailwind config, but that would require some kind of trickery
+ * to dynamically pull that config, and then would need to use some kind of
+ * useMediaQuery hook along with javascript being aware of the breakpoint
+ * sizing.
  */
-export function useBreakpoint() {
-  // Holds the current breakpoint string (i.e. '"sm"'). This string has quotes
-  // on it when it comes out of getComputedStyle(). Deferring stripping that off
-  // until it is used to compute the return value, since that can happen *far*
-  // less often than the window resize event.
-  const [currentBreakpoint, setCurrentBreakpoint] = React.useState<string>();
+export const useBreakpoint = singletonHook(
+  // This is used until singletonHook sets up the hook (which is only once?)
+  () => getBreakpointInfo(getBreakpointFromMeasurer(getMeasurer())),
+  // Then, singletonHook just fully uses this hook
+  useBreakpointImplementation,
+);
 
-  const [counter, setCounter] = React.useState(0);
+export function useBreakpointImplementation() {
+  let [measurer, setMeasurer] = React.useState<HTMLElement>();
+  let [breakpoint, setBreakpoint] = React.useState<BreakpointType>();
 
   React.useEffect(() => {
-    let breakpointFinder = document.getElementById(breakpointFinderId);
-
-    // We only need to install this element once -- other components calling
-    // this hook can just use the same element.
-    if (!breakpointFinder) {
-      breakpointFinder = document.createElement('div');
-      breakpointFinder.id = breakpointFinderId;
-      breakpointFinder.className = clsw(`
-        absolute
-        hidden
-        before:content-['xs']
-        sm:before:content-['sm']
-        md:before:content-['md']
-        lg:before:content-['lg']
-        xl:before:content-['xl']
-      `);
-      breakpointFinder.ariaHidden = 'true';
-      document.body.appendChild(breakpointFinder);
-    }
-
-    // Now that we have the finder installed, we can set the initial breakpoint.
-    // The hook below will only update it if/when a window resize occurs.
-    setCurrentBreakpoint(getBreakpointFromFinder(breakpointFinder));
-  }, []);
-
-  // Add a window.onresize event that updates the currentBreakpoint value
-  // (only) when it needs to change.
-  React.useLayoutEffect(() => {
-    const breakpointFinder = document.getElementById(breakpointFinderId);
-
-    if (!breakpointFinder) {
-      setCounter(counter + 1);
-    } else {
-      const updateBreakpointOnResize = debounceToRepaint(() => {
-        if (breakpointFinder) {
-          const newBreakpoint = getBreakpointFromFinder(breakpointFinder);
-
-          if (newBreakpoint !== currentBreakpoint) {
-            setCurrentBreakpoint(newBreakpoint);
-          }
+    if (measurer) {
+      // By using ResizeObserver, our updater only fires when actual breakpoint
+      // changes occur, since our secret element does resizes at breakpoints.
+      // And since this hook is wrapped with a react-singleton-hook, there
+      // should only be one instance of this ResizeObserver running, no matter
+      // how many responsive NickUI components your application has mounted.
+      const observer = new ResizeObserver(() => {
+        if (measurer) {
+          setBreakpoint(getBreakpointFromMeasurer(measurer));
         }
       });
-
-      window.addEventListener('resize', updateBreakpointOnResize);
-
-      return () => {
-        window.removeEventListener('resize', updateBreakpointOnResize);
-      };
+      observer.observe(measurer);
+      return () => observer.disconnect();
     }
-  }, [counter, currentBreakpoint]);
+  }, [measurer]);
 
-  return React.useMemo(() => {
-    if (!currentBreakpoint) {
-      return;
-    }
+  if (!measurer) {
+    measurer = getMeasurer();
+    setMeasurer(measurer);
+  }
 
-    const isXlUp = currentBreakpoint === '"xl"';
-    const isLgUp = isXlUp || currentBreakpoint === '"lg"';
-    const isMdUp = isLgUp || currentBreakpoint === '"md"';
-    const isSmUp = isMdUp || currentBreakpoint === '"sm"';
+  if (!breakpoint) {
+    breakpoint = getBreakpointFromMeasurer(measurer);
+    setBreakpoint(breakpoint);
+  }
 
-    return {
-      currentBreakpoint: currentBreakpoint?.replace(/\W/g, ''),
-
-      isXsUp: true,
-      isXs: !isSmUp,
-      isXsDown: !isSmUp,
-
-      isSmUp,
-      isSm: isSmUp && !isMdUp,
-      isSmDown: !isMdUp,
-
-      isMdUp,
-      isMd: isMdUp && !isLgUp,
-      isMdDown: !isMdUp,
-
-      isLgUp,
-      isLg: isLgUp && !isXlUp,
-      isLgDown: !isLgUp,
-
-      isXlUp,
-      isXl: isXlUp,
-      isXlDown: true,
-    };
-  }, [currentBreakpoint]);
+  return getBreakpointInfo(breakpoint);
 }
 
-function getBreakpointFromFinder(breakpointFinder: Element) {
-  // Note: this is mocked to always return '"md"' in unit tests in
+function getBreakpointFromMeasurer(measurer: Element) {
+  // Note: this is mocked to always return 'md' in unit tests in
   // vitest.setup.ts
-  return window.getComputedStyle(breakpointFinder, '::before').content;
+  return window
+    .getComputedStyle(measurer, '::before')
+    .content.replace(/\W/g, '') as BreakpointType;
 }
+
+/**
+ * Gets the breakpoint measurer element from the DOM. Adds it first if it
+ * doesn't exist yet.
+ */
+function getMeasurer() {
+  let measurer = document.getElementById(BREAKPOINT_MEASURER_ID);
+
+  // If it doesn't exist in the dom yet, create it
+  if (!measurer) {
+    measurer = document.createElement('div');
+    measurer.id = BREAKPOINT_MEASURER_ID;
+    measurer.ariaHidden = 'true';
+
+    // For each breakpoint, we change the size (so the ResizeObserver calls
+    // our observer function again), and we change the content to the name
+    // of the breakpoint, so we can peek which name is currently displayed.
+    measurer.className = clsw(`
+        absolute -top-[9999px] -left-[9999px] -z-[9999]
+
+        w-1 before:content-['xs']
+        sm:w-2 sm:before:content-['sm']
+        md:w-3 md:before:content-['md']
+        lg:w-4 lg:before:content-['lg']
+        xl:w-5 xl:before:content-['xl']
+      `);
+
+    document.body.appendChild(measurer);
+  }
+
+  return measurer;
+}
+
+const getBreakpointInfo = memoize((breakpoint: BreakpointType) => {
+  const isXlUp = breakpoint === 'xl';
+  const isLgUp = isXlUp || breakpoint === 'lg';
+  const isMdUp = isLgUp || breakpoint === 'md';
+  const isSmUp = isMdUp || breakpoint === 'sm';
+
+  return {
+    breakpoint,
+
+    isXsUp: true,
+    isXs: !isSmUp,
+    isXsDown: !isSmUp,
+
+    isSmUp,
+    isSm: isSmUp && !isMdUp,
+    isSmDown: !isMdUp,
+
+    isMdUp,
+    isMd: isMdUp && !isLgUp,
+    isMdDown: !isMdUp,
+
+    isLgUp,
+    isLg: isLgUp && !isXlUp,
+    isLgDown: !isLgUp,
+
+    isXlUp,
+    isXl: isXlUp,
+    isXlDown: true,
+  };
+});

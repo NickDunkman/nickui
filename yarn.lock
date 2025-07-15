@@ -4553,6 +4553,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"just-memoize@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "just-memoize@npm:2.2.0"
+  checksum: 10c0/af27c23490ef3cfea1eddff38b32609e7bb1788bdd36961732ee9ae07011340c53388dc72869ca4002243d04c2b59a92e15b60f593cedabdb68aee507970a602
+  languageName: node
+  linkType: hard
+
 "keycode@npm:^2.2.1":
   version: 2.2.1
   resolution: "keycode@npm:2.2.1"
@@ -5072,6 +5079,7 @@ __metadata:
     eslint-plugin-storybook: "npm:^9.0.16"
     formik: "npm:^2.4.6"
     jsdom: "npm:^26.1.0"
+    just-memoize: "npm:^2.2.0"
     keycode: "npm:^2.2.1"
     playwright: "npm:^1.52.0"
     postcss: "npm:^8.5.6"
@@ -5080,7 +5088,7 @@ __metadata:
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     react-hook-form: "npm:^7.58.1"
-    resize-observer-polyfill: "npm:^1.5.1"
+    react-singleton-hook: "npm:^4.0.1"
     storybook: "npm:^9.0.16"
     tailwind-merge: "npm:^3.3.1"
     tailwind-variants: "npm:^1.0.0"
@@ -5669,6 +5677,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-singleton-hook@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "react-singleton-hook@npm:4.0.1"
+  peerDependencies:
+    react: 18
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 10c0/53261f8a99d0a4dd40ead18c6af1955b3d81d3c369c0a83eb7b3a3833499dc40e140f36fc868efa63fae5313765f49c610fa94031b919460af498a36010f5444
+  languageName: node
+  linkType: hard
+
 "react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react@npm:^19.1.0":
   version: 19.1.0
   resolution: "react@npm:19.1.0"
@@ -5726,13 +5748,6 @@ __metadata:
     gopd: "npm:^1.2.0"
     set-function-name: "npm:^2.0.2"
   checksum: 10c0/83b88e6115b4af1c537f8dabf5c3744032cb875d63bc05c288b1b8c0ef37cbe55353f95d8ca817e8843806e3e150b118bc624e4279b24b4776b4198232735a77
-  languageName: node
-  linkType: hard
-
-"resize-observer-polyfill@npm:^1.5.1":
-  version: 1.5.1
-  resolution: "resize-observer-polyfill@npm:1.5.1"
-  checksum: 10c0/5e882475067f0b97dc07e0f37c3e335ac5bc3520d463f777cec7e894bb273eddbfecb857ae668e6fb6881fd6f6bb7148246967172139302da50fa12ea3a15d95
   languageName: node
   linkType: hard
 
