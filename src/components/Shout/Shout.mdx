@@ -1,4 +1,4 @@
-import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/docs';
 
@@ -28,3 +28,46 @@ Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
 <Canvas of={Stories.AllFlavors} />
 
 <Docs.Sizing of={Stories} />
+
+## Accessibility considerations
+
+Since Shouts are intended to be prominent messages & are often added to the page
+after the user takes some kind of action, such as a success or error message
+after a form submission, you should take care to use the `role` and `aria-live`
+props appropriately, so that your message is announced to the user in the right
+way.
+
+When adding success message, you probably want it to be announced to the user,
+but without yanking their attention if they’re busy with something else:
+
+<Source
+  dark
+  language="tsx"
+  code={`
+    <Shout
+      role="status"
+      aria-live="polite"
+      flavor={Shout.flavor.yep} 
+    >
+      Hey that was a good form submission 👍
+    </Shout>
+  `}
+/>
+
+When adding an error message, you probably want it to be announced in an urgent
+way:
+
+<Source
+  dark
+  language="tsx"
+  code={`
+    <Shout
+      role="alert"
+      aria-live="assertive"
+      flavor={Shout.flavor.nope} 
+    >
+      There was a problem with your visa application submission. If you don’t
+      fix and resubmit, you will be apprehended at the border.
+    </Shout>
+  `}
+/>
