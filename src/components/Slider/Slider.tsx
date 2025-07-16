@@ -239,9 +239,6 @@ export function Slider({
       updateValueFromEventPosition(event.nativeEvent);
 
       onTouchStart?.(event);
-
-      // Don't allow page scrolling while dragging the slider
-      event.preventDefault();
     }
   }
 
@@ -410,6 +407,26 @@ export function Slider({
     atMin: percentage === 0,
     atMax: percentage === 100,
   });
+
+  // Add an additional touchstart event that prevents the page from scrolling
+  // as you drag the slider on touch screens
+  React.useEffect(() => {
+    if (rootRef.current) {
+      function handler(event: TouchEvent) {
+        event.preventDefault();
+      }
+
+      const rootEl = rootRef.current;
+
+      rootEl.addEventListener('touchstart', handler, {
+        passive: false,
+      });
+
+      return () => {
+        rootEl.removeEventListener('touchstart', handler);
+      };
+    }
+  }, [rootRef]);
 
   return (
     <Field
