@@ -17,7 +17,7 @@ export const styles = tv({
       [Sizer.small]: {
         contentRoot: 'gap-2 text-xs',
       },
-      [Sizer.medium]: {
+      [Sizer.base]: {
         contentRoot: 'gap-2.5 text-sm',
         label: 'text-sm',
         hint: 'text-xs',
@@ -37,7 +37,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.small,
+    sizer: Sizer.base,
     isDisabled: false,
   },
 });

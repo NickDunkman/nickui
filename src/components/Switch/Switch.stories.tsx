@@ -158,26 +158,27 @@ export const DisabledChecked: Story = {
 
 export const Small: Story = {
   args: {
-    label: 'Small Switch (default)',
+    sizer: Switch.sizer.small,
+    label: 'Small Switch',
     defaultChecked: true,
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the the small style', async () => {
+    await step('Assert the the small sizer style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('h-5');
     });
   },
 };
 
-export const Medium: Story = {
+export const Base: Story = {
   args: {
-    sizer: Switch.sizer.medium,
-    label: 'Medium Switch',
+    sizer: Switch.sizer.base,
+    label: 'Base Switch',
     defaultChecked: true,
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the the medium style', async () => {
+    await step('Assert the the base sizer style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('h-6');
     });
   },
@@ -191,7 +192,7 @@ export const Large: Story = {
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the the large style', async () => {
+    await step('Assert the the large sizer style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('h-7');
     });
   },
@@ -200,7 +201,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test'],
   args: {
-    sizer: [Switch.sizer.smMedium, Switch.sizer.mdLarge],
+    sizer: [Switch.sizer.small, Switch.sizer.smBase, Switch.sizer.mdLarge],
     label: 'Responsive Switch',
     defaultChecked: true,
   },
@@ -224,7 +225,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
       <Switch {...Small.args} className="sm:flex-1" />
-      <Switch {...Medium.args} className="sm:flex-1" />
+      <Switch {...Base.args} className="sm:flex-1" />
       <Switch {...Large.args} className="sm:flex-1" />
       <Switch {...Responsive.args} className="sm:flex-1" />
     </div>

@@ -58,24 +58,24 @@ export const AllControlStates: Story = {
 export const Small: Story = {
   args: {
     sizer: Button.sizer.small,
-    children: 'Small Button (default)',
+    children: 'Small Button',
     onClick: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the small style', async () => {
+    await step('Assert the small sizer style', async () => {
       expect(canvas.getByRole('button')).toHaveClass('text-sm');
     });
   },
 };
 
-export const Medium: Story = {
+export const Base: Story = {
   args: {
-    sizer: Button.sizer.medium,
-    children: 'Medium Button',
+    sizer: Button.sizer.base,
+    children: 'Base Button',
     onClick: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the medium style', async () => {
+    await step('Assert the base sizer style', async () => {
       expect(canvas.getByRole('button')).toHaveClass('text-base');
     });
   },
@@ -88,7 +88,7 @@ export const Large: Story = {
     onClick: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the large style', async () => {
+    await step('Assert the large sizer style', async () => {
       expect(canvas.getByRole('button')).toHaveClass('text-lg');
     });
   },
@@ -97,7 +97,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test'],
   args: {
-    sizer: [Button.sizer.smMedium, Button.sizer.mdLarge],
+    sizer: [Button.sizer.small, Button.sizer.smBase, Button.sizer.mdLarge],
     children: 'Responsive Button',
     onClick: fn(),
   },
@@ -108,7 +108,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-wrap items-baseline gap-4">
       <Button {...Small.args} />
-      <Button {...Medium.args} />
+      <Button {...Base.args} />
       <Button {...Large.args} />
       <Button {...Responsive.args} />
     </div>

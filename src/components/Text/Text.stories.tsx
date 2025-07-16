@@ -143,29 +143,35 @@ export const Small: Story = {
   args: {
     sizer: Text.sizer.small,
     label: 'Small label',
-    placeholder: 'Small Text (default)',
+    placeholder: 'Small Text',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the small style on both the Text & Field', async () => {
-      expect(canvas.getByLabelText('Small label')).toHaveClass('text-sm');
-      expect(canvas.getByText('Small label')).toHaveClass('text-xs');
-    });
+    await step(
+      'Assert the small sizer style on both the Text & Field',
+      async () => {
+        expect(canvas.getByLabelText('Small label')).toHaveClass('text-sm');
+        expect(canvas.getByText('Small label')).toHaveClass('text-xs');
+      },
+    );
   },
 };
 
-export const Medium: Story = {
+export const Base: Story = {
   args: {
-    sizer: Text.sizer.medium,
-    label: 'Medium label',
-    placeholder: 'Medium Text',
+    sizer: Text.sizer.base,
+    label: 'Base label',
+    placeholder: 'Base Text',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the medium style on both the Text & Field', async () => {
-      expect(canvas.getByLabelText('Medium label')).toHaveClass('text-base');
-      expect(canvas.getByText('Medium label')).toHaveClass('text-sm');
-    });
+    await step(
+      'Assert the base sizer style on both the Text & Field',
+      async () => {
+        expect(canvas.getByLabelText('Base label')).toHaveClass('text-base');
+        expect(canvas.getByText('Base label')).toHaveClass('text-sm');
+      },
+    );
   },
 };
 
@@ -177,17 +183,20 @@ export const Large: Story = {
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the large style on both the Text & Field', async () => {
-      expect(canvas.getByLabelText('Large label')).toHaveClass('text-lg');
-      expect(canvas.getByText('Large label')).toHaveClass('text-lg');
-    });
+    await step(
+      'Assert the large sizer style on both the Text & Field',
+      async () => {
+        expect(canvas.getByLabelText('Large label')).toHaveClass('text-lg');
+        expect(canvas.getByText('Large label')).toHaveClass('text-lg');
+      },
+    );
   },
 };
 
 export const Responsive: Story = {
   tags: ['!test'],
   args: {
-    sizer: [Text.sizer.smMedium, Text.sizer.mdLarge],
+    sizer: [Text.sizer.small, Text.sizer.smBase, Text.sizer.mdLarge],
     label: 'Responsive label',
     placeholder: 'Responsive Text',
     onChange: fn(),
@@ -211,7 +220,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
       <Text {...Small.args} className="sm:flex-1" />
-      <Text {...Medium.args} className="sm:flex-1" />
+      <Text {...Base.args} className="sm:flex-1" />
       <Text {...Large.args} className="sm:flex-1" />
       <Text {...Responsive.args} className="sm:flex-1" />
     </div>

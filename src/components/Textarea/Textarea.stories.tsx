@@ -145,12 +145,12 @@ export const Small: Story = {
   args: {
     sizer: Textarea.sizer.small,
     label: 'Small label',
-    placeholder: 'Small Textarea (default)',
+    placeholder: 'Small Textarea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small style on both the Textarea & Field',
+      'Assert the small sizer style on both the Textarea & Field',
       async () => {
         expect(canvas.getByLabelText('Small label')).toHaveClass('text-sm');
         expect(canvas.getByText('Small label')).toHaveClass('text-xs');
@@ -159,19 +159,19 @@ export const Small: Story = {
   },
 };
 
-export const Medium: Story = {
+export const Base: Story = {
   args: {
-    sizer: Textarea.sizer.medium,
-    label: 'Medium label',
-    placeholder: 'Medium Textarea',
+    sizer: Textarea.sizer.base,
+    label: 'Base label',
+    placeholder: 'Base Textarea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the medium style on both the Textarea & Field',
+      'Assert the base sizer style on both the Textarea & Field',
       async () => {
-        expect(canvas.getByLabelText('Medium label')).toHaveClass('text-base');
-        expect(canvas.getByText('Medium label')).toHaveClass('text-sm');
+        expect(canvas.getByLabelText('Base label')).toHaveClass('text-base');
+        expect(canvas.getByText('Base label')).toHaveClass('text-sm');
       },
     );
   },
@@ -186,7 +186,7 @@ export const Large: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the large style on both the Textarea & Field',
+      'Assert the large sizer style on both the Textarea & Field',
       async () => {
         expect(canvas.getByLabelText('Large label')).toHaveClass('text-lg');
         expect(canvas.getByText('Large label')).toHaveClass('text-lg');
@@ -198,7 +198,11 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test'],
   args: {
-    sizer: [Textarea.sizer.smMedium, Textarea.sizer.mdLarge],
+    sizer: [
+      Textarea.sizer.small,
+      Textarea.sizer.smBase,
+      Textarea.sizer.mdLarge,
+    ],
     label: 'Responsive label',
     placeholder: 'Responsive Text',
     onChange: fn(),
@@ -345,7 +349,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4">
       <Textarea {...Small.args} />
-      <Textarea {...Medium.args} />
+      <Textarea {...Base.args} />
       <Textarea {...Large.args} />
       <Textarea {...Responsive.args} />
     </div>

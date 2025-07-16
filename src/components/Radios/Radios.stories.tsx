@@ -275,7 +275,6 @@ export const CustomLayout: Story = {
         <span className="text-xs text-gray-500">or</span>
         <Radio
           {...radio({ value: 'nice-and-custom' })}
-          sizer={Radio.sizer.medium}
           label={
             <div className="font-bold">
               👨‍🎨 <span className="text-blue-600">Nice</span>{' '}
@@ -327,7 +326,7 @@ export const Small: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small style of both the Radios & Fieldset',
+      'Assert the small sizer style of both the Radios & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-3.5');
@@ -338,11 +337,11 @@ export const Small: Story = {
   },
 };
 
-export const Medium: Story = {
+export const Base: Story = {
   args: {
-    sizer: Radios.sizer.medium,
-    label: 'Medium label',
-    hint: 'Medium hint',
+    sizer: Radios.sizer.base,
+    label: 'Base label',
+    hint: 'Base hint',
     options: [
       {
         value: 'one',
@@ -357,12 +356,12 @@ export const Medium: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the medium style of both the Radios & Fieldset',
+      'Assert the base sizer style of both the Radios & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-4');
         });
-        expect(canvas.getByText('Medium label')).toHaveClass('text-sm');
+        expect(canvas.getByText('Base label')).toHaveClass('text-sm');
       },
     );
   },
@@ -387,7 +386,7 @@ export const Large: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the large style of both the Radios & Fieldset',
+      'Assert the large sizer style of both the Radios & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-5');
@@ -401,7 +400,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test'],
   args: {
-    sizer: [Radios.sizer.smMedium, Radios.sizer.mdLarge],
+    sizer: [Radios.sizer.small, Radios.sizer.smBase, Radios.sizer.mdLarge],
     label: 'Responsive label',
     hint: 'Responsive hint',
     options: [
@@ -435,7 +434,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row">
       <Radios {...Small.args} className="sm:flex-1" />
-      <Radios {...Medium.args} className="sm:flex-1" />
+      <Radios {...Base.args} className="sm:flex-1" />
       <Radios {...Large.args} className="sm:flex-1" />
       <Radios {...Responsive.args} className="sm:flex-1" />
     </div>

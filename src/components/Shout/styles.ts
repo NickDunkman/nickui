@@ -5,12 +5,12 @@ import { NoticeFlavor, Sizer } from '@/constants';
 /** tailwind-variants styles for the Shout component */
 export const shoutStyles = tv({
   base: `
-    rounded-sm font-semibold
+    rounded-sm font-medium
   `,
   variants: {
     sizer: {
       [Sizer.small]: 'text-sm px-3 py-2',
-      [Sizer.medium]: 'text-base px-4 py-3',
+      [Sizer.base]: 'text-base px-4 py-3',
       [Sizer.large]: 'text-lg px-5 py-4',
     },
     flavor: {
@@ -21,7 +21,7 @@ export const shoutStyles = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.small,
+    sizer: Sizer.base,
     flavor: NoticeFlavor.info,
   },
 });

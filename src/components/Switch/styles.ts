@@ -27,7 +27,7 @@ export const styles = tv({
         indicator:
           'w-8 h-5 after:size-4 after:border-5 peer-checked:after:translate-x-3',
       },
-      [Sizer.medium]: {
+      [Sizer.base]: {
         root: 'min-h-6',
         indicator:
           'w-10 h-6 after:size-5 after:border-6 peer-checked:after:translate-x-4',
@@ -53,7 +53,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.small,
+    sizer: Sizer.base,
     isDisabled: false,
     isKeyboardFocused: false,
   },

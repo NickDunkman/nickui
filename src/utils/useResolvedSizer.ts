@@ -23,8 +23,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       if (asArray.includes(Sizer.xlLarge)) {
         return Sizer.large;
       }
-      if (asArray.includes(Sizer.xlMedium)) {
-        return Sizer.medium;
+      if (asArray.includes(Sizer.xlBase)) {
+        return Sizer.base;
       }
       if (asArray.includes(Sizer.xlSmall)) {
         return Sizer.small;
@@ -35,8 +35,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       if (asArray.includes(Sizer.lgLarge)) {
         return Sizer.large;
       }
-      if (asArray.includes(Sizer.lgMedium)) {
-        return Sizer.medium;
+      if (asArray.includes(Sizer.lgBase)) {
+        return Sizer.base;
       }
       if (asArray.includes(Sizer.lgSmall)) {
         return Sizer.small;
@@ -47,8 +47,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       if (asArray.includes(Sizer.mdLarge)) {
         return Sizer.large;
       }
-      if (asArray.includes(Sizer.mdMedium)) {
-        return Sizer.medium;
+      if (asArray.includes(Sizer.mdBase)) {
+        return Sizer.base;
       }
       if (asArray.includes(Sizer.mdSmall)) {
         return Sizer.small;
@@ -59,8 +59,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       if (asArray.includes(Sizer.smLarge)) {
         return Sizer.large;
       }
-      if (asArray.includes(Sizer.smMedium)) {
-        return Sizer.medium;
+      if (asArray.includes(Sizer.smBase)) {
+        return Sizer.base;
       }
       if (asArray.includes(Sizer.smSmall)) {
         return Sizer.small;
@@ -70,11 +70,10 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
     if (asArray.includes(Sizer.large)) {
       return Sizer.large;
     }
-    if (asArray.includes(Sizer.medium)) {
-      return Sizer.medium;
-    }
     if (asArray.includes(Sizer.small)) {
       return Sizer.small;
     }
+
+    return Sizer.base;
   }, [breakpoint, responsiveSizer]);
 }

@@ -34,7 +34,7 @@ export const styles = tv({
         select: 'text-sm py-1.5 pl-2 pr-8',
         root: `after:w-[7px] after:h-[13px] after:right-3 ${arrowIcons.sm}`,
       },
-      [Sizer.medium]: {
+      [Sizer.base]: {
         select: 'text-base py-2.5 pl-3.5 pr-10',
         root: `after:w-[12px] after:h-[16px] after:right-3.75 ${arrowIcons.md}`,
       },
@@ -58,7 +58,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.small,
+    sizer: Sizer.base,
     hasError: false,
     isDisabled: false,
   },

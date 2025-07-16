@@ -21,7 +21,7 @@ export const styles = tv({
         hint: 'text-xs',
         error: 'text-xs',
       },
-      [Sizer.medium]: {
+      [Sizer.base]: {
         legend: 'mb-3',
         label: 'text-sm',
         footer: 'mt-3 gap-2',
@@ -38,6 +38,6 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.small,
+    sizer: Sizer.base,
   },
 });

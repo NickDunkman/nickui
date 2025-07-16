@@ -41,16 +41,16 @@ export const Small: Story = {
   },
 };
 
-export const Medium: Story = {
+export const Base: Story = {
   args: {
-    sizer: Fieldset.sizer.medium,
+    sizer: Fieldset.sizer.base,
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,
     ],
-    label: 'Medium label',
-    hint: 'Medium hint',
-    error: 'Medium error',
+    label: 'Base label',
+    hint: 'Base hint',
+    error: 'Base error',
     required: true,
   },
 };
@@ -71,7 +71,11 @@ export const Large: Story = {
 
 export const Responsive: Story = {
   args: {
-    sizer: [Fieldset.sizer.smMedium, Fieldset.sizer.mdLarge],
+    sizer: [
+      Fieldset.sizer.small,
+      Fieldset.sizer.smBase,
+      Fieldset.sizer.mdLarge,
+    ],
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,
@@ -88,7 +92,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
       <Fieldset {...Small.args} className="sm:flex-1" />
-      <Fieldset {...Medium.args} className="sm:flex-1" />
+      <Fieldset {...Base.args} className="sm:flex-1" />
       <Fieldset {...Large.args} className="sm:flex-1" />
       <Fieldset {...Responsive.args} className="sm:flex-1" />
     </div>

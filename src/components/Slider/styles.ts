@@ -30,8 +30,8 @@ export const styles = tv({
         `,
         thumb: 'size-5',
       },
-      [Sizer.medium]: {
-        root: 'h-6', // same aggregate height as medium Text
+      [Sizer.base]: {
+        root: 'h-6', // same aggregate height as base Text
         track: `
           h-1.5 left-3 right-3
           before:w-3 before:-left-3
@@ -96,7 +96,7 @@ export const styles = tv({
     },
     {
       hasFieldHeader: true,
-      sizer: Sizer.medium,
+      sizer: Sizer.base,
       className: { root: 'mt-3' },
     },
     {
@@ -111,7 +111,7 @@ export const styles = tv({
     },
     {
       hasFieldFooter: true,
-      sizer: Sizer.medium,
+      sizer: Sizer.base,
       className: { root: 'mb-3' },
     },
     {
@@ -121,7 +121,7 @@ export const styles = tv({
     },
   ],
   defaultVariants: {
-    sizer: Sizer.small,
+    sizer: Sizer.base,
     isKeyboardFocused: false,
     isDisabled: false,
     atMin: true,

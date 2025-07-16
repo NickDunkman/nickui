@@ -142,26 +142,27 @@ export const DisabledChecked: Story = {
 
 export const Small: Story = {
   args: {
-    label: 'Small Radio (default)',
+    sizer: Radio.sizer.small,
+    label: 'Small Radio',
     defaultChecked: true,
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the small style', async () => {
+    await step('Assert the small sizer style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('size-3.5');
     });
   },
 };
 
-export const Medium: Story = {
+export const Base: Story = {
   args: {
-    sizer: Radio.sizer.medium,
-    label: 'Medium Radio',
+    sizer: Radio.sizer.base,
+    label: 'Base Radio',
     defaultChecked: true,
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the medium style', async () => {
+    await step('Assert the base sizer style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('size-4');
     });
   },
@@ -175,7 +176,7 @@ export const Large: Story = {
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the large style', async () => {
+    await step('Assert the large sizer style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('size-5');
     });
   },
@@ -184,7 +185,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test'],
   args: {
-    sizer: [Radio.sizer.smMedium, Radio.sizer.mdLarge],
+    sizer: [Radio.sizer.small, Radio.sizer.smBase, Radio.sizer.mdLarge],
     label: 'Responsive Radio',
     defaultChecked: true,
     onChange: fn(),
@@ -209,7 +210,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
       <Radio {...Small.args} className="sm:flex-1" />
-      <Radio {...Medium.args} className="sm:flex-1" />
+      <Radio {...Base.args} className="sm:flex-1" />
       <Radio {...Large.args} className="sm:flex-1" />
       <Radio {...Responsive.args} className="sm:flex-1" />
     </div>

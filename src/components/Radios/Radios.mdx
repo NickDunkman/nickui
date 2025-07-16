@@ -22,7 +22,6 @@ import * as Stories from './Radios.stories';
       { value: 'deux', label: 'Deux' },
       { value: 'trois', label: 'Trois' },
     ]}
-    sizer={Radios.sizer.medium}
   />
 </Docs.FauxCanvas>
 
@@ -74,7 +73,6 @@ pass a `render` function instead of using `options`.
           <span className="text-xs text-gray-500">or</span>
           <Radio
             {...radio({ value: 'nice-and-custom' })}
-            sizer={Radio.sizer.medium}
             label={
               <div className="font-bold">
                 👨‍🎨 <span className="text-blue-600">Nice</span>{' '}
@@ -103,7 +101,6 @@ pass a `render` function instead of using `options`.
   fieldName="pinPositionFormik"
   initialValue="front"
   componentProps={{
-    sizer: Radios.sizer.medium,
     label: 'Today’s pin positioning',
     hint: 'Starting from the first hole',
     options: [

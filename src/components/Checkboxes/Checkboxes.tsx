@@ -216,7 +216,7 @@ export function Checkables({
           options &&
           clsw('flex flex-col', {
             'gap-y-2': !resolvedSizer || resolvedSizer === Sizer.small,
-            'gap-y-2.5': resolvedSizer === Sizer.medium,
+            'gap-y-2.5': resolvedSizer === Sizer.base,
             'gap-y-3': resolvedSizer === Sizer.large,
           })
         }

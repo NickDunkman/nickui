@@ -300,7 +300,7 @@ export const Small: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small style of both the Checkboxes & Fieldset',
+      'Assert the small sizer style of both the Checkboxes & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-3.5');
@@ -311,11 +311,11 @@ export const Small: Story = {
   },
 };
 
-export const Medium: Story = {
+export const Base: Story = {
   args: {
-    label: 'Medium label',
-    hint: 'Medium hint',
-    sizer: Checkboxes.sizer.medium,
+    label: 'Base label',
+    hint: 'Base hint',
+    sizer: Checkboxes.sizer.base,
     options: [
       {
         value: 'one',
@@ -330,12 +330,12 @@ export const Medium: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the medium style of both the Checkboxes & Fieldset',
+      'Assert the base sizer style of both the Checkboxes & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-4');
         });
-        expect(canvas.getByText('Medium label')).toHaveClass('text-sm');
+        expect(canvas.getByText('Base label')).toHaveClass('text-sm');
       },
     );
   },
@@ -376,7 +376,11 @@ export const Responsive: Story = {
   args: {
     label: 'Responsive label',
     hint: 'Responsive hint',
-    sizer: [Checkboxes.sizer.smMedium, Checkboxes.sizer.mdLarge],
+    sizer: [
+      Checkbox.sizer.small,
+      Checkboxes.sizer.smBase,
+      Checkboxes.sizer.mdLarge,
+    ],
     options: [
       {
         value: 'one',
@@ -408,7 +412,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
       <Checkboxes {...Small.args} className="sm:flex-1" />
-      <Checkboxes {...Medium.args} className="sm:flex-1" />
+      <Checkboxes {...Base.args} className="sm:flex-1" />
       <Checkboxes {...Large.args} className="sm:flex-1" />
       <Checkboxes {...Responsive.args} className="sm:flex-1" />
     </div>

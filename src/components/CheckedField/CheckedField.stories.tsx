@@ -31,12 +31,12 @@ export const Small: Story = {
   },
 };
 
-export const Medium: Story = {
+export const Base: Story = {
   args: {
-    sizer: CheckedField.sizer.medium,
+    sizer: CheckedField.sizer.base,
     children: <Docs.FormControlPlaceholder tiny />,
-    label: 'Medium label',
-    hint: 'Medium hint',
+    label: 'Base label',
+    hint: 'Base hint',
   },
 };
 
@@ -52,7 +52,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test'],
   args: {
-    sizer: [CheckedField.sizer.smMedium, CheckedField.sizer.mdLarge],
+    sizer: [CheckedField.sizer.smBase, CheckedField.sizer.mdLarge],
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Responsive label',
     hint: 'Responsive hint',
@@ -64,7 +64,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
       <CheckedField {...Small.args} className="sm:flex-1" />
-      <CheckedField {...Medium.args} className="sm:flex-1" />
+      <CheckedField {...Base.args} className="sm:flex-1" />
       <CheckedField {...Large.args} className="sm:flex-1" />
       <CheckedField {...Responsive.args} className="sm:flex-1" />
     </div>

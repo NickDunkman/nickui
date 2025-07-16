@@ -273,39 +273,37 @@ export const CustomRange: Story = {
 export const Small: Story = {
   args: {
     sizer: Slider.sizer.small,
-    ...withMetaHint('Small Slider (default)'),
+    ...withMetaHint('Small Slider'),
     defaultValue: '50',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small style on both the Slider & Field',
+      'Assert the small sizer style on both the Slider & Field',
       async () => {
-        expect(canvas.getByLabelText('Small Slider (default)')).toHaveClass(
-          'h-5',
-        );
+        expect(canvas.getByLabelText('Small Slider')).toHaveClass('h-5');
         expect(
-          canvas.getByText('Small Slider (default)').parentNode?.parentNode,
+          canvas.getByText('Small Slider').parentNode?.parentNode,
         ).toHaveClass('text-xs');
       },
     );
   },
 };
 
-export const Medium: Story = {
+export const Base: Story = {
   args: {
-    sizer: Slider.sizer.medium,
-    ...withMetaHint('Medium Slider'),
+    sizer: Slider.sizer.base,
+    ...withMetaHint('Base Slider'),
     defaultValue: '50',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the medium style on both the Slider & Field',
+      'Assert the base sizer style on both the Slider & Field',
       async () => {
-        expect(canvas.getByLabelText('Medium Slider')).toHaveClass('h-6');
+        expect(canvas.getByLabelText('Base Slider')).toHaveClass('h-6');
         expect(
-          canvas.getByText('Medium Slider').parentNode?.parentNode,
+          canvas.getByText('Base Slider').parentNode?.parentNode,
         ).toHaveClass('text-xs');
       },
     );
@@ -321,7 +319,7 @@ export const Large: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the large style on both the Slider & Field',
+      'Assert the large sizer style on both the Slider & Field',
       async () => {
         expect(canvas.getByLabelText('Large Slider')).toHaveClass('h-7');
         expect(
@@ -335,7 +333,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test'],
   args: {
-    sizer: [Slider.sizer.smMedium, Slider.sizer.mdLarge],
+    sizer: [Slider.sizer.small, Slider.sizer.smBase, Slider.sizer.mdLarge],
     ...withMetaHint('Responsive Slider'),
     defaultValue: '50',
     onChange: fn(),
@@ -359,7 +357,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-col items-center gap-5 sm:flex-row">
       <Slider {...Small.args} className="sm:flex-1" />
-      <Slider {...Medium.args} className="sm:flex-1" />
+      <Slider {...Base.args} className="sm:flex-1" />
       <Slider {...Large.args} className="sm:flex-1" />
       <Slider {...Responsive.args} className="sm:flex-1" />
     </div>

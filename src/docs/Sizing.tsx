@@ -18,10 +18,10 @@ export function Sizing({ of }: { of: StoriesModule }) {
 Sizing is done via the \`sizer\` prop. You can pass a single sizer as a string,
 or an array of sizers if you want different sizing at different breakpoints.
 
-- The standard sizes are \`"small"\` (the default), \`"medium"\`, and \`"large"\`
+- The standard sizes are \`"small"\`, \`"base"\` (the default), and \`"large"\`
 - You can also do Tailwind-style responsive sizing using prefixes: \`"sm:"\`, \`"md:"\`, \`"lg:"\`, and \`"xl:"\`.
 
-For example, \`sizer={["sm:medium", "md:large"]}\` will show the small size on screens smaller than the "sm" breakpoint, then the medium size between the "sm" and "md" breakpoints, and then the large size above the "md" breakpoint.
+For example, \`sizer={["small", "sm:base", "md:large"]}\` will show the small size on screens smaller than the "sm" breakpoint, then the base size between the "sm" and "md" breakpoints, and then the large size above the "md" breakpoint.
         `}
       </Markdown>
 

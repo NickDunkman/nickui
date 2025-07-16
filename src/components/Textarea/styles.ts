@@ -30,7 +30,7 @@ export const styles = tv({
     },
     {
       slots: ['textarea', 'hiddenTextarea'],
-      sizer: Sizer.medium,
+      sizer: Sizer.base,
       className: 'text-base py-2.5 px-3.5',
     },
     {
@@ -43,7 +43,7 @@ export const styles = tv({
   variants: {
     sizer: {
       [Sizer.small]: {},
-      [Sizer.medium]: {},
+      [Sizer.base]: {},
       [Sizer.large]: {},
     },
     hasError: {
@@ -60,7 +60,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.small,
+    sizer: Sizer.base,
     hasError: false,
   },
 });

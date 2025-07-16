@@ -11,7 +11,7 @@ interface ShoutProps extends React.ComponentProps<'div'> {
   children?: React.ReactNode;
   /** Optionally add utility classes to the root element */
   className?: string;
-  /** Changes the size of the Shout ("small", "medium", "large") */
+  /** Changes the size of the Shout ("small", "base", "large") */
   sizer?: Sizer | Sizer[];
   /** Changes the color of the Shout ("info", "yep", "maybe", "nope") */
   flavor?: NoticeFlavor;

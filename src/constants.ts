@@ -3,23 +3,23 @@
  */
 export enum Sizer {
   small = 'small',
-  medium = 'medium',
+  base = 'base',
   large = 'large',
 
   smSmall = 'sm:small',
-  smMedium = 'sm:medium',
+  smBase = 'sm:base',
   smLarge = 'sm:large',
 
   mdSmall = 'md:small',
-  mdMedium = 'md:medium',
+  mdBase = 'md:base',
   mdLarge = 'md:large',
 
   lgSmall = 'lg:small',
-  lgMedium = 'lg:medium',
+  lgBase = 'lg:base',
   lgLarge = 'lg:large',
 
   xlSmall = 'xl:small',
-  xlMedium = 'xl:medium',
+  xlBase = 'xl:base',
   xlLarge = 'xl:large',
 }
 

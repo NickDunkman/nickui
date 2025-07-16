@@ -17,7 +17,7 @@ export const styles = tv({
   variants: {
     sizer: {
       [Sizer.small]: 'text-sm py-1.75 px-3',
-      [Sizer.medium]: 'text-base py-2.75 px-4.5',
+      [Sizer.base]: 'text-base py-2.75 px-4.5',
       [Sizer.large]: 'text-lg py-3.75 px-5.5',
     },
     isDisabled: {
@@ -189,7 +189,7 @@ export const styles = tv({
     },
   ],
   defaultVariants: {
-    sizer: Sizer.small,
+    sizer: Sizer.base,
     flavor: ButtonFlavor.primary,
     isDisabled: false,
     isTouched: false,

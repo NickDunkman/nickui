@@ -22,7 +22,7 @@ export const styles = tv({
       [Sizer.small]: {
         indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.5',
       },
-      [Sizer.medium]: {
+      [Sizer.base]: {
         indicator: 'size-4 top-0.75 peer-checked:after:size-1.5',
       },
       [Sizer.large]: {
@@ -47,7 +47,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.small,
+    sizer: Sizer.base,
     isDisabled: false,
     isKeyboardFocused: false,
   },

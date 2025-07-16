@@ -15,7 +15,7 @@ export const styles = tv({
   variants: {
     sizer: {
       [Sizer.small]: 'text-sm py-1.5 px-2',
-      [Sizer.medium]: 'text-base py-2.5 px-3.5',
+      [Sizer.base]: 'text-base py-2.5 px-3.5',
       [Sizer.large]: 'text-lg py-3.5 px-4.5',
     },
     hasError: {
@@ -23,7 +23,7 @@ export const styles = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.small,
+    sizer: Sizer.base,
     hasError: false,
   },
 });

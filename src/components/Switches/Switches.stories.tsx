@@ -305,7 +305,7 @@ export const Small: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small style of both the Switches & Fieldset',
+      'Assert the small sizer style of both the Switches & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('h-5');
@@ -316,11 +316,11 @@ export const Small: Story = {
   },
 };
 
-export const Medium: Story = {
+export const Base: Story = {
   args: {
-    sizer: Switches.sizer.medium,
-    label: 'Medium label',
-    hint: 'Medium hint',
+    sizer: Switches.sizer.base,
+    label: 'Base label',
+    hint: 'Base hint',
     options: [
       {
         value: 'one',
@@ -335,12 +335,12 @@ export const Medium: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the medium style of both the Switches & Fieldset',
+      'Assert the base sizer style of both the Switches & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('h-6');
         });
-        expect(canvas.getByText('Medium label')).toHaveClass('text-sm');
+        expect(canvas.getByText('Base label')).toHaveClass('text-sm');
       },
     );
   },
@@ -379,7 +379,11 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test'],
   args: {
-    sizer: [Switches.sizer.smMedium, Switches.sizer.mdLarge],
+    sizer: [
+      Switches.sizer.small,
+      Switches.sizer.smBase,
+      Switches.sizer.mdLarge,
+    ],
     label: 'Responsive label',
     hint: 'Responsive hint',
     options: [
@@ -413,7 +417,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
       <Switches {...Small.args} className="sm:flex-1" />
-      <Switches {...Medium.args} className="sm:flex-1" />
+      <Switches {...Base.args} className="sm:flex-1" />
       <Switches {...Large.args} className="sm:flex-1" />
       <Switches {...Responsive.args} className="sm:flex-1" />
     </div>
