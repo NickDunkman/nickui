@@ -24,10 +24,6 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
   flavor?: ButtonFlavor;
 }
 
-// Adding a touchstart event to the <body> allows the :hover styles to apply
-// when an element is tapped on iOS touch screens, which we need for Button
-document.addEventListener('touchstart', () => {}, false);
-
 /**
  * Buttons allow the user to trigger an action, such as submitting a form
  * @param props {@link ButtonProps}
@@ -38,10 +34,15 @@ export function Button({
   disabled = false,
   sizer,
   flavor,
+  onTouchStart,
+  onTouchEnd,
+  onTouchCancel,
   ...buttonHTMLProps
 }: ButtonProps) {
+  const [isTouched, setIsTouched] = React.useState(false);
+
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = styles({ sizer: resolvedSizer, flavor });
+  const s = styles({ sizer: resolvedSizer, flavor, isTouched });
 
   return (
     <button
@@ -49,6 +50,24 @@ export function Button({
       className={clsw(s, className)}
       disabled={disabled}
       type={type}
+      onTouchStart={(event) => {
+        if (!isTouched) {
+          setIsTouched(true);
+        }
+        onTouchStart?.(event);
+      }}
+      onTouchEnd={(event) => {
+        if (isTouched) {
+          setIsTouched(false);
+        }
+        onTouchEnd?.(event);
+      }}
+      onTouchCancel={(event) => {
+        if (isTouched) {
+          setIsTouched(false);
+        }
+        onTouchCancel?.(event);
+      }}
     />
   );
 }

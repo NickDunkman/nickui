@@ -39,6 +39,13 @@ export const styles = tv({
       [ButtonFlavor.danger]:
         'bg-rose-700 border-rose-700 text-white font-medium',
     },
+    isTouched: {
+      true: `
+        bg-amber-500
+        pointer-coarse:shadow-md/15 pointer-coarse:translate-y-0 pointer-coarse:scale-100
+        pointer-coarse:bg-black
+      `,
+    },
   },
   defaultVariants: {
     sizer: Sizer.small,
