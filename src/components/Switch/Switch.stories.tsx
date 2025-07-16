@@ -47,6 +47,7 @@ export const CheckedFieldLayout: Story = {
 export const Unchecked: Story = {
   args: {
     label: 'Unchecked Switch',
+    onChange: fn(),
   },
   play: async ({ canvas }) => {
     expect(canvas.getByLabelText('Unchecked Switch')).not.toBeChecked();
@@ -159,6 +160,7 @@ export const Small: Story = {
   args: {
     label: 'Small Switch (default)',
     defaultChecked: true,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the the small style', async () => {
@@ -172,6 +174,7 @@ export const Medium: Story = {
     sizer: Switch.sizer.medium,
     label: 'Medium Switch',
     defaultChecked: true,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the the medium style', async () => {
@@ -185,6 +188,7 @@ export const Large: Story = {
     sizer: Switch.sizer.large,
     label: 'Large Switch',
     defaultChecked: true,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the the large style', async () => {

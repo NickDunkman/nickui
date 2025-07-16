@@ -47,6 +47,7 @@ export const CheckedFieldLayout: Story = {
 export const Unchecked: Story = {
   args: {
     label: 'Unchecked Checkbox',
+    onChange: fn(),
   },
   play: ({ canvas }) => {
     expect(canvas.getByLabelText('Unchecked Checkbox')).not.toBeChecked();
@@ -155,24 +156,12 @@ export const DisabledChecked: Story = {
   },
 };
 
-export const AllControlStates: Story = {
-  tags: ['!dev', '!test'],
-  render: (_args) => (
-    <div className="flex flex-col gap-4">
-      <Checkbox {...Unchecked.args} />
-      <Checkbox {...Controlled.args} />
-      <Checkbox {...Uncontrolled.args} />
-      <Checkbox {...DisabledUnchecked.args} />
-      <Checkbox {...DisabledChecked.args} />
-    </div>
-  ),
-};
-
 export const Small: Story = {
   args: {
     sizer: Checkbox.sizer.small,
     label: 'Small Checkbox (default)',
     defaultChecked: true,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the the small style', async () => {
@@ -186,6 +175,7 @@ export const Medium: Story = {
     sizer: Checkbox.sizer.medium,
     label: 'Medium Checkbox',
     defaultChecked: true,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the medium style', async () => {
@@ -199,6 +189,7 @@ export const Large: Story = {
     sizer: Checkbox.sizer.large,
     label: 'Large Checkbox',
     defaultChecked: true,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the large style', async () => {
@@ -213,7 +204,21 @@ export const Responsive: Story = {
     sizer: [Checkbox.sizer.smMedium, Checkbox.sizer.mdLarge],
     label: 'Responsive Checkbox',
     defaultChecked: true,
+    onChange: fn(),
   },
+};
+
+export const AllControlStates: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <div className="flex flex-col gap-4">
+      <Checkbox {...Unchecked.args} />
+      <Checkbox {...Controlled.args} />
+      <Checkbox {...Uncontrolled.args} />
+      <Checkbox {...DisabledUnchecked.args} />
+      <Checkbox {...DisabledChecked.args} />
+    </div>
+  ),
 };
 
 export const AllSizes: Story = {

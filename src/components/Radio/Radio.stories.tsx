@@ -66,6 +66,7 @@ export const CheckedFieldLayout: Story = {
 export const Unchecked: Story = {
   args: {
     label: 'Unchecked Radio',
+    onChange: fn(),
   },
   play: ({ canvas }) => {
     expect(canvas.getByLabelText('Unchecked Radio')).not.toBeChecked();
@@ -76,7 +77,7 @@ export const Controlled: Story = {
   args: {
     label: 'Controlled Radio',
     checked: true,
-    onChange: () => {},
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert `checked` prop works', async () => {
@@ -89,6 +90,7 @@ export const Uncontrolled: Story = {
   args: {
     label: 'Uncontrolled Radio',
     defaultChecked: true,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert `defaultChecked` prop works', async () => {
@@ -138,23 +140,11 @@ export const DisabledChecked: Story = {
   },
 };
 
-export const AllControlStates: Story = {
-  tags: ['!dev', '!test'],
-  render: (_args) => (
-    <div className="flex flex-col gap-4">
-      <Radio {...Unchecked.args} />
-      <Radio {...Controlled.args} />
-      <Radio {...Uncontrolled.args} />
-      <Radio {...DisabledUnchecked.args} />
-      <Radio {...DisabledChecked.args} />
-    </div>
-  ),
-};
-
 export const Small: Story = {
   args: {
     label: 'Small Radio (default)',
     defaultChecked: true,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the small style', async () => {
@@ -168,6 +158,7 @@ export const Medium: Story = {
     sizer: Radio.sizer.medium,
     label: 'Medium Radio',
     defaultChecked: true,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the medium style', async () => {
@@ -181,6 +172,7 @@ export const Large: Story = {
     sizer: Radio.sizer.large,
     label: 'Large Radio',
     defaultChecked: true,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the large style', async () => {
@@ -195,7 +187,21 @@ export const Responsive: Story = {
     sizer: [Radio.sizer.smMedium, Radio.sizer.mdLarge],
     label: 'Responsive Radio',
     defaultChecked: true,
+    onChange: fn(),
   },
+};
+
+export const AllControlStates: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <div className="flex flex-col gap-4">
+      <Radio {...Unchecked.args} />
+      <Radio {...Controlled.args} />
+      <Radio {...Uncontrolled.args} />
+      <Radio {...DisabledUnchecked.args} />
+      <Radio {...DisabledChecked.args} />
+    </div>
+  ),
 };
 
 export const AllSizes: Story = {

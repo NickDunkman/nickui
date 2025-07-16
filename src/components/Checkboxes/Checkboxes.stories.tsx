@@ -30,6 +30,7 @@ export const FieldsetLayout: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     const fieldset = canvas.getByRole('group');
@@ -192,6 +193,7 @@ export const Disabled: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert all Checkboxes are disabled', async () => {
@@ -264,6 +266,7 @@ export const CustomLayout: Story = {
         </label>
       </div>
     ),
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     const cb1 = canvas.getByLabelText('Colorful');
@@ -293,6 +296,7 @@ export const Small: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -322,6 +326,7 @@ export const Medium: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -351,6 +356,7 @@ export const Large: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -381,6 +387,7 @@ export const Responsive: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
 };
 

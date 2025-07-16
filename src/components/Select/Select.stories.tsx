@@ -19,6 +19,7 @@ export const FieldLayout: Story = {
     error: 'An error message',
     hint: 'A hint',
     children: <option>An option</option>,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     const select = canvas.getByLabelText('A label*');
@@ -40,7 +41,6 @@ export const FieldLayout: Story = {
 export const Controlled: Story = {
   args: {
     value: 'controlled',
-    onChange: fn(),
     'aria-label': 'Controlled Select',
     children: [
       <option value="another" key="another">
@@ -50,6 +50,7 @@ export const Controlled: Story = {
         Controlled Select
       </option>,
     ],
+    onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
     const select = canvas.getByLabelText('Controlled Select');
@@ -76,7 +77,6 @@ export const Uncontrolled: Story = {
   args: {
     defaultValue: 'uncontrolled',
     'aria-label': 'Uncontrolled Select',
-    onChange: fn(),
     children: [
       <option value="another" key="another">
         Another option
@@ -85,6 +85,7 @@ export const Uncontrolled: Story = {
         Uncontrolled Select
       </option>,
     ],
+    onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
     const select = canvas.getByLabelText('Uncontrolled Select');
@@ -113,8 +114,8 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     'aria-label': 'Disabled Select',
-    onChange: fn(),
     children: <option value="disabled">Disabled Select</option>,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert disabled state', async () => {
@@ -128,6 +129,7 @@ export const Small: Story = {
     sizer: Select.sizer.small,
     label: 'Small label',
     children: <option>Small Select (default)</option>,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -145,6 +147,7 @@ export const Medium: Story = {
     sizer: Select.sizer.medium,
     label: 'Medium label',
     children: <option>Medium Select</option>,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -162,6 +165,7 @@ export const Large: Story = {
     sizer: Select.sizer.large,
     label: 'Large label',
     children: <option>Large Select</option>,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -180,6 +184,7 @@ export const Responsive: Story = {
     sizer: [Select.sizer.smMedium, Select.sizer.mdLarge],
     label: 'Responsive label',
     children: <option>Responsive Select</option>,
+    onChange: fn(),
   },
 };
 

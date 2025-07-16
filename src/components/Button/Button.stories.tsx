@@ -59,6 +59,7 @@ export const Small: Story = {
   args: {
     sizer: Button.sizer.small,
     children: 'Small Button (default)',
+    onClick: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the small style', async () => {
@@ -71,6 +72,7 @@ export const Medium: Story = {
   args: {
     sizer: Button.sizer.medium,
     children: 'Medium Button',
+    onClick: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the medium style', async () => {
@@ -83,6 +85,7 @@ export const Large: Story = {
   args: {
     sizer: Button.sizer.large,
     children: 'Large Button',
+    onClick: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the large style', async () => {
@@ -96,6 +99,7 @@ export const Responsive: Story = {
   args: {
     sizer: [Button.sizer.smMedium, Button.sizer.mdLarge],
     children: 'Responsive Button',
+    onClick: fn(),
   },
 };
 
@@ -113,7 +117,9 @@ export const AllSizes: Story = {
 
 export const Primary: Story = {
   args: {
+    flavor: Button.flavor.primary,
     children: 'Primary Button (default)',
+    onClick: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the primary style', async () => {
@@ -126,6 +132,7 @@ export const Secondary: Story = {
   args: {
     flavor: Button.flavor.secondary,
     children: 'Secondary Button',
+    onClick: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the secondary style', async () => {
@@ -138,6 +145,7 @@ export const Danger: Story = {
   args: {
     flavor: Button.flavor.danger,
     children: 'Danger Button',
+    onClick: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the secondary style', async () => {

@@ -33,6 +33,7 @@ export const FieldLayout: Story = {
     hint: 'A hint',
     error: 'An error message',
     defaultValue: '50',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     const slider = canvas.getByLabelText('A label*');
@@ -202,6 +203,7 @@ export const Disabled: Story = {
     ...withMetaHint('Disabled Slider'),
     disabled: true,
     defaultValue: '50',
+    onChange: fn(),
   },
   play: async ({ canvas, step, userEvent }) => {
     const slider = canvas.getByRole('slider');
@@ -222,6 +224,7 @@ export const CustomRange: Story = {
     max: 1000,
     step: 0.01,
     shiftSteps: 500,
+    onChange: fn(),
   },
   play: async ({ canvas, step, userEvent }) => {
     const slider = canvas.getByRole('slider');
@@ -272,6 +275,7 @@ export const Small: Story = {
     sizer: Slider.sizer.small,
     ...withMetaHint('Small Slider (default)'),
     defaultValue: '50',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -293,6 +297,7 @@ export const Medium: Story = {
     sizer: Slider.sizer.medium,
     ...withMetaHint('Medium Slider'),
     defaultValue: '50',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -312,6 +317,7 @@ export const Large: Story = {
     sizer: Slider.sizer.large,
     ...withMetaHint('Large Slider'),
     defaultValue: '50',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -332,6 +338,7 @@ export const Responsive: Story = {
     sizer: [Slider.sizer.smMedium, Slider.sizer.mdLarge],
     ...withMetaHint('Responsive Slider'),
     defaultValue: '50',
+    onChange: fn(),
   },
 };
 

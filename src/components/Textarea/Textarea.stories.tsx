@@ -21,6 +21,7 @@ export const FieldLayout: Story = {
     hint: 'A hint',
     error: 'An error message',
     defaultValue: 'A problematic value',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     const textarea = canvas.getByLabelText('A label*');
@@ -67,8 +68,8 @@ export const Empty: Story = {
 export const Controlled: Story = {
   args: {
     value: 'Controlled Textarea',
-    onChange: fn(),
     'aria-label': 'Controlled Textarea',
+    onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
     const textarea = canvas.getByLabelText('Controlled Textarea');
@@ -145,6 +146,7 @@ export const Small: Story = {
     sizer: Textarea.sizer.small,
     label: 'Small label',
     placeholder: 'Small Textarea (default)',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -162,6 +164,7 @@ export const Medium: Story = {
     sizer: Textarea.sizer.medium,
     label: 'Medium label',
     placeholder: 'Medium Textarea',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -179,6 +182,7 @@ export const Large: Story = {
     sizer: Textarea.sizer.large,
     label: 'Large label',
     placeholder: 'Large Textarea',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -197,6 +201,7 @@ export const Responsive: Story = {
     sizer: [Textarea.sizer.smMedium, Textarea.sizer.mdLarge],
     label: 'Responsive label',
     placeholder: 'Responsive Text',
+    onChange: fn(),
   },
 };
 
@@ -208,6 +213,7 @@ export const AutoResizableHeight: Story = {
     lang: 'la',
     minRows: 1,
     maxRows: 10,
+    onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
     const textarea = canvas.getByLabelText('Autoresizable Textarea');
@@ -260,6 +266,7 @@ export const FixedHeight: Story = {
     minRows: 1,
     maxRows: 10,
     lang: 'la',
+    onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
     const textarea = canvas.getByLabelText('Fixed height Textarea');
@@ -307,6 +314,7 @@ export const DisableManualResize: Story = {
     'aria-label': 'Disabled manual resize Textarea',
     defaultValue: 'This Textarea has no resize handle at the bottom right!',
     disableManualResize: true,
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(

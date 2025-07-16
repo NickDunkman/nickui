@@ -47,6 +47,7 @@ export const FieldsetLayout: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     const fieldset = canvas.getByRole('group');
@@ -210,6 +211,7 @@ export const Disabled: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert all Radios are disabled', async () => {
@@ -217,18 +219,6 @@ export const Disabled: Story = {
       expect(canvas.getByLabelText('Option two')).toBeDisabled();
     });
   },
-};
-
-export const AllControlStates: Story = {
-  tags: ['!dev', '!test'],
-  render: (_args) => (
-    <div className="flex flex-col gap-4 sm:flex-row">
-      <Radios {...NoValue.args} className="sm:flex-1" />
-      <Radios {...Controlled.args} className="sm:flex-1" />
-      <Radios {...Uncontrolled.args} className="sm:flex-1" />
-      <Radios {...Disabled.args} className="sm:flex-1" />
-    </div>
-  ),
 };
 
 export const StandardLayout: Story = {
@@ -251,6 +241,7 @@ export const StandardLayout: Story = {
         disabled: true,
       },
     ],
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     const r1 = canvas.getByLabelText('Roman Aquila');
@@ -302,6 +293,7 @@ export const CustomLayout: Story = {
         />
       </div>
     ),
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     const r1 = canvas.getByLabelText('Just plain');
@@ -331,6 +323,7 @@ export const Small: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -360,6 +353,7 @@ export const Medium: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -389,6 +383,7 @@ export const Large: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
@@ -419,7 +414,20 @@ export const Responsive: Story = {
         label: 'Option two',
       },
     ],
+    onChange: fn(),
   },
+};
+
+export const AllControlStates: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <div className="flex flex-col gap-4 sm:flex-row">
+      <Radios {...NoValue.args} className="sm:flex-1" />
+      <Radios {...Controlled.args} className="sm:flex-1" />
+      <Radios {...Uncontrolled.args} className="sm:flex-1" />
+      <Radios {...Disabled.args} className="sm:flex-1" />
+    </div>
+  ),
 };
 
 export const AllSizes: Story = {

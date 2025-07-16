@@ -19,6 +19,7 @@ export const FieldLayout: Story = {
     hint: 'A hint',
     error: 'An error message',
     defaultValue: 'A problematic value',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     const input = canvas.getByLabelText('A label*');
@@ -119,8 +120,8 @@ export const Disabled: Story = {
   args: {
     defaultValue: 'Disabled Text',
     disabled: true,
-    onChange: fn(),
     'aria-label': 'Disabled Text',
+    onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
     const input = canvas.getByLabelText('Disabled Text');
@@ -143,6 +144,7 @@ export const Small: Story = {
     sizer: Text.sizer.small,
     label: 'Small label',
     placeholder: 'Small Text (default)',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the small style on both the Text & Field', async () => {
@@ -157,6 +159,7 @@ export const Medium: Story = {
     sizer: Text.sizer.medium,
     label: 'Medium label',
     placeholder: 'Medium Text',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the medium style on both the Text & Field', async () => {
@@ -171,6 +174,7 @@ export const Large: Story = {
     sizer: Text.sizer.large,
     label: 'Large label',
     placeholder: 'Large Text',
+    onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step('Assert the large style on both the Text & Field', async () => {
@@ -186,6 +190,7 @@ export const Responsive: Story = {
     sizer: [Text.sizer.smMedium, Text.sizer.mdLarge],
     label: 'Responsive label',
     placeholder: 'Responsive Text',
+    onChange: fn(),
   },
 };
 
