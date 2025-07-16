@@ -13,7 +13,9 @@ Displays an important notice to the user, such as an error message, warning, or
 congratulatory message. For a less prominent notice, use <Docs of="Callout" />.
 
 <Docs.FauxCanvas>
-  <Shout flavor={Shout.flavor.nope}>Fore!</Shout>
+  <Shout flavor={Shout.flavor.nope} role="alert" aria-live="assertive">
+    Fore!
+  </Shout>
 </Docs.FauxCanvas>
 
 <Docs.TableOfContents />
