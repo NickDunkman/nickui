@@ -43,13 +43,26 @@ export const styles = tv({
         pointer-coarse:active:bg-indigo-600  pointer-coarse:active:border-indigo-600
       `,
       // The border on the secondary accentuates the shadow, so lighten it a bit
-      [ButtonFlavor.secondary]: 'border-gray-500 bg-gray-100 shadow-md/8',
-      [ButtonFlavor.danger]:
-        'bg-rose-700 border-rose-700 text-white font-medium',
+      [ButtonFlavor.secondary]: `
+        shadow-md/8
+        bg-gray-100 border-gray-500 
+        hover:bg-gray-200 hover:border-gray-600
+        active:bg-gray-300 active:border-gray-700
+        pointer-coarse:hover:bg-gray-100  pointer-coarse:hover:border-gray-500
+        pointer-coarse:active:bg-gray-100  pointer-coarse:active:border-gray-500
+      `,
+      [ButtonFlavor.danger]: `
+        text-white font-medium
+        bg-rose-700 border-rose-700 
+        hover:bg-rose-800 hover:border-rose-800
+        active:bg-rose-950 active:border-rose-950
+        pointer-coarse:hover:bg-rose-700  pointer-coarse:hover:border-rose-700
+        pointer-coarse:active:bg-rose-700  pointer-coarse:active:border-rose-700
+      `,
     },
     isTouched: {
       true: `
-        pointer-coarse:shadow-none pointer-coarse:hover:shadow-none
+        pointer-coarse:shadow-none pointer-coarse:hover:shadow-none pointer-coarse:focus:shadow-none
         pointer-coarse:translate-y-0.5 pointer-coarse:hover:translate-y-0.5 pointer-coarse:focus:translate-y-0.5
         pointer-coarse:scale-98 pointer-coarse:hover:scale-98 pointer-coarse:focus:scale-98
       `,
@@ -62,6 +75,28 @@ export const styles = tv({
       class: `
         pointer-coarse:bg-indigo-950 pointer-coarse:border-indigo-950
         pointer-coarse:active:bg-indigo-950  pointer-coarse:active:border-indigo-950
+        pointer-coarse:hover:bg-indigo-950  pointer-coarse:hover:border-indigo-950
+        pointer-coarse:focus:bg-indigo-950  pointer-coarse:focus:border-indigo-950
+      `,
+    },
+    {
+      flavor: ButtonFlavor.secondary,
+      isTouched: true,
+      class: `
+        pointer-coarse:bg-gray-300 pointer-coarse:border-gray-700
+        pointer-coarse:active:bg-gray-300  pointer-coarse:active:border-gray-700
+        pointer-coarse:hover:bg-gray-300  pointer-coarse:hover:border-gray-700
+        pointer-coarse:focus:bg-gray-300  pointer-coarse:focus:border-gray-700
+      `,
+    },
+    {
+      flavor: ButtonFlavor.danger,
+      isTouched: true,
+      class: `
+        pointer-coarse:bg-rose-950 pointer-coarse:border-rose-950
+        pointer-coarse:active:bg-rose-950  pointer-coarse:active:border-rose-950
+        pointer-coarse:hover:bg-rose-950  pointer-coarse:hover:border-rose-950
+        pointer-coarse:focus:bg-rose-950  pointer-coarse:focus:border-rose-950
       `,
     },
   ],
