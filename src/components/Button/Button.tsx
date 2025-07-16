@@ -45,7 +45,7 @@ export function Button({
   onBlur,
   ...buttonHTMLProps
 }: ButtonProps) {
-  const [isClickFocused, setIsClickFocused] = React.useState(false);
+  const [isMouseFocused, setIsMouseFocused] = React.useState(false);
   const [isFocused, setIsFocused] = React.useState(false);
   const [isTouched, setIsTouched] = React.useState(false);
   const [isKeyboardActivated, setIsKeyboardActivated] = React.useState(false);
@@ -54,9 +54,10 @@ export function Button({
   const s = styles({
     sizer: resolvedSizer,
     flavor,
-    isTouched,
-    isKeyboardFocused: isFocused && !disabled && !isClickFocused && !isTouched,
-    isKeyboardActivated,
+    isDisabled: disabled,
+    isTouched: !disabled && isTouched,
+    isKeyboardFocused: !disabled && isFocused && !isMouseFocused && !isTouched,
+    isKeyboardActivated: !disabled && isKeyboardActivated,
   });
 
   return (
@@ -66,8 +67,8 @@ export function Button({
       disabled={disabled}
       type={type}
       onBlur={(event) => {
-        if (isClickFocused) {
-          setIsClickFocused(false);
+        if (isMouseFocused) {
+          setIsMouseFocused(false);
         }
         if (isFocused) {
           setIsFocused(false);
@@ -101,8 +102,8 @@ export function Button({
         onKeyUp?.(event);
       }}
       onMouseDown={(event) => {
-        if (!isClickFocused) {
-          setIsClickFocused(true);
+        if (!isMouseFocused) {
+          setIsMouseFocused(true);
         }
         onMouseDown?.(event);
       }}
