@@ -1,3 +1,4 @@
+import keycode from 'keycode';
 import * as React from 'react';
 
 import { Sizer } from '@/constants';
@@ -38,6 +39,8 @@ export function Button({
   onTouchEnd,
   onTouchCancel,
   onMouseDown,
+  onKeyDown,
+  onKeyUp,
   onFocus,
   onBlur,
   ...buttonHTMLProps
@@ -45,6 +48,7 @@ export function Button({
   const [isClickFocused, setIsClickFocused] = React.useState(false);
   const [isFocused, setIsFocused] = React.useState(false);
   const [isTouched, setIsTouched] = React.useState(false);
+  const [isKeyboardActivated, setIsKeyboardActivated] = React.useState(false);
 
   const resolvedSizer = useResolvedSizer(sizer);
   const s = styles({
@@ -52,6 +56,7 @@ export function Button({
     flavor,
     isTouched,
     isKeyboardFocused: isFocused && !disabled && !isClickFocused && !isTouched,
+    isKeyboardActivated,
   });
 
   return (
@@ -74,6 +79,26 @@ export function Button({
           setIsFocused(true);
         }
         onFocus?.(event);
+      }}
+      onKeyDown={(event) => {
+        console.log(keycode(event.nativeEvent));
+        if (!isKeyboardActivated) {
+          if (
+            keycode(event.nativeEvent) === 'enter' ||
+            event.nativeEvent.key === 'Enter' ||
+            keycode(event.nativeEvent) === 'space' ||
+            event.nativeEvent.key === ' '
+          ) {
+            setIsKeyboardActivated(true);
+          }
+        }
+        onKeyDown?.(event);
+      }}
+      onKeyUp={(event) => {
+        if (isKeyboardActivated) {
+          setIsKeyboardActivated(false);
+        }
+        onKeyUp?.(event);
       }}
       onMouseDown={(event) => {
         if (!isClickFocused) {
