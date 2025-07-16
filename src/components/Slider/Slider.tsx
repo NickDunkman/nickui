@@ -111,7 +111,7 @@ export function Slider({
   // <input> in addition to the `ref` prop.
   const internalInputRef = React.useRef<HTMLInputElement>(null);
 
-  const [isClicked, setIsClicked] = React.useState<boolean>(false);
+  const [isClickFocused, setIsClickFocused] = React.useState<boolean>(false);
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
   const [uncontrolledValue, setUncontrolledValue] = React.useState(
@@ -216,8 +216,8 @@ export function Slider({
       // Prevent text selection when dragging the slider (but still focus)
       event.preventDefault();
 
-      if (!isClicked) {
-        setIsClicked(true);
+      if (!isClickFocused) {
+        setIsClickFocused(true);
       }
 
       rootRef.current?.focus();
@@ -321,8 +321,8 @@ export function Slider({
       // scroll up.
       event.preventDefault();
 
-      if (isClicked) {
-        setIsClicked(false);
+      if (isClickFocused) {
+        setIsClickFocused(false);
       }
     }
   }
@@ -339,8 +339,8 @@ export function Slider({
 
   function handleBlur(event: React.FocusEvent<HTMLDivElement>) {
     if (!disabled) {
-      if (isClicked) {
-        setIsClicked(false);
+      if (isClickFocused) {
+        setIsClickFocused(false);
       }
       if (isFocused) {
         setIsFocused(false);
@@ -403,7 +403,7 @@ export function Slider({
   const s = styles({
     sizer: resolvedSizer,
     isDisabled: disabled,
-    isFocused: isFocused && !disabled && !isClicked,
+    isKeyboardFocused: isFocused && !disabled && !isClickFocused,
     hasFieldHeader: !!label,
     hasFieldFooter: !!((error && error !== true) || hint),
     hasError: !!error,

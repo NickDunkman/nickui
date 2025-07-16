@@ -59,7 +59,7 @@ export function Checkable({
   CommonCheckedFieldProps &
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   { styler?: any; type: 'checkbox' | 'radio' }) {
-  const [isClicked, setIsClicked] = React.useState<boolean>(false);
+  const [isClickFocused, setIsClickFocused] = React.useState<boolean>(false);
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
   // We only want the focus style (the blue dot that appears in the thumb) to
@@ -76,8 +76,8 @@ export function Checkable({
 
   function handleRootMouseDown(event: React.MouseEvent<HTMLLabelElement>) {
     event.preventDefault();
-    if (!isClicked) {
-      setIsClicked(true);
+    if (!isClickFocused) {
+      setIsClickFocused(true);
     }
   }
 
@@ -93,8 +93,8 @@ export function Checkable({
     if (isFocused) {
       setIsFocused(false);
     }
-    if (isClicked) {
-      setIsClicked(false);
+    if (isClickFocused) {
+      setIsClickFocused(false);
     }
   }
 
@@ -112,7 +112,7 @@ export function Checkable({
   const s = styler({
     sizer: resolvedSizer,
     isDisabled: !!disabled,
-    isFocused: isFocused && !disabled && !isClicked,
+    isKeyboardFocused: isFocused && !disabled && !isClickFocused,
   });
 
   const labelWithOffset =

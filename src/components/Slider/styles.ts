@@ -49,7 +49,7 @@ export const styles = tv({
         thumb: 'size-7',
       },
     },
-    isFocused: {
+    isKeyboardFocused: {
       true: {
         thumb: `
           border-indigo-800
@@ -83,7 +83,7 @@ export const styles = tv({
   },
   compoundVariants: [
     {
-      isFocused: true,
+      isKeyboardFocused: true,
       hasError: true,
       className: {
         thumb: 'after:bg-rose-800',
@@ -122,7 +122,7 @@ export const styles = tv({
   ],
   defaultVariants: {
     sizer: Sizer.small,
-    isFocused: false,
+    isKeyboardFocused: false,
     isDisabled: false,
     atMin: true,
     atMax: false,

@@ -44,7 +44,7 @@ export const styles = tv({
           'bg-gray-300 after:bg-gray-100 peer-checked:bg-gray-300 after:shadow-none',
       },
     },
-    isFocused: {
+    isKeyboardFocused: {
       true: {
         indicator: `
           after:bg-indigo-600 after:border-white
@@ -55,6 +55,6 @@ export const styles = tv({
   defaultVariants: {
     sizer: Sizer.small,
     isDisabled: false,
-    isFocused: false,
+    isKeyboardFocused: false,
   },
 });

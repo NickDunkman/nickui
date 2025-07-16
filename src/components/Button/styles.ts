@@ -14,13 +14,10 @@ export const styles = tv({
     shadow-md/15
     transition-all duration-8 ease-out
 
-    disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-600 disabled:opacity-100 disabled:cursor-not-allowed disabled:shadow-none
-
-
     hover:shadow-xl/15 hover:-translate-y-0.5 hover:scale-102
-    focus:shadow-xl/15 focus:-translate-y-0.5 focus:scale-102
-
     active:shadow-none active:translate-y-0.25 active:scale-99
+
+    disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-600 disabled:opacity-100 disabled:cursor-not-allowed disabled:shadow-none
     disabled:hover:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100
 
     pointer-coarse:hover:shadow-md/15 pointer-coarse:hover:translate-y-0 pointer-coarse:hover:scale-100
@@ -60,6 +57,9 @@ export const styles = tv({
         pointer-coarse:active:bg-rose-700  pointer-coarse:active:border-rose-700
       `,
     },
+    isKeyboardFocused: {
+      true: 'focus:shadow-xl/15 focus:-translate-y-0.5 focus:scale-102',
+    },
     isTouched: {
       true: `
         pointer-coarse:shadow-none pointer-coarse:hover:shadow-none pointer-coarse:focus:shadow-none
@@ -80,6 +80,11 @@ export const styles = tv({
       `,
     },
     {
+      flavor: ButtonFlavor.primary,
+      isKeyboardFocused: true,
+      class: 'focus:bg-indigo-800 focus:border-indigo-800',
+    },
+    {
       flavor: ButtonFlavor.secondary,
       isTouched: true,
       class: `
@@ -88,6 +93,11 @@ export const styles = tv({
         pointer-coarse:hover:bg-gray-300  pointer-coarse:hover:border-gray-700
         pointer-coarse:focus:bg-gray-300  pointer-coarse:focus:border-gray-700
       `,
+    },
+    {
+      flavor: ButtonFlavor.secondary,
+      isKeyboardFocused: true,
+      class: 'focus:bg-gray-200 focus:border-gray-600',
     },
     {
       flavor: ButtonFlavor.danger,
@@ -99,9 +109,16 @@ export const styles = tv({
         pointer-coarse:focus:bg-rose-950  pointer-coarse:focus:border-rose-950
       `,
     },
+    {
+      flavor: ButtonFlavor.danger,
+      isKeyboardFocused: true,
+      class: 'focus:bg-rose-800 focus:border-rose-800',
+    },
   ],
   defaultVariants: {
     sizer: Sizer.small,
     flavor: ButtonFlavor.primary,
+    isTouched: false,
+    isKeyboardFocused: false,
   },
 });

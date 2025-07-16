@@ -37,12 +37,22 @@ export function Button({
   onTouchStart,
   onTouchEnd,
   onTouchCancel,
+  onMouseDown,
+  onFocus,
+  onBlur,
   ...buttonHTMLProps
 }: ButtonProps) {
+  const [isClickFocused, setIsClickFocused] = React.useState(false);
+  const [isFocused, setIsFocused] = React.useState(false);
   const [isTouched, setIsTouched] = React.useState(false);
 
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = styles({ sizer: resolvedSizer, flavor, isTouched });
+  const s = styles({
+    sizer: resolvedSizer,
+    flavor,
+    isTouched,
+    isKeyboardFocused: isFocused && !disabled && !isClickFocused && !isTouched,
+  });
 
   return (
     <button
@@ -50,6 +60,27 @@ export function Button({
       className={clsw(s, className)}
       disabled={disabled}
       type={type}
+      onBlur={(event) => {
+        if (isClickFocused) {
+          setIsClickFocused(false);
+        }
+        if (isFocused) {
+          setIsFocused(false);
+        }
+        onBlur?.(event);
+      }}
+      onFocus={(event) => {
+        if (!isFocused) {
+          setIsFocused(true);
+        }
+        onFocus?.(event);
+      }}
+      onMouseDown={(event) => {
+        if (!isClickFocused) {
+          setIsClickFocused(true);
+        }
+        onMouseDown?.(event);
+      }}
       onTouchStart={(event) => {
         if (!isTouched) {
           setIsTouched(true);

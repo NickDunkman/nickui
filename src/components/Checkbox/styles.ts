@@ -39,7 +39,7 @@ export const styles = tv({
         `,
       },
     },
-    isFocused: {
+    isKeyboardFocused: {
       true: {
         indicator: `
           border-indigo-800 shadow-[0_0_11px] shadow-indigo-300 outline-0 
@@ -51,6 +51,6 @@ export const styles = tv({
   defaultVariants: {
     sizer: Sizer.small,
     isDisabled: false,
-    isFocused: false,
+    isKeyboardFocused: false,
   },
 });
