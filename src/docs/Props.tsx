@@ -58,7 +58,7 @@ export function Props({
 In addition to some custom props, <ComponentName of="${componentName}" /> takes all
 the props that can be used with
 [HTML${ucFirst(nativeBase)}Element](https://react.dev/reference/react-dom/components/${allReactDocs.includes(nativeBase) ? nativeBase : 'common'}).
-Here are some of the most commonly used:
+You may be looking for these:
         `}
       </Markdown>
 

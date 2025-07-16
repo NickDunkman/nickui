@@ -23,4 +23,11 @@ export enum Sizer {
   xlLarge = 'xl:large',
 }
 
+export enum NoticeFlavor {
+  info = 'info',
+  yep = 'yep',
+  maybe = 'maybe',
+  nope = 'nope',
+}
+
 export const BREAKPOINT_MEASURER_ID = 'nickui-breakpoint-measurer';

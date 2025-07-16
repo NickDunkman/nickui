@@ -23,7 +23,7 @@ export function ControlStates({
     <>
       <Markdown>
         {`
-## Control States
+## Control states
 
 ${
   valuable

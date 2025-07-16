@@ -24,6 +24,10 @@ export function getStoryTitle(componentName: string) {
     case 'Field':
     case 'Fieldset':
       return `Field layouts/${componentName}`;
+    case 'Callout':
+    case 'Fwoop':
+    case 'Shout':
+      return `Notices/${componentName}`;
     default:
       return componentName;
   }

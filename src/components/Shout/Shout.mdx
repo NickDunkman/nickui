@@ -1,0 +1,30 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import Docs from '@/docs';
+
+import { Shout } from './Shout';
+import * as Stories from './Shout.stories';
+
+<Meta of={Stories} />
+
+<Docs.ComponentHeading of="Shout" />
+
+Displays an important notice to the user, such as an error message, warning, or
+congratulatory message. For a less prominent notice, use <Docs of="Callout" />.
+
+<Docs.FauxCanvas>
+  <Shout flavor={Shout.flavor.nope}>Fore!</Shout>
+</Docs.FauxCanvas>
+
+<Docs.TableOfContents />
+
+<Docs.Props of={Stories} nativeBase="div" />
+
+## Flavors
+
+Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
+`"yep"`, `"maybe"` or `"nope"`.
+
+<Canvas of={Stories.AllFlavors} />
+
+<Docs.Sizing of={Stories} />

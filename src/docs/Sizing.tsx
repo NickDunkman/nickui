@@ -13,7 +13,7 @@ export function Sizing({ of }: { of: StoriesModule }) {
     <>
       <Markdown>
         {`
-## Standard sizing options
+## Standard sizing
 
 Sizing is done via the \`sizer\` prop. You can pass a single sizer as a string,
 or an array of sizers if you want different sizing at different breakpoints.
