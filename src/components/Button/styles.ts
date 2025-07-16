@@ -20,9 +20,11 @@ export const styles = tv({
     hover:shadow-xl/15 hover:-translate-y-0.5 hover:scale-101.5
     focus:shadow-xl/15 focus:-translate-y-0.5 focus:scale-101.5
 
-    active:shadow-md/15 active:translate-y-0 active:scale-100
-    pointer-coarse:hover:shadow-md/15 pointer-coarse:translate-y-0 pointer-coarse:scale-100
+    active:shadow-none active:translate-y-0.25 active:scale-100
     disabled:hover:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100
+
+    pointer-coarse:hover:shadow-md/15 pointer-coarse:hover:translate-y-0 pointer-coarse:hover:scale-100
+    pointer-coarse:focus:shadow-md/15 pointer-coarse:focus:translate-y-0 pointer-coarse:focus:scale-100
   `,
 
   variants: {
@@ -32,8 +34,14 @@ export const styles = tv({
       [Sizer.large]: 'text-lg py-3.75 px-5.5',
     },
     flavor: {
-      [ButtonFlavor.primary]:
-        'bg-indigo-600 border-indigo-600 text-white font-medium',
+      [ButtonFlavor.primary]: `
+        text-white font-medium
+        bg-indigo-600 border-indigo-600
+        hover:bg-indigo-800 hover:border-indigo-800
+        active:bg-indigo-950 active:border-indigo-950
+        pointer-coarse:hover:bg-indigo-600  pointer-coarse:hover:border-indigo-600
+        pointer-coarse:active:bg-indigo-600  pointer-coarse:active:border-indigo-600
+      `,
       // The border on the secondary accentuates the shadow, so lighten it a bit
       [ButtonFlavor.secondary]: 'border-gray-500 bg-gray-100 shadow-md/8',
       [ButtonFlavor.danger]:
@@ -41,12 +49,22 @@ export const styles = tv({
     },
     isTouched: {
       true: `
-        bg-amber-500
-        pointer-coarse:shadow-md/15 pointer-coarse:translate-y-0 pointer-coarse:scale-100
-        pointer-coarse:bg-black
+        pointer-coarse:shadow-none pointer-coarse:hover:shadow-none
+        pointer-coarse:translate-y-0.25 pointer-coarse:hover:translate-y-0.25
+        pointer-coarse:scale-100
       `,
     },
   },
+  compoundVariants: [
+    {
+      flavor: ButtonFlavor.primary,
+      isTouched: true,
+      class: `
+        pointer-coarse:bg-indigo-950 pointer-coarse:border-indigo-950
+        pointer-coarse:active:bg-indigo-950  pointer-coarse:active:border-indigo-950
+      `,
+    },
+  ],
   defaultVariants: {
     sizer: Sizer.small,
     flavor: ButtonFlavor.primary,
