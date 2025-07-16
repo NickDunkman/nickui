@@ -50,8 +50,8 @@ export const styles = tv({
     isTouched: {
       true: `
         pointer-coarse:shadow-none pointer-coarse:hover:shadow-none
-        pointer-coarse:translate-y-0.25 pointer-coarse:hover:translate-y-0.25
-        pointer-coarse:scale-98 pointer-coarse:hover:scale-98
+        pointer-coarse:translate-y-0.5 pointer-coarse:hover:translate-y-0.5 pointer-coarse:focus:translate-y-0.5
+        pointer-coarse:scale-98 pointer-coarse:hover:scale-98 pointer-coarse:focus:scale-98
       `,
     },
   },
