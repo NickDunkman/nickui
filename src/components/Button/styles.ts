@@ -66,8 +66,8 @@ export const styles = tv({
       class: `
         text-white
         bg-indigo-600 border-indigo-600
-        hover:bg-indigo-800 hover:border-indigo-800
-        active:bg-indigo-950 active:border-indigo-950
+        hover:bg-indigo-500 hover:border-indigo-500
+        active:bg-indigo-700 active:border-indigo-700
         pointer-coarse:hover:bg-indigo-600  pointer-coarse:hover:border-indigo-600
         pointer-coarse:active:bg-indigo-600  pointer-coarse:active:border-indigo-600
       `,
@@ -79,8 +79,8 @@ export const styles = tv({
       class: `
         shadow-md/8
         bg-gray-100 border-gray-500 
-        hover:bg-gray-200 hover:border-gray-600
-        active:bg-gray-300 active:border-gray-700
+        hover:bg-gray-50 hover:border-gray-400
+        active:bg-gray-200 active:border-gray-600
         pointer-coarse:hover:bg-gray-100  pointer-coarse:hover:border-gray-500
         pointer-coarse:active:bg-gray-100  pointer-coarse:active:border-gray-500
       `,
@@ -91,8 +91,8 @@ export const styles = tv({
       class: `
         text-white
         bg-rose-700 border-rose-700 
-        hover:bg-rose-800 hover:border-rose-800
-        active:bg-rose-950 active:border-rose-950
+        hover:bg-rose-600 hover:border-rose-600
+        active:bg-rose-800 active:border-rose-800
         pointer-coarse:hover:bg-rose-700  pointer-coarse:hover:border-rose-700
         pointer-coarse:active:bg-rose-700  pointer-coarse:active:border-rose-700
       `,
@@ -102,9 +102,9 @@ export const styles = tv({
       isKeyboardActivated: true,
       isDisabled: false,
       class: `
-        active:bg-indigo-950 active:border-indigo-950
-        focus:bg-indigo-950 focus:border-indigo-950
-        hover:bg-indigo-950 hover:border-indigo-950
+        active:bg-indigo-700 active:border-indigo-700
+        focus:bg-indigo-700 focus:border-indigo-700
+        hover:bg-indigo-700 hover:border-indigo-700
       `,
     },
     {
@@ -112,10 +112,10 @@ export const styles = tv({
       isTouched: true,
       isDisabled: false,
       class: `
-        pointer-coarse:bg-indigo-950 pointer-coarse:border-indigo-950
-        pointer-coarse:active:bg-indigo-950  pointer-coarse:active:border-indigo-950
-        pointer-coarse:hover:bg-indigo-950  pointer-coarse:hover:border-indigo-950
-        pointer-coarse:focus:bg-indigo-950  pointer-coarse:focus:border-indigo-950
+        pointer-coarse:bg-indigo-800 pointer-coarse:border-indigo-800
+        pointer-coarse:active:bg-indigo-800  pointer-coarse:active:border-indigo-800
+        pointer-coarse:hover:bg-indigo-800  pointer-coarse:hover:border-indigo-800
+        pointer-coarse:focus:bg-indigo-800  pointer-coarse:focus:border-indigo-800
       `,
     },
     {
@@ -123,16 +123,16 @@ export const styles = tv({
       isKeyboardFocused: true,
       isKeyboardActivated: false,
       isDisabled: false,
-      class: 'focus:bg-indigo-800 focus:border-indigo-800',
+      class: 'focus:bg-indigo-500 focus:border-indigo-500',
     },
     {
       flavor: ButtonFlavor.secondary,
       isKeyboardActivated: true,
       isDisabled: false,
       class: `
-        active:bg-gray-300 active:border-gray-700
-        focus:bg-gray-300 focus:border-gray-700
-        hover:bg-gray-300 hover:border-gray-700
+        active:bg-gray-200 active:border-gray-600
+        focus:bg-gray-200 focus:border-gray-600
+        hover:bg-gray-200 hover:border-gray-600
       `,
     },
     {
@@ -151,16 +151,16 @@ export const styles = tv({
       isKeyboardFocused: true,
       isKeyboardActivated: false,
       isDisabled: false,
-      class: 'focus:bg-gray-200 focus:border-gray-600',
+      class: 'focus:bg-gray-50 focus:border-gray-400',
     },
     {
       flavor: ButtonFlavor.danger,
       isKeyboardActivated: true,
       isDisabled: false,
       class: `
-        active:bg-rose-950 active:border-rose-950
-        focus:bg-rose-950 focus:border-rose-950
-        hover:bg-rose-950 hover:border-rose-950
+        active:bg-rose-800 active:border-rose-800
+        focus:bg-rose-800 focus:border-rose-800
+        hover:bg-rose-800 hover:border-rose-800
       `,
     },
     {
@@ -168,10 +168,10 @@ export const styles = tv({
       isTouched: true,
       isDisabled: false,
       class: `
-        pointer-coarse:bg-rose-950 pointer-coarse:border-rose-950
-        pointer-coarse:active:bg-rose-950  pointer-coarse:active:border-rose-950
-        pointer-coarse:hover:bg-rose-950  pointer-coarse:hover:border-rose-950
-        pointer-coarse:focus:bg-rose-950  pointer-coarse:focus:border-rose-950
+        pointer-coarse:bg-rose-900 pointer-coarse:border-rose-900
+        pointer-coarse:active:bg-rose-900  pointer-coarse:active:border-rose-900
+        pointer-coarse:hover:bg-rose-900  pointer-coarse:hover:border-rose-900
+        pointer-coarse:focus:bg-rose-900  pointer-coarse:focus:border-rose-900
       `,
     },
     {
@@ -179,7 +179,7 @@ export const styles = tv({
       isKeyboardFocused: true,
       isKeyboardActivated: false,
       isDisabled: false,
-      class: 'focus:bg-rose-800 focus:border-rose-800',
+      class: 'focus:bg-rose-600 focus:border-rose-600',
     },
     {
       isKeyboardFocused: true,
