@@ -52,8 +52,8 @@ export const styles = tv({
     isKeyboardFocused: {
       true: {
         thumb: `
-          border-indigo-800
-          after:absolute after:inset-3/10 after:bg-indigo-600 after:rounded-full 
+          border-blue-800
+          after:absolute after:inset-3/10 after:bg-blue-600 after:rounded-full 
         `,
       },
     },

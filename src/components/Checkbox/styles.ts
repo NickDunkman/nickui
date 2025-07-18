@@ -42,8 +42,8 @@ export const styles = tv({
     isKeyboardFocused: {
       true: {
         indicator: `
-          border-indigo-800 shadow-[0_0_11px] shadow-indigo-300 outline-0 
-          peer-checked:bg-indigo-800
+          border-blue-800 shadow-[0_0_11px] shadow-blue-300 outline-0 
+          peer-checked:bg-blue-800
         `,
       },
     },

@@ -47,7 +47,7 @@ export const styles = tv({
     isKeyboardFocused: {
       true: {
         indicator: `
-          after:bg-indigo-600 after:border-white
+          after:bg-blue-600 after:border-white
         `,
       },
     },

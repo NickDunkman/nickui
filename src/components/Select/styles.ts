@@ -16,7 +16,7 @@ export const styles = tv({
       w-full
       border-2 rounded-sm
       bg-white
-      focus:border-indigo-800 focus:shadow-[0_0_11px] focus:shadow-indigo-300 focus:outline-0 
+      focus:border-blue-800 focus:shadow-[0_0_11px] focus:shadow-blue-300 focus:outline-0 
       disabled:bg-gray-100 disabled:border-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed disabled:opacity-100
     `,
     // Can't add an :after to the <select> for the iconography, so we need

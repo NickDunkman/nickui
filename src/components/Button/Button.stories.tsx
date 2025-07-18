@@ -123,7 +123,7 @@ export const Primary: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the primary style', async () => {
-      await expect(canvas.getByRole('button')).toHaveClass('bg-indigo-600');
+      await expect(canvas.getByRole('button')).toHaveClass('bg-blue-600');
     });
   },
 };

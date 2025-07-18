@@ -14,7 +14,7 @@ export const shoutStyles = tv({
       [Sizer.large]: 'text-lg px-5 py-4',
     },
     flavor: {
-      [NoticeFlavor.info]: 'bg-indigo-800 text-white',
+      [NoticeFlavor.info]: 'bg-blue-800 text-white',
       [NoticeFlavor.yep]: 'bg-emerald-700 text-white',
       [NoticeFlavor.maybe]: 'bg-yellow-500',
       [NoticeFlavor.nope]: 'bg-rose-800 text-white',

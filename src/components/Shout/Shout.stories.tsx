@@ -20,7 +20,7 @@ export const Info: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the info flavor style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('bg-indigo-800');
+      expect(canvas.getByRole('status')).toHaveClass('bg-blue-800');
     });
   },
 };

@@ -65,11 +65,11 @@ export const styles = tv({
       isDisabled: false,
       class: `
         text-white
-        bg-indigo-600 border-indigo-600
-        hover:bg-indigo-500 hover:border-indigo-500
-        active:bg-indigo-700 active:border-indigo-700
-        pointer-coarse:hover:bg-indigo-600  pointer-coarse:hover:border-indigo-600
-        pointer-coarse:active:bg-indigo-600  pointer-coarse:active:border-indigo-600
+        bg-blue-600 border-blue-600
+        hover:bg-blue-500 hover:border-blue-500
+        active:bg-blue-700 active:border-blue-700
+        pointer-coarse:hover:bg-blue-600  pointer-coarse:hover:border-blue-600
+        pointer-coarse:active:bg-blue-600  pointer-coarse:active:border-blue-600
       `,
     },
     {
@@ -102,9 +102,9 @@ export const styles = tv({
       isKeyboardActivated: true,
       isDisabled: false,
       class: `
-        active:bg-indigo-700 active:border-indigo-700
-        focus:bg-indigo-700 focus:border-indigo-700
-        hover:bg-indigo-700 hover:border-indigo-700
+        active:bg-blue-700 active:border-blue-700
+        focus:bg-blue-700 focus:border-blue-700
+        hover:bg-blue-700 hover:border-blue-700
       `,
     },
     {
@@ -112,10 +112,10 @@ export const styles = tv({
       isTouched: true,
       isDisabled: false,
       class: `
-        pointer-coarse:bg-indigo-800 pointer-coarse:border-indigo-800
-        pointer-coarse:active:bg-indigo-800  pointer-coarse:active:border-indigo-800
-        pointer-coarse:hover:bg-indigo-800  pointer-coarse:hover:border-indigo-800
-        pointer-coarse:focus:bg-indigo-800  pointer-coarse:focus:border-indigo-800
+        pointer-coarse:bg-blue-800 pointer-coarse:border-blue-800
+        pointer-coarse:active:bg-blue-800  pointer-coarse:active:border-blue-800
+        pointer-coarse:hover:bg-blue-800  pointer-coarse:hover:border-blue-800
+        pointer-coarse:focus:bg-blue-800  pointer-coarse:focus:border-blue-800
       `,
     },
     {
@@ -123,7 +123,7 @@ export const styles = tv({
       isKeyboardFocused: true,
       isKeyboardActivated: false,
       isDisabled: false,
-      class: 'focus:bg-indigo-500 focus:border-indigo-500',
+      class: 'focus:bg-blue-500 focus:border-blue-500',
     },
     {
       flavor: ButtonFlavor.secondary,
