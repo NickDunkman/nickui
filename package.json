@@ -27,7 +27,6 @@
     "@eslint/compat": "^1.2.9",
     "@storybook/addon-a11y": "^9.0.16",
     "@storybook/addon-docs": "^9.0.16",
-    "@storybook/addon-onboarding": "^9.0.16",
     "@storybook/addon-vitest": "^9.0.16",
     "@storybook/react-vite": "^9.0.16",
     "@testing-library/dom": "^10.4.0",

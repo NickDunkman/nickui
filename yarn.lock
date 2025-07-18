@@ -1128,15 +1128,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-onboarding@npm:^9.0.16":
-  version: 9.0.16
-  resolution: "@storybook/addon-onboarding@npm:9.0.16"
-  peerDependencies:
-    storybook: ^9.0.16
-  checksum: 10c0/d0150a9fc3e4493119f95816919809ed23689011fef4dac07fe4e67b0fb2c0a2df9a2d2b14dede420f32b5a96fcba643eb3dbacf902e77d94278bb3a736bbaf7
-  languageName: node
-  linkType: hard
-
 "@storybook/addon-vitest@npm:^9.0.16":
   version: 9.0.16
   resolution: "@storybook/addon-vitest@npm:9.0.16"
@@ -5050,7 +5041,6 @@ __metadata:
     "@eslint/compat": "npm:^1.2.9"
     "@storybook/addon-a11y": "npm:^9.0.16"
     "@storybook/addon-docs": "npm:^9.0.16"
-    "@storybook/addon-onboarding": "npm:^9.0.16"
     "@storybook/addon-vitest": "npm:^9.0.16"
     "@storybook/react-vite": "npm:^9.0.16"
     "@tailwindcss/postcss": "npm:^4.1.8"
