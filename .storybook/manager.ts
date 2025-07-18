@@ -1,6 +1,15 @@
 import { addons } from 'storybook/manager-api';
+import { create } from 'storybook/theming';
 
 const SITE_NAME = 'NickUI';
+
+addons.setConfig({
+  theme: create({
+    base: 'light',
+    brandTitle: 'NickUI',
+    brandImage: './nickui.svg',
+  }),
+});
 
 // Custom addon that adds nicer formatting to the site title & prefixes with
 // "NicKUI".
