@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 import { fastType } from '@/utils/fastType';
 
 import { TextArea } from './TextArea';
@@ -395,12 +396,12 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4">
+    <AllSizersStoryWrapper>
       <TextArea {...Xs.args} />
       <TextArea {...Sm.args} />
       <TextArea {...Base.args} />
       <TextArea {...Lg.args} />
       <TextArea {...Xl.args} />
-    </div>
+    </AllSizersStoryWrapper>
   ),
 };

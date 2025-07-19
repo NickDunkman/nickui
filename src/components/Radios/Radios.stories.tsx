@@ -3,6 +3,7 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { Radio } from '@/components/Radio';
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 
 import { Radios } from './Radios';
 
@@ -508,12 +509,12 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4 sm:flex-row">
-      <Radios {...Xs.args} className="sm:flex-1" />
-      <Radios {...Sm.args} className="sm:flex-1" />
-      <Radios {...Base.args} className="sm:flex-1" />
-      <Radios {...Lg.args} className="sm:flex-1" />
-      <Radios {...Xl.args} className="sm:flex-1" />
-    </div>
+    <AllSizersStoryWrapper>
+      <Radios {...Xs.args} />
+      <Radios {...Sm.args} />
+      <Radios {...Base.args} />
+      <Radios {...Lg.args} />
+      <Radios {...Xl.args} />
+    </AllSizersStoryWrapper>
   ),
 };

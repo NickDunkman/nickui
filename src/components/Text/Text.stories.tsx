@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+
 import { Text } from './Text';
 
 const meta = {
@@ -270,12 +272,12 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
-      <Text {...Xs.args} className="sm:flex-1" />
-      <Text {...Sm.args} className="sm:flex-1" />
-      <Text {...Base.args} className="sm:flex-1" />
-      <Text {...Lg.args} className="sm:flex-1" />
-      <Text {...Xl.args} className="sm:flex-1" />
-    </div>
+    <AllSizersStoryWrapper>
+      <Text {...Xs.args} />
+      <Text {...Sm.args} />
+      <Text {...Base.args} />
+      <Text {...Lg.args} />
+      <Text {...Xl.args} />
+    </AllSizersStoryWrapper>
   ),
 };

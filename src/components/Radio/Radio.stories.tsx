@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+
 import { Radio } from './Radio';
 
 const meta = {
@@ -253,12 +255,12 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
-      <Radio {...Xs.args} className="sm:flex-1" />
-      <Radio {...Sm.args} className="sm:flex-1" />
-      <Radio {...Base.args} className="sm:flex-1" />
-      <Radio {...Lg.args} className="sm:flex-1" />
-      <Radio {...Xl.args} className="sm:flex-1" />
-    </div>
+    <AllSizersStoryWrapper>
+      <Radio {...Xs.args} />
+      <Radio {...Sm.args} />
+      <Radio {...Base.args} />
+      <Radio {...Lg.args} />
+      <Radio {...Xl.args} />
+    </AllSizersStoryWrapper>
   ),
 };

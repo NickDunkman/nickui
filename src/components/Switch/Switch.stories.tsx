@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+
 import { Switch } from './Switch';
 
 const meta = {
@@ -268,12 +270,12 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
-      <Switch {...Xs.args} className="sm:flex-1" />
-      <Switch {...Sm.args} className="sm:flex-1" />
-      <Switch {...Base.args} className="sm:flex-1" />
-      <Switch {...Lg.args} className="sm:flex-1" />
-      <Switch {...Xl.args} className="sm:flex-1" />
-    </div>
+    <AllSizersStoryWrapper>
+      <Switch {...Xs.args} />
+      <Switch {...Sm.args} />
+      <Switch {...Base.args} />
+      <Switch {...Lg.args} />
+      <Switch {...Xl.args} />
+    </AllSizersStoryWrapper>
   ),
 };

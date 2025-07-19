@@ -3,6 +3,7 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { Checkbox } from '@/components/Checkbox';
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 
 import { Checkboxes } from './Checkboxes';
 
@@ -482,12 +483,12 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-      <Checkboxes {...Xs.args} className="sm:flex-1" />
-      <Checkboxes {...Sm.args} className="sm:flex-1" />
-      <Checkboxes {...Base.args} className="sm:flex-1" />
-      <Checkboxes {...Lg.args} className="sm:flex-1" />
-      <Checkboxes {...Xl.args} className="sm:flex-1" />
-    </div>
+    <AllSizersStoryWrapper>
+      <Checkboxes {...Xs.args} />
+      <Checkboxes {...Sm.args} />
+      <Checkboxes {...Base.args} />
+      <Checkboxes {...Lg.args} />
+      <Checkboxes {...Xl.args} />
+    </AllSizersStoryWrapper>
   ),
 };

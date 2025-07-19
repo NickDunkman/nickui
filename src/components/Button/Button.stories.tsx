@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+
 import { Button } from './Button';
 
 const meta = {
@@ -142,19 +144,6 @@ export const Responsive: Story = {
   },
 };
 
-export const AllSizers: Story = {
-  tags: ['!dev', '!test'],
-  render: (_args) => (
-    <div className="flex flex-wrap items-baseline gap-4">
-      <Button {...Xs.args} />
-      <Button {...Sm.args} />
-      <Button {...Base.args} />
-      <Button {...Lg.args} />
-      <Button {...Xl.args} />
-    </div>
-  ),
-};
-
 export const Primary: Story = {
   tags: ['flavor'],
   args: {
@@ -195,6 +184,19 @@ export const Danger: Story = {
       expect(canvas.getByRole('button')).toHaveClass('bg-rose-700');
     });
   },
+};
+
+export const AllSizers: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <AllSizersStoryWrapper className="flex-wrap">
+      <Button {...Xs.args} />
+      <Button {...Sm.args} />
+      <Button {...Base.args} />
+      <Button {...Lg.args} />
+      <Button {...Xl.args} />
+    </AllSizersStoryWrapper>
+  ),
 };
 
 export const AllFlavors: Story = {

@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { expect } from 'storybook/test';
 
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+
 import { Shout } from './Shout';
 
 const meta = {
@@ -168,12 +170,12 @@ export const AllFlavors: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4">
+    <AllSizersStoryWrapper>
       <Shout {...Xs.args} />
       <Shout {...Sm.args} />
       <Shout {...Base.args} />
       <Shout {...Lg.args} />
       <Shout {...Xl.args} />
-    </div>
+    </AllSizersStoryWrapper>
   ),
 };

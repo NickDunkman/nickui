@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+
 import { Checkbox } from './Checkbox';
 
 const meta = {
@@ -269,12 +271,12 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
-      <Checkbox {...Xs.args} className="sm:flex-1" />
-      <Checkbox {...Sm.args} className="sm:flex-1" />
-      <Checkbox {...Base.args} className="sm:flex-1" />
-      <Checkbox {...Lg.args} className="sm:flex-1" />
-      <Checkbox {...Xl.args} className="sm:flex-1" />
-    </div>
+    <AllSizersStoryWrapper>
+      <Checkbox {...Xs.args} />
+      <Checkbox {...Sm.args} />
+      <Checkbox {...Base.args} />
+      <Checkbox {...Lg.args} />
+      <Checkbox {...Xl.args} />
+    </AllSizersStoryWrapper>
   ),
 };

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 
 import Docs from '@/docs';
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 
 import { CheckedField } from './CheckedField';
 
@@ -91,12 +92,12 @@ export const Responsive: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
-      <CheckedField {...Xs.args} className="sm:flex-1" />
-      <CheckedField {...Sm.args} className="sm:flex-1" />
-      <CheckedField {...Base.args} className="sm:flex-1" />
-      <CheckedField {...Lg.args} className="sm:flex-1" />
-      <CheckedField {...Xl.args} className="sm:flex-1" />
-    </div>
+    <AllSizersStoryWrapper>
+      <CheckedField {...Xs.args} />
+      <CheckedField {...Sm.args} />
+      <CheckedField {...Base.args} />
+      <CheckedField {...Lg.args} />
+      <CheckedField {...Xl.args} />
+    </AllSizersStoryWrapper>
   ),
 };

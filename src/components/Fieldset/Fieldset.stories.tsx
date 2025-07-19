@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 
 import Docs from '@/docs';
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 
 import { Fieldset } from './Fieldset';
 
@@ -148,12 +149,12 @@ export const Required: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
-      <Fieldset {...Xs.args} className="sm:flex-1" />
-      <Fieldset {...Sm.args} className="sm:flex-1" />
-      <Fieldset {...Base.args} className="sm:flex-1" />
-      <Fieldset {...Lg.args} className="sm:flex-1" />
-      <Fieldset {...Xl.args} className="sm:flex-1" />
-    </div>
+    <AllSizersStoryWrapper>
+      <Fieldset {...Xs.args} />
+      <Fieldset {...Sm.args} />
+      <Fieldset {...Base.args} />
+      <Fieldset {...Lg.args} />
+      <Fieldset {...Xl.args} />
+    </AllSizersStoryWrapper>
   ),
 };

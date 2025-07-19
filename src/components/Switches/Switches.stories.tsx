@@ -3,6 +3,7 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { Switch } from '@/components/Switch';
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 
 import { Switches } from './Switches';
 
@@ -487,12 +488,12 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
+    <AllSizersStoryWrapper>
       <Switches {...Xs.args} className="sm:flex-1" />
       <Switches {...Sm.args} className="sm:flex-1" />
       <Switches {...Base.args} className="sm:flex-1" />
       <Switches {...Lg.args} className="sm:flex-1" />
       <Switches {...Xl.args} className="sm:flex-1" />
-    </div>
+    </AllSizersStoryWrapper>
   ),
 };
