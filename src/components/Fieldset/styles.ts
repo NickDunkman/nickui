@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Fieldset component */
-export const styles = tv({
+export const fieldsetStyler = tv({
   slots: {
     legend: 'block',
     label: 'font-bold',
@@ -14,6 +14,13 @@ export const styles = tv({
   },
   variants: {
     sizer: {
+      [Sizer.xs]: {
+        legend: 'mb-2.5',
+        label: 'text-xs',
+        footer: 'mt-2.5 gap-1.5',
+        hint: 'text-xs',
+        error: 'text-xs',
+      },
       [Sizer.small]: {
         legend: 'mb-2.5',
         label: 'text-xs',

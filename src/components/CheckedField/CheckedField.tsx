@@ -6,7 +6,7 @@ import { clsw } from '@/utils/clsw';
 import { useElementBounds } from '@/utils/useElementBounds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
-import { styles } from './styles';
+import { checkedFieldStyler } from './styles';
 
 export interface CheckedFieldProps extends React.ComponentProps<'label'> {
   /** The content of the form-control section of the Field */
@@ -44,12 +44,15 @@ export function CheckedField({
   const controlBounds = useElementBounds(controlRef);
 
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = styles({ sizer: resolvedSizer, isDisabled: disabled });
+  const styles = checkedFieldStyler({
+    sizer: resolvedSizer,
+    isDisabled: disabled,
+  });
 
   return (
-    <label {...labelProps} className={clsw(s.root(), className)}>
-      <div className={s.contentRoot()}>
-        <div className={s.control()} ref={controlRef}>
+    <label {...labelProps} className={clsw(styles.root(), className)}>
+      <div className={styles.contentRoot()}>
+        <div className={styles.control()} ref={controlRef}>
           {formControl}
         </div>
         {/*
@@ -60,14 +63,14 @@ export function CheckedField({
       */}
         <span style={{ paddingLeft: controlBounds?.width || 0 }}>&#8203;</span>
         {(label || hint) && (
-          <div className={s.labelese()}>
+          <div className={styles.labelese()}>
             {label && (
-              <div className={s.label()} id={labelId}>
+              <div className={styles.label()} id={labelId}>
                 {label}
               </div>
             )}
             {hint && (
-              <div className={s.hint()} id={hintId}>
+              <div className={styles.hint()} id={hintId}>
                 {hint}
               </div>
             )}

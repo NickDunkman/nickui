@@ -9,7 +9,7 @@ const arrowIcons = {
 };
 
 /** tailwind-variants styles for the Select component */
-export const styles = tv({
+export const selectStyler = tv({
   slots: {
     select: `
       appearance-none
@@ -30,6 +30,10 @@ export const styles = tv({
   },
   variants: {
     sizer: {
+      [Sizer.xs]: {
+        select: 'text-sm py-1.5 pl-2 pr-8',
+        root: `after:w-[7px] after:h-[13px] after:right-3 ${arrowIcons.sm}`,
+      },
       [Sizer.small]: {
         select: 'text-sm py-1.5 pl-2 pr-8',
         root: `after:w-[7px] after:h-[13px] after:right-3 ${arrowIcons.sm}`,

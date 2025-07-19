@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the CheckedField component */
-export const styles = tv({
+export const checkedFieldStyler = tv({
   slots: {
     root: 'cursor-pointer',
     contentRoot: 'flex relative',
@@ -14,6 +14,9 @@ export const styles = tv({
   },
   variants: {
     sizer: {
+      [Sizer.xs]: {
+        contentRoot: 'gap-2 text-xs',
+      },
       [Sizer.small]: {
         contentRoot: 'gap-2 text-xs',
       },

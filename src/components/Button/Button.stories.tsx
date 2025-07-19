@@ -57,6 +57,20 @@ export const AllControlStates: Story = {
   ),
 };
 
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Button.sizer.xs,
+    children: 'Xs Button',
+    onClick: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the xs sizer style', async () => {
+      expect(canvas.getByRole('button')).toHaveClass('text-sm');
+    });
+  },
+};
+
 export const Small: Story = {
   tags: ['sizer'],
   args: {
@@ -112,6 +126,7 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-wrap items-baseline gap-4">
+      <Button {...Xs.args} />
       <Button {...Small.args} />
       <Button {...Base.args} />
       <Button {...Large.args} />

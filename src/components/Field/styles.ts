@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Field component */
-export const styles = tv({
+export const fieldStyler = tv({
   slots: {
     heading: 'flex flex-col',
     label: 'font-bold',
@@ -13,6 +13,12 @@ export const styles = tv({
   },
   variants: {
     sizer: {
+      [Sizer.xs]: {
+        heading: 'mb-1.5',
+        label: 'text-xs',
+        hint: 'text-xs mt-1.5',
+        error: 'text-xs mt-1.5',
+      },
       [Sizer.small]: {
         heading: 'mb-1.5',
         label: 'text-xs',

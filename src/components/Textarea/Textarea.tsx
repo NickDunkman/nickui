@@ -6,7 +6,7 @@ import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
-import { styles } from './styles';
+import { textareaStyler } from './styles';
 
 interface TextareaProps extends React.ComponentProps<'textarea'> {
   /**
@@ -152,7 +152,7 @@ export function Textarea({
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = styles({
+  const styles = textareaStyler({
     sizer: resolvedSizer,
     hasError: !!error,
     disableManualResize,
@@ -171,14 +171,14 @@ export function Textarea({
       disabled={disabled}
       required={required}
     >
-      <div ref={containerRef} className={s.root()}>
+      <div ref={containerRef} className={styles.root()}>
         {/*
           This <textarea> is hidden & used to calculate how tall the other
           textarea should be if it wants to make the value fully visible.
         */}
         <textarea
           ref={hiddenTextarea}
-          className={s.hiddenTextarea()}
+          className={styles.hiddenTextarea()}
           rows={minRows}
           disabled
           aria-hidden
@@ -188,7 +188,7 @@ export function Textarea({
         <textarea
           {...otherTextareaProps}
           id={id}
-          className={s.textarea()}
+          className={styles.textarea()}
           rows={rows}
           value={value}
           onChange={handleChange}

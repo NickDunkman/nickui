@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Slider component */
-export const styles = tv({
+export const sliderStyler = tv({
   slots: {
     root: 'w-full relative outline-0 cursor-pointer',
     track: `
@@ -21,6 +21,15 @@ export const styles = tv({
   },
   variants: {
     sizer: {
+      [Sizer.xs]: {
+        root: 'h-5', // same aggregate height as xs Text
+        track: `
+          h-1 left-2.5 right-2.5
+          before:w-2.5 before:-left-2.5 
+          after:w-2.5 after:-right-2.5
+        `,
+        thumb: 'size-5',
+      },
       [Sizer.small]: {
         root: 'h-5', // same aggregate height as small Text
         track: `
@@ -91,6 +100,11 @@ export const styles = tv({
     },
     {
       hasFieldHeader: true,
+      sizer: Sizer.xs,
+      className: { root: 'mt-2' },
+    },
+    {
+      hasFieldHeader: true,
       sizer: Sizer.small,
       className: { root: 'mt-2' },
     },
@@ -103,6 +117,11 @@ export const styles = tv({
       hasFieldHeader: true,
       sizer: Sizer.large,
       className: { root: 'mt-4' },
+    },
+    {
+      hasFieldFooter: true,
+      sizer: Sizer.xs,
+      className: { root: 'mb-2' },
     },
     {
       hasFieldFooter: true,

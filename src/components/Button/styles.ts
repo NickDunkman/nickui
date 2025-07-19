@@ -5,7 +5,7 @@ import { Sizer } from '@/constants';
 import { ButtonFlavor } from './constants';
 
 /** tailwind-variants styles for the Button component */
-export const styles = tv({
+export const buttonStyler = tv({
   base: `
     appearance-none
     border-1 rounded-sm
@@ -16,6 +16,7 @@ export const styles = tv({
   `,
   variants: {
     sizer: {
+      [Sizer.xs]: 'text-sm py-1.75 px-3',
       [Sizer.small]: 'text-sm py-1.75 px-3',
       [Sizer.base]: 'text-base py-2.75 px-4.5',
       [Sizer.large]: 'text-lg py-3.75 px-5.5',

@@ -312,6 +312,37 @@ export const CustomLayout: Story = {
   },
 };
 
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Radios.sizer.xs,
+    label: 'Xs label',
+    hint: 'Xs hint',
+    options: [
+      {
+        value: 'one',
+        label: 'Option one',
+      },
+      {
+        value: 'two',
+        label: 'Option two',
+      },
+    ],
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xs sizer style of both the Radios & Fieldset',
+      async () => {
+        canvas.getAllByTestId('indicator').forEach((indicator) => {
+          expect(indicator).toHaveClass('size-3.5');
+        });
+        expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
+      },
+    );
+  },
+};
+
 export const Small: Story = {
   tags: ['sizer'],
   args: {

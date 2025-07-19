@@ -6,7 +6,7 @@ import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
-import { styles } from './styles';
+import { textStyler } from './styles';
 
 interface TextProps extends React.ComponentProps<'input'> {
   /** Called when the value of the Text changes */
@@ -80,7 +80,7 @@ export function Text({
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = styles({ sizer: resolvedSizer, hasError: !!error });
+  const styles = textStyler({ sizer: resolvedSizer, hasError: !!error });
 
   return (
     <Field
@@ -98,7 +98,7 @@ export function Text({
       <input
         {...otherInputProps}
         id={id}
-        className={s}
+        className={styles}
         disabled={disabled}
         required={required}
         aria-describedby={ariaDescribedBy}

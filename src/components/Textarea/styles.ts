@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Textarea component */
-export const styles = tv({
+export const textareaStyler = tv({
   slots: {
     root: 'relative',
     textarea: `
@@ -25,6 +25,11 @@ export const styles = tv({
     },
     {
       slots: ['textarea', 'hiddenTextarea'],
+      sizer: Sizer.xs,
+      className: 'text-sm py-1.5 px-2',
+    },
+    {
+      slots: ['textarea', 'hiddenTextarea'],
       sizer: Sizer.small,
       className: 'text-sm py-1.5 px-2',
     },
@@ -42,6 +47,7 @@ export const styles = tv({
 
   variants: {
     sizer: {
+      [Sizer.xs]: {},
       [Sizer.small]: {},
       [Sizer.base]: {},
       [Sizer.large]: {},

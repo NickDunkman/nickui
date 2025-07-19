@@ -29,6 +29,9 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       if (asArray.includes(Sizer.xlSmall)) {
         return Sizer.small;
       }
+      if (asArray.includes(Sizer.xlXs)) {
+        return Sizer.xs;
+      }
     }
 
     if (breakpoint.isLgUp) {
@@ -40,6 +43,9 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       }
       if (asArray.includes(Sizer.lgSmall)) {
         return Sizer.small;
+      }
+      if (asArray.includes(Sizer.lgXs)) {
+        return Sizer.xs;
       }
     }
 
@@ -53,6 +59,9 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       if (asArray.includes(Sizer.mdSmall)) {
         return Sizer.small;
       }
+      if (asArray.includes(Sizer.mdXs)) {
+        return Sizer.xs;
+      }
     }
 
     if (breakpoint.isSmUp) {
@@ -65,13 +74,22 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       if (asArray.includes(Sizer.smSmall)) {
         return Sizer.small;
       }
+      if (asArray.includes(Sizer.smXs)) {
+        return Sizer.xs;
+      }
     }
 
     if (asArray.includes(Sizer.large)) {
       return Sizer.large;
     }
+    if (asArray.includes(Sizer.base)) {
+      return Sizer.base;
+    }
     if (asArray.includes(Sizer.small)) {
       return Sizer.small;
+    }
+    if (asArray.includes(Sizer.xs)) {
+      return Sizer.xs;
     }
 
     return Sizer.base;

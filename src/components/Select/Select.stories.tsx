@@ -128,6 +128,25 @@ export const Disabled: Story = {
   },
 };
 
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Select.sizer.xs,
+    label: 'Xs label',
+    children: <option>Small Select</option>,
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xs sizer style on both the Select & Field',
+      async () => {
+        expect(canvas.getByLabelText('Xs label')).toHaveClass('text-sm');
+        expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
+      },
+    );
+  },
+};
+
 export const Small: Story = {
   tags: ['sizer'],
   args: {
@@ -210,6 +229,7 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col items-baseline gap-4 sm:flex-row">
+      <Select {...Xs.args} className="sm:flex-1" />
       <Select {...Small.args} className="sm:flex-1" />
       <Select {...Base.args} className="sm:flex-1" />
       <Select {...Large.args} className="sm:flex-1" />

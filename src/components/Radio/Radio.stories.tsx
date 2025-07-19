@@ -146,6 +146,21 @@ export const DisabledChecked: Story = {
   },
 };
 
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Radio.sizer.xs,
+    label: 'Xs Radio',
+    defaultChecked: true,
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the xs sizer style', async () => {
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-3.5');
+    });
+  },
+};
+
 export const Small: Story = {
   tags: ['sizer'],
   args: {

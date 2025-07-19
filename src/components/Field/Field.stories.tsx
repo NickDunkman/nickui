@@ -24,6 +24,18 @@ export const Basic: Story = {
   },
 };
 
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Field.sizer.xs,
+    children: <Docs.FormControlPlaceholder />,
+    label: 'Xs label',
+    hint: 'Xs hint',
+    error: 'Xs error',
+    required: true,
+  },
+};
+
 export const Small: Story = {
   tags: ['sizer'],
   args: {
@@ -85,6 +97,7 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
+      <Field {...Xs.args} className="sm:flex-1" />
       <Field {...Small.args} className="sm:flex-1" />
       <Field {...Base.args} className="sm:flex-1" />
       <Field {...Large.args} className="sm:flex-1" />

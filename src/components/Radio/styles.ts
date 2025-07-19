@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Radio component */
-export const styles = tv({
+export const radioStyler = tv({
   slots: {
     root: '',
     labelWithOffset: '',
@@ -19,6 +19,9 @@ export const styles = tv({
   },
   variants: {
     sizer: {
+      [Sizer.xs]: {
+        indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.5',
+      },
       [Sizer.small]: {
         indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.5',
       },

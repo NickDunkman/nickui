@@ -4,7 +4,7 @@ import { Sizer } from '@/constants';
 import { CommonFieldProps } from '@/types';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
-import { styles } from './styles';
+import { fieldStyler } from './styles';
 
 export interface FieldProps extends React.ComponentProps<'div'> {
   /** The content of the form-control section of the Field */
@@ -43,16 +43,16 @@ export function Field({
   ...otherDivProps
 }: FieldProps & CommonFieldProps) {
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = styles({ sizer: resolvedSizer });
+  const styles = fieldStyler({ sizer: resolvedSizer });
 
   return (
     <div {...otherDivProps}>
       {label && (
-        <label id={labelId} className={s.heading()} htmlFor={controlId}>
-          <div className={s.label()}>
+        <label id={labelId} className={styles.heading()} htmlFor={controlId}>
+          <div className={styles.label()}>
             {label}
             {required && (
-              <abbr className={s.requiredAsterisk()} title="required">
+              <abbr className={styles.requiredAsterisk()} title="required">
                 *
               </abbr>
             )}
@@ -63,13 +63,13 @@ export function Field({
       <div>{formControl}</div>
 
       {hint && (
-        <div id={hintId} className={s.hint()}>
+        <div id={hintId} className={styles.hint()}>
           {hint}
         </div>
       )}
 
       {error && error !== true && (
-        <div id={errorId} className={s.error()} aria-live="assertive">
+        <div id={errorId} className={styles.error()} aria-live="assertive">
           {error}
         </div>
       )}

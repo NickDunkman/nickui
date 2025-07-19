@@ -6,7 +6,7 @@ import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
-import { styles } from './styles';
+import { selectStyler } from './styles';
 
 interface SelectProps extends React.ComponentProps<'select'> {
   /** Called when the value of the Select changes */
@@ -55,7 +55,7 @@ export function Select({
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = styles({
+  const styles = selectStyler({
     sizer: resolvedSizer,
     hasError: !!error,
     isDisabled: !!disabled,
@@ -74,11 +74,11 @@ export function Select({
       disabled={disabled}
       required={required}
     >
-      <div className={s.root()}>
+      <div className={styles.root()}>
         <select
           {...otherSelectProps}
           id={id}
-          className={s.select()}
+          className={styles.select()}
           disabled={disabled}
           required={required}
           aria-describedby={ariaDescribedBy}

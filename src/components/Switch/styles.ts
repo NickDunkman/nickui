@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 import { Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Switch component */
-export const styles = tv({
+export const switchStyler = tv({
   slots: {
     root: '',
     labelWithOffset: 'pt-0.5',
@@ -22,6 +22,11 @@ export const styles = tv({
   },
   variants: {
     sizer: {
+      [Sizer.xs]: {
+        root: 'min-h-5',
+        indicator:
+          'w-8 h-5 after:size-4 after:border-5 peer-checked:after:translate-x-3',
+      },
       [Sizer.small]: {
         root: 'min-h-5',
         indicator:

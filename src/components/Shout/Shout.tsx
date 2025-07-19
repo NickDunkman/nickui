@@ -4,7 +4,7 @@ import { NoticeFlavor, Sizer } from '@/constants';
 import { clsw } from '@/utils/clsw';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
-import { shoutStyles } from './styles';
+import { shoutStyler } from './styles';
 
 interface ShoutProps extends React.ComponentProps<'div'> {
   /** The inner content shown in the Shout */
@@ -24,8 +24,8 @@ interface ShoutProps extends React.ComponentProps<'div'> {
  */
 export function Shout({ className, sizer, flavor, ...divProps }: ShoutProps) {
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = shoutStyles({ sizer: resolvedSizer, flavor });
-  return <div {...divProps} className={clsw(s, className)} />;
+  const styles = shoutStyler({ sizer: resolvedSizer, flavor });
+  return <div {...divProps} className={clsw(styles, className)} />;
 }
 
 Shout.sizer = Sizer;

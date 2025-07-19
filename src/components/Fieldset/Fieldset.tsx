@@ -6,7 +6,7 @@ import { CommonFieldsetProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
-import { styles } from './styles';
+import { fieldsetStyler } from './styles';
 
 export interface FieldsetProps extends React.ComponentProps<'fieldset'> {
   /** The content of the form-controls section of the Fieldset */
@@ -32,12 +32,12 @@ export function Fieldset({
   'aria-invalid': ariaInvalid,
   ...otherFieldsetProps
 }: FieldsetProps & CommonFieldsetProps) {
-  const [legendId] = React.useState<string>(randomId());
-  const [hintId] = React.useState<string>(randomId());
-  const [errorId] = React.useState<string>(randomId());
+  const [legendId] = React.useState(randomId());
+  const [hintId] = React.useState(randomId());
+  const [errorId] = React.useState(randomId());
 
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = styles({ sizer: resolvedSizer });
+  const styles = fieldsetStyler({ sizer: resolvedSizer });
 
   return (
     <fieldset
@@ -63,11 +63,11 @@ export function Fieldset({
       aria-invalid={!!(ariaInvalid || error)}
     >
       {label && (
-        <legend id={legendId} className={s.legend()}>
-          <div className={s.label()}>
+        <legend id={legendId} className={styles.legend()}>
+          <div className={styles.label()}>
             {label}
             {required && (
-              <abbr className={s.requiredAsterisk()} title="required">
+              <abbr className={styles.requiredAsterisk()} title="required">
                 *
               </abbr>
             )}
@@ -78,15 +78,15 @@ export function Fieldset({
       <div>{formControls}</div>
 
       {(!!hint || !!error) && (
-        <div className={s.footer()}>
+        <div className={styles.footer()}>
           {hint && (
-            <div id={hintId} className={s.hint()}>
+            <div id={hintId} className={styles.hint()}>
               {hint}
             </div>
           )}
 
           {error && (
-            <div id={errorId} className={s.error()} aria-live="assertive">
+            <div id={errorId} className={styles.error()} aria-live="assertive">
               {error}
             </div>
           )}

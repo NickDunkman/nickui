@@ -162,6 +162,21 @@ export const DisabledChecked: Story = {
   },
 };
 
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Checkbox.sizer.xs,
+    label: 'Xs Checkbox',
+    defaultChecked: true,
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the the xs sizer style', async () => {
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-3.5');
+    });
+  },
+};
+
 export const Small: Story = {
   tags: ['sizer'],
   args: {
@@ -238,6 +253,7 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
+      <Checkbox {...Xs.args} className="sm:flex-1" />
       <Checkbox {...Small.args} className="sm:flex-1" />
       <Checkbox {...Base.args} className="sm:flex-1" />
       <Checkbox {...Large.args} className="sm:flex-1" />

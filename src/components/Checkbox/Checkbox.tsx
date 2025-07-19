@@ -7,7 +7,7 @@ import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
-import { styles as checkboxStyles } from './styles';
+import { checkboxStyler } from './styles';
 
 interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
   /**
@@ -29,7 +29,7 @@ interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
  * @param props {@link CheckboxProps} {@link CommonCheckedFieldProps}
  */
 export function Checkbox(props: CheckboxProps & CommonCheckedFieldProps) {
-  return <Checkable {...props} type="checkbox" styler={checkboxStyles} />;
+  return <Checkable {...props} type="checkbox" styler={checkboxStyler} />;
 }
 
 Checkbox.sizer = Sizer;
@@ -109,18 +109,20 @@ export function Checkable({
     (hint ? uncontrolledAriaDescribedBy : undefined);
 
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = styler({
+  const styles = styler({
     sizer: resolvedSizer,
     isDisabled: !!disabled,
     isKeyboardFocused: isFocused && !disabled && !isMouseFocused,
   });
 
   const labelWithOffset =
-    label || hint ? <div className={s.labelWithOffset()}>{label}</div> : null;
+    label || hint ? (
+      <div className={styles.labelWithOffset()}>{label}</div>
+    ) : null;
 
   return (
     <CheckedField
-      className={clsw(s.root(), className)}
+      className={clsw(styles.root(), className)}
       label={labelWithOffset}
       labelId={ariaLabelledBy}
       hint={hint}
@@ -131,7 +133,7 @@ export function Checkable({
     >
       <input
         type={type}
-        className={s.input()}
+        className={styles.input()}
         disabled={disabled}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
@@ -139,7 +141,7 @@ export function Checkable({
         aria-describedby={ariaDescribedBy}
         {...inputProps}
       />
-      <div className={s.indicator()} data-testid="indicator" />
+      <div className={styles.indicator()} data-testid="indicator" />
     </CheckedField>
   );
 }

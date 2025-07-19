@@ -144,6 +144,25 @@ export const Disabled: Story = {
   },
 };
 
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Text.sizer.xs,
+    label: 'Xs label',
+    placeholder: 'Xs Text',
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xs sizer style on both the Text & Field',
+      async () => {
+        expect(canvas.getByLabelText('Xs label')).toHaveClass('text-sm');
+        expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
+      },
+    );
+  },
+};
+
 export const Small: Story = {
   tags: ['sizer'],
   args: {
@@ -227,6 +246,7 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
+      <Text {...Xs.args} className="sm:flex-1" />
       <Text {...Small.args} className="sm:flex-1" />
       <Text {...Base.args} className="sm:flex-1" />
       <Text {...Large.args} className="sm:flex-1" />

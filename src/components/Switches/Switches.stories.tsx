@@ -291,6 +291,37 @@ export const CustomLayout: Story = {
   },
 };
 
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Switches.sizer.xs,
+    label: 'Xs label',
+    hint: 'Xs hint',
+    options: [
+      {
+        value: 'one',
+        label: 'Option one',
+      },
+      {
+        value: 'two',
+        label: 'Option two',
+      },
+    ],
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xs sizer style of both the Switches & Fieldset',
+      async () => {
+        canvas.getAllByTestId('indicator').forEach((indicator) => {
+          expect(indicator).toHaveClass('h-5');
+        });
+        expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
+      },
+    );
+  },
+};
+
 export const Small: Story = {
   tags: ['sizer'],
   args: {
@@ -424,6 +455,7 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
+      <Switches {...Xs.args} className="sm:flex-1" />
       <Switches {...Small.args} className="sm:flex-1" />
       <Switches {...Base.args} className="sm:flex-1" />
       <Switches {...Large.args} className="sm:flex-1" />

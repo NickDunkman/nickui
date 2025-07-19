@@ -6,7 +6,7 @@ import { clsw } from '@/utils/clsw';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { ButtonFlavor } from './constants';
-import { styles } from './styles';
+import { buttonStyler } from './styles';
 
 export interface ButtonProps extends React.ComponentProps<'button'> {
   /** The inner content shown in the Button */
@@ -51,7 +51,7 @@ export function Button({
   const [isKeyboardActivated, setIsKeyboardActivated] = React.useState(false);
 
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = styles({
+  const styles = buttonStyler({
     sizer: resolvedSizer,
     flavor,
     isDisabled: disabled,
@@ -63,7 +63,7 @@ export function Button({
   return (
     <button
       {...buttonHTMLProps}
-      className={clsw(s, className)}
+      className={clsw(styles, className)}
       disabled={disabled}
       type={type}
       onBlur={(event) => {

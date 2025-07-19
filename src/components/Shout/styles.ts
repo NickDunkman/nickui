@@ -3,12 +3,13 @@ import { tv } from 'tailwind-variants';
 import { NoticeFlavor, Sizer } from '@/constants';
 
 /** tailwind-variants styles for the Shout component */
-export const shoutStyles = tv({
+export const shoutStyler = tv({
   base: `
     rounded-sm font-medium
   `,
   variants: {
     sizer: {
+      [Sizer.xs]: 'text-sm px-3 py-2',
       [Sizer.small]: 'text-sm px-3 py-2',
       [Sizer.base]: 'text-base px-4 py-3',
       [Sizer.large]: 'text-lg px-5 py-4',

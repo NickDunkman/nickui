@@ -275,6 +275,27 @@ export const CustomRange: Story = {
   },
 };
 
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Slider.sizer.xs,
+    ...withMetaHint('Xs Slider'),
+    defaultValue: '50',
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xs sizer style on both the Slider & Field',
+      async () => {
+        expect(canvas.getByLabelText('Xs Slider')).toHaveClass('h-5');
+        expect(
+          canvas.getByText('Xs Slider').parentNode?.parentNode,
+        ).toHaveClass('text-xs');
+      },
+    );
+  },
+};
+
 export const Small: Story = {
   tags: ['sizer'],
   args: {
@@ -364,6 +385,7 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col items-center gap-5 sm:flex-row">
+      <Slider {...Xs.args} className="sm:flex-1" />
       <Slider {...Small.args} className="sm:flex-1" />
       <Slider {...Base.args} className="sm:flex-1" />
       <Slider {...Large.args} className="sm:flex-1" />

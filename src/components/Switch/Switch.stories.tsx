@@ -162,6 +162,21 @@ export const DisabledChecked: Story = {
   },
 };
 
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Switch.sizer.xs,
+    label: 'Xs Switch',
+    defaultChecked: true,
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the the xs sizer style', async () => {
+      expect(canvas.getByTestId('indicator')).toHaveClass('h-5');
+    });
+  },
+};
+
 export const Small: Story = {
   tags: ['sizer'],
   args: {
@@ -233,6 +248,7 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
+      <Switch {...Xs.args} className="sm:flex-1" />
       <Switch {...Small.args} className="sm:flex-1" />
       <Switch {...Base.args} className="sm:flex-1" />
       <Switch {...Large.args} className="sm:flex-1" />

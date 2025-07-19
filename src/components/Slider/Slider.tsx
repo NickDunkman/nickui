@@ -8,7 +8,7 @@ import { debounceToRepaint } from '@/utils/debounceToRepaint';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
-import { styles } from './styles';
+import { sliderStyler } from './styles';
 
 function valueToRangePercentage(value: number, min: number, max: number) {
   const percentage = (value - min) / (max - min) || 0;
@@ -397,7 +397,7 @@ export function Slider({
   const percentage = valueToRangePercentage(implicitValue, min, max);
 
   const resolvedSizer = useResolvedSizer(sizer);
-  const s = styles({
+  const styles = sliderStyler({
     sizer: resolvedSizer,
     isDisabled: disabled,
     isKeyboardFocused: isFocused && !disabled && !isMouseFocused,
@@ -444,7 +444,7 @@ export function Slider({
       <div
         {...otherDivProps}
         ref={rootRef}
-        className={s.root()}
+        className={styles.root()}
         role="slider"
         tabIndex={disabled ? -1 : tabIndex || 0}
         onMouseDown={handleMouseDown}
@@ -461,14 +461,14 @@ export function Slider({
         aria-errormessage={ariaErrorMessage}
         aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
       >
-        <div ref={trackRef} className={s.track()}>
+        <div ref={trackRef} className={styles.track()}>
           <div
-            className={s.fill()}
+            className={styles.fill()}
             style={{ right: `${100 - percentage}%` }}
             data-testid="fill"
           />
           <div
-            className={s.thumb()}
+            className={styles.thumb()}
             style={{ left: `${percentage}%` }}
             data-testid="thumb"
           />

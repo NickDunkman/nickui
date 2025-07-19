@@ -68,6 +68,20 @@ export const Nope: Story = {
   },
 };
 
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Shout.sizer.xs,
+    children: 'Xs Shout',
+    role: 'status',
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the xs sizer style', async () => {
+      expect(canvas.getByRole('status')).toHaveClass('text-sm');
+    });
+  },
+};
+
 export const Small: Story = {
   tags: ['sizer'],
   args: {
@@ -131,7 +145,7 @@ export const AllFlavors: Story = {
   ),
 };
 
-export const AllSizers: Story = {
+export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
