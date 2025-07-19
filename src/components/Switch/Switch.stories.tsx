@@ -13,6 +13,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const CheckedFieldLayout: Story = {
+  tags: ['field-layout'],
   args: {
     label: 'A label',
     hint: 'A hint',
@@ -45,6 +46,7 @@ export const CheckedFieldLayout: Story = {
 };
 
 export const Unchecked: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Unchecked Switch',
     onChange: fn(),
@@ -55,6 +57,7 @@ export const Unchecked: Story = {
 };
 
 export const Controlled: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Controlled Switch',
     checked: true,
@@ -79,6 +82,7 @@ export const Controlled: Story = {
 };
 
 export const Uncontrolled: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Uncontrolled Switch',
     defaultChecked: true,
@@ -110,6 +114,7 @@ export const Uncontrolled: Story = {
 };
 
 export const DisabledUnchecked: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Disabled & unchecked Switch',
     disabled: true,
@@ -133,6 +138,7 @@ export const DisabledUnchecked: Story = {
 };
 
 export const DisabledChecked: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Disabled & checked Switch',
     disabled: true,
@@ -157,6 +163,7 @@ export const DisabledChecked: Story = {
 };
 
 export const Small: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Switch.sizer.small,
     label: 'Small Switch',
@@ -171,6 +178,7 @@ export const Small: Story = {
 };
 
 export const Base: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Switch.sizer.base,
     label: 'Base Switch',
@@ -185,6 +193,7 @@ export const Base: Story = {
 };
 
 export const Large: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Switch.sizer.large,
     label: 'Large Switch',
@@ -199,7 +208,7 @@ export const Large: Story = {
 };
 
 export const Responsive: Story = {
-  tags: ['!test'],
+  tags: ['!test', 'sizer'],
   args: {
     sizer: [Switch.sizer.small, Switch.sizer.smBase, Switch.sizer.mdLarge],
     label: 'Responsive Switch',
@@ -220,7 +229,7 @@ export const AllControlStates: Story = {
   ),
 };
 
-export const AllSizes: Story = {
+export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">

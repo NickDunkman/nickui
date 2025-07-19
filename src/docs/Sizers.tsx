@@ -4,7 +4,7 @@ import * as React from 'react';
 import { StoriesModule } from '@/types';
 
 /** Custom doc block for rendering a Component's "Standard sizing" section */
-export function Sizing({ of }: { of: StoriesModule }) {
+export function Sizers({ of }: { of: StoriesModule }) {
   return (
     <>
       <Markdown>
@@ -21,7 +21,7 @@ For example, \`sizer={["small", "sm:base", "md:large"]}\` will show the small si
         `}
       </Markdown>
 
-      {of.AllSizes && <Canvas of={of.AllSizes} />}
+      {of.AllSizers && <Canvas of={of.AllSizers} />}
     </>
   );
 }

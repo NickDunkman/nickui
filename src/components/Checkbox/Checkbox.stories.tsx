@@ -13,6 +13,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const CheckedFieldLayout: Story = {
+  tags: ['field-layout'],
   args: {
     label: 'A label',
     hint: 'A hint',
@@ -45,6 +46,7 @@ export const CheckedFieldLayout: Story = {
 };
 
 export const Unchecked: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Unchecked Checkbox',
     onChange: fn(),
@@ -55,6 +57,7 @@ export const Unchecked: Story = {
 };
 
 export const Controlled: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Controlled Checkbox',
     checked: true,
@@ -79,6 +82,7 @@ export const Controlled: Story = {
 };
 
 export const Uncontrolled: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Uncontrolled Checkbox',
     defaultChecked: true,
@@ -110,6 +114,7 @@ export const Uncontrolled: Story = {
 };
 
 export const DisabledUnchecked: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Disabled & unchecked Checkbox',
     disabled: true,
@@ -133,6 +138,7 @@ export const DisabledUnchecked: Story = {
 };
 
 export const DisabledChecked: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Disabled & checked Checkbox',
     disabled: true,
@@ -157,6 +163,7 @@ export const DisabledChecked: Story = {
 };
 
 export const Small: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Checkbox.sizer.small,
     label: 'Small Checkbox',
@@ -171,6 +178,7 @@ export const Small: Story = {
 };
 
 export const Base: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Checkbox.sizer.base,
     label: 'Base Checkbox',
@@ -185,6 +193,7 @@ export const Base: Story = {
 };
 
 export const Large: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Checkbox.sizer.large,
     label: 'Large Checkbox',
@@ -199,7 +208,7 @@ export const Large: Story = {
 };
 
 export const Responsive: Story = {
-  tags: ['!test'],
+  tags: ['!test', 'sizer'],
   args: {
     sizer: [
       Checkbox.sizer.small,
@@ -225,7 +234,7 @@ export const AllControlStates: Story = {
   ),
 };
 
-export const AllSizes: Story = {
+export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">

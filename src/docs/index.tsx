@@ -8,7 +8,7 @@ import { FormControlPlaceholder } from './FormControlPlaceholder';
 import { FormLibraryCompatibility } from './FormLibraryCompatibility';
 import { PrettyPrint } from './PrettyPrint';
 import { Props } from './Props';
-import { Sizing } from './Sizing';
+import { Sizers } from './Sizers';
 import { SourceLink } from './SourceLink';
 import { TableOfContents } from './TableOfContents';
 
@@ -45,6 +45,6 @@ Docs.FormControlPlaceholder = FormControlPlaceholder;
 Docs.FormLibraryCompatibility = FormLibraryCompatibility;
 Docs.PrettyPrint = PrettyPrint;
 Docs.Props = Props;
-Docs.Sizing = Sizing;
+Docs.Sizers = Sizers;
 Docs.SourceLink = SourceLink;
 Docs.TableOfContents = TableOfContents;

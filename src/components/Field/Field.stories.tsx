@@ -14,7 +14,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
-  tags: ['!dev', '!test'],
+  tags: ['!dev', '!test', 'field-layout'],
   args: {
     children: <Docs.FormControlPlaceholder />,
     label: 'A label for the field',
@@ -25,6 +25,7 @@ export const Basic: Story = {
 };
 
 export const Small: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Field.sizer.small,
     children: <Docs.FormControlPlaceholder />,
@@ -36,6 +37,7 @@ export const Small: Story = {
 };
 
 export const Base: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Field.sizer.base,
     children: <Docs.FormControlPlaceholder />,
@@ -47,6 +49,7 @@ export const Base: Story = {
 };
 
 export const Large: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Field.sizer.large,
     children: <Docs.FormControlPlaceholder />,
@@ -58,7 +61,7 @@ export const Large: Story = {
 };
 
 export const Responsive: Story = {
-  tags: ['!test'],
+  tags: ['!test', 'sizer'],
   args: {
     sizer: [Field.sizer.small, Field.sizer.smBase, Field.sizer.mdLarge],
     children: <Docs.FormControlPlaceholder />,
@@ -78,7 +81,7 @@ export const Required: Story = {
   },
 };
 
-export const AllSizes: Story = {
+export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">

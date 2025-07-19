@@ -28,6 +28,7 @@ async function uncheck(
 }
 
 export const CheckedFieldLayout: Story = {
+  tags: ['field-layout'],
   args: {
     label: 'A label',
     hint: 'A hint',
@@ -64,6 +65,7 @@ export const CheckedFieldLayout: Story = {
 };
 
 export const Unchecked: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Unchecked Radio',
     onChange: fn(),
@@ -74,6 +76,7 @@ export const Unchecked: Story = {
 };
 
 export const Controlled: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Controlled Radio',
     checked: true,
@@ -87,6 +90,7 @@ export const Controlled: Story = {
 };
 
 export const Uncontrolled: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Uncontrolled Radio',
     defaultChecked: true,
@@ -100,6 +104,7 @@ export const Uncontrolled: Story = {
 };
 
 export const DisabledUnchecked: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Disabled & unchecked Radio',
     disabled: true,
@@ -123,6 +128,7 @@ export const DisabledUnchecked: Story = {
 };
 
 export const DisabledChecked: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Disabled & checked Radio',
     disabled: true,
@@ -141,6 +147,7 @@ export const DisabledChecked: Story = {
 };
 
 export const Small: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Radio.sizer.small,
     label: 'Small Radio',
@@ -155,6 +162,7 @@ export const Small: Story = {
 };
 
 export const Base: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Radio.sizer.base,
     label: 'Base Radio',
@@ -169,6 +177,7 @@ export const Base: Story = {
 };
 
 export const Large: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Radio.sizer.large,
     label: 'Large Radio',
@@ -183,7 +192,7 @@ export const Large: Story = {
 };
 
 export const Responsive: Story = {
-  tags: ['!test'],
+  tags: ['!test', 'sizer'],
   args: {
     sizer: [Radio.sizer.small, Radio.sizer.smBase, Radio.sizer.mdLarge],
     label: 'Responsive Radio',
@@ -205,7 +214,7 @@ export const AllControlStates: Story = {
   ),
 };
 
-export const AllSizes: Story = {
+export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">

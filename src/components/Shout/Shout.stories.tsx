@@ -13,6 +13,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Info: Story = {
+  tags: ['flavor'],
   args: {
     flavor: Shout.flavor.info,
     children: 'Info Shout',
@@ -26,6 +27,7 @@ export const Info: Story = {
 };
 
 export const Yep: Story = {
+  tags: ['flavor'],
   args: {
     flavor: Shout.flavor.yep,
     children: 'Yep Shout',
@@ -39,6 +41,7 @@ export const Yep: Story = {
 };
 
 export const Maybe: Story = {
+  tags: ['flavor'],
   args: {
     flavor: Shout.flavor.maybe,
     children: 'Maybe Shout',
@@ -52,6 +55,7 @@ export const Maybe: Story = {
 };
 
 export const Nope: Story = {
+  tags: ['flavor'],
   args: {
     flavor: Shout.flavor.nope,
     children: 'Nope Shout',
@@ -65,6 +69,7 @@ export const Nope: Story = {
 };
 
 export const Small: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Shout.sizer.small,
     children: 'Small Shout',
@@ -78,6 +83,7 @@ export const Small: Story = {
 };
 
 export const Base: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Shout.sizer.base,
     children: 'Base Shout',
@@ -91,6 +97,7 @@ export const Base: Story = {
 };
 
 export const Large: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Shout.sizer.large,
     children: 'Large Shout',
@@ -104,7 +111,7 @@ export const Large: Story = {
 };
 
 export const Responsive: Story = {
-  tags: ['!test'],
+  tags: ['!test', 'sizer'],
   args: {
     sizer: [Shout.sizer.small, Shout.sizer.smBase, Shout.sizer.mdLarge],
     children: 'Responsive Shout',
@@ -124,7 +131,7 @@ export const AllFlavors: Story = {
   ),
 };
 
-export const AllSizes: Story = {
+export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">

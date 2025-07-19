@@ -14,7 +14,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
-  tags: ['!dev', '!test'],
+  tags: ['!dev', '!test', 'field-layout'],
   args: {
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'A label for the field',
@@ -23,6 +23,7 @@ export const Basic: Story = {
 };
 
 export const Small: Story = {
+  tags: ['sizer'],
   args: {
     sizer: CheckedField.sizer.small,
     children: <Docs.FormControlPlaceholder tiny />,
@@ -32,6 +33,7 @@ export const Small: Story = {
 };
 
 export const Base: Story = {
+  tags: ['sizer'],
   args: {
     sizer: CheckedField.sizer.base,
     children: <Docs.FormControlPlaceholder tiny />,
@@ -41,6 +43,7 @@ export const Base: Story = {
 };
 
 export const Large: Story = {
+  tags: ['sizer'],
   args: {
     sizer: CheckedField.sizer.large,
     children: <Docs.FormControlPlaceholder tiny />,
@@ -50,7 +53,7 @@ export const Large: Story = {
 };
 
 export const Responsive: Story = {
-  tags: ['!test'],
+  tags: ['!test', 'sizer'],
   args: {
     sizer: [CheckedField.sizer.smBase, CheckedField.sizer.mdLarge],
     children: <Docs.FormControlPlaceholder tiny />,
@@ -59,7 +62,7 @@ export const Responsive: Story = {
   },
 };
 
-export const AllSizes: Story = {
+export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">

@@ -13,6 +13,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Enabled: Story = {
+  tags: ['control-state'],
   args: {
     children: 'Enabled Button',
     onClick: fn(),
@@ -26,6 +27,7 @@ export const Enabled: Story = {
 };
 
 export const Disabled: Story = {
+  tags: ['control-state'],
   args: {
     children: 'Disabled Button',
     disabled: true,
@@ -56,6 +58,7 @@ export const AllControlStates: Story = {
 };
 
 export const Small: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Button.sizer.small,
     children: 'Small Button',
@@ -69,6 +72,7 @@ export const Small: Story = {
 };
 
 export const Base: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Button.sizer.base,
     children: 'Base Button',
@@ -82,6 +86,7 @@ export const Base: Story = {
 };
 
 export const Large: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Button.sizer.large,
     children: 'Large Button',
@@ -95,7 +100,7 @@ export const Large: Story = {
 };
 
 export const Responsive: Story = {
-  tags: ['!test'],
+  tags: ['!test', 'sizer'],
   args: {
     sizer: [Button.sizer.small, Button.sizer.smBase, Button.sizer.mdLarge],
     children: 'Responsive Button',
@@ -103,7 +108,7 @@ export const Responsive: Story = {
   },
 };
 
-export const AllSizes: Story = {
+export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-wrap items-baseline gap-4">
@@ -116,6 +121,7 @@ export const AllSizes: Story = {
 };
 
 export const Primary: Story = {
+  tags: ['flavor'],
   args: {
     flavor: Button.flavor.primary,
     children: 'Primary Button (default)',
@@ -129,6 +135,7 @@ export const Primary: Story = {
 };
 
 export const Secondary: Story = {
+  tags: ['flavor'],
   args: {
     flavor: Button.flavor.secondary,
     children: 'Secondary Button',
@@ -142,6 +149,7 @@ export const Secondary: Story = {
 };
 
 export const Danger: Story = {
+  tags: ['flavor'],
   args: {
     flavor: Button.flavor.danger,
     children: 'Danger Button',

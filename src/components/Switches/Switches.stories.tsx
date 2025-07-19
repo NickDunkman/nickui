@@ -15,6 +15,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const FieldsetLayout: Story = {
+  tags: ['field-layout'],
   args: {
     required: true,
     label: 'A label',
@@ -46,6 +47,7 @@ export const FieldsetLayout: Story = {
 };
 
 export const NoValue: Story = {
+  tags: ['control-state'],
   args: {
     label: 'No valueish prop',
     options: [
@@ -99,6 +101,7 @@ export const NoValue: Story = {
 };
 
 export const Controlled: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Controlled',
     value: 'one',
@@ -136,6 +139,7 @@ export const Controlled: Story = {
 };
 
 export const Uncontrolled: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Uncontrolled',
     defaultValue: 'one',
@@ -178,6 +182,7 @@ export const Uncontrolled: Story = {
 };
 
 export const Disabled: Story = {
+  tags: ['control-state'],
   args: {
     label: 'Disabled',
     defaultValue: 'one',
@@ -287,6 +292,7 @@ export const CustomLayout: Story = {
 };
 
 export const Small: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Switches.sizer.small,
     label: 'Small label',
@@ -317,6 +323,7 @@ export const Small: Story = {
 };
 
 export const Base: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Switches.sizer.base,
     label: 'Base label',
@@ -347,6 +354,7 @@ export const Base: Story = {
 };
 
 export const Large: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Switches.sizer.large,
     label: 'Large label',
@@ -377,7 +385,7 @@ export const Large: Story = {
 };
 
 export const Responsive: Story = {
-  tags: ['!test'],
+  tags: ['!test', 'sizer'],
   args: {
     sizer: [
       Switches.sizer.small,
@@ -412,7 +420,7 @@ export const AllControlStates: Story = {
   ),
 };
 
-export const AllSizes: Story = {
+export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">

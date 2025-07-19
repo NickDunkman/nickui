@@ -27,6 +27,7 @@ function withMetaHint(
 }
 
 export const FieldLayout: Story = {
+  tags: ['field-layout'],
   args: {
     required: true,
     label: 'A label',
@@ -56,6 +57,7 @@ export const FieldLayout: Story = {
 };
 
 export const NoValue: Story = {
+  tags: ['control-state'],
   args: {
     ...withMetaHint('Slider with no valueish prop'),
     onChange: fn(),
@@ -126,6 +128,7 @@ export const NoValue: Story = {
 };
 
 export const Controlled: Story = {
+  tags: ['control-state'],
   args: {
     ...withMetaHint('Slider with controlled value'),
     value: '50',
@@ -160,6 +163,7 @@ export const Controlled: Story = {
 };
 
 export const Uncontrolled: Story = {
+  tags: ['control-state'],
   args: {
     ...withMetaHint('Slider with uncontrolled value'),
     defaultValue: '50',
@@ -199,6 +203,7 @@ export const Uncontrolled: Story = {
 };
 
 export const Disabled: Story = {
+  tags: ['control-state'],
   args: {
     ...withMetaHint('Disabled Slider'),
     disabled: true,
@@ -271,6 +276,7 @@ export const CustomRange: Story = {
 };
 
 export const Small: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Slider.sizer.small,
     ...withMetaHint('Small Slider'),
@@ -291,6 +297,7 @@ export const Small: Story = {
 };
 
 export const Base: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Slider.sizer.base,
     ...withMetaHint('Base Slider'),
@@ -311,6 +318,7 @@ export const Base: Story = {
 };
 
 export const Large: Story = {
+  tags: ['sizer'],
   args: {
     sizer: Slider.sizer.large,
     ...withMetaHint('Large Slider'),
@@ -331,7 +339,7 @@ export const Large: Story = {
 };
 
 export const Responsive: Story = {
-  tags: ['!test'],
+  tags: ['!test', 'sizer'],
   args: {
     sizer: [Slider.sizer.small, Slider.sizer.smBase, Slider.sizer.mdLarge],
     ...withMetaHint('Responsive Slider'),
@@ -352,7 +360,7 @@ export const AllControlStates: Story = {
   ),
 };
 
-export const AllSizes: Story = {
+export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col items-center gap-5 sm:flex-row">
