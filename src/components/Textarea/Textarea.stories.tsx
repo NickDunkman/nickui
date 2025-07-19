@@ -158,7 +158,7 @@ export const Xs: Story = {
     await step(
       'Assert the xs sizer style on both the Textarea & Field',
       async () => {
-        expect(canvas.getByLabelText('Xs label')).toHaveClass('text-sm');
+        expect(canvas.getByLabelText('Xs label')).toHaveClass('text-xs');
         expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
       },
     );
@@ -234,7 +234,7 @@ export const Xl: Story = {
     await step(
       'Assert the xl sizer style on both the Textarea & Field',
       async () => {
-        expect(canvas.getByLabelText('Xl label')).toHaveClass('text-lg');
+        expect(canvas.getByLabelText('Xl label')).toHaveClass('text-xl');
         expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
       },
     );

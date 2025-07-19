@@ -26,7 +26,7 @@ export const textareaStyler = tv({
     {
       slots: ['textarea', 'hiddenTextarea'],
       sizer: Sizer.xs,
-      className: 'text-sm py-1.5 px-2',
+      className: 'text-xs py-1.25 px-2',
     },
     {
       slots: ['textarea', 'hiddenTextarea'],
@@ -46,7 +46,7 @@ export const textareaStyler = tv({
     {
       slots: ['textarea', 'hiddenTextarea'],
       sizer: Sizer.xl,
-      className: 'text-lg py-3.5 px-4.5',
+      className: 'text-xl py-4.5 px-5.5',
     },
   ],
 
