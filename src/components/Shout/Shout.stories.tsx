@@ -59,7 +59,7 @@ export const Nope: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the nope flavor style', async () => {
-      expect(canvas.getByRole('alert')).toHaveClass('bg-rose-800');
+      expect(canvas.getByRole('alert')).toHaveClass('bg-rose-700');
     });
   },
 };
