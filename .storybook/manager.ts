@@ -11,25 +11,27 @@ addons.setConfig({
   }),
 });
 
-// Custom addon that adds nicer formatting to the site title & prefixes with
-// "NicKUI".
-addons.register('titleNickUI', (api) => {
-  const setTitle = () => {
-    let storyData;
-    try {
-      storyData = api.getCurrentStoryData();
-    } catch (e) {}
+// Can run code inside here after the manager UI is loaded
+addons.register('NickUI Storybook manager UI fiddling', (api) => {
+  // Remove blue outline when clicking the title in the sidebar
+  const sidebarTitle = document.querySelector('a[title="NickUI"]');
+  if (sidebarTitle) {
+    (sidebarTitle as HTMLElement).style.borderColor = 'transparent';
+  }
 
-    document.title = !storyData
-      ? SITE_NAME
-      : storyData.type === 'docs'
-        ? `${SITE_NAME} ⋅ ${storyData.title.replace(/\//g, ' ⋅ ')}`
-        : `${SITE_NAME} ⋅ ${storyData.title.replace(/\//g, ' ⋅ ')} ⋅ ${storyData.name}`;
-  };
-
-  return new MutationObserver(() => {
+  // Nicely format the page <title>
+  new MutationObserver(() => {
     if (document.title.endsWith('Storybook')) {
-      setTitle();
+      let storyData;
+      try {
+        storyData = api.getCurrentStoryData();
+      } catch (e) {}
+
+      document.title = !storyData
+        ? SITE_NAME
+        : storyData.type === 'docs'
+          ? `${SITE_NAME} ⋅ ${storyData.title.replace(/\//g, ' ⋅ ')}`
+          : `${SITE_NAME} ⋅ ${storyData.title.replace(/\//g, ' ⋅ ')} ⋅ ${storyData.name}`;
     }
   }).observe(document.querySelector('title') as Node, {
     childList: true,
