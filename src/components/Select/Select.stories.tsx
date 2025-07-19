@@ -133,14 +133,14 @@ export const Xs: Story = {
   args: {
     sizer: Select.sizer.xs,
     label: 'Xs label',
-    children: <option>Sm Select</option>,
+    children: <option>Xs Select</option>,
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
       'Assert the xs sizer style on both the Select & Field',
       async () => {
-        expect(canvas.getByLabelText('Xs label')).toHaveClass('text-sm');
+        expect(canvas.getByLabelText('Xs label')).toHaveClass('text-xs');
         expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
       },
     );
@@ -216,7 +216,7 @@ export const Xl: Story = {
     await step(
       'Assert the xl sizer style on both the Select & Field',
       async () => {
-        expect(canvas.getByLabelText('Xl label')).toHaveClass('text-lg');
+        expect(canvas.getByLabelText('Xl label')).toHaveClass('text-xl');
         expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
       },
     );
