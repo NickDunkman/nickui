@@ -3,13 +3,13 @@ import * as React from 'react';
 
 import { StoriesModule } from '@/types';
 
-/** Custom doc block for rendering a Component's "Standard sizing" section */
+/** Custom doc block for rendering a Component's "Responsive sizing" section */
 export function Sizers({ of }: { of: StoriesModule }) {
   return (
     <>
       <Markdown>
         {`
-## Standard sizing
+## ${of.Responsive ? 'Responsive sizing' : 'Sizing'}
 
 Sizing is done via the \`sizer\` prop & uses Tailwind terminology. The standard
 sizes are: \`"xs"\`, \`"sm"\`,\`"base"\`,\`"lg"\`, and \`"xl"\` (\`"base"\` is

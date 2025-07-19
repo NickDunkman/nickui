@@ -317,12 +317,12 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    label: 'Small label',
-    hint: 'Small hint',
-    sizer: Checkboxes.sizer.small,
+    label: 'Sm label',
+    hint: 'Sm hint',
+    sizer: Checkboxes.sizer.sm,
     options: [
       {
         value: 'one',
@@ -337,12 +337,12 @@ export const Small: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small sizer style of both the Checkboxes & Fieldset',
+      'Assert the sm sizer style of both the Checkboxes & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-3.5');
         });
-        expect(canvas.getByText('Small label')).toHaveClass('text-xs');
+        expect(canvas.getByText('Sm label')).toHaveClass('text-xs');
       },
     );
   },
@@ -416,7 +416,7 @@ export const Responsive: Story = {
     label: 'Responsive label',
     hint: 'Responsive hint',
     sizer: [
-      Checkbox.sizer.small,
+      Checkbox.sizer.sm,
       Checkboxes.sizer.smBase,
       Checkboxes.sizer.mdLarge,
     ],
@@ -451,7 +451,7 @@ export const AllSizers: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
       <Checkboxes {...Xs.args} className="sm:flex-1" />
-      <Checkboxes {...Small.args} className="sm:flex-1" />
+      <Checkboxes {...Sm.args} className="sm:flex-1" />
       <Checkboxes {...Base.args} className="sm:flex-1" />
       <Checkboxes {...Large.args} className="sm:flex-1" />
     </div>

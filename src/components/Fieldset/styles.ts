@@ -21,7 +21,7 @@ export const fieldsetStyler = tv({
         hint: 'text-xs',
         error: 'text-xs',
       },
-      [Sizer.small]: {
+      [Sizer.sm]: {
         legend: 'mb-2.5',
         label: 'text-xs',
         footer: 'mt-2.5 gap-1.5',

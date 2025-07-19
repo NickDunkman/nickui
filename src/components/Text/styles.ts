@@ -15,7 +15,7 @@ export const textStyler = tv({
   variants: {
     sizer: {
       [Sizer.xs]: 'text-sm py-1.5 px-2',
-      [Sizer.small]: 'text-sm py-1.5 px-2',
+      [Sizer.sm]: 'text-sm py-1.5 px-2',
       [Sizer.base]: 'text-base py-2.5 px-3.5',
       [Sizer.large]: 'text-lg py-3.5 px-4.5',
     },

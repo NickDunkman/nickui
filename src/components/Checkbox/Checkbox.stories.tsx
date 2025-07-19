@@ -177,16 +177,16 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Checkbox.sizer.small,
-    label: 'Small Checkbox',
+    sizer: Checkbox.sizer.sm,
+    label: 'Sm Checkbox',
     defaultChecked: true,
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the the small sizer style', async () => {
+    await step('Assert the the sm sizer style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('size-3.5');
     });
   },
@@ -225,11 +225,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [
-      Checkbox.sizer.small,
-      Checkbox.sizer.smBase,
-      Checkbox.sizer.mdLarge,
-    ],
+    sizer: [Checkbox.sizer.sm, Checkbox.sizer.smBase, Checkbox.sizer.mdLarge],
     label: 'Responsive Checkbox',
     defaultChecked: true,
     onChange: fn(),
@@ -254,7 +250,7 @@ export const AllSizers: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
       <Checkbox {...Xs.args} className="sm:flex-1" />
-      <Checkbox {...Small.args} className="sm:flex-1" />
+      <Checkbox {...Sm.args} className="sm:flex-1" />
       <Checkbox {...Base.args} className="sm:flex-1" />
       <Checkbox {...Large.args} className="sm:flex-1" />
     </div>

@@ -17,7 +17,7 @@ export const checkedFieldStyler = tv({
       [Sizer.xs]: {
         contentRoot: 'gap-2 text-xs',
       },
-      [Sizer.small]: {
+      [Sizer.sm]: {
         contentRoot: 'gap-2 text-xs',
       },
       [Sizer.base]: {

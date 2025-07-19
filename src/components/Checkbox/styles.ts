@@ -24,7 +24,7 @@ export const checkboxStyler = tv({
       [Sizer.xs]: {
         indicator: 'size-3.5 top-0.25 bg-size-[8px_8px] bg-white',
       },
-      [Sizer.small]: {
+      [Sizer.sm]: {
         indicator: 'size-3.5 top-0.25 bg-size-[8px_8px] bg-white',
       },
       [Sizer.base]: {

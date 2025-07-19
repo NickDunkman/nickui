@@ -322,12 +322,12 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switches.sizer.small,
-    label: 'Small label',
-    hint: 'Small hint',
+    sizer: Switches.sizer.sm,
+    label: 'Sm label',
+    hint: 'Sm hint',
     options: [
       {
         value: 'one',
@@ -342,12 +342,12 @@ export const Small: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small sizer style of both the Switches & Fieldset',
+      'Assert the sm sizer style of both the Switches & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('h-5');
         });
-        expect(canvas.getByText('Small label')).toHaveClass('text-xs');
+        expect(canvas.getByText('Sm label')).toHaveClass('text-xs');
       },
     );
   },
@@ -418,11 +418,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [
-      Switches.sizer.small,
-      Switches.sizer.smBase,
-      Switches.sizer.mdLarge,
-    ],
+    sizer: [Switches.sizer.sm, Switches.sizer.smBase, Switches.sizer.mdLarge],
     label: 'Responsive label',
     hint: 'Responsive hint',
     options: [
@@ -456,7 +452,7 @@ export const AllSizers: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
       <Switches {...Xs.args} className="sm:flex-1" />
-      <Switches {...Small.args} className="sm:flex-1" />
+      <Switches {...Sm.args} className="sm:flex-1" />
       <Switches {...Base.args} className="sm:flex-1" />
       <Switches {...Large.args} className="sm:flex-1" />
     </div>

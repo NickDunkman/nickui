@@ -343,12 +343,12 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radios.sizer.small,
-    label: 'Small label',
-    hint: 'Small hint',
+    sizer: Radios.sizer.sm,
+    label: 'Sm label',
+    hint: 'Sm hint',
     options: [
       {
         value: 'one',
@@ -363,12 +363,12 @@ export const Small: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small sizer style of both the Radios & Fieldset',
+      'Assert the sm sizer style of both the Radios & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-3.5');
         });
-        expect(canvas.getByText('Small label')).toHaveClass('text-xs');
+        expect(canvas.getByText('Sm label')).toHaveClass('text-xs');
       },
     );
   },
@@ -439,7 +439,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Radios.sizer.small, Radios.sizer.smBase, Radios.sizer.mdLarge],
+    sizer: [Radios.sizer.sm, Radios.sizer.smBase, Radios.sizer.mdLarge],
     label: 'Responsive label',
     hint: 'Responsive hint',
     options: [
@@ -473,7 +473,7 @@ export const AllSizers: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row">
       <Radios {...Xs.args} className="sm:flex-1" />
-      <Radios {...Small.args} className="sm:flex-1" />
+      <Radios {...Sm.args} className="sm:flex-1" />
       <Radios {...Base.args} className="sm:flex-1" />
       <Radios {...Large.args} className="sm:flex-1" />
     </div>

@@ -163,20 +163,20 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Text.sizer.small,
-    label: 'Small label',
-    placeholder: 'Small Text',
+    sizer: Text.sizer.sm,
+    label: 'Sm label',
+    placeholder: 'Sm Text',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small sizer style on both the Text & Field',
+      'Assert the sm sizer style on both the Text & Field',
       async () => {
-        expect(canvas.getByLabelText('Small label')).toHaveClass('text-sm');
-        expect(canvas.getByText('Small label')).toHaveClass('text-xs');
+        expect(canvas.getByLabelText('Sm label')).toHaveClass('text-sm');
+        expect(canvas.getByText('Sm label')).toHaveClass('text-xs');
       },
     );
   },
@@ -223,7 +223,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Text.sizer.small, Text.sizer.smBase, Text.sizer.mdLarge],
+    sizer: [Text.sizer.sm, Text.sizer.smBase, Text.sizer.mdLarge],
     label: 'Responsive label',
     placeholder: 'Responsive Text',
     onChange: fn(),
@@ -247,7 +247,7 @@ export const AllSizers: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
       <Text {...Xs.args} className="sm:flex-1" />
-      <Text {...Small.args} className="sm:flex-1" />
+      <Text {...Sm.args} className="sm:flex-1" />
       <Text {...Base.args} className="sm:flex-1" />
       <Text {...Large.args} className="sm:flex-1" />
     </div>

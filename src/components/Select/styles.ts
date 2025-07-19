@@ -34,7 +34,7 @@ export const selectStyler = tv({
         select: 'text-sm py-1.5 pl-2 pr-8',
         root: `after:w-[7px] after:h-[13px] after:right-3 ${arrowIcons.sm}`,
       },
-      [Sizer.small]: {
+      [Sizer.sm]: {
         select: 'text-sm py-1.5 pl-2 pr-8',
         root: `after:w-[7px] after:h-[13px] after:right-3 ${arrowIcons.sm}`,
       },

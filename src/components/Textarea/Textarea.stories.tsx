@@ -165,20 +165,20 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Textarea.sizer.small,
-    label: 'Small label',
-    placeholder: 'Small Textarea',
+    sizer: Textarea.sizer.sm,
+    label: 'Sm label',
+    placeholder: 'Sm Textarea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small sizer style on both the Textarea & Field',
+      'Assert the sm sizer style on both the Textarea & Field',
       async () => {
-        expect(canvas.getByLabelText('Small label')).toHaveClass('text-sm');
-        expect(canvas.getByText('Small label')).toHaveClass('text-xs');
+        expect(canvas.getByLabelText('Sm label')).toHaveClass('text-sm');
+        expect(canvas.getByText('Sm label')).toHaveClass('text-xs');
       },
     );
   },
@@ -225,11 +225,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [
-      Textarea.sizer.small,
-      Textarea.sizer.smBase,
-      Textarea.sizer.mdLarge,
-    ],
+    sizer: [Textarea.sizer.sm, Textarea.sizer.smBase, Textarea.sizer.mdLarge],
     label: 'Responsive label',
     placeholder: 'Responsive Text',
     onChange: fn(),
@@ -376,7 +372,7 @@ export const AllSizers: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4">
       <Textarea {...Xs.args} />
-      <Textarea {...Small.args} />
+      <Textarea {...Sm.args} />
       <Textarea {...Base.args} />
       <Textarea {...Large.args} />
     </div>

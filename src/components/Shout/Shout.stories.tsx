@@ -82,15 +82,15 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Shout.sizer.small,
-    children: 'Small Shout',
+    sizer: Shout.sizer.sm,
+    children: 'Sm Shout',
     role: 'status',
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the small sizer style', async () => {
+    await step('Assert the sm sizer style', async () => {
       expect(canvas.getByRole('status')).toHaveClass('text-sm');
     });
   },
@@ -127,7 +127,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Shout.sizer.small, Shout.sizer.smBase, Shout.sizer.mdLarge],
+    sizer: [Shout.sizer.sm, Shout.sizer.smBase, Shout.sizer.mdLarge],
     children: 'Responsive Shout',
     role: 'status',
   },
@@ -150,7 +150,7 @@ export const AllSizes: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-4">
       <Shout {...Xs.args} />
-      <Shout {...Small.args} />
+      <Shout {...Sm.args} />
       <Shout {...Base.args} />
       <Shout {...Large.args} />
     </div>

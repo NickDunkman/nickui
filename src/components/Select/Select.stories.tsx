@@ -133,7 +133,7 @@ export const Xs: Story = {
   args: {
     sizer: Select.sizer.xs,
     label: 'Xs label',
-    children: <option>Small Select</option>,
+    children: <option>Sm Select</option>,
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
@@ -147,20 +147,20 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Select.sizer.small,
-    label: 'Small label',
-    children: <option>Small Select</option>,
+    sizer: Select.sizer.sm,
+    label: 'Sm label',
+    children: <option>Sm Select</option>,
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small sizer style on both the Select & Field',
+      'Assert the sm sizer style on both the Select & Field',
       async () => {
-        expect(canvas.getByLabelText('Small label')).toHaveClass('text-sm');
-        expect(canvas.getByText('Small label')).toHaveClass('text-xs');
+        expect(canvas.getByLabelText('Sm label')).toHaveClass('text-sm');
+        expect(canvas.getByText('Sm label')).toHaveClass('text-xs');
       },
     );
   },
@@ -195,7 +195,7 @@ export const Large: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small sizer style on both the Select & Field',
+      'Assert the sm sizer style on both the Select & Field',
       async () => {
         expect(canvas.getByLabelText('Large label')).toHaveClass('text-lg');
         expect(canvas.getByText('Large label')).toHaveClass('text-lg');
@@ -207,7 +207,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Select.sizer.small, Select.sizer.smBase, Select.sizer.mdLarge],
+    sizer: [Select.sizer.sm, Select.sizer.smBase, Select.sizer.mdLarge],
     label: 'Responsive label',
     children: <option>Responsive Select</option>,
     onChange: fn(),
@@ -230,7 +230,7 @@ export const AllSizers: Story = {
   render: (_args) => (
     <div className="flex flex-col items-baseline gap-4 sm:flex-row">
       <Select {...Xs.args} className="sm:flex-1" />
-      <Select {...Small.args} className="sm:flex-1" />
+      <Select {...Sm.args} className="sm:flex-1" />
       <Select {...Base.args} className="sm:flex-1" />
       <Select {...Large.args} className="sm:flex-1" />
     </div>

@@ -26,8 +26,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       if (asArray.includes(Sizer.xlBase)) {
         return Sizer.base;
       }
-      if (asArray.includes(Sizer.xlSmall)) {
-        return Sizer.small;
+      if (asArray.includes(Sizer.xlSm)) {
+        return Sizer.sm;
       }
       if (asArray.includes(Sizer.xlXs)) {
         return Sizer.xs;
@@ -41,8 +41,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       if (asArray.includes(Sizer.lgBase)) {
         return Sizer.base;
       }
-      if (asArray.includes(Sizer.lgSmall)) {
-        return Sizer.small;
+      if (asArray.includes(Sizer.lgSm)) {
+        return Sizer.sm;
       }
       if (asArray.includes(Sizer.lgXs)) {
         return Sizer.xs;
@@ -56,8 +56,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       if (asArray.includes(Sizer.mdBase)) {
         return Sizer.base;
       }
-      if (asArray.includes(Sizer.mdSmall)) {
-        return Sizer.small;
+      if (asArray.includes(Sizer.mdSm)) {
+        return Sizer.sm;
       }
       if (asArray.includes(Sizer.mdXs)) {
         return Sizer.xs;
@@ -71,8 +71,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       if (asArray.includes(Sizer.smBase)) {
         return Sizer.base;
       }
-      if (asArray.includes(Sizer.smSmall)) {
-        return Sizer.small;
+      if (asArray.includes(Sizer.smSm)) {
+        return Sizer.sm;
       }
       if (asArray.includes(Sizer.smXs)) {
         return Sizer.xs;
@@ -85,8 +85,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
     if (asArray.includes(Sizer.base)) {
       return Sizer.base;
     }
-    if (asArray.includes(Sizer.small)) {
-      return Sizer.small;
+    if (asArray.includes(Sizer.sm)) {
+      return Sizer.sm;
     }
     if (asArray.includes(Sizer.xs)) {
       return Sizer.xs;

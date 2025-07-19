@@ -177,16 +177,16 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switch.sizer.small,
-    label: 'Small Switch',
+    sizer: Switch.sizer.sm,
+    label: 'Sm Switch',
     defaultChecked: true,
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the the small sizer style', async () => {
+    await step('Assert the the sm sizer style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('h-5');
     });
   },
@@ -225,7 +225,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Switch.sizer.small, Switch.sizer.smBase, Switch.sizer.mdLarge],
+    sizer: [Switch.sizer.sm, Switch.sizer.smBase, Switch.sizer.mdLarge],
     label: 'Responsive Switch',
     defaultChecked: true,
   },
@@ -249,7 +249,7 @@ export const AllSizers: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
       <Switch {...Xs.args} className="sm:flex-1" />
-      <Switch {...Small.args} className="sm:flex-1" />
+      <Switch {...Sm.args} className="sm:flex-1" />
       <Switch {...Base.args} className="sm:flex-1" />
       <Switch {...Large.args} className="sm:flex-1" />
     </div>

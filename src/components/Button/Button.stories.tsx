@@ -71,15 +71,15 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Button.sizer.small,
-    children: 'Small Button',
+    sizer: Button.sizer.sm,
+    children: 'Sm Button',
     onClick: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the small sizer style', async () => {
+    await step('Assert the sm sizer style', async () => {
       expect(canvas.getByRole('button')).toHaveClass('text-sm');
     });
   },
@@ -116,7 +116,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Button.sizer.small, Button.sizer.smBase, Button.sizer.mdLarge],
+    sizer: [Button.sizer.sm, Button.sizer.smBase, Button.sizer.mdLarge],
     children: 'Responsive Button',
     onClick: fn(),
   },
@@ -127,7 +127,7 @@ export const AllSizers: Story = {
   render: (_args) => (
     <div className="flex flex-wrap items-baseline gap-4">
       <Button {...Xs.args} />
-      <Button {...Small.args} />
+      <Button {...Sm.args} />
       <Button {...Base.args} />
       <Button {...Large.args} />
     </div>

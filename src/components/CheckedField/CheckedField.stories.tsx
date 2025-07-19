@@ -32,13 +32,13 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: CheckedField.sizer.small,
+    sizer: CheckedField.sizer.sm,
     children: <Docs.FormControlPlaceholder tiny />,
-    label: 'Small label',
-    hint: 'Small hint',
+    label: 'Sm label',
+    hint: 'Sm hint',
   },
 };
 
@@ -77,7 +77,7 @@ export const AllSizers: Story = {
   render: (_args) => (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
       <CheckedField {...Xs.args} className="sm:flex-1" />
-      <CheckedField {...Small.args} className="sm:flex-1" />
+      <CheckedField {...Sm.args} className="sm:flex-1" />
       <CheckedField {...Base.args} className="sm:flex-1" />
       <CheckedField {...Large.args} className="sm:flex-1" />
     </div>

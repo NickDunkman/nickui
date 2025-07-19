@@ -296,21 +296,21 @@ export const Xs: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Slider.sizer.small,
-    ...withMetaHint('Small Slider'),
+    sizer: Slider.sizer.sm,
+    ...withMetaHint('Sm Slider'),
     defaultValue: '50',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the small sizer style on both the Slider & Field',
+      'Assert the sm sizer style on both the Slider & Field',
       async () => {
-        expect(canvas.getByLabelText('Small Slider')).toHaveClass('h-5');
+        expect(canvas.getByLabelText('Sm Slider')).toHaveClass('h-5');
         expect(
-          canvas.getByText('Small Slider').parentNode?.parentNode,
+          canvas.getByText('Sm Slider').parentNode?.parentNode,
         ).toHaveClass('text-xs');
       },
     );
@@ -362,7 +362,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Slider.sizer.small, Slider.sizer.smBase, Slider.sizer.mdLarge],
+    sizer: [Slider.sizer.sm, Slider.sizer.smBase, Slider.sizer.mdLarge],
     ...withMetaHint('Responsive Slider'),
     defaultValue: '50',
     onChange: fn(),
@@ -386,7 +386,7 @@ export const AllSizers: Story = {
   render: (_args) => (
     <div className="flex flex-col items-center gap-5 sm:flex-row">
       <Slider {...Xs.args} className="sm:flex-1" />
-      <Slider {...Small.args} className="sm:flex-1" />
+      <Slider {...Sm.args} className="sm:flex-1" />
       <Slider {...Base.args} className="sm:flex-1" />
       <Slider {...Large.args} className="sm:flex-1" />
     </div>

@@ -19,7 +19,7 @@ export const fieldStyler = tv({
         hint: 'text-xs mt-1.5',
         error: 'text-xs mt-1.5',
       },
-      [Sizer.small]: {
+      [Sizer.sm]: {
         heading: 'mb-1.5',
         label: 'text-xs',
         hint: 'text-xs mt-1.5',

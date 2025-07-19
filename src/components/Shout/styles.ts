@@ -10,7 +10,7 @@ export const shoutStyler = tv({
   variants: {
     sizer: {
       [Sizer.xs]: 'text-sm px-3 py-2',
-      [Sizer.small]: 'text-sm px-3 py-2',
+      [Sizer.sm]: 'text-sm px-3 py-2',
       [Sizer.base]: 'text-base px-4 py-3',
       [Sizer.large]: 'text-lg px-5 py-4',
     },

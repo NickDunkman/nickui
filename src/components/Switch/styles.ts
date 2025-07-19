@@ -27,7 +27,7 @@ export const switchStyler = tv({
         indicator:
           'w-8 h-5 after:size-4 after:border-5 peer-checked:after:translate-x-3',
       },
-      [Sizer.small]: {
+      [Sizer.sm]: {
         root: 'min-h-5',
         indicator:
           'w-8 h-5 after:size-4 after:border-5 peer-checked:after:translate-x-3',

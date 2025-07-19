@@ -22,7 +22,7 @@ export const radioStyler = tv({
       [Sizer.xs]: {
         indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.5',
       },
-      [Sizer.small]: {
+      [Sizer.sm]: {
         indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.5',
       },
       [Sizer.base]: {
