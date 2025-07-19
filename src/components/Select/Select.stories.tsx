@@ -195,7 +195,7 @@ export const Lg: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the sm sizer style on both the Select & Field',
+      'Assert the lg sizer style on both the Select & Field',
       async () => {
         expect(canvas.getByLabelText('Lg label')).toHaveClass('text-lg');
         expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
@@ -204,8 +204,27 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Select.sizer.xl,
+    label: 'Xl label',
+    children: <option>Xl Select</option>,
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xl sizer style on both the Select & Field',
+      async () => {
+        expect(canvas.getByLabelText('Xl label')).toHaveClass('text-lg');
+        expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
+      },
+    );
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [Select.sizer.sm, Select.sizer.smBase, Select.sizer.mdLg],
     label: 'Responsive label',
@@ -233,6 +252,7 @@ export const AllSizers: Story = {
       <Select {...Sm.args} className="sm:flex-1" />
       <Select {...Base.args} className="sm:flex-1" />
       <Select {...Lg.args} className="sm:flex-1" />
+      <Select {...Xl.args} className="sm:flex-1" />
     </div>
   ),
 };

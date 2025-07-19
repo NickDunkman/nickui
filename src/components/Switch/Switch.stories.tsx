@@ -222,8 +222,23 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Switch.sizer.xl,
+    label: 'Xl Switch',
+    defaultChecked: true,
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the the xl sizer style', async () => {
+      expect(canvas.getByTestId('indicator')).toHaveClass('h-7');
+    });
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [Switch.sizer.sm, Switch.sizer.smBase, Switch.sizer.mdLg],
     label: 'Responsive Switch',
@@ -252,6 +267,7 @@ export const AllSizers: Story = {
       <Switch {...Sm.args} className="sm:flex-1" />
       <Switch {...Base.args} className="sm:flex-1" />
       <Switch {...Lg.args} className="sm:flex-1" />
+      <Switch {...Xl.args} className="sm:flex-1" />
     </div>
   ),
 };

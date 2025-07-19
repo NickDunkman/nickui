@@ -62,8 +62,18 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: CheckedField.sizer.xl,
+    children: <Docs.FormControlPlaceholder tiny />,
+    label: 'Xl label',
+    hint: 'Xl hint',
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [CheckedField.sizer.smBase, CheckedField.sizer.mdLg],
     children: <Docs.FormControlPlaceholder tiny />,
@@ -80,6 +90,7 @@ export const AllSizers: Story = {
       <CheckedField {...Sm.args} className="sm:flex-1" />
       <CheckedField {...Base.args} className="sm:flex-1" />
       <CheckedField {...Lg.args} className="sm:flex-1" />
+      <CheckedField {...Xl.args} className="sm:flex-1" />
     </div>
   ),
 };

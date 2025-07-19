@@ -30,6 +30,11 @@ export const checkedFieldStyler = tv({
         label: 'text-base',
         hint: 'text-sm',
       },
+      [Sizer.xl]: {
+        contentRoot: 'gap-3 text-base',
+        label: 'text-base',
+        hint: 'text-sm',
+      },
     },
     isDisabled: {
       true: {

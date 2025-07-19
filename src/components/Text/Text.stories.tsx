@@ -220,8 +220,27 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Text.sizer.xl,
+    label: 'Xl label',
+    placeholder: 'Xl Text',
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xl sizer style on both the Text & Field',
+      async () => {
+        expect(canvas.getByLabelText('Xl label')).toHaveClass('text-lg');
+        expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
+      },
+    );
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [Text.sizer.sm, Text.sizer.smBase, Text.sizer.mdLg],
     label: 'Responsive label',
@@ -250,6 +269,7 @@ export const AllSizers: Story = {
       <Text {...Sm.args} className="sm:flex-1" />
       <Text {...Base.args} className="sm:flex-1" />
       <Text {...Lg.args} className="sm:flex-1" />
+      <Text {...Xl.args} className="sm:flex-1" />
     </div>
   ),
 };

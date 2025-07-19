@@ -20,6 +20,9 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
     // size.
 
     if (breakpoint.isXlUp) {
+      if (asArray.includes(Sizer.xlXl)) {
+        return Sizer.xl;
+      }
       if (asArray.includes(Sizer.xlLg)) {
         return Sizer.lg;
       }
@@ -35,6 +38,9 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
     }
 
     if (breakpoint.isLgUp) {
+      if (asArray.includes(Sizer.lgXl)) {
+        return Sizer.xl;
+      }
       if (asArray.includes(Sizer.lgLg)) {
         return Sizer.lg;
       }
@@ -50,6 +56,9 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
     }
 
     if (breakpoint.isMdUp) {
+      if (asArray.includes(Sizer.mdXl)) {
+        return Sizer.xl;
+      }
       if (asArray.includes(Sizer.mdLg)) {
         return Sizer.lg;
       }
@@ -65,6 +74,9 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
     }
 
     if (breakpoint.isSmUp) {
+      if (asArray.includes(Sizer.smXl)) {
+        return Sizer.xl;
+      }
       if (asArray.includes(Sizer.smLg)) {
         return Sizer.lg;
       }
@@ -79,6 +91,9 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       }
     }
 
+    if (asArray.includes(Sizer.xl)) {
+      return Sizer.xl;
+    }
     if (asArray.includes(Sizer.lg)) {
       return Sizer.lg;
     }

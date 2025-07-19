@@ -222,8 +222,23 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Checkbox.sizer.xl,
+    label: 'Xl Checkbox',
+    defaultChecked: true,
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the xl sizer style', async () => {
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-5');
+    });
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [Checkbox.sizer.sm, Checkbox.sizer.smBase, Checkbox.sizer.mdLg],
     label: 'Responsive Checkbox',
@@ -253,6 +268,7 @@ export const AllSizers: Story = {
       <Checkbox {...Sm.args} className="sm:flex-1" />
       <Checkbox {...Base.args} className="sm:flex-1" />
       <Checkbox {...Lg.args} className="sm:flex-1" />
+      <Checkbox {...Xl.args} className="sm:flex-1" />
     </div>
   ),
 };

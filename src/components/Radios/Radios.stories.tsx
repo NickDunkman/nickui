@@ -436,8 +436,39 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Radios.sizer.xl,
+    label: 'Xl label',
+    hint: 'Xl hint',
+    options: [
+      {
+        value: 'one',
+        label: 'Option one',
+      },
+      {
+        value: 'two',
+        label: 'Option two',
+      },
+    ],
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xl sizer style of both the Radios & Fieldset',
+      async () => {
+        canvas.getAllByTestId('indicator').forEach((indicator) => {
+          expect(indicator).toHaveClass('size-5');
+        });
+        expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
+      },
+    );
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [Radios.sizer.sm, Radios.sizer.smBase, Radios.sizer.mdLg],
     label: 'Responsive label',
@@ -476,6 +507,7 @@ export const AllSizers: Story = {
       <Radios {...Sm.args} className="sm:flex-1" />
       <Radios {...Base.args} className="sm:flex-1" />
       <Radios {...Lg.args} className="sm:flex-1" />
+      <Radios {...Xl.args} className="sm:flex-1" />
     </div>
   ),
 };

@@ -46,6 +46,10 @@ export const selectStyler = tv({
         select: 'text-lg py-3.5 pl-4.5 pr-12',
         root: `after:w-[12px] after:h-[23px] after:right-4.5 ${arrowIcons.lg}`,
       },
+      [Sizer.xl]: {
+        select: 'text-lg py-3.5 pl-4.5 pr-12',
+        root: `after:w-[12px] after:h-[23px] after:right-4.5 ${arrowIcons.lg}`,
+      },
     },
     hasError: {
       true: {

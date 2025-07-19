@@ -33,6 +33,9 @@ export const checkboxStyler = tv({
       [Sizer.lg]: {
         indicator: 'size-5 top-0.75 bg-size-[13px_13px] bg-white',
       },
+      [Sizer.xl]: {
+        indicator: 'size-5 top-0.75 bg-size-[13px_13px] bg-white',
+      },
     },
     isDisabled: {
       true: {

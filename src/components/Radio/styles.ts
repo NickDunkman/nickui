@@ -31,6 +31,9 @@ export const radioStyler = tv({
       [Sizer.lg]: {
         indicator: 'size-5 top-0.75 peer-checked:after:size-2',
       },
+      [Sizer.xl]: {
+        indicator: 'size-5 top-0.75 peer-checked:after:size-2',
+      },
     },
     isDisabled: {
       true: {

@@ -222,8 +222,27 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Textarea.sizer.xl,
+    label: 'Xl label',
+    placeholder: 'Xl Textarea',
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xl sizer style on both the Textarea & Field',
+      async () => {
+        expect(canvas.getByLabelText('Xl label')).toHaveClass('text-lg');
+        expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
+      },
+    );
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [Textarea.sizer.sm, Textarea.sizer.smBase, Textarea.sizer.mdLg],
     label: 'Responsive label',
@@ -375,6 +394,7 @@ export const AllSizers: Story = {
       <Textarea {...Sm.args} />
       <Textarea {...Base.args} />
       <Textarea {...Lg.args} />
+      <Textarea {...Xl.args} />
     </div>
   ),
 };

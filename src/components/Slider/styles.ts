@@ -57,6 +57,15 @@ export const sliderStyler = tv({
         `,
         thumb: 'size-7',
       },
+      [Sizer.xl]: {
+        root: 'h-7', // same aggregate height as lg Text
+        track: `
+          h-2 left-3.5 right-3.5
+          before:w-3.5 before:-left-3.5
+          after:w-3.5 after:-right-3.5
+        `,
+        thumb: 'size-7',
+      },
     },
     isKeyboardFocused: {
       true: {
@@ -119,6 +128,11 @@ export const sliderStyler = tv({
       className: { root: 'mt-4' },
     },
     {
+      hasFieldHeader: true,
+      sizer: Sizer.xl,
+      className: { root: 'mt-4' },
+    },
+    {
       hasFieldFooter: true,
       sizer: Sizer.xs,
       className: { root: 'mb-2' },
@@ -136,6 +150,11 @@ export const sliderStyler = tv({
     {
       hasFieldFooter: true,
       sizer: Sizer.lg,
+      className: { root: 'mb-4' },
+    },
+    {
+      hasFieldFooter: true,
+      sizer: Sizer.xl,
       className: { root: 'mb-4' },
     },
   ],

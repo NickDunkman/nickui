@@ -113,8 +113,22 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Button.sizer.xl,
+    children: 'Xl Button',
+    onClick: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the xl sizer style', async () => {
+      expect(canvas.getByRole('button')).toHaveClass('text-lg');
+    });
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [Button.sizer.sm, Button.sizer.smBase, Button.sizer.mdLg],
     children: 'Responsive Button',
@@ -130,6 +144,7 @@ export const AllSizers: Story = {
       <Button {...Sm.args} />
       <Button {...Base.args} />
       <Button {...Lg.args} />
+      <Button {...Xl.args} />
     </div>
   ),
 };

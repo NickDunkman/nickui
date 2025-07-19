@@ -20,6 +20,7 @@ export const buttonStyler = tv({
       [Sizer.sm]: 'text-sm py-1.75 px-3',
       [Sizer.base]: 'text-base py-2.75 px-4.5',
       [Sizer.lg]: 'text-lg py-3.75 px-5.5',
+      [Sizer.xl]: 'text-lg py-3.75 px-5.5',
     },
     isDisabled: {
       false: `

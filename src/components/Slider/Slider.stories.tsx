@@ -359,8 +359,29 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Slider.sizer.xl,
+    ...withMetaHint('Xl Slider'),
+    defaultValue: '50',
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xl sizer style on both the Slider & Field',
+      async () => {
+        expect(canvas.getByLabelText('Xl Slider')).toHaveClass('h-7');
+        expect(
+          canvas.getByText('Xl Slider').parentNode?.parentNode,
+        ).toHaveClass('text-sm');
+      },
+    );
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [Slider.sizer.sm, Slider.sizer.smBase, Slider.sizer.mdLg],
     ...withMetaHint('Responsive Slider'),
@@ -389,6 +410,7 @@ export const AllSizers: Story = {
       <Slider {...Sm.args} className="sm:flex-1" />
       <Slider {...Base.args} className="sm:flex-1" />
       <Slider {...Lg.args} className="sm:flex-1" />
+      <Slider {...Xl.args} className="sm:flex-1" />
     </div>
   ),
 };

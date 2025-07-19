@@ -42,6 +42,13 @@ export const fieldsetStyler = tv({
         hint: 'text-sm',
         error: 'text-base',
       },
+      [Sizer.xl]: {
+        legend: 'mb-3.5',
+        label: 'text-lg',
+        footer: 'mt-3.5 gap-2',
+        hint: 'text-sm',
+        error: 'text-base',
+      },
     },
   },
   defaultVariants: {

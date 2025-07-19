@@ -404,7 +404,7 @@ export const Lg: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the laerge style of both the Switches & Fieldset',
+      'Assert the lg style of both the Switches & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('h-7');
@@ -415,8 +415,39 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Switches.sizer.xl,
+    label: 'Xl label',
+    hint: 'Xl hint',
+    options: [
+      {
+        value: 'one',
+        label: 'Option one',
+      },
+      {
+        value: 'two',
+        label: 'Option two',
+      },
+    ],
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xl style of both the Switches & Fieldset',
+      async () => {
+        canvas.getAllByTestId('indicator').forEach((indicator) => {
+          expect(indicator).toHaveClass('h-7');
+        });
+        expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
+      },
+    );
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [Switches.sizer.sm, Switches.sizer.smBase, Switches.sizer.mdLg],
     label: 'Responsive label',
@@ -455,6 +486,7 @@ export const AllSizers: Story = {
       <Switches {...Sm.args} className="sm:flex-1" />
       <Switches {...Base.args} className="sm:flex-1" />
       <Switches {...Lg.args} className="sm:flex-1" />
+      <Switches {...Xl.args} className="sm:flex-1" />
     </div>
   ),
 };

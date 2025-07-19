@@ -43,6 +43,11 @@ export const textareaStyler = tv({
       sizer: Sizer.lg,
       className: 'text-lg py-3.5 px-4.5',
     },
+    {
+      slots: ['textarea', 'hiddenTextarea'],
+      sizer: Sizer.xl,
+      className: 'text-lg py-3.5 px-4.5',
+    },
   ],
 
   variants: {
@@ -51,6 +56,7 @@ export const textareaStyler = tv({
       [Sizer.sm]: {},
       [Sizer.base]: {},
       [Sizer.lg]: {},
+      [Sizer.xl]: {},
     },
     hasError: {
       false: {},

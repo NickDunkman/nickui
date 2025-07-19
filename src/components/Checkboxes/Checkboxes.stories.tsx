@@ -399,7 +399,7 @@ export const Lg: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the laerge style of both the Checkboxes & Fieldset',
+      'Assert the lg style of both the Checkboxes & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-5');
@@ -410,8 +410,39 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    label: 'Xl label',
+    hint: 'Xl hint',
+    sizer: Checkboxes.sizer.xl,
+    options: [
+      {
+        value: 'one',
+        label: 'Option one',
+      },
+      {
+        value: 'two',
+        label: 'Option two',
+      },
+    ],
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xl style of both the Checkboxes & Fieldset',
+      async () => {
+        canvas.getAllByTestId('indicator').forEach((indicator) => {
+          expect(indicator).toHaveClass('size-5');
+        });
+        expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
+      },
+    );
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     label: 'Responsive label',
     hint: 'Responsive hint',
@@ -450,6 +481,7 @@ export const AllSizers: Story = {
       <Checkboxes {...Sm.args} className="sm:flex-1" />
       <Checkboxes {...Base.args} className="sm:flex-1" />
       <Checkboxes {...Lg.args} className="sm:flex-1" />
+      <Checkboxes {...Xl.args} className="sm:flex-1" />
     </div>
   ),
 };

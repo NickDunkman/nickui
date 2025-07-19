@@ -37,6 +37,12 @@ export const fieldStyler = tv({
         hint: 'text-sm mt-2',
         error: 'text-base mt-2',
       },
+      [Sizer.xl]: {
+        heading: 'mb-2',
+        label: 'text-lg',
+        hint: 'text-sm mt-2',
+        error: 'text-base mt-2',
+      },
     },
   },
   defaultVariants: {

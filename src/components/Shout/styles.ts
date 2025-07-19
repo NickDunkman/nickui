@@ -13,6 +13,7 @@ export const shoutStyler = tv({
       [Sizer.sm]: 'text-sm px-3 py-2',
       [Sizer.base]: 'text-base px-4 py-3',
       [Sizer.lg]: 'text-lg px-5 py-4',
+      [Sizer.xl]: 'text-lg px-5 py-4',
     },
     flavor: {
       [NoticeFlavor.info]: 'bg-blue-800 text-white',

@@ -87,8 +87,23 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Fieldset.sizer.xl,
+    children: [
+      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
+      <Docs.FormControlPlaceholder key="second" />,
+    ],
+    label: 'Xl label',
+    hint: 'Xl hint',
+    error: 'Xl error',
+    required: true,
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [Fieldset.sizer.sm, Fieldset.sizer.smBase, Fieldset.sizer.mdLg],
     children: [
@@ -100,18 +115,6 @@ export const Responsive: Story = {
     error: 'Responsive error',
     required: true,
   },
-};
-
-export const AllSizers: Story = {
-  tags: ['!dev', '!test'],
-  render: (_args) => (
-    <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
-      <Fieldset {...Xs.args} className="sm:flex-1" />
-      <Fieldset {...Sm.args} className="sm:flex-1" />
-      <Fieldset {...Base.args} className="sm:flex-1" />
-      <Fieldset {...Lg.args} className="sm:flex-1" />
-    </div>
-  ),
 };
 
 export const Error: Story = {
@@ -134,4 +137,17 @@ export const Required: Story = {
     label: 'Your name',
     required: true,
   },
+};
+
+export const AllSizers: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline">
+      <Fieldset {...Xs.args} className="sm:flex-1" />
+      <Fieldset {...Sm.args} className="sm:flex-1" />
+      <Fieldset {...Base.args} className="sm:flex-1" />
+      <Fieldset {...Lg.args} className="sm:flex-1" />
+      <Fieldset {...Xl.args} className="sm:flex-1" />
+    </div>
+  ),
 };

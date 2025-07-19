@@ -206,8 +206,23 @@ export const Lg: Story = {
   },
 };
 
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: Radio.sizer.xl,
+    label: 'Xl Radio',
+    defaultChecked: true,
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the xl sizer style', async () => {
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-5');
+    });
+  },
+};
+
 export const Responsive: Story = {
-  tags: ['!test', 'sizer'],
+  tags: ['sizer'],
   args: {
     sizer: [Radio.sizer.sm, Radio.sizer.smBase, Radio.sizer.mdLg],
     label: 'Responsive Radio',
@@ -237,6 +252,7 @@ export const AllSizers: Story = {
       <Radio {...Sm.args} className="sm:flex-1" />
       <Radio {...Base.args} className="sm:flex-1" />
       <Radio {...Lg.args} className="sm:flex-1" />
+      <Radio {...Xl.args} className="sm:flex-1" />
     </div>
   ),
 };
