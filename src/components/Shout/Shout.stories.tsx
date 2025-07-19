@@ -77,7 +77,7 @@ export const Xs: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the xs sizer style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('text-sm');
+      expect(canvas.getByRole('status')).toHaveClass('text-xs');
     });
   },
 };
@@ -133,7 +133,7 @@ export const Xl: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the xl sizer style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('text-lg');
+      expect(canvas.getByRole('status')).toHaveClass('text-xl');
     });
   },
 };
@@ -165,7 +165,7 @@ export const AllFlavors: Story = {
   ),
 };
 
-export const AllSizes: Story = {
+export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
