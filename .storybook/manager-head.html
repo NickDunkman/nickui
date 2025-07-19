@@ -4,3 +4,29 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="NickUI" />
 <link rel="manifest" href="./site.webmanifest" />
+
+<style type="text/css">
+  /* Add checkered-background to story background to show how components control the background */
+
+  #storybook-preview-iframe {
+    background: transparent;
+  }
+
+  #storybook-preview-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  #storybook-preview-wrapper:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background: url('./transparency-checker.png');
+    background-size: 30px 30px;
+    opacity: 0.025;
+  }
+</style>
