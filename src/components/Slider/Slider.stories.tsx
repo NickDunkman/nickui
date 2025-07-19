@@ -383,7 +383,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [Slider.sizer.sm, Slider.sizer.smBase, Slider.sizer.mdLg],
+    sizer: [
+      Slider.sizer.xs,
+      Slider.sizer.smSm,
+      Slider.sizer.mdBase,
+      Slider.sizer.lgLg,
+      Slider.sizer.xlXl,
+    ],
     ...withMetaHint('Responsive Slider'),
     defaultValue: '50',
     onChange: fn(),

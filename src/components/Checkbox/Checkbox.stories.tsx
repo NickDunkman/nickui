@@ -240,7 +240,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [Checkbox.sizer.sm, Checkbox.sizer.smBase, Checkbox.sizer.mdLg],
+    sizer: [
+      Checkbox.sizer.xs,
+      Checkbox.sizer.smSm,
+      Checkbox.sizer.mdBase,
+      Checkbox.sizer.lgLg,
+      Checkbox.sizer.xlXl,
+    ],
     label: 'Responsive Checkbox',
     defaultChecked: true,
     onChange: fn(),

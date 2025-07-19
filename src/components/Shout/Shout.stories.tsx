@@ -141,7 +141,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [Shout.sizer.sm, Shout.sizer.smBase, Shout.sizer.mdLg],
+    sizer: [
+      Shout.sizer.xs,
+      Shout.sizer.smSm,
+      Shout.sizer.mdBase,
+      Shout.sizer.lgLg,
+      Shout.sizer.xlXl,
+    ],
     children: 'Responsive Shout',
     role: 'status',
   },

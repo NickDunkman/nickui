@@ -87,7 +87,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [Field.sizer.sm, Field.sizer.smBase, Field.sizer.mdLg],
+    sizer: [
+      Field.sizer.xs,
+      Field.sizer.smSm,
+      Field.sizer.mdBase,
+      Field.sizer.lgLg,
+      Field.sizer.xlXl,
+    ],
     children: <Docs.FormControlPlaceholder />,
     label: 'Responsive label',
     hint: 'Responsive hint',

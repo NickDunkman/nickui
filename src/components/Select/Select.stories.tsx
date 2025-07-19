@@ -226,7 +226,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [Select.sizer.sm, Select.sizer.smBase, Select.sizer.mdLg],
+    sizer: [
+      Select.sizer.xs,
+      Select.sizer.smSm,
+      Select.sizer.mdBase,
+      Select.sizer.lgLg,
+      Select.sizer.xlXl,
+    ],
     label: 'Responsive label',
     children: <option>Responsive Select</option>,
     onChange: fn(),

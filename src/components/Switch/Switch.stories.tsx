@@ -240,7 +240,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [Switch.sizer.sm, Switch.sizer.smBase, Switch.sizer.mdLg],
+    sizer: [
+      Switch.sizer.xs,
+      Switch.sizer.smSm,
+      Switch.sizer.mdBase,
+      Switch.sizer.lgLg,
+      Switch.sizer.xlXl,
+    ],
     label: 'Responsive Switch',
     defaultChecked: true,
   },

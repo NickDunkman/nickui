@@ -224,7 +224,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [Radio.sizer.sm, Radio.sizer.smBase, Radio.sizer.mdLg],
+    sizer: [
+      Radio.sizer.xs,
+      Radio.sizer.smSm,
+      Radio.sizer.mdBase,
+      Radio.sizer.lgLg,
+      Radio.sizer.xlXl,
+    ],
     label: 'Responsive Radio',
     defaultChecked: true,
     onChange: fn(),

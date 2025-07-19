@@ -449,7 +449,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [Switches.sizer.sm, Switches.sizer.smBase, Switches.sizer.mdLg],
+    sizer: [
+      Switches.sizer.xs,
+      Switches.sizer.smSm,
+      Switches.sizer.mdBase,
+      Switches.sizer.lgLg,
+      Switches.sizer.xlXl,
+    ],
     label: 'Responsive label',
     hint: 'Responsive hint',
     options: [

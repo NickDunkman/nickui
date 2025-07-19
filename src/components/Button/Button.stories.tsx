@@ -130,7 +130,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [Button.sizer.sm, Button.sizer.smBase, Button.sizer.mdLg],
+    sizer: [
+      Button.sizer.xs,
+      Button.sizer.smSm,
+      Button.sizer.mdBase,
+      Button.sizer.lgLg,
+      Button.sizer.xlXl,
+    ],
     children: 'Responsive Button',
     onClick: fn(),
   },

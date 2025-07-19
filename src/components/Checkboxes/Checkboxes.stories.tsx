@@ -446,7 +446,13 @@ export const Responsive: Story = {
   args: {
     label: 'Responsive label',
     hint: 'Responsive hint',
-    sizer: [Checkbox.sizer.sm, Checkboxes.sizer.smBase, Checkboxes.sizer.mdLg],
+    sizer: [
+      Checkboxes.sizer.xs,
+      Checkboxes.sizer.smSm,
+      Checkboxes.sizer.mdBase,
+      Checkboxes.sizer.lgLg,
+      Checkboxes.sizer.xlXl,
+    ],
     options: [
       {
         value: 'one',

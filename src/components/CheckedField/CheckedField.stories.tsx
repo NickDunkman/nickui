@@ -75,7 +75,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [CheckedField.sizer.smBase, CheckedField.sizer.mdLg],
+    sizer: [
+      CheckedField.sizer.xs,
+      CheckedField.sizer.smSm,
+      CheckedField.sizer.mdBase,
+      CheckedField.sizer.lgLg,
+      CheckedField.sizer.xlXl,
+    ],
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Responsive label',
     hint: 'Responsive hint',

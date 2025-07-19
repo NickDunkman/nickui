@@ -105,7 +105,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [Fieldset.sizer.sm, Fieldset.sizer.smBase, Fieldset.sizer.mdLg],
+    sizer: [
+      Fieldset.sizer.xs,
+      Fieldset.sizer.smSm,
+      Fieldset.sizer.mdBase,
+      Fieldset.sizer.lgLg,
+      Fieldset.sizer.xlXl,
+    ],
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,

@@ -244,7 +244,13 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [Textarea.sizer.sm, Textarea.sizer.smBase, Textarea.sizer.mdLg],
+    sizer: [
+      Textarea.sizer.xs,
+      Textarea.sizer.smSm,
+      Textarea.sizer.mdBase,
+      Textarea.sizer.lgLg,
+      Textarea.sizer.xlXl,
+    ],
     label: 'Responsive label',
     placeholder: 'Responsive Text',
     onChange: fn(),
