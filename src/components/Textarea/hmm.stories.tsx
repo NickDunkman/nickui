@@ -5,7 +5,7 @@ import { expect, fn } from 'storybook/test';
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 import { fastType } from '@/utils/fastType';
 
-import { TextArea } from './TextArea';
+import { TextArea } from './hmm';
 
 const meta = {
   title: 'Form controls/TextArea',
