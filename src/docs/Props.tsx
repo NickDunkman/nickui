@@ -24,8 +24,9 @@ function ucFirst(str: string) {
 const alwaysExclude = ['onBlur', 'ref'];
 
 /**
- * Helper for easily documenting the props for a component, especially for
- * breaking out props from a wrapper component in a separate section.
+ * Custom doc block for showing a Component's props with some consistent
+ * language. Automatically breaks the wrapping field component's props into
+ * a separate table, when applicable.
  */
 export function Props({
   of,

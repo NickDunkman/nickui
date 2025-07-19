@@ -1,10 +1,19 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Markdown, Meta } from '@storybook/addon-docs/blocks';
+
+import docs from '@/docs';
 
 <Meta title="About this project" />
 
-# Welcome! 👋
+<div className="flex w-full items-baseline">
+  <div>
+    <Markdown># Welcome! 👋</Markdown>
+  </div>
+  <div style={{ marginLeft: 'auto' }}>
+    <docs.SourceLink />
+  </div>
+</div>
 
-<div className="max-w-[600px] text-base" style={{ fontSize: 16 }}>
+<div className="text-base" style={{ fontSize: 16 }}>
   <div>
     NickUI is a little component library I worked on after taking a gap year to
     start coding again and rebuild some confidence. Along the way, I explored

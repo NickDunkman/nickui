@@ -9,10 +9,8 @@ import { FormikDemo } from './FormikDemo';
 import { ReactHookFormDemo } from './ReactHookFormDemo';
 
 /**
- * Helper for easily demonstrating Formik compatibility within a component's
- * docs. Shows the working component + realtime-updating Formik context within
- * a FauxCanvas, and then a code snippet which shows how to integrate Formik
- * into the component.
+ * Custom doc block for demoing a form control's compatibility with
+ * compatibility with React Hook Form & Formik.
  */
 export function FormLibraryCompatibility({
   of,

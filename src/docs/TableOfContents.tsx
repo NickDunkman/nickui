@@ -1,6 +1,11 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import * as React from 'react';
 
+/**
+ * Custom doc block for rendering a table of contents on an mdx doc.
+ * Automatically parses out the <h2> headings on the doc and shows a link
+ * for each.
+ */
 export function TableOfContents() {
   const [sections, setSections] = React.useState<
     { id: string; title: string }[]

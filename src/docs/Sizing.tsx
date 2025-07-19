@@ -3,11 +3,7 @@ import * as React from 'react';
 
 import { StoriesModule } from '@/types';
 
-/**
- * Helper for easily documenting the props for a field component which uses
- * either Field or Fieldset. Renders the component-specific props in one table,
- * and the common field props in another table below.
- */
+/** Custom doc block for rendering a Component's "Standard sizing" section */
 export function Sizing({ of }: { of: StoriesModule }) {
   return (
     <>

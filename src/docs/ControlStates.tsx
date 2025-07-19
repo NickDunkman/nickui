@@ -3,9 +3,7 @@ import * as React from 'react';
 
 import { StoriesModule } from '@/types';
 
-/**
- * Helper for easily showing the "Control States" section in a component's docs
- */
+/** Custom doc block for rendering a Component's "Control States" section */
 export function ControlStates({
   of,
   valuable = false,

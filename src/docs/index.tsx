@@ -9,6 +9,7 @@ import { FormLibraryCompatibility } from './FormLibraryCompatibility';
 import { PrettyPrint } from './PrettyPrint';
 import { Props } from './Props';
 import { Sizing } from './Sizing';
+import { SourceLink } from './SourceLink';
 import { TableOfContents } from './TableOfContents';
 
 /**
@@ -45,4 +46,5 @@ Docs.FormLibraryCompatibility = FormLibraryCompatibility;
 Docs.PrettyPrint = PrettyPrint;
 Docs.Props = Props;
 Docs.Sizing = Sizing;
+Docs.SourceLink = SourceLink;
 Docs.TableOfContents = TableOfContents;

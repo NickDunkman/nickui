@@ -3,7 +3,11 @@ import * as React from 'react';
 
 import { getStoryId } from '@/utils/stories';
 
-/** Given a component name, renders a fancy-looking link to its docs */
+/**
+ * Custom doc block for rendering a consistent-looking Component name in the
+ * the docs. Becomes a link to that Component's docs if it's not the page you’re
+ * already on.
+ */
 export function ComponentName({ of }: { of: string }) {
   const docsId = getStoryId(of, 'Docs');
   const asLink = !window.location.href.includes(docsId);

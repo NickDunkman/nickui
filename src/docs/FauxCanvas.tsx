@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 /**
- * Displays children inside of a card that appears to be a Storybook <Canvas />,
- * without the "show code" feature. This is useful when you want to display
- * something in a doc without creating a story for it, which Canvas requires.
+ * Custom doc block for rendering what appears to be a standard Storybook
+ * <Canvas /> bock. This is useful for when you want to demo something without
+ * having to make a story for it. Does not support the "show code" feature.
  */
 export function FauxCanvas({ children }: { children?: React.ReactNode }) {
   // The checkered background is added in /.storybook/preview-head.html

@@ -1,11 +1,10 @@
-import { AnchorMdx, Markdown } from '@storybook/addon-docs/blocks';
+import { Markdown } from '@storybook/addon-docs/blocks';
 import * as React from 'react';
 
 import { ComponentName } from './ComponentName';
+import { SourceLink } from './SourceLink';
 
-/**
- * Helper for easily showing the "Control States" section in a component's docs
- */
+/** Custom doc block for rendering the heading of a Components mdx doc */
 export function ComponentHeading({ of }: { of: string }) {
   return (
     <div className="flex w-full items-baseline">
@@ -17,29 +16,8 @@ export function ComponentHeading({ of }: { of: string }) {
       <div style={{ marginLeft: 'auto' }}>
         <Markdown
           options={{ overrides: { SourceLink } }}
-        >{`<SourceLink of={${of}} />`}</Markdown>
+        >{`<SourceLink path="/tree/main/src/components/${of}" />`}</Markdown>
       </div>
     </div>
-  );
-}
-
-function SourceLink({
-  of,
-  ...props
-}: { of: string } & React.ComponentProps<typeof AnchorMdx>) {
-  return (
-    <AnchorMdx
-      {...props}
-      target="_blank"
-      href={`https://github.com/NickDunkman/nickui/tree/main/src/components/${of}`}
-    >
-      <img
-        className="relative -top-0.5 mr-2 inline"
-        src="./github-mark.svg"
-        width="20"
-        alt=""
-      />
-      Source code
-    </AnchorMdx>
   );
 }
