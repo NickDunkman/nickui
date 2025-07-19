@@ -125,6 +125,8 @@ export function Button({
         }
         onTouchCancel?.(event);
       }}
+      data-nickui-sizer={Array.isArray(sizer) ? sizer.join(',') : sizer}
+      data-nickui-resolved-sizer={resolvedSizer}
     />
   );
 }

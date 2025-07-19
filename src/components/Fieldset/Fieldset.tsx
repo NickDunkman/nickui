@@ -61,6 +61,8 @@ export function Fieldset({
         ariaErrorMessage,
       )}
       aria-invalid={!!(ariaInvalid || error)}
+      data-nickui-sizer={Array.isArray(sizer) ? sizer.join(',') : sizer}
+      data-nickui-resolved-sizer={resolvedSizer}
     >
       {label && (
         <legend id={legendId} className={styles.legend()}>

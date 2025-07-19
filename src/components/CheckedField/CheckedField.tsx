@@ -50,7 +50,12 @@ export function CheckedField({
   });
 
   return (
-    <label {...labelProps} className={clsw(styles.root(), className)}>
+    <label
+      {...labelProps}
+      className={clsw(styles.root(), className)}
+      data-nickui-sizer={Array.isArray(sizer) ? sizer.join(',') : sizer}
+      data-nickui-resolved-sizer={resolvedSizer}
+    >
       <div className={styles.contentRoot()}>
         <div className={styles.control()} ref={controlRef}>
           {formControl}

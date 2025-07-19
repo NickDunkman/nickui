@@ -46,7 +46,11 @@ export function Field({
   const styles = fieldStyler({ sizer: resolvedSizer });
 
   return (
-    <div {...otherDivProps}>
+    <div
+      {...otherDivProps}
+      data-nickui-sizer={Array.isArray(sizer) ? sizer.join(',') : sizer}
+      data-nickui-resolved-sizer={resolvedSizer}
+    >
       {label && (
         <label id={labelId} className={styles.heading()} htmlFor={controlId}>
           <div className={styles.label()}>

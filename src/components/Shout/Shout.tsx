@@ -25,7 +25,14 @@ interface ShoutProps extends React.ComponentProps<'div'> {
 export function Shout({ className, sizer, flavor, ...divProps }: ShoutProps) {
   const resolvedSizer = useResolvedSizer(sizer);
   const styles = shoutStyler({ sizer: resolvedSizer, flavor });
-  return <div {...divProps} className={clsw(styles, className)} />;
+  return (
+    <div
+      {...divProps}
+      className={clsw(styles, className)}
+      data-nickui-sizer={Array.isArray(sizer) ? sizer.join(',') : sizer}
+      data-nickui-resolved-sizer={resolvedSizer}
+    />
+  );
 }
 
 Shout.sizer = Sizer;
