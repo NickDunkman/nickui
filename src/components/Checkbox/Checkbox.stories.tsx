@@ -257,7 +257,6 @@ export const AllSizers: Story = {
       <Checkbox {...Small.args} className="sm:flex-1" />
       <Checkbox {...Base.args} className="sm:flex-1" />
       <Checkbox {...Large.args} className="sm:flex-1" />
-      <Checkbox {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

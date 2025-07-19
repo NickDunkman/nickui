@@ -11,17 +11,30 @@ export function Sizers({ of }: { of: StoriesModule }) {
         {`
 ## Standard sizing
 
-Sizing is done via the \`sizer\` prop. You can pass a single sizer as a string,
-or an array of sizers if you want different sizing at different breakpoints.
-
-- The standard sizes are \`"small"\`, \`"base"\` (the default), and \`"large"\`
-- You can also do Tailwind-style responsive sizing using prefixes: \`"sm:"\`, \`"md:"\`, \`"lg:"\`, and \`"xl:"\`.
-
-For example, \`sizer={["small", "sm:base", "md:large"]}\` will show the small size on screens smaller than the "sm" breakpoint, then the base size between the "sm" and "md" breakpoints, and then the large size above the "md" breakpoint.
+Sizing is done via the \`sizer\` prop & uses Tailwind terminology. The standard
+sizes are: \`"xs"\`, \`"sm"\`,\`"base"\`,\`"lg"\`, and \`"xl"\` (\`"base"\` is
+the default).
         `}
       </Markdown>
 
       {of.AllSizers && <Canvas of={of.AllSizers} />}
+
+      {of.Responsive && (
+        <>
+          <Markdown>
+            {`
+You can also do Tailwind-style responsive sizing using breakpoint prefixes. For
+example, \`sizer={['xs', 'md:base', 'xl:lg']}\` resolves to...
+
+- The \`"xs"\` size below the \`"md"\` breakpoint
+- The \`"base"\` size between the \`"md"\` and \'"xl"\` breakpoints
+- The \`"lg"\` size above the \`"xl"\` breakpoint
+        `}
+          </Markdown>
+
+          <Canvas of={of.Responsive} />
+        </>
+      )}
     </>
   );
 }

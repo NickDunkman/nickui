@@ -252,7 +252,6 @@ export const AllSizers: Story = {
       <Switch {...Small.args} className="sm:flex-1" />
       <Switch {...Base.args} className="sm:flex-1" />
       <Switch {...Large.args} className="sm:flex-1" />
-      <Switch {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

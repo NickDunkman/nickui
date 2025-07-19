@@ -233,10 +233,10 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline">
+      <Radio {...Xs.args} className="sm:flex-1" />
       <Radio {...Small.args} className="sm:flex-1" />
       <Radio {...Base.args} className="sm:flex-1" />
       <Radio {...Large.args} className="sm:flex-1" />
-      <Radio {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

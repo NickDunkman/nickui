@@ -80,7 +80,6 @@ export const AllSizers: Story = {
       <CheckedField {...Small.args} className="sm:flex-1" />
       <CheckedField {...Base.args} className="sm:flex-1" />
       <CheckedField {...Large.args} className="sm:flex-1" />
-      <CheckedField {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

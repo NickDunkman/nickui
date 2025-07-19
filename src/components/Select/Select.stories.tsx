@@ -233,7 +233,6 @@ export const AllSizers: Story = {
       <Select {...Small.args} className="sm:flex-1" />
       <Select {...Base.args} className="sm:flex-1" />
       <Select {...Large.args} className="sm:flex-1" />
-      <Select {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

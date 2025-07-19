@@ -389,7 +389,6 @@ export const AllSizers: Story = {
       <Slider {...Small.args} className="sm:flex-1" />
       <Slider {...Base.args} className="sm:flex-1" />
       <Slider {...Large.args} className="sm:flex-1" />
-      <Slider {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

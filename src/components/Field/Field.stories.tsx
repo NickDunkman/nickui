@@ -101,7 +101,6 @@ export const AllSizers: Story = {
       <Field {...Small.args} className="sm:flex-1" />
       <Field {...Base.args} className="sm:flex-1" />
       <Field {...Large.args} className="sm:flex-1" />
-      <Field {...Responsive.args} className="sm:flex-1" />
     </div>
   ),
 };

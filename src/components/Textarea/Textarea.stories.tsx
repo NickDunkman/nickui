@@ -379,7 +379,6 @@ export const AllSizers: Story = {
       <Textarea {...Small.args} />
       <Textarea {...Base.args} />
       <Textarea {...Large.args} />
-      <Textarea {...Responsive.args} />
     </div>
   ),
 };

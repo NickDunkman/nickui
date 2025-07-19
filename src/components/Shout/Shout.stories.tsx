@@ -149,10 +149,10 @@ export const AllSizes: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
+      <Shout {...Xs.args} />
       <Shout {...Small.args} />
       <Shout {...Base.args} />
       <Shout {...Large.args} />
-      <Shout {...Responsive.args} />
     </div>
   ),
 };

@@ -130,7 +130,6 @@ export const AllSizers: Story = {
       <Button {...Small.args} />
       <Button {...Base.args} />
       <Button {...Large.args} />
-      <Button {...Responsive.args} />
     </div>
   ),
 };
