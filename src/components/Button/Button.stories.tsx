@@ -66,7 +66,7 @@ export const Xs: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the xs sizer style', async () => {
-      expect(canvas.getByRole('button')).toHaveClass('text-sm');
+      expect(canvas.getByRole('button')).toHaveClass('text-xs');
     });
   },
 };
@@ -122,7 +122,7 @@ export const Xl: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the xl sizer style', async () => {
-      expect(canvas.getByRole('button')).toHaveClass('text-lg');
+      expect(canvas.getByRole('button')).toHaveClass('text-xl');
     });
   },
 };

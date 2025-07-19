@@ -16,11 +16,11 @@ export const buttonStyler = tv({
   `,
   variants: {
     sizer: {
-      [Sizer.xs]: 'text-sm py-1.75 px-3',
+      [Sizer.xs]: 'text-xs py-1.5 px-2.25',
       [Sizer.sm]: 'text-sm py-1.75 px-3',
       [Sizer.base]: 'text-base py-2.75 px-4.5',
       [Sizer.lg]: 'text-lg py-3.75 px-5.5',
-      [Sizer.xl]: 'text-lg py-3.75 px-5.5',
+      [Sizer.xl]: 'text-xl py-4.75 px-6.5',
     },
     isDisabled: {
       false: `
