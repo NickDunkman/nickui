@@ -14,11 +14,11 @@ export const textStyler = tv({
   `,
   variants: {
     sizer: {
-      [Sizer.xs]: 'text-sm py-1.5 px-2',
+      [Sizer.xs]: 'text-xs py-1.25 px-2',
       [Sizer.sm]: 'text-sm py-1.5 px-2',
       [Sizer.base]: 'text-base py-2.5 px-3.5',
       [Sizer.lg]: 'text-lg py-3.5 px-4.5',
-      [Sizer.xl]: 'text-lg py-3.5 px-4.5',
+      [Sizer.xl]: 'text-xl py-4.5 px-5.5',
     },
     hasError: {
       true: 'border-rose-800 focus:border-rose-800 focus:shadow-rose-300',
