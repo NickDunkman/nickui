@@ -4,12 +4,12 @@ import { expect, fn } from 'storybook/test';
 
 import { fastType } from '@/utils/fastType';
 
-import { Textarea } from './Textarea';
+import { TextArea } from './TextArea';
 
 const meta = {
-  title: 'Form controls/Textarea',
-  component: Textarea,
-} satisfies Meta<typeof Textarea>;
+  title: 'Form controls/TextArea',
+  component: TextArea,
+} satisfies Meta<typeof TextArea>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -44,12 +44,12 @@ export const FieldLayout: Story = {
 export const Empty: Story = {
   tags: ['control-state'],
   args: {
-    placeholder: 'Empty Textarea',
-    'aria-label': 'Empty Textarea',
+    placeholder: 'Empty TextArea',
+    'aria-label': 'Empty TextArea',
     onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
-    const textarea = canvas.getByLabelText('Empty Textarea');
+    const textarea = canvas.getByLabelText('Empty TextArea');
 
     await step(
       'Assert Text is functional without an initial value',
@@ -70,12 +70,12 @@ export const Empty: Story = {
 export const Controlled: Story = {
   tags: ['control-state'],
   args: {
-    value: 'Controlled Textarea',
-    'aria-label': 'Controlled Textarea',
+    value: 'Controlled TextArea',
+    'aria-label': 'Controlled TextArea',
     onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
-    const textarea = canvas.getByLabelText('Controlled Textarea');
+    const textarea = canvas.getByLabelText('Controlled TextArea');
 
     await step('Assert `value` works', async () => {
       expect(textarea).toHaveValue(args.value);
@@ -95,19 +95,19 @@ export const Controlled: Story = {
 export const Uncontrolled: Story = {
   tags: ['control-state'],
   args: {
-    defaultValue: 'Uncontrolled Textarea',
-    'aria-label': 'Uncontrolled Textarea',
+    defaultValue: 'Uncontrolled TextArea',
+    'aria-label': 'Uncontrolled TextArea',
     onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
-    const textarea = canvas.getByLabelText('Uncontrolled Textarea');
+    const textarea = canvas.getByLabelText('Uncontrolled TextArea');
 
     await step('Assert `defaultValue` works', async () => {
       expect(textarea).toHaveValue(args.defaultValue);
     });
 
     await step(
-      'Typing into the Textarea should amend the value, since it’s uncontrolled',
+      'Typing into the TextArea should amend the value, since it’s uncontrolled',
       async () => {
         await userEvent.type(textarea, 'a');
         expect(textarea).toHaveValue(`${args.defaultValue}a`);
@@ -125,13 +125,13 @@ export const Uncontrolled: Story = {
 export const Disabled: Story = {
   tags: ['control-state'],
   args: {
-    defaultValue: 'Disabled Textarea',
+    defaultValue: 'Disabled TextArea',
     disabled: true,
-    'aria-label': 'Disabled Textarea',
+    'aria-label': 'Disabled TextArea',
     onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
-    const textarea = canvas.getByLabelText('Disabled Textarea');
+    const textarea = canvas.getByLabelText('Disabled TextArea');
 
     await step('Assert disabled state', async () => {
       expect(textarea).toBeDisabled();
@@ -149,14 +149,14 @@ export const Disabled: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Textarea.sizer.xs,
+    sizer: TextArea.sizer.xs,
     label: 'Xs label',
-    placeholder: 'Xs Textarea',
+    placeholder: 'Xs TextArea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the xs sizer style on both the Textarea & Field',
+      'Assert the xs sizer style on both the TextArea & Field',
       async () => {
         expect(canvas.getByLabelText('Xs label')).toHaveClass('text-xs');
         expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
@@ -168,14 +168,14 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Textarea.sizer.sm,
+    sizer: TextArea.sizer.sm,
     label: 'Sm label',
-    placeholder: 'Sm Textarea',
+    placeholder: 'Sm TextArea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the sm sizer style on both the Textarea & Field',
+      'Assert the sm sizer style on both the TextArea & Field',
       async () => {
         expect(canvas.getByLabelText('Sm label')).toHaveClass('text-sm');
         expect(canvas.getByText('Sm label')).toHaveClass('text-xs');
@@ -187,14 +187,14 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Textarea.sizer.base,
+    sizer: TextArea.sizer.base,
     label: 'Base label',
-    placeholder: 'Base Textarea',
+    placeholder: 'Base TextArea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the base sizer style on both the Textarea & Field',
+      'Assert the base sizer style on both the TextArea & Field',
       async () => {
         expect(canvas.getByLabelText('Base label')).toHaveClass('text-base');
         expect(canvas.getByText('Base label')).toHaveClass('text-sm');
@@ -206,14 +206,14 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Textarea.sizer.lg,
+    sizer: TextArea.sizer.lg,
     label: 'Lg label',
-    placeholder: 'Lg Textarea',
+    placeholder: 'Lg TextArea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the lg sizer style on both the Textarea & Field',
+      'Assert the lg sizer style on both the TextArea & Field',
       async () => {
         expect(canvas.getByLabelText('Lg label')).toHaveClass('text-lg');
         expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
@@ -225,14 +225,14 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Textarea.sizer.xl,
+    sizer: TextArea.sizer.xl,
     label: 'Xl label',
-    placeholder: 'Xl Textarea',
+    placeholder: 'Xl TextArea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the xl sizer style on both the Textarea & Field',
+      'Assert the xl sizer style on both the TextArea & Field',
       async () => {
         expect(canvas.getByLabelText('Xl label')).toHaveClass('text-xl');
         expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
@@ -245,11 +245,11 @@ export const Responsive: Story = {
   tags: ['sizer'],
   args: {
     sizer: [
-      Textarea.sizer.xs,
-      Textarea.sizer.smSm,
-      Textarea.sizer.mdBase,
-      Textarea.sizer.lgLg,
-      Textarea.sizer.xlXl,
+      TextArea.sizer.xs,
+      TextArea.sizer.smSm,
+      TextArea.sizer.mdBase,
+      TextArea.sizer.lgLg,
+      TextArea.sizer.xlXl,
     ],
     label: 'Responsive label',
     placeholder: 'Responsive Text',
@@ -259,7 +259,7 @@ export const Responsive: Story = {
 
 export const AutoResizableHeight: Story = {
   args: {
-    'aria-label': 'Autoresizable Textarea',
+    'aria-label': 'Autoresizable TextArea',
     defaultValue:
       'In quis convallis felis. In efficitur aliquam lobortis. Curabitur venenatis ut justo vitae tincidunt. Morbi vel commodo sapien. Maecenas tincidunt, leo in maximus posuere, metus neque auctor elit, congue rutrum tellus tellus a magna. Ut leo est, auctor et purus non, pellentesque pellentesque libero. Quisque at maximus risus, mollis tempus justo. Donec venenatis quam ac risus auctor pellentesque. Aenean ex quam, facilisis at pharetra ut, sollicitudin et urna. Nullam bibendum nibh sed leo convallis, eu vestibulum purus gravida. Fusce elementum nulla in ornare bibendum. In euismod diam ut nisl tristique, in ornare turpis tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer finibus mauris risus, quis aliquet dolor vehicula ut. Suspendisse id dolor felis.',
     lang: 'la',
@@ -268,7 +268,7 @@ export const AutoResizableHeight: Story = {
     onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
-    const textarea = canvas.getByLabelText('Autoresizable Textarea');
+    const textarea = canvas.getByLabelText('Autoresizable TextArea');
 
     function getCurrentRows() {
       return parseInt(textarea.getAttribute('rows') || '0');
@@ -311,7 +311,7 @@ Proin et fringilla enim. Fusce id ultrices nisl. Fusce dignissim dolor et elemen
 
 export const FixedHeight: Story = {
   args: {
-    'aria-label': 'Fixed height Textarea',
+    'aria-label': 'Fixed height TextArea',
     defaultValue:
       'In quis convallis felis. In efficitur aliquam lobortis. Curabitur venenatis ut justo vitae tincidunt. Morbi vel commodo sapien. Maecenas tincidunt, leo in maximus posuere, metus neque auctor elit, congue rutrum tellus tellus a magna. Ut leo est, auctor et purus non, pellentesque pellentesque libero. Quisque at maximus risus, mollis tempus justo. Donec venenatis quam ac risus auctor pellentesque. Aenean ex quam, facilisis at pharetra ut, sollicitudin et urna. Nullam bibendum nibh sed leo convallis, eu vestibulum purus gravida. Fusce elementum nulla in ornare bibendum. In euismod diam ut nisl tristique, in ornare turpis tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer finibus mauris risus, quis aliquet dolor vehicula ut. Suspendisse id dolor felis.',
     rows: 3,
@@ -321,7 +321,7 @@ export const FixedHeight: Story = {
     onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
-    const textarea = canvas.getByLabelText('Fixed height Textarea');
+    const textarea = canvas.getByLabelText('Fixed height TextArea');
 
     function getCurrentRows() {
       return parseInt(textarea.getAttribute('rows') || '0');
@@ -363,17 +363,17 @@ Proin et fringilla enim. Fusce id ultrices nisl. Fusce dignissim dolor et elemen
 
 export const DisableManualResize: Story = {
   args: {
-    'aria-label': 'Disabled manual resize Textarea',
-    defaultValue: 'This Textarea has no resize handle at the bottom right!',
+    'aria-label': 'Disabled manual resize TextArea',
+    defaultValue: 'This TextArea has no resize handle at the bottom right!',
     disableManualResize: true,
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'The Textarea should have the resize handle hidden',
+      'The TextArea should have the resize handle hidden',
       async () => {
         expect(
-          canvas.getByLabelText('Disabled manual resize Textarea'),
+          canvas.getByLabelText('Disabled manual resize TextArea'),
         ).toHaveClass('resize-none');
       },
     );
@@ -384,10 +384,10 @@ export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
-      <Textarea {...Empty.args} />
-      <Textarea {...Controlled.args} />
-      <Textarea {...Uncontrolled.args} />
-      <Textarea {...Disabled.args} />
+      <TextArea {...Empty.args} />
+      <TextArea {...Controlled.args} />
+      <TextArea {...Uncontrolled.args} />
+      <TextArea {...Disabled.args} />
     </div>
   ),
 };
@@ -396,11 +396,11 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
-      <Textarea {...Xs.args} />
-      <Textarea {...Sm.args} />
-      <Textarea {...Base.args} />
-      <Textarea {...Lg.args} />
-      <Textarea {...Xl.args} />
+      <TextArea {...Xs.args} />
+      <TextArea {...Sm.args} />
+      <TextArea {...Base.args} />
+      <TextArea {...Lg.args} />
+      <TextArea {...Xl.args} />
     </div>
   ),
 };

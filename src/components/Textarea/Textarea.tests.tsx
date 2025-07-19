@@ -1,11 +1,11 @@
-// Note: more tests are in story play functions in Textarea.stories.tsx
+// Note: more tests are in story play functions in TextArea.stories.tsx
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { useFormik } from 'formik';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Textarea } from './Textarea';
+import { TextArea } from './TextArea';
 
 function RHFTest() {
   const {
@@ -17,7 +17,7 @@ function RHFTest() {
   });
 
   return (
-    <Textarea
+    <TextArea
       label="Name"
       {...register('name', {
         validate: (value) => value !== 'erroneous value' || 'That’s erroneous',
@@ -42,7 +42,7 @@ function FormikTest() {
   });
 
   return (
-    <Textarea
+    <TextArea
       label="Name"
       {...form.getFieldProps('name')}
       error={form.errors.name}

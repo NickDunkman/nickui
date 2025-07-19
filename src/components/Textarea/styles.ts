@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants';
 
 import { Sizer } from '@/constants';
 
-/** tailwind-variants styles for the Textarea component */
+/** tailwind-variants styles for the TextArea component */
 export const textareaStyler = tv({
   slots: {
     root: 'relative',
@@ -13,38 +13,38 @@ export const textareaStyler = tv({
       focus:border-blue-800 focus:shadow-[0_0_11px] focus:shadow-blue-300 focus:outline-0
       disabled:bg-gray-100 disabled:border-gray-300 disabled:text-gray-400 disabled:placeholder:text-gray-300 disabled:cursor-not-allowed disabled:opacity-100
     `,
-    hiddenTextarea: 'invisible absolute -z-1 pointer-events-none select-none',
+    hiddenTextArea: 'invisible absolute -z-1 pointer-events-none select-none',
   },
   // Some of the styles applied to textarea should also be applied to
-  // hiddenTextarea, so that the height caculations on hiddenTextarea are
+  // hiddenTextArea, so that the height caculations on hiddenTextArea are
   // accurate
   compoundSlots: [
     {
-      slots: ['textarea', 'hiddenTextarea'],
+      slots: ['textarea', 'hiddenTextArea'],
       className: 'appearance-none w-full border-2',
     },
     {
-      slots: ['textarea', 'hiddenTextarea'],
+      slots: ['textarea', 'hiddenTextArea'],
       sizer: Sizer.xs,
       className: 'text-xs py-1.25 px-2',
     },
     {
-      slots: ['textarea', 'hiddenTextarea'],
+      slots: ['textarea', 'hiddenTextArea'],
       sizer: Sizer.sm,
       className: 'text-sm py-1.5 px-2',
     },
     {
-      slots: ['textarea', 'hiddenTextarea'],
+      slots: ['textarea', 'hiddenTextArea'],
       sizer: Sizer.base,
       className: 'text-base py-2.5 px-3.5',
     },
     {
-      slots: ['textarea', 'hiddenTextarea'],
+      slots: ['textarea', 'hiddenTextArea'],
       sizer: Sizer.lg,
       className: 'text-lg py-3.5 px-4.5',
     },
     {
-      slots: ['textarea', 'hiddenTextarea'],
+      slots: ['textarea', 'hiddenTextArea'],
       sizer: Sizer.xl,
       className: 'text-xl py-4.5 px-5.5',
     },

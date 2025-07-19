@@ -17,6 +17,14 @@ function ucFirst(str: string) {
   return str.substring(0, 1).toUpperCase() + str.substring(1);
 }
 
+function getInterfaceName(nativeBase: string) {
+  if (nativeBase === 'textarea') {
+    return 'HTMLTextAreaElement';
+  }
+
+  return `HTML${ucFirst(nativeBase)}Element)`;
+}
+
 /**
  * These props are weedsy -- they may need to be tinkered with in a component's
  * props, but they don't need to appear in the docs.
@@ -58,7 +66,7 @@ export function Props({
 
 In addition to some custom props, <ComponentName of="${componentName}" /> takes all
 the props that can be used with
-[HTML${ucFirst(nativeBase)}Element](https://react.dev/reference/react-dom/components/${allReactDocs.includes(nativeBase) ? nativeBase : 'common'}).
+[${getInterfaceName(nativeBase)}](https://react.dev/reference/react-dom/components/${allReactDocs.includes(nativeBase) ? nativeBase : 'common'}).
 You may be looking for these:
         `}
       </Markdown>

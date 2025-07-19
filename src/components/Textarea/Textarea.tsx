@@ -8,34 +8,34 @@ import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { textareaStyler } from './styles';
 
-interface TextareaProps extends React.ComponentProps<'textarea'> {
+interface TextAreaProps extends React.ComponentProps<'textarea'> {
   /**
-   * Sets the value of the Textarea when using it as a
+   * Sets the value of the TextArea when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/textarea#controlling-a-text-area-with-a-state-variable)
    */
   value?: string;
   /**
-   * Sets the value of the Textarea when using it as an uncontrolled component
+   * Sets the value of the TextArea when using it as an uncontrolled component
    */
   defaultValue?: string;
   /**
-   * Use this to set a fixed number of visible rows on the Textarea. Causes
+   * Use this to set a fixed number of visible rows on the TextArea. Causes
    * the `minRows` & `maxRows` props to be ignored.
    */
   rows?: number;
   /**
    * When the `rows` prop is not used, sets the minimum rows used by the
-   * auto-resizing Textarea as its value changes. Default is 2.
+   * auto-resizing TextArea as its value changes. Default is 2.
    */
   minRows?: number;
   /**
    * When the `rows` prop is not used, sets the maximum rows used by the
-   * auto-resizing Textarea as its value changes. Default is 10.
+   * auto-resizing TextArea as its value changes. Default is 10.
    */
   maxRows?: number;
   /** Set to `true` to remove the resize handle from the bottom right */
   disableManualResize?: boolean;
-  /** Called when the value of the Textarea changes */
+  /** Called when the value of the TextArea changes */
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   /**
    * A string that contains a brief hint to the user as to what information is
@@ -46,9 +46,9 @@ interface TextareaProps extends React.ComponentProps<'textarea'> {
 
 /**
  * A form control that allows users to enter & edit a mass of text
- * @param props {@link TextareaProps} + {@link CommonFieldProps}
+ * @param props {@link TextAreaProps} + {@link CommonFieldProps}
  */
-export function Textarea({
+export function TextArea({
   // Field props
   className,
   sizer,
@@ -57,7 +57,7 @@ export function Textarea({
   error,
   disabled,
   required,
-  // Textarea-specific props
+  // TextArea-specific props
   id: controlledId,
   defaultValue,
   value: controlledValue,
@@ -70,10 +70,10 @@ export function Textarea({
   'aria-errormessage': controlledAriaErrorMessage,
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <textarea>
-  ...otherTextareaProps
-}: TextareaProps & CommonFieldProps) {
+  ...otherTextAreaProps
+}: TextAreaProps & CommonFieldProps) {
   const containerRef = React.createRef<HTMLDivElement>();
-  const hiddenTextarea = React.useRef<HTMLTextAreaElement>(null);
+  const hiddenTextArea = React.useRef<HTMLTextAreaElement>(null);
   const [autoRows, setAutoRows] = React.useState<number>(0);
 
   const rows =
@@ -98,15 +98,15 @@ export function Textarea({
 
   // Compute the height to use when autoResize applies
   React.useLayoutEffect(() => {
-    if (hiddenTextarea.current) {
+    if (hiddenTextArea.current) {
       // Measure the number of rows of the hidden textarea with the new value
-      hiddenTextarea.current.value = value || '';
-      const computedStyle = getComputedStyle(hiddenTextarea.current);
+      hiddenTextArea.current.value = value || '';
+      const computedStyle = getComputedStyle(hiddenTextArea.current);
       const lineHeight = noPx(computedStyle.lineHeight);
       const yPadding =
         noPx(computedStyle.paddingTop) + noPx(computedStyle.paddingBottom);
       const newAutoRows = Math.ceil(
-        (hiddenTextarea.current.scrollHeight - yPadding) / lineHeight,
+        (hiddenTextArea.current.scrollHeight - yPadding) / lineHeight,
       );
 
       const newBoundedAutoRows =
@@ -129,9 +129,9 @@ export function Textarea({
   // for this component -- allowing the textarea to set its initial auto height.
   React.useLayoutEffect(() => {
     if (controlledValue === undefined && defaultValue === undefined) {
-      const interativeTextarea = getInteractiveTextarea(containerRef);
-      if (interativeTextarea.value) {
-        setUncontrolledValue(interativeTextarea.value);
+      const interativeTextArea = getInteractiveTextArea(containerRef);
+      if (interativeTextArea.value) {
+        setUncontrolledValue(interativeTextArea.value);
       }
     }
     // We only want to run this effect once after mount
@@ -177,8 +177,8 @@ export function Textarea({
           textarea should be if it wants to make the value fully visible.
         */}
         <textarea
-          ref={hiddenTextarea}
-          className={styles.hiddenTextarea()}
+          ref={hiddenTextArea}
+          className={styles.hiddenTextArea()}
           rows={minRows}
           disabled
           aria-hidden
@@ -186,7 +186,7 @@ export function Textarea({
 
         {/* This is the <textarea> the user sees & interacts with! */}
         <textarea
-          {...otherTextareaProps}
+          {...otherTextAreaProps}
           id={id}
           className={styles.textarea()}
           rows={rows}
@@ -203,14 +203,14 @@ export function Textarea({
   );
 }
 
-Textarea.sizer = Sizer;
+TextArea.sizer = Sizer;
 
 /** Converts a px string to a number (e.g. "20px" -> 20) */
 function noPx(px: string): number {
   return Number(px.slice(0, -2));
 }
 
-function getInteractiveTextarea(
+function getInteractiveTextArea(
   container: React.RefObject<HTMLElement | null>,
 ) {
   return [

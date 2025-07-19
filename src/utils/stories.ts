@@ -18,7 +18,7 @@ export function getStoryTitle(componentName: string) {
     case 'Switch':
     case 'Switches':
     case 'Text':
-    case 'Textarea':
+    case 'TextArea':
       return `Form controls/${componentName}`;
     case 'CheckedField':
     case 'Field':

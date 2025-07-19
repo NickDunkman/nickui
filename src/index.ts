@@ -8,7 +8,7 @@ export { Slider } from '@/components/Slider';
 export { Switch } from '@/components/Switch';
 export { Switches } from '@/components/Switches';
 export { Text } from '@/components/Text';
-export { Textarea } from '@/components/Textarea';
+export { TextArea } from '@/components/TextArea';
 
 export { CheckedField } from '@/components/CheckedField';
 export { Field } from '@/components/Field';
