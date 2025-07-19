@@ -28,7 +28,7 @@ export function FormLibraryCompatibility({
   componentProps?: object;
 }) {
   const componentName = of.default.title.split('/').pop();
-  const [library, setLibrary] = React.useState('rhf');
+  const [library, setLibrary] = React.useState('React Hook Form');
 
   return (
     <>
@@ -43,35 +43,27 @@ props to be used with [React Hook Form](https://react-hook-form.com/) and
       </Markdown>
 
       <div className="sb-unstyled relative z-2 -mb-7 flex gap-2 rounded-t-sm bg-gray-200 p-3">
-        <Button
-          onClick={() => {
-            setLibrary('rhf');
-          }}
-          flavor={
-            library === 'rhf' ? Button.flavor.primary : Button.flavor.secondary
-          }
-        >
-          React Hook Form
-        </Button>
-        <Button
-          onClick={() => {
-            setLibrary('formik');
-          }}
-          flavor={
-            library === 'formik'
-              ? Button.flavor.primary
-              : Button.flavor.secondary
-          }
-        >
-          Formik
-        </Button>
+        {['React Hook Form', 'Formik'].map((lib) => (
+          <Button
+            key={lib}
+            sizer={Button.sizer.small}
+            onClick={() => {
+              setLibrary(lib);
+            }}
+            flavor={
+              library === lib ? Button.flavor.primary : Button.flavor.secondary
+            }
+          >
+            {lib}
+          </Button>
+        ))}
         <div className="ml-auto">
           <span className="relative -top-4 -mt-2 mr-3 blur-[0.5px]">⛳️</span>
           <span className="text-3xl">🏌️‍♂️</span>
         </div>
       </div>
 
-      {library === 'rhf' && (
+      {library === 'React Hook Form' && (
         <ReactHookFormDemo
           of={of}
           fieldName={fieldName}
@@ -82,7 +74,7 @@ props to be used with [React Hook Form](https://react-hook-form.com/) and
         />
       )}
 
-      {library === 'formik' && (
+      {library === 'Formik' && (
         <FormikDemo
           of={of}
           fieldName={fieldName}
