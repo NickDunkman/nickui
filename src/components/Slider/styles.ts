@@ -48,8 +48,8 @@ export const sliderStyler = tv({
         `,
         thumb: 'size-6',
       },
-      [Sizer.large]: {
-        root: 'h-7', // same aggregate height as large Text
+      [Sizer.lg]: {
+        root: 'h-7', // same aggregate height as lg Text
         track: `
           h-2 left-3.5 right-3.5
           before:w-3.5 before:-left-3.5
@@ -115,7 +115,7 @@ export const sliderStyler = tv({
     },
     {
       hasFieldHeader: true,
-      sizer: Sizer.large,
+      sizer: Sizer.lg,
       className: { root: 'mt-4' },
     },
     {
@@ -135,7 +135,7 @@ export const sliderStyler = tv({
     },
     {
       hasFieldFooter: true,
-      sizer: Sizer.large,
+      sizer: Sizer.lg,
       className: { root: 'mb-4' },
     },
   ],

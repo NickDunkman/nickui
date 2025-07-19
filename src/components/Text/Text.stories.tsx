@@ -201,20 +201,20 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Text.sizer.large,
-    label: 'Large label',
-    placeholder: 'Large Text',
+    sizer: Text.sizer.lg,
+    label: 'Lg label',
+    placeholder: 'Lg Text',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the large sizer style on both the Text & Field',
+      'Assert the lg sizer style on both the Text & Field',
       async () => {
-        expect(canvas.getByLabelText('Large label')).toHaveClass('text-lg');
-        expect(canvas.getByText('Large label')).toHaveClass('text-lg');
+        expect(canvas.getByLabelText('Lg label')).toHaveClass('text-lg');
+        expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
       },
     );
   },
@@ -223,7 +223,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Text.sizer.sm, Text.sizer.smBase, Text.sizer.mdLarge],
+    sizer: [Text.sizer.sm, Text.sizer.smBase, Text.sizer.mdLg],
     label: 'Responsive label',
     placeholder: 'Responsive Text',
     onChange: fn(),
@@ -249,7 +249,7 @@ export const AllSizers: Story = {
       <Text {...Xs.args} className="sm:flex-1" />
       <Text {...Sm.args} className="sm:flex-1" />
       <Text {...Base.args} className="sm:flex-1" />
-      <Text {...Large.args} className="sm:flex-1" />
+      <Text {...Lg.args} className="sm:flex-1" />
     </div>
   ),
 };

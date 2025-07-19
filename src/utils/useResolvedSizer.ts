@@ -20,8 +20,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
     // size.
 
     if (breakpoint.isXlUp) {
-      if (asArray.includes(Sizer.xlLarge)) {
-        return Sizer.large;
+      if (asArray.includes(Sizer.xlLg)) {
+        return Sizer.lg;
       }
       if (asArray.includes(Sizer.xlBase)) {
         return Sizer.base;
@@ -35,8 +35,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
     }
 
     if (breakpoint.isLgUp) {
-      if (asArray.includes(Sizer.lgLarge)) {
-        return Sizer.large;
+      if (asArray.includes(Sizer.lgLg)) {
+        return Sizer.lg;
       }
       if (asArray.includes(Sizer.lgBase)) {
         return Sizer.base;
@@ -50,8 +50,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
     }
 
     if (breakpoint.isMdUp) {
-      if (asArray.includes(Sizer.mdLarge)) {
-        return Sizer.large;
+      if (asArray.includes(Sizer.mdLg)) {
+        return Sizer.lg;
       }
       if (asArray.includes(Sizer.mdBase)) {
         return Sizer.base;
@@ -65,8 +65,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
     }
 
     if (breakpoint.isSmUp) {
-      if (asArray.includes(Sizer.smLarge)) {
-        return Sizer.large;
+      if (asArray.includes(Sizer.smLg)) {
+        return Sizer.lg;
       }
       if (asArray.includes(Sizer.smBase)) {
         return Sizer.base;
@@ -79,8 +79,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
       }
     }
 
-    if (asArray.includes(Sizer.large)) {
-      return Sizer.large;
+    if (asArray.includes(Sizer.lg)) {
+      return Sizer.lg;
     }
     if (asArray.includes(Sizer.base)) {
       return Sizer.base;

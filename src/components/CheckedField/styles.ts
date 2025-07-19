@@ -25,7 +25,7 @@ export const checkedFieldStyler = tv({
         label: 'text-sm',
         hint: 'text-xs',
       },
-      [Sizer.large]: {
+      [Sizer.lg]: {
         contentRoot: 'gap-3 text-base',
         label: 'text-base',
         hint: 'text-sm',

@@ -5,27 +5,27 @@ export enum Sizer {
   xs = 'xs',
   sm = 'sm',
   base = 'base',
-  large = 'large',
+  lg = 'lg',
 
   smXs = 'sm:xs',
   smSm = 'sm:sm',
   smBase = 'sm:base',
-  smLarge = 'sm:large',
+  smLg = 'sm:lg',
 
   mdXs = 'md:xs',
   mdSm = 'md:sm',
   mdBase = 'md:base',
-  mdLarge = 'md:large',
+  mdLg = 'md:lg',
 
   lgXs = 'lg:xs',
   lgSm = 'lg:sm',
   lgBase = 'lg:base',
-  lgLarge = 'lg:large',
+  lgLg = 'lg:lg',
 
   xlXs = 'xl:xs',
   xlSm = 'xl:sm',
   xlBase = 'xl:base',
-  xlLarge = 'xl:large',
+  xlLg = 'xl:lg',
 }
 
 export enum NoticeFlavor {

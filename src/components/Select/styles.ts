@@ -42,7 +42,7 @@ export const selectStyler = tv({
         select: 'text-base py-2.5 pl-3.5 pr-10',
         root: `after:w-[12px] after:h-[16px] after:right-3.75 ${arrowIcons.md}`,
       },
-      [Sizer.large]: {
+      [Sizer.lg]: {
         select: 'text-lg py-3.5 pl-4.5 pr-12',
         root: `after:w-[12px] after:h-[23px] after:right-4.5 ${arrowIcons.lg}`,
       },

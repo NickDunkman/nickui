@@ -60,14 +60,14 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Field.sizer.large,
+    sizer: Field.sizer.lg,
     children: <Docs.FormControlPlaceholder />,
-    label: 'Large label',
-    hint: 'Large hint',
-    error: 'Large error',
+    label: 'Lg label',
+    hint: 'Lg hint',
+    error: 'Lg error',
     required: true,
   },
 };
@@ -75,7 +75,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Field.sizer.sm, Field.sizer.smBase, Field.sizer.mdLarge],
+    sizer: [Field.sizer.sm, Field.sizer.smBase, Field.sizer.mdLg],
     children: <Docs.FormControlPlaceholder />,
     label: 'Responsive label',
     hint: 'Responsive hint',
@@ -100,7 +100,7 @@ export const AllSizers: Story = {
       <Field {...Xs.args} className="sm:flex-1" />
       <Field {...Sm.args} className="sm:flex-1" />
       <Field {...Base.args} className="sm:flex-1" />
-      <Field {...Large.args} className="sm:flex-1" />
+      <Field {...Lg.args} className="sm:flex-1" />
     </div>
   ),
 };

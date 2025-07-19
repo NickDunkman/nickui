@@ -72,17 +72,17 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Fieldset.sizer.large,
+    sizer: Fieldset.sizer.lg,
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,
     ],
-    label: 'Large label',
-    hint: 'Large hint',
-    error: 'Large error',
+    label: 'Lg label',
+    hint: 'Lg hint',
+    error: 'Lg error',
     required: true,
   },
 };
@@ -90,7 +90,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Fieldset.sizer.sm, Fieldset.sizer.smBase, Fieldset.sizer.mdLarge],
+    sizer: [Fieldset.sizer.sm, Fieldset.sizer.smBase, Fieldset.sizer.mdLg],
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,
@@ -109,7 +109,7 @@ export const AllSizers: Story = {
       <Fieldset {...Xs.args} className="sm:flex-1" />
       <Fieldset {...Sm.args} className="sm:flex-1" />
       <Fieldset {...Base.args} className="sm:flex-1" />
-      <Fieldset {...Large.args} className="sm:flex-1" />
+      <Fieldset {...Lg.args} className="sm:flex-1" />
     </div>
   ),
 };

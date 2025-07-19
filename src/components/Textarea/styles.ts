@@ -40,7 +40,7 @@ export const textareaStyler = tv({
     },
     {
       slots: ['textarea', 'hiddenTextarea'],
-      sizer: Sizer.large,
+      sizer: Sizer.lg,
       className: 'text-lg py-3.5 px-4.5',
     },
   ],
@@ -50,7 +50,7 @@ export const textareaStyler = tv({
       [Sizer.xs]: {},
       [Sizer.sm]: {},
       [Sizer.base]: {},
-      [Sizer.large]: {},
+      [Sizer.lg]: {},
     },
     hasError: {
       false: {},

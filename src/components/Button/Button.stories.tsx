@@ -99,15 +99,15 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Button.sizer.large,
-    children: 'Large Button',
+    sizer: Button.sizer.lg,
+    children: 'Lg Button',
     onClick: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the large sizer style', async () => {
+    await step('Assert the lg sizer style', async () => {
       expect(canvas.getByRole('button')).toHaveClass('text-lg');
     });
   },
@@ -116,7 +116,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Button.sizer.sm, Button.sizer.smBase, Button.sizer.mdLarge],
+    sizer: [Button.sizer.sm, Button.sizer.smBase, Button.sizer.mdLg],
     children: 'Responsive Button',
     onClick: fn(),
   },
@@ -129,7 +129,7 @@ export const AllSizers: Story = {
       <Button {...Xs.args} />
       <Button {...Sm.args} />
       <Button {...Base.args} />
-      <Button {...Large.args} />
+      <Button {...Lg.args} />
     </div>
   ),
 };

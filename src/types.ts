@@ -8,7 +8,10 @@ import { Sizer } from '@/constants';
 export type CommonFieldProps<ReactNode = React.ReactNode> = {
   /** Optionally add utility classes to the root element */
   className?: string;
-  /** Changes the size of the field ("sm", "base", "large") */
+  /**
+   * Changes the size of the field ("xs", "sm", "base", "lg", "xl", "sm:base",
+   * "lg:xl", etc)
+   */
   sizer?: Sizer | Sizer[];
   /** The main label to show above the form control, naming the field */
   label?: ReactNode;
@@ -35,8 +38,8 @@ export type CommonFieldsetProps = {
   /** Optionally add utility classes to the root element */
   className?: string;
   /**
-   * Changes the size of the field ("sm", "base", "large", "sm:sm",
-   * "md:large", etc)
+   * Changes the size of the fieldset ("xs", "sm", "base", "lg", "xl",
+   * "sm:base", "lg:xl", etc)
    */
   sizer?: Sizer | Sizer[];
   /** The main label to show above the form control, naming the field */
@@ -58,7 +61,10 @@ export type CommonFieldsetProps = {
 export type CommonCheckedFieldProps = {
   /** Optionally add utility classes to the root element */
   className?: string;
-  /** Changes the size of the field ("sm", "base", "large") */
+  /**
+   * Changes the size of the field ("xs", "sm", "base", "lg", "xl", "sm:base",
+   * "lg:xl", etc)
+   */
   sizer?: Sizer | Sizer[];
   /** The main label to to the right of the form control, naming the field */
   label?: React.ReactNode;

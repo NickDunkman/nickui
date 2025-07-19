@@ -110,15 +110,15 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Shout.sizer.large,
-    children: 'Large Shout',
+    sizer: Shout.sizer.lg,
+    children: 'Lg Shout',
     role: 'status',
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the large sizer style', async () => {
+    await step('Assert the lg sizer style', async () => {
       expect(canvas.getByRole('status')).toHaveClass('text-lg');
     });
   },
@@ -127,7 +127,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Shout.sizer.sm, Shout.sizer.smBase, Shout.sizer.mdLarge],
+    sizer: [Shout.sizer.sm, Shout.sizer.smBase, Shout.sizer.mdLg],
     children: 'Responsive Shout',
     role: 'status',
   },
@@ -152,7 +152,7 @@ export const AllSizes: Story = {
       <Shout {...Xs.args} />
       <Shout {...Sm.args} />
       <Shout {...Base.args} />
-      <Shout {...Large.args} />
+      <Shout {...Lg.args} />
     </div>
   ),
 };

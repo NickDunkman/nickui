@@ -52,20 +52,20 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: CheckedField.sizer.large,
+    sizer: CheckedField.sizer.lg,
     children: <Docs.FormControlPlaceholder tiny />,
-    label: 'Large label',
-    hint: 'Large hint',
+    label: 'Lg label',
+    hint: 'Lg hint',
   },
 };
 
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [CheckedField.sizer.smBase, CheckedField.sizer.mdLarge],
+    sizer: [CheckedField.sizer.smBase, CheckedField.sizer.mdLg],
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Responsive label',
     hint: 'Responsive hint',
@@ -79,7 +79,7 @@ export const AllSizers: Story = {
       <CheckedField {...Xs.args} className="sm:flex-1" />
       <CheckedField {...Sm.args} className="sm:flex-1" />
       <CheckedField {...Base.args} className="sm:flex-1" />
-      <CheckedField {...Large.args} className="sm:flex-1" />
+      <CheckedField {...Lg.args} className="sm:flex-1" />
     </div>
   ),
 };

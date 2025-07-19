@@ -203,20 +203,20 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Textarea.sizer.large,
-    label: 'Large label',
-    placeholder: 'Large Textarea',
+    sizer: Textarea.sizer.lg,
+    label: 'Lg label',
+    placeholder: 'Lg Textarea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the large sizer style on both the Textarea & Field',
+      'Assert the lg sizer style on both the Textarea & Field',
       async () => {
-        expect(canvas.getByLabelText('Large label')).toHaveClass('text-lg');
-        expect(canvas.getByText('Large label')).toHaveClass('text-lg');
+        expect(canvas.getByLabelText('Lg label')).toHaveClass('text-lg');
+        expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
       },
     );
   },
@@ -225,7 +225,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Textarea.sizer.sm, Textarea.sizer.smBase, Textarea.sizer.mdLarge],
+    sizer: [Textarea.sizer.sm, Textarea.sizer.smBase, Textarea.sizer.mdLg],
     label: 'Responsive label',
     placeholder: 'Responsive Text',
     onChange: fn(),
@@ -374,7 +374,7 @@ export const AllSizers: Story = {
       <Textarea {...Xs.args} />
       <Textarea {...Sm.args} />
       <Textarea {...Base.args} />
-      <Textarea {...Large.args} />
+      <Textarea {...Lg.args} />
     </div>
   ),
 };

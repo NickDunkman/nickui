@@ -263,7 +263,7 @@ export const CustomLayout: Story = {
         />
         <Switch
           {...checkbox({ value: 'embiggened' })}
-          sizer={Switch.sizer.large}
+          sizer={Switch.sizer.lg}
           label="Embiggened"
         />
         <label>
@@ -384,12 +384,12 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switches.sizer.large,
-    label: 'Large label',
-    hint: 'Large hint',
+    sizer: Switches.sizer.lg,
+    label: 'Lg label',
+    hint: 'Lg hint',
     options: [
       {
         value: 'one',
@@ -409,7 +409,7 @@ export const Large: Story = {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('h-7');
         });
-        expect(canvas.getByText('Large label')).toHaveClass('text-lg');
+        expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
       },
     );
   },
@@ -418,7 +418,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Switches.sizer.sm, Switches.sizer.smBase, Switches.sizer.mdLarge],
+    sizer: [Switches.sizer.sm, Switches.sizer.smBase, Switches.sizer.mdLg],
     label: 'Responsive label',
     hint: 'Responsive hint',
     options: [
@@ -454,7 +454,7 @@ export const AllSizers: Story = {
       <Switches {...Xs.args} className="sm:flex-1" />
       <Switches {...Sm.args} className="sm:flex-1" />
       <Switches {...Base.args} className="sm:flex-1" />
-      <Switches {...Large.args} className="sm:flex-1" />
+      <Switches {...Lg.args} className="sm:flex-1" />
     </div>
   ),
 };

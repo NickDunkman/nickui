@@ -191,16 +191,16 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radio.sizer.large,
-    label: 'Large Radio',
+    sizer: Radio.sizer.lg,
+    label: 'Lg Radio',
     defaultChecked: true,
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the large sizer style', async () => {
+    await step('Assert the lg sizer style', async () => {
       expect(canvas.getByTestId('indicator')).toHaveClass('size-5');
     });
   },
@@ -209,7 +209,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Radio.sizer.sm, Radio.sizer.smBase, Radio.sizer.mdLarge],
+    sizer: [Radio.sizer.sm, Radio.sizer.smBase, Radio.sizer.mdLg],
     label: 'Responsive Radio',
     defaultChecked: true,
     onChange: fn(),
@@ -236,7 +236,7 @@ export const AllSizers: Story = {
       <Radio {...Xs.args} className="sm:flex-1" />
       <Radio {...Sm.args} className="sm:flex-1" />
       <Radio {...Base.args} className="sm:flex-1" />
-      <Radio {...Large.args} className="sm:flex-1" />
+      <Radio {...Lg.args} className="sm:flex-1" />
     </div>
   ),
 };

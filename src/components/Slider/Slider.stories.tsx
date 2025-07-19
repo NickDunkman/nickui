@@ -338,21 +338,21 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Slider.sizer.large,
-    ...withMetaHint('Large Slider'),
+    sizer: Slider.sizer.lg,
+    ...withMetaHint('Lg Slider'),
     defaultValue: '50',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the large sizer style on both the Slider & Field',
+      'Assert the lg sizer style on both the Slider & Field',
       async () => {
-        expect(canvas.getByLabelText('Large Slider')).toHaveClass('h-7');
+        expect(canvas.getByLabelText('Lg Slider')).toHaveClass('h-7');
         expect(
-          canvas.getByText('Large Slider').parentNode?.parentNode,
+          canvas.getByText('Lg Slider').parentNode?.parentNode,
         ).toHaveClass('text-sm');
       },
     );
@@ -362,7 +362,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Slider.sizer.sm, Slider.sizer.smBase, Slider.sizer.mdLarge],
+    sizer: [Slider.sizer.sm, Slider.sizer.smBase, Slider.sizer.mdLg],
     ...withMetaHint('Responsive Slider'),
     defaultValue: '50',
     onChange: fn(),
@@ -388,7 +388,7 @@ export const AllSizers: Story = {
       <Slider {...Xs.args} className="sm:flex-1" />
       <Slider {...Sm.args} className="sm:flex-1" />
       <Slider {...Base.args} className="sm:flex-1" />
-      <Slider {...Large.args} className="sm:flex-1" />
+      <Slider {...Lg.args} className="sm:flex-1" />
     </div>
   ),
 };

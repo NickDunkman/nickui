@@ -263,7 +263,7 @@ export const CustomLayout: Story = {
         />
         <Checkbox
           {...checkbox({ value: 'embiggened' })}
-          sizer={Checkbox.sizer.large}
+          sizer={Checkbox.sizer.lg}
           label="Embiggened"
         />
         <label>
@@ -379,12 +379,12 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    label: 'Large label',
-    hint: 'Large hint',
-    sizer: Checkboxes.sizer.large,
+    label: 'Lg label',
+    hint: 'Lg hint',
+    sizer: Checkboxes.sizer.lg,
     options: [
       {
         value: 'one',
@@ -404,7 +404,7 @@ export const Large: Story = {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-5');
         });
-        expect(canvas.getByText('Large label')).toHaveClass('text-lg');
+        expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
       },
     );
   },
@@ -415,11 +415,7 @@ export const Responsive: Story = {
   args: {
     label: 'Responsive label',
     hint: 'Responsive hint',
-    sizer: [
-      Checkbox.sizer.sm,
-      Checkboxes.sizer.smBase,
-      Checkboxes.sizer.mdLarge,
-    ],
+    sizer: [Checkbox.sizer.sm, Checkboxes.sizer.smBase, Checkboxes.sizer.mdLg],
     options: [
       {
         value: 'one',
@@ -453,7 +449,7 @@ export const AllSizers: Story = {
       <Checkboxes {...Xs.args} className="sm:flex-1" />
       <Checkboxes {...Sm.args} className="sm:flex-1" />
       <Checkboxes {...Base.args} className="sm:flex-1" />
-      <Checkboxes {...Large.args} className="sm:flex-1" />
+      <Checkboxes {...Lg.args} className="sm:flex-1" />
     </div>
   ),
 };

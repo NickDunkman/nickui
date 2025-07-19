@@ -292,7 +292,7 @@ export const CustomLayout: Story = {
         <Radio
           {...radio({ value: 'too', disabled: true })}
           className="-rotate-30"
-          sizer={Radio.sizer.large}
+          sizer={Radio.sizer.lg}
           label="Too custom"
         />
       </div>
@@ -405,12 +405,12 @@ export const Base: Story = {
   },
 };
 
-export const Large: Story = {
+export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radios.sizer.large,
-    label: 'Large label',
-    hint: 'Large hint',
+    sizer: Radios.sizer.lg,
+    label: 'Lg label',
+    hint: 'Lg hint',
     options: [
       {
         value: 'one',
@@ -425,12 +425,12 @@ export const Large: Story = {
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the large sizer style of both the Radios & Fieldset',
+      'Assert the lg sizer style of both the Radios & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-5');
         });
-        expect(canvas.getByText('Large label')).toHaveClass('text-lg');
+        expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
       },
     );
   },
@@ -439,7 +439,7 @@ export const Large: Story = {
 export const Responsive: Story = {
   tags: ['!test', 'sizer'],
   args: {
-    sizer: [Radios.sizer.sm, Radios.sizer.smBase, Radios.sizer.mdLarge],
+    sizer: [Radios.sizer.sm, Radios.sizer.smBase, Radios.sizer.mdLg],
     label: 'Responsive label',
     hint: 'Responsive hint',
     options: [
@@ -475,7 +475,7 @@ export const AllSizers: Story = {
       <Radios {...Xs.args} className="sm:flex-1" />
       <Radios {...Sm.args} className="sm:flex-1" />
       <Radios {...Base.args} className="sm:flex-1" />
-      <Radios {...Large.args} className="sm:flex-1" />
+      <Radios {...Lg.args} className="sm:flex-1" />
     </div>
   ),
 };
