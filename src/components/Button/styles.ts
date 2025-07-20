@@ -7,6 +7,7 @@ import { ButtonFlavor } from './constants';
 /** tailwind-variants styles for the Button component */
 export const buttonStyler = tv({
   base: `
+    text-nowrap
     appearance-none
     border-1 rounded-sm
     text-center
