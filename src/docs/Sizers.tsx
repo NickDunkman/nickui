@@ -12,8 +12,7 @@ export function Sizers({ of }: { of: StoriesModule }) {
 ## ${of.Responsive ? 'Responsive sizing' : 'Sizing'}
 
 Sizing is done via the \`sizer\` prop & uses Tailwind terminology. The standard
-sizes are: \`"xs"\`, \`"sm"\`,\`"base"\`,\`"lg"\`, and \`"xl"\` (\`"base"\` is
-the default).
+sizes are: \`"xs"\`, \`"sm"\`,\`"base"\` (the default), \`"lg"\`, and \`"xl"\`.
         `}
       </Markdown>
 
