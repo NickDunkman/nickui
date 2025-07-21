@@ -8,8 +8,8 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
   const breakpoint = useBreakpoint();
 
   return React.useMemo(() => {
-    if (!breakpoint || !responsiveSizer) {
-      return undefined;
+    if (!responsiveSizer) {
+      return Sizer.base;
     }
 
     const asArray = Array.isArray(responsiveSizer)
