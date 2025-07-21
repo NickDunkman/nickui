@@ -141,7 +141,12 @@ export function Checkable({
         aria-describedby={ariaDescribedBy}
         {...inputProps}
       />
-      <div className={styles.indicator()} data-testid="indicator" />
+      <div
+        className={styles.indicator()}
+        data-testid="indicator"
+        // bg-position conflicts with bg-size in tailwind for some reason
+        style={{ backgroundPosition: '50% 60%' }}
+      />
     </CheckedField>
   );
 }
