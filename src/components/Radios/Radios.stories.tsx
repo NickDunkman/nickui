@@ -293,7 +293,7 @@ export const CustomLayout: Story = {
         <Radio
           {...radio({ value: 'too', disabled: true })}
           className="-rotate-30"
-          sizer={Radio.sizer.lg}
+          sizer="lg"
           label="Too custom"
         />
       </div>
@@ -316,7 +316,7 @@ export const CustomLayout: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radios.sizer.xs,
+    sizer: 'xs',
     label: 'Xs label',
     hint: 'Xs hint',
     options: [
@@ -347,7 +347,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radios.sizer.sm,
+    sizer: 'sm',
     label: 'Sm label',
     hint: 'Sm hint',
     options: [
@@ -378,7 +378,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radios.sizer.base,
+    sizer: 'base',
     label: 'Base label',
     hint: 'Base hint',
     options: [
@@ -409,7 +409,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radios.sizer.lg,
+    sizer: 'lg',
     label: 'Lg label',
     hint: 'Lg hint',
     options: [
@@ -440,7 +440,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radios.sizer.xl,
+    sizer: 'xl',
     label: 'Xl label',
     hint: 'Xl hint',
     options: [
@@ -471,13 +471,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      Radios.sizer.xs,
-      Radios.sizer.smSm,
-      Radios.sizer.mdBase,
-      Radios.sizer.lgLg,
-      Radios.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     label: 'Responsive label',
     hint: 'Responsive hint',
     options: [
@@ -509,7 +503,7 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper>
+    <AllSizersStoryWrapper alignBaseline>
       <Radios {...Xs.args} />
       <Radios {...Sm.args} />
       <Radios {...Base.args} />

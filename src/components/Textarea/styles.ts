@@ -1,7 +1,5 @@
 import { tv } from 'tailwind-variants';
 
-import { Sizer } from '@/constants';
-
 /** tailwind-variants styles for the TextArea component */
 export const textareaStyler = tv({
   slots: {
@@ -25,38 +23,38 @@ export const textareaStyler = tv({
     },
     {
       slots: ['textarea', 'hiddenTextArea'],
-      sizer: Sizer.xs,
+      sizer: 'xs',
       className: 'text-xs py-1.25 px-2',
     },
     {
       slots: ['textarea', 'hiddenTextArea'],
-      sizer: Sizer.sm,
+      sizer: 'sm',
       className: 'text-sm py-1.5 px-2',
     },
     {
       slots: ['textarea', 'hiddenTextArea'],
-      sizer: Sizer.base,
+      sizer: 'base',
       className: 'text-base py-2.5 px-3.5',
     },
     {
       slots: ['textarea', 'hiddenTextArea'],
-      sizer: Sizer.lg,
+      sizer: 'lg',
       className: 'text-lg py-3.5 px-4.5',
     },
     {
       slots: ['textarea', 'hiddenTextArea'],
-      sizer: Sizer.xl,
+      sizer: 'xl',
       className: 'text-xl py-4.5 px-5.5',
     },
   ],
 
   variants: {
     sizer: {
-      [Sizer.xs]: {},
-      [Sizer.sm]: {},
-      [Sizer.base]: {},
-      [Sizer.lg]: {},
-      [Sizer.xl]: {},
+      xs: {},
+      sm: {},
+      base: {},
+      lg: {},
+      xl: {},
     },
     hasError: {
       false: {},
@@ -72,7 +70,7 @@ export const textareaStyler = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.base,
+    sizer: 'base',
     hasError: false,
   },
 });

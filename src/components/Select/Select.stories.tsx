@@ -133,7 +133,7 @@ export const Disabled: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Select.sizer.xs,
+    sizer: 'xs',
     label: 'Xs label',
     children: <option>Xs Select</option>,
     onChange: fn(),
@@ -152,7 +152,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Select.sizer.sm,
+    sizer: 'sm',
     label: 'Sm label',
     children: <option>Sm Select</option>,
     onChange: fn(),
@@ -171,7 +171,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Select.sizer.base,
+    sizer: 'base',
     label: 'Base label',
     children: <option>Base Select</option>,
     onChange: fn(),
@@ -190,7 +190,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Select.sizer.lg,
+    sizer: 'lg',
     label: 'Lg label',
     children: <option>Lg Select</option>,
     onChange: fn(),
@@ -209,7 +209,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Select.sizer.xl,
+    sizer: 'xl',
     label: 'Xl label',
     children: <option>Xl Select</option>,
     onChange: fn(),
@@ -228,13 +228,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      Select.sizer.xs,
-      Select.sizer.smSm,
-      Select.sizer.mdBase,
-      Select.sizer.lgLg,
-      Select.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     label: 'Responsive label',
     children: <option>Responsive Select</option>,
     onChange: fn(),
@@ -255,7 +249,7 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper>
+    <AllSizersStoryWrapper alignBaseline>
       <Select {...Xs.args} />
       <Select {...Sm.args} />
       <Select {...Base.args} />

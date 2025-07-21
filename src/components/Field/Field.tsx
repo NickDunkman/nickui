@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { Sizer } from '@/constants';
 import { CommonFieldProps } from '@/types';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
@@ -80,5 +79,3 @@ export function Field({
     </div>
   );
 }
-
-Field.sizer = Sizer;

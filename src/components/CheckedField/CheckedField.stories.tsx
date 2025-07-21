@@ -26,7 +26,7 @@ export const Basic: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: CheckedField.sizer.xs,
+    sizer: 'xs',
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Xs label',
     hint: 'Xs hint',
@@ -36,7 +36,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: CheckedField.sizer.sm,
+    sizer: 'sm',
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Sm label',
     hint: 'Sm hint',
@@ -46,7 +46,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: CheckedField.sizer.base,
+    sizer: 'base',
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Base label',
     hint: 'Base hint',
@@ -56,7 +56,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: CheckedField.sizer.lg,
+    sizer: 'lg',
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Lg label',
     hint: 'Lg hint',
@@ -66,7 +66,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: CheckedField.sizer.xl,
+    sizer: 'xl',
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Xl label',
     hint: 'Xl hint',
@@ -76,13 +76,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      CheckedField.sizer.xs,
-      CheckedField.sizer.smSm,
-      CheckedField.sizer.mdBase,
-      CheckedField.sizer.lgLg,
-      CheckedField.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     children: <Docs.FormControlPlaceholder tiny />,
     label: 'Responsive label',
     hint: 'Responsive hint',
@@ -92,7 +86,7 @@ export const Responsive: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper>
+    <AllSizersStoryWrapper alignBaseline>
       <CheckedField {...Xs.args} />
       <CheckedField {...Sm.args} />
       <CheckedField {...Base.args} />

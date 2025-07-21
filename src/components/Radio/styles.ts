@@ -1,7 +1,5 @@
 import { tv } from 'tailwind-variants';
 
-import { Sizer } from '@/constants';
-
 /** tailwind-variants styles for the Radio component */
 export const radioStyler = tv({
   slots: {
@@ -19,19 +17,19 @@ export const radioStyler = tv({
   },
   variants: {
     sizer: {
-      [Sizer.xs]: {
+      xs: {
         indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.5',
       },
-      [Sizer.sm]: {
+      sm: {
         indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.5',
       },
-      [Sizer.base]: {
+      base: {
         indicator: 'size-4 top-0.75 peer-checked:after:size-1.5',
       },
-      [Sizer.lg]: {
+      lg: {
         indicator: 'size-5 top-0.75 peer-checked:after:size-2',
       },
-      [Sizer.xl]: {
+      xl: {
         indicator: 'size-5 top-0.75 peer-checked:after:size-2',
       },
     },
@@ -53,7 +51,7 @@ export const radioStyler = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.base,
+    sizer: 'base',
     isDisabled: false,
     isKeyboardFocused: false,
   },

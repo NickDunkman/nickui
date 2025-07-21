@@ -151,7 +151,7 @@ export const DisabledChecked: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radio.sizer.xs,
+    sizer: 'xs',
     label: 'Xs Radio',
     defaultChecked: true,
     onChange: fn(),
@@ -166,7 +166,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radio.sizer.sm,
+    sizer: 'sm',
     label: 'Sm Radio',
     defaultChecked: true,
     onChange: fn(),
@@ -181,7 +181,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radio.sizer.base,
+    sizer: 'base',
     label: 'Base Radio',
     defaultChecked: true,
     onChange: fn(),
@@ -196,7 +196,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radio.sizer.lg,
+    sizer: 'lg',
     label: 'Lg Radio',
     defaultChecked: true,
     onChange: fn(),
@@ -211,7 +211,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Radio.sizer.xl,
+    sizer: 'xl',
     label: 'Xl Radio',
     defaultChecked: true,
     onChange: fn(),
@@ -226,13 +226,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      Radio.sizer.xs,
-      Radio.sizer.smSm,
-      Radio.sizer.mdBase,
-      Radio.sizer.lgLg,
-      Radio.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     label: 'Responsive Radio',
     defaultChecked: true,
     onChange: fn(),
@@ -255,7 +249,7 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper>
+    <AllSizersStoryWrapper alignBaseline>
       <Radio {...Xs.args} />
       <Radio {...Sm.args} />
       <Radio {...Base.args} />

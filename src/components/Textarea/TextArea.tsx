@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { Sizer } from '@/constants';
 import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
@@ -202,8 +201,6 @@ export function TextArea({
     </Field>
   );
 }
-
-TextArea.sizer = Sizer;
 
 /** Converts a px string to a number (e.g. "20px" -> 20) */
 function noPx(px: string): number {

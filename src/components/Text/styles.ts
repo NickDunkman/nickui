@@ -1,7 +1,5 @@
 import { tv } from 'tailwind-variants';
 
-import { Sizer } from '@/constants';
-
 /** tailwind-variants styles for the Text component */
 export const textStyler = tv({
   base: `
@@ -14,18 +12,18 @@ export const textStyler = tv({
   `,
   variants: {
     sizer: {
-      [Sizer.xs]: 'text-xs py-1.25 px-2',
-      [Sizer.sm]: 'text-sm py-1.5 px-2',
-      [Sizer.base]: 'text-base py-2.5 px-3.5',
-      [Sizer.lg]: 'text-lg py-3.5 px-4.5',
-      [Sizer.xl]: 'text-xl py-4.5 px-5.5',
+      xs: 'text-xs py-1.25 px-2',
+      sm: 'text-sm py-1.5 px-2',
+      base: 'text-base py-2.5 px-3.5',
+      lg: 'text-lg py-3.5 px-4.5',
+      xl: 'text-xl py-4.5 px-5.5',
     },
     hasError: {
       true: 'border-rose-800 focus:border-rose-800 focus:shadow-rose-300',
     },
   },
   defaultVariants: {
-    sizer: Sizer.base,
+    sizer: 'base',
     hasError: false,
   },
 });

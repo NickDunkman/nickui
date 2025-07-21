@@ -264,7 +264,7 @@ export const CustomLayout: Story = {
         />
         <Switch
           {...checkbox({ value: 'embiggened' })}
-          sizer={Switch.sizer.lg}
+          sizer="lg"
           label="Embiggened"
         />
         <label>
@@ -295,7 +295,7 @@ export const CustomLayout: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switches.sizer.xs,
+    sizer: 'xs',
     label: 'Xs label',
     hint: 'Xs hint',
     options: [
@@ -326,7 +326,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switches.sizer.sm,
+    sizer: 'sm',
     label: 'Sm label',
     hint: 'Sm hint',
     options: [
@@ -357,7 +357,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switches.sizer.base,
+    sizer: 'base',
     label: 'Base label',
     hint: 'Base hint',
     options: [
@@ -388,7 +388,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switches.sizer.lg,
+    sizer: 'lg',
     label: 'Lg label',
     hint: 'Lg hint',
     options: [
@@ -419,7 +419,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switches.sizer.xl,
+    sizer: 'xl',
     label: 'Xl label',
     hint: 'Xl hint',
     options: [
@@ -450,13 +450,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      Switches.sizer.xs,
-      Switches.sizer.smSm,
-      Switches.sizer.mdBase,
-      Switches.sizer.lgLg,
-      Switches.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     label: 'Responsive label',
     hint: 'Responsive hint',
     options: [
@@ -488,7 +482,7 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper>
+    <AllSizersStoryWrapper alignBaseline>
       <Switches {...Xs.args} className="sm:flex-1" />
       <Switches {...Sm.args} className="sm:flex-1" />
       <Switches {...Base.args} className="sm:flex-1" />

@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Switch } from '@/components/Switch';
-import { Sizer } from '@/constants';
 import type { CommonFieldsetProps } from '@/types';
 
 import { Checkables, CheckablesProps } from '../Checkboxes/Checkboxes';
@@ -18,5 +17,3 @@ export function Switches({
     <Checkables {...otherProps} Checkable={Switch} delimiter={delimiter} />
   );
 }
-
-Switches.sizer = Sizer;

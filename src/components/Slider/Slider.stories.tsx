@@ -280,7 +280,7 @@ export const CustomRange: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Slider.sizer.xs,
+    sizer: 'xs',
     ...withMetaHint('Xs Slider'),
     defaultValue: '50',
     onChange: fn(),
@@ -301,7 +301,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Slider.sizer.sm,
+    sizer: 'sm',
     ...withMetaHint('Sm Slider'),
     defaultValue: '50',
     onChange: fn(),
@@ -322,7 +322,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Slider.sizer.base,
+    sizer: 'base',
     ...withMetaHint('Base Slider'),
     defaultValue: '50',
     onChange: fn(),
@@ -343,7 +343,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Slider.sizer.lg,
+    sizer: 'lg',
     ...withMetaHint('Lg Slider'),
     defaultValue: '50',
     onChange: fn(),
@@ -364,7 +364,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Slider.sizer.xl,
+    sizer: 'xl',
     ...withMetaHint('Xl Slider'),
     defaultValue: '50',
     onChange: fn(),
@@ -385,13 +385,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      Slider.sizer.xs,
-      Slider.sizer.smSm,
-      Slider.sizer.mdBase,
-      Slider.sizer.lgLg,
-      Slider.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     ...withMetaHint('Responsive Slider'),
     defaultValue: '50',
     onChange: fn(),
@@ -414,11 +408,11 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper>
-      <Slider {...Xs.args} />
-      <Slider {...Sm.args} />
-      <Slider {...Base.args} />
-      <Slider {...Lg.args} />
-      <Slider {...Xl.args} />
+      <Slider {...Xs.args} className="sm:flex-1" />
+      <Slider {...Sm.args} className="sm:flex-1" />
+      <Slider {...Base.args} className="sm:flex-1" />
+      <Slider {...Lg.args} className="sm:flex-1" />
+      <Slider {...Xl.args} className="sm:flex-1" />
     </AllSizersStoryWrapper>
   ),
 };

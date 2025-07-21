@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { Sizer } from '@/constants';
 import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
@@ -98,6 +97,7 @@ export function Text({
       <input
         {...otherInputProps}
         id={id}
+        style={{ paddingLeft: 0, paddingRight: 0 }}
         className={styles}
         disabled={disabled}
         required={required}
@@ -108,5 +108,3 @@ export function Text({
     </Field>
   );
 }
-
-Text.sizer = Sizer;

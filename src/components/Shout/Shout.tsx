@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import { NoticeFlavor, Sizer } from '@/constants';
+import { NoticeFlavor } from '@/constants';
+import { SizerType } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
@@ -12,7 +13,7 @@ interface ShoutProps extends React.ComponentProps<'div'> {
   /** Optionally add utility classes to the root element */
   className?: string;
   /** Changes the size of the Shout ("sm", "base", "lg") */
-  sizer?: Sizer | Sizer[];
+  sizer?: SizerType | SizerType[];
   /** Changes the color of the Shout ("info", "yep", "maybe", "nope") */
   flavor?: NoticeFlavor;
 }
@@ -35,5 +36,4 @@ export function Shout({ className, sizer, flavor, ...divProps }: ShoutProps) {
   );
 }
 
-Shout.sizer = Sizer;
 Shout.flavor = NoticeFlavor;

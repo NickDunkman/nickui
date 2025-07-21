@@ -167,7 +167,7 @@ export const DisabledChecked: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switch.sizer.xs,
+    sizer: 'xs',
     label: 'Xs Switch',
     defaultChecked: true,
     onChange: fn(),
@@ -182,7 +182,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switch.sizer.sm,
+    sizer: 'sm',
     label: 'Sm Switch',
     defaultChecked: true,
     onChange: fn(),
@@ -197,7 +197,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switch.sizer.base,
+    sizer: 'base',
     label: 'Base Switch',
     defaultChecked: true,
     onChange: fn(),
@@ -212,7 +212,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switch.sizer.lg,
+    sizer: 'lg',
     label: 'Lg Switch',
     defaultChecked: true,
     onChange: fn(),
@@ -227,7 +227,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Switch.sizer.xl,
+    sizer: 'xl',
     label: 'Xl Switch',
     defaultChecked: true,
     onChange: fn(),
@@ -242,13 +242,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      Switch.sizer.xs,
-      Switch.sizer.smSm,
-      Switch.sizer.mdBase,
-      Switch.sizer.lgLg,
-      Switch.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     label: 'Responsive Switch',
     defaultChecked: true,
   },
@@ -270,7 +264,7 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper>
+    <AllSizersStoryWrapper alignBaseline>
       <Switch {...Xs.args} />
       <Switch {...Sm.args} />
       <Switch {...Base.args} />

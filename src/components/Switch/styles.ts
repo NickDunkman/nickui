@@ -1,7 +1,5 @@
 import { tv } from 'tailwind-variants';
 
-import { Sizer } from '@/constants';
-
 /** tailwind-variants styles for the Switch component */
 export const switchStyler = tv({
   slots: {
@@ -22,27 +20,27 @@ export const switchStyler = tv({
   },
   variants: {
     sizer: {
-      [Sizer.xs]: {
+      xs: {
         root: 'min-h-5',
         indicator:
           'w-8 h-5 after:size-4 after:border-5 peer-checked:after:translate-x-3',
       },
-      [Sizer.sm]: {
+      sm: {
         root: 'min-h-5',
         indicator:
           'w-8 h-5 after:size-4 after:border-5 peer-checked:after:translate-x-3',
       },
-      [Sizer.base]: {
+      base: {
         root: 'min-h-6',
         indicator:
           'w-10 h-6 after:size-5 after:border-6 peer-checked:after:translate-x-4',
       },
-      [Sizer.lg]: {
+      lg: {
         root: 'min-h-7',
         indicator:
           'w-12 h-7 after:size-6 after:border-7 peer-checked:after:translate-x-5',
       },
-      [Sizer.xl]: {
+      xl: {
         root: 'min-h-7',
         indicator:
           'w-12 h-7 after:size-6 after:border-7 peer-checked:after:translate-x-5',
@@ -63,7 +61,7 @@ export const switchStyler = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.base,
+    sizer: 'base',
     isDisabled: false,
     isKeyboardFocused: false,
   },

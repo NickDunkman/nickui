@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { Sizer } from '@/constants';
 import { CommonFieldsetProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
@@ -99,5 +98,3 @@ export function Fieldset({
     </fieldset>
   );
 }
-
-Fieldset.sizer = Sizer;

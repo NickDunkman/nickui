@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Checkable } from '@/components/Checkbox';
-import { Sizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
 
 import { radioStyler } from './styles';
@@ -28,5 +27,3 @@ interface RadioProps extends Omit<React.ComponentProps<'input'>, 'type'> {
 export function Radio(props: RadioProps & CommonCheckedFieldProps) {
   return <Checkable {...props} type="radio" styler={radioStyler} />;
 }
-
-Radio.sizer = Sizer;

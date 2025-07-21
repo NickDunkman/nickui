@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { CheckedField } from '@/components/CheckedField';
-import { Sizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
@@ -31,8 +30,6 @@ interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
 export function Checkbox(props: CheckboxProps & CommonCheckedFieldProps) {
   return <Checkable {...props} type="checkbox" styler={checkboxStyler} />;
 }
-
-Checkbox.sizer = Sizer;
 
 /**
  * This component is the engine of the form controls that use a checkable

@@ -46,7 +46,7 @@ props to be used with [React Hook Form](https://react-hook-form.com/) and
         {['React Hook Form', 'Formik'].map((lib) => (
           <Button
             key={lib}
-            sizer={Button.sizer.sm}
+            sizer="sm"
             onClick={() => {
               setLibrary(lib);
             }}

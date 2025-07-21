@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { Checkbox } from '@/components/Checkbox';
 import { Fieldset } from '@/components/Fieldset';
-import { Sizer } from '@/constants';
 import type { CommonCheckedFieldProps, CommonFieldsetProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
@@ -66,8 +65,6 @@ export function Checkboxes({
     <Checkables {...otherProps} delimiter={delimiter} Checkable={Checkbox} />
   );
 }
-
-Checkboxes.sizer = Sizer;
 
 /**
  * This component is the engine for the components that render multiple
@@ -215,11 +212,11 @@ export function Checkables({
           // (otherwise, the caller should manage the layout within `render`)
           options &&
           clsw('flex flex-col', {
-            'gap-y-1.5': resolvedSizer === Sizer.xs,
-            'gap-y-1.75': resolvedSizer === Sizer.sm,
-            'gap-y-2': resolvedSizer === Sizer.base,
-            'gap-y-2.25': resolvedSizer === Sizer.lg,
-            'gap-y-2.5': resolvedSizer === Sizer.xl,
+            'gap-y-1.5': resolvedSizer === 'xs',
+            'gap-y-1.75': resolvedSizer === 'sm',
+            'gap-y-2': resolvedSizer === 'base',
+            'gap-y-2.25': resolvedSizer === 'lg',
+            'gap-y-2.5': resolvedSizer === 'xl',
           })
         }
       >

@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-import { NoticeFlavor, Sizer } from '@/constants';
+import { NoticeFlavor } from '@/constants';
 
 /** tailwind-variants styles for the Shout component */
 export const shoutStyler = tv({
@@ -9,11 +9,11 @@ export const shoutStyler = tv({
   `,
   variants: {
     sizer: {
-      [Sizer.xs]: 'text-xs px-2.5 py-1.5',
-      [Sizer.sm]: 'text-sm px-3 py-2',
-      [Sizer.base]: 'text-base px-4 py-3',
-      [Sizer.lg]: 'text-lg px-5 py-4',
-      [Sizer.xl]: 'text-xl px-6 py-5',
+      xs: 'text-xs px-2.5 py-1.5',
+      sm: 'text-sm px-3 py-2',
+      base: 'text-base px-4 py-3',
+      lg: 'text-lg px-5 py-4',
+      xl: 'text-xl px-6 py-5',
     },
     flavor: {
       [NoticeFlavor.info]: 'bg-blue-800 text-white',
@@ -23,7 +23,7 @@ export const shoutStyler = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.base,
+    sizer: 'base',
     flavor: NoticeFlavor.info,
   },
 });

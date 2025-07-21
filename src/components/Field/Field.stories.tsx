@@ -28,7 +28,7 @@ export const Basic: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Field.sizer.xs,
+    sizer: 'xs',
     children: <Docs.FormControlPlaceholder />,
     label: 'Xs label',
     hint: 'Xs hint',
@@ -40,7 +40,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Field.sizer.sm,
+    sizer: 'sm',
     children: <Docs.FormControlPlaceholder />,
     label: 'Sm label',
     hint: 'Sm hint',
@@ -52,7 +52,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Field.sizer.base,
+    sizer: 'base',
     children: <Docs.FormControlPlaceholder />,
     label: 'Base label',
     hint: 'Base hint',
@@ -64,7 +64,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Field.sizer.lg,
+    sizer: 'lg',
     children: <Docs.FormControlPlaceholder />,
     label: 'Lg label',
     hint: 'Lg hint',
@@ -76,7 +76,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Field.sizer.xl,
+    sizer: 'xl',
     children: <Docs.FormControlPlaceholder />,
     label: 'Xl label',
     hint: 'Xl hint',
@@ -88,13 +88,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      Field.sizer.xs,
-      Field.sizer.smSm,
-      Field.sizer.mdBase,
-      Field.sizer.lgLg,
-      Field.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     children: <Docs.FormControlPlaceholder />,
     label: 'Responsive label',
     hint: 'Responsive hint',
@@ -115,7 +109,7 @@ export const Required: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper>
+    <AllSizersStoryWrapper alignBaseline>
       <Field {...Xs.args} />
       <Field {...Sm.args} />
       <Field {...Base.args} />

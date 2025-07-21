@@ -150,7 +150,7 @@ export const Disabled: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: TextArea.sizer.xs,
+    sizer: 'xs',
     label: 'Xs label',
     placeholder: 'Xs TextArea',
     onChange: fn(),
@@ -169,7 +169,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: TextArea.sizer.sm,
+    sizer: 'sm',
     label: 'Sm label',
     placeholder: 'Sm TextArea',
     onChange: fn(),
@@ -188,7 +188,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: TextArea.sizer.base,
+    sizer: 'base',
     label: 'Base label',
     placeholder: 'Base TextArea',
     onChange: fn(),
@@ -207,7 +207,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: TextArea.sizer.lg,
+    sizer: 'lg',
     label: 'Lg label',
     placeholder: 'Lg TextArea',
     onChange: fn(),
@@ -226,7 +226,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: TextArea.sizer.xl,
+    sizer: 'xl',
     label: 'Xl label',
     placeholder: 'Xl TextArea',
     onChange: fn(),
@@ -245,13 +245,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      TextArea.sizer.xs,
-      TextArea.sizer.smSm,
-      TextArea.sizer.mdBase,
-      TextArea.sizer.lgLg,
-      TextArea.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     label: 'Responsive label',
     placeholder: 'Responsive Text',
     onChange: fn(),
@@ -396,7 +390,7 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper>
+    <AllSizersStoryWrapper alignBaseline>
       <TextArea {...Xs.args} />
       <TextArea {...Sm.args} />
       <TextArea {...Base.args} />

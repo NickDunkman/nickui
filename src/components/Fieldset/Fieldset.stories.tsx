@@ -31,7 +31,7 @@ export const Basic: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Fieldset.sizer.xs,
+    sizer: 'xs',
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,
@@ -46,7 +46,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Fieldset.sizer.sm,
+    sizer: 'sm',
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,
@@ -61,7 +61,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Fieldset.sizer.base,
+    sizer: 'base',
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,
@@ -76,7 +76,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Fieldset.sizer.lg,
+    sizer: 'lg',
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,
@@ -91,7 +91,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Fieldset.sizer.xl,
+    sizer: 'xl',
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,
@@ -106,13 +106,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      Fieldset.sizer.xs,
-      Fieldset.sizer.smSm,
-      Fieldset.sizer.mdBase,
-      Fieldset.sizer.lgLg,
-      Fieldset.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     children: [
       <Docs.FormControlPlaceholder key="first" className="mb-2" />,
       <Docs.FormControlPlaceholder key="second" />,
@@ -149,7 +143,7 @@ export const Required: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper>
+    <AllSizersStoryWrapper alignBaseline>
       <Fieldset {...Xs.args} />
       <Fieldset {...Sm.args} />
       <Fieldset {...Base.args} />

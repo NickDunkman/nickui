@@ -1,7 +1,5 @@
 import { tv } from 'tailwind-variants';
 
-import { Sizer } from '@/constants';
-
 /** tailwind-variants styles for the Slider component */
 export const sliderStyler = tv({
   slots: {
@@ -21,7 +19,7 @@ export const sliderStyler = tv({
   },
   variants: {
     sizer: {
-      [Sizer.xs]: {
+      xs: {
         root: 'h-5', // same aggregate height as xs Text
         track: `
           h-1 left-2.5 right-2.5
@@ -30,7 +28,7 @@ export const sliderStyler = tv({
         `,
         thumb: 'size-5',
       },
-      [Sizer.sm]: {
+      sm: {
         root: 'h-5', // same aggregate height as sm Text
         track: `
           h-1 left-2.5 right-2.5
@@ -39,7 +37,7 @@ export const sliderStyler = tv({
         `,
         thumb: 'size-5',
       },
-      [Sizer.base]: {
+      base: {
         root: 'h-6', // same aggregate height as base Text
         track: `
           h-1.5 left-3 right-3
@@ -48,7 +46,7 @@ export const sliderStyler = tv({
         `,
         thumb: 'size-6',
       },
-      [Sizer.lg]: {
+      lg: {
         root: 'h-7', // same aggregate height as lg Text
         track: `
           h-2 left-3.5 right-3.5
@@ -57,7 +55,7 @@ export const sliderStyler = tv({
         `,
         thumb: 'size-7',
       },
-      [Sizer.xl]: {
+      xl: {
         root: 'h-7', // same aggregate height as lg Text
         track: `
           h-2 left-3.5 right-3.5
@@ -109,57 +107,57 @@ export const sliderStyler = tv({
     },
     {
       hasFieldHeader: true,
-      sizer: Sizer.xs,
+      sizer: 'xs',
       className: { root: 'mt-2' },
     },
     {
       hasFieldHeader: true,
-      sizer: Sizer.sm,
+      sizer: 'sm',
       className: { root: 'mt-2' },
     },
     {
       hasFieldHeader: true,
-      sizer: Sizer.base,
+      sizer: 'base',
       className: { root: 'mt-3' },
     },
     {
       hasFieldHeader: true,
-      sizer: Sizer.lg,
+      sizer: 'lg',
       className: { root: 'mt-4' },
     },
     {
       hasFieldHeader: true,
-      sizer: Sizer.xl,
+      sizer: 'xl',
       className: { root: 'mt-4' },
     },
     {
       hasFieldFooter: true,
-      sizer: Sizer.xs,
+      sizer: 'xs',
       className: { root: 'mb-2' },
     },
     {
       hasFieldFooter: true,
-      sizer: Sizer.sm,
+      sizer: 'sm',
       className: { root: 'mb-2' },
     },
     {
       hasFieldFooter: true,
-      sizer: Sizer.base,
+      sizer: 'base',
       className: { root: 'mb-3' },
     },
     {
       hasFieldFooter: true,
-      sizer: Sizer.lg,
+      sizer: 'lg',
       className: { root: 'mb-4' },
     },
     {
       hasFieldFooter: true,
-      sizer: Sizer.xl,
+      sizer: 'xl',
       className: { root: 'mb-4' },
     },
   ],
   defaultVariants: {
-    sizer: Sizer.base,
+    sizer: 'base',
     isKeyboardFocused: false,
     isDisabled: false,
     atMin: true,

@@ -2,7 +2,6 @@ import keycode from 'keycode';
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { Sizer } from '@/constants';
 import { CommonFieldProps } from '@/types';
 import { debounceToRepaint } from '@/utils/debounceToRepaint';
 import { randomId } from '@/utils/randomId';
@@ -507,5 +506,3 @@ export function Slider({
     </Field>
   );
 }
-
-Slider.sizer = Sizer;

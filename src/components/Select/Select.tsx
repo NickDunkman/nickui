@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { Sizer } from '@/constants';
 import type { CommonFieldProps } from '@/types';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
@@ -89,5 +88,3 @@ export function Select({
     </Field>
   );
 }
-
-Select.sizer = Sizer;

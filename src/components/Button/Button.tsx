@@ -1,7 +1,7 @@
 import keycode from 'keycode';
 import * as React from 'react';
 
-import { Sizer } from '@/constants';
+import { SizerType } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
@@ -20,7 +20,7 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
   /** Controls the behavior of the button */
   type?: 'button' | 'reset' | 'submit';
   /** Changes the size of the button ("sm", "base", "lg") */
-  sizer?: Sizer | Sizer[];
+  sizer?: SizerType | SizerType[];
   /** Changes the color of the button ("primary", "secondary", "danger") */
   flavor?: ButtonFlavor;
 }
@@ -132,4 +132,3 @@ export function Button({
 }
 
 Button.flavor = ButtonFlavor;
-Button.sizer = Sizer;

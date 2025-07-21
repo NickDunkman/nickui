@@ -1,7 +1,5 @@
 import { tv } from 'tailwind-variants';
 
-import { Sizer } from '@/constants';
-
 /** tailwind-variants styles for the CheckedField component */
 export const checkedFieldStyler = tv({
   slots: {
@@ -12,23 +10,23 @@ export const checkedFieldStyler = tv({
   },
   variants: {
     sizer: {
-      [Sizer.xs]: {
+      xs: {
         root: 'gap-2 text-xs',
         hint: 'text-xs',
       },
-      [Sizer.sm]: {
+      sm: {
         root: 'gap-2.5 text-sm',
         hint: 'text-sm',
       },
-      [Sizer.base]: {
+      base: {
         root: 'gap-3 text-base',
         hint: 'text-sm',
       },
-      [Sizer.lg]: {
+      lg: {
         root: 'gap-3.5 text-lg',
         hint: 'text-base',
       },
-      [Sizer.xl]: {
+      xl: {
         root: 'gap-4 text-xl',
         hint: 'text-lg',
       },
@@ -41,7 +39,7 @@ export const checkedFieldStyler = tv({
     },
   },
   defaultVariants: {
-    sizer: Sizer.base,
+    sizer: 'base',
     isDisabled: false,
   },
 });

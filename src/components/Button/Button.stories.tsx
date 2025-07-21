@@ -62,7 +62,7 @@ export const AllControlStates: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Button.sizer.xs,
+    sizer: 'xs',
     children: 'Xs Button',
     onClick: fn(),
   },
@@ -76,7 +76,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Button.sizer.sm,
+    sizer: 'sm',
     children: 'Sm Button',
     onClick: fn(),
   },
@@ -90,7 +90,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Button.sizer.base,
+    sizer: 'base',
     children: 'Base Button',
     onClick: fn(),
   },
@@ -104,7 +104,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Button.sizer.lg,
+    sizer: 'lg',
     children: 'Lg Button',
     onClick: fn(),
   },
@@ -118,7 +118,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Button.sizer.xl,
+    sizer: 'xl',
     children: 'Xl Button',
     onClick: fn(),
   },
@@ -132,13 +132,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      Button.sizer.xs,
-      Button.sizer.smSm,
-      Button.sizer.mdBase,
-      Button.sizer.lgLg,
-      Button.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     children: 'Responsive Button',
     onClick: fn(),
   },
@@ -189,7 +183,7 @@ export const Danger: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper className="flex-wrap">
+    <AllSizersStoryWrapper alignBaseline>
       <Button {...Xs.args} />
       <Button {...Sm.args} />
       <Button {...Base.args} />

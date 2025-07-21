@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Radio } from '@/components/Radio';
-import { Sizer } from '@/constants';
 import type { CommonFieldsetProps } from '@/types';
 
 import { Checkables, CheckablesProps } from '../Checkboxes/Checkboxes';
@@ -20,5 +19,3 @@ export function Radios({
 
   return <Checkables {...otherProps} Checkable={Radio} />;
 }
-
-Radios.sizer = Sizer;

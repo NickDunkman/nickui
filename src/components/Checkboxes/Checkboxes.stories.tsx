@@ -264,7 +264,7 @@ export const CustomLayout: Story = {
         />
         <Checkbox
           {...checkbox({ value: 'embiggened' })}
-          sizer={Checkbox.sizer.lg}
+          sizer="lg"
           label="Embiggened"
         />
         <label>
@@ -292,7 +292,7 @@ export const Xs: Story = {
   args: {
     label: 'Xs label',
     hint: 'Xs hint',
-    sizer: Checkboxes.sizer.xs,
+    sizer: 'xs',
     options: [
       {
         value: 'one',
@@ -323,7 +323,7 @@ export const Sm: Story = {
   args: {
     label: 'Sm label',
     hint: 'Sm hint',
-    sizer: Checkboxes.sizer.sm,
+    sizer: 'sm',
     options: [
       {
         value: 'one',
@@ -354,7 +354,7 @@ export const Base: Story = {
   args: {
     label: 'Base label',
     hint: 'Base hint',
-    sizer: Checkboxes.sizer.base,
+    sizer: 'base',
     options: [
       {
         value: 'one',
@@ -385,7 +385,7 @@ export const Lg: Story = {
   args: {
     label: 'Lg label',
     hint: 'Lg hint',
-    sizer: Checkboxes.sizer.lg,
+    sizer: 'lg',
     options: [
       {
         value: 'one',
@@ -416,7 +416,7 @@ export const Xl: Story = {
   args: {
     label: 'Xl label',
     hint: 'Xl hint',
-    sizer: Checkboxes.sizer.xl,
+    sizer: 'xl',
     options: [
       {
         value: 'one',
@@ -447,13 +447,7 @@ export const Responsive: Story = {
   args: {
     label: 'Responsive label',
     hint: 'Responsive hint',
-    sizer: [
-      Checkboxes.sizer.xs,
-      Checkboxes.sizer.smSm,
-      Checkboxes.sizer.mdBase,
-      Checkboxes.sizer.lgLg,
-      Checkboxes.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     options: [
       {
         value: 'one',
@@ -483,7 +477,7 @@ export const AllControlStates: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper>
+    <AllSizersStoryWrapper alignBaseline>
       <Checkboxes {...Xs.args} />
       <Checkboxes {...Sm.args} />
       <Checkboxes {...Base.args} />

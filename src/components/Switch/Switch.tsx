@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Checkable } from '@/components/Checkbox';
-import { Sizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
 
 import { switchStyler } from './styles';
@@ -31,5 +30,3 @@ interface SwitchProps extends Omit<React.ComponentProps<'input'>, 'type'> {
 export function Switch(props: SwitchProps & CommonCheckedFieldProps) {
   return <Checkable {...props} type="checkbox" styler={switchStyler} />;
 }
-
-Switch.sizer = Sizer;

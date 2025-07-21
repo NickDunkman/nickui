@@ -1,7 +1,5 @@
 import { tv } from 'tailwind-variants';
 
-import { Sizer } from '@/constants';
-
 import { ButtonFlavor } from './constants';
 
 /** tailwind-variants styles for the Button component */
@@ -17,11 +15,11 @@ export const buttonStyler = tv({
   `,
   variants: {
     sizer: {
-      [Sizer.xs]: 'text-xs py-1.5 px-2.25',
-      [Sizer.sm]: 'text-sm py-1.75 px-3',
-      [Sizer.base]: 'text-base py-2.75 px-4.5',
-      [Sizer.lg]: 'text-lg py-3.75 px-5.5',
-      [Sizer.xl]: 'text-xl py-4.75 px-6.5',
+      xs: 'text-xs py-1.5 px-2.25',
+      sm: 'text-sm py-1.75 px-3',
+      base: 'text-base py-2.75 px-4.5',
+      lg: 'text-lg py-3.75 px-5.5',
+      xl: 'text-xl py-4.75 px-6.5',
     },
     isDisabled: {
       false: `
@@ -192,7 +190,7 @@ export const buttonStyler = tv({
     },
   ],
   defaultVariants: {
-    sizer: Sizer.base,
+    sizer: 'base',
     flavor: ButtonFlavor.primary,
     isDisabled: false,
     isTouched: false,

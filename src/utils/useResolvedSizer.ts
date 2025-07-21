@@ -1,15 +1,17 @@
 import * as React from 'react';
 
-import { Sizer } from '@/constants';
+import { SizerType } from '@/types';
 
 import { useBreakpoint } from './useBreakpoint';
 
-export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
+export function useResolvedSizer(
+  responsiveSizer: SizerType | SizerType[] | undefined,
+) {
   const breakpoint = useBreakpoint();
 
   return React.useMemo(() => {
     if (!responsiveSizer) {
-      return Sizer.base;
+      return 'base';
     }
 
     const asArray = Array.isArray(responsiveSizer)
@@ -20,93 +22,93 @@ export function useResolvedSizer(responsiveSizer: Sizer | Sizer[] | undefined) {
     // size.
 
     if (breakpoint.isXlUp) {
-      if (asArray.includes(Sizer.xlXl)) {
-        return Sizer.xl;
+      if (asArray.includes('xl:xl')) {
+        return 'xl';
       }
-      if (asArray.includes(Sizer.xlLg)) {
-        return Sizer.lg;
+      if (asArray.includes('xl:lg')) {
+        return 'lg';
       }
-      if (asArray.includes(Sizer.xlBase)) {
-        return Sizer.base;
+      if (asArray.includes('xl:base')) {
+        return 'base';
       }
-      if (asArray.includes(Sizer.xlSm)) {
-        return Sizer.sm;
+      if (asArray.includes('xl:sm')) {
+        return 'sm';
       }
-      if (asArray.includes(Sizer.xlXs)) {
-        return Sizer.xs;
+      if (asArray.includes('xl:xs')) {
+        return 'xs';
       }
     }
 
     if (breakpoint.isLgUp) {
-      if (asArray.includes(Sizer.lgXl)) {
-        return Sizer.xl;
+      if (asArray.includes('lg:xl')) {
+        return 'xl';
       }
-      if (asArray.includes(Sizer.lgLg)) {
-        return Sizer.lg;
+      if (asArray.includes('lg:lg')) {
+        return 'lg';
       }
-      if (asArray.includes(Sizer.lgBase)) {
-        return Sizer.base;
+      if (asArray.includes('lg:base')) {
+        return 'base';
       }
-      if (asArray.includes(Sizer.lgSm)) {
-        return Sizer.sm;
+      if (asArray.includes('lg:sm')) {
+        return 'sm';
       }
-      if (asArray.includes(Sizer.lgXs)) {
-        return Sizer.xs;
+      if (asArray.includes('lg:xs')) {
+        return 'xs';
       }
     }
 
     if (breakpoint.isMdUp) {
-      if (asArray.includes(Sizer.mdXl)) {
-        return Sizer.xl;
+      if (asArray.includes('md:xl')) {
+        return 'xl';
       }
-      if (asArray.includes(Sizer.mdLg)) {
-        return Sizer.lg;
+      if (asArray.includes('md:lg')) {
+        return 'lg';
       }
-      if (asArray.includes(Sizer.mdBase)) {
-        return Sizer.base;
+      if (asArray.includes('md:base')) {
+        return 'base';
       }
-      if (asArray.includes(Sizer.mdSm)) {
-        return Sizer.sm;
+      if (asArray.includes('md:sm')) {
+        return 'sm';
       }
-      if (asArray.includes(Sizer.mdXs)) {
-        return Sizer.xs;
+      if (asArray.includes('md:xs')) {
+        return 'xs';
       }
     }
 
     if (breakpoint.isSmUp) {
-      if (asArray.includes(Sizer.smXl)) {
-        return Sizer.xl;
+      if (asArray.includes('sm:xl')) {
+        return 'xl';
       }
-      if (asArray.includes(Sizer.smLg)) {
-        return Sizer.lg;
+      if (asArray.includes('sm:lg')) {
+        return 'lg';
       }
-      if (asArray.includes(Sizer.smBase)) {
-        return Sizer.base;
+      if (asArray.includes('sm:base')) {
+        return 'base';
       }
-      if (asArray.includes(Sizer.smSm)) {
-        return Sizer.sm;
+      if (asArray.includes('sm:sm')) {
+        return 'sm';
       }
-      if (asArray.includes(Sizer.smXs)) {
-        return Sizer.xs;
+      if (asArray.includes('sm:xs')) {
+        return 'xs';
       }
     }
 
-    if (asArray.includes(Sizer.xl)) {
-      return Sizer.xl;
+    if (asArray.includes('xl')) {
+      return 'xl';
     }
-    if (asArray.includes(Sizer.lg)) {
-      return Sizer.lg;
+    if (asArray.includes('lg')) {
+      return 'lg';
     }
-    if (asArray.includes(Sizer.base)) {
-      return Sizer.base;
+    if (asArray.includes('base')) {
+      return 'base';
     }
-    if (asArray.includes(Sizer.sm)) {
-      return Sizer.sm;
+    if (asArray.includes('sm')) {
+      return 'sm';
     }
-    if (asArray.includes(Sizer.xs)) {
-      return Sizer.xs;
+    if (asArray.includes('xs')) {
+      return 'xs';
     }
 
-    return Sizer.base;
+    return 'base';
   }, [breakpoint, responsiveSizer]);
 }

@@ -73,7 +73,7 @@ export const Nope: Story = {
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Shout.sizer.xs,
+    sizer: 'xs',
     children: 'Xs Shout',
     role: 'status',
   },
@@ -87,7 +87,7 @@ export const Xs: Story = {
 export const Sm: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Shout.sizer.sm,
+    sizer: 'sm',
     children: 'Sm Shout',
     role: 'status',
   },
@@ -101,7 +101,7 @@ export const Sm: Story = {
 export const Base: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Shout.sizer.base,
+    sizer: 'base',
     children: 'Base Shout',
     role: 'status',
   },
@@ -115,7 +115,7 @@ export const Base: Story = {
 export const Lg: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Shout.sizer.lg,
+    sizer: 'lg',
     children: 'Lg Shout',
     role: 'status',
   },
@@ -129,7 +129,7 @@ export const Lg: Story = {
 export const Xl: Story = {
   tags: ['sizer'],
   args: {
-    sizer: Shout.sizer.xl,
+    sizer: 'xl',
     children: 'Xl Shout',
     role: 'status',
   },
@@ -143,13 +143,7 @@ export const Xl: Story = {
 export const Responsive: Story = {
   tags: ['sizer'],
   args: {
-    sizer: [
-      Shout.sizer.xs,
-      Shout.sizer.smSm,
-      Shout.sizer.mdBase,
-      Shout.sizer.lgLg,
-      Shout.sizer.xlXl,
-    ],
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     children: 'Responsive Shout',
     role: 'status',
   },
@@ -170,7 +164,7 @@ export const AllFlavors: Story = {
 export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper>
+    <AllSizersStoryWrapper alignBaseline>
       <Shout {...Xs.args} />
       <Shout {...Sm.args} />
       <Shout {...Base.args} />

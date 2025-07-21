@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { Sizer } from '@/constants';
 import { CommonCheckedFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useElementBounds } from '@/utils/useElementBounds';
@@ -79,5 +78,3 @@ export function CheckedField({
     </label>
   );
 }
-
-CheckedField.sizer = Sizer;
