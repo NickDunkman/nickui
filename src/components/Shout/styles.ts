@@ -1,7 +1,5 @@
 import { tv } from 'tailwind-variants';
 
-import { NoticeFlavor } from '@/constants';
-
 /** tailwind-variants styles for the Shout component */
 export const shoutStyler = tv({
   base: `
@@ -16,14 +14,14 @@ export const shoutStyler = tv({
       xl: 'text-xl px-6 py-5',
     },
     flavor: {
-      [NoticeFlavor.info]: 'bg-blue-800 text-white',
-      [NoticeFlavor.yep]: 'bg-emerald-700 text-white',
-      [NoticeFlavor.maybe]: 'bg-yellow-500',
-      [NoticeFlavor.nope]: 'bg-rose-700 text-white',
+      info: 'bg-blue-800 text-white',
+      yep: 'bg-emerald-700 text-white',
+      maybe: 'bg-yellow-500',
+      nope: 'bg-rose-700 text-white',
     },
   },
   defaultVariants: {
     sizer: 'base',
-    flavor: NoticeFlavor.info,
+    flavor: 'info',
   },
 });

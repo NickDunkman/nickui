@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 export const Info: Story = {
   tags: ['flavor'],
   args: {
-    flavor: Shout.flavor.info,
+    flavor: 'info',
     children: 'Info Shout',
     role: 'status',
   },
@@ -31,7 +31,7 @@ export const Info: Story = {
 export const Yep: Story = {
   tags: ['flavor'],
   args: {
-    flavor: Shout.flavor.yep,
+    flavor: 'yep',
     children: 'Yep Shout',
     role: 'status',
   },
@@ -45,7 +45,7 @@ export const Yep: Story = {
 export const Maybe: Story = {
   tags: ['flavor'],
   args: {
-    flavor: Shout.flavor.maybe,
+    flavor: 'maybe',
     children: 'Maybe Shout',
     role: 'status',
   },
@@ -59,7 +59,7 @@ export const Maybe: Story = {
 export const Nope: Story = {
   tags: ['flavor'],
   args: {
-    flavor: Shout.flavor.nope,
+    flavor: 'nope',
     children: 'Nope Shout',
     role: 'alert',
   },

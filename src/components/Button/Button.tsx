@@ -5,7 +5,6 @@ import { SizerType } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
-import { ButtonFlavor } from './constants';
 import { buttonStyler } from './styles';
 
 export interface ButtonProps extends React.ComponentProps<'button'> {
@@ -22,7 +21,7 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
   /** Changes the size of the button ("sm", "base", "lg") */
   sizer?: SizerType | SizerType[];
   /** Changes the color of the button ("primary", "secondary", "danger") */
-  flavor?: ButtonFlavor;
+  flavor?: 'primary' | 'secondary' | 'danger';
 }
 
 /**
@@ -130,5 +129,3 @@ export function Button({
     />
   );
 }
-
-Button.flavor = ButtonFlavor;

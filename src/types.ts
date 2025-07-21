@@ -102,3 +102,5 @@ export type CommonCheckedFieldProps = {
 // (This is how Storybook types its "of" props)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type StoriesModule = Record<string, any>;
+
+export type NoticeFlavorType = 'info' | 'yep' | 'maybe' | 'nope';

@@ -141,7 +141,7 @@ export const Responsive: Story = {
 export const Primary: Story = {
   tags: ['flavor'],
   args: {
-    flavor: Button.flavor.primary,
+    flavor: 'primary',
     children: 'Primary Button (default)',
     onClick: fn(),
   },
@@ -155,7 +155,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
   tags: ['flavor'],
   args: {
-    flavor: Button.flavor.secondary,
+    flavor: 'secondary',
     children: 'Secondary Button',
     onClick: fn(),
   },
@@ -169,7 +169,7 @@ export const Secondary: Story = {
 export const Danger: Story = {
   tags: ['flavor'],
   args: {
-    flavor: Button.flavor.danger,
+    flavor: 'danger',
     children: 'Danger Button',
     onClick: fn(),
   },

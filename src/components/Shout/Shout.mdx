@@ -13,7 +13,7 @@ Displays an important notice to the user, such as an error message, warning, or
 congratulatory message. For a less prominent notice, use <Docs of="Callout" />.
 
 <Docs.FauxCanvas>
-  <Shout flavor={Shout.flavor.nope} role="alert" aria-live="assertive">
+  <Shout flavor="nope" role="alert" aria-live="assertive">
     Fore!
   </Shout>
 </Docs.FauxCanvas>
@@ -49,7 +49,7 @@ but without yanking their attention if they’re busy with something else:
     <Shout
       role="status"
       aria-live="polite"
-      flavor={Shout.flavor.yep} 
+      flavor="yep"
     >
       Hey that was a good form submission 👍
     </Shout>
@@ -66,7 +66,7 @@ way:
     <Shout
       role="alert"
       aria-live="assertive"
-      flavor={Shout.flavor.nope} 
+      flavor="nope"
     >
       There was a problem with your visa application submission. If you don’t
       fix and resubmit, you will be apprehended at the border.
