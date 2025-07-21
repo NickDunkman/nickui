@@ -5,8 +5,7 @@ import { Sizer } from '@/constants';
 /** tailwind-variants styles for the Fieldset component */
 export const fieldsetStyler = tv({
   slots: {
-    legend: 'block',
-    label: 'font-bold',
+    legend: 'font-bold',
     footer: 'flex flex-col',
     hint: 'text-gray-500',
     error: 'before:content-["✘"] before:mr-1 text-rose-800',
@@ -15,36 +14,31 @@ export const fieldsetStyler = tv({
   variants: {
     sizer: {
       [Sizer.xs]: {
-        legend: 'mb-2.5',
-        label: 'text-xs',
+        legend: 'text-xs mb-2.5',
         footer: 'mt-2.5 gap-1.5',
         hint: 'text-xs',
         error: 'text-xs',
       },
       [Sizer.sm]: {
-        legend: 'mb-2.5',
-        label: 'text-xs',
+        legend: 'text-xs mb-2.5',
         footer: 'mt-2.5 gap-1.5',
         hint: 'text-xs',
         error: 'text-xs',
       },
       [Sizer.base]: {
-        legend: 'mb-3',
-        label: 'text-sm',
+        legend: 'text-sm mb-3',
         footer: 'mt-3 gap-2',
         hint: 'text-xs',
         error: 'text-sm',
       },
       [Sizer.lg]: {
-        legend: 'mb-3.5',
-        label: 'text-lg',
+        legend: 'text-lg mb-3.5',
         footer: 'mt-3.5 gap-2',
         hint: 'text-sm',
         error: 'text-base',
       },
       [Sizer.xl]: {
-        legend: 'mb-3.5',
-        label: 'text-lg',
+        legend: 'text-lg mb-3.5',
         footer: 'mt-3.5 gap-2',
         hint: 'text-sm',
         error: 'text-base',

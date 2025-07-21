@@ -65,16 +65,18 @@ export function Fieldset({
       data-nickui-resolved-sizer={resolvedSizer}
     >
       {label && (
-        <legend id={legendId} className={styles.legend()}>
-          <div className={styles.label()}>
+        // This extra wrapping div allows the legend to be used as the
+        // aligner, when the Fieldset is used in a flexbox, for example
+        <div>
+          <legend id={legendId} className={styles.legend()}>
             {label}
             {required && (
               <abbr className={styles.requiredAsterisk()} title="required">
                 *
               </abbr>
             )}
-          </div>
-        </legend>
+          </legend>
+        </div>
       )}
 
       <div>{formControls}</div>
