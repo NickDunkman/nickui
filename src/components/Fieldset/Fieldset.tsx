@@ -38,6 +38,8 @@ export function Fieldset({
   const resolvedSizer = useResolvedSizer(sizer);
   const styles = fieldsetStyler({ sizer: resolvedSizer });
 
+  const hasErrorMessage = error && error !== true;
+
   return (
     <fieldset
       {...otherFieldsetProps}
@@ -80,15 +82,15 @@ export function Fieldset({
 
       <div>{formControls}</div>
 
-      {(!!hint || !!error) && (
-        <div className={styles.footer()}>
+      {(hint || hasErrorMessage) && (
+        <div className={styles.footing()}>
           {hint && (
             <div id={hintId} className={styles.hint()}>
               {hint}
             </div>
           )}
 
-          {error && (
+          {hasErrorMessage && (
             <div id={errorId} className={styles.error()} aria-live="assertive">
               {error}
             </div>
