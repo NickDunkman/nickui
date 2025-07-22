@@ -174,7 +174,7 @@ export const Xs: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the the xs sizer style', async () => {
-      expect(canvas.getByTestId('indicator')).toHaveClass('h-5');
+      expect(canvas.getByTestId('indicator')).toHaveClass('h-4');
     });
   },
 };
@@ -234,7 +234,7 @@ export const Xl: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the the xl sizer style', async () => {
-      expect(canvas.getByTestId('indicator')).toHaveClass('h-7');
+      expect(canvas.getByTestId('indicator')).toHaveClass('h-8');
     });
   },
 };

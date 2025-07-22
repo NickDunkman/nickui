@@ -315,7 +315,7 @@ export const Xs: Story = {
       'Assert the xs sizer style of both the Switches & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
-          expect(indicator).toHaveClass('h-5');
+          expect(indicator).toHaveClass('h-4');
         });
         expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
       },
@@ -439,7 +439,7 @@ export const Xl: Story = {
       'Assert the xl style of both the Switches & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
-          expect(indicator).toHaveClass('h-7');
+          expect(indicator).toHaveClass('h-8');
         });
         expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
       },
