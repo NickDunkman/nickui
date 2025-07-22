@@ -369,7 +369,7 @@ export const Base: Story = {
       'Assert the base sizer style of both the Checkboxes & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
-          expect(indicator).toHaveClass('size-5');
+          expect(indicator).toHaveClass('size-4.75');
         });
         expect(canvas.getByText('Base label')).toHaveClass('text-sm');
       },

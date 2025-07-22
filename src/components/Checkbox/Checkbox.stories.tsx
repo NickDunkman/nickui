@@ -204,7 +204,7 @@ export const Base: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the base sizer style', async () => {
-      expect(canvas.getByTestId('indicator')).toHaveClass('size-5');
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-4.75');
     });
   },
 };

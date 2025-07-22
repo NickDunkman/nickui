@@ -367,7 +367,7 @@ export const Sm: Story = {
       'Assert the sm sizer style of both the Radios & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
-          expect(indicator).toHaveClass('size-3.5');
+          expect(indicator).toHaveClass('size-4');
         });
         expect(canvas.getByText('Sm label')).toHaveClass('text-xs');
       },
@@ -398,7 +398,7 @@ export const Base: Story = {
       'Assert the base sizer style of both the Radios & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
-          expect(indicator).toHaveClass('size-4');
+          expect(indicator).toHaveClass('size-4.75');
         });
         expect(canvas.getByText('Base label')).toHaveClass('text-sm');
       },
@@ -429,7 +429,7 @@ export const Lg: Story = {
       'Assert the lg sizer style of both the Radios & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
-          expect(indicator).toHaveClass('size-5');
+          expect(indicator).toHaveClass('size-5.5');
         });
         expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
       },
@@ -460,7 +460,7 @@ export const Xl: Story = {
       'Assert the xl sizer style of both the Radios & Fieldset',
       async () => {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
-          expect(indicator).toHaveClass('size-5');
+          expect(indicator).toHaveClass('size-6');
         });
         expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
       },

@@ -173,7 +173,7 @@ export const Sm: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the sm sizer style', async () => {
-      expect(canvas.getByTestId('indicator')).toHaveClass('size-3.5');
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-4');
     });
   },
 };
@@ -188,7 +188,7 @@ export const Base: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the base sizer style', async () => {
-      expect(canvas.getByTestId('indicator')).toHaveClass('size-4');
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-4.75');
     });
   },
 };
@@ -203,7 +203,7 @@ export const Lg: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the lg sizer style', async () => {
-      expect(canvas.getByTestId('indicator')).toHaveClass('size-5');
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-5.5');
     });
   },
 };
@@ -218,7 +218,7 @@ export const Xl: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the xl sizer style', async () => {
-      expect(canvas.getByTestId('indicator')).toHaveClass('size-5');
+      expect(canvas.getByTestId('indicator')).toHaveClass('size-6');
     });
   },
 };
