@@ -44,6 +44,8 @@ export function Field({
   const resolvedSizer = useResolvedSizer(sizer);
   const styles = fieldStyler({ sizer: resolvedSizer });
 
+  const hasErrorMessage = error && error !== true;
+
   return (
     <div
       {...otherDivProps}
@@ -65,15 +67,19 @@ export function Field({
 
       <div>{formControl}</div>
 
-      {hint && (
-        <div id={hintId} className={styles.hint()}>
-          {hint}
-        </div>
-      )}
+      {(hint || hasErrorMessage) && (
+        <div className={styles.footing()}>
+          {hint && (
+            <div id={hintId} className={styles.hint()}>
+              {hint}
+            </div>
+          )}
 
-      {error && error !== true && (
-        <div id={errorId} className={styles.error()} aria-live="assertive">
-          {error}
+          {hasErrorMessage && (
+            <div id={errorId} className={styles.error()} aria-live="assertive">
+              {error}
+            </div>
+          )}
         </div>
       )}
     </div>
