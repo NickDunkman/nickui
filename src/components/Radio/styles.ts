@@ -18,19 +18,19 @@ export const radioStyler = tv({
   variants: {
     sizer: {
       xs: {
-        indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.5',
+        indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.25',
       },
       sm: {
-        indicator: 'size-3.5 top-0.25 peer-checked:after:size-1.5',
+        indicator: 'size-4 top-[2.5px] peer-checked:after:size-1.5',
       },
       base: {
-        indicator: 'size-4 top-0.75 peer-checked:after:size-1.5',
+        indicator: 'size-4.75 top-0.75 peer-checked:after:size-1.75',
       },
       lg: {
-        indicator: 'size-5 top-0.75 peer-checked:after:size-2',
+        indicator: 'size-5.5 top-[3.5px] peer-checked:after:size-2',
       },
       xl: {
-        indicator: 'size-5 top-0.75 peer-checked:after:size-2',
+        indicator: 'size-6 top-0.75 peer-checked:after:size-2.25',
       },
     },
     isDisabled: {

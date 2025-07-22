@@ -23,10 +23,10 @@ export const checkboxStyler = tv({
         indicator: 'size-3.5 top-0.25 bg-size-[8px]',
       },
       sm: {
-        indicator: 'size-4 top-0.5 bg-size-[10px]',
+        indicator: 'size-4 top-[2.5px] bg-size-[10px]',
       },
       base: {
-        indicator: 'size-4.75 top-[2.5px] bg-size-[12px]',
+        indicator: 'size-4.75 top-0.75 bg-size-[12px]',
       },
       lg: {
         indicator: 'size-5.5 top-[3.5px] bg-size-[14px]',
