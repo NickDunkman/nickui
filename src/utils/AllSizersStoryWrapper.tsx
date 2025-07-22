@@ -58,7 +58,7 @@ export function AllSizersStoryWrapper({
       <div
         className={clsw(
           'flex flex-col gap-4 sm:flex-row sm:justify-between',
-          alignBaseline ? 'sm:items-baseline' : 'sm:items-center',
+          alignBaseline ? 'sm:items-baseline' : 'sm:items-top',
         )}
       >
         {children}
