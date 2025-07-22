@@ -55,26 +55,28 @@ export function CheckedField({
       data-nickui-sizer={Array.isArray(sizer) ? sizer.join(',') : sizer}
       data-nickui-resolved-sizer={resolvedSizer}
     >
-      <div className={styles.control()} ref={controlRef}>
-        {formControl}
-      </div>
-      {/*
+      <div className={styles.innerContainer()}>
+        <div className={styles.control()} ref={controlRef}>
+          {formControl}
+        </div>
+        {/*
         This empty element exists to create an extra flex-gap between the
         absolutely-positioned control & the label. It contains a zero-width
         character so that it doesn’t affect vertical alignment, such as when
         the field is inside a `flex items-baseline` parent.
       */}
-      <span style={{ paddingLeft: controlBounds?.width || 0 }}>&#8203;</span>
-      {(label || hint) && (
-        <div className={styles.descriptors()}>
-          {label && <div id={labelId}>{label}</div>}
-          {hint && (
-            <div className={styles.hint()} id={hintId}>
-              {hint}
-            </div>
-          )}
-        </div>
-      )}
+        <span style={{ paddingLeft: controlBounds?.width || 0 }}>&#8203;</span>
+        {(label || hint) && (
+          <div className={styles.descriptors()}>
+            {label && <div id={labelId}>{label}</div>}
+            {hint && (
+              <div className={styles.hint()} id={hintId}>
+                {hint}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </label>
   );
 }

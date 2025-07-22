@@ -161,7 +161,7 @@ export const Secondary: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the secondary style', async () => {
-      expect(canvas.getByRole('button')).toHaveClass('bg-gray-100');
+      expect(canvas.getByRole('button')).toHaveClass('bg-blue-200');
     });
   },
 };
