@@ -97,7 +97,6 @@ export function Text({
       <input
         {...otherInputProps}
         id={id}
-        style={{ paddingLeft: 0, paddingRight: 0 }}
         className={styles}
         disabled={disabled}
         required={required}
