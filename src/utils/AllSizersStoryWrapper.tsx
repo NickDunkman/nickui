@@ -17,7 +17,7 @@ export function AllSizersStoryWrapper({
         <>
           {/** This is the legend we show at the bottom left of the canvas */}
           <div
-            className="absolute -bottom-8.5 hidden text-sm text-gray-400 sm:block"
+            className="absolute -bottom-8.5 -left-5 hidden text-sm text-gray-400 sm:block"
             style={{ lineHeight: '1em' }}
           >
             <div className="absolute -right-2.5 -left-2.5 z-9999 -mt-0.5 border-b-2 border-b-[#ff8aff] opacity-50">

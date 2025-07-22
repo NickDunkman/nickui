@@ -291,7 +291,6 @@ export const Xs: Story = {
   tags: ['sizer'],
   args: {
     label: 'Xs label',
-    hint: 'Xs hint',
     sizer: 'xs',
     options: [
       {
@@ -322,7 +321,6 @@ export const Sm: Story = {
   tags: ['sizer'],
   args: {
     label: 'Sm label',
-    hint: 'Sm hint',
     sizer: 'sm',
     options: [
       {
@@ -353,7 +351,6 @@ export const Base: Story = {
   tags: ['sizer'],
   args: {
     label: 'Base label',
-    hint: 'Base hint',
     sizer: 'base',
     options: [
       {
@@ -384,7 +381,6 @@ export const Lg: Story = {
   tags: ['sizer'],
   args: {
     label: 'Lg label',
-    hint: 'Lg hint',
     sizer: 'lg',
     options: [
       {
@@ -415,7 +411,6 @@ export const Xl: Story = {
   tags: ['sizer'],
   args: {
     label: 'Xl label',
-    hint: 'Xl hint',
     sizer: 'xl',
     options: [
       {
@@ -446,7 +441,6 @@ export const Responsive: Story = {
   tags: ['sizer'],
   args: {
     label: 'Responsive label',
-    hint: 'Responsive hint',
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     options: [
       {
