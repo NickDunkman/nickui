@@ -13,31 +13,31 @@ export const fieldsetStyler = tv({
     sizer: {
       xs: {
         legend: 'text-xs mb-2',
-        footer: 'mb-2',
+        footing: 'mt-2',
         hint: 'text-xs',
         error: 'text-xs',
       },
       sm: {
         legend: 'text-sm mb-2.25',
-        footer: 'mt-2.25',
+        footing: 'mt-2.25',
         hint: 'text-xs',
         error: 'text-sm',
       },
       base: {
         legend: 'text-base mb-2.5',
-        footer: 'mt-2.5',
+        footing: 'mt-2.5',
         hint: 'text-sm',
         error: 'text-sm',
       },
       lg: {
         legend: 'text-lg mb-2.75',
-        footer: 'mt-2.75',
+        footing: 'mt-2.75',
         hint: 'text-base',
         error: 'text-base',
       },
       xl: {
         legend: 'text-xl mb-3',
-        footer: 'mt-3',
+        footing: 'mt-3',
         hint: 'text-lg',
         error: 'text-lg',
       },

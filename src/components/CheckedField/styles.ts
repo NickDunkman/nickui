@@ -4,7 +4,7 @@ import { tv } from 'tailwind-variants';
 export const checkedFieldStyler = tv({
   slots: {
     container: 'cursor-pointer flex relative',
-    control: 'absolute top-0',
+    control: 'absolute top-0 left-0',
     descriptors: 'flex flex-col',
     hint: 'text-gray-500',
   },
