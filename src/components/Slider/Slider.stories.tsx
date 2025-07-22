@@ -289,7 +289,7 @@ export const Xs: Story = {
     await step(
       'Assert the xs sizer style on both the Slider & Field',
       async () => {
-        expect(canvas.getByLabelText('Xs Slider')).toHaveClass('h-5');
+        expect(canvas.getByLabelText('Xs Slider')).toHaveClass('h-4');
         expect(
           canvas.getByText('Xs Slider').parentNode?.parentNode,
         ).toHaveClass('text-xs');
@@ -373,7 +373,7 @@ export const Xl: Story = {
     await step(
       'Assert the xl sizer style on both the Slider & Field',
       async () => {
-        expect(canvas.getByLabelText('Xl Slider')).toHaveClass('h-7');
+        expect(canvas.getByLabelText('Xl Slider')).toHaveClass('h-8');
         expect(
           canvas.getByText('Xl Slider').parentNode?.parentNode,
         ).toHaveClass('text-sm');

@@ -20,25 +20,25 @@ export const sliderStyler = tv({
   variants: {
     sizer: {
       xs: {
-        root: 'h-5', // same aggregate height as xs Text
+        root: 'h-4', // same height as xs text
         track: `
-          h-1 left-2.5 right-2.5
-          before:w-2.5 before:-left-2.5 
-          after:w-2.5 after:-right-2.5
+          h-1 left-2 right-2
+          before:w-2 before:-left-2
+          after:w-2 after:-right-2
         `,
-        thumb: 'size-5',
+        thumb: 'size-4',
       },
       sm: {
-        root: 'h-5', // same aggregate height as sm Text
+        root: 'h-5', // same height as sm text
         track: `
-          h-1 left-2.5 right-2.5
+          h-1.25 left-2.5 right-2.5
           before:w-2.5 before:-left-2.5 
           after:w-2.5 after:-right-2.5
         `,
         thumb: 'size-5',
       },
       base: {
-        root: 'h-6', // same aggregate height as base Text
+        root: 'h-6', // same height as base text
         track: `
           h-1.5 left-3 right-3
           before:w-3 before:-left-3
@@ -47,22 +47,22 @@ export const sliderStyler = tv({
         thumb: 'size-6',
       },
       lg: {
-        root: 'h-7', // same aggregate height as lg Text
+        root: 'h-7', // same height as lg text
         track: `
-          h-2 left-3.5 right-3.5
+          h-1.75 left-3.5 right-3.5
           before:w-3.5 before:-left-3.5
           after:w-3.5 after:-right-3.5
         `,
         thumb: 'size-7',
       },
       xl: {
-        root: 'h-7', // same aggregate height as lg Text
+        root: 'h-8', // same height as xl text
         track: `
-          h-2 left-3.5 right-3.5
-          before:w-3.5 before:-left-3.5
-          after:w-3.5 after:-right-3.5
+          h-2 left-4 right-4
+          before:w-4 before:-left-4
+          after:w-4 after:-right-4
         `,
-        thumb: 'size-7',
+        thumb: 'size-8',
       },
     },
     isKeyboardFocused: {
