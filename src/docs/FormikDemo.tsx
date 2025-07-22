@@ -54,29 +54,6 @@ export function FormikDemo({
 
   return (
     <>
-      <FauxCanvas>
-        <Component
-          {...form.getFieldProps({
-            name: fieldName,
-            type: checkbox ? 'checkbox' : radioWithValue ? 'radio' : undefined,
-            value: radioWithValue,
-          })}
-          error={form.errors[fieldName]}
-          {...componentProps}
-        />
-        <PrettyPrint
-          className="-mx-5 mt-8 -mb-5"
-          title="Formik context"
-          data={{
-            values: form.values,
-            errors: form.errors,
-            touched: form.touched,
-            isValid: form.isValid,
-            dirty: form.dirty,
-          }}
-        />
-      </FauxCanvas>
-
       <div style={{ marginTop: -20 }}>
         <Source
           dark
@@ -126,6 +103,29 @@ return (
           `}
         />
       </div>
+
+      <FauxCanvas>
+        <Component
+          {...form.getFieldProps({
+            name: fieldName,
+            type: checkbox ? 'checkbox' : radioWithValue ? 'radio' : undefined,
+            value: radioWithValue,
+          })}
+          error={form.errors[fieldName]}
+          {...componentProps}
+        />
+        <PrettyPrint
+          className="-mx-5 mt-8 -mb-5"
+          title="Formik context"
+          data={{
+            values: form.values,
+            errors: form.errors,
+            touched: form.touched,
+            isValid: form.isValid,
+            dirty: form.dirty,
+          }}
+        />
+      </FauxCanvas>
     </>
   );
 }

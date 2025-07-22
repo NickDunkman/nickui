@@ -49,30 +49,6 @@ export function ReactHookFormDemo({
 
   return (
     <>
-      <FauxCanvas>
-        <Component
-          {...register(fieldName, {
-            validate: !addValidation
-              ? undefined
-              : (value) =>
-                  value === theInitialValue || 'Heyyyy, change that back',
-          })}
-          error={errors[fieldName]?.message}
-          {...componentProps}
-        />
-        <PrettyPrint
-          className="-mx-5 mt-8 -mb-5"
-          title="React Hook Form context"
-          data={{
-            dirtyFields,
-            isDirty,
-            isValid,
-            touchedFields,
-            watch: watch(),
-          }}
-        />
-      </FauxCanvas>
-
       <div style={{ marginTop: -20 }}>
         <Source
           dark
@@ -107,6 +83,30 @@ return (
           `}
         />
       </div>
+
+      <FauxCanvas>
+        <Component
+          {...register(fieldName, {
+            validate: !addValidation
+              ? undefined
+              : (value) =>
+                  value === theInitialValue || 'Heyyyy, change that back',
+          })}
+          error={errors[fieldName]?.message}
+          {...componentProps}
+        />
+        <PrettyPrint
+          className="-mx-5 mt-8 -mb-5"
+          title="React Hook Form context"
+          data={{
+            dirtyFields,
+            isDirty,
+            isValid,
+            touchedFields,
+            watch: watch(),
+          }}
+        />
+      </FauxCanvas>
     </>
   );
 }
