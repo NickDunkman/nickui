@@ -112,15 +112,10 @@ export function Checkable({
     isKeyboardFocused: isFocused && !disabled && !isMouseFocused,
   });
 
-  const labelWithOffset =
-    label || hint ? (
-      <div className={styles.labelWithOffset()}>{label}</div>
-    ) : null;
-
   return (
     <CheckedField
       className={clsw(styles.root(), className)}
-      label={labelWithOffset}
+      label={label}
       labelId={ariaLabelledBy}
       hint={hint}
       hintId={ariaDescribedBy}

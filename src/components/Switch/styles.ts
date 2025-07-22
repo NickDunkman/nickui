@@ -4,7 +4,6 @@ import { tv } from 'tailwind-variants';
 export const switchStyler = tv({
   slots: {
     root: '',
-    labelWithOffset: 'pt-0.5',
     input: 'peer opacity-0 absolute -z-1',
     indicator: `
       relative rounded-l-full rounded-r-full bg-gray-300
@@ -13,7 +12,7 @@ export const switchStyler = tv({
       after:border-transparent
       pointer-events-none
 
-      after:bg-white after:rounded-full after:absolute after:m-0.5
+      after:bg-white after:rounded-full after:absolute 
       after:transition-transform after:duration-100 after:east-out
       after:shadow-md/15
     `,
@@ -21,29 +20,29 @@ export const switchStyler = tv({
   variants: {
     sizer: {
       xs: {
-        root: 'min-h-5',
+        root: 'min-h-4',
         indicator:
-          'w-8 h-5 after:size-4 after:border-5 peer-checked:after:translate-x-3',
+          'w-6 h-4 after:size-3 after:border-[3.5px] peer-checked:after:translate-x-2 after:m-0.5',
       },
       sm: {
         root: 'min-h-5',
         indicator:
-          'w-8 h-5 after:size-4 after:border-5 peer-checked:after:translate-x-3',
+          'w-7.5 h-5 after:size-3.75 after:border-[4.5px] peer-checked:after:translate-x-2.5 after:m-[2.5px]',
       },
       base: {
         root: 'min-h-6',
         indicator:
-          'w-10 h-6 after:size-5 after:border-6 peer-checked:after:translate-x-4',
+          'w-9 h-6 after:size-4.5 after:border-[5.5px] peer-checked:after:translate-x-3 after:m-0.75',
       },
       lg: {
         root: 'min-h-7',
         indicator:
-          'w-12 h-7 after:size-6 after:border-7 peer-checked:after:translate-x-5',
+          'w-10.5 h-7 after:size-5.25 after:border-[6.5px] peer-checked:after:translate-x-3.5 after:m-[3.5px]',
       },
       xl: {
-        root: 'min-h-7',
+        root: 'min-h-8 pt-0.5',
         indicator:
-          'w-12 h-7 after:size-6 after:border-7 peer-checked:after:translate-x-5',
+          'w-12 h-8 after:size-6 after:border-[7.5px] peer-checked:after:translate-x-4 after:m-1',
       },
     },
     isDisabled: {

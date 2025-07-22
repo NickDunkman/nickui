@@ -51,11 +51,10 @@ export function CheckedField({
   return (
     <label
       {...labelProps}
-      className={clsw(styles.root(), className)}
       data-nickui-sizer={Array.isArray(sizer) ? sizer.join(',') : sizer}
       data-nickui-resolved-sizer={resolvedSizer}
     >
-      <div className={styles.innerContainer()}>
+      <div className={clsw(styles.container(), className)}>
         <div className={styles.control()} ref={controlRef}>
           {formControl}
         </div>

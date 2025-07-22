@@ -4,7 +4,6 @@ import { tv } from 'tailwind-variants';
 export const radioStyler = tv({
   slots: {
     root: '',
-    labelWithOffset: '',
     input: 'peer opacity-0 absolute -z-1',
     indicator: `
       flex justify-center items-center
