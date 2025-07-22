@@ -184,11 +184,21 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Button {...Xs.args} />
-      <Button {...Sm.args} />
-      <Button {...Base.args} />
-      <Button {...Lg.args} />
-      <Button {...Xl.args} />
+      <div>
+        <Button {...Xs.args} />
+      </div>
+      <div>
+        <Button {...Sm.args} />
+      </div>
+      <div>
+        <Button {...Base.args} />
+      </div>
+      <div>
+        <Button {...Lg.args} />
+      </div>
+      <div>
+        <Button {...Xl.args} />
+      </div>
     </AllSizersStoryWrapper>
   ),
 };
