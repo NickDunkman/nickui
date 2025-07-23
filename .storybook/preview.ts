@@ -9,6 +9,22 @@ const preview: Preview = {
         transform: async (source: string) => {
           let transformed = source;
 
+          // Storybook uses the eventual component names for these in <Source>
+          // blocks -- convert them back
+          transformed = transformed.replace(
+            /<(\/)?Aside(Heading|Paragraph)>/g,
+            '<$1Aside.$2>',
+          );
+
+          // sizer arrays should always be short enough to collapse to a single
+          // line
+          const matches = transformed.match(
+            /([\s\S]*\ssizer={\[)(\n\s*)([^\]]*)(\n\s*)(\]}[\s\S]*)/,
+          );
+          if (matches) {
+            transformed = `${matches[1]}${matches[3].replace(/\s+/g, ' ')}${matches[5]}`;
+          }
+
           // Remove some event handler props from auto-generated source code
           // show in <Canvas> blocks. They're unhelpful b/c they don't show
           // the code within the function, and they use minified names in

@@ -31,7 +31,7 @@ example, \`sizer={['xs', 'md:base', 'xl:lg']}\` resolves to...
         `}
           </Markdown>
 
-          <Canvas of={of.Responsive} />
+          <Canvas of={of.Responsive} sourceState="shown" />
         </>
       )}
     </>

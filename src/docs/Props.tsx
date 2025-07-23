@@ -22,7 +22,7 @@ function getInterfaceName(nativeBase: string) {
     return 'HTMLTextAreaElement';
   }
 
-  return `HTML${ucFirst(nativeBase)}Element)`;
+  return `HTML${ucFirst(nativeBase)}Element`;
 }
 
 /**

@@ -76,6 +76,7 @@ export const buttonStyler = tv({
       // the shadow a bit so it appears the same as the other button flavors
       class: `
         shadow-md/10
+        text-blue-950
         bg-blue-200 
         hover:bg-[#c4e4ff]
         active:bg-blue-300 

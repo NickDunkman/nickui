@@ -6,14 +6,16 @@ export function AllSizersStoryWrapper({
   children,
   className,
   alignBaseline = false,
+  keepStacked = false,
 }: {
   children?: React.ReactNode;
   className?: string;
   alignBaseline?: boolean;
+  keepStacked?: boolean;
 }) {
   return (
     <div className={clsw('relative', className)}>
-      {alignBaseline && (
+      {!keepStacked && alignBaseline && (
         <>
           {/** This is the legend we show at the bottom left of the canvas */}
           <div
@@ -57,8 +59,9 @@ export function AllSizersStoryWrapper({
        */}
       <div
         className={clsw(
-          'flex flex-col gap-4 sm:flex-row sm:justify-between',
-          alignBaseline ? 'sm:items-baseline' : 'sm:items-top',
+          'flex flex-col gap-4',
+          !keepStacked && 'sm:flex-row sm:justify-between',
+          !keepStacked && alignBaseline ? 'sm:items-baseline' : 'sm:items-top',
         )}
       >
         {children}
