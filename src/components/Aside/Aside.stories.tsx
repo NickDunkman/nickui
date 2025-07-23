@@ -240,7 +240,7 @@ export const Responsive: Story = {
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     children: [
-      <Aside.Heading key="1">Reponsive Aside</Aside.Heading>,
+      <Aside.Heading key="1">Responsive Aside</Aside.Heading>,
       <Aside.Paragraph key="2">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
         eleifend enim ullamcorper nibh dapibus, et mollis tellus sagittis. Cras
