@@ -9,106 +9,111 @@ export function useResolvedSizer(
 ) {
   const breakpoint = useBreakpoint();
 
+  const responsiveSizers = Array.isArray(responsiveSizer)
+    ? responsiveSizer
+    : responsiveSizer
+      ? [responsiveSizer]
+      : [];
+
   return React.useMemo(() => {
-    if (!responsiveSizer) {
+    if (!responsiveSizers.length) {
       return 'base';
     }
-
-    const asArray = Array.isArray(responsiveSizer)
-      ? responsiveSizer
-      : [responsiveSizer];
 
     // Return the biggest specified sizer that applies to the current screen
     // size.
 
     if (breakpoint.isXlUp) {
-      if (asArray.includes('xl:xl')) {
+      if (responsiveSizers.includes('xl:xl')) {
         return 'xl';
       }
-      if (asArray.includes('xl:lg')) {
+      if (responsiveSizers.includes('xl:lg')) {
         return 'lg';
       }
-      if (asArray.includes('xl:base')) {
+      if (responsiveSizers.includes('xl:base')) {
         return 'base';
       }
-      if (asArray.includes('xl:sm')) {
+      if (responsiveSizers.includes('xl:sm')) {
         return 'sm';
       }
-      if (asArray.includes('xl:xs')) {
+      if (responsiveSizers.includes('xl:xs')) {
         return 'xs';
       }
     }
 
     if (breakpoint.isLgUp) {
-      if (asArray.includes('lg:xl')) {
+      if (responsiveSizers.includes('lg:xl')) {
         return 'xl';
       }
-      if (asArray.includes('lg:lg')) {
+      if (responsiveSizers.includes('lg:lg')) {
         return 'lg';
       }
-      if (asArray.includes('lg:base')) {
+      if (responsiveSizers.includes('lg:base')) {
         return 'base';
       }
-      if (asArray.includes('lg:sm')) {
+      if (responsiveSizers.includes('lg:sm')) {
         return 'sm';
       }
-      if (asArray.includes('lg:xs')) {
+      if (responsiveSizers.includes('lg:xs')) {
         return 'xs';
       }
     }
 
     if (breakpoint.isMdUp) {
-      if (asArray.includes('md:xl')) {
+      if (responsiveSizers.includes('md:xl')) {
         return 'xl';
       }
-      if (asArray.includes('md:lg')) {
+      if (responsiveSizers.includes('md:lg')) {
         return 'lg';
       }
-      if (asArray.includes('md:base')) {
+      if (responsiveSizers.includes('md:base')) {
         return 'base';
       }
-      if (asArray.includes('md:sm')) {
+      if (responsiveSizers.includes('md:sm')) {
         return 'sm';
       }
-      if (asArray.includes('md:xs')) {
+      if (responsiveSizers.includes('md:xs')) {
         return 'xs';
       }
     }
 
     if (breakpoint.isSmUp) {
-      if (asArray.includes('sm:xl')) {
+      if (responsiveSizers.includes('sm:xl')) {
         return 'xl';
       }
-      if (asArray.includes('sm:lg')) {
+      if (responsiveSizers.includes('sm:lg')) {
         return 'lg';
       }
-      if (asArray.includes('sm:base')) {
+      if (responsiveSizers.includes('sm:base')) {
         return 'base';
       }
-      if (asArray.includes('sm:sm')) {
+      if (responsiveSizers.includes('sm:sm')) {
         return 'sm';
       }
-      if (asArray.includes('sm:xs')) {
+      if (responsiveSizers.includes('sm:xs')) {
         return 'xs';
       }
     }
 
-    if (asArray.includes('xl')) {
+    if (responsiveSizers.includes('xl')) {
       return 'xl';
     }
-    if (asArray.includes('lg')) {
+    if (responsiveSizers.includes('lg')) {
       return 'lg';
     }
-    if (asArray.includes('base')) {
+    if (responsiveSizers.includes('base')) {
       return 'base';
     }
-    if (asArray.includes('sm')) {
+    if (responsiveSizers.includes('sm')) {
       return 'sm';
     }
-    if (asArray.includes('xs')) {
+    if (responsiveSizers.includes('xs')) {
       return 'xs';
     }
 
     return 'base';
-  }, [breakpoint, responsiveSizer]);
+    // Using a spread here so that our dependencies array doesn't change
+    // when `responsiveSizers` is just a new array w/ the same items
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [breakpoint, ...responsiveSizers]);
 }
