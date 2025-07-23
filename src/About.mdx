@@ -4,20 +4,43 @@ import docs from '@/docs';
 
 <Meta title="About this project" />
 
-<div className="flex w-full items-baseline">
-  <div>
-    <Markdown># Welcome! 👋</Markdown>
+<div className="sb-unstyled -mt-10 mb-12 flex items-start gap-6">
+  <div className="sb-unstyled flex flex-1 flex-wrap gap-3">
+    <div>
+      [![vitest
+      status](https://github.com/NickDunkman/nickui/actions/workflows/vitest.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/vitest.yml)
+    </div>
+    <div>
+      [![eslint
+      status](https://github.com/NickDunkman/nickui/actions/workflows/eslint.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/eslint.yml)
+    </div>
+    <div>
+      [![tsc
+      status](https://github.com/NickDunkman/nickui/actions/workflows/tsc.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/tsc.yml)
+    </div>
+    <div>
+      [![prettier
+      status](https://github.com/NickDunkman/nickui/actions/workflows/prettier.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/prettier.yml)
+    </div>
   </div>
-  <div style={{ marginLeft: 'auto' }}>
+  <div className="relative -top-1 ml-auto text-nowrap">
     <docs.SourceLink />
   </div>
 </div>
 
+# Welcome! 👋
+
 <div className="text-base" style={{ fontSize: 16 }}>
   <div>
-    NickUI is a little component library I worked on after taking a gap year to
-    start coding again and rebuild some confidence. Along the way, I explored
-    some new technologies (like [Tailwind](https://tailwindcss.com/),
+    <img
+      src="./nickui.svg"
+      alt="NickUI"
+      width="100"
+      className="float-left -mt-1.25 mr-0.5"
+    />{' '}
+    is a little component library I worked on after taking a gap year to start
+    coding again and rebuild some confidence. Along the way, I explored some new
+    technologies (like [Tailwind](https://tailwindcss.com/),
     [Vite](https://vite.dev/), [Vitest](https://vitest.dev/), [React Hook
     Form](https://www.react-hook-form.com/), and [Nx](https://nx.dev/)) and went
     a little deeper into frontend devops and
