@@ -7,7 +7,7 @@ import { SourceLink } from './SourceLink';
 /** Custom doc block for rendering the heading of a Components mdx doc */
 export function ComponentHeading({ of }: { of: string }) {
   return (
-    <div className="flex w-full items-baseline">
+    <div className="flex w-full items-baseline" style={{ marginTop: -30 }}>
       <div>
         <Markdown
           options={{ overrides: { ComponentName } }}
