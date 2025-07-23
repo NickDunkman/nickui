@@ -1,4 +1,4 @@
-# <img src="/.storybook/assets/nickui.svg" width="250" alt="NickUI" />
+<h1 alt="NickUI"><img src="/.storybook/assets/nickui.svg" width="250" alt="NickUI" /></h1>
 
 [![vitest status](https://github.com/NickDunkman/nickui/actions/workflows/vitest.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/vitest.yml)
 [![eslint status](https://github.com/NickDunkman/nickui/actions/workflows/eslint.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/eslint.yml)
@@ -58,6 +58,8 @@ add to each component’s docs. If you’re inspired by anything you see, feel f
 to peep the
 [custom "doc blocks" I created](https://github.com/NickDunkman/nickui/tree/main/src/docs)!
 
+---
+
 ## 👷 Development
 
 ### Getting started
@@ -75,6 +77,8 @@ TODO
 ### Running the checks
 
 TODO
+
+---
 
 ## 📚 Updating the docs site
 
