@@ -1,6 +1,8 @@
 # <img src="/.storybook/assets/nickui.svg" width="250" alt="NickUI" title="NickUI" />
 
-# ![Try this](/.storybook/assets.nickui.svg)
+# ![Try this](/.storybook/assets/nickui.svg)
+
+# Try that
 
 [![vitest status](https://github.com/NickDunkman/nickui/actions/workflows/vitest.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/vitest.yml)
 [![eslint status](https://github.com/NickDunkman/nickui/actions/workflows/eslint.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/eslint.yml)
