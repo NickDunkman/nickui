@@ -33,7 +33,7 @@ export const Info: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the info flavor style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('bg-blue-800');
+      expect(canvas.getByRole('complementary')).toHaveClass('bg-blue-50');
     });
   },
 };
@@ -57,7 +57,7 @@ export const Yep: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the yep flavor style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('bg-emerald-700');
+      expect(canvas.getByRole('complementary')).toHaveClass('bg-emerald-50');
     });
   },
 };
@@ -81,7 +81,7 @@ export const Maybe: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the maybe flavor style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('bg-yellow-500');
+      expect(canvas.getByRole('complementary')).toHaveClass('bg-yellow-50');
     });
   },
 };
@@ -105,7 +105,7 @@ export const Nope: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the nope flavor style', async () => {
-      expect(canvas.getByRole('alert')).toHaveClass('bg-rose-700');
+      expect(canvas.getByRole('complementary')).toHaveClass('bg-rose-50');
     });
   },
 };
@@ -129,7 +129,8 @@ export const Xs: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the xs sizer style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('text-xs');
+      expect(canvas.getByRole('complementary')).toHaveClass('text-xs');
+      expect(canvas.getByRole('heading')).toHaveClass('text-xs');
     });
   },
 };
@@ -153,7 +154,8 @@ export const Sm: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the sm sizer style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('text-sm');
+      expect(canvas.getByRole('complementary')).toHaveClass('text-xs');
+      expect(canvas.getByRole('heading')).toHaveClass('text-sm');
     });
   },
 };
@@ -177,7 +179,8 @@ export const Base: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the base sizer style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('text-base');
+      expect(canvas.getByRole('complementary')).toHaveClass('text-sm');
+      expect(canvas.getByRole('heading')).toHaveClass('text-base');
     });
   },
 };
@@ -201,7 +204,8 @@ export const Lg: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the lg sizer style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('text-lg');
+      expect(canvas.getByRole('complementary')).toHaveClass('text-base');
+      expect(canvas.getByRole('heading')).toHaveClass('text-lg');
     });
   },
 };
@@ -225,7 +229,8 @@ export const Xl: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the xl sizer style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('text-xl');
+      expect(canvas.getByRole('complementary')).toHaveClass('text-lg');
+      expect(canvas.getByRole('heading')).toHaveClass('text-xl');
     });
   },
 };

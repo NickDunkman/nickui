@@ -162,7 +162,7 @@ export const Sm: Story = {
       'Assert the sm sizer style on both the Select & Field',
       async () => {
         expect(canvas.getByLabelText('Sm label')).toHaveClass('text-sm');
-        expect(canvas.getByText('Sm label')).toHaveClass('text-xs');
+        expect(canvas.getByText('Sm label')).toHaveClass('text-sm');
       },
     );
   },
@@ -181,7 +181,7 @@ export const Base: Story = {
       'Assert the base sizer style on both the Select & Field',
       async () => {
         expect(canvas.getByLabelText('Base label')).toHaveClass('text-base');
-        expect(canvas.getByText('Base label')).toHaveClass('text-sm');
+        expect(canvas.getByText('Base label')).toHaveClass('text-base');
       },
     );
   },
@@ -219,7 +219,7 @@ export const Xl: Story = {
       'Assert the xl sizer style on both the Select & Field',
       async () => {
         expect(canvas.getByLabelText('Xl label')).toHaveClass('text-xl');
-        expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
+        expect(canvas.getByText('Xl label')).toHaveClass('text-xl');
       },
     );
   },

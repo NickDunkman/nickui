@@ -348,7 +348,7 @@ export const Sm: Story = {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('h-5');
         });
-        expect(canvas.getByText('Sm label')).toHaveClass('text-xs');
+        expect(canvas.getByText('Sm label')).toHaveClass('text-sm');
       },
     );
   },
@@ -379,7 +379,7 @@ export const Base: Story = {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('h-6');
         });
-        expect(canvas.getByText('Base label')).toHaveClass('text-sm');
+        expect(canvas.getByText('Base label')).toHaveClass('text-base');
       },
     );
   },
@@ -441,7 +441,7 @@ export const Xl: Story = {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('h-8');
         });
-        expect(canvas.getByText('Xl label')).toHaveClass('text-lg');
+        expect(canvas.getByText('Xl label')).toHaveClass('text-xl');
       },
     );
   },

@@ -334,7 +334,7 @@ export const Base: Story = {
         expect(canvas.getByLabelText('Base Slider')).toHaveClass('h-6');
         expect(
           canvas.getByText('Base Slider').parentNode?.parentNode,
-        ).toHaveClass('text-xs');
+        ).toHaveClass('text-sm');
       },
     );
   },
@@ -355,7 +355,7 @@ export const Lg: Story = {
         expect(canvas.getByLabelText('Lg Slider')).toHaveClass('h-7');
         expect(
           canvas.getByText('Lg Slider').parentNode?.parentNode,
-        ).toHaveClass('text-sm');
+        ).toHaveClass('text-base');
       },
     );
   },
@@ -376,7 +376,7 @@ export const Xl: Story = {
         expect(canvas.getByLabelText('Xl Slider')).toHaveClass('h-8');
         expect(
           canvas.getByText('Xl Slider').parentNode?.parentNode,
-        ).toHaveClass('text-sm');
+        ).toHaveClass('text-lg');
       },
     );
   },
