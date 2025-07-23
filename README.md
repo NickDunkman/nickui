@@ -8,7 +8,7 @@
 
 Docs: https://nickdunkman.github.io/nickui
 
-## Welcome! 👋
+## 👋 Welcome!
 
 NickUI is a little component library I worked on after taking a gap year to
 start coding again and rebuild some confidence. Along the way, I explored some
@@ -57,3 +57,25 @@ storybook docs more powerful, and cut down on the amount of boilerplate I had to
 add to each component’s docs. If you’re inspired by anything you see, feel free
 to peep the
 [custom "doc blocks" I created](https://github.com/NickDunkman/nickui/tree/main/src/docs)!
+
+## 👷 Development
+
+### Getting started
+
+TODO
+
+### Running Storybook in development mode
+
+TODO
+
+### Configuring Cursor or VS Code
+
+TODO
+
+### Running the checks
+
+TODO
+
+## 📚 Updating the docs site
+
+TODO
