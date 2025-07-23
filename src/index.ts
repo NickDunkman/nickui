@@ -1,3 +1,6 @@
+export { Aside } from '@/components/Aside';
+export { Shout } from '@/components/Shout';
+
 export { Button } from '@/components/Button';
 export { Checkbox } from '@/components/Checkbox';
 export { Checkboxes } from '@/components/Checkboxes';
@@ -13,5 +16,3 @@ export { TextArea } from '@/components/TextArea';
 export { CheckedField } from '@/components/CheckedField';
 export { Field } from '@/components/Field';
 export { Fieldset } from '@/components/Fieldset';
-
-export { Shout } from '@/components/Shout';
