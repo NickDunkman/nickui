@@ -1,8 +1,4 @@
-# <img src="/.storybook/assets/nickui.svg" width="250" alt="NickUI" title="NickUI" />
-
-# ![Try this](/.storybook/assets/nickui.svg)
-
-# Try that
+# <img src="/.storybook/assets/nickui.svg" width="250" alt="NickUI" />
 
 [![vitest status](https://github.com/NickDunkman/nickui/actions/workflows/vitest.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/vitest.yml)
 [![eslint status](https://github.com/NickDunkman/nickui/actions/workflows/eslint.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/eslint.yml)
@@ -12,7 +8,7 @@
 
 Docs: https://nickdunkman.github.io/nickui
 
-### Welcome! 👋
+## Welcome! 👋
 
 NickUI is a little component library I worked on after taking a gap year to
 start coding again and rebuild some confidence. Along the way, I explored some
