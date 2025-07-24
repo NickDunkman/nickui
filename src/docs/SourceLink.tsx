@@ -6,8 +6,12 @@ import * as React from 'react';
  */
 export function SourceLink({
   path = '',
+  markOnly = false,
   ...props
-}: { path?: string } & React.ComponentProps<typeof AnchorMdx>) {
+}: {
+  path?: string;
+  markOnly?: boolean;
+} & React.ComponentProps<typeof AnchorMdx>) {
   return (
     <AnchorMdx
       {...props}
@@ -17,10 +21,10 @@ export function SourceLink({
       <img
         className="relative -top-0.5 mr-2 inline"
         src="./github-mark.svg"
-        width="20"
+        width={markOnly ? undefined : 20}
         alt=""
       />
-      Source code
+      {!markOnly && 'Source code'}
     </AnchorMdx>
   );
 }

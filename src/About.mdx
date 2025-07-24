@@ -4,7 +4,7 @@ import docs from '@/docs';
 
 <Meta title="About this project" />
 
-<div className="sb-unstyled -mt-10 mb-12 flex items-start gap-6">
+<div className="sb-unstyled -mt-10 mb-10 flex items-start gap-6 rounded-sm border-1 border-blue-200 bg-blue-50 p-3">
   <div className="sb-unstyled flex flex-1 flex-wrap gap-3">
     <div>
       [![vitest
@@ -23,8 +23,10 @@ import docs from '@/docs';
       status](https://github.com/NickDunkman/nickui/actions/workflows/prettier.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/prettier.yml)
     </div>
   </div>
-  <div className="relative -top-1 ml-auto text-nowrap">
-    <docs.SourceLink />
+  <div className="relative ml-auto w-6">
+    <div className="absolute -top-0.5 bottom-0 left-0 size-6">
+      <docs.SourceLink markOnly />
+    </div>
   </div>
 </div>
 
