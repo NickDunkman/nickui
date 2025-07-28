@@ -10,30 +10,50 @@ export const buttonStyler = tv({
     select-none
     transition-all duration-8 ease-out
     outline-none
+    border-1
+
+    text-(--nickui-button-text-color)
 
     bg-(--nickui-button-bg-color)
-    text-(--nickui-button-text-color)
+    border-(--nickui-button-border-color)
+
     hover:bg-(--nickui-button-hover-bg-color)
+    hover:border-(--nickui-button-hover-border-color)
+
     active:bg-(--nickui-button-active-bg-color)
+    active:border-(--nickui-button-active-border-color)
+
     focus:bg-(--nickui-button-focus-bg-color)
+    focus:border-(--nickui-button-focus-border-color)
 
     pointer-coarse:bg-(--nickui-button-coarse-bg-color)
     pointer-coarse:hover:bg-(--nickui-button-coarse-bg-color)
     pointer-coarse:active:bg-(--nickui-button-coarse-bg-color)
     pointer-coarse:focus:bg-(--nickui-button-coarse-bg-color)
 
+    pointer-coarse:border-(--nickui-button-coarse-border-color)
+    pointer-coarse:hover:border-(--nickui-button-coarse-border-color)
+    pointer-coarse:active:border-(--nickui-button-coarse-border-color)
+    pointer-coarse:focus:border-(--nickui-button-coarse-border-color)
+
     [--nickui-button-hover-bg-color:var(--nickui-button-bg-color)]
     [--nickui-button-active-bg-color:var(--nickui-button-bg-color)]
     [--nickui-button-focus-bg-color:var(--nickui-button-bg-color)]
     [--nickui-button-coarse-bg-color:var(--nickui-button-bg-color)]
+
+    [--nickui-button-border-color:var(--nickui-button-bg-color)]
+    [--nickui-button-hover-border-color:var(--nickui-button-hover-bg-color)]
+    [--nickui-button-active-border-color:var(--nickui-button-active-bg-color)]
+    [--nickui-button-focus-border-color:var(--nickui-button-focus-bg-color)]
+    [--nickui-button-coarse-border-color:var(--nickui-button-coarse-bg-color)]
   `,
   variants: {
     sizer: {
-      xs: 'text-xs py-1.75 px-2.25',
-      sm: 'text-sm py-2 px-3',
-      base: 'text-base py-3 px-4.5',
-      lg: 'text-lg py-4 px-5.5',
-      xl: 'text-xl py-5 px-6.5',
+      xs: 'text-xs py-1.5 px-2',
+      sm: 'text-sm py-1.75 px-2.75',
+      base: 'text-base py-2.75 px-4.25',
+      lg: 'text-lg py-3.75 px-5.25',
+      xl: 'text-xl py-4.75 px-6.25',
     },
     isDisabled: {
       false: `
