@@ -29,7 +29,7 @@ export const toastStyler = tv({
         root: 'bg-blue-50 border-blue-200 text-blue-950',
         dismisserIcon: 'bg-blue-900',
       },
-      yep: {
+      positive: {
         root: 'bg-emerald-50 border-emerald-200 text-emerald-950',
         dismisserIcon: 'bg-emerald-800',
       },

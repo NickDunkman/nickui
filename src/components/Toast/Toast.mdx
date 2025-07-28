@@ -85,7 +85,7 @@ from anywhere, even outside of a render context!
 ## Flavors
 
 Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
-`"yep"`, `"maybe"` or `"nope"`.
+`"positive"`, `"maybe"` or `"nope"`.
 
 <Canvas
   of={Stories.AllFlavors}
@@ -98,8 +98,8 @@ Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
         <Button onClick={() => toast({ title: 'Info Toast', body: 'Lorem ipsum ...' })} />
           Info Toast
         </Button>
-        <Button onClick={() => toast({ title: 'Yep Toast', body: 'Lorem ipsum ...' })} />
-          Yep Toast
+        <Button onClick={() => toast({ title: 'Positive Toast', body: 'Lorem ipsum ...' })} />
+          Positive Toast
         </Button>
         <Button onClick={() => toast({ title: 'Maybe Toast', body: 'Lorem ipsum ...' })} />
           Maybe Toast
@@ -129,7 +129,7 @@ props you want to pass to the <Docs of="Toast" /> when it finishes.
       const successToastProps = {
         title: 'Success',
         body: 'Your request has been completed successfully!',
-        flavor: 'yep',
+        flavor: 'positive',
       };
 
       function runTask() {

@@ -25,7 +25,7 @@ export function Toast({
 
   let loadingColor: string;
   switch (flavor) {
-    case 'yep':
+    case 'positive':
       loadingColor = '#002c22';
       break;
     case 'maybe':

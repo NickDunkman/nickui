@@ -38,12 +38,12 @@ export const Info: Story = {
   },
 };
 
-export const Yep: Story = {
+export const Positive: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
-    flavor: 'yep',
-    title: 'Yep Toast',
+    flavor: 'positive',
+    title: 'Positive Toast',
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim consectetur ante et ornare. Sed interdum sed quam vitae consequat.',
   },
 };
@@ -80,7 +80,7 @@ export const AsyncToast: Story = {
                 resolve({
                   title: 'Success',
                   body: 'Your request has been completed successfully!',
-                  flavor: 'yep',
+                  flavor: 'positive',
                 }),
               2000,
             );
@@ -133,7 +133,7 @@ export const AllFlavors: Story = {
   render: (_args) => (
     <div className="flex flex-wrap gap-4">
       <Button onClick={() => toast(Info.args)}>Info Toast</Button>
-      <Button onClick={() => toast(Yep.args)}>Yep Toast</Button>
+      <Button onClick={() => toast(Positive.args)}>Positive Toast</Button>
       <Button onClick={() => toast(Maybe.args)}>Maybe Toast</Button>
       <Button onClick={() => toast(Nope.args)}>Nope Toast</Button>
     </div>

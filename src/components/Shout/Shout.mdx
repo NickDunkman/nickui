@@ -25,7 +25,7 @@ congratulatory message. For a less prominent notice, use <Docs of="Aside" />.
 ## Flavors
 
 Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
-`"yep"`, `"maybe"` or `"nope"`.
+`"positive"`, `"maybe"` or `"nope"`.
 
 <Canvas of={Stories.AllFlavors} />
 
@@ -49,7 +49,7 @@ but without yanking their attention if they’re busy with something else:
     <Shout
       role="status"
       aria-live="polite"
-      flavor="yep"
+      flavor="positive"
     >
       Hey that was a good form submission 👍
     </Shout>
