@@ -130,12 +130,42 @@ export const CustomAsyncToast: Story = {
 
 export const AllFlavors: Story = {
   tags: ['!dev', '!test'],
+  parameters: {
+    source: `
+      import { Button, toast } from 'nickui';
+
+      <div className="flex gap-4 flex-wrap">
+        <Button
+          flavor="neutral"
+          onClick={() => toast({ title: 'Neutral Toast', body: 'Lorem ipsum ...' })}
+        />
+          Neutral Toast
+        </Button>
+        <Button onClick={() => toast({ title: 'Positive Toast', body: 'Lorem ipsum ...' })} />
+          Positive Toast
+        </Button>
+        <Button onClick={() => toast({ title: 'Caution Toast', body: 'Lorem ipsum ...' })} />
+          Caution Toast
+        </Button>
+        <Button
+          flavor="negative"
+          onClick={() => toast({ title: 'Negative Toast', body: 'Lorem ipsum ...' })}
+        />
+          Negative Toast
+        </Button>
+      </div>
+    `,
+  },
   render: (_args) => (
     <div className="flex flex-wrap gap-4">
-      <Button onClick={() => toast(Neutral.args)}>Neutral Toast</Button>
+      <Button onClick={() => toast(Neutral.args)} flavor="neutral">
+        Neutral Toast
+      </Button>
       <Button onClick={() => toast(Positive.args)}>Positive Toast</Button>
       <Button onClick={() => toast(Caution.args)}>Caution Toast</Button>
-      <Button onClick={() => toast(Negative.args)}>Negative Toast</Button>
+      <Button onClick={() => toast(Negative.args)} flavor="negative">
+        Negative Toast
+      </Button>
     </div>
   ),
 };

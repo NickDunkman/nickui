@@ -1,4 +1,4 @@
-import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
+import { Meta, Source } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/docs';
 
@@ -21,14 +21,7 @@ congratulatory message. For a less prominent notice, use <Docs of="Aside" />.
 <Docs.TableOfContents />
 
 <Docs.Props of={Stories} nativeBase="div" />
-
-## Flavors
-
-Coloring is done via the `flavor` prop. You can pass `"neutral"` (the default),
-`"positive"`, `"caution"` or `"negative"`.
-
-<Canvas of={Stories.AllFlavors} />
-
+<Docs.Flavoring of={Stories} />
 <Docs.Sizers of={Stories} />
 
 ## Accessibility considerations

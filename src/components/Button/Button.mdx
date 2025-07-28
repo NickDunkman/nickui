@@ -1,4 +1,4 @@
-import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/docs';
 
@@ -16,15 +16,7 @@ Allows the user to trigger an action, such as submitting a form.
 </Docs.FauxCanvas>
 
 <Docs.TableOfContents />
-
 <Docs.Props of={Stories} nativeBase="button" />
 <Docs.ControlStates of={Stories} />
-
-## Flavors
-
-Coloring is done via the `flavor` prop. You can pass `"neutral"` (the default),
-`"secondary"`, or `"negative"`.
-
-<Canvas of={Stories.AllFlavors} />
-
+<Docs.Flavoring of={Stories} />
 <Docs.Sizers of={Stories} />
