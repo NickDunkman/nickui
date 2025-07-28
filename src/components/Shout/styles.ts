@@ -14,7 +14,7 @@ export const shoutStyler = tv({
       xl: 'text-xl px-6 py-5',
     },
     flavor: {
-      info: 'bg-blue-800 text-white',
+      neutral: 'bg-blue-800 text-white',
       positive: 'bg-emerald-700 text-white',
       caution: 'bg-yellow-500 text-yellow-950',
       negative: 'bg-rose-700 text-white',
@@ -22,6 +22,6 @@ export const shoutStyler = tv({
   },
   defaultVariants: {
     sizer: 'base',
-    flavor: 'info',
+    flavor: 'neutral',
   },
 });

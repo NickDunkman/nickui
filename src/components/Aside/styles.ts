@@ -36,7 +36,7 @@ export const asideStyler = tv({
       },
     },
     flavor: {
-      info: {
+      neutral: {
         root: 'bg-blue-50 border-blue-200 text-blue-950',
       },
       positive: {
@@ -48,6 +48,6 @@ export const asideStyler = tv({
   },
   defaultVariants: {
     sizer: 'base',
-    flavor: 'info',
+    flavor: 'neutral',
   },
 });

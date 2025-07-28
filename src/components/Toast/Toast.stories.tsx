@@ -28,12 +28,12 @@ const renderWithButtonOpener: DecoratorFunction<
   );
 };
 
-export const Info: Story = {
+export const Neutral: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
-    flavor: 'info',
-    title: 'Info Toast',
+    flavor: 'neutral',
+    title: 'Neutral Toast',
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim consectetur ante et ornare. Sed interdum sed quam vitae consequat.',
   },
 };
@@ -132,7 +132,7 @@ export const AllFlavors: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-wrap gap-4">
-      <Button onClick={() => toast(Info.args)}>Info Toast</Button>
+      <Button onClick={() => toast(Neutral.args)}>Neutral Toast</Button>
       <Button onClick={() => toast(Positive.args)}>Positive Toast</Button>
       <Button onClick={() => toast(Caution.args)}>Caution Toast</Button>
       <Button onClick={() => toast(Negative.args)}>Negative Toast</Button>

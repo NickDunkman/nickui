@@ -14,12 +14,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Info: Story = {
+export const Neutral: Story = {
   tags: ['flavor'],
   args: {
-    flavor: 'info',
+    flavor: 'neutral',
     children: [
-      <Aside.Heading key="1">Info Aside</Aside.Heading>,
+      <Aside.Heading key="1">Neutral Aside</Aside.Heading>,
       <Aside.Paragraph key="2">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
         eleifend enim ullamcorper nibh dapibus, et mollis tellus sagittis. Cras
@@ -32,7 +32,7 @@ export const Info: Story = {
     ],
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the info flavor style', async () => {
+    await step('Assert the neutral flavor style', async () => {
       expect(canvas.getByRole('complementary')).toHaveClass('bg-blue-50');
     });
   },
@@ -258,7 +258,7 @@ export const AllFlavors: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
-      <Aside {...Info.args} />
+      <Aside {...Neutral.args} />
       <Aside {...Positive.args} />
       <Aside {...Caution.args} />
       <Aside {...Negative.args} />

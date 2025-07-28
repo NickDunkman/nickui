@@ -84,7 +84,7 @@ from anywhere, even outside of a render context!
 
 ## Flavors
 
-Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
+Coloring is done via the `flavor` prop. You can pass `"neutral"` (the default),
 `"positive"`, `"caution"` or `"negative"`.
 
 <Canvas
@@ -95,8 +95,8 @@ Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
       import { Button, toast } from 'nickui';
       ...
       <div className="flex gap-4 flex-wrap">
-        <Button onClick={() => toast({ title: 'Info Toast', body: 'Lorem ipsum ...' })} />
-          Info Toast
+        <Button onClick={() => toast({ title: 'Neutral Toast', body: 'Lorem ipsum ...' })} />
+          Neutral Toast
         </Button>
         <Button onClick={() => toast({ title: 'Positive Toast', body: 'Lorem ipsum ...' })} />
           Positive Toast

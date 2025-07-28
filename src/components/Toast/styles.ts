@@ -25,7 +25,7 @@ export const toastStyler = tv({
   },
   variants: {
     flavor: {
-      info: {
+      neutral: {
         root: 'bg-blue-50 border-blue-200 text-blue-950',
         dismisserIcon: 'bg-blue-900',
       },
@@ -44,7 +44,7 @@ export const toastStyler = tv({
     },
   },
   defaultVariants: {
-    flavor: 'info',
+    flavor: 'neutral',
     isDisabled: false,
     isKeyboardFocused: false,
   },

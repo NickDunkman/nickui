@@ -14,15 +14,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Info: Story = {
+export const Neutral: Story = {
   tags: ['flavor'],
   args: {
-    flavor: 'info',
-    children: 'Info Shout',
+    flavor: 'neutral',
+    children: 'Neutral Shout',
     role: 'status',
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the info flavor style', async () => {
+    await step('Assert the neutral flavor style', async () => {
       expect(canvas.getByRole('status')).toHaveClass('bg-blue-800');
     });
   },
@@ -153,7 +153,7 @@ export const AllFlavors: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
-      <Shout {...Info.args} />
+      <Shout {...Neutral.args} />
       <Shout {...Positive.args} />
       <Shout {...Caution.args} />
       <Shout {...Negative.args} />
