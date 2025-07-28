@@ -148,7 +148,9 @@ export const Neutral: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the neutral style', async () => {
-      await expect(canvas.getByRole('button')).toHaveClass('bg-blue-600');
+      await expect(canvas.getByRole('button')).toHaveClass(
+        '[--nickui-button-bg-color:var(--color-blue-600)]',
+      );
     });
   },
 };
@@ -163,7 +165,9 @@ export const Positive: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the positive style', async () => {
-      await expect(canvas.getByRole('button')).toHaveClass('bg-emerald-700');
+      await expect(canvas.getByRole('button')).toHaveClass(
+        '[--nickui-button-bg-color:var(--color-emerald-700)]',
+      );
     });
   },
 };
@@ -178,7 +182,9 @@ export const Negative: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the negative style', async () => {
-      expect(canvas.getByRole('button')).toHaveClass('bg-rose-700');
+      await expect(canvas.getByRole('button')).toHaveClass(
+        '[--nickui-button-bg-color:var(--color-rose-700)]',
+      );
     });
   },
 };
@@ -193,7 +199,9 @@ export const SecondaryNeutral: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the secondary neutral style', async () => {
-      expect(canvas.getByRole('button')).toHaveClass('bg-blue-200');
+      await expect(canvas.getByRole('button')).toHaveClass(
+        '[--nickui-button-bg-color:var(--color-blue-50)]',
+      );
     });
   },
 };
@@ -208,7 +216,9 @@ export const SecondaryPositive: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the secondary positive style', async () => {
-      expect(canvas.getByRole('button')).toHaveClass('bg-emerald-200');
+      await expect(canvas.getByRole('button')).toHaveClass(
+        '[--nickui-button-bg-color:var(--color-emerald-50)]',
+      );
     });
   },
 };
@@ -223,7 +233,9 @@ export const SecondaryNegative: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the secondary negative style', async () => {
-      expect(canvas.getByRole('button')).toHaveClass('bg-rose-200');
+      await expect(canvas.getByRole('button')).toHaveClass(
+        '[--nickui-button-bg-color:var(--color-rose-50)]',
+      );
     });
   },
 };
