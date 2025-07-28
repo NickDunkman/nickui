@@ -42,7 +42,7 @@ export const asideStyler = tv({
       positive: {
         root: 'bg-emerald-50 border-emerald-200 text-emerald-950',
       },
-      maybe: { root: 'bg-yellow-50 border-yellow-300 text-yellow-950' },
+      caution: { root: 'bg-yellow-50 border-yellow-300 text-yellow-950' },
       negative: { root: 'bg-rose-50 border-rose-200 text-rose-950' },
     },
   },

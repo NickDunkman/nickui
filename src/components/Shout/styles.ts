@@ -16,7 +16,7 @@ export const shoutStyler = tv({
     flavor: {
       info: 'bg-blue-800 text-white',
       positive: 'bg-emerald-700 text-white',
-      maybe: 'bg-yellow-500 text-yellow-950',
+      caution: 'bg-yellow-500 text-yellow-950',
       negative: 'bg-rose-700 text-white',
     },
   },

@@ -85,7 +85,7 @@ from anywhere, even outside of a render context!
 ## Flavors
 
 Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
-`"positive"`, `"maybe"` or `"negative"`.
+`"positive"`, `"caution"` or `"negative"`.
 
 <Canvas
   of={Stories.AllFlavors}
@@ -101,8 +101,8 @@ Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
         <Button onClick={() => toast({ title: 'Positive Toast', body: 'Lorem ipsum ...' })} />
           Positive Toast
         </Button>
-        <Button onClick={() => toast({ title: 'Maybe Toast', body: 'Lorem ipsum ...' })} />
-          Maybe Toast
+        <Button onClick={() => toast({ title: 'Caution Toast', body: 'Lorem ipsum ...' })} />
+          Caution Toast
         </Button>
         <Button onClick={() => toast({ title: 'Negative Toast', body: 'Lorem ipsum ...' })} />
           Negative Toast

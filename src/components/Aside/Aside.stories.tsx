@@ -62,12 +62,12 @@ export const Positive: Story = {
   },
 };
 
-export const Maybe: Story = {
+export const Caution: Story = {
   tags: ['flavor'],
   args: {
-    flavor: 'maybe',
+    flavor: 'caution',
     children: [
-      <Aside.Heading key="1">Maybe Aside</Aside.Heading>,
+      <Aside.Heading key="1">Caution Aside</Aside.Heading>,
       <Aside.Paragraph key="2">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
         eleifend enim ullamcorper nibh dapibus, et mollis tellus sagittis. Cras
@@ -80,7 +80,7 @@ export const Maybe: Story = {
     ],
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the maybe flavor style', async () => {
+    await step('Assert the caution flavor style', async () => {
       expect(canvas.getByRole('complementary')).toHaveClass('bg-yellow-50');
     });
   },
@@ -260,7 +260,7 @@ export const AllFlavors: Story = {
     <div className="flex flex-col gap-4">
       <Aside {...Info.args} />
       <Aside {...Positive.args} />
-      <Aside {...Maybe.args} />
+      <Aside {...Caution.args} />
       <Aside {...Negative.args} />
     </div>
   ),

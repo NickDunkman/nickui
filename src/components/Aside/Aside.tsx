@@ -15,7 +15,7 @@ interface AsideProps extends React.ComponentProps<'aside'> {
   heading?: React.ReactNode;
   /** Changes the size of the Shout ("sm", "base", "lg") */
   sizer?: SizerType | SizerType[];
-  /** Changes the color of the Shout ("info", "positive", "maybe", "negative") */
+  /** Changes the color of the Shout ("info", "positive", "caution", "negative") */
   flavor?: NoticeFlavorType;
 }
 

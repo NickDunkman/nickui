@@ -48,12 +48,12 @@ export const Positive: Story = {
   },
 };
 
-export const Maybe: Story = {
+export const Caution: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
-    flavor: 'maybe',
-    title: 'Maybe Toast',
+    flavor: 'caution',
+    title: 'Caution Toast',
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim consectetur ante et ornare. Sed interdum sed quam vitae consequat.',
   },
 };
@@ -134,7 +134,7 @@ export const AllFlavors: Story = {
     <div className="flex flex-wrap gap-4">
       <Button onClick={() => toast(Info.args)}>Info Toast</Button>
       <Button onClick={() => toast(Positive.args)}>Positive Toast</Button>
-      <Button onClick={() => toast(Maybe.args)}>Maybe Toast</Button>
+      <Button onClick={() => toast(Caution.args)}>Caution Toast</Button>
       <Button onClick={() => toast(Negative.args)}>Negative Toast</Button>
     </div>
   ),
