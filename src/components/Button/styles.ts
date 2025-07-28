@@ -10,6 +10,22 @@ export const buttonStyler = tv({
     select-none
     transition-all duration-8 ease-out
     outline-none
+
+    bg-(--nickui-button-bg-color)
+    text-(--nickui-button-text-color)
+    hover:bg-(--nickui-button-hover-bg-color)
+    active:bg-(--nickui-button-active-bg-color)
+    focus:bg-(--nickui-button-focus-bg-color)
+
+    pointer-coarse:bg-(--nickui-button-coarse-bg-color)
+    pointer-coarse:hover:bg-(--nickui-button-coarse-bg-color)
+    pointer-coarse:active:bg-(--nickui-button-coarse-bg-color)
+    pointer-coarse:focus:bg-(--nickui-button-coarse-bg-color)
+
+    [--nickui-button-hover-bg-color:var(--nickui-button-bg-color)]
+    [--nickui-button-active-bg-color:var(--nickui-button-bg-color)]
+    [--nickui-button-focus-bg-color:var(--nickui-button-bg-color)]
+    [--nickui-button-coarse-bg-color:var(--nickui-button-bg-color)]
   `,
   variants: {
     sizer: {
@@ -44,7 +60,7 @@ export const buttonStyler = tv({
     // Primary buttons have heavier text
     ////////////////////////////////////////////////////////////////////////////
     isSecondary: {
-      false: 'font-medium',
+      false: 'font-semibold',
       true: '',
     },
     ////////////////////////////////////////////////////////////////////////////
@@ -88,6 +104,7 @@ export const buttonStyler = tv({
       isDisabled: false,
       class: 'focus:shadow-none focus:translate-y-0.25 focus:scale-99',
     },
+
     ////////////////////////////////////////////////////////////////////////////
     // Flavor: primary neutral
     ////////////////////////////////////////////////////////////////////////////
@@ -96,10 +113,10 @@ export const buttonStyler = tv({
       isSecondary: false,
       isDisabled: false,
       class: `
-        bg-blue-600 text-white
-        hover:bg-blue-500
-        active:bg-blue-700
-        pointer-coarse:hover:bg-blue-600 pointer-coarse:active:bg-blue-600
+        [--nickui-button-text-color:var(--color-white)]
+        [--nickui-button-bg-color:var(--color-blue-600)]
+        [--nickui-button-hover-bg-color:var(--color-blue-500)]
+        [--nickui-button-active-bg-color:var(--color-blue-700)]
       `,
     },
     {
@@ -107,17 +124,18 @@ export const buttonStyler = tv({
       isSecondary: false,
       isKeyboardActivated: true,
       isDisabled: false,
-      class: 'active:bg-blue-700 focus:bg-blue-700 hover:bg-blue-700',
+      class: `
+        [--nickui-button-hover-bg-color:var(--color-blue-700)]
+        [--nickui-button-active-bg-color:var(--color-blue-700)]
+        [--nickui-button-focus-bg-color:var(--color-blue-700)]
+      `,
     },
     {
       flavor: 'neutral',
       isSecondary: false,
       isTouchActivated: true,
       isDisabled: false,
-      class: `
-        pointer-coarse:bg-blue-800 pointer-coarse:active:bg-blue-800
-        pointer-coarse:hover:bg-blue-800 pointer-coarse:focus:bg-blue-800
-      `,
+      class: '[--nickui-button-coarse-bg-color:var(--color-blue-800)]',
     },
     {
       flavor: 'neutral',
@@ -125,7 +143,7 @@ export const buttonStyler = tv({
       isKeyboardFocused: true,
       isKeyboardActivated: false,
       isDisabled: false,
-      class: 'focus:bg-blue-500',
+      class: '[--nickui-button-focus-bg-color:var(--color-blue-500)]',
     },
 
     ////////////////////////////////////////////////////////////////////////////
