@@ -141,7 +141,10 @@ export const AllFlavors: Story = {
         />
           Neutral Toast
         </Button>
-        <Button onClick={() => toast({ title: 'Positive Toast', body: 'Lorem ipsum ...' })} />
+        <Button 
+          flavor="positive"
+          onClick={() => toast({ title: 'Positive Toast', body: 'Lorem ipsum ...' })}
+        />
           Positive Toast
         </Button>
         <Button onClick={() => toast({ title: 'Caution Toast', body: 'Lorem ipsum ...' })} />
@@ -161,7 +164,9 @@ export const AllFlavors: Story = {
       <Button onClick={() => toast(Neutral.args)} flavor="neutral">
         Neutral Toast
       </Button>
-      <Button onClick={() => toast(Positive.args)}>Positive Toast</Button>
+      <Button onClick={() => toast(Positive.args)} flavor="positive">
+        Positive Toast
+      </Button>
       <Button onClick={() => toast(Caution.args)}>Caution Toast</Button>
       <Button onClick={() => toast(Negative.args)} flavor="negative">
         Negative Toast
