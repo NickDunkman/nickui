@@ -50,7 +50,7 @@ props to be used with [React Hook Form](https://react-hook-form.com/) and
             onClick={() => {
               setLibrary(lib);
             }}
-            flavor={library === lib ? 'neutral' : 'secondary'}
+            secondary={library !== lib}
           >
             {lib}
           </Button>

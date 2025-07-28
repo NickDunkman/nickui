@@ -142,6 +142,7 @@ export const Neutral: Story = {
   tags: ['flavor'],
   args: {
     flavor: 'neutral',
+    secondary: false,
     children: 'Neutral Button (default)',
     onClick: fn(),
   },
@@ -152,29 +153,46 @@ export const Neutral: Story = {
   },
 };
 
-export const Secondary: Story = {
+export const Negative: Story = {
   tags: ['flavor'],
   args: {
-    flavor: 'secondary',
-    children: 'Secondary Button',
+    flavor: 'negative',
+    secondary: false,
+    children: 'Negative Button',
     onClick: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the secondary style', async () => {
+    await step('Assert the negative style', async () => {
+      expect(canvas.getByRole('button')).toHaveClass('bg-rose-700');
+    });
+  },
+};
+
+export const SecondaryNeutral: Story = {
+  tags: ['flavor'],
+  args: {
+    flavor: 'neutral',
+    secondary: true,
+    children: 'Secondary neutral Button',
+    onClick: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the secondary neutral style', async () => {
       expect(canvas.getByRole('button')).toHaveClass('bg-blue-200');
     });
   },
 };
 
-export const Danger: Story = {
+export const SecondaryNegative: Story = {
   tags: ['flavor'],
   args: {
     flavor: 'negative',
-    children: 'Danger Button',
+    secondary: true,
+    children: 'Secondary negative Button',
     onClick: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the secondary style', async () => {
+    await step('Assert the secondary negative style', async () => {
       expect(canvas.getByRole('button')).toHaveClass('bg-rose-700');
     });
   },
@@ -208,8 +226,17 @@ export const AllFlavors: Story = {
   render: (_args) => (
     <div className="flex flex-wrap gap-4">
       <Button {...Neutral.args} />
-      <Button {...Secondary.args} />
-      <Button {...Danger.args} />
+      <Button {...Negative.args} />
+    </div>
+  ),
+};
+
+export const AllSecondaryFlavors: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <div className="flex flex-wrap gap-4">
+      <Button {...SecondaryNeutral.args} />
+      <Button {...SecondaryNegative.args} />
     </div>
   ),
 };

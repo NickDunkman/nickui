@@ -21,7 +21,9 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
   /** Changes the size of the button ("sm", "base", "lg") */
   sizer?: SizerType | SizerType[];
   /** Changes the color of the button ("neutral", "secondary", "negative") */
-  flavor?: 'neutral' | 'secondary' | 'negative';
+  flavor?: 'neutral' | 'negative';
+  /** Set to `true` to show the secondary style of the flavor */
+  secondary?: boolean;
 }
 
 /**
@@ -34,6 +36,7 @@ export function Button({
   disabled = false,
   sizer,
   flavor,
+  secondary = false,
   onTouchStart,
   onTouchEnd,
   onTouchCancel,
@@ -53,6 +56,7 @@ export function Button({
   const styles = buttonStyler({
     sizer: resolvedSizer,
     flavor,
+    isSecondary: secondary,
     isDisabled: disabled,
     isTouched: !disabled && isTouched,
     isKeyboardFocused: !disabled && isFocused && !isMouseFocused && !isTouched,

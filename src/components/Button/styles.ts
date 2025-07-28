@@ -35,10 +35,13 @@ export const buttonStyler = tv({
       `,
     },
     flavor: {
-      // Most flavor styling is done below in compoundVariants, when isDisabled is false
-      neutral: 'font-medium',
-      secondary: '',
-      negative: 'font-medium',
+      // All flavor styling is done below in compoundVariants, when isDisabled is false
+      neutral: '',
+      negative: '',
+    },
+    isSecondary: {
+      false: 'font-medium',
+      true: '',
     },
     isKeyboardFocused: {
       true: 'focus:shadow-xl/15 focus:-translate-y-0.5 focus:scale-102',
@@ -61,6 +64,7 @@ export const buttonStyler = tv({
   compoundVariants: [
     {
       flavor: 'neutral',
+      isSecondary: false,
       isDisabled: false,
       class: `
         bg-blue-600 text-white
@@ -70,7 +74,8 @@ export const buttonStyler = tv({
       `,
     },
     {
-      flavor: 'secondary',
+      flavor: 'neutral',
+      isSecondary: true,
       isDisabled: false,
       // The lighter background color accentuates the shadow, so lighten
       // the shadow a bit so it appears the same as the other button flavors
@@ -96,12 +101,14 @@ export const buttonStyler = tv({
     },
     {
       flavor: 'neutral',
+      isSecondary: false,
       isKeyboardActivated: true,
       isDisabled: false,
       class: 'active:bg-blue-700 focus:bg-blue-700 hover:bg-blue-700',
     },
     {
       flavor: 'neutral',
+      isSecondary: false,
       isTouched: true,
       isDisabled: false,
       class: `
@@ -111,19 +118,22 @@ export const buttonStyler = tv({
     },
     {
       flavor: 'neutral',
+      isSecondary: false,
       isKeyboardFocused: true,
       isKeyboardActivated: false,
       isDisabled: false,
       class: 'focus:bg-blue-500',
     },
     {
-      flavor: 'secondary',
+      flavor: 'neutral',
+      isSecondary: true,
       isKeyboardActivated: true,
       isDisabled: false,
       class: 'active:bg-blue-300 focus:bg-blue-300 hover:bg-blue-300',
     },
     {
-      flavor: 'secondary',
+      flavor: 'neutral',
+      isSecondary: true,
       isTouched: true,
       isDisabled: false,
       class: `
@@ -132,7 +142,8 @@ export const buttonStyler = tv({
       `,
     },
     {
-      flavor: 'secondary',
+      flavor: 'neutral',
+      isSecondary: true,
       isKeyboardFocused: true,
       isKeyboardActivated: false,
       isDisabled: false,
@@ -170,6 +181,7 @@ export const buttonStyler = tv({
   defaultVariants: {
     sizer: 'base',
     flavor: 'neutral',
+    isSecondary: false,
     isDisabled: false,
     isTouched: false,
     isKeyboardFocused: false,
