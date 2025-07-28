@@ -37,6 +37,7 @@ export const buttonStyler = tv({
     // All flavor styling is done below in compoundVariants
     flavor: {
       neutral: '',
+      positive: '',
       negative: '',
     },
     ////////////////////////////////////////////////////////////////////////////
@@ -170,6 +171,46 @@ export const buttonStyler = tv({
       isKeyboardActivated: false,
       isDisabled: false,
       class: 'focus:bg-[#c4e4ff]',
+    },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Flavor: primary positive
+    ////////////////////////////////////////////////////////////////////////////
+    {
+      flavor: 'positive',
+      isSecondary: false,
+      isDisabled: false,
+      class: `
+        bg-emerald-700 text-white
+        hover:bg-emerald-600
+        active:bg-emerald-800
+        pointer-coarse:hover:bg-emerald-700 pointer-coarse:active:bg-emerald-700
+      `,
+    },
+    {
+      flavor: 'positive',
+      isSecondary: false,
+      isKeyboardActivated: true,
+      isDisabled: false,
+      class: 'active:bg-emerald-800 focus:bg-emerald-800 hover:bg-emerald-800',
+    },
+    {
+      flavor: 'positive',
+      isSecondary: false,
+      isTouchActivated: true,
+      isDisabled: false,
+      class: `
+        pointer-coarse:bg-emerald-900 pointer-coarse:active:bg-emerald-900
+        pointer-coarse:hover:bg-emerald-900 pointer-coarse:focus:bg-emerald-900
+      `,
+    },
+    {
+      flavor: 'positive',
+      isSecondary: false,
+      isKeyboardFocused: true,
+      isKeyboardActivated: false,
+      isDisabled: false,
+      class: 'focus:bg-emerald-600',
     },
 
     ////////////////////////////////////////////////////////////////////////////
