@@ -34,7 +34,7 @@ default), \`"positive"\`, \`"caution"\` or \`"negative"\`.
         <>
           <Markdown>
             {`
-You can also use the \`secondary\` prop for more muted look to each flavor.
+You can also use the \`secondary\` prop for a more muted look to each flavor.
         `}
           </Markdown>
 
