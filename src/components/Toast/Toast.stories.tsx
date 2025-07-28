@@ -137,23 +137,42 @@ export const AllFlavors: Story = {
       <div className="flex gap-4 flex-wrap">
         <Button
           flavor="neutral"
-          onClick={() => toast({ title: 'Neutral Toast', body: 'Lorem ipsum ...' })}
-        />
+          onClick={() => toast({
+            flavor: 'neutral',
+            title: 'Neutral Toast',
+            body: 'Lorem ipsum ...',
+          })}
+        >
           Neutral Toast
         </Button>
         <Button 
           flavor="positive"
-          onClick={() => toast({ title: 'Positive Toast', body: 'Lorem ipsum ...' })}
-        />
+          onClick={() => toast({
+            flavor: 'positive',
+            title: 'Positive Toast',
+            body: 'Lorem ipsum ...',
+          })}
+        >
           Positive Toast
         </Button>
-        <Button onClick={() => toast({ title: 'Caution Toast', body: 'Lorem ipsum ...' })} />
+        <Button
+          flavor="caution"
+          onClick={() => toast({
+            flavor: 'caution',
+            title: 'Caution Toast',
+            body: 'Lorem ipsum ...',
+          })}
+        >
           Caution Toast
         </Button>
         <Button
           flavor="negative"
-          onClick={() => toast({ title: 'Negative Toast', body: 'Lorem ipsum ...' })}
-        />
+          onClick={() => toast({
+            flavor: 'negative',
+            title: 'Negative Toast',
+            body: 'Lorem ipsum ...',
+          })}
+        >
           Negative Toast
         </Button>
       </div>
@@ -167,7 +186,9 @@ export const AllFlavors: Story = {
       <Button onClick={() => toast(Positive.args)} flavor="positive">
         Positive Toast
       </Button>
-      <Button onClick={() => toast(Caution.args)}>Caution Toast</Button>
+      <Button onClick={() => toast(Caution.args)} flavor="caution">
+        Caution Toast
+      </Button>
       <Button onClick={() => toast(Negative.args)} flavor="negative">
         Negative Toast
       </Button>
