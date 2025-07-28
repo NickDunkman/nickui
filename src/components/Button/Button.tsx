@@ -49,8 +49,8 @@ export function Button({
 }: ButtonProps) {
   const [isMouseFocused, setIsMouseFocused] = React.useState(false);
   const [isFocused, setIsFocused] = React.useState(false);
-  const [isTouched, setIsTouched] = React.useState(false);
   const [isKeyboardActivated, setIsKeyboardActivated] = React.useState(false);
+  const [isTouchActivated, setIsTouchActivated] = React.useState(false);
 
   const resolvedSizer = useResolvedSizer(sizer);
   const styles = buttonStyler({
@@ -58,9 +58,10 @@ export function Button({
     flavor,
     isSecondary: secondary,
     isDisabled: disabled,
-    isTouched: !disabled && isTouched,
-    isKeyboardFocused: !disabled && isFocused && !isMouseFocused && !isTouched,
+    isKeyboardFocused:
+      !disabled && isFocused && !isMouseFocused && !isTouchActivated,
     isKeyboardActivated: !disabled && isKeyboardActivated,
+    isTouchActivated: !disabled && isTouchActivated,
   });
 
   return (
@@ -111,20 +112,20 @@ export function Button({
         onMouseDown?.(event);
       }}
       onTouchStart={(event) => {
-        if (!isTouched) {
-          setIsTouched(true);
+        if (!isTouchActivated) {
+          setIsTouchActivated(true);
         }
         onTouchStart?.(event);
       }}
       onTouchEnd={(event) => {
-        if (isTouched) {
-          setIsTouched(false);
+        if (isTouchActivated) {
+          setIsTouchActivated(false);
         }
         onTouchEnd?.(event);
       }}
       onTouchCancel={(event) => {
-        if (isTouched) {
-          setIsTouched(false);
+        if (isTouchActivated) {
+          setIsTouchActivated(false);
         }
         onTouchCancel?.(event);
       }}

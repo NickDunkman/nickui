@@ -34,18 +34,29 @@ export const buttonStyler = tv({
         disabled:opacity-100
       `,
     },
+    // All flavor styling is done below in compoundVariants
     flavor: {
-      // All flavor styling is done below in compoundVariants, when isDisabled is false
       neutral: '',
       negative: '',
     },
+    ////////////////////////////////////////////////////////////////////////////
+    // Primary buttons have heavier text
+    ////////////////////////////////////////////////////////////////////////////
     isSecondary: {
       false: 'font-medium',
       true: '',
     },
+    ////////////////////////////////////////////////////////////////////////////
+    // Focusing with the keyboard (tabbing to it) should have the same style
+    // as mouse-hoving. Push upwards & darken the shadow.
+    ////////////////////////////////////////////////////////////////////////////
     isKeyboardFocused: {
       true: 'focus:shadow-xl/15 focus:-translate-y-0.5 focus:scale-102',
     },
+    ////////////////////////////////////////////////////////////////////////////
+    // Activating the button with a keyboard (pressing enter or spacebar) should
+    // have the same styles as mouse-activating. Push downwards & remove shadow.
+    ////////////////////////////////////////////////////////////////////////////
     isKeyboardActivated: {
       true: `
         active:shadow-none active:translate-y-0.25 active:scale-99
@@ -53,7 +64,11 @@ export const buttonStyler = tv({
         focus:shadow-none focus:translate-y-0.25 focus:scale-99
       `,
     },
-    isTouched: {
+    ////////////////////////////////////////////////////////////////////////////
+    // Activating the button with a touch (on touch screens) should have the
+    // same styles as mouse-activating. Push downwards & remove shadow.
+    ////////////////////////////////////////////////////////////////////////////
+    isTouchActivated: {
       true: `
         pointer-coarse:shadow-none pointer-coarse:hover:shadow-none pointer-coarse:focus:shadow-none
         pointer-coarse:translate-y-0.5 pointer-coarse:hover:translate-y-0.5 pointer-coarse:focus:translate-y-0.5
@@ -62,6 +77,19 @@ export const buttonStyler = tv({
     },
   },
   compoundVariants: [
+    ////////////////////////////////////////////////////////////////////////////
+    // Some keyboard-activated styles need to override some keyboard-focused
+    // styles
+    ////////////////////////////////////////////////////////////////////////////
+    {
+      isKeyboardFocused: true,
+      isKeyboardActivated: true,
+      isDisabled: false,
+      class: 'focus:shadow-none focus:translate-y-0.25 focus:scale-99',
+    },
+    ////////////////////////////////////////////////////////////////////////////
+    // Flavor: primary neutral
+    ////////////////////////////////////////////////////////////////////////////
     {
       flavor: 'neutral',
       isSecondary: false,
@@ -73,6 +101,35 @@ export const buttonStyler = tv({
         pointer-coarse:hover:bg-blue-600 pointer-coarse:active:bg-blue-600
       `,
     },
+    {
+      flavor: 'neutral',
+      isSecondary: false,
+      isKeyboardActivated: true,
+      isDisabled: false,
+      class: 'active:bg-blue-700 focus:bg-blue-700 hover:bg-blue-700',
+    },
+    {
+      flavor: 'neutral',
+      isSecondary: false,
+      isTouchActivated: true,
+      isDisabled: false,
+      class: `
+        pointer-coarse:bg-blue-800 pointer-coarse:active:bg-blue-800
+        pointer-coarse:hover:bg-blue-800 pointer-coarse:focus:bg-blue-800
+      `,
+    },
+    {
+      flavor: 'neutral',
+      isSecondary: false,
+      isKeyboardFocused: true,
+      isKeyboardActivated: false,
+      isDisabled: false,
+      class: 'focus:bg-blue-500',
+    },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Flavor: secondary neutral
+    ////////////////////////////////////////////////////////////////////////////
     {
       flavor: 'neutral',
       isSecondary: true,
@@ -90,41 +147,6 @@ export const buttonStyler = tv({
       `,
     },
     {
-      flavor: 'negative',
-      isDisabled: false,
-      class: `
-        bg-rose-700 text-white
-        hover:bg-rose-600
-        active:bg-rose-800
-        pointer-coarse:hover:bg-rose-700 pointer-coarse:active:bg-rose-700
-      `,
-    },
-    {
-      flavor: 'neutral',
-      isSecondary: false,
-      isKeyboardActivated: true,
-      isDisabled: false,
-      class: 'active:bg-blue-700 focus:bg-blue-700 hover:bg-blue-700',
-    },
-    {
-      flavor: 'neutral',
-      isSecondary: false,
-      isTouched: true,
-      isDisabled: false,
-      class: `
-        pointer-coarse:bg-blue-800 pointer-coarse:active:bg-blue-800
-        pointer-coarse:hover:bg-blue-800 pointer-coarse:focus:bg-blue-800
-      `,
-    },
-    {
-      flavor: 'neutral',
-      isSecondary: false,
-      isKeyboardFocused: true,
-      isKeyboardActivated: false,
-      isDisabled: false,
-      class: 'focus:bg-blue-500',
-    },
-    {
       flavor: 'neutral',
       isSecondary: true,
       isKeyboardActivated: true,
@@ -134,7 +156,7 @@ export const buttonStyler = tv({
     {
       flavor: 'neutral',
       isSecondary: true,
-      isTouched: true,
+      isTouchActivated: true,
       isDisabled: false,
       class: `
         pointer-coarse:bg-blue-400 pointer-coarse:active:bg-blue-400
@@ -149,6 +171,20 @@ export const buttonStyler = tv({
       isDisabled: false,
       class: 'focus:bg-[#c4e4ff]',
     },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Flavor: primary negative
+    ////////////////////////////////////////////////////////////////////////////
+    {
+      flavor: 'negative',
+      isDisabled: false,
+      class: `
+        bg-rose-700 text-white
+        hover:bg-rose-600
+        active:bg-rose-800
+        pointer-coarse:hover:bg-rose-700 pointer-coarse:active:bg-rose-700
+      `,
+    },
     {
       flavor: 'negative',
       isKeyboardActivated: true,
@@ -157,7 +193,7 @@ export const buttonStyler = tv({
     },
     {
       flavor: 'negative',
-      isTouched: true,
+      isTouchActivated: true,
       isDisabled: false,
       class: `
         pointer-coarse:bg-rose-900 pointer-coarse:active:bg-rose-900
@@ -171,11 +207,50 @@ export const buttonStyler = tv({
       isDisabled: false,
       class: 'focus:bg-rose-600',
     },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Flavor: secondary negative
+    ////////////////////////////////////////////////////////////////////////////
     {
-      isKeyboardFocused: true,
+      flavor: 'negative',
+      isSecondary: true,
+      isDisabled: false,
+      // The lighter background color accentuates the shadow, so lighten
+      // the shadow a bit so it appears the same as the other button flavors
+      class: `
+        shadow-md/10
+        text-rose-950
+        bg-rose-200 
+        hover:bg-[#ffdadd]
+        active:bg-rose-300 
+        pointer-coarse:hover:bg-rose-200  
+        pointer-coarse:active:bg-rose-200  
+      `,
+    },
+    {
+      flavor: 'negative',
+      isSecondary: true,
       isKeyboardActivated: true,
       isDisabled: false,
-      class: 'focus:shadow-none focus:translate-y-0.25 focus:scale-99',
+      class: 'active:bg-rose-300 focus:bg-rose-300 hover:bg-rose-300',
+    },
+    {
+      flavor: 'negative',
+      isSecondary: true,
+      isTouchActivated: true,
+      isDisabled: false,
+      class: `
+        pointer-coarse:bg-rose-400 pointer-coarse:active:bg-rose-400
+        pointer-coarse:hover:bg-rose-400 pointer-coarse:focus:bg-rose-400
+      `,
+    },
+    {
+      flavor: 'negative',
+      isSecondary: true,
+      isKeyboardFocused: true,
+      isKeyboardActivated: false,
+      isDisabled: false,
+      class: 'focus:bg-[#ffdadd]',
     },
   ],
   defaultVariants: {
@@ -183,7 +258,7 @@ export const buttonStyler = tv({
     flavor: 'neutral',
     isSecondary: false,
     isDisabled: false,
-    isTouched: false,
+    isTouchActivated: false,
     isKeyboardFocused: false,
   },
 });
