@@ -127,7 +127,9 @@ export const buttonStyler = tv({
       class: `
         focus:shadow-none focus:translate-y-0.25 focus:scale-99
         [--nickui-button-hover-bg-color:var(--nickui-button-active-bg-color)]
+        [--nickui-button-hover-border-color:var(--nickui-button-active-border-color)]
         [--nickui-button-focus-bg-color:var(--nickui-button-active-bg-color)]
+        [--nickui-button-focus-border-color:var(--nickui-button-active-border-color)]
       `,
     },
 
@@ -141,6 +143,7 @@ export const buttonStyler = tv({
       isDisabled: false,
       class: `
         [--nickui-button-focus-bg-color:var(--nickui-button-hover-bg-color)]
+        [--nickui-button-focus-border-color:var(--nickui-button-hover-border-color)]
       `,
     },
 
@@ -180,9 +183,16 @@ export const buttonStyler = tv({
       class: `
         shadow-md/10
         [--nickui-button-text-color:var(--color-blue-950)]
-        [--nickui-button-bg-color:var(--color-blue-200)]
-        [--nickui-button-hover-bg-color:#c4e4ff]
-        [--nickui-button-active-bg-color:var(--color-blue-300)]
+
+        [--nickui-button-bg-color:var(--color-blue-50)]
+        [--nickui-button-border-color:var(--color-blue-900)]
+        [--nickui-button-focus-border-color:var(--color-blue-900)]
+
+        [--nickui-button-hover-bg-color:#f2f7fc]
+        [--nickui-button-hover-border-color:var(--color-blue-800)]
+
+        [--nickui-button-active-bg-color:var(--color-blue-100)]
+        [--nickui-button-active-border-color:var(--color-blue-950)]
       `,
     },
     // Make the active color when touching a little darker, since we’re
@@ -192,7 +202,10 @@ export const buttonStyler = tv({
       isSecondary: true,
       isTouchActivated: true,
       isDisabled: false,
-      class: '[--nickui-button-coarse-bg-color:var(--color-blue-400)]',
+      class: `
+        [--nickui-button-coarse-bg-color:var(--color-blue-200)]
+        [--nickui-button-coarse-border-color:var(--color-blue-950)]
+      `,
     },
 
     ////////////////////////////////////////////////////////////////////////////
@@ -231,9 +244,16 @@ export const buttonStyler = tv({
       class: `
         shadow-md/10
         [--nickui-button-text-color:var(--color-emerald-950)]
-        [--nickui-button-bg-color:var(--color-emerald-200)]
-        [--nickui-button-hover-bg-color:#bff2d9]
-        [--nickui-button-active-bg-color:var(--color-emerald-300)]
+
+        [--nickui-button-bg-color:var(--color-emerald-50)]
+        [--nickui-button-border-color:var(--color-emerald-900)]
+        [--nickui-button-focus-border-color:var(--color-emerald-900)]
+
+        [--nickui-button-hover-bg-color:#f2fcf8]
+        [--nickui-button-hover-border-color:var(--color-emerald-800)]
+
+        [--nickui-button-active-bg-color:var(--color-emerald-100)]
+        [--nickui-button-active-border-color:var(--color-emerald-950)]
       `,
     },
     // Make the active color when touching a little darker, since we’re
@@ -243,7 +263,10 @@ export const buttonStyler = tv({
       isSecondary: true,
       isTouchActivated: true,
       isDisabled: false,
-      class: '[--nickui-button-coarse-bg-color:var(--color-emerald-400)]',
+      class: `
+        [--nickui-button-coarse-bg-color:var(--color-emerald-200)]
+        [--nickui-button-coarse-border-color:var(--color-emerald-950)]
+      `,
     },
 
     ////////////////////////////////////////////////////////////////////////////
@@ -280,9 +303,16 @@ export const buttonStyler = tv({
       class: `
         shadow-md/10
         [--nickui-button-text-color:var(--color-rose-950)]
-        [--nickui-button-bg-color:var(--color-rose-200)]
-        [--nickui-button-hover-bg-color:#ffdadd]
-        [--nickui-button-active-bg-color:var(--color-rose-300)]
+
+        [--nickui-button-bg-color:var(--color-rose-50)]
+        [--nickui-button-border-color:var(--color-rose-900)]
+        [--nickui-button-focus-border-color:var(--color-rose-900)]
+
+        [--nickui-button-hover-bg-color:#fcf2f3]
+        [--nickui-button-hover-border-color:var(--color-rose-800)]
+
+        [--nickui-button-active-bg-color:var(--color-rose-100)]
+        [--nickui-button-active-border-color:var(--color-rose-950)]
       `,
     },
     // Make the active color when touching a little darker, since we’re
@@ -292,7 +322,10 @@ export const buttonStyler = tv({
       isSecondary: true,
       isTouchActivated: true,
       isDisabled: false,
-      class: '[--nickui-button-coarse-bg-color:var(--color-rose-400)]',
+      class: `
+        [--nickui-button-coarse-bg-color:var(--color-rose-200)]
+        [--nickui-button-coarse-border-color:var(--color-rose-950)]
+      `,
     },
   ],
   defaultVariants: {
