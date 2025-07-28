@@ -1,0 +1,118 @@
+import{r as e}from"./iframe-BLM9_nYH.js";import{C as S}from"./CheckedField-DCUj15v0.js";import{a as I,u as N,c as F}from"./index-BGW97fss.js";import{r as g}from"./randomId-Dfhrkieu.js";const M=`peer-checked:bg-[url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2010%2010'%3E%3Cpolygon%20fill='%23fff'%20fill-opacity='1'%20points='3.5%205.45%201.5%203.45%200%204.95%203.5%208.45%2010%201.95%208.5%20.45'/%3E%3C/svg%3E%0A")]`,A=I({slots:{root:"",input:"peer opacity-0 absolute -z-1",indicator:`
+      relative
+      border-2 border-black rounded-[3px]
+      bg-white peer-checked:bg-black 
+      pointer-events-none select-none
+      ${M} bg-no-repeat
+    `},variants:{sizer:{xs:{indicator:"size-3.5 top-0.25 bg-size-[8px]"},sm:{indicator:"size-4 top-[2.5px] bg-size-[10px]"},base:{indicator:"size-4.75 top-0.75 bg-size-[12px]"},lg:{indicator:"size-5.5 top-[3.5px] bg-size-[14px]"},xl:{indicator:"size-6 top-0.75 bg-size-[16px]"}},isDisabled:{true:{indicator:`
+          bg-gray-100 border-gray-300
+          peer-checked:bg-gray-400 peer-checked:border-gray-400
+        `}},isKeyboardFocused:{true:{indicator:`
+          border-blue-800 shadow-[0_0_11px] shadow-blue-300 outline-0 
+          peer-checked:bg-blue-800
+        `}}},defaultVariants:{sizer:"base",isDisabled:!1,isKeyboardFocused:!1}});function B(n){return e.createElement(v,{...n,type:"checkbox",styler:A})}function v({className:n,sizer:r,label:m,hint:o,disabled:a,styler:p,onBlur:b,onFocus:h,type:f,"aria-labelledby":y,"aria-describedby":w,...k}){const[t,u]=e.useState(!1),[s,d]=e.useState(!1);function T(l){l.preventDefault(),t||u(!0)}function C(l){h?.(l),s||d(!0)}function z(l){b?.(l),s&&d(!1),t&&u(!1)}const[R]=e.useState(g()),c=y||(m?R:void 0),[E]=e.useState(g()),x=w||(o?E:void 0),q=N(r),i=p({sizer:q,isDisabled:!!a,isKeyboardFocused:s&&!a&&!t});return e.createElement(S,{className:F(i.root(),n),label:m,labelId:c,hint:o,hintId:x,sizer:r,disabled:a,onMouseDown:T},e.createElement("input",{type:f,className:i.input(),disabled:a,onFocus:C,onBlur:z,"aria-labelledby":c,"aria-describedby":x,...k}),e.createElement("div",{className:i.indicator(),"data-testid":"indicator",style:{backgroundPosition:"50% 60%"}}))}B.__docgenInfo={description:`A form control that allow users to choose zero to many options from a set
+@param props {@link CheckboxProps} {@link CommonCheckedFieldProps}`,methods:[],displayName:"Checkbox",props:{checked:{required:!1,tsType:{name:"boolean"},description:`Sets the checked state of the Checkbox when using it as a
+[controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)`},defaultChecked:{required:!1,tsType:{name:"boolean"},description:`Sets the checked state of the Checkbox when using it as a uncontrolled
+component`},onChange:{required:!1,tsType:{name:"signature",type:"function",raw:"(event: React.ChangeEvent<HTMLInputElement>) => void",signature:{arguments:[{type:{name:"ReactChangeEvent",raw:"React.ChangeEvent<HTMLInputElement>",elements:[{name:"HTMLInputElement"}]},name:"event"}],return:{name:"void"}}},description:"Called when the checked state changes"},className:{required:!1,tsType:{name:"string"},description:"Optionally add utility classes to the root element"},sizer:{required:!1,tsType:{name:"union",raw:"SizerType | SizerType[]",elements:[{name:"union",raw:`| 'xs'
+| 'sm'
+| 'base'
+| 'lg'
+| 'xl'
+| 'sm:xs'
+| 'sm:sm'
+| 'sm:base'
+| 'sm:lg'
+| 'sm:xl'
+| 'md:xs'
+| 'md:sm'
+| 'md:base'
+| 'md:lg'
+| 'md:xl'
+| 'lg:xs'
+| 'lg:sm'
+| 'lg:base'
+| 'lg:lg'
+| 'lg:xl'
+| 'xl:xs'
+| 'xl:sm'
+| 'xl:base'
+| 'xl:lg'
+| 'xl:xl'`,elements:[{name:"literal",value:"'xs'"},{name:"literal",value:"'sm'"},{name:"literal",value:"'base'"},{name:"literal",value:"'lg'"},{name:"literal",value:"'xl'"},{name:"literal",value:"'sm:xs'"},{name:"literal",value:"'sm:sm'"},{name:"literal",value:"'sm:base'"},{name:"literal",value:"'sm:lg'"},{name:"literal",value:"'sm:xl'"},{name:"literal",value:"'md:xs'"},{name:"literal",value:"'md:sm'"},{name:"literal",value:"'md:base'"},{name:"literal",value:"'md:lg'"},{name:"literal",value:"'md:xl'"},{name:"literal",value:"'lg:xs'"},{name:"literal",value:"'lg:sm'"},{name:"literal",value:"'lg:base'"},{name:"literal",value:"'lg:lg'"},{name:"literal",value:"'lg:xl'"},{name:"literal",value:"'xl:xs'"},{name:"literal",value:"'xl:sm'"},{name:"literal",value:"'xl:base'"},{name:"literal",value:"'xl:lg'"},{name:"literal",value:"'xl:xl'"}]},{name:"Array",elements:[{name:"union",raw:`| 'xs'
+| 'sm'
+| 'base'
+| 'lg'
+| 'xl'
+| 'sm:xs'
+| 'sm:sm'
+| 'sm:base'
+| 'sm:lg'
+| 'sm:xl'
+| 'md:xs'
+| 'md:sm'
+| 'md:base'
+| 'md:lg'
+| 'md:xl'
+| 'lg:xs'
+| 'lg:sm'
+| 'lg:base'
+| 'lg:lg'
+| 'lg:xl'
+| 'xl:xs'
+| 'xl:sm'
+| 'xl:base'
+| 'xl:lg'
+| 'xl:xl'`,elements:[{name:"literal",value:"'xs'"},{name:"literal",value:"'sm'"},{name:"literal",value:"'base'"},{name:"literal",value:"'lg'"},{name:"literal",value:"'xl'"},{name:"literal",value:"'sm:xs'"},{name:"literal",value:"'sm:sm'"},{name:"literal",value:"'sm:base'"},{name:"literal",value:"'sm:lg'"},{name:"literal",value:"'sm:xl'"},{name:"literal",value:"'md:xs'"},{name:"literal",value:"'md:sm'"},{name:"literal",value:"'md:base'"},{name:"literal",value:"'md:lg'"},{name:"literal",value:"'md:xl'"},{name:"literal",value:"'lg:xs'"},{name:"literal",value:"'lg:sm'"},{name:"literal",value:"'lg:base'"},{name:"literal",value:"'lg:lg'"},{name:"literal",value:"'lg:xl'"},{name:"literal",value:"'xl:xs'"},{name:"literal",value:"'xl:sm'"},{name:"literal",value:"'xl:base'"},{name:"literal",value:"'xl:lg'"},{name:"literal",value:"'xl:xl'"}]}],raw:"SizerType[]"}]},description:`Changes the size of the field ("xs", "sm", "base", "lg", "xl", "sm:base",
+"lg:xl", etc)`},label:{required:!1,tsType:{name:"ReactReactNode",raw:"React.ReactNode"},description:"The main label to to the right of the form control, naming the field"},hint:{required:!1,tsType:{name:"ReactReactNode",raw:"React.ReactNode"},description:"Additional detail about the field, placed directly below the label"},disabled:{required:!1,tsType:{name:"boolean"},description:"Prevents the user from interacting with the control"}},composes:["Omit"]};v.__docgenInfo={description:`This component is the engine of the form controls that use a checkable
+input with a custom indicator. You can pass in alternate styles if you want
+the control to look different (such as for the Radio or Switch component!)`,methods:[],displayName:"Checkable",props:{checked:{required:!1,tsType:{name:"boolean"},description:`Sets the checked state of the Checkbox when using it as a
+[controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)`},defaultChecked:{required:!1,tsType:{name:"boolean"},description:`Sets the checked state of the Checkbox when using it as a uncontrolled
+component`},onChange:{required:!1,tsType:{name:"signature",type:"function",raw:"(event: React.ChangeEvent<HTMLInputElement>) => void",signature:{arguments:[{type:{name:"ReactChangeEvent",raw:"React.ChangeEvent<HTMLInputElement>",elements:[{name:"HTMLInputElement"}]},name:"event"}],return:{name:"void"}}},description:"Called when the checked state changes"},className:{required:!1,tsType:{name:"string"},description:"Optionally add utility classes to the root element"},sizer:{required:!1,tsType:{name:"union",raw:"SizerType | SizerType[]",elements:[{name:"union",raw:`| 'xs'
+| 'sm'
+| 'base'
+| 'lg'
+| 'xl'
+| 'sm:xs'
+| 'sm:sm'
+| 'sm:base'
+| 'sm:lg'
+| 'sm:xl'
+| 'md:xs'
+| 'md:sm'
+| 'md:base'
+| 'md:lg'
+| 'md:xl'
+| 'lg:xs'
+| 'lg:sm'
+| 'lg:base'
+| 'lg:lg'
+| 'lg:xl'
+| 'xl:xs'
+| 'xl:sm'
+| 'xl:base'
+| 'xl:lg'
+| 'xl:xl'`,elements:[{name:"literal",value:"'xs'"},{name:"literal",value:"'sm'"},{name:"literal",value:"'base'"},{name:"literal",value:"'lg'"},{name:"literal",value:"'xl'"},{name:"literal",value:"'sm:xs'"},{name:"literal",value:"'sm:sm'"},{name:"literal",value:"'sm:base'"},{name:"literal",value:"'sm:lg'"},{name:"literal",value:"'sm:xl'"},{name:"literal",value:"'md:xs'"},{name:"literal",value:"'md:sm'"},{name:"literal",value:"'md:base'"},{name:"literal",value:"'md:lg'"},{name:"literal",value:"'md:xl'"},{name:"literal",value:"'lg:xs'"},{name:"literal",value:"'lg:sm'"},{name:"literal",value:"'lg:base'"},{name:"literal",value:"'lg:lg'"},{name:"literal",value:"'lg:xl'"},{name:"literal",value:"'xl:xs'"},{name:"literal",value:"'xl:sm'"},{name:"literal",value:"'xl:base'"},{name:"literal",value:"'xl:lg'"},{name:"literal",value:"'xl:xl'"}]},{name:"Array",elements:[{name:"union",raw:`| 'xs'
+| 'sm'
+| 'base'
+| 'lg'
+| 'xl'
+| 'sm:xs'
+| 'sm:sm'
+| 'sm:base'
+| 'sm:lg'
+| 'sm:xl'
+| 'md:xs'
+| 'md:sm'
+| 'md:base'
+| 'md:lg'
+| 'md:xl'
+| 'lg:xs'
+| 'lg:sm'
+| 'lg:base'
+| 'lg:lg'
+| 'lg:xl'
+| 'xl:xs'
+| 'xl:sm'
+| 'xl:base'
+| 'xl:lg'
+| 'xl:xl'`,elements:[{name:"literal",value:"'xs'"},{name:"literal",value:"'sm'"},{name:"literal",value:"'base'"},{name:"literal",value:"'lg'"},{name:"literal",value:"'xl'"},{name:"literal",value:"'sm:xs'"},{name:"literal",value:"'sm:sm'"},{name:"literal",value:"'sm:base'"},{name:"literal",value:"'sm:lg'"},{name:"literal",value:"'sm:xl'"},{name:"literal",value:"'md:xs'"},{name:"literal",value:"'md:sm'"},{name:"literal",value:"'md:base'"},{name:"literal",value:"'md:lg'"},{name:"literal",value:"'md:xl'"},{name:"literal",value:"'lg:xs'"},{name:"literal",value:"'lg:sm'"},{name:"literal",value:"'lg:base'"},{name:"literal",value:"'lg:lg'"},{name:"literal",value:"'lg:xl'"},{name:"literal",value:"'xl:xs'"},{name:"literal",value:"'xl:sm'"},{name:"literal",value:"'xl:base'"},{name:"literal",value:"'xl:lg'"},{name:"literal",value:"'xl:xl'"}]}],raw:"SizerType[]"}]},description:`Changes the size of the field ("xs", "sm", "base", "lg", "xl", "sm:base",
+"lg:xl", etc)`},label:{required:!1,tsType:{name:"ReactReactNode",raw:"React.ReactNode"},description:"The main label to to the right of the form control, naming the field"},hint:{required:!1,tsType:{name:"ReactReactNode",raw:"React.ReactNode"},description:"Additional detail about the field, placed directly below the label"},disabled:{required:!1,tsType:{name:"boolean"},description:"Prevents the user from interacting with the control"},styler:{required:!1,tsType:{name:"any"},description:""},type:{required:!0,tsType:{name:"union",raw:"'checkbox' | 'radio'",elements:[{name:"literal",value:"'checkbox'"},{name:"literal",value:"'radio'"}]},description:""}},composes:["Omit"]};export{B as C,v as a};
