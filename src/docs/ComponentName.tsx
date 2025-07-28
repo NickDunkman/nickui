@@ -10,7 +10,7 @@ import { getStoryId } from '@/utils/stories';
  */
 export function ComponentName({ of }: { of: string }) {
   const docsId = getStoryId(of, 'Docs');
-  const asLink = !window.location.href.includes(docsId);
+  const asLink = !!docsId && !window.location.href.includes(docsId);
 
   const componentName = (
     <code

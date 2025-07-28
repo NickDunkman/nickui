@@ -1,0 +1,189 @@
+import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
+
+import { Button } from '@/components/Button';
+import Docs from '@/docs';
+
+import * as Stories from './Toast.stories';
+import { Toaster } from './Toaster';
+import { toast } from './toastFn';
+
+<Meta title="Notices/Toast" of={Stories} />
+
+<Docs.ComponentHeading of="Toast" />
+
+A <Docs of="Toast" /> is a temporary notice that animates into the corner of the
+screen.
+
+This component is powered by the [Sonner](https://sonner.emilkowal.ski) library
+created by Emil Kowalski, layering on the look & feel of NickUI.
+
+<div className="sb-unstyled">
+  <Toaster />
+</div>
+
+<Docs.FauxCanvas>
+  <Button
+    onClick={() =>
+      toast({
+        title: 'This is a toast',
+        body: 'Open as many as you want! They’ll stack up. Hover to get the option to dismiss immediately.',
+      })
+    }
+  >
+    Open a Toast
+  </Button>
+</Docs.FauxCanvas>
+
+<Docs.TableOfContents />
+
+## Setup
+
+To show toasts, you must mount the <Docs of="Toaster" /> somewhere in your
+application. It’s responsible for rendering the toasts as you add them.
+
+The <Docs of="Toaster" /> component takes many of the same props as
+[Sonner's Toaster](https://sonner.emilkowal.ski/toaster) component, which you
+can use to change the screen placement, how big the stack can get, etc. Some
+style- and content- related props have been omitted, since NickUI is adding its
+own look & feel.
+
+<Source
+  dark
+  language="tsx"
+  code={`
+    import { Toaster } from 'nickui';
+    ...
+    <MyApp>
+      ...
+      <Toaster position="bottom-right" visibleToasts={5} />
+    </MyApp>
+  `}
+/>
+
+## Triggering a toast
+
+Just call the `toast` function. It’s a regular function, so it can be called
+from anywhere, even outside of a render context!
+
+<Source
+  dark
+  language="tsx"
+  code={`
+    import { Button, toast } from 'nickui';
+    ...
+    <Button
+      onClick={() => toast({
+        title: 'Optional title',
+        body: 'The message you want to convey.'
+      })}
+    >
+      Open a toast!
+    </Button>
+  `}
+/>
+
+## Flavors
+
+Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
+`"yep"`, `"maybe"` or `"nope"`.
+
+<Canvas
+  of={Stories.AllFlavors}
+  source={{
+    language: 'tsx',
+    code: `
+      import { Button, toast } from 'nickui';
+      ...
+      <div className="flex gap-4 flex-wrap">
+        <Button onClick={() => toast({ title: 'Info Toast', body: 'Lorem ipsum ...' })} />
+          Info Toast
+        </Button>
+        <Button onClick={() => toast({ title: 'Yep Toast', body: 'Lorem ipsum ...' })} />
+          Yep Toast
+        </Button>
+        <Button onClick={() => toast({ title: 'Maybe Toast', body: 'Lorem ipsum ...' })} />
+          Maybe Toast
+        </Button>
+        <Button onClick={() => toast({ title: 'Nope Toast', body: 'Lorem ipsum ...' })} />
+          Nope Toast
+        </Button>
+      </div>
+    `,
+  }}
+/>
+
+## Asynchronous Toasts
+
+If you want your <Docs of="Toast" /> to have a loading state while an async task
+completes, you can use `toast.promise()`. Pass a promise which resolves with the
+props you want to pass to the <Docs of="Toast" /> when it finishes.
+
+<Canvas
+  of={Stories.AsyncToast}
+  sourceState="shown"
+  source={{
+    language: 'tsx',
+    code: `
+      import { Button, toast } from 'nickui';
+
+      const successToastProps = {
+        title: 'Success',
+        body: 'Your request has been completed successfully!',
+        flavor: 'yep',
+      };
+
+      function runTask() {
+        const task = new Promise((resolve) => {
+          setTimeout(() => resolve(successToastProps), 2000);
+        });
+
+        toast.promise(task);
+      }
+
+      <Button onClick={runTask}>Async Toast</Button>
+    `,
+
+}} />
+
+There are plenty of customization options. You can override the props passed to
+the <Docs of="Toast" /> during the loading phase, and you can pass any of the
+options that sonner offers, like customizing the `duration`, or whether it’s
+`dismissible`.
+
+The promise you provide should handle errors within its chain. For example, you
+could catch an HTTP error and then resolve with `flavor: 'nope'`.
+
+<Canvas of={Stories.CustomAsyncToast} sourceState="shown" source={{
+  language: "tsx",
+  code: `
+    import { Button, toast } from 'nickui';
+
+    const errorToastProps = {
+      title: 'Failure',
+      body: 'There was a problem completing your request.',
+      flavor: 'nope',
+    };
+
+    function runTask() {
+      const task = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject('oh no!');
+        }, 2000);
+      });
+
+      const taskWithErrorHandling = task.catch(() => errorToastProps);
+
+      toast.promise(taskWithErrorHandling, {
+        loadingToastProps: {
+          body: <>We’re working on it &hellip;</>,
+        },
+        sonnerOptions: {
+          dismissible: false,
+          duration: 3000,
+        },
+      });
+    }
+
+    <Button onClick={runTask}>Customized async Toast</Button>
+
+` }} />

@@ -5078,6 +5078,7 @@ __metadata:
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     react-hook-form: "npm:^7.58.1"
+    react-loading-indicators: "npm:^1.0.1"
     react-singleton-hook: "npm:^4.0.1"
     sonner: "npm:^2.0.6"
     storybook: "npm:^9.0.17"
@@ -5658,6 +5659,16 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 10c0/2bdb6b93fbb1820b024b496042cce405c57e2f85e777c9aabd55f9b26d145408f9f74f5934676ffdc46f3dcff656d78413a6e43968e7b3f92eea35b3052e9053
+  languageName: node
+  linkType: hard
+
+"react-loading-indicators@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "react-loading-indicators@npm:1.0.1"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 10c0/d2b50eea063afb3c4d7d9146e24f935341074ec42bd4375cf735abb43fa5e10b212b72308570fc2c86c24e85cda5470338974fa7ee02313cb6fb5de4c45351ba
   languageName: node
   linkType: hard
 

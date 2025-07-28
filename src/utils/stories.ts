@@ -3,7 +3,8 @@ function sluggify(str: string) {
 }
 
 export function getStoryId(componentName: string, storyName: string) {
-  return `${sluggify(getStoryTitle(componentName))}--${sluggify(storyName)}`;
+  const title = getStoryTitle(componentName);
+  return title ? `${sluggify(title)}--${sluggify(storyName)}` : null;
 }
 
 export function getStoryTitle(componentName: string) {
@@ -25,10 +26,10 @@ export function getStoryTitle(componentName: string) {
     case 'Fieldset':
       return `Field layouts/${componentName}`;
     case 'Aside':
-    case 'Fwoop':
     case 'Shout':
+    case 'Toast':
       return `Notices/${componentName}`;
     default:
-      return componentName;
+      return null;
   }
 }
