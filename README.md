@@ -4,9 +4,9 @@
 [![eslint status](https://github.com/NickDunkman/nickui/actions/workflows/eslint.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/eslint.yml)
 [![tsc status](https://github.com/NickDunkman/nickui/actions/workflows/tsc.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/tsc.yml)
 [![prettier status](https://github.com/NickDunkman/nickui/actions/workflows/prettier.yml/badge.svg?kill_cache=1)](https://github.com/NickDunkman/nickui/actions/workflows/prettier.yml)
-[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://nickdunkman.github.io/nickui)
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://nickui.nickdunkman.com)
 
-Docs: https://nickdunkman.github.io/nickui
+Docs: https://nickui.nickdunkman.com
 
 ---
 
