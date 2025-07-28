@@ -169,7 +169,7 @@ export const Secondary: Story = {
 export const Danger: Story = {
   tags: ['flavor'],
   args: {
-    flavor: 'danger',
+    flavor: 'negative',
     children: 'Danger Button',
     onClick: fn(),
   },
