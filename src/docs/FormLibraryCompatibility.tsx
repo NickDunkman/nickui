@@ -42,7 +42,7 @@ props to be used with [React Hook Form](https://react-hook-form.com/) and
         `}
       </Markdown>
 
-      <div className="sb-unstyled relative z-2 -mb-7 flex gap-2 rounded-t-sm bg-blue-950 p-3">
+      <div className="sb-unstyled relative z-2 -mb-7 flex gap-2 rounded-t-sm bg-emerald-900 p-3">
         {['React Hook Form', 'Formik'].map((lib) => (
           <Button
             key={lib}
@@ -50,6 +50,7 @@ props to be used with [React Hook Form](https://react-hook-form.com/) and
             onClick={() => {
               setLibrary(lib);
             }}
+            flavor="caution"
             secondary={library !== lib}
           >
             {lib}
