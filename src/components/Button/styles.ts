@@ -65,9 +65,11 @@ export const buttonStyler = tv({
         pointer-coarse:focus:shadow-md/15 pointer-coarse:focus:translate-y-0 pointer-coarse:focus:scale-100
       `,
       true: `
-        bg-gray-300 text-gray-600 cursor-not-allowed shadow-none
+        cursor-not-allowed shadow-none
         hover:shadow-none hover:translate-y-0 hover:scale-100
         disabled:opacity-100
+        [--nickui-button-text-color:var(--color-gray-600)]
+        [--nickui-button-bg-color:var(--color-gray-300)]
       `,
     },
     // All flavor styling is done below in compoundVariants
