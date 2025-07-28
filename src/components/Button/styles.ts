@@ -76,6 +76,7 @@ export const buttonStyler = tv({
     flavor: {
       neutral: '',
       positive: '',
+      caution: '',
       negative: '',
     },
     ////////////////////////////////////////////////////////////////////////////
@@ -256,6 +257,7 @@ export const buttonStyler = tv({
         [--nickui-button-active-border-color:var(--color-emerald-950)]
       `,
     },
+
     // Make the active color when touching a little darker, since we’re
     // transitioning from the base color, rather than the lighter hover color
     {
@@ -266,6 +268,65 @@ export const buttonStyler = tv({
       class: `
         [--nickui-button-coarse-bg-color:var(--color-emerald-200)]
         [--nickui-button-coarse-border-color:var(--color-emerald-950)]
+      `,
+    },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Flavor: primary caution
+    ////////////////////////////////////////////////////////////////////////////
+    {
+      flavor: 'caution',
+      isSecondary: false,
+      isDisabled: false,
+      class: `
+        [--nickui-button-text-color:var(--color-yellow-950)]
+        [--nickui-button-bg-color:var(--color-yellow-500)]
+        [--nickui-button-hover-bg-color:var(--color-yellow-400)]
+        [--nickui-button-active-bg-color:var(--color-yellow-600)]
+      `,
+    },
+    {
+      flavor: 'caution',
+      isSecondary: false,
+      isTouchActivated: true,
+      isDisabled: false,
+      class: '[--nickui-button-coarse-bg-color:var(--color-yellow-600)]',
+    },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Flavor: secondary caution
+    ////////////////////////////////////////////////////////////////////////////
+    {
+      flavor: 'caution',
+      isSecondary: true,
+      isDisabled: false,
+      // The lighter background color accentuates the shadow, so lighten
+      // the shadow a bit so it appears the same as the other button flavors
+      class: `
+        shadow-md/10
+        [--nickui-button-text-color:var(--color-yellow-950)]
+
+        [--nickui-button-bg-color:var(--color-yellow-50)]
+        [--nickui-button-border-color:var(--color-yellow-900)]
+        [--nickui-button-focus-border-color:var(--color-yellow-900)]
+
+        [--nickui-button-hover-bg-color:#fffef3]
+        [--nickui-button-hover-border-color:var(--color-yellow-800)]
+
+        [--nickui-button-active-bg-color:var(--color-yellow-100)]
+        [--nickui-button-active-border-color:var(--color-yellow-950)]
+      `,
+    },
+    // Make the active color when touching a little darker, since we’re
+    // transitioning from the base color, rather than the lighter hover color
+    {
+      flavor: 'caution',
+      isSecondary: true,
+      isTouchActivated: true,
+      isDisabled: false,
+      class: `
+        [--nickui-button-coarse-bg-color:var(--color-yellow-200)]
+        [--nickui-button-coarse-border-color:var(--color-yellow-950)]
       `,
     },
 

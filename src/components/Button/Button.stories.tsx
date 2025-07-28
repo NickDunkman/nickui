@@ -172,6 +172,23 @@ export const Positive: Story = {
   },
 };
 
+export const Caution: Story = {
+  tags: ['flavor'],
+  args: {
+    flavor: 'caution',
+    secondary: false,
+    children: 'Caution Button',
+    onClick: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the caution style', async () => {
+      await expect(canvas.getByRole('button')).toHaveClass(
+        '[--nickui-button-bg-color:var(--color-yellow-500)]',
+      );
+    });
+  },
+};
+
 export const Negative: Story = {
   tags: ['flavor'],
   args: {
@@ -223,6 +240,23 @@ export const SecondaryPositive: Story = {
   },
 };
 
+export const SecondaryCaution: Story = {
+  tags: ['flavor'],
+  args: {
+    flavor: 'caution',
+    secondary: true,
+    children: 'Secondary caution Button',
+    onClick: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the secondary caution style', async () => {
+      await expect(canvas.getByRole('button')).toHaveClass(
+        '[--nickui-button-bg-color:var(--color-yellow-50)]',
+      );
+    });
+  },
+};
+
 export const SecondaryNegative: Story = {
   tags: ['flavor'],
   args: {
@@ -269,6 +303,7 @@ export const AllFlavors: Story = {
     <div className="flex flex-wrap gap-4">
       <Button {...Neutral.args} />
       <Button {...Positive.args} />
+      <Button {...Caution.args} />
       <Button {...Negative.args} />
     </div>
   ),
@@ -280,6 +315,7 @@ export const AllSecondaryFlavors: Story = {
     <div className="flex flex-wrap gap-4">
       <Button {...SecondaryNeutral.args} />
       <Button {...SecondaryPositive.args} />
+      <Button {...SecondaryCaution.args} />
       <Button {...SecondaryNegative.args} />
     </div>
   ),
