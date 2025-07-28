@@ -56,15 +56,15 @@ export const Maybe: Story = {
   },
 };
 
-export const Nope: Story = {
+export const Negative: Story = {
   tags: ['flavor'],
   args: {
-    flavor: 'nope',
-    children: 'Nope Shout',
+    flavor: 'negative',
+    children: 'Negative Shout',
     role: 'alert',
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the nope flavor style', async () => {
+    await step('Assert the negative flavor style', async () => {
       expect(canvas.getByRole('alert')).toHaveClass('bg-rose-700');
     });
   },
@@ -156,7 +156,7 @@ export const AllFlavors: Story = {
       <Shout {...Info.args} />
       <Shout {...Positive.args} />
       <Shout {...Maybe.args} />
-      <Shout {...Nope.args} />
+      <Shout {...Negative.args} />
     </div>
   ),
 };

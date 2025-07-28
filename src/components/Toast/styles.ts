@@ -37,7 +37,7 @@ export const toastStyler = tv({
         root: 'bg-yellow-50 border-yellow-300 text-yellow-950',
         dismisserIcon: 'bg-yellow-600',
       },
-      nope: {
+      negative: {
         root: 'bg-rose-50 border-rose-200 text-rose-950',
         dismisserIcon: 'bg-rose-900',
       },

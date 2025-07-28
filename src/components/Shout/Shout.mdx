@@ -13,7 +13,7 @@ Displays an important notice to the user, such as an error message, warning, or
 congratulatory message. For a less prominent notice, use <Docs of="Aside" />.
 
 <Docs.FauxCanvas>
-  <Shout flavor="nope" role="alert" aria-live="assertive">
+  <Shout flavor="negative" role="alert" aria-live="assertive">
     Fore!
   </Shout>
 </Docs.FauxCanvas>
@@ -25,7 +25,7 @@ congratulatory message. For a less prominent notice, use <Docs of="Aside" />.
 ## Flavors
 
 Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
-`"positive"`, `"maybe"` or `"nope"`.
+`"positive"`, `"maybe"` or `"negative"`.
 
 <Canvas of={Stories.AllFlavors} />
 
@@ -66,7 +66,7 @@ way:
     <Shout
       role="alert"
       aria-live="assertive"
-      flavor="nope"
+      flavor="negative"
     >
       There was a problem with your visa application submission. If you don’t
       fix and resubmit, you will be apprehended at the border.

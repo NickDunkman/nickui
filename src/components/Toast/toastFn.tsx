@@ -43,7 +43,7 @@ toast.promise = (
    * The promise the performs the asynchronous task, and then resolves with
    * the props to pass to the Toast in its finalized state, such as the `title`,
    * `body`, `flavor`, etc. Should catch errors itself -- e.g. handling an
-   * HTTP error and then resolving with a `flavor="nope"` Toast with error
+   * HTTP error and then resolving with a `flavor="negative"` Toast with error
    * information.
    */
   thePromise: Promise<ToastProps>,

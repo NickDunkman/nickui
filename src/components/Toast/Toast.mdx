@@ -85,7 +85,7 @@ from anywhere, even outside of a render context!
 ## Flavors
 
 Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
-`"positive"`, `"maybe"` or `"nope"`.
+`"positive"`, `"maybe"` or `"negative"`.
 
 <Canvas
   of={Stories.AllFlavors}
@@ -104,8 +104,8 @@ Coloring is done via the `flavor` prop. You can pass `"info"` (the default),
         <Button onClick={() => toast({ title: 'Maybe Toast', body: 'Lorem ipsum ...' })} />
           Maybe Toast
         </Button>
-        <Button onClick={() => toast({ title: 'Nope Toast', body: 'Lorem ipsum ...' })} />
-          Nope Toast
+        <Button onClick={() => toast({ title: 'Negative Toast', body: 'Lorem ipsum ...' })} />
+          Negative Toast
         </Button>
       </div>
     `,
@@ -151,7 +151,7 @@ options that sonner offers, like customizing the `duration`, or whether it’s
 `dismissible`.
 
 The promise you provide should handle errors within its chain. For example, you
-could catch an HTTP error and then resolve with `flavor: 'nope'`.
+could catch an HTTP error and then resolve with `flavor: 'negative'`.
 
 <Canvas of={Stories.CustomAsyncToast} sourceState="shown" source={{
   language: "tsx",
@@ -161,7 +161,7 @@ could catch an HTTP error and then resolve with `flavor: 'nope'`.
     const errorToastProps = {
       title: 'Failure',
       body: 'There was a problem completing your request.',
-      flavor: 'nope',
+      flavor: 'negative',
     };
 
     function runTask() {

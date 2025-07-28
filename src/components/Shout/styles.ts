@@ -17,7 +17,7 @@ export const shoutStyler = tv({
       info: 'bg-blue-800 text-white',
       positive: 'bg-emerald-700 text-white',
       maybe: 'bg-yellow-500 text-yellow-950',
-      nope: 'bg-rose-700 text-white',
+      negative: 'bg-rose-700 text-white',
     },
   },
   defaultVariants: {

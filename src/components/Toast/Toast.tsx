@@ -31,7 +31,7 @@ export function Toast({
     case 'maybe':
       loadingColor = '#432004';
       break;
-    case 'nope':
+    case 'negative':
       loadingColor = '#460809';
       break;
     default:

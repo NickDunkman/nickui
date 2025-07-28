@@ -58,12 +58,12 @@ export const Maybe: Story = {
   },
 };
 
-export const Nope: Story = {
+export const Negative: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
-    flavor: 'nope',
-    title: 'Nope Toast',
+    flavor: 'negative',
+    title: 'Negative Toast',
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim consectetur ante et ornare. Sed interdum sed quam vitae consequat.',
   },
 };
@@ -101,7 +101,7 @@ export const CustomAsyncToast: Story = {
         const errorToastProps: ToastProps = {
           title: 'Failure',
           body: 'There was a problem completing your request.',
-          flavor: 'nope',
+          flavor: 'negative',
         };
 
         const task = new Promise<ToastProps>((_resolve, reject) => {
@@ -135,7 +135,7 @@ export const AllFlavors: Story = {
       <Button onClick={() => toast(Info.args)}>Info Toast</Button>
       <Button onClick={() => toast(Positive.args)}>Positive Toast</Button>
       <Button onClick={() => toast(Maybe.args)}>Maybe Toast</Button>
-      <Button onClick={() => toast(Nope.args)}>Nope Toast</Button>
+      <Button onClick={() => toast(Negative.args)}>Negative Toast</Button>
     </div>
   ),
 };

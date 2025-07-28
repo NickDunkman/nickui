@@ -86,12 +86,12 @@ export const Maybe: Story = {
   },
 };
 
-export const Nope: Story = {
+export const Negative: Story = {
   tags: ['flavor'],
   args: {
-    flavor: 'nope',
+    flavor: 'negative',
     children: [
-      <Aside.Heading key="1">Nope Aside</Aside.Heading>,
+      <Aside.Heading key="1">Negative Aside</Aside.Heading>,
       <Aside.Paragraph key="2">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
         eleifend enim ullamcorper nibh dapibus, et mollis tellus sagittis. Cras
@@ -104,7 +104,7 @@ export const Nope: Story = {
     ],
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the nope flavor style', async () => {
+    await step('Assert the negative flavor style', async () => {
       expect(canvas.getByRole('complementary')).toHaveClass('bg-rose-50');
     });
   },
@@ -261,7 +261,7 @@ export const AllFlavors: Story = {
       <Aside {...Info.args} />
       <Aside {...Positive.args} />
       <Aside {...Maybe.args} />
-      <Aside {...Nope.args} />
+      <Aside {...Negative.args} />
     </div>
   ),
 };

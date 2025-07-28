@@ -103,4 +103,4 @@ export type CommonCheckedFieldProps = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type StoriesModule = Record<string, any>;
 
-export type NoticeFlavorType = 'info' | 'positive' | 'maybe' | 'nope';
+export type NoticeFlavorType = 'info' | 'positive' | 'maybe' | 'negative';

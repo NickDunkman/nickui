@@ -13,7 +13,7 @@ interface ShoutProps extends React.ComponentProps<'div'> {
   className?: string;
   /** Changes the size of the Shout ("sm", "base", "lg") */
   sizer?: SizerType | SizerType[];
-  /** Changes the color of the Shout ("info", "positive", "maybe", "nope") */
+  /** Changes the color of the Shout ("info", "positive", "maybe", "negative") */
   flavor?: NoticeFlavorType;
 }
 
