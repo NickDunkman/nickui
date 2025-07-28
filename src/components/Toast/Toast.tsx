@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { OrbitProgress } from 'react-loading-indicators';
 
-import { NoticeFlavorType } from '@/types';
+import { FlavorType } from '@/types';
 
 import { toastStyler } from './styles';
 
@@ -10,7 +10,7 @@ export interface ToastProps {
   body?: React.ReactNode;
   loading?: boolean;
   onDismiss?: React.MouseEventHandler<HTMLButtonElement>;
-  flavor?: NoticeFlavorType;
+  flavor?: FlavorType;
 }
 
 /** A fully custom toast that still maintains the animations and interactions. */

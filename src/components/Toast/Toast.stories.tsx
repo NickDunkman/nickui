@@ -22,7 +22,9 @@ const renderWithButtonOpener: DecoratorFunction<
 > = (_, ctx) => {
   return (
     <>
-      <Button onClick={() => toast(ctx.args)}>{ctx.name} Toast</Button>
+      <Button onClick={() => toast(ctx.args)} flavor={ctx.args.flavor}>
+        {ctx.name} Toast
+      </Button>
       <Toaster />
     </>
   );

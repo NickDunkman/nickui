@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { NoticeFlavorType, SizerType } from '@/types';
+import { FlavorType, SizerType } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
@@ -15,8 +15,11 @@ interface AsideProps extends React.ComponentProps<'aside'> {
   heading?: React.ReactNode;
   /** Changes the size of the Shout ("sm", "base", "lg") */
   sizer?: SizerType | SizerType[];
-  /** Changes the color of the Shout ("neutral", "positive", "caution", "negative") */
-  flavor?: NoticeFlavorType;
+  /**
+   * Changes the color of the Shout ("neutral", "positive", "caution",
+   * "negative")
+   */
+  flavor?: FlavorType;
 }
 
 /**
@@ -64,7 +67,7 @@ Aside.Paragraph = AsideParagraph;
 const AsideContext = React.createContext<{
   styles: ReturnType<typeof asideStyler>;
   resolvedSizer: ReturnType<typeof useResolvedSizer>;
-  flavor?: NoticeFlavorType;
+  flavor?: FlavorType;
 }>({
   styles: asideStyler(),
   resolvedSizer: 'base',

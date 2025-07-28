@@ -1,7 +1,7 @@
 import keycode from 'keycode';
 import * as React from 'react';
 
-import { SizerType } from '@/types';
+import { FlavorType, SizerType } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
@@ -24,7 +24,7 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
    * Changes the color of the button ("neutral", "positive", "caution",
    * "negative")
    */
-  flavor?: 'neutral' | 'positive' | 'caution' | 'negative';
+  flavor?: FlavorType;
   /** Set to `true` to show the secondary style of the flavor */
   secondary?: boolean;
 }
