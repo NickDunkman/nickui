@@ -198,6 +198,21 @@ export const SecondaryNeutral: Story = {
   },
 };
 
+export const SecondaryPositive: Story = {
+  tags: ['flavor'],
+  args: {
+    flavor: 'positive',
+    secondary: true,
+    children: 'Secondary positive Button',
+    onClick: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step('Assert the secondary positive style', async () => {
+      expect(canvas.getByRole('button')).toHaveClass('bg-emerald-200');
+    });
+  },
+};
+
 export const SecondaryNegative: Story = {
   tags: ['flavor'],
   args: {
@@ -252,6 +267,7 @@ export const AllSecondaryFlavors: Story = {
   render: (_args) => (
     <div className="flex flex-wrap gap-4">
       <Button {...SecondaryNeutral.args} />
+      <Button {...SecondaryPositive.args} />
       <Button {...SecondaryNegative.args} />
     </div>
   ),

@@ -214,6 +214,51 @@ export const buttonStyler = tv({
     },
 
     ////////////////////////////////////////////////////////////////////////////
+    // Flavor: secondary positive
+    ////////////////////////////////////////////////////////////////////////////
+    {
+      flavor: 'positive',
+      isSecondary: true,
+      isDisabled: false,
+      // The lighter background color accentuates the shadow, so lighten
+      // the shadow a bit so it appears the same as the other button flavors
+      class: `
+        shadow-md/10
+        text-emerald-950
+        bg-emerald-200
+        hover:bg-[#bff2d9]
+        active:bg-emerald-300 
+        pointer-coarse:hover:bg-emerald-200  
+        pointer-coarse:active:bg-emerald-200  
+      `,
+    },
+    {
+      flavor: 'neutral',
+      isSecondary: true,
+      isKeyboardActivated: true,
+      isDisabled: false,
+      class: 'active:bg-emerald-300 focus:bg-emerald-300 hover:bg-emerald-300',
+    },
+    {
+      flavor: 'neutral',
+      isSecondary: true,
+      isTouchActivated: true,
+      isDisabled: false,
+      class: `
+        pointer-coarse:bg-emerald-400 pointer-coarse:active:bg-emerald-400
+        pointer-coarse:hover:bg-emerald-400 pointer-coarse:focus:bg-emerald-400
+      `,
+    },
+    {
+      flavor: 'neutral',
+      isSecondary: true,
+      isKeyboardFocused: true,
+      isKeyboardActivated: false,
+      isDisabled: false,
+      class: 'focus:bg-[#bff2d9]',
+    },
+
+    ////////////////////////////////////////////////////////////////////////////
     // Flavor: primary negative
     ////////////////////////////////////////////////////////////////////////////
     {
