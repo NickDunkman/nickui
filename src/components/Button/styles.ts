@@ -95,14 +95,31 @@ export const buttonStyler = tv({
   },
   compoundVariants: [
     ////////////////////////////////////////////////////////////////////////////
-    // Some keyboard-activated styles need to override some keyboard-focused
-    // styles
+    // On keyboard-activation, force the active style by overriding relevant
+    // focus & hover styles
     ////////////////////////////////////////////////////////////////////////////
     {
       isKeyboardFocused: true,
       isKeyboardActivated: true,
       isDisabled: false,
-      class: 'focus:shadow-none focus:translate-y-0.25 focus:scale-99',
+      class: `
+        focus:shadow-none focus:translate-y-0.25 focus:scale-99
+        [--nickui-button-hover-bg-color:var(--nickui-button-active-bg-color)]
+        [--nickui-button-focus-bg-color:var(--nickui-button-active-bg-color)]
+      `,
+    },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Hightlight keyboard-focus using the same color as the hover state, across
+    // all flavors
+    ////////////////////////////////////////////////////////////////////////////
+    {
+      isKeyboardFocused: true,
+      isKeyboardActivated: false,
+      isDisabled: false,
+      class: `
+        [--nickui-button-focus-bg-color:var(--nickui-button-hover-bg-color)]
+      `,
     },
 
     ////////////////////////////////////////////////////////////////////////////
@@ -119,31 +136,14 @@ export const buttonStyler = tv({
         [--nickui-button-active-bg-color:var(--color-blue-700)]
       `,
     },
-    {
-      flavor: 'neutral',
-      isSecondary: false,
-      isKeyboardActivated: true,
-      isDisabled: false,
-      class: `
-        [--nickui-button-hover-bg-color:var(--color-blue-700)]
-        [--nickui-button-active-bg-color:var(--color-blue-700)]
-        [--nickui-button-focus-bg-color:var(--color-blue-700)]
-      `,
-    },
+    // Make the active color when touching a little darker, since we’re
+    // transitioning from the base color, rather than the lighter hover color
     {
       flavor: 'neutral',
       isSecondary: false,
       isTouchActivated: true,
       isDisabled: false,
       class: '[--nickui-button-coarse-bg-color:var(--color-blue-800)]',
-    },
-    {
-      flavor: 'neutral',
-      isSecondary: false,
-      isKeyboardFocused: true,
-      isKeyboardActivated: false,
-      isDisabled: false,
-      class: '[--nickui-button-focus-bg-color:var(--color-blue-500)]',
     },
 
     ////////////////////////////////////////////////////////////////////////////
@@ -157,38 +157,20 @@ export const buttonStyler = tv({
       // the shadow a bit so it appears the same as the other button flavors
       class: `
         shadow-md/10
-        text-blue-950
-        bg-blue-200 
-        hover:bg-[#c4e4ff]
-        active:bg-blue-300 
-        pointer-coarse:hover:bg-blue-200  
-        pointer-coarse:active:bg-blue-200  
+        [--nickui-button-text-color:var(--color-blue-950)]
+        [--nickui-button-bg-color:var(--color-blue-200)]
+        [--nickui-button-hover-bg-color:#c4e4ff]
+        [--nickui-button-active-bg-color:var(--color-blue-300)]
       `,
     },
-    {
-      flavor: 'neutral',
-      isSecondary: true,
-      isKeyboardActivated: true,
-      isDisabled: false,
-      class: 'active:bg-blue-300 focus:bg-blue-300 hover:bg-blue-300',
-    },
+    // Make the active color when touching a little darker, since we’re
+    // transitioning from the base color, rather than the lighter hover color
     {
       flavor: 'neutral',
       isSecondary: true,
       isTouchActivated: true,
       isDisabled: false,
-      class: `
-        pointer-coarse:bg-blue-400 pointer-coarse:active:bg-blue-400
-        pointer-coarse:hover:bg-blue-400 pointer-coarse:focus:bg-blue-400
-      `,
-    },
-    {
-      flavor: 'neutral',
-      isSecondary: true,
-      isKeyboardFocused: true,
-      isKeyboardActivated: false,
-      isDisabled: false,
-      class: 'focus:bg-[#c4e4ff]',
+      class: '[--nickui-button-coarse-bg-color:var(--color-blue-400)]',
     },
 
     ////////////////////////////////////////////////////////////////////////////
@@ -199,36 +181,20 @@ export const buttonStyler = tv({
       isSecondary: false,
       isDisabled: false,
       class: `
-        bg-emerald-700 text-white
-        hover:bg-emerald-600
-        active:bg-emerald-800
-        pointer-coarse:hover:bg-emerald-700 pointer-coarse:active:bg-emerald-700
+        [--nickui-button-text-color:var(--color-white)]
+        [--nickui-button-bg-color:var(--color-emerald-700)]
+        [--nickui-button-hover-bg-color:var(--color-emerald-600)]
+        [--nickui-button-active-bg-color:var(--color-emerald-800)]
       `,
     },
-    {
-      flavor: 'positive',
-      isSecondary: false,
-      isKeyboardActivated: true,
-      isDisabled: false,
-      class: 'active:bg-emerald-800 focus:bg-emerald-800 hover:bg-emerald-800',
-    },
+    // Make the active color when touching a little darker, since we’re
+    // transitioning from the base color, rather than the lighter hover color
     {
       flavor: 'positive',
       isSecondary: false,
       isTouchActivated: true,
       isDisabled: false,
-      class: `
-        pointer-coarse:bg-emerald-900 pointer-coarse:active:bg-emerald-900
-        pointer-coarse:hover:bg-emerald-900 pointer-coarse:focus:bg-emerald-900
-      `,
-    },
-    {
-      flavor: 'positive',
-      isSecondary: false,
-      isKeyboardFocused: true,
-      isKeyboardActivated: false,
-      isDisabled: false,
-      class: 'focus:bg-emerald-600',
+      class: '[--nickui-button-coarse-bg-color:var(--color-emerald-900)]',
     },
 
     ////////////////////////////////////////////////////////////////////////////
@@ -242,38 +208,20 @@ export const buttonStyler = tv({
       // the shadow a bit so it appears the same as the other button flavors
       class: `
         shadow-md/10
-        text-emerald-950
-        bg-emerald-200
-        hover:bg-[#bff2d9]
-        active:bg-emerald-300 
-        pointer-coarse:hover:bg-emerald-200  
-        pointer-coarse:active:bg-emerald-200  
+        [--nickui-button-text-color:var(--color-emerald-950)]
+        [--nickui-button-bg-color:var(--color-emerald-200)]
+        [--nickui-button-hover-bg-color:#bff2d9]
+        [--nickui-button-active-bg-color:var(--color-emerald-300)]
       `,
     },
+    // Make the active color when touching a little darker, since we’re
+    // transitioning from the base color, rather than the lighter hover color
     {
-      flavor: 'neutral',
-      isSecondary: true,
-      isKeyboardActivated: true,
-      isDisabled: false,
-      class: 'active:bg-emerald-300 focus:bg-emerald-300 hover:bg-emerald-300',
-    },
-    {
-      flavor: 'neutral',
+      flavor: 'positive',
       isSecondary: true,
       isTouchActivated: true,
       isDisabled: false,
-      class: `
-        pointer-coarse:bg-emerald-400 pointer-coarse:active:bg-emerald-400
-        pointer-coarse:hover:bg-emerald-400 pointer-coarse:focus:bg-emerald-400
-      `,
-    },
-    {
-      flavor: 'neutral',
-      isSecondary: true,
-      isKeyboardFocused: true,
-      isKeyboardActivated: false,
-      isDisabled: false,
-      class: 'focus:bg-[#bff2d9]',
+      class: '[--nickui-button-coarse-bg-color:var(--color-emerald-400)]',
     },
 
     ////////////////////////////////////////////////////////////////////////////
@@ -283,33 +231,19 @@ export const buttonStyler = tv({
       flavor: 'negative',
       isDisabled: false,
       class: `
-        bg-rose-700 text-white
-        hover:bg-rose-600
-        active:bg-rose-800
-        pointer-coarse:hover:bg-rose-700 pointer-coarse:active:bg-rose-700
+        [--nickui-button-text-color:var(--color-white)]
+        [--nickui-button-bg-color:var(--color-rose-700)]
+        [--nickui-button-hover-bg-color:var(--color-rose-600)]
+        [--nickui-button-active-bg-color:var(--color-rose-800)]
       `,
     },
-    {
-      flavor: 'negative',
-      isKeyboardActivated: true,
-      isDisabled: false,
-      class: 'active:bg-rose-800 focus:bg-rose-800 hover:bg-rose-800',
-    },
+    // Make the active color when touching a little darker, since we’re
+    // transitioning from the base color, rather than the lighter hover color
     {
       flavor: 'negative',
       isTouchActivated: true,
       isDisabled: false,
-      class: `
-        pointer-coarse:bg-rose-900 pointer-coarse:active:bg-rose-900
-        pointer-coarse:hover:bg-rose-900 pointer-coarse:focus:bg-rose-900
-      `,
-    },
-    {
-      flavor: 'negative',
-      isKeyboardFocused: true,
-      isKeyboardActivated: false,
-      isDisabled: false,
-      class: 'focus:bg-rose-600',
+      class: '[--nickui-button-coarse-bg-color:var(--color-rose-900)]',
     },
 
     ////////////////////////////////////////////////////////////////////////////
@@ -323,38 +257,20 @@ export const buttonStyler = tv({
       // the shadow a bit so it appears the same as the other button flavors
       class: `
         shadow-md/10
-        text-rose-950
-        bg-rose-200 
-        hover:bg-[#ffdadd]
-        active:bg-rose-300 
-        pointer-coarse:hover:bg-rose-200  
-        pointer-coarse:active:bg-rose-200  
+        [--nickui-button-text-color:var(--color-rose-950)]
+        [--nickui-button-bg-color:var(--color-rose-200)]
+        [--nickui-button-hover-bg-color:#ffdadd]
+        [--nickui-button-active-bg-color:var(--color-rose-300)]
       `,
     },
-    {
-      flavor: 'negative',
-      isSecondary: true,
-      isKeyboardActivated: true,
-      isDisabled: false,
-      class: 'active:bg-rose-300 focus:bg-rose-300 hover:bg-rose-300',
-    },
+    // Make the active color when touching a little darker, since we’re
+    // transitioning from the base color, rather than the lighter hover color
     {
       flavor: 'negative',
       isSecondary: true,
       isTouchActivated: true,
       isDisabled: false,
-      class: `
-        pointer-coarse:bg-rose-400 pointer-coarse:active:bg-rose-400
-        pointer-coarse:hover:bg-rose-400 pointer-coarse:focus:bg-rose-400
-      `,
-    },
-    {
-      flavor: 'negative',
-      isSecondary: true,
-      isKeyboardFocused: true,
-      isKeyboardActivated: false,
-      isDisabled: false,
-      class: 'focus:bg-[#ffdadd]',
+      class: '[--nickui-button-coarse-bg-color:var(--color-rose-400)]',
     },
   ],
   defaultVariants: {
