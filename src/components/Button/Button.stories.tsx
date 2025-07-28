@@ -138,15 +138,15 @@ export const Responsive: Story = {
   },
 };
 
-export const Primary: Story = {
+export const Neutral: Story = {
   tags: ['flavor'],
   args: {
-    flavor: 'primary',
-    children: 'Primary Button (default)',
+    flavor: 'neutral',
+    children: 'Neutral Button (default)',
     onClick: fn(),
   },
   play: async ({ canvas, step }) => {
-    await step('Assert the primary style', async () => {
+    await step('Assert the neutral style', async () => {
       await expect(canvas.getByRole('button')).toHaveClass('bg-blue-600');
     });
   },
@@ -207,7 +207,7 @@ export const AllFlavors: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-wrap gap-4">
-      <Button {...Primary.args} />
+      <Button {...Neutral.args} />
       <Button {...Secondary.args} />
       <Button {...Danger.args} />
     </div>

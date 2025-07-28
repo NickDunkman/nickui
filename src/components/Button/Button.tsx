@@ -20,8 +20,8 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
   type?: 'button' | 'reset' | 'submit';
   /** Changes the size of the button ("sm", "base", "lg") */
   sizer?: SizerType | SizerType[];
-  /** Changes the color of the button ("primary", "secondary", "negative") */
-  flavor?: 'primary' | 'secondary' | 'negative';
+  /** Changes the color of the button ("neutral", "secondary", "negative") */
+  flavor?: 'neutral' | 'secondary' | 'negative';
 }
 
 /**
