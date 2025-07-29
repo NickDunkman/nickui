@@ -96,6 +96,8 @@ function AsideHeading({
   );
 }
 
+AsideParagraph.displayName = 'AsideHeading';
+
 function AsideParagraph({
   children,
   className,
@@ -109,3 +111,5 @@ function AsideParagraph({
 
   return <p className={clsw(styles.paragraph(), className)}>{children}</p>;
 }
+
+AsideParagraph.displayName = 'AsideParagraph';
