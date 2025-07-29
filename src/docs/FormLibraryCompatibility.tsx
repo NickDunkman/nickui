@@ -7,6 +7,7 @@ import { StoriesModule } from '@/types';
 import { ComponentName } from './ComponentName';
 import { FormikDemo } from './FormikDemo';
 import { ReactHookFormDemo } from './ReactHookFormDemo';
+import { TanStackFormDemo } from './TanStackFormDemo';
 
 /**
  * Custom doc block for demoing a form control's compatibility with
@@ -37,13 +38,13 @@ export function FormLibraryCompatibility({
 ## Compatibility with popular form libraries
 
 &nbsp;<ComponentName of="${componentName}" /> implements all of the necessary
-props to be used with [React Hook Form](https://react-hook-form.com/) and
-[Formik](https://formik.org)!
+props to be used with [React Hook Form](https://react-hook-form.com/),
+[TanStack Form](https://tanstack.com/form), and [Formik](https://formik.org)!
         `}
       </Markdown>
 
       <div className="sb-unstyled relative z-2 -mb-7 flex gap-2 rounded-t-sm bg-emerald-900 p-3">
-        {['React Hook Form', 'Formik'].map((lib) => (
+        {['React Hook Form', 'TanStack Form', 'Formik'].map((lib) => (
           <Button
             key={lib}
             sizer="sm"
@@ -64,6 +65,17 @@ props to be used with [React Hook Form](https://react-hook-form.com/) and
 
       {library === 'React Hook Form' && (
         <ReactHookFormDemo
+          of={of}
+          fieldName={fieldName}
+          initialValue={initialValue}
+          checkbox={checkbox}
+          radioWithValue={radioWithValue}
+          componentProps={componentProps}
+        />
+      )}
+
+      {library === 'TanStack Form' && (
+        <TanStackFormDemo
           of={of}
           fieldName={fieldName}
           initialValue={initialValue}

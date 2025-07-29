@@ -61,31 +61,30 @@ const form = useForm<{ ${fieldName}: string }>({
   defaultValues: { ${fieldName}: ${theInitialValueDisplay} },
 });
 
-return (
-  <${componentName}${
-    addValidation
-      ? `
-    {...register('${fieldName}', {
-      validate: (value) => value === ${theInitialValueDisplay} || 'Heyyy, change that back', 
-    })}`
-      : `
-    {...register('${fieldName}')}`
-  }${
-    radioWithValue
-      ? `
-    value="${radioWithValue}"`
-      : ''
-  }
-    error={errors.${fieldName}?.message}
-    // ...
-  />
-);
+<${componentName}${
+            addValidation
+              ? `
+  {...register('${fieldName}', {
+    validate: (value) => value === ${theInitialValueDisplay} || 'Heyyy, change that back', 
+  })}`
+              : `
+  {...register('${fieldName}')}`
+          }${
+            radioWithValue
+              ? `
+  value="${radioWithValue}"`
+              : ''
+          }
+  error={errors.${fieldName}?.message}
+  // ...
+/>
           `}
         />
       </div>
 
       <FauxCanvas>
         <Component
+          value={radioWithValue}
           {...register(fieldName, {
             validate: !addValidation
               ? undefined

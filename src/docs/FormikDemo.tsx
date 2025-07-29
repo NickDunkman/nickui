@@ -75,31 +75,29 @@ const form = useFormik({
   }
 });
 
-return (
-  <${componentName}${
-    !checkbox && !radioWithValue
-      ? `
-    {...form.getFieldProps('${fieldName}')}`
-      : `
-    {...form.getFieldProps({
-      name: '${fieldName}',${
-        checkbox
-          ? `
-      type: 'checkbox',`
-          : ''
-      }${
-        radioWithValue
-          ? `
-      type: 'radio',
-      value: '${radioWithValue}',`
-          : ''
-      }
-    )}`
-  }
-    error={form.errors.${fieldName}}
-    // ...
-  />
-);
+<${componentName}${
+            !checkbox && !radioWithValue
+              ? `
+  {...form.getFieldProps('${fieldName}')}`
+              : `
+  {...form.getFieldProps({
+    name: '${fieldName}',${
+      checkbox
+        ? `
+    type: 'checkbox',`
+        : ''
+    }${
+      radioWithValue
+        ? `
+    type: 'radio',
+    value: '${radioWithValue}',`
+        : ''
+    }
+  })}`
+          }
+  error={form.errors.${fieldName}}
+  // ...
+/>
           `}
         />
       </div>
