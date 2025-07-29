@@ -22,14 +22,14 @@ A form control that allows users to enter & edit a mass of text.
 
 ## Controlling the height
 
-Minimum vertical sizing of textareas is done via the `rows` prop (the default is
-2 rows). The <Docs of="TextArea" /> will automatically grow up to the `maxRows`
-prop to accomodate the value (the default is 10 rows). For an unbounded height,
-you can use `maxRows={Infinity}`.
+Minimum vertical sizing of textareas is done via the `minRows` prop (the default
+is 2 rows). The <Docs of="TextArea" /> will automatically grow up to the
+`maxRows` prop to accomodate the value (the default is 10 rows). For an
+unbounded height, you can use `maxRows={Infinity}`.
 
 <Canvas of={Stories.AutoResizableHeight} sourceState="shown" />
 
-For a fixed height, use the same value for `rows` and `maxRows`.
+For a fixed height, use the `rows` prop.
 
 <Canvas of={Stories.FixedHeight} sourceState="shown" />
 
