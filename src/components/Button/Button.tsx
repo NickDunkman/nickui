@@ -89,7 +89,6 @@ export function Button({
         onFocus?.(event);
       }}
       onKeyDown={(event) => {
-        console.log(keycode(event.nativeEvent));
         if (!isKeyboardActivated) {
           if (
             keycode(event.nativeEvent) === 'enter' ||

@@ -5,17 +5,14 @@ import { randomId } from '@/utils/randomId';
 
 import { Toast, ToastProps } from './Toast';
 
-function renderToast(id: string | number, toastProps: ToastProps) {
-  return (
-    <Toast
-      {...toastProps}
-      onDismiss={(event) => {
-        toastProps.onDismiss?.(event);
-        sonnerToastFn.dismiss(id);
-      }}
-    />
-  );
-}
+const toastRegistry: Record<
+  string | number,
+  {
+    eventualDuration: number;
+    toastProps: ToastProps;
+    sonnerOptions: ExternalToast;
+  }
+> = {};
 
 /** Call this function to trigger a new Toast */
 export function toast(
@@ -25,11 +22,76 @@ export function toast(
    * Options to pass through to sonner's toast.custom function, such as to
    * change the `duration` the toast is open for
    */
-  sonnerOptions?: Parameters<typeof sonnerToastFn>[1],
+  sonnerOptions?: ExternalToast,
 ) {
+  // Create a unique ID if not provided
+  const thisToastId = sonnerOptions?.id ?? randomId();
+
+  // Peep the existing toasts in the stack
+  const allToasts = sonnerToastFn.getToasts();
+  const toastAtTop = allToasts[allToasts.length - 1];
+
+  // Check if the requested toast already exists, and if so, whether it is at
+  // the top of the stack
+  const thisToast = allToasts.find((t) => t.id === thisToastId);
+  const thisToastIsAtTop = !!thisToast && thisToast === toastAtTop;
+  const thisToastWillBeAtTop = thisToastIsAtTop || !thisToast;
+
+  // This is the duration that will take effect once the toast is at the top
+  // of the stack. Defaults to 0 instead of `undefined`, so that when we apply
+  // it, it overwrites an existing Infinity duration if necessary. 0 is
+  // shorthand for sonner's default duration (which is 4 seconds)
+  const thisToastEventualDuration = sonnerOptions?.duration ?? 0;
+
+  // The actual duration to use for this toast should be Infinity unless
+  // it will be at the top of the stack.
+  const thisToastDuration = thisToastWillBeAtTop
+    ? thisToastEventualDuration
+    : Infinity;
+
+  const fullSonnerOptions: ExternalToast = {
+    ...sonnerOptions,
+    id: thisToastId,
+    duration: thisToastDuration,
+    onAutoClose: (t) => {
+      sonnerOptions?.onAutoClose?.(t);
+      handleToastClose(t);
+    },
+    onDismiss: (t) => {
+      sonnerOptions?.onDismiss?.(t);
+      handleToastClose(t);
+    },
+  };
+
+  // Add (or update) this toast in the registry
+  toastRegistry[thisToastId] = {
+    eventualDuration: thisToastEventualDuration,
+    toastProps: {
+      ...toastProps,
+      onDismiss: () => sonnerToastFn.dismiss(thisToastId),
+    },
+    sonnerOptions: fullSonnerOptions,
+  };
+
+  // If we're adding a new toast to the top of the stack, update the existing
+  // top of the stack toast to duration: infinity so that it doesn't go away
+  if (
+    thisToastWillBeAtTop &&
+    !thisToastIsAtTop &&
+    toastAtTop &&
+    toastRegistry[toastAtTop.id]?.sonnerOptions.duration !== Infinity
+  ) {
+    toastRegistry[toastAtTop.id].sonnerOptions.duration = Infinity;
+    sonnerToastFn.custom(
+      () => <Toast {...toastRegistry[toastAtTop.id].toastProps} />,
+      toastRegistry[toastAtTop.id].sonnerOptions,
+    );
+  }
+
+  // Add or update the new toast
   return sonnerToastFn.custom(
-    (id) => renderToast(id, toastProps),
-    sonnerOptions,
+    () => <Toast {...toastRegistry[thisToastId].toastProps} />,
+    toastRegistry[thisToastId].sonnerOptions,
   );
 }
 
@@ -65,10 +127,7 @@ toast.promise = (
     loadingToastProps?: Partial<ToastProps>;
   } = {},
 ) => {
-  // Create a unique ID if not provided
-  const id = sonnerOptions?.id ?? randomId();
-
-  toast(
+  const id = toast(
     {
       body: <>Loading &hellip;</>,
       ...loadingToastProps,
@@ -76,30 +135,43 @@ toast.promise = (
     },
     {
       ...sonnerOptions,
-      id,
       // While in the initial loading state, the toast should not auto-dismiss
       duration: Infinity,
     },
   );
 
-  return sonnerToastFn.promise(thePromise, {
-    success: (toastProps) => ({
+  thePromise.then((toastProps) => {
+    toast(toastProps, {
       ...sonnerOptions,
       // Using the same ID causes sonner to update the same toast created
       // for the loadong state, rather than creating a new one
       id,
-      // Our <Toast> content
-      jsx: renderToast(id, toastProps),
       // Force duration to 0 when not specified, so that it overrides
       // the initial setting of 'Infinity' in the loading state above.
       duration: sonnerOptions.duration ?? 0,
-      // Remove the spinner Sonner adds to promise toasts
-      type: 'normal',
-      // required by sonner
-      message: null,
-    }),
+    });
   });
 };
 
-// pass through some of the other functions sonner provides
-toast.dimiss = sonnerToastFn.dismiss;
+const handleToastClose: NonNullable<ExternalToast['onAutoClose']> = (t) => {
+  // remove from the registry
+  delete toastRegistry[t.id];
+
+  const allToasts = sonnerToastFn.getToasts();
+  const nextToastAtTop = allToasts[allToasts.length - 2];
+
+  // If the next toast at the top of the stack has an eventualDuration other
+  // than Infinity, we should update it to use eventualDuration so that it will
+  // autoHide
+  if (
+    nextToastAtTop &&
+    toastRegistry[nextToastAtTop.id].eventualDuration !== Infinity
+  ) {
+    toastRegistry[nextToastAtTop.id].sonnerOptions.duration =
+      toastRegistry[nextToastAtTop.id].eventualDuration;
+    sonnerToastFn.custom(
+      () => <Toast {...toastRegistry[nextToastAtTop.id].toastProps} />,
+      toastRegistry[nextToastAtTop.id].sonnerOptions,
+    );
+  }
+};

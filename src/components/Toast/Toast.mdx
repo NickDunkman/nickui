@@ -15,7 +15,13 @@ A <Docs of="Toast" /> is a temporary notice that animates into the corner of the
 screen.
 
 This component is powered by the [Sonner](https://sonner.emilkowal.ski) library
-created by Emil Kowalski, layering on the look & feel of NickUI.
+created by Emil Kowalski, with these customizations:
+
+- the look & feel of NickUI
+- when a toast is configured to auto-hide after some `duration`, its timer
+  pauses when another toast is opened, and then resets when it gets back to the
+  top of the stack. This allows the user to actually see each toast for the
+  desired time when successive toasts happen quickly (try it!)
 
 <div className="sb-unstyled">
   <Toaster />

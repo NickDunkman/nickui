@@ -25,6 +25,13 @@ export function Toaster({
       {...otherProps}
       className={clsw('group toaster', className)}
       position={position}
+      icons={{
+        success: null,
+        info: null,
+        warning: null,
+        error: null,
+        loading: null,
+      }}
       toastOptions={{
         ...toastOptions,
         classNames: {
