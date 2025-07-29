@@ -96,7 +96,7 @@ function AsideHeading({
   );
 }
 
-AsideParagraph.displayName = 'AsideHeading';
+AsideHeading.displayName = 'AsideHeading';
 
 function AsideParagraph({
   children,
