@@ -70,6 +70,50 @@ export const Negative: Story = {
   },
 };
 
+export const SecondaryNeutral: Story = {
+  tags: ['flavor'],
+  decorators: [renderWithButtonOpener],
+  args: {
+    flavor: 'neutral',
+    secondary: true,
+    title: 'Secondary neutral Toast',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim consectetur ante et ornare. Sed interdum sed quam vitae consequat.',
+  },
+};
+
+export const SecondaryPositive: Story = {
+  tags: ['flavor'],
+  decorators: [renderWithButtonOpener],
+  args: {
+    flavor: 'positive',
+    secondary: true,
+    title: 'Secondary positive Toast',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim consectetur ante et ornare. Sed interdum sed quam vitae consequat.',
+  },
+};
+
+export const SecondaryCaution: Story = {
+  tags: ['flavor'],
+  decorators: [renderWithButtonOpener],
+  args: {
+    flavor: 'caution',
+    secondary: true,
+    title: 'Secondary caution Toast',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim consectetur ante et ornare. Sed interdum sed quam vitae consequat.',
+  },
+};
+
+export const SecondaryNegative: Story = {
+  tags: ['flavor'],
+  decorators: [renderWithButtonOpener],
+  args: {
+    flavor: 'negative',
+    secondary: true,
+    title: 'Secondary negative Toast',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim consectetur ante et ornare. Sed interdum sed quam vitae consequat.',
+  },
+};
+
 export const AsyncToast: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
@@ -130,70 +174,88 @@ export const CustomAsyncToast: Story = {
   ),
 };
 
+const allFlavors = [Neutral, Positive, Caution, Negative];
 export const AllFlavors: Story = {
   tags: ['!dev', '!test'],
   parameters: {
     source: `
       import { Button, toast } from 'nickui';
 
-      <div className="flex gap-4 flex-wrap">
+      <div className="flex gap-4 flex-wrap">${allFlavors
+        .map(
+          (s) => `
         <Button
-          flavor="neutral"
-          onClick={() => toast({
-            flavor: 'neutral',
-            title: 'Neutral Toast',
-            body: 'Lorem ipsum ...',
-          })}
+          flavor="${s.args?.flavor}"
+          onClick={() => toast(${JSON.stringify(s.args, null, 2).replace(
+            /\n(\s*)("(\w+)"|(}))/g,
+            '\n$1          $3$4',
+          )})}
         >
-          Neutral Toast
-        </Button>
-        <Button 
-          flavor="positive"
-          onClick={() => toast({
-            flavor: 'positive',
-            title: 'Positive Toast',
-            body: 'Lorem ipsum ...',
-          })}
-        >
-          Positive Toast
-        </Button>
-        <Button
-          flavor="caution"
-          onClick={() => toast({
-            flavor: 'caution',
-            title: 'Caution Toast',
-            body: 'Lorem ipsum ...',
-          })}
-        >
-          Caution Toast
-        </Button>
-        <Button
-          flavor="negative"
-          onClick={() => toast({
-            flavor: 'negative',
-            title: 'Negative Toast',
-            body: 'Lorem ipsum ...',
-          })}
-        >
-          Negative Toast
-        </Button>
+          ${s.args?.title}
+        </Button>`,
+        )
+        .join('')}
       </div>
     `,
   },
   render: (_args) => (
     <div className="flex flex-wrap gap-4">
-      <Button onClick={() => toast(Neutral.args)} flavor="neutral">
-        Neutral Toast
-      </Button>
-      <Button onClick={() => toast(Positive.args)} flavor="positive">
-        Positive Toast
-      </Button>
-      <Button onClick={() => toast(Caution.args)} flavor="caution">
-        Caution Toast
-      </Button>
-      <Button onClick={() => toast(Negative.args)} flavor="negative">
-        Negative Toast
-      </Button>
+      {allFlavors.map((s) => (
+        <Button
+          key={s.name}
+          flavor={s.args?.flavor}
+          onClick={() => toast(s.args)}
+        >
+          {s.args?.title}
+        </Button>
+      ))}
+    </div>
+  ),
+};
+
+const allSecondaryFlavors = [
+  SecondaryNeutral,
+  SecondaryPositive,
+  SecondaryCaution,
+  SecondaryNegative,
+];
+
+export const AllSecondaryFlavors: Story = {
+  tags: ['!dev', '!test'],
+  parameters: {
+    source: `
+      import { Button, toast } from 'nickui';
+
+      <div className="flex gap-4 flex-wrap">${allSecondaryFlavors
+        .map(
+          (s) => `
+        <Button
+          flavor="${s.args?.flavor}"
+          secondary
+          onClick={() => toast(${JSON.stringify(s.args, null, 2).replace(
+            /\n(\s*)("(\w+)"|(}))/g,
+            '\n$1          $3$4',
+          )})}
+        >
+          ${s.args?.title}
+        </Button>`,
+        )
+        .join('')}
+      </div>
+    `,
+  },
+  render: (_args) => (
+    <div className="flex flex-wrap gap-4">
+      {allSecondaryFlavors.map((s) => (
+        <Button
+          key={s.name}
+          flavor={s.args?.flavor}
+          secondary
+          onClick={() => toast(s.args)}
+        >
+          {s.args?.title}
+        </Button>
+      ))}
     </div>
   ),
 };

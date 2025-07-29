@@ -11,6 +11,7 @@ export interface ToastProps {
   loading?: boolean;
   onDismiss?: React.MouseEventHandler<HTMLButtonElement>;
   flavor?: FlavorType;
+  secondary?: boolean;
 }
 
 /** A fully custom toast that still maintains the animations and interactions. */
@@ -20,8 +21,9 @@ export function Toast({
   loading = false,
   onDismiss,
   flavor,
+  secondary = false,
 }: ToastProps) {
-  const styles = toastStyler({ flavor });
+  const styles = toastStyler({ flavor, isSecondary: secondary });
 
   let loadingColor: string;
   switch (flavor) {

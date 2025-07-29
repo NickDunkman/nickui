@@ -23,7 +23,7 @@ export const Neutral: Story = {
   },
   play: async ({ canvas, step }) => {
     await step('Assert the neutral flavor style', async () => {
-      expect(canvas.getByRole('status')).toHaveClass('bg-blue-800');
+      expect(canvas.getByRole('status')).toHaveClass('bg-blue-700');
     });
   },
 };
