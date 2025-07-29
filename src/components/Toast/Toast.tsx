@@ -26,18 +26,16 @@ export function Toast({
   const styles = toastStyler({ flavor, isSecondary: secondary });
 
   let loadingColor: string;
-  switch (flavor) {
-    case 'positive':
-      loadingColor = '#002c22';
-      break;
-    case 'caution':
-      loadingColor = '#432004';
-      break;
-    case 'negative':
-      loadingColor = '#460809';
-      break;
-    default:
-      loadingColor = '#162456';
+  if (flavor === 'caution') {
+    loadingColor = '#432004';
+  } else if (!secondary) {
+    loadingColor = '#ffffff';
+  } else if (flavor === 'positive') {
+    loadingColor = '#002c22';
+  } else if (flavor === 'negative') {
+    loadingColor = '#460809';
+  } else {
+    loadingColor = '#162456';
   }
 
   return (
