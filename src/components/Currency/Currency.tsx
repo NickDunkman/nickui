@@ -117,7 +117,7 @@ export function Currency({
       const setValue = descriptor.set;
       if (setValue) {
         const event = new Event('input', { bubbles: true });
-        setValue.call(internalInputRef.current, state.value);
+        setValue.call(internalInputRef.current, valueState.value);
         internalInputRef.current.dispatchEvent(event);
       }
     }
