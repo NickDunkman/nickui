@@ -114,10 +114,7 @@ export function Currency({
       }
 
       // Block input of a second decimal
-      if (
-        event.key === '.' &&
-        valueState.workingFormattedValue.indexOf('.') !== -1
-      ) {
+      if (event.key === '.' && valueState.workingValue.indexOf('.') !== -1) {
         event.preventDefault();
       }
     }
@@ -128,7 +125,7 @@ export function Currency({
   const currencyStyles = currencyStyler({
     sizer: resolvedSizer,
     hasError: !!error,
-    hasValue: !!valueState.workingFormattedValue,
+    hasValue: !!valueState.workingValue,
   });
 
   return (
@@ -150,9 +147,8 @@ export function Currency({
           defaultValue,
           controlledValue,
           value: valueState.value,
-          numericValue: valueState.numericValue,
-          workingFormattedValue: valueState.workingFormattedValue,
-          placeholderFormattedValue: valueState.placeholderFormattedValue,
+          workingValue: valueState.workingValue,
+          placeholderValue: valueState.placeholderValue,
         }}
       />
       <div className={currencyStyles.visibleInputsContainer()}>
@@ -167,7 +163,7 @@ export function Currency({
         */}
         <input
           className={clsw(textStyles, currencyStyles.placeholderInput())}
-          placeholder={valueState.placeholderFormattedValue}
+          placeholder={valueState.placeholderValue}
           tabIndex={-1}
           aria-hidden
         />
@@ -187,7 +183,7 @@ export function Currency({
           disabled={disabled}
           required={required}
           placeholder="0.00"
-          value={valueState.workingFormattedValue}
+          value={valueState.workingValue}
           aria-describedby={ariaDescribedBy}
           aria-errormessage={ariaErrorMessage}
           aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}

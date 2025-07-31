@@ -15,25 +15,20 @@ type StateType = {
    */
   value: string;
   /**
-   * `state.numericValue` is the Number representation of `state.value`. For
-   * example, if `state.value` is `"0.00"` or `""`, `state.numericValue` is `0`.
-   */
-  numericValue: number;
-  /**
-   * `state.workingFormattedValue` is the value of the <input> that the user
+   * `state.workingValue` is the value of the <input> that the user
    * is interacting with. It’s initially set to the formatted version of
    * `state.value` (e.g. with thousands separators), and then stays in sync
    * with what the user is typing. For example, it can have the decimal prefix
    * at the end of the string.
    */
-  workingFormattedValue: string;
+  workingValue: string;
   /**
-   * `state.placedholderFormattedValue` is the same as
-   * `state.workingFormattedValue`, except it abides the minimum and maximum
+   * `state.placeholderValue` is the same as
+   * `state.workingValue`, except it abides the minimum and maximum
    * decimal places, so the user can see the hint about decimal places in the
    * background.
    */
-  placeholderFormattedValue: string;
+  placeholderValue: string;
   previousValue?: string;
   previousValueUpdateSource?: 'value' | 'workingValue';
 };
@@ -53,9 +48,8 @@ function createInitialState(
 ): StateType {
   return {
     value: parseValue(initialRawValue),
-    numericValue: parseNumericValue(initialRawValue),
-    workingFormattedValue: formatValue(initialRawValue),
-    placeholderFormattedValue: formatValue(initialRawValue, true),
+    workingValue: formatValue(initialRawValue),
+    placeholderValue: formatValue(initialRawValue, true),
   };
 }
 
@@ -91,7 +85,6 @@ export function useCurrencyValueState(
 
 function reducer(state: StateType, action: ActionType): StateType {
   const newValue = parseValue(action.payload);
-  const newNumericValue = parseNumericValue(newValue);
   const valueIsChanging = state.value !== newValue;
 
   switch (action.type) {
@@ -105,17 +98,16 @@ function reducer(state: StateType, action: ActionType): StateType {
       // Don’t update the formatted versions unless there is a numerical
       // change. Otherwise the user's formatting changes will get wiped.
       const formattedValuesShouldChange =
-        newNumericValue !== parseNumericValue(state.workingFormattedValue);
+        parseNumericValue(newValue) !== parseNumericValue(state.workingValue);
 
       return {
         value: newValue,
-        numericValue: newNumericValue,
-        workingFormattedValue: formattedValuesShouldChange
+        workingValue: formattedValuesShouldChange
           ? formatValue(newValue)
-          : state.workingFormattedValue,
-        placeholderFormattedValue: formattedValuesShouldChange
+          : state.workingValue,
+        placeholderValue: formattedValuesShouldChange
           ? formatValue(newValue, true)
-          : state.placeholderFormattedValue,
+          : state.placeholderValue,
         previousValue: state.value,
         previousValueUpdateSource: 'value',
       };
@@ -123,9 +115,8 @@ function reducer(state: StateType, action: ActionType): StateType {
     case 'updateFromWorkingValue':
       return {
         value: newValue,
-        numericValue: newNumericValue,
-        workingFormattedValue: formatValue(action.payload),
-        placeholderFormattedValue: formatValue(action.payload, true),
+        workingValue: formatValue(action.payload),
+        placeholderValue: formatValue(action.payload, true),
         // Don't update these unless the value is actually changing
         previousValue: valueIsChanging ? state.value : state.previousValue,
         previousValueUpdateSource: valueIsChanging
