@@ -77,17 +77,14 @@ export function Currency({
   // <input> in addition to the `ref` prop.
   const internalInputRef = React.useRef<HTMLInputElement>(null);
 
-  const state = useCurrencyValueState(
+  const valueState = useCurrencyValueState(
     controlledValue !== undefined ? controlledValue : defaultValue,
   );
 
-  const { updateFromValue: updateStateFromValue } = state;
-  React.useEffect(
-    function () {
-      updateStateFromValue(controlledValue);
-    },
-    [updateStateFromValue, controlledValue],
-  );
+  const { updateFromValue: updateStateFromValue } = valueState;
+  React.useEffect(() => {
+    updateStateFromValue(controlledValue);
+  }, [updateStateFromValue, controlledValue]);
 
   const [uncontrolledId] = React.useState(randomId());
   const id = controlledId || (label ? uncontrolledId : undefined);
@@ -103,14 +100,14 @@ export function Currency({
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    state.updateFromWorkingValue(event.target.value);
+    valueState.updateFromWorkingValue(event.target.value);
   }
 
   React.useEffect(() => {
     if (
       internalInputRef.current &&
-      state.value !== state.previousValue &&
-      state.previousValueUpdateSource === 'workingValue'
+      valueState.value !== valueState.previousValue &&
+      valueState.previousValueUpdateSource === 'workingValue'
     ) {
       const inputProto = window.HTMLInputElement.prototype;
       const descriptor = Object.getOwnPropertyDescriptor(
@@ -124,7 +121,11 @@ export function Currency({
         internalInputRef.current.dispatchEvent(event);
       }
     }
-  }, [state.value, state.previousValue, state.previousValueUpdateSource]);
+  }, [
+    valueState.value,
+    valueState.previousValue,
+    valueState.previousValueUpdateSource,
+  ]);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     // Don't block when holding command/etc, since those are things like
@@ -137,7 +138,7 @@ export function Currency({
       // Block input of a second decimal
       if (
         event.key === '.' &&
-        state.workingFormattedValue.indexOf('.') !== -1
+        valueState.workingFormattedValue.indexOf('.') !== -1
       ) {
         event.preventDefault();
       }
@@ -149,7 +150,7 @@ export function Currency({
   const currencyStyles = currencyStyler({
     sizer: resolvedSizer,
     hasError: !!error,
-    hasValue: !!state.workingFormattedValue,
+    hasValue: !!valueState.workingFormattedValue,
   });
 
   return (
@@ -170,10 +171,10 @@ export function Currency({
         data={{
           defaultValue,
           controlledValue,
-          value: state.value,
-          numericValue: state.numericValue,
-          workingFormattedValue: state.workingFormattedValue,
-          placeholderFormattedValue: state.placeholderFormattedValue,
+          value: valueState.value,
+          numericValue: valueState.numericValue,
+          workingFormattedValue: valueState.workingFormattedValue,
+          placeholderFormattedValue: valueState.placeholderFormattedValue,
         }}
       />
       <div className={currencyStyles.visibleInputsContainer()}>
@@ -188,7 +189,7 @@ export function Currency({
         */}
         <input
           className={clsw(textStyles, currencyStyles.placeholderInput())}
-          placeholder={state.placeholderFormattedValue}
+          placeholder={valueState.placeholderFormattedValue}
           tabIndex={-1}
           aria-hidden
         />
@@ -208,7 +209,7 @@ export function Currency({
           disabled={disabled}
           required={required}
           placeholder="0.00"
-          value={state.workingFormattedValue}
+          value={valueState.workingFormattedValue}
           aria-describedby={ariaDescribedBy}
           aria-errormessage={ariaErrorMessage}
           aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
@@ -246,7 +247,7 @@ export function Currency({
         // `value` prop here, otherwise React will supress that change event.
         // We can, however, set a defaultValue, so that the <input> has the
         // initial value.
-        defaultValue={state.value}
+        defaultValue={valueState.value}
       />
     </Field>
   );
