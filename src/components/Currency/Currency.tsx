@@ -2,12 +2,14 @@ import * as React from 'react';
 
 import { Field } from '@/components/Field';
 import { textStyler } from '@/components/Text/styles';
+import { PrettyPrint } from '@/docs/PrettyPrint';
 import type { CommonFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { currencyStyler } from './styles';
+import { useCurrencyValueState } from './useCurrencyState';
 
 interface CurrencyProps
   extends Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'> {
@@ -75,17 +77,27 @@ export function Currency({
   // <input> in addition to the `ref` prop.
   const internalInputRef = React.useRef<HTMLInputElement>(null);
 
-  const [stringValue, setStringValue] = React.useState(
+  const [value, setValue] = React.useState(
     controlledValue !== undefined
-      ? formatStringValue(controlledValue)
-      : formatStringValue(defaultValue),
+      ? parseStringValue(controlledValue)
+      : parseStringValue(defaultValue),
+  );
+
+  const [formattedValue, setFormattedValue] = React.useState(
+    formatValue(value),
   );
 
   React.useEffect(() => {
-    setStringValue(formatStringValue(controlledValue));
-  }, [controlledValue]);
+    const newValue = parseStringValue(controlledValue);
+    if (newValue !== value) {
+      setValue(newValue);
+      if (parseNumericValue(newValue) !== parseNumericValue(formattedValue)) {
+        setFormattedValue(formatValue(newValue));
+      }
+    }
+  }, [value, formattedValue, controlledValue]);
 
-  const decimaledFormattedValue = formatStringValue(stringValue, true);
+  const decimaledValue = formatValue(formattedValue, true);
 
   const [uncontrolledId] = React.useState(randomId());
   const id = controlledId || (label ? uncontrolledId : undefined);
@@ -101,10 +113,15 @@ export function Currency({
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const newStringValue = formatStringValue(event.target.value);
+    let newValue = parseStringValue(event.target.value);
+    const newFormattedValue = formatValue(event.target.value);
 
-    if (stringValue !== newStringValue) {
-      setStringValue(newStringValue);
+    if (newValue !== value) {
+      setValue(newValue);
+    }
+
+    if (newFormattedValue !== formattedValue) {
+      setFormattedValue(newFormattedValue);
     }
 
     // Trigger a call to the `onChange` prop by dispatching an `input` event
@@ -113,15 +130,17 @@ export function Currency({
     // an HTMLInputElement, which helps make the component compatible with
     // form libraries like React Hook Form.
 
-    const newNumericValue = parseNumericValue(newStringValue);
+    const newNumericValue = parseNumericValue(newFormattedValue);
 
     const shouldTriggerChange =
       // if the number is changing meaningfully, numerically
-      newNumericValue !== parseNumericValue(controlledValue) ||
-      // or if the user typed "0" instead of "." to trigger a change from empty to zero-ish
-      (newStringValue === '0' && !controlledValue) ||
+      newNumericValue !== parseNumericValue(value) ||
+      // or if the user typed "0" to trigger a change from empty to zero-ish
+      (newFormattedValue === '0' && !value) ||
+      // or if the user typed "." to trigger a change from empty to zero-ish
+      (newFormattedValue === '0.' && !value) ||
       // or the user is emptying the input, and the value wasn't already empty
-      (newStringValue === '' && controlledValue);
+      (newFormattedValue === '' && value);
 
     if (shouldTriggerChange) {
       if (internalInputRef.current) {
@@ -135,7 +154,7 @@ export function Currency({
           const event = new Event('input', { bubbles: true });
           setValue.call(
             internalInputRef.current,
-            newStringValue === '' ? '' : newNumericValue.toString(),
+            newFormattedValue === '' ? '' : newNumericValue.toString(),
           );
           internalInputRef.current.dispatchEvent(event);
         }
@@ -152,7 +171,7 @@ export function Currency({
       }
 
       // Block input of a second decimal
-      if (event.key === '.' && stringValue.indexOf('.') !== -1) {
+      if (event.key === '.' && formattedValue.indexOf('.') !== -1) {
         event.preventDefault();
       }
     }
@@ -163,8 +182,7 @@ export function Currency({
   const currencyStyles = currencyStyler({
     sizer: resolvedSizer,
     hasError: !!error,
-    hasValue: !!stringValue,
-    hasDecimalPointOnlyValue: !controlledValue && stringValue === '0.',
+    hasValue: !!formattedValue,
   });
 
   return (
@@ -180,6 +198,16 @@ export function Currency({
       disabled={disabled}
       required={required}
     >
+      <PrettyPrint
+        className="mb-2"
+        data={{
+          defaultValue,
+          controlledValue,
+          value,
+          formattedValue,
+          decimaledValue,
+        }}
+      />
       <div className={currencyStyles.visibleInputsContainer()}>
         {/*
           This <input> is not interactive; the user cannot focus it. It's styled
@@ -192,7 +220,7 @@ export function Currency({
         */}
         <input
           className={clsw(textStyles, currencyStyles.placeholderInput())}
-          placeholder={decimaledFormattedValue}
+          placeholder={decimaledValue}
           tabIndex={-1}
           aria-hidden
         />
@@ -212,7 +240,7 @@ export function Currency({
           disabled={disabled}
           required={required}
           placeholder="0.00"
-          value={stringValue}
+          value={formattedValue}
           aria-describedby={ariaDescribedBy}
           aria-errormessage={ariaErrorMessage}
           aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
@@ -250,13 +278,20 @@ export function Currency({
         // `value` prop here, otherwise React will supress that change event.
         // We can, however, set a defaultValue, so that the <input> has the
         // initial value.
-        defaultValue={stringValue}
+        defaultValue={formattedValue}
       />
     </Field>
   );
 }
 
-function parseStringValue(rawValue: string | number | undefined) {
+function parseStringValue(
+  rawValue: string | number | undefined,
+  {
+    keepTrailingFractionSeparator = false,
+  }: {
+    keepTrailingFractionSeparator?: boolean;
+  } = {},
+) {
   const stringValue = rawValue?.toString().replace(/[^0-9.-]/g, '') || '';
 
   // Reject if there is a negative sign not at the front
@@ -274,9 +309,17 @@ function parseStringValue(rawValue: string | number | undefined) {
     return '';
   }
 
-  // Pad with a zero when the first character is the decimal point
+  // Pad with a zero when the first character is the fractional separator
   if (stringValue[0] === '.') {
     return `0${stringValue}`;
+  }
+
+  // Drop the fractional separator when it's the last character
+  if (
+    !keepTrailingFractionSeparator &&
+    stringValue[stringValue.length - 1] === '.'
+  ) {
+    return stringValue.slice(0, -1);
   }
 
   return stringValue;
@@ -286,11 +329,13 @@ function parseNumericValue(rawValue: string | number | undefined) {
   return Number(parseStringValue(rawValue)) || 0;
 }
 
-function formatStringValue(
+function formatValue(
   rawValue: string | number | undefined,
   forceFullDecimal: boolean = false,
 ) {
-  const stringValue = parseStringValue(rawValue);
+  const stringValue = parseStringValue(rawValue, {
+    keepTrailingFractionSeparator: true,
+  });
 
   if (stringValue === '') {
     return '';

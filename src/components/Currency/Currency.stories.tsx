@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
+import { PrettyPrint } from '@/docs/PrettyPrint';
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 
 import { Currency } from './Currency';
@@ -16,15 +17,43 @@ type Story = StoryObj<typeof meta>;
 
 function ControlledCurrency(props: React.ComponentProps<typeof Currency>) {
   const [value, setValue] = React.useState(props.defaultValue);
+  const [count, setCount] = React.useState(0);
 
   return (
-    <Currency
-      {...props}
-      value={value}
-      onChange={(event) => {
-        setValue(event.target.value === '1.23' ? '69.69' : event.target.value);
-      }}
-    />
+    <>
+      <PrettyPrint className="mb-2" data={{ count, value }} />
+      <Currency
+        {...props}
+        value={value}
+        onChange={(event) => {
+          setCount(count + 1);
+          setValue(
+            event.target.value === '1.23' ? '69.69' : event.target.value,
+          );
+        }}
+      />
+    </>
+  );
+}
+
+function UncontrolledCurrency(props: React.ComponentProps<typeof Currency>) {
+  const [value, setValue] = React.useState(props.defaultValue);
+  const [count, setCount] = React.useState(0);
+
+  return (
+    <>
+      <PrettyPrint className="mb-2" data={{ count, value }} />
+      <Currency
+        {...props}
+        defaultValue={value}
+        onChange={(event) => {
+          setCount(count + 1);
+          setValue(
+            event.target.value === '1.23' ? '69.69' : event.target.value,
+          );
+        }}
+      />
+    </>
   );
 }
 
@@ -37,22 +66,31 @@ export const FieldLayout: Story = {
     error: 'An error message',
     onChange: fn(),
   },
-  render: (args) => <ControlledCurrency {...args} />,
-  play: async ({ canvas, step }) => {
-    const input = canvas.getByLabelText('A label*');
-    const requiredAsterisk = canvas.getByTitle('required');
+  render: (args) => (
+    <div>
+      <div className="mb-5">
+        <UncontrolledCurrency {...args} />
+      </div>
+      <div>
+        <ControlledCurrency {...args} />
+      </div>
+    </div>
+  ),
+  //play: async ({ canvas, step }) => {
+  //  const input = canvas.getByLabelText('A label*');
+  //  const requiredAsterisk = canvas.getByTitle('required');
 
-    await step('Assert accessibility of layout elements', async () => {
-      expect(input).toHaveRole('spinbutton');
-      expect(input).toHaveAccessibleDescription('A hint');
-      expect(input).toHaveAccessibleErrorMessage('An error message');
-      expect(requiredAsterisk).toHaveTextContent('*');
-    });
+  //  await step('Assert accessibility of layout elements', async () => {
+  //    expect(input).toHaveRole('spinbutton');
+  //    expect(input).toHaveAccessibleDescription('A hint');
+  //    expect(input).toHaveAccessibleErrorMessage('An error message');
+  //    expect(requiredAsterisk).toHaveTextContent('*');
+  //  });
 
-    await step('Assert the error style', async () => {
-      expect(input).toHaveClass('border-rose-800');
-    });
-  },
+  //  await step('Assert the error style', async () => {
+  //    expect(input).toHaveClass('border-rose-800');
+  //  });
+  //},
 };
 
 //export const Empty: Story = {

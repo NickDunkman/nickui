@@ -33,26 +33,13 @@ export const currencyStyler = tv({
     hasValue: {
       true: {},
     },
-    hasDecimalPointOnlyValue: {
-      true: {
-        interactiveInput: '!text-transparent caret-black',
-      },
-    },
   },
   compoundVariants: [
     {
       hasError: false,
       hasValue: true,
-      hasDecimalPointOnlyValue: false,
       class: {
         currencySymbol: 'text-black',
-      },
-    },
-    {
-      hasError: false,
-      hasDecimalPointOnlyValue: true,
-      class: {
-        currencySymbol: 'text-gray-400',
       },
     },
   ],
@@ -60,6 +47,5 @@ export const currencyStyler = tv({
     sizer: 'base',
     hasError: false,
     hasValue: false,
-    hasDecimalPointOnlyValue: false,
   },
 });
