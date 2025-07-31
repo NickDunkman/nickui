@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { Field } from '@/components/Field';
 import { textStyler } from '@/components/Text/styles';
-import { PrettyPrint } from '@/docs/PrettyPrint';
 import type { CommonFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
@@ -22,6 +21,7 @@ interface CurrencyProps
   value?: string;
   /** Sets the value of the Text when using it as an uncontrolled component */
   defaultValue?: string;
+  currencySymbol?: string;
 }
 
 /**
@@ -41,6 +41,7 @@ export function Currency({
   id: controlledId,
   value: controlledValue,
   defaultValue,
+  currencySymbol = '$',
   ref: controlledInputRef,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
@@ -60,13 +61,17 @@ export function Currency({
     previousState,
     updateFromControlledValue,
     updateFromWorkingValue,
-  } = useCurrencyValueStore(
-    controlledValue !== undefined ? controlledValue : defaultValue,
-  );
+  } = useCurrencyValueStore(controlledValue, defaultValue);
 
   React.useEffect(() => {
-    updateFromControlledValue(controlledValue);
-  }, [updateFromControlledValue, controlledValue]);
+    if (controlledValue !== currentState.controlledValue) {
+      updateFromControlledValue(controlledValue);
+    }
+  }, [
+    currentState.controlledValue,
+    updateFromControlledValue,
+    controlledValue,
+  ]);
 
   const [uncontrolledId] = React.useState(randomId());
   const id = controlledId || (label ? uncontrolledId : undefined);
@@ -138,16 +143,6 @@ export function Currency({
       disabled={disabled}
       required={required}
     >
-      <PrettyPrint
-        className="mb-2"
-        data={{
-          defaultValue,
-          controlledValue,
-          value: currentState.value,
-          workingValue: currentState.workingValue,
-          placeholderValue: currentState.placeholderValue,
-        }}
-      />
       <div className={currencyStyles.visibleInputsContainer()}>
         {/*
           This is the "placholder" <input>. It's positioned directly underneath
@@ -159,6 +154,7 @@ export function Currency({
         <input
           className={clsw(textStyles, currencyStyles.placeholderInput())}
           placeholder={currentState.placeholderValue}
+          disabled={disabled}
           tabIndex={-1}
           aria-hidden
         />
@@ -187,7 +183,7 @@ export function Currency({
           onKeyDown={handleKeyDown}
         />
 
-        <div className={currencyStyles.currencySymbol()}>$</div>
+        <div className={currencyStyles.currencySymbol()}>{currencySymbol}</div>
       </div>
 
       {/*

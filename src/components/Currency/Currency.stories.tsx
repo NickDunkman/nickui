@@ -64,18 +64,9 @@ export const FieldLayout: Story = {
     label: 'A label',
     hint: 'A hint',
     error: 'An error message',
+    defaultValue: '99.99',
     onChange: fn(),
   },
-  render: (args) => (
-    <div>
-      <div className="mb-5">
-        <UncontrolledCurrency {...args} />
-      </div>
-      <div>
-        <ControlledCurrency {...args} />
-      </div>
-    </div>
-  ),
   //play: async ({ canvas, step }) => {
   //  const input = canvas.getByLabelText('A label*');
   //  const requiredAsterisk = canvas.getByTitle('required');
@@ -93,110 +84,133 @@ export const FieldLayout: Story = {
   //},
 };
 
-//export const Empty: Story = {
-//  tags: ['control-state'],
-//  args: {
-//    placeholder: 'Empty Text',
-//    'aria-label': 'Empty Text',
-//    onChange: fn(),
-//  },
-//  play: async ({ args, canvas, step, userEvent }) => {
-//    const input = canvas.getByLabelText('Empty Text');
+export const Empty: Story = {
+  tags: ['control-state'],
+  args: {
+    'aria-label': 'Empty Currency',
+    onChange: fn(),
+  },
+  //  play: async ({ args, canvas, step, userEvent }) => {
+  //    const input = canvas.getByLabelText('Empty Text');
+  //
+  //    await step(
+  //      'Assert Text is functional without an initial value',
+  //      async () => {
+  //        await userEvent.type(input, 'a');
+  //        expect(input).toHaveValue('a');
+  //        expect(args.onChange).toHaveBeenCalledOnce();
+  //      },
+  //    );
+  //
+  //    await step('Reset the value', async () => {
+  //      await userEvent.type(input, '{backspace}');
+  //      expect(input).toHaveValue('');
+  //    });
+  //  },
+};
 //
-//    await step(
-//      'Assert Text is functional without an initial value',
-//      async () => {
-//        await userEvent.type(input, 'a');
-//        expect(input).toHaveValue('a');
-//        expect(args.onChange).toHaveBeenCalledOnce();
-//      },
-//    );
+export const Controlled: Story = {
+  tags: ['control-state'],
+  args: {
+    value: '1234.56',
+    'aria-label': 'Controlled Currency',
+    onChange: fn(),
+  },
+  //  play: async ({ args, canvas, step, userEvent }) => {
+  //    const input = canvas.getByLabelText('Controlled Text');
+  //
+  //    await step('Assert `value` works', async () => {
+  //      expect(input).toHaveValue(args.value);
+  //    });
+  //
+  //    await step(
+  //      'Try adding text. `onChange` should fire, but the value is controlled, so it shouldn’t change',
+  //      async () => {
+  //        await userEvent.type(input, 'a');
+  //        expect(args.onChange).toHaveBeenCalledOnce();
+  //        expect(input).toHaveValue(args.value);
+  //      },
+  //    );
+  //  },
+};
 //
-//    await step('Reset the value', async () => {
-//      await userEvent.type(input, '{backspace}');
-//      expect(input).toHaveValue('');
-//    });
-//  },
-//};
+export const Uncontrolled: Story = {
+  tags: ['control-state'],
+  args: {
+    defaultValue: '1234.56',
+    'aria-label': 'Uncontrolled Currency',
+    onChange: fn(),
+  },
+  //  play: async ({ args, canvas, step, userEvent }) => {
+  //    const input = canvas.getByLabelText('Uncontrolled Text');
+  //
+  //    await step('Assert `defaultValue` works', async () => {
+  //      expect(input).toHaveValue(args.defaultValue);
+  //    });
+  //
+  //    await step(
+  //      'Typing into the Text should amend the value, since it’s uncontrolled',
+  //      async () => {
+  //        await userEvent.type(input, 'a');
+  //        expect(input).toHaveValue(`${args.defaultValue}a`);
+  //        expect(args.onChange).toHaveBeenCalledOnce();
+  //      },
+  //    );
+  //
+  //    await step('Reset the value', async () => {
+  //      await userEvent.type(input, '{backspace}');
+  //      expect(input).toHaveValue(args.defaultValue);
+  //    });
+  //  },
+};
 //
-//export const Controlled: Story = {
-//  tags: ['control-state'],
-//  args: {
-//    value: 'Controlled Text',
-//    'aria-label': 'Controlled Text',
-//    onChange: fn(),
-//  },
-//  play: async ({ args, canvas, step, userEvent }) => {
-//    const input = canvas.getByLabelText('Controlled Text');
-//
-//    await step('Assert `value` works', async () => {
-//      expect(input).toHaveValue(args.value);
-//    });
-//
-//    await step(
-//      'Try adding text. `onChange` should fire, but the value is controlled, so it shouldn’t change',
-//      async () => {
-//        await userEvent.type(input, 'a');
-//        expect(args.onChange).toHaveBeenCalledOnce();
-//        expect(input).toHaveValue(args.value);
-//      },
-//    );
-//  },
-//};
-//
-//export const Uncontrolled: Story = {
-//  tags: ['control-state'],
-//  args: {
-//    defaultValue: 'Uncontrolled Text',
-//    'aria-label': 'Uncontrolled Text',
-//    onChange: fn(),
-//  },
-//  play: async ({ args, canvas, step, userEvent }) => {
-//    const input = canvas.getByLabelText('Uncontrolled Text');
-//
-//    await step('Assert `defaultValue` works', async () => {
-//      expect(input).toHaveValue(args.defaultValue);
-//    });
-//
-//    await step(
-//      'Typing into the Text should amend the value, since it’s uncontrolled',
-//      async () => {
-//        await userEvent.type(input, 'a');
-//        expect(input).toHaveValue(`${args.defaultValue}a`);
-//        expect(args.onChange).toHaveBeenCalledOnce();
-//      },
-//    );
-//
-//    await step('Reset the value', async () => {
-//      await userEvent.type(input, '{backspace}');
-//      expect(input).toHaveValue(args.defaultValue);
-//    });
-//  },
-//};
-//
-//export const Disabled: Story = {
-//  tags: ['control-state'],
-//  args: {
-//    defaultValue: 'Disabled Text',
-//    disabled: true,
-//    'aria-label': 'Disabled Text',
-//    onChange: fn(),
-//  },
-//  play: async ({ args, canvas, step, userEvent }) => {
-//    const input = canvas.getByLabelText('Disabled Text');
-//
-//    await step('Assert disabled state', async () => {
-//      expect(input).toBeDisabled();
-//    });
-//
-//    // Typing should not fire any changes
-//    await step('Typing should have no effect', async () => {
-//      await userEvent.type(input, 'a');
-//      expect(args.onChange).not.toHaveBeenCalled();
-//      expect(input).toHaveValue(args.defaultValue);
-//    });
-//  },
-//};
+export const Disabled: Story = {
+  tags: ['control-state'],
+  args: {
+    defaultValue: '1234.56',
+    disabled: true,
+    'aria-label': 'Disabled Currency',
+    onChange: fn(),
+  },
+  //  play: async ({ args, canvas, step, userEvent }) => {
+  //    const input = canvas.getByLabelText('Disabled Text');
+  //
+  //    await step('Assert disabled state', async () => {
+  //      expect(input).toBeDisabled();
+  //    });
+  //
+  //    // Typing should not fire any changes
+  //    await step('Typing should have no effect', async () => {
+  //      await userEvent.type(input, 'a');
+  //      expect(args.onChange).not.toHaveBeenCalled();
+  //      expect(input).toHaveValue(args.defaultValue);
+  //    });
+  //  },
+};
+
+export const Euros: Story = {
+  tags: ['control-state'],
+  args: {
+    defaultValue: '1234.56',
+    currencySymbol: '€',
+    'aria-label': 'Euros Currency',
+    onChange: fn(),
+  },
+  //  play: async ({ args, canvas, step, userEvent }) => {
+  //    const input = canvas.getByLabelText('Disabled Text');
+  //
+  //    await step('Assert disabled state', async () => {
+  //      expect(input).toBeDisabled();
+  //    });
+  //
+  //    // Typing should not fire any changes
+  //    await step('Typing should have no effect', async () => {
+  //      await userEvent.type(input, 'a');
+  //      expect(args.onChange).not.toHaveBeenCalled();
+  //      expect(input).toHaveValue(args.defaultValue);
+  //    });
+  //  },
+};
 //
 //export const Xs: Story = {
 //  tags: ['sizer'],

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { formatValue, parseNumericValue, parseValue } from './utils';
 
 type StateType = {
+  controlledValue: string | number | undefined;
   /**
    * `state.value` is in the format that can be input via the `value` or
    * `defaultValue` prop, and is emmitted via the onChange event back to the
@@ -55,14 +56,22 @@ type ActionType =
       payload: string;
     };
 
-function createInitialState(
-  initialRawValue: string | number | undefined,
-): StatesType {
+function createInitialState({
+  controlledValue,
+  defaultValue,
+}: {
+  controlledValue: string | number | undefined;
+  defaultValue: string | number | undefined;
+}): StatesType {
+  const initialValue =
+    controlledValue !== undefined ? controlledValue : defaultValue;
+
   return {
     currentState: {
-      value: parseValue(initialRawValue),
-      workingValue: formatValue(initialRawValue),
-      placeholderValue: formatValue(initialRawValue, true),
+      controlledValue,
+      value: parseValue(initialValue),
+      workingValue: formatValue(initialValue),
+      placeholderValue: formatValue(initialValue, true),
       source: 'initialValue',
     },
   };
@@ -73,11 +82,12 @@ function createInitialState(
  * component.
  */
 export function useCurrencyValueStore(
-  initialRawValue: string | number | undefined,
+  controlledValue: string | number | undefined,
+  defaultValue: string | number | undefined,
 ) {
   const [{ currentState, previousState }, dispatch] = React.useReducer(
     reducer,
-    initialRawValue,
+    { controlledValue, defaultValue },
     createInitialState,
   );
 
@@ -125,6 +135,7 @@ function reducer(states: StatesType, action: ActionType): StatesType {
       return {
         previousState: states.currentState,
         currentState: {
+          controlledValue: action.payload,
           value: newValue,
           workingValue: formattedValuesShouldChange
             ? formatValue(newValue)
@@ -140,6 +151,7 @@ function reducer(states: StatesType, action: ActionType): StatesType {
       return {
         previousState: states.currentState,
         currentState: {
+          controlledValue: states.currentState.controlledValue,
           value: newValue,
           workingValue: formatValue(action.payload),
           placeholderValue: formatValue(action.payload, true),

@@ -7,11 +7,12 @@ import { tv } from 'tailwind-variants';
 export const currencyStyler = tv({
   slots: {
     visibleInputsContainer: 'relative',
-    placeholderInput: 'user-select-none pointer-events-none',
+    placeholderInput: 'select-none pointer-events-none',
     interactiveInput:
-      'absolute top-0 right-0 left-0 !bg-transparent !border-transparent',
+      'peer absolute top-0 right-0 left-0 !bg-transparent !border-transparent',
     hiddenInput: 'hidden',
-    currencySymbol: 'absolute scale-140 text-gray-400',
+    currencySymbol:
+      'absolute scale-140 text-gray-400 peer-disabled:text-gray-400 select-none pointer-events-none',
   },
   variants: {
     sizer: {
