@@ -24,28 +24,6 @@ interface CurrencyProps
   defaultValue?: string;
 }
 
-const allowedKeyPresses = Object.freeze([
-  '0',
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '.',
-  'ArrowUp',
-  'ArrowDown',
-  'ArrowLeft',
-  'ArrowRight',
-  'ArrowRight',
-  'Tab',
-  'Enter',
-  'Backspace',
-]);
-
 /**
  * A form control that allows users to enter & edit a single line of text
  * @param props {@link CurrencyProps} + {@link CommonFieldProps}
@@ -252,3 +230,25 @@ export function Currency({
     </Field>
   );
 }
+
+const allowedKeyPresses = Object.freeze([
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '.',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowRight',
+  'Tab',
+  'Enter',
+  'Backspace',
+]);
