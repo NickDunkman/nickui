@@ -1,5 +1,5 @@
 // Returns `true` if a string has multiple occurrences of a substring
-export function stringHasMultipleSubstring(str: string, substr: string) {
+function stringHasMultipleSubstring(str: string, substr: string) {
   const firstOccurenceIndex = str.indexOf(substr);
 
   if (firstOccurenceIndex === -1) {
@@ -13,13 +13,14 @@ export function stringHasMultipleSubstring(str: string, substr: string) {
 
 export function parseValue(
   rawValue: string | number | undefined,
-  {
-    keepTrailingFractionSeparator = false,
-  }: {
-    keepTrailingFractionSeparator?: boolean;
-  } = {},
+  options: {
+    decimalPoint: string;
+    keepTrailingDecimalPoint?: boolean;
+  },
 ) {
-  let stringValue = rawValue?.toString().replace(/[^0-9.-]/g, '') || '';
+  const regex = new RegExp(`[^0-9${options.decimalPoint}-]`, 'g');
+
+  let stringValue = rawValue?.toString().replace(regex, '') || '';
 
   // Reject if there is a negative sign not at the front
   if (stringValue.indexOf('-') > 0) {
@@ -27,7 +28,7 @@ export function parseValue(
   }
 
   // Reject if there are more than one decimal points
-  if (stringHasMultipleSubstring(stringValue, '.')) {
+  if (stringHasMultipleSubstring(stringValue, options.decimalPoint)) {
     return '';
   }
 
@@ -36,15 +37,15 @@ export function parseValue(
     return '';
   }
 
-  // Pad with a zero when the first character is the fractional separator
-  if (stringValue[0] === '.') {
+  // Pad with a zero when the first character is the decimal point
+  if (stringValue[0] === options.decimalPoint) {
     stringValue = `0${stringValue}`;
   }
 
-  // Drop the fractional separator when it's the last character
+  // Drop the decimal point when it's the last character
   if (
-    !keepTrailingFractionSeparator &&
-    stringValue[stringValue.length - 1] === '.'
+    !options.keepTrailingDecimalPoint &&
+    stringValue[stringValue.length - 1] === options.decimalPoint
   ) {
     stringValue = stringValue.slice(0, -1);
   }
@@ -52,23 +53,34 @@ export function parseValue(
   return stringValue;
 }
 
-export function parseNumericValue(rawValue: string | number | undefined) {
-  return Number(parseValue(rawValue)) || 0;
+export function parseNumericValue(
+  rawValue: string | number | undefined,
+  decimalPoint: string,
+) {
+  return (
+    Number(parseValue(rawValue, { decimalPoint }).replace(decimalPoint, '.')) ||
+    0
+  );
 }
 
 export function formatValue(
   rawValue: string | number | undefined,
-  forceFullDecimal: boolean = false,
+  options: {
+    decimalPoint: string;
+    thousandsSeparator: string;
+    forceFractionalPart?: boolean;
+  },
 ) {
   const stringValue = parseValue(rawValue, {
-    keepTrailingFractionSeparator: true,
+    decimalPoint: options.decimalPoint,
+    keepTrailingDecimalPoint: true,
   });
 
   if (stringValue === '') {
     return '';
   }
 
-  const [wholePart, decimalPart] = stringValue.split('.');
+  const [wholePart, fractionalPart] = stringValue.split(options.decimalPoint);
 
   // Chunk the whole part into thousands places. Doing it this way instead of
   // Number.toLocaleString() so that it works even with very large numbers.
@@ -84,12 +96,12 @@ export function formatValue(
       ),
     );
   }
-  const chunkedWholePart = chunks.join(',');
+  const chunkedWholePart = chunks.join(options.thousandsSeparator);
 
-  if (forceFullDecimal) {
-    return `${chunkedWholePart}.${(decimalPart || '').padEnd(2, '0')}`;
-  } else if (decimalPart !== undefined) {
-    return `${chunkedWholePart}.${decimalPart}`;
+  if (options.forceFractionalPart) {
+    return `${chunkedWholePart}${options.decimalPoint}${(fractionalPart || '').padEnd(2, '0')}`;
+  } else if (fractionalPart !== undefined) {
+    return `${chunkedWholePart}${options.decimalPoint}${fractionalPart}`;
   } else {
     return chunkedWholePart;
   }

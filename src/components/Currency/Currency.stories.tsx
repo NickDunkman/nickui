@@ -194,6 +194,8 @@ export const Euros: Story = {
     defaultValue: '1234.56',
     currencySymbol: '€',
     'aria-label': 'Euros Currency',
+    thousandsSeparator: '.',
+    decimalPoint: ',',
     onChange: fn(),
   },
   //  play: async ({ args, canvas, step, userEvent }) => {

@@ -22,6 +22,8 @@ interface CurrencyProps
   /** Sets the value of the Text when using it as an uncontrolled component */
   defaultValue?: string;
   currencySymbol?: string;
+  thousandsSeparator?: string;
+  decimalPoint?: string;
 }
 
 /**
@@ -42,6 +44,8 @@ export function Currency({
   value: controlledValue,
   defaultValue,
   currencySymbol = '$',
+  thousandsSeparator = ',',
+  decimalPoint = '.',
   ref: controlledInputRef,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
@@ -61,7 +65,12 @@ export function Currency({
     previousState,
     updateFromControlledValue,
     updateFromWorkingValue,
-  } = useCurrencyValueStore(controlledValue, defaultValue);
+  } = useCurrencyValueStore({
+    controlledValue,
+    defaultValue,
+    thousandsSeparator,
+    decimalPoint,
+  });
 
   React.useEffect(() => {
     if (controlledValue !== currentState.controlledValue) {
@@ -111,12 +120,18 @@ export function Currency({
     // Don't block when holding command/etc, since those are things like
     // "copy" / "paste", instead of character inputs.
     if (!event.metaKey) {
-      if (!allowedKeyPresses.includes(event.key)) {
+      if (
+        !allowedKeyPressesExceptDecimalPoint.includes(event.key) &&
+        event.key !== decimalPoint
+      ) {
         event.preventDefault();
       }
 
       // Block input of a second decimal
-      if (event.key === '.' && currentState.workingValue.indexOf('.') !== -1) {
+      if (
+        event.key === decimalPoint &&
+        currentState.workingValue.indexOf(decimalPoint) !== -1
+      ) {
         event.preventDefault();
       }
     }
@@ -226,7 +241,7 @@ export function Currency({
   );
 }
 
-const allowedKeyPresses = Object.freeze([
+const allowedKeyPressesExceptDecimalPoint = Object.freeze([
   '0',
   '1',
   '2',
@@ -237,7 +252,6 @@ const allowedKeyPresses = Object.freeze([
   '7',
   '8',
   '9',
-  '.',
   'ArrowUp',
   'ArrowDown',
   'ArrowLeft',

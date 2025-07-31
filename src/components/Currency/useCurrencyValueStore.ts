@@ -3,6 +3,8 @@ import * as React from 'react';
 import { formatValue, parseNumericValue, parseValue } from './utils';
 
 type StateType = {
+  thousandsSeparator: string;
+  decimalPoint: string;
   controlledValue: string | number | undefined;
   /**
    * `state.value` is in the format that can be input via the `value` or
@@ -59,19 +61,32 @@ type ActionType =
 function createInitialState({
   controlledValue,
   defaultValue,
+  thousandsSeparator,
+  decimalPoint,
 }: {
   controlledValue: string | number | undefined;
   defaultValue: string | number | undefined;
+  thousandsSeparator: string;
+  decimalPoint: string;
 }): StatesType {
   const initialValue =
     controlledValue !== undefined ? controlledValue : defaultValue;
 
   return {
     currentState: {
+      thousandsSeparator,
+      decimalPoint,
       controlledValue,
-      value: parseValue(initialValue),
-      workingValue: formatValue(initialValue),
-      placeholderValue: formatValue(initialValue, true),
+      value: parseValue(initialValue, { decimalPoint }),
+      workingValue: formatValue(initialValue, {
+        decimalPoint,
+        thousandsSeparator,
+      }),
+      placeholderValue: formatValue(initialValue, {
+        decimalPoint,
+        thousandsSeparator,
+        forceFractionalPart: true,
+      }),
       source: 'initialValue',
     },
   };
@@ -81,13 +96,15 @@ function createInitialState({
  * Returns a store for managing the various values needed in the <Currency>
  * component.
  */
-export function useCurrencyValueStore(
-  controlledValue: string | number | undefined,
-  defaultValue: string | number | undefined,
-) {
+export function useCurrencyValueStore(options: {
+  controlledValue: string | number | undefined;
+  defaultValue: string | number | undefined;
+  thousandsSeparator: string;
+  decimalPoint: string;
+}) {
   const [{ currentState, previousState }, dispatch] = React.useReducer(
     reducer,
-    { controlledValue, defaultValue },
+    options,
     createInitialState,
   );
 
@@ -115,7 +132,10 @@ export function useCurrencyValueStore(
 
 /** Reducer for the store used in useCurrencyValueState */
 function reducer(states: StatesType, action: ActionType): StatesType {
-  const newValue = parseValue(action.payload);
+  const decimalPoint = states.currentState.decimalPoint;
+  const thousandsSeparator = states.currentState.thousandsSeparator;
+
+  const newValue = parseValue(action.payload, { decimalPoint });
   const valueIsChanging = states.currentState.value !== newValue;
 
   switch (action.type) {
@@ -129,19 +149,24 @@ function reducer(states: StatesType, action: ActionType): StatesType {
       // Don’t update the formatted versions unless there is a numerical
       // change. Otherwise the user's formatting changes will get wiped.
       const formattedValuesShouldChange =
-        parseNumericValue(newValue) !==
-        parseNumericValue(states.currentState.workingValue);
+        parseNumericValue(newValue, decimalPoint) !==
+        parseNumericValue(states.currentState.workingValue, decimalPoint);
 
       return {
         previousState: states.currentState,
         currentState: {
+          ...states.currentState,
           controlledValue: action.payload,
           value: newValue,
           workingValue: formattedValuesShouldChange
-            ? formatValue(newValue)
+            ? formatValue(newValue, { decimalPoint, thousandsSeparator })
             : states.currentState.workingValue,
           placeholderValue: formattedValuesShouldChange
-            ? formatValue(newValue, true)
+            ? formatValue(newValue, {
+                decimalPoint,
+                thousandsSeparator,
+                forceFractionalPart: true,
+              })
             : states.currentState.placeholderValue,
           source: 'controlledValue',
         },
@@ -151,10 +176,18 @@ function reducer(states: StatesType, action: ActionType): StatesType {
       return {
         previousState: states.currentState,
         currentState: {
+          ...states.currentState,
           controlledValue: states.currentState.controlledValue,
           value: newValue,
-          workingValue: formatValue(action.payload),
-          placeholderValue: formatValue(action.payload, true),
+          workingValue: formatValue(action.payload, {
+            decimalPoint,
+            thousandsSeparator,
+          }),
+          placeholderValue: formatValue(action.payload, {
+            decimalPoint,
+            thousandsSeparator,
+            forceFractionalPart: true,
+          }),
           source: 'workingValue',
         },
       };
