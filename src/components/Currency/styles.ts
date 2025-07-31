@@ -30,14 +30,14 @@ export const currencyStyler = tv({
         currencySymbol: 'text-rose-800',
       },
     },
-    hasValue: {
+    hasWorkingValue: {
       true: {},
     },
   },
   compoundVariants: [
     {
       hasError: false,
-      hasValue: true,
+      hasWorkingValue: true,
       class: {
         currencySymbol: 'text-black',
       },

@@ -30,12 +30,6 @@ type StateType = {
    */
   placeholderValue: string;
   /**
-   * Whenever the state’s `value` changes, its previous `value` is transferred
-   * to this property, so that downstream code can conditionally decide whether
-   * to act on changes to the `value`.
-   */
-  previousValue?: string;
-  /**
    * Whenever the state’s `value` changes, a descriptor for what caused the
    * change is set here, so that downstream code can conditionally decide
    * whether to act on changes to the `value`. For example, the <Currency>
@@ -43,7 +37,12 @@ type StateType = {
    * of the subsequent value change was from a new controlled `value` being
    * passed in.
    */
-  previousValueUpdateSource?: 'value' | 'workingValue';
+  source: 'initialValue' | 'controlledValue' | 'workingValue';
+};
+
+type StatesType = {
+  currentState: StateType;
+  previousState?: StateType;
 };
 
 type ActionType =
@@ -58,11 +57,14 @@ type ActionType =
 
 function createInitialState(
   initialRawValue: string | number | undefined,
-): StateType {
+): StatesType {
   return {
-    value: parseValue(initialRawValue),
-    workingValue: formatValue(initialRawValue),
-    placeholderValue: formatValue(initialRawValue, true),
+    currentState: {
+      value: parseValue(initialRawValue),
+      workingValue: formatValue(initialRawValue),
+      placeholderValue: formatValue(initialRawValue, true),
+      source: 'initialValue',
+    },
   };
 }
 
@@ -73,7 +75,7 @@ function createInitialState(
 export function useCurrencyValueStore(
   initialRawValue: string | number | undefined,
 ) {
-  const [state, dispatch] = React.useReducer(
+  const [{ currentState, previousState }, dispatch] = React.useReducer(
     reducer,
     initialRawValue,
     createInitialState,
@@ -94,52 +96,55 @@ export function useCurrencyValueStore(
   );
 
   return {
-    state,
+    previousState,
+    currentState,
     updateFromControlledValue,
     updateFromWorkingValue,
   };
 }
 
 /** Reducer for the store used in useCurrencyValueState */
-function reducer(state: StateType, action: ActionType): StateType {
+function reducer(states: StatesType, action: ActionType): StatesType {
   const newValue = parseValue(action.payload);
-  const valueIsChanging = state.value !== newValue;
+  const valueIsChanging = states.currentState.value !== newValue;
 
   switch (action.type) {
     case 'updateFromControlledValue':
       // When updating based on value, nothing should change unless the value
       // is different, since everything cascades from the new value
       if (!valueIsChanging) {
-        return state;
+        return states;
       }
 
       // Don’t update the formatted versions unless there is a numerical
       // change. Otherwise the user's formatting changes will get wiped.
       const formattedValuesShouldChange =
-        parseNumericValue(newValue) !== parseNumericValue(state.workingValue);
+        parseNumericValue(newValue) !==
+        parseNumericValue(states.currentState.workingValue);
 
       return {
-        value: newValue,
-        workingValue: formattedValuesShouldChange
-          ? formatValue(newValue)
-          : state.workingValue,
-        placeholderValue: formattedValuesShouldChange
-          ? formatValue(newValue, true)
-          : state.placeholderValue,
-        previousValue: state.value,
-        previousValueUpdateSource: 'value',
+        previousState: states.currentState,
+        currentState: {
+          value: newValue,
+          workingValue: formattedValuesShouldChange
+            ? formatValue(newValue)
+            : states.currentState.workingValue,
+          placeholderValue: formattedValuesShouldChange
+            ? formatValue(newValue, true)
+            : states.currentState.placeholderValue,
+          source: 'controlledValue',
+        },
       };
 
     case 'updateFromWorkingValue':
       return {
-        value: newValue,
-        workingValue: formatValue(action.payload),
-        placeholderValue: formatValue(action.payload, true),
-        // Don't update these unless the value is actually changing
-        previousValue: valueIsChanging ? state.value : state.previousValue,
-        previousValueUpdateSource: valueIsChanging
-          ? 'workingValue'
-          : state.previousValueUpdateSource,
+        previousState: states.currentState,
+        currentState: {
+          value: newValue,
+          workingValue: formatValue(action.payload),
+          placeholderValue: formatValue(action.payload, true),
+          source: 'workingValue',
+        },
       };
   }
 }
