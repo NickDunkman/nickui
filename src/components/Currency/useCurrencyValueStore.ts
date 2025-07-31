@@ -29,13 +29,26 @@ type StateType = {
    * background.
    */
   placeholderValue: string;
+  /**
+   * Whenever the state’s `value` changes, its previous `value` is transferred
+   * to this property, so that downstream code can conditionally decide whether
+   * to act on changes to the `value`.
+   */
   previousValue?: string;
+  /**
+   * Whenever the state’s `value` changes, a descriptor for what caused the
+   * change is set here, so that downstream code can conditionally decide
+   * whether to act on changes to the `value`. For example, the <Currency>
+   * component does not want to refire a value change event when the source
+   * of the subsequent value change was from a new controlled `value` being
+   * passed in.
+   */
   previousValueUpdateSource?: 'value' | 'workingValue';
 };
 
 type ActionType =
   | {
-      type: 'updateFromValue';
+      type: 'updateFromControlledValue';
       payload: string | number | undefined;
     }
   | {
@@ -53,7 +66,11 @@ function createInitialState(
   };
 }
 
-export function useCurrencyValueState(
+/**
+ * Returns a store for managing the various values needed in the <Currency>
+ * component.
+ */
+export function useCurrencyValueStore(
   initialRawValue: string | number | undefined,
 ) {
   const [state, dispatch] = React.useReducer(
@@ -62,9 +79,9 @@ export function useCurrencyValueState(
     createInitialState,
   );
 
-  const updateFromValue = React.useCallback(
+  const updateFromControlledValue = React.useCallback(
     (newRawValue: string | number | undefined) => {
-      dispatch({ type: 'updateFromValue', payload: newRawValue });
+      dispatch({ type: 'updateFromControlledValue', payload: newRawValue });
     },
     [dispatch],
   );
@@ -77,18 +94,19 @@ export function useCurrencyValueState(
   );
 
   return {
-    ...state,
-    updateFromValue,
+    state,
+    updateFromControlledValue,
     updateFromWorkingValue,
   };
 }
 
+/** Reducer for the store used in useCurrencyValueState */
 function reducer(state: StateType, action: ActionType): StateType {
   const newValue = parseValue(action.payload);
   const valueIsChanging = state.value !== newValue;
 
   switch (action.type) {
-    case 'updateFromValue':
+    case 'updateFromControlledValue':
       // When updating based on value, nothing should change unless the value
       // is different, since everything cascades from the new value
       if (!valueIsChanging) {

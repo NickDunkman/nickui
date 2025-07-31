@@ -9,7 +9,7 @@ import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { currencyStyler } from './styles';
-import { useCurrencyValueState } from './useCurrencyState';
+import { useCurrencyValueStore } from './useCurrencyValueStore';
 
 interface CurrencyProps
   extends Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'> {
@@ -55,14 +55,15 @@ export function Currency({
   // <input> in addition to the `ref` prop.
   const internalInputRef = React.useRef<HTMLInputElement>(null);
 
-  const valueState = useCurrencyValueState(
+  const valueStore = useCurrencyValueStore(
     controlledValue !== undefined ? controlledValue : defaultValue,
   );
 
-  const { updateFromValue: updateStateFromValue } = valueState;
+  const { updateFromControlledValue: updateStoreFromControlledValue } =
+    valueStore;
   React.useEffect(() => {
-    updateStateFromValue(controlledValue);
-  }, [updateStateFromValue, controlledValue]);
+    updateStoreFromControlledValue(controlledValue);
+  }, [updateStoreFromControlledValue, controlledValue]);
 
   const [uncontrolledId] = React.useState(randomId());
   const id = controlledId || (label ? uncontrolledId : undefined);
@@ -78,14 +79,14 @@ export function Currency({
     (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    valueState.updateFromWorkingValue(event.target.value);
+    valueStore.updateFromWorkingValue(event.target.value);
   }
 
   React.useEffect(() => {
     if (
       internalInputRef.current &&
-      valueState.value !== valueState.previousValue &&
-      valueState.previousValueUpdateSource === 'workingValue'
+      valueStore.state.value !== valueStore.state.previousValue &&
+      valueStore.state.previousValueUpdateSource === 'workingValue'
     ) {
       const inputProto = window.HTMLInputElement.prototype;
       const descriptor = Object.getOwnPropertyDescriptor(
@@ -95,14 +96,14 @@ export function Currency({
       const setValue = descriptor.set;
       if (setValue) {
         const event = new Event('input', { bubbles: true });
-        setValue.call(internalInputRef.current, valueState.value);
+        setValue.call(internalInputRef.current, valueStore.state.value);
         internalInputRef.current.dispatchEvent(event);
       }
     }
   }, [
-    valueState.value,
-    valueState.previousValue,
-    valueState.previousValueUpdateSource,
+    valueStore.state.value,
+    valueStore.state.previousValue,
+    valueStore.state.previousValueUpdateSource,
   ]);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -114,7 +115,10 @@ export function Currency({
       }
 
       // Block input of a second decimal
-      if (event.key === '.' && valueState.workingValue.indexOf('.') !== -1) {
+      if (
+        event.key === '.' &&
+        valueStore.state.workingValue.indexOf('.') !== -1
+      ) {
         event.preventDefault();
       }
     }
@@ -125,7 +129,7 @@ export function Currency({
   const currencyStyles = currencyStyler({
     sizer: resolvedSizer,
     hasError: !!error,
-    hasValue: !!valueState.workingValue,
+    hasValue: !!valueStore.state.workingValue,
   });
 
   return (
@@ -146,34 +150,34 @@ export function Currency({
         data={{
           defaultValue,
           controlledValue,
-          value: valueState.value,
-          workingValue: valueState.workingValue,
-          placeholderValue: valueState.placeholderValue,
+          value: valueStore.state.value,
+          workingValue: valueStore.state.workingValue,
+          placeholderValue: valueStore.state.placeholderValue,
         }}
       />
       <div className={currencyStyles.visibleInputsContainer()}>
         {/*
-          This <input> is not interactive; the user cannot focus it. It's styled
-          the same as a regular <Text> & placed behind the interactive <input>
-          directly below. It always includes the desired number of decimal
-          places, and uses the `placeholder` prop instead of the `value` prop.
-          The effect this has is that when the current value does not include
-          the maximum desired decimal places, the remainder appear as a
-          placeholder to the right of the current value.
+          This is the "placholder" <input>. It's positioned directly underneath
+          the working <input>. It has the same value in a muter color, except
+          it always abides the min/max decimal places. So if there are missing
+          decimal places in the working value, they'll be hinted in this
+          <input>.
         */}
         <input
           className={clsw(textStyles, currencyStyles.placeholderInput())}
-          placeholder={valueState.placeholderValue}
+          placeholder={valueStore.state.placeholderValue}
           tabIndex={-1}
           aria-hidden
         />
 
         {/*
-         This <input> is what the user actually interacts with. It has a
-         transparent background so that the user can see the placholder <input>
-         above. It's layered directly over that <input>, so that the characters
-         that are actually included in the value appear as the regular font
-         color.
+          This is the "working" <input>. It is what the user actually types
+          into, and is filled with {state.workingValue}, which auto-formats
+          with thousands-separators (,) as you type. It also allows there to be
+          a trailing decimal prefix (.), since that is a keystroke that is made
+          before typing the decimal places. It does not necessarily abide
+          the min/max decimal places -- those are shown in the placeholder
+          <input> behind until the user enters them manually.
         */}
         <input
           id={id}
@@ -182,8 +186,7 @@ export function Currency({
           className={clsw(textStyles, currencyStyles.interactiveInput())}
           disabled={disabled}
           required={required}
-          placeholder="0.00"
-          value={valueState.workingValue}
+          value={valueStore.state.workingValue}
           aria-describedby={ariaDescribedBy}
           aria-errormessage={ariaErrorMessage}
           aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
@@ -195,11 +198,18 @@ export function Currency({
       </div>
 
       {/*
-        This hidden <input> is used to actually drive the component's value,
-        such as to drive the onChange callback. It has a purely numeric value,
-        whereas the visible/interactive <inputs> above can have commas, for
-        example. This enables logic such as: don't trigger the onChange
-        callback if we're just adding a comma.
+        This is the hidden <input> which controls the component's actual
+        non-formatted value -- when we emit change events to the parent via
+        the onChange handler, we want the value on those events to be
+        non-formatted, so they can be easily parsed as numbers. It's filled
+        with {valueState.value}, which has no thousands separators, but does
+        abide by the min/max decimal places, so that the parent component
+        can get properly-decimaled currency number values as it desires.
+
+        As the user interacts with the working <input> above, updates to the
+        value are passed to this hidden <input> via programmatically-initiated
+        'input' events, which React picks up on and then fires an onChange
+        event.
       */}
       <input
         {...otherInputProps}
@@ -221,7 +231,7 @@ export function Currency({
         // `value` prop here, otherwise React will supress that change event.
         // We can, however, set a defaultValue, so that the <input> has the
         // initial value.
-        defaultValue={valueState.value}
+        defaultValue={valueStore.state.value}
       />
     </Field>
   );
