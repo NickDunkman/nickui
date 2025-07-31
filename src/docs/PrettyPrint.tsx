@@ -10,7 +10,7 @@ export function PrettyPrint({
 }: {
   className?: string;
   data: unknown;
-  title: React.ReactNode;
+  title?: React.ReactNode;
 }) {
   return (
     <div
