@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Field } from '@/components/Field';
 import type { CommonFieldProps } from '@/types';
-import { randomId } from '@/utils/randomId';
+import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { textStyler } from './styles';
@@ -59,24 +59,22 @@ export function Text({
   disabled,
   // Text-specific props
   id: controlledId,
+  'aria-labelledby': controlledAriaLabelledBy,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <input>
   ...otherInputProps
 }: TextProps & CommonFieldProps) {
-  const [uncontrolledId] = React.useState(randomId());
-  const id = controlledId || (label ? uncontrolledId : undefined);
-
-  const [uncontrolledAriaDescribedBy] = React.useState(randomId());
-  const ariaDescribedBy =
-    controlledAriaDescribedBy ||
-    (hint ? uncontrolledAriaDescribedBy : undefined);
-
-  const [uncontrolledAriaErrorMessage] = React.useState(randomId());
-  const ariaErrorMessage =
-    controlledAriaErrorMessage ||
-    (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
+  const a11yIds = useFieldA11yIds({
+    label,
+    hint,
+    error,
+    controlledId,
+    controlledAriaLabelledBy,
+    controlledAriaDescribedBy,
+    controlledAriaErrorMessage,
+  });
 
   const resolvedSizer = useResolvedSizer(sizer);
   const styles = textStyler({ sizer: resolvedSizer, hasError: !!error });
@@ -86,22 +84,24 @@ export function Text({
       className={className}
       sizer={sizer}
       label={label}
-      controlId={id}
+      labelId={a11yIds.ariaLabelledBy}
+      controlId={a11yIds.id}
       hint={hint}
-      hintId={ariaDescribedBy}
+      hintId={a11yIds.ariaDescribedBy}
       error={error !== true ? error : undefined}
-      errorId={ariaErrorMessage}
+      errorId={a11yIds.ariaErrorMessage}
       disabled={disabled}
       required={required}
     >
       <input
         {...otherInputProps}
-        id={id}
+        id={a11yIds.id}
         className={styles}
         disabled={disabled}
         required={required}
-        aria-describedby={ariaDescribedBy}
-        aria-errormessage={ariaErrorMessage}
+        aria-labelledby={a11yIds.ariaLabelledBy}
+        aria-describedby={a11yIds.ariaDescribedBy}
+        aria-errormessage={a11yIds.ariaErrorMessage}
         aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
       />
     </Field>

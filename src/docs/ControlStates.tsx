@@ -33,7 +33,9 @@ ${
 ${note ? `\n${note}` : ''}
         `}
       </Markdown>
-      <Canvas of={of.AllControlStates} sourceState={sourceState} />
+      {of.AllControlStates && (
+        <Canvas of={of.AllControlStates} sourceState={sourceState} />
+      )}
     </>
   );
 }

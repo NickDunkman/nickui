@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Field } from '@/components/Field';
 import { CommonFieldProps } from '@/types';
 import { debounceToRepaint } from '@/utils/debounceToRepaint';
-import { randomId } from '@/utils/randomId';
+import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { sliderStyler } from './styles';
@@ -378,20 +378,14 @@ export function Slider({
   const hint = descriptorOrFnToNode(hintOrFn);
   const error = descriptorOrFnToNode(errorOrFn);
 
-  const [uncontrolledAriaLabelledBy] = React.useState(randomId());
-  const ariaLabelledBy =
-    controlledAriaLabelledBy ||
-    (label ? uncontrolledAriaLabelledBy : undefined);
-
-  const [uncontrolledAriaDescribedBy] = React.useState(randomId());
-  const ariaDescribedBy =
-    controlledAriaDescribedBy ||
-    (hint ? uncontrolledAriaDescribedBy : undefined);
-
-  const [uncontrolledAriaErrorMessage] = React.useState(randomId());
-  const ariaErrorMessage =
-    controlledAriaErrorMessage ||
-    (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
+  const a11yIds = useFieldA11yIds({
+    label,
+    hint,
+    error,
+    controlledAriaLabelledBy,
+    controlledAriaDescribedBy,
+    controlledAriaErrorMessage,
+  });
 
   const percentage = valueToRangePercentage(implicitValue, min, max);
 
@@ -432,11 +426,11 @@ export function Slider({
       className={className}
       sizer={sizer}
       label={label}
-      labelId={ariaLabelledBy}
+      labelId={a11yIds.ariaLabelledBy}
       hint={hint}
-      hintId={ariaDescribedBy}
+      hintId={a11yIds.ariaDescribedBy}
       error={error}
-      errorId={ariaErrorMessage}
+      errorId={a11yIds.ariaErrorMessage}
       disabled={disabled}
       required={required}
     >
@@ -455,9 +449,9 @@ export function Slider({
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={implicitValue}
-        aria-labelledby={ariaLabelledBy}
-        aria-describedby={ariaDescribedBy}
-        aria-errormessage={ariaErrorMessage}
+        aria-labelledby={a11yIds.ariaLabelledBy}
+        aria-describedby={a11yIds.ariaDescribedBy}
+        aria-errormessage={a11yIds.ariaErrorMessage}
         aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
       >
         <div ref={trackRef} className={styles.track()}>
