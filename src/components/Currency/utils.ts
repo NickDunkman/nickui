@@ -1,3 +1,5 @@
+import { CurrencyFormatType } from './types';
+
 // Returns `true` if a string has multiple occurrences of a substring
 function stringHasMultipleSubstring(str: string, substr: string) {
   const firstOccurenceIndex = str.indexOf(substr);
@@ -13,41 +15,72 @@ function stringHasMultipleSubstring(str: string, substr: string) {
 
 export function parseValue(
   rawValue: string | number | undefined,
-  options: {
-    decimalPoint: string;
-    keepTrailingDecimalPoint?: boolean;
-  },
+  format: CurrencyFormatType,
 ) {
-  const regex = new RegExp(`[^0-9${options.decimalPoint}-]`, 'g');
+  const regex = new RegExp(`[^0-9${format.decimalPoint}-]`, 'g');
 
   let stringValue = rawValue?.toString().replace(regex, '') || '';
 
   // Reject if there is a negative sign not at the front
-  if (stringValue.indexOf('-') > 0) {
+  if (
+    stringValue.indexOf('-') > 0 ||
+    stringHasMultipleSubstring(stringValue, '-')
+  ) {
     return '';
   }
 
   // Reject if there are more than one decimal points
-  if (stringHasMultipleSubstring(stringValue, options.decimalPoint)) {
+  if (stringHasMultipleSubstring(stringValue, format.decimalPoint)) {
     return '';
   }
 
   // Reject if there are more than one negative signs
-  if (stringHasMultipleSubstring(stringValue, '-')) {
-    return '';
-  }
 
   // Pad with a zero when the first character is the decimal point
-  if (stringValue[0] === options.decimalPoint) {
+  if (stringValue[0] === format.decimalPoint) {
     stringValue = `0${stringValue}`;
   }
 
   // Drop the decimal point when it's the last character
   if (
-    !options.keepTrailingDecimalPoint &&
-    stringValue[stringValue.length - 1] === options.decimalPoint
+    !format?.allowTrailingDecimalPoint &&
+    stringValue[stringValue.length - 1] === format.decimalPoint
   ) {
     stringValue = stringValue.slice(0, -1);
+  }
+
+  // Ensure minimum decimal places
+  if (stringValue && format.minDecimalPlaces > 0) {
+    let [wholePart, decimalPart] = stringValue.split(format.decimalPoint);
+    stringValue = `${wholePart || '0'}${format.decimalPoint}${(decimalPart || '').padEnd(format.minDecimalPlaces, '0')}`;
+  }
+
+  // Ensure maximum decimal places
+  if (stringValue && format.maxDecimalPlaces === 0) {
+    let [wholePart] = stringValue.split(format.decimalPoint);
+    stringValue = wholePart;
+  } else {
+    let [wholePart, decimalPart] = stringValue.split(format.decimalPoint);
+    if (decimalPart && decimalPart.length > format.maxDecimalPlaces) {
+      [wholePart, decimalPart] = (
+        Math.round(
+          Number(`${wholePart}.${decimalPart}`) *
+            Math.pow(10, format.maxDecimalPlaces),
+        ) / Math.pow(10, format.maxDecimalPlaces)
+      )
+        .toString()
+        .split('.');
+      stringValue = `${wholePart}${format.decimalPoint}${(decimalPart || '').padEnd(format.maxDecimalPlaces, '0')}`;
+    }
+  }
+
+  // Drop decimal when whole number
+  if (stringValue && format.excludeDecimalOnWholeNumber) {
+    const asFloat = parseFloat(stringValue);
+    const asInt = parseInt(stringValue);
+    if (asFloat === asInt) {
+      stringValue = asInt.toString();
+    }
   }
 
   return stringValue;
@@ -55,32 +88,25 @@ export function parseValue(
 
 export function parseNumericValue(
   rawValue: string | number | undefined,
-  decimalPoint: string,
+  format: CurrencyFormatType,
 ) {
   return (
-    Number(parseValue(rawValue, { decimalPoint }).replace(decimalPoint, '.')) ||
-    0
+    Number(parseValue(rawValue, format).replace(format.decimalPoint, '.')) || 0
   );
 }
 
 export function formatValue(
   rawValue: string | number | undefined,
-  options: {
-    decimalPoint: string;
-    thousandsSeparator: string;
-    forceFractionalPart?: boolean;
-  },
+  format: CurrencyFormatType,
 ) {
-  const stringValue = parseValue(rawValue, {
-    decimalPoint: options.decimalPoint,
-    keepTrailingDecimalPoint: true,
-  });
+  const stringValue = parseValue(rawValue, format);
 
   if (stringValue === '') {
     return '';
   }
 
-  const [wholePart, fractionalPart] = stringValue.split(options.decimalPoint);
+  const [wholePart, decimalPart] = stringValue.split(format.decimalPoint);
+  const hasDecimalPoint = stringValue.indexOf(format.decimalPoint) !== -1;
 
   // Chunk the whole part into thousands places. Doing it this way instead of
   // Number.toLocaleString() so that it works even with very large numbers.
@@ -96,13 +122,8 @@ export function formatValue(
       ),
     );
   }
-  const chunkedWholePart = chunks.join(options.thousandsSeparator);
 
-  if (options.forceFractionalPart) {
-    return `${chunkedWholePart}${options.decimalPoint}${(fractionalPart || '').padEnd(2, '0')}`;
-  } else if (fractionalPart !== undefined) {
-    return `${chunkedWholePart}${options.decimalPoint}${fractionalPart}`;
-  } else {
-    return chunkedWholePart;
-  }
+  const chunkedWholePart = chunks.join(format.thousandsSeparator);
+
+  return `${chunkedWholePart}${hasDecimalPoint ? format.decimalPoint : ''}${decimalPart || ''}`;
 }

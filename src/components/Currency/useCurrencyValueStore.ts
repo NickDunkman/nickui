@@ -1,11 +1,9 @@
 import * as React from 'react';
 
+import { CurrencyFormatType } from './types';
 import { formatValue, parseNumericValue, parseValue } from './utils';
 
 type StateType = {
-  thousandsSeparator: string;
-  decimalPoint: string;
-  controlledValue: string | number | undefined;
   /**
    * `state.value` is in the format that can be input via the `value` or
    * `defaultValue` prop, and is emmitted via the onChange event back to the
@@ -32,6 +30,17 @@ type StateType = {
    * background.
    */
   placeholderValue: string;
+  /**
+   * The <Currency> component’s raw `value` that was present alongside this
+   * state. Can be used downstream to see if it changed from the previous
+   * state.
+   */
+  controlledValue: string | number | undefined;
+  /**
+   * The currency formatting config used to parse & format the values for this
+   * state.
+   */
+  format: CurrencyFormatType;
   /**
    * Whenever the state’s `value` changes, a descriptor for what caused the
    * change is set here, so that downstream code can conditionally decide
@@ -61,32 +70,22 @@ type ActionType =
 function createInitialState({
   controlledValue,
   defaultValue,
-  thousandsSeparator,
-  decimalPoint,
+  format,
 }: {
   controlledValue: string | number | undefined;
   defaultValue: string | number | undefined;
-  thousandsSeparator: string;
-  decimalPoint: string;
+  format: CurrencyFormatType;
 }): StatesType {
   const initialValue =
     controlledValue !== undefined ? controlledValue : defaultValue;
 
   return {
     currentState: {
-      thousandsSeparator,
-      decimalPoint,
+      value: parseValue(initialValue, format),
+      workingValue: formatWorkingValue(initialValue, format),
+      placeholderValue: formatPlaceholderValue(initialValue, format),
       controlledValue,
-      value: parseValue(initialValue, { decimalPoint }),
-      workingValue: formatValue(initialValue, {
-        decimalPoint,
-        thousandsSeparator,
-      }),
-      placeholderValue: formatValue(initialValue, {
-        decimalPoint,
-        thousandsSeparator,
-        forceFractionalPart: true,
-      }),
+      format,
       source: 'initialValue',
     },
   };
@@ -96,15 +95,14 @@ function createInitialState({
  * Returns a store for managing the various values needed in the <Currency>
  * component.
  */
-export function useCurrencyValueStore(options: {
+export function useCurrencyValueStore(args: {
   controlledValue: string | number | undefined;
   defaultValue: string | number | undefined;
-  thousandsSeparator: string;
-  decimalPoint: string;
+  format: CurrencyFormatType;
 }) {
   const [{ currentState, previousState }, dispatch] = React.useReducer(
     reducer,
-    options,
+    args,
     createInitialState,
   );
 
@@ -132,14 +130,16 @@ export function useCurrencyValueStore(options: {
 
 /** Reducer for the store used in useCurrencyValueState */
 function reducer(states: StatesType, action: ActionType): StatesType {
-  const decimalPoint = states.currentState.decimalPoint;
-  const thousandsSeparator = states.currentState.thousandsSeparator;
+  //const decimalPoint = states.currentState.decimalPoint;
+  //const thousandsSeparator = states.currentState.thousandsSeparator;
 
-  const newValue = parseValue(action.payload, { decimalPoint });
-  const valueIsChanging = states.currentState.value !== newValue;
+  let newValue: string;
 
   switch (action.type) {
     case 'updateFromControlledValue':
+      newValue = parseValue(action.payload, states.currentState.format);
+      let valueIsChanging = states.currentState.value !== newValue;
+
       // When updating based on value, nothing should change unless the value
       // is different, since everything cascades from the new value
       if (!valueIsChanging) {
@@ -149,47 +149,70 @@ function reducer(states: StatesType, action: ActionType): StatesType {
       // Don’t update the formatted versions unless there is a numerical
       // change. Otherwise the user's formatting changes will get wiped.
       const formattedValuesShouldChange =
-        parseNumericValue(newValue, decimalPoint) !==
-        parseNumericValue(states.currentState.workingValue, decimalPoint);
+        parseNumericValue(newValue, states.currentState.format) !==
+        parseNumericValue(
+          states.currentState.placeholderValue,
+          states.currentState.format,
+        );
 
       return {
         previousState: states.currentState,
         currentState: {
-          ...states.currentState,
-          controlledValue: action.payload,
           value: newValue,
           workingValue: formattedValuesShouldChange
-            ? formatValue(newValue, { decimalPoint, thousandsSeparator })
+            ? formatWorkingValue(newValue, states.currentState.format)
             : states.currentState.workingValue,
           placeholderValue: formattedValuesShouldChange
-            ? formatValue(newValue, {
-                decimalPoint,
-                thousandsSeparator,
-                forceFractionalPart: true,
-              })
+            ? formatPlaceholderValue(newValue, states.currentState.format)
             : states.currentState.placeholderValue,
+          controlledValue: action.payload,
+          format: states.currentState.format,
           source: 'controlledValue',
         },
       };
 
     case 'updateFromWorkingValue':
+      newValue = parseValue(action.payload, states.currentState.format);
+
       return {
         previousState: states.currentState,
         currentState: {
-          ...states.currentState,
-          controlledValue: states.currentState.controlledValue,
           value: newValue,
-          workingValue: formatValue(action.payload, {
-            decimalPoint,
-            thousandsSeparator,
-          }),
-          placeholderValue: formatValue(action.payload, {
-            decimalPoint,
-            thousandsSeparator,
-            forceFractionalPart: true,
-          }),
+          workingValue: formatWorkingValue(
+            action.payload,
+            states.currentState.format,
+          ),
+          placeholderValue: formatPlaceholderValue(
+            action.payload,
+            states.currentState.format,
+          ),
+          controlledValue: states.currentState.controlledValue,
+          format: states.currentState.format,
           source: 'workingValue',
         },
       };
   }
+}
+
+function formatWorkingValue(
+  value: string | number | undefined,
+  format: CurrencyFormatType,
+) {
+  return formatValue(value, {
+    ...format,
+    minDecimalPlaces: 0,
+    allowTrailingDecimalPoint: true,
+    excludeDecimalOnWholeNumber: false,
+  });
+}
+
+function formatPlaceholderValue(
+  value: string | number | undefined,
+  format: CurrencyFormatType,
+) {
+  return formatValue(value, {
+    ...format,
+    minDecimalPlaces: format.maxDecimalPlaces,
+    excludeDecimalOnWholeNumber: false,
+  });
 }

@@ -1,16 +1,18 @@
+import memoize from 'just-memoize';
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
 import { textStyler } from '@/components/Text/styles';
 import type { CommonFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
-import { randomId } from '@/utils/randomId';
+import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { currencyStyler } from './styles';
+import { CurrencyFormatProps, CurrencyFormatType } from './types';
 import { useCurrencyValueStore } from './useCurrencyValueStore';
 
-interface CurrencyProps
+interface CurrencyInputProps
   extends Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'> {
   /** Called when the value of the Text changes */
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -22,13 +24,11 @@ interface CurrencyProps
   /** Sets the value of the Text when using it as an uncontrolled component */
   defaultValue?: string;
   currencySymbol?: string;
-  thousandsSeparator?: string;
-  decimalPoint?: string;
 }
 
 /**
  * A form control that allows users to enter & edit a single line of text
- * @param props {@link CurrencyProps} + {@link CommonFieldProps}
+ * @param props {@link CurrencyInputProps} + {@link CurrencyFormatProps} + {@link CommonFieldProps}
  */
 export function Currency({
   // Field props
@@ -44,15 +44,21 @@ export function Currency({
   value: controlledValue,
   defaultValue,
   currencySymbol = '$',
-  thousandsSeparator = ',',
   decimalPoint = '.',
+  minDecimalPlaces = 2,
+  maxDecimalPlaces = 2,
+  excludeDecimalOnWholeNumber = false,
+  thousandsSeparator = ',',
   ref: controlledInputRef,
+  onChange,
+  onKeyDown,
+  'aria-labelledby': controlledAriaLabelledBy,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <input>
   ...otherInputProps
-}: CurrencyProps & CommonFieldProps) {
+}: CurrencyInputProps & CurrencyFormatProps & CommonFieldProps) {
   // This component needs a ref to the hidden <input> for its internal
   // mechanisms. There may also be a `ref` prop provided, such as by React Form
   // Hook for managing the field, and that may be a RefCallback or a RefObject.
@@ -68,8 +74,13 @@ export function Currency({
   } = useCurrencyValueStore({
     controlledValue,
     defaultValue,
-    thousandsSeparator,
-    decimalPoint,
+    format: createFormat(
+      decimalPoint,
+      minDecimalPlaces,
+      maxDecimalPlaces,
+      excludeDecimalOnWholeNumber,
+      thousandsSeparator,
+    ),
   });
 
   React.useEffect(() => {
@@ -82,18 +93,15 @@ export function Currency({
     controlledValue,
   ]);
 
-  const [uncontrolledId] = React.useState(randomId());
-  const id = controlledId || (label ? uncontrolledId : undefined);
-
-  const [uncontrolledAriaDescribedBy] = React.useState(randomId());
-  const ariaDescribedBy =
-    controlledAriaDescribedBy ||
-    (hint ? uncontrolledAriaDescribedBy : undefined);
-
-  const [uncontrolledAriaErrorMessage] = React.useState(randomId());
-  const ariaErrorMessage =
-    controlledAriaErrorMessage ||
-    (error && error !== true ? uncontrolledAriaErrorMessage : undefined);
+  const a11yIds = useFieldA11yIds({
+    label,
+    hint,
+    error,
+    controlledId,
+    controlledAriaLabelledBy,
+    controlledAriaDescribedBy,
+    controlledAriaErrorMessage,
+  });
 
   React.useEffect(() => {
     if (
@@ -125,6 +133,7 @@ export function Currency({
         event.key !== decimalPoint
       ) {
         event.preventDefault();
+        return;
       }
 
       // Block input of a second decimal
@@ -133,8 +142,11 @@ export function Currency({
         currentState.workingValue.indexOf(decimalPoint) !== -1
       ) {
         event.preventDefault();
+        return;
       }
     }
+
+    onKeyDown?.(event);
   }
 
   const resolvedSizer = useResolvedSizer(sizer);
@@ -150,11 +162,12 @@ export function Currency({
       className={className}
       sizer={sizer}
       label={label}
-      controlId={id}
+      labelId={a11yIds.ariaLabelledBy}
+      controlId={a11yIds.id}
       hint={hint}
-      hintId={ariaDescribedBy}
+      hintId={a11yIds.ariaDescribedBy}
       error={error !== true ? error : undefined}
-      errorId={ariaErrorMessage}
+      errorId={a11yIds.ariaErrorMessage}
       disabled={disabled}
       required={required}
     >
@@ -184,15 +197,17 @@ export function Currency({
           <input> behind until the user enters them manually.
         */}
         <input
-          id={id}
           role="spinbutton"
+          {...otherInputProps}
+          id={a11yIds.id}
           type="text"
           className={clsw(textStyles, currencyStyles.interactiveInput())}
           disabled={disabled}
           required={required}
           value={currentState.workingValue}
-          aria-describedby={ariaDescribedBy}
-          aria-errormessage={ariaErrorMessage}
+          aria-labelledby={a11yIds.ariaLabelledBy}
+          aria-describedby={a11yIds.ariaDescribedBy}
+          aria-errormessage={a11yIds.ariaErrorMessage}
           aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
           onChange={(event) => updateFromWorkingValue(event.target.value)}
           onKeyDown={handleKeyDown}
@@ -216,7 +231,7 @@ export function Currency({
         event.
       */}
       <input
-        {...otherInputProps}
+        onChange={onChange}
         ref={(el) => {
           internalInputRef.current = el;
 
@@ -261,3 +276,23 @@ const allowedKeyPressesExceptDecimalPoint = Object.freeze([
   'Enter',
   'Backspace',
 ]);
+
+/**
+ * A function that creates the `format` in a guaranteed-memoized way
+ * (React.useMemo does not guarantee absolute memoization)
+ */
+const createFormat = memoize(
+  (
+    decimalPoint: CurrencyFormatType['decimalPoint'],
+    minDecimalPlaces: CurrencyFormatType['minDecimalPlaces'],
+    maxDecimalPlaces: CurrencyFormatType['maxDecimalPlaces'],
+    excludeDecimalOnWholeNumber: CurrencyFormatType['excludeDecimalOnWholeNumber'],
+    thousandsSeparator: CurrencyFormatType['thousandsSeparator'],
+  ) => ({
+    decimalPoint,
+    minDecimalPlaces,
+    maxDecimalPlaces,
+    excludeDecimalOnWholeNumber,
+    thousandsSeparator,
+  }),
+);

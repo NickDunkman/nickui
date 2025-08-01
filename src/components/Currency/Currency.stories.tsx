@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import * as React from 'react';
-import { expect, fn } from 'storybook/test';
-
-import { PrettyPrint } from '@/docs/PrettyPrint';
-import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+//import * as React from 'react';
+import { fn } from 'storybook/test';
 
 import { Currency } from './Currency';
 
@@ -15,47 +12,47 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function ControlledCurrency(props: React.ComponentProps<typeof Currency>) {
-  const [value, setValue] = React.useState(props.defaultValue);
-  const [count, setCount] = React.useState(0);
-
-  return (
-    <>
-      <PrettyPrint className="mb-2" data={{ count, value }} />
-      <Currency
-        {...props}
-        value={value}
-        onChange={(event) => {
-          setCount(count + 1);
-          setValue(
-            event.target.value === '1.23' ? '69.69' : event.target.value,
-          );
-        }}
-      />
-    </>
-  );
-}
-
-function UncontrolledCurrency(props: React.ComponentProps<typeof Currency>) {
-  const [value, setValue] = React.useState(props.defaultValue);
-  const [count, setCount] = React.useState(0);
-
-  return (
-    <>
-      <PrettyPrint className="mb-2" data={{ count, value }} />
-      <Currency
-        {...props}
-        defaultValue={value}
-        onChange={(event) => {
-          setCount(count + 1);
-          setValue(
-            event.target.value === '1.23' ? '69.69' : event.target.value,
-          );
-        }}
-      />
-    </>
-  );
-}
+//function ControlledCurrency(props: React.ComponentProps<typeof Currency>) {
+//  const [value, setValue] = React.useState(props.defaultValue);
+//  const [count, setCount] = React.useState(0);
+//
+//  return (
+//    <>
+//      <PrettyPrint className="mb-2" data={{ count, value }} />
+//      <Currency
+//        {...props}
+//        value={value}
+//        onChange={(event) => {
+//          setCount(count + 1);
+//          setValue(
+//            event.target.value === '1.23' ? '69.69' : event.target.value,
+//          );
+//        }}
+//      />
+//    </>
+//  );
+//}
+//
+//function UncontrolledCurrency(props: React.ComponentProps<typeof Currency>) {
+//  const [value, setValue] = React.useState(props.defaultValue);
+//  const [count, setCount] = React.useState(0);
+//
+//  return (
+//    <>
+//      <PrettyPrint className="mb-2" data={{ count, value }} />
+//      <Currency
+//        {...props}
+//        defaultValue={value}
+//        onChange={(event) => {
+//          setCount(count + 1);
+//          setValue(
+//            event.target.value === '1.23' ? '69.69' : event.target.value,
+//          );
+//        }}
+//      />
+//    </>
+//  );
+//}
 
 export const FieldLayout: Story = {
   tags: ['field-layout'],
