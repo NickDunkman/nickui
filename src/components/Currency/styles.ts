@@ -7,7 +7,8 @@ import { tv } from 'tailwind-variants';
 export const currencyStyler = tv({
   slots: {
     visibleInputsContainer: 'relative',
-    placeholderInput: 'select-none pointer-events-none',
+    placeholderInput:
+      'select-none pointer-events-none text-gray-400 disabled:text-gray-400',
     interactiveInput:
       'peer absolute top-0 right-0 left-0 !bg-transparent !border-transparent',
     hiddenInput: 'hidden',

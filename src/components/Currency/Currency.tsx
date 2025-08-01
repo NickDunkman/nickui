@@ -7,6 +7,7 @@ import type { CommonFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
+import { useScrollClone } from '@/utils/useScrollClone';
 
 import { currencyStyler } from './styles';
 import { CurrencyFormatProps, CurrencyFormatType } from './types';
@@ -65,6 +66,9 @@ export function Currency({
   // So for internal convenience, we install a managed RefObject on the hidden
   // <input> in addition to the `ref` prop.
   const internalInputRef = React.useRef<HTMLInputElement>(null);
+
+  const [workingInputRef, placeholderInputRef] =
+    useScrollClone<HTMLInputElement>();
 
   const {
     currentState,
@@ -180,8 +184,9 @@ export function Currency({
           <input>.
         */}
         <input
+          ref={placeholderInputRef}
           className={clsw(textStyles, currencyStyles.placeholderInput())}
-          placeholder={currentState.placeholderValue}
+          value={currentState.placeholderValue}
           disabled={disabled}
           tabIndex={-1}
           aria-hidden
@@ -199,6 +204,7 @@ export function Currency({
         <input
           role="spinbutton"
           {...otherInputProps}
+          ref={workingInputRef}
           id={a11yIds.id}
           type="text"
           className={clsw(textStyles, currencyStyles.interactiveInput())}
