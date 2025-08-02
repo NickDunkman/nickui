@@ -188,6 +188,7 @@ export const buttonStyler = tv({
         [--nickui-button-bg-color:var(--color-blue-50)]
         [--nickui-button-border-color:var(--color-blue-900)]
         [--nickui-button-focus-border-color:var(--color-blue-900)]
+        [--nickui-button-coarse-border-color:var(--color-blue-900)]
 
         [--nickui-button-hover-bg-color:#f2f7fc]
         [--nickui-button-hover-border-color:var(--color-blue-800)]
@@ -249,6 +250,7 @@ export const buttonStyler = tv({
         [--nickui-button-bg-color:var(--color-emerald-50)]
         [--nickui-button-border-color:var(--color-emerald-900)]
         [--nickui-button-focus-border-color:var(--color-emerald-900)]
+        [--nickui-button-coarse-border-color:var(--color-emerald-900)]
 
         [--nickui-button-hover-bg-color:#f2fcf8]
         [--nickui-button-hover-border-color:var(--color-emerald-800)]
@@ -309,6 +311,7 @@ export const buttonStyler = tv({
         [--nickui-button-bg-color:var(--color-yellow-50)]
         [--nickui-button-border-color:var(--color-yellow-900)]
         [--nickui-button-focus-border-color:var(--color-yellow-900)]
+        [--nickui-button-coarse-border-color:var(--color-yellow-900)]
 
         [--nickui-button-hover-bg-color:#fffef3]
         [--nickui-button-hover-border-color:var(--color-yellow-800)]
@@ -368,6 +371,7 @@ export const buttonStyler = tv({
         [--nickui-button-bg-color:var(--color-rose-50)]
         [--nickui-button-border-color:var(--color-rose-900)]
         [--nickui-button-focus-border-color:var(--color-rose-900)]
+        [--nickui-button-coarse-border-color:var(--color-rose-900)]
 
         [--nickui-button-hover-bg-color:#fcf2f3]
         [--nickui-button-hover-border-color:var(--color-rose-800)]
