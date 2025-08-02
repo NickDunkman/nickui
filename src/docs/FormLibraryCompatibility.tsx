@@ -57,7 +57,7 @@ props to be used with [React Hook Form](https://react-hook-form.com/),
             {lib}
           </Button>
         ))}
-        <div className="ml-auto">
+        <div className="ml-auto hidden sm:block">
           <span className="relative -top-4 -mt-2 mr-3 blur-[0.5px]">⛳️</span>
           <span className="text-3xl">🏌️‍♂️</span>
         </div>
