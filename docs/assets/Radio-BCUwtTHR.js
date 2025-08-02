@@ -1,0 +1,9 @@
+import{j as t,M as m}from"./blocks-DRGCN4bN.js";import{useMDXComponents as a}from"./index-CNx8CMKU.js";import{D as o}from"./index-Bss8VEMq.js";import{R as p}from"./Radio-BWpvQsoH.js";import{S as i}from"./Radio.stories-BphLxfTo.js";import"./iframe-BIe9rtw3.js";import"./index-Cx0u_3GC.js";import"./client-CwYka2MO.js";import"./index-B5YwM-hZ.js";import"./Button-Do5gQcsc.js";import"./index-BM0oayHQ.js";import"./PrettyPrint-DGuw_oHe.js";import"./Checkbox-DUk2eHIM.js";import"./CheckedField-iUjy3rzy.js";import"./useFieldA11yIds-CcFzIdLi.js";import"./randomId-Dfhrkieu.js";import"./AllSizersStoryWrapper-BSR9N4QE.js";function s(e){const n={p:"p",...a(),...e.components};return o||r("Docs",!1),o.ComponentHeading||r("Docs.ComponentHeading",!0),o.ControlStates||r("Docs.ControlStates",!0),o.FauxCanvas||r("Docs.FauxCanvas",!0),o.FormLibraryCompatibility||r("Docs.FormLibraryCompatibility",!0),o.Props||r("Docs.Props",!0),o.Sizers||r("Docs.Sizers",!0),o.TableOfContents||r("Docs.TableOfContents",!0),t.jsxs(t.Fragment,{children:[t.jsx(m,{of:i}),`
+`,t.jsx(o.ComponentHeading,{of:"Radio"}),`
+`,t.jsx(n.p,{children:"A form control that allow users to choose one option from a set."}),`
+`,t.jsx(o.FauxCanvas,{children:t.jsx(p,{label:"I hope you don’t regret checking me"})}),`
+`,t.jsx(o.TableOfContents,{}),`
+`,t.jsx(o.Props,{of:i,wrapper:"CheckedField",nativeBase:"input"}),`
+`,t.jsx(o.ControlStates,{of:i,checkable:!0}),`
+`,t.jsx(o.Sizers,{of:i,wrapper:"CheckedField"}),`
+`,t.jsx(o.FormLibraryCompatibility,{of:i,fieldName:"inTheHoleFormik",radioWithValue:"holed-out",componentProps:{label:"It’s in the hole"}})]})}function w(e={}){const{wrapper:n}={...a(),...e.components};return n?t.jsx(n,{...e,children:t.jsx(s,{...e})}):s(e)}function r(e,n){throw new Error("Expected "+(n?"component":"object")+" `"+e+"` to be defined: you likely forgot to import, pass, or provide it.")}export{w as default};
