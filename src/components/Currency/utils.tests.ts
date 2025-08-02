@@ -1,13 +1,18 @@
 // Note: most tests are in story play functions in Radio.stories.tsx
 import { CurrencyFormatType } from './types';
-import { parseValue } from './utils';
+import { deformatValue, parseValue } from './utils';
 
 const usdFormat: CurrencyFormatType = {
   decimalPoint: '.',
   minDecimalPlaces: 2,
   maxDecimalPlaces: 2,
-  excludeDecimalOnWholeNumber: false,
   thousandsSeparator: ',',
+};
+
+const euroFormat: CurrencyFormatType = {
+  ...usdFormat,
+  decimalPoint: ',',
+  thousandsSeparator: '.',
 };
 
 describe('parseValue', () => {
@@ -70,24 +75,65 @@ describe('parseValue', () => {
     },
   );
 
-  test.each([
-    ['empty strings are preserved', { input: '', max: 2, output: '' }],
-    ['decimal zeros are dropped', { input: ' 1.00 ', max: 2, output: '1' }],
-    [
-      'dropping happens after rounding occurs when truncating to max decimal places',
-      { input: ' 1.999 ', max: 2, output: '2' },
-    ],
-  ])(
-    'can exclude decimals on whole numbers: $0',
-    (_, { input, max, output }) => {
-      expect(
-        parseValue(input, {
-          ...usdFormat,
-          excludeDecimalOnWholeNumber: true,
-          minDecimalPlaces: max,
-          maxDecimalPlaces: max,
-        }),
-      ).toStrictEqual(output);
-    },
-  );
+  test('does not use custom decimalPoint', () => {
+    expect(
+      parseValue('1234', { ...euroFormat, minDecimalPlaces: 2 }),
+    ).toStrictEqual('1234.00');
+  });
+
+  test('should strip leading zeros properly', () => {
+    expect(parseValue('0', usdFormat)).toStrictEqual('0.00');
+    expect(parseValue('0.', usdFormat)).toStrictEqual('0.00');
+    expect(parseValue('-0', usdFormat)).toStrictEqual('-0.00');
+    expect(parseValue('-0.', usdFormat)).toStrictEqual('-0.00');
+
+    expect(parseValue('00', usdFormat)).toStrictEqual('0.00');
+    expect(parseValue('00.', usdFormat)).toStrictEqual('0.00');
+    expect(parseValue('-00', usdFormat)).toStrictEqual('-0.00');
+    expect(parseValue('-00.', usdFormat)).toStrictEqual('-0.00');
+
+    expect(parseValue('001', usdFormat)).toStrictEqual('1.00');
+    expect(parseValue('001.', usdFormat)).toStrictEqual('1.00');
+    expect(parseValue('-001', usdFormat)).toStrictEqual('-1.00');
+    expect(parseValue('-001.', usdFormat)).toStrictEqual('-1.00');
+
+    expect(parseValue('0010', usdFormat)).toStrictEqual('10.00');
+    expect(parseValue('0010.', usdFormat)).toStrictEqual('10.00');
+    expect(parseValue('-0010', usdFormat)).toStrictEqual('-10.00');
+    expect(parseValue('-0010.', usdFormat)).toStrictEqual('-10.00');
+
+    expect(parseValue('0010.0', usdFormat)).toStrictEqual('10.00');
+    expect(parseValue('0010.0', usdFormat)).toStrictEqual('10.00');
+    expect(parseValue('-0010.0', usdFormat)).toStrictEqual('-10.00');
+    expect(parseValue('-0010.0', usdFormat)).toStrictEqual('-10.00');
+
+    expect(parseValue('0010.1', usdFormat)).toStrictEqual('10.10');
+    expect(parseValue('0010.1', usdFormat)).toStrictEqual('10.10');
+    expect(parseValue('-0010.1', usdFormat)).toStrictEqual('-10.10');
+    expect(parseValue('-0010.1', usdFormat)).toStrictEqual('-10.10');
+  });
+});
+
+describe('deformatValue', () => {
+  test('Deformats from standard format', () => {
+    expect(deformatValue('', usdFormat)).toStrictEqual('');
+    expect(deformatValue('1', usdFormat)).toStrictEqual('1');
+    expect(deformatValue('1.', usdFormat)).toStrictEqual('1.');
+    expect(deformatValue('1.2', usdFormat)).toStrictEqual('1.2');
+    expect(deformatValue('1,234.56', usdFormat)).toStrictEqual('1234.56');
+    expect(deformatValue('1,234,567.89', usdFormat)).toStrictEqual(
+      '1234567.89',
+    );
+  });
+
+  test('Deformats from custom format', () => {
+    expect(deformatValue('', euroFormat)).toStrictEqual('');
+    expect(deformatValue('1', euroFormat)).toStrictEqual('1');
+    expect(deformatValue('1,', euroFormat)).toStrictEqual('1.');
+    expect(deformatValue('1,2', euroFormat)).toStrictEqual('1.2');
+    expect(deformatValue('1.234,56', euroFormat)).toStrictEqual('1234.56');
+    expect(deformatValue('1.234.567,89', euroFormat)).toStrictEqual(
+      '1234567.89',
+    );
+  });
 });

@@ -48,7 +48,6 @@ export function Currency({
   decimalPoint = '.',
   minDecimalPlaces = 2,
   maxDecimalPlaces = 2,
-  excludeDecimalOnWholeNumber = false,
   thousandsSeparator = ',',
   ref: controlledInputRef,
   onChange,
@@ -82,7 +81,6 @@ export function Currency({
       decimalPoint,
       minDecimalPlaces,
       maxDecimalPlaces,
-      excludeDecimalOnWholeNumber,
       thousandsSeparator,
     ),
   });
@@ -187,6 +185,7 @@ export function Currency({
           ref={placeholderInputRef}
           className={clsw(textStyles, currencyStyles.placeholderInput())}
           value={currentState.placeholderValue}
+          onChange={() => {}} // silence no onChange w/ value warning
           disabled={disabled}
           tabIndex={-1}
           aria-hidden
@@ -292,13 +291,11 @@ const createFormat = memoize(
     decimalPoint: CurrencyFormatType['decimalPoint'],
     minDecimalPlaces: CurrencyFormatType['minDecimalPlaces'],
     maxDecimalPlaces: CurrencyFormatType['maxDecimalPlaces'],
-    excludeDecimalOnWholeNumber: CurrencyFormatType['excludeDecimalOnWholeNumber'],
     thousandsSeparator: CurrencyFormatType['thousandsSeparator'],
   ) => ({
     decimalPoint,
     minDecimalPlaces,
     maxDecimalPlaces,
-    excludeDecimalOnWholeNumber,
     thousandsSeparator,
   }),
 );

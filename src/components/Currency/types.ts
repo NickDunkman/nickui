@@ -18,8 +18,6 @@ export interface CurrencyFormatProps {
    * The maximum number of decimal places to include on the value, typically 2
    */
   maxDecimalPlaces?: number;
-  /** Option to exclude the decimal places when the decimal part is zero */
-  excludeDecimalOnWholeNumber?: boolean;
 }
 
 /**

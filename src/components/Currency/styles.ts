@@ -8,9 +8,8 @@ export const currencyStyler = tv({
   slots: {
     visibleInputsContainer: 'relative',
     placeholderInput:
-      'select-none pointer-events-none text-gray-400 disabled:text-gray-400',
-    interactiveInput:
-      'peer absolute top-0 right-0 left-0 !bg-transparent !border-transparent',
+      'select-none pointer-events-none text-gray-400 disabled:text-gray-400 !border-transparent',
+    interactiveInput: 'peer absolute top-0 right-0 left-0 !bg-transparent',
     hiddenInput: 'hidden',
     currencySymbol:
       'absolute scale-140 text-gray-400 peer-disabled:text-gray-400 select-none pointer-events-none',

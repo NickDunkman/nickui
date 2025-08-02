@@ -1,7 +1,12 @@
 import * as React from 'react';
 
 import { CurrencyFormatType } from './types';
-import { formatValue, parseNumericValue, parseValue } from './utils';
+import {
+  deformatValue,
+  formatValue,
+  parseNumericValue,
+  parseValue,
+} from './utils';
 
 type StateType = {
   /**
@@ -172,18 +177,22 @@ function reducer(states: StatesType, action: ActionType): StatesType {
       };
 
     case 'updateFromWorkingValue':
-      newValue = parseValue(action.payload, states.currentState.format);
+      const deformattedValue = deformatValue(
+        action.payload,
+        states.currentState.format,
+      );
+      newValue = parseValue(deformattedValue, states.currentState.format);
 
       return {
         previousState: states.currentState,
         currentState: {
           value: newValue,
           workingValue: formatWorkingValue(
-            action.payload,
+            deformattedValue,
             states.currentState.format,
           ),
           placeholderValue: formatPlaceholderValue(
-            action.payload,
+            deformattedValue,
             states.currentState.format,
           ),
           controlledValue: states.currentState.controlledValue,
@@ -200,9 +209,9 @@ function formatWorkingValue(
 ) {
   return formatValue(value, {
     ...format,
-    minDecimalPlaces: 0,
+    // These allow the decimal part to be a work in progress
     allowTrailingDecimalPoint: true,
-    excludeDecimalOnWholeNumber: false,
+    minDecimalPlaces: 0,
   });
 }
 
@@ -213,6 +222,5 @@ function formatPlaceholderValue(
   return formatValue(value, {
     ...format,
     minDecimalPlaces: format.maxDecimalPlaces,
-    excludeDecimalOnWholeNumber: false,
   });
 }

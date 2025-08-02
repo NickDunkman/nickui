@@ -17,9 +17,7 @@ export function parseValue(
   rawValue: string | number | undefined,
   format: CurrencyFormatType,
 ) {
-  const regex = new RegExp(`[^0-9${format.decimalPoint}-]`, 'g');
-
-  let stringValue = rawValue?.toString().replace(regex, '') || '';
+  let stringValue = rawValue?.toString().replace(/[^0-9.-]/g, '') || '';
 
   // Reject if there is a negative sign not at the front
   if (
@@ -30,37 +28,44 @@ export function parseValue(
   }
 
   // Reject if there are more than one decimal points
-  if (stringHasMultipleSubstring(stringValue, format.decimalPoint)) {
+  if (stringHasMultipleSubstring(stringValue, '.')) {
     return '';
   }
 
-  // Reject if there are more than one negative signs
+  // There should not be leading zeros on the front of the whole part (unless
+  // the whole part is a single zero)
+  const matches = stringValue.match(/^(-?)0+(([1-9][0-9]*)|0)(\.[0-9]*)?$/);
+  if (matches) {
+    stringValue = (matches[1] || '') + (matches[2] || '') + (matches[4] || '');
+  }
 
   // Pad with a zero when the first character is the decimal point
-  if (stringValue[0] === format.decimalPoint) {
+  if (stringValue[0] === '.') {
     stringValue = `0${stringValue}`;
+  } else if (stringValue.slice(0, 2) === '-.') {
+    stringValue = `-0${stringValue.slice(1)}`;
   }
 
   // Drop the decimal point when it's the last character
   if (
     !format?.allowTrailingDecimalPoint &&
-    stringValue[stringValue.length - 1] === format.decimalPoint
+    stringValue[stringValue.length - 1] === '.'
   ) {
     stringValue = stringValue.slice(0, -1);
   }
 
   // Ensure minimum decimal places
   if (stringValue && format.minDecimalPlaces > 0) {
-    let [wholePart, decimalPart] = stringValue.split(format.decimalPoint);
-    stringValue = `${wholePart || '0'}${format.decimalPoint}${(decimalPart || '').padEnd(format.minDecimalPlaces, '0')}`;
+    let [wholePart, decimalPart] = stringValue.split('.');
+    stringValue = `${wholePart || '0'}.${(decimalPart || '').padEnd(format.minDecimalPlaces, '0')}`;
   }
 
   // Ensure maximum decimal places
   if (stringValue && format.maxDecimalPlaces === 0) {
-    let [wholePart] = stringValue.split(format.decimalPoint);
+    let [wholePart] = stringValue.split('.');
     stringValue = wholePart;
   } else {
-    let [wholePart, decimalPart] = stringValue.split(format.decimalPoint);
+    let [wholePart, decimalPart] = stringValue.split('.');
     if (decimalPart && decimalPart.length > format.maxDecimalPlaces) {
       [wholePart, decimalPart] = (
         Math.round(
@@ -70,20 +75,20 @@ export function parseValue(
       )
         .toString()
         .split('.');
-      stringValue = `${wholePart}${format.decimalPoint}${(decimalPart || '').padEnd(format.maxDecimalPlaces, '0')}`;
-    }
-  }
-
-  // Drop decimal when whole number
-  if (stringValue && format.excludeDecimalOnWholeNumber) {
-    const asFloat = parseFloat(stringValue);
-    const asInt = parseInt(stringValue);
-    if (asFloat === asInt) {
-      stringValue = asInt.toString();
+      stringValue = `${wholePart}.${(decimalPart || '').padEnd(format.maxDecimalPlaces, '0')}`;
     }
   }
 
   return stringValue;
+}
+
+export function deformatValue(
+  formattedValue: string,
+  format: CurrencyFormatType,
+) {
+  return formattedValue
+    .replaceAll(format.thousandsSeparator, '')
+    .replace(format.decimalPoint, '.');
 }
 
 export function parseNumericValue(
@@ -105,8 +110,8 @@ export function formatValue(
     return '';
   }
 
-  const [wholePart, decimalPart] = stringValue.split(format.decimalPoint);
-  const hasDecimalPoint = stringValue.indexOf(format.decimalPoint) !== -1;
+  const [wholePart, decimalPart] = stringValue.split('.');
+  const hasDecimalPoint = stringValue.indexOf('.') !== -1;
 
   // Chunk the whole part into thousands places. Doing it this way instead of
   // Number.toLocaleString() so that it works even with very large numbers.
