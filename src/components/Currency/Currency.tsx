@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import { Field } from '@/components/Field';
 import { textStyler } from '@/components/Text/styles';
+import { PrettyPrint } from '@/docs/PrettyPrint';
 import type { CommonFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
@@ -69,31 +70,17 @@ export function Currency({
   const [workingInputRef, placeholderInputRef] =
     useScrollClone<HTMLInputElement>();
 
-  const {
-    currentState,
-    previousState,
-    updateFromControlledValue,
-    updateFromWorkingValue,
-  } = useCurrencyValueStore({
-    controlledValue,
-    defaultValue,
-    format: createFormat(
-      decimalPoint,
-      minDecimalPlaces,
-      maxDecimalPlaces,
-      thousandsSeparator,
-    ),
-  });
-
-  React.useEffect(() => {
-    if (controlledValue !== currentState.controlledValue) {
-      updateFromControlledValue(controlledValue);
-    }
-  }, [
-    currentState.controlledValue,
-    updateFromControlledValue,
-    controlledValue,
-  ]);
+  const { currentState, previousState, updateFromWorkingValue } =
+    useCurrencyValueStore({
+      controlledValue,
+      defaultValue,
+      format: createFormat(
+        decimalPoint,
+        minDecimalPlaces,
+        maxDecimalPlaces,
+        thousandsSeparator,
+      ),
+    });
 
   const a11yIds = useFieldA11yIds({
     label,
@@ -173,6 +160,12 @@ export function Currency({
       disabled={disabled}
       required={required}
     >
+      <PrettyPrint
+        className="mb-2"
+        data={{
+          currentState,
+        }}
+      />
       <div className={currencyStyles.visibleInputsContainer()}>
         {/*
           This is the "placholder" <input>. It's positioned directly underneath

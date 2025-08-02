@@ -9,6 +9,8 @@ import {
 } from './utils';
 
 type StateType = {
+  /** Starts at 1; each time the state changes, it increments */
+  version: number;
   /**
    * `state.value` is in the format that can be input via the `value` or
    * `defaultValue` prop, and is emmitted via the onChange event back to the
@@ -60,6 +62,7 @@ type StateType = {
 type StatesType = {
   currentState: StateType;
   previousState?: StateType;
+  history: StateType[];
 };
 
 type ActionType =
@@ -71,30 +74,6 @@ type ActionType =
       type: 'updateFromWorkingValue';
       payload: string;
     };
-
-function createInitialState({
-  controlledValue,
-  defaultValue,
-  format,
-}: {
-  controlledValue: string | number | undefined;
-  defaultValue: string | number | undefined;
-  format: CurrencyFormatType;
-}): StatesType {
-  const initialValue =
-    controlledValue !== undefined ? controlledValue : defaultValue;
-
-  return {
-    currentState: {
-      value: parseValue(initialValue, format),
-      workingValue: formatWorkingValue(initialValue, format),
-      placeholderValue: formatPlaceholderValue(initialValue, format),
-      controlledValue,
-      format,
-      source: 'initialValue',
-    },
-  };
-}
 
 /**
  * Returns a store for managing the various values needed in the <Currency>
@@ -108,7 +87,7 @@ export function useCurrencyValueStore(args: {
   const [{ currentState, previousState }, dispatch] = React.useReducer(
     reducer,
     args,
-    createInitialState,
+    createStates,
   );
 
   const updateFromControlledValue = React.useCallback(
@@ -125,11 +104,67 @@ export function useCurrencyValueStore(args: {
     [dispatch],
   );
 
+  // Update w/ new controlledValue when it changes
+  React.useEffect(() => {
+    if (args.controlledValue !== currentState.controlledValue) {
+      updateFromControlledValue(args.controlledValue);
+    }
+  }, [
+    args.controlledValue,
+    currentState.controlledValue,
+    updateFromControlledValue,
+  ]);
+
   return {
     previousState,
     currentState,
     updateFromControlledValue,
     updateFromWorkingValue,
+  };
+}
+
+function createStates({
+  controlledValue,
+  defaultValue,
+  format,
+}: {
+  controlledValue: string | number | undefined;
+  defaultValue: string | number | undefined;
+  format: CurrencyFormatType;
+}): StatesType {
+  const initialValue =
+    controlledValue !== undefined ? controlledValue : defaultValue;
+
+  const initialState: StateType = {
+    version: 1,
+    value: parseValue(initialValue, format),
+    workingValue: formatWorkingValue(initialValue, format),
+    placeholderValue: formatPlaceholderValue(initialValue, format),
+    controlledValue,
+    format,
+    source: 'initialValue',
+  };
+
+  return {
+    currentState: initialState,
+    history: [initialState],
+  };
+}
+
+function updatedStates(
+  oldStates: StatesType,
+  stateChanges: Omit<Partial<StateType>, 'version'>,
+): StatesType {
+  const newState = {
+    ...oldStates.currentState,
+    ...stateChanges,
+    version: oldStates.currentState?.version + 1,
+  };
+
+  return {
+    currentState: newState,
+    previousState: oldStates?.currentState,
+    history: [...(oldStates?.history || []), newState],
   };
 }
 
@@ -142,39 +177,34 @@ function reducer(states: StatesType, action: ActionType): StatesType {
 
   switch (action.type) {
     case 'updateFromControlledValue':
-      newValue = parseValue(action.payload, states.currentState.format);
-      let valueIsChanging = states.currentState.value !== newValue;
-
-      // When updating based on value, nothing should change unless the value
-      // is different, since everything cascades from the new value
-      if (!valueIsChanging) {
+      // If the controlledValue is identical to our current state, change
+      // nothing.
+      if (action.payload === states.currentState.controlledValue) {
         return states;
       }
+
+      newValue = parseValue(action.payload, states.currentState.format);
 
       // Don’t update the formatted versions unless there is a numerical
       // change. Otherwise the user's formatting changes will get wiped.
       const formattedValuesShouldChange =
         parseNumericValue(newValue, states.currentState.format) !==
         parseNumericValue(
-          states.currentState.placeholderValue,
+          states.currentState.value,
           states.currentState.format,
         );
 
-      return {
-        previousState: states.currentState,
-        currentState: {
-          value: newValue,
-          workingValue: formattedValuesShouldChange
-            ? formatWorkingValue(newValue, states.currentState.format)
-            : states.currentState.workingValue,
-          placeholderValue: formattedValuesShouldChange
-            ? formatPlaceholderValue(newValue, states.currentState.format)
-            : states.currentState.placeholderValue,
-          controlledValue: action.payload,
-          format: states.currentState.format,
-          source: 'controlledValue',
-        },
-      };
+      return updatedStates(states, {
+        value: newValue,
+        workingValue: formattedValuesShouldChange
+          ? formatWorkingValue(newValue, states.currentState.format)
+          : states.currentState.workingValue,
+        placeholderValue: formattedValuesShouldChange
+          ? formatPlaceholderValue(newValue, states.currentState.format)
+          : states.currentState.placeholderValue,
+        controlledValue: action.payload,
+        source: 'controlledValue',
+      });
 
     case 'updateFromWorkingValue':
       const deformattedValue = deformatValue(
@@ -183,23 +213,18 @@ function reducer(states: StatesType, action: ActionType): StatesType {
       );
       newValue = parseValue(deformattedValue, states.currentState.format);
 
-      return {
-        previousState: states.currentState,
-        currentState: {
-          value: newValue,
-          workingValue: formatWorkingValue(
-            deformattedValue,
-            states.currentState.format,
-          ),
-          placeholderValue: formatPlaceholderValue(
-            deformattedValue,
-            states.currentState.format,
-          ),
-          controlledValue: states.currentState.controlledValue,
-          format: states.currentState.format,
-          source: 'workingValue',
-        },
-      };
+      return updatedStates(states, {
+        value: newValue,
+        workingValue: formatWorkingValue(
+          deformattedValue,
+          states.currentState.format,
+        ),
+        placeholderValue: formatPlaceholderValue(
+          deformattedValue,
+          states.currentState.format,
+        ),
+        source: 'workingValue',
+      });
   }
 }
 
