@@ -12,6 +12,7 @@ export function getStoryTitle(componentName: string) {
     case 'Button':
     case 'Checkbox':
     case 'Checkboxes':
+    case 'Currency':
     case 'Radio':
     case 'Radios':
     case 'Select':
