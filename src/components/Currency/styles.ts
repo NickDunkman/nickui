@@ -7,24 +7,37 @@ import { tv } from 'tailwind-variants';
 export const currencyStyler = tv({
   slots: {
     visibleInputsContainer: 'relative',
-    placeholderInput:
-      'select-none pointer-events-none text-gray-400 disabled:text-gray-400 !border-transparent',
-    interactiveInput: 'peer absolute top-0 right-0 left-0 !bg-transparent',
+    placeholderInput: `
+      select-none pointer-events-none
+      text-gray-400 disabled:text-gray-400 !border-transparent
+    `,
+    workingInput: 'peer absolute top-0 right-0 left-0 !bg-transparent',
     hiddenInput: 'hidden',
-    currencySymbol:
-      'absolute scale-140 text-gray-400 peer-disabled:text-gray-400 select-none pointer-events-none',
+    currencySymbol: `
+      absolute top-0 bottom-0 left-0.5
+      flex items-center  
+      select-none pointer-events-none
+      text-gray-400 peer-disabled:text-gray-400 
+      font-medium
+    `,
   },
   variants: {
     sizer: {
-      xs: {},
-      sm: {},
-      base: {
-        placeholderInput: 'pl-9',
-        interactiveInput: 'pl-9',
-        currencySymbol: 'top-3 left-4',
+      xs: {
+        currencySymbol: 'text-xs pl-2 pr-1',
       },
-      lg: {},
-      xl: {},
+      sm: {
+        currencySymbol: 'text-sm pl-2.25 pr-1.5',
+      },
+      base: {
+        currencySymbol: 'text-base pl-3 pr-2',
+      },
+      lg: {
+        currencySymbol: 'text-lg pl-4 pr-2',
+      },
+      xl: {
+        currencySymbol: 'text-xl pl-4.5 pr-2.5',
+      },
     },
     hasError: {
       true: {
@@ -33,6 +46,15 @@ export const currencyStyler = tv({
     },
     hasWorkingValue: {
       true: {},
+    },
+    // Prevent text from appearing to jump to the right when the currency symbol
+    // padding is applied
+    hasSpacingApplied: {
+      false: {
+        placeholderInput: 'text-transparent disabled:text-transparent',
+        workingInput: 'text-transparent disabled:text-transparent',
+        currencySymbol: 'text-transparent',
+      },
     },
   },
   compoundVariants: [
@@ -48,5 +70,6 @@ export const currencyStyler = tv({
     sizer: 'base',
     hasError: false,
     hasValue: false,
+    hasSpacingApplied: true,
   },
 });

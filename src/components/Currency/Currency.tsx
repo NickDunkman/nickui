@@ -3,9 +3,9 @@ import * as React from 'react';
 
 import { Field } from '@/components/Field';
 import { textStyler } from '@/components/Text/styles';
-import { PrettyPrint } from '@/docs/PrettyPrint';
 import type { CommonFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
+import { useElementBounds } from '@/utils/useElementBounds';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 import { useScrollClone } from '@/utils/useScrollClone';
@@ -25,7 +25,8 @@ interface CurrencyInputProps
   value?: string;
   /** Sets the value of the Text when using it as an uncontrolled component */
   defaultValue?: string;
-  currencySymbol?: string;
+  /** Option to change the currency symbol shown at the front of the input */
+  currencySymbol?: React.ReactNode;
 }
 
 /**
@@ -66,6 +67,9 @@ export function Currency({
   // So for internal convenience, we install a managed RefObject on the hidden
   // <input> in addition to the `ref` prop.
   const internalInputRef = React.useRef<HTMLInputElement>(null);
+
+  const currencySymbolRef = React.useRef<HTMLDivElement>(null);
+  const currencySymbolBounds = useElementBounds(currencySymbolRef);
 
   const [workingInputRef, placeholderInputRef] =
     useScrollClone<HTMLInputElement>();
@@ -148,6 +152,7 @@ export function Currency({
     sizer: resolvedSizer,
     hasError: !!error,
     hasWorkingValue: !!currentState.workingValue,
+    hasSpacingApplied: !!currencySymbolBounds,
   });
 
   return (
@@ -164,12 +169,6 @@ export function Currency({
       disabled={disabled}
       required={required}
     >
-      <PrettyPrint
-        className="mb-2"
-        data={{
-          currentState,
-        }}
-      />
       <div className={currencyStyles.visibleInputsContainer()}>
         {/*
           This is the "placholder" <input>. It's positioned directly underneath
@@ -186,6 +185,7 @@ export function Currency({
           disabled={disabled}
           tabIndex={-1}
           aria-hidden
+          style={{ paddingLeft: currencySymbolBounds?.width }}
         />
 
         {/*
@@ -203,7 +203,7 @@ export function Currency({
           ref={workingInputRef}
           id={a11yIds.id}
           type="text"
-          className={clsw(textStyles, currencyStyles.interactiveInput())}
+          className={clsw(textStyles, currencyStyles.workingInput())}
           disabled={disabled}
           required={required}
           value={currentState.workingValue}
@@ -213,9 +213,15 @@ export function Currency({
           aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
           onChange={(event) => updateFromWorkingValue(event.target.value)}
           onKeyDown={handleKeyDown}
+          style={{ paddingLeft: currencySymbolBounds?.width }}
         />
 
-        <div className={currencyStyles.currencySymbol()}>{currencySymbol}</div>
+        <div
+          ref={currencySymbolRef}
+          className={currencyStyles.currencySymbol()}
+        >
+          {currencySymbol}
+        </div>
       </div>
 
       {/*
@@ -277,6 +283,7 @@ const allowedKeyPressesExceptDecimalPoint = Object.freeze([
   'Tab',
   'Enter',
   'Backspace',
+  'Delete',
 ]);
 
 /**

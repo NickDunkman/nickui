@@ -13,10 +13,10 @@ export const textStyler = tv({
   variants: {
     sizer: {
       xs: 'text-xs py-1.25 px-2',
-      sm: 'text-sm py-1.5 px-2',
-      base: 'text-base py-2.5 px-3.5',
-      lg: 'text-lg py-3.5 px-4.5',
-      xl: 'text-xl py-4.5 px-5.5',
+      sm: 'text-sm py-1.5 px-2.25',
+      base: 'text-base py-2.5 px-3',
+      lg: 'text-lg py-3.5 px-4',
+      xl: 'text-xl p-4.5',
     },
     hasError: {
       true: 'border-rose-800 focus:border-rose-800 focus:shadow-rose-300',
