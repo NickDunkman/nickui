@@ -244,7 +244,7 @@ function formatPlaceholderValue(
   value: string | number | undefined,
   format: CurrencyFormatType,
 ) {
-  return formatValue(value, {
+  return formatValue(value || '0', {
     ...format,
     minDecimalPlaces: format.maxDecimalPlaces,
   });
