@@ -11,19 +11,21 @@ export interface CurrencyFormatProps {
    */
   thousandsSeparator?: string;
   /**
-   * The minimum number of decimal places to include on the value, typically 2
+   * Controls how many decimal places the user is allowed to add, and how many
+   * will always be included on the value emitted via the onChange handler.
+   * Typically 2.
    */
-  minDecimalPlaces?: number;
-  /**
-   * The maximum number of decimal places to include on the value, typically 2
-   */
-  maxDecimalPlaces?: number;
+  decimalPlaces?: number;
 }
 
 /**
- * A version of CurrencyFormatProps where all properties are required. They’re
- * optional in CurrencyFormatProps b/c the component provides default values.
+ * The formatting configuration used internally in the Currency component
+ * system.
  */
-export type CurrencyFormatType = Required<CurrencyFormatProps> & {
+export interface CurrencyFormatType {
+  decimalPoint: NonNullable<CurrencyFormatProps['decimalPoint']>;
+  minDecimalPlaces: NonNullable<CurrencyFormatProps['decimalPlaces']>;
+  maxDecimalPlaces: NonNullable<CurrencyFormatProps['decimalPlaces']>;
+  thousandsSeparator: NonNullable<CurrencyFormatProps['decimalPoint']>;
   allowTrailingDecimalPoint?: boolean;
-};
+}

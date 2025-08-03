@@ -48,8 +48,7 @@ export function Currency({
   defaultValue,
   currencySymbol = '$',
   decimalPoint = '.',
-  minDecimalPlaces = 2,
-  maxDecimalPlaces = 2,
+  decimalPlaces = 2,
   thousandsSeparator = ',',
   ref: controlledInputRef,
   onChange,
@@ -80,8 +79,8 @@ export function Currency({
       defaultValue,
       format: createFormat(
         decimalPoint,
-        minDecimalPlaces,
-        maxDecimalPlaces,
+        decimalPlaces,
+        decimalPlaces,
         thousandsSeparator,
       ),
     });
