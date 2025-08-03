@@ -1,18 +1,5 @@
 import { CurrencyFormatType } from './types';
 
-// Returns `true` if a string has multiple occurrences of a substring
-function stringHasMultipleSubstring(str: string, substr: string) {
-  const firstOccurenceIndex = str.indexOf(substr);
-
-  if (firstOccurenceIndex === -1) {
-    return false;
-  }
-
-  const secondOccurrenceIndex = str.indexOf(substr, firstOccurenceIndex + 1);
-
-  return secondOccurrenceIndex !== -1;
-}
-
 /**
  * Given a raw value, converts to a "numerish" (number as a string)
  * representation that abides by any of the formatting configuration options
@@ -150,4 +137,17 @@ export function deformatValue(
   return formattedValue
     .replaceAll(format.thousandsSeparator, '')
     .replace(format.decimalPoint, '.');
+}
+
+/** Returns `true` if a string has multiple occurrences of a substring */
+function stringHasMultipleSubstring(str: string, substr: string) {
+  const firstOccurenceIndex = str.indexOf(substr);
+
+  if (firstOccurenceIndex === -1) {
+    return false;
+  }
+
+  const secondOccurrenceIndex = str.indexOf(substr, firstOccurenceIndex + 1);
+
+  return secondOccurrenceIndex !== -1;
 }
