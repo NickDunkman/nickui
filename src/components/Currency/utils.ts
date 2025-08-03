@@ -13,6 +13,19 @@ function stringHasMultipleSubstring(str: string, substr: string) {
   return secondOccurrenceIndex !== -1;
 }
 
+/**
+ * Given a raw value, converts to a "numerish" (number as a string)
+ * representation that abides by any of the formatting configuration options
+ * that wouldn't prevent the string from being a parsable Number() -- e.g.
+ * `minDecimalPoints` is followed, but adding `thousandsSeparators` is not.
+ *
+ * If the raw value provided is not a valid representation of a number (such
+ * as by having multiple decimal points, or by being an empty string), returns
+ * an empty string.
+ *
+ * To fully format (but not have a guaranteed parsable Number()), use the
+ * formatValue function.
+ */
 export function parseNumerishValue(
   rawValue: string | number | undefined,
   format: CurrencyFormatType,
@@ -82,15 +95,16 @@ export function parseNumerishValue(
   return stringValue;
 }
 
-export function deformatValue(
-  formattedValue: string,
-  format: CurrencyFormatType,
-) {
-  return formattedValue
-    .replaceAll(format.thousandsSeparator, '')
-    .replace(format.decimalPoint, '.');
-}
-
+/**
+ * Converts a raw value to a fully formatted currency based on the provided
+ * formatting configuration, for display to the user.
+ *
+ * This string is intended to be presented to the user (such as in the
+ * Currency component’s interactive <input>. It is not necessarily parsable
+ * using Number(), since Number() parsing only works with standard number
+ * formatting (such as by having "." as the decimal point). To convert to a
+ * parseable Number() string, use the parseNumerishValue() function.
+ */
 export function formatValue(
   rawValue: string | number | undefined,
   format: CurrencyFormatType,
@@ -122,4 +136,18 @@ export function formatValue(
   const chunkedWholePart = chunks.join(format.thousandsSeparator);
 
   return `${chunkedWholePart}${hasDecimalPoint ? format.decimalPoint : ''}${decimalPart || ''}`;
+}
+
+/**
+ * Given a currency string that is formatted (such as the value provided from
+ * the Currency component’s interactive <input>, strips the custom formatting
+ * so that it can then be parsed using parseNumerishValue().
+ */
+export function deformatValue(
+  formattedValue: string,
+  format: CurrencyFormatType,
+) {
+  return formattedValue
+    .replaceAll(format.thousandsSeparator, '')
+    .replace(format.decimalPoint, '.');
 }
