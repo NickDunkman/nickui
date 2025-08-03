@@ -231,7 +231,7 @@ export const Xs: Story = {
       async () => {
         expect(canvas.getByLabelText('Xs Currency')).toHaveClass('text-xs');
         expect(canvas.getByText('Xs Currency')).toHaveClass('text-xs');
-        expect(canvas.getByText('$')).toHaveClass('text-sm');
+        expect(canvas.getByText('$')).toHaveClass('text-xs');
       },
     );
   },
@@ -251,7 +251,7 @@ export const Sm: Story = {
       async () => {
         expect(canvas.getByLabelText('Sm Currency')).toHaveClass('text-sm');
         expect(canvas.getByText('Sm Currency')).toHaveClass('text-sm');
-        expect(canvas.getByText('$')).toHaveClass('text-base');
+        expect(canvas.getByText('$')).toHaveClass('text-sm');
       },
     );
   },
@@ -271,7 +271,7 @@ export const Base: Story = {
       async () => {
         expect(canvas.getByLabelText('Base Currency')).toHaveClass('text-base');
         expect(canvas.getByText('Base Currency')).toHaveClass('text-base');
-        expect(canvas.getByText('$')).toHaveClass('text-lg');
+        expect(canvas.getByText('$')).toHaveClass('text-base');
       },
     );
   },
@@ -291,7 +291,7 @@ export const Lg: Story = {
       async () => {
         expect(canvas.getByLabelText('Lg Currency')).toHaveClass('text-lg');
         expect(canvas.getByText('Lg Currency')).toHaveClass('text-lg');
-        expect(canvas.getByText('$')).toHaveClass('text-xl');
+        expect(canvas.getByText('$')).toHaveClass('text-lg');
       },
     );
   },
@@ -311,7 +311,7 @@ export const Xl: Story = {
       async () => {
         expect(canvas.getByLabelText('Xl Currency')).toHaveClass('text-xl');
         expect(canvas.getByText('Xl Currency')).toHaveClass('text-xl');
-        expect(canvas.getByText('$')).toHaveClass('text-2xl');
+        expect(canvas.getByText('$')).toHaveClass('text-xl');
       },
     );
   },
