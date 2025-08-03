@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { fn } from 'storybook/test';
+import { expect, fn } from 'storybook/test';
 
 import { PrettyPrint } from '@/docs/PrettyPrint';
+import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 
 import { Currency } from './Currency';
 
@@ -194,7 +195,8 @@ export const Euros: Story = {
   args: {
     defaultValue: '1234.56',
     currencySymbol: '€',
-    'aria-label': 'Euros Currency',
+    label: 'Euros',
+    hint: 'Uses "." as the thousands-separator and "," as the decimal point!',
     thousandsSeparator: '.',
     decimalPoint: ',',
     onChange: fn(),
@@ -215,111 +217,116 @@ export const Euros: Story = {
   //  },
 };
 //
-//export const Xs: Story = {
-//  tags: ['sizer'],
-//  args: {
-//    sizer: 'xs',
-//    label: 'Xs label',
-//    placeholder: 'Xs Text',
-//    onChange: fn(),
-//  },
-//  play: async ({ canvas, step }) => {
-//    await step(
-//      'Assert the xs sizer style on both the Text & Field',
-//      async () => {
-//        expect(canvas.getByLabelText('Xs label')).toHaveClass('text-xs');
-//        expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
-//      },
-//    );
-//  },
-//};
-//
-//export const Sm: Story = {
-//  tags: ['sizer'],
-//  args: {
-//    sizer: 'sm',
-//    label: 'Sm label',
-//    placeholder: 'Sm Text',
-//    onChange: fn(),
-//  },
-//  play: async ({ canvas, step }) => {
-//    await step(
-//      'Assert the sm sizer style on both the Text & Field',
-//      async () => {
-//        expect(canvas.getByLabelText('Sm label')).toHaveClass('text-sm');
-//        expect(canvas.getByText('Sm label')).toHaveClass('text-sm');
-//      },
-//    );
-//  },
-//};
-//
-//export const Base: Story = {
-//  tags: ['sizer'],
-//  args: {
-//    sizer: 'base',
-//    label: 'Base label',
-//    placeholder: 'Base Text',
-//    onChange: fn(),
-//  },
-//  play: async ({ canvas, step }) => {
-//    await step(
-//      'Assert the base sizer style on both the Text & Field',
-//      async () => {
-//        expect(canvas.getByLabelText('Base label')).toHaveClass('text-base');
-//        expect(canvas.getByText('Base label')).toHaveClass('text-base');
-//      },
-//    );
-//  },
-//};
-//
-//export const Lg: Story = {
-//  tags: ['sizer'],
-//  args: {
-//    sizer: 'lg',
-//    label: 'Lg label',
-//    placeholder: 'Lg Text',
-//    onChange: fn(),
-//  },
-//  play: async ({ canvas, step }) => {
-//    await step(
-//      'Assert the lg sizer style on both the Text & Field',
-//      async () => {
-//        expect(canvas.getByLabelText('Lg label')).toHaveClass('text-lg');
-//        expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
-//      },
-//    );
-//  },
-//};
-//
-//export const Xl: Story = {
-//  tags: ['sizer'],
-//  args: {
-//    sizer: 'xl',
-//    label: 'Xl label',
-//    placeholder: 'Xl Text',
-//    onChange: fn(),
-//  },
-//  play: async ({ canvas, step }) => {
-//    await step(
-//      'Assert the xl sizer style on both the Text & Field',
-//      async () => {
-//        expect(canvas.getByLabelText('Xl label')).toHaveClass('text-xl');
-//        expect(canvas.getByText('Xl label')).toHaveClass('text-xl');
-//      },
-//    );
-//  },
-//};
-//
-//export const Responsive: Story = {
-//  tags: ['sizer'],
-//  args: {
-//    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
-//    label: 'Responsive label',
-//    placeholder: 'Responsive Text',
-//    onChange: fn(),
-//  },
-//};
-//
+export const Xs: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: 'xs',
+    label: 'Xs Currency',
+    defaultValue: '1.23',
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xs sizer style on both the Currency & Field',
+      async () => {
+        expect(canvas.getByLabelText('Xs Currency')).toHaveClass('text-xs');
+        expect(canvas.getByText('Xs Currency')).toHaveClass('text-xs');
+        expect(canvas.getByText('$')).toHaveClass('text-sm');
+      },
+    );
+  },
+};
+
+export const Sm: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: 'sm',
+    label: 'Sm Currency',
+    defaultValue: '1.23',
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the sm sizer style on both the Currency & Field',
+      async () => {
+        expect(canvas.getByLabelText('Sm Currency')).toHaveClass('text-sm');
+        expect(canvas.getByText('Sm Currency')).toHaveClass('text-sm');
+        expect(canvas.getByText('$')).toHaveClass('text-base');
+      },
+    );
+  },
+};
+
+export const Base: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: 'base',
+    label: 'Base Currency',
+    defaultValue: '1.23',
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the base sizer style on both the Currency & Field',
+      async () => {
+        expect(canvas.getByLabelText('Base Currency')).toHaveClass('text-base');
+        expect(canvas.getByText('Base Currency')).toHaveClass('text-base');
+        expect(canvas.getByText('$')).toHaveClass('text-lg');
+      },
+    );
+  },
+};
+
+export const Lg: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: 'lg',
+    label: 'Lg Currency',
+    defaultValue: '1.23',
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the lg sizer style on both the Currency & Field',
+      async () => {
+        expect(canvas.getByLabelText('Lg Currency')).toHaveClass('text-lg');
+        expect(canvas.getByText('Lg Currency')).toHaveClass('text-lg');
+        expect(canvas.getByText('$')).toHaveClass('text-xl');
+      },
+    );
+  },
+};
+
+export const Xl: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: 'xl',
+    label: 'Xl Currency',
+    defaultValue: '1.23',
+    onChange: fn(),
+  },
+  play: async ({ canvas, step }) => {
+    await step(
+      'Assert the xl sizer style on both the Currency & Field',
+      async () => {
+        expect(canvas.getByLabelText('Xl Currency')).toHaveClass('text-xl');
+        expect(canvas.getByText('Xl Currency')).toHaveClass('text-xl');
+        expect(canvas.getByText('$')).toHaveClass('text-2xl');
+      },
+    );
+  },
+};
+
+export const Responsive: Story = {
+  tags: ['sizer'],
+  args: {
+    sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
+    label: 'Responsive Currency',
+    defaultValue: '1.23',
+    onChange: fn(),
+  },
+};
+
 //export const AllControlStates: Story = {
 //  tags: ['!dev', '!test'],
 //  render: (_args) => (
@@ -331,17 +338,16 @@ export const Euros: Story = {
 //    </div>
 //  ),
 //};
-//
-//export const AllSizers: Story = {
-//  tags: ['!dev', '!test'],
-//  render: (_args) => (
-//    <AllSizersStoryWrapper alignBaseline>
-//      <Text {...Xs.args} />
-//      <Text {...Sm.args} />
-//      <Text {...Base.args} />
-//      <Text {...Lg.args} />
-//      <Text {...Xl.args} />
-//    </AllSizersStoryWrapper>
-//  ),
-//};
-//
+
+export const AllSizers: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <AllSizersStoryWrapper alignBaseline>
+      <Currency {...Xs.args} />
+      <Currency {...Sm.args} />
+      <Currency {...Base.args} />
+      <Currency {...Lg.args} />
+      <Currency {...Xl.args} />
+    </AllSizersStoryWrapper>
+  ),
+};
