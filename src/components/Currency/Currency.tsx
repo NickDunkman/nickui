@@ -120,12 +120,30 @@ export function Currency({
     currentState.source,
   ]);
 
+  const allowedKeyPresses = React.useMemo(
+    () => [
+      ...numberKeys,
+      decimalPoint,
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowRight',
+      'Tab',
+      'Enter',
+      'Backspace',
+      'Delete',
+    ],
+    [decimalPoint],
+  );
+
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     // Don't block when holding command/etc, since those are things like
     // "copy" / "paste", instead of character inputs.
     if (!event.metaKey) {
+      // Block disallowed characters
       if (
-        !allowedKeyPressesExceptDecimalPoint.includes(event.key) &&
+        !allowedKeyPresses.includes(event.key) &&
         event.key !== decimalPoint
       ) {
         event.preventDefault();
@@ -139,6 +157,27 @@ export function Currency({
       ) {
         event.preventDefault();
         return;
+      }
+
+      // Block too many decimal places
+      if (workingInputRef.current && numberKeys.includes(event.key)) {
+        // Don’t block when there is selected text, since the number key press
+        // can’t possibly add another decimal place
+        const cursorPosition = workingInputRef.current.selectionStart || 0;
+        if (cursorPosition === (workingInputRef.current.selectionEnd || 0)) {
+          // Don't block unless the cursor is to the right of the decimal point
+          const decimalPointIndex =
+            currentState.workingValue.indexOf(decimalPoint);
+          if (decimalPointIndex !== -1 && cursorPosition > decimalPointIndex) {
+            // Don't block unless we already have max decimal places
+            const decimalPlacesOnWorkingValue =
+              currentState.workingValue.length - (decimalPointIndex + 1);
+            if (decimalPlacesOnWorkingValue >= decimalPlaces) {
+              event.preventDefault();
+              return;
+            }
+          }
+        }
       }
     }
 
@@ -263,7 +302,7 @@ export function Currency({
   );
 }
 
-const allowedKeyPressesExceptDecimalPoint = Object.freeze([
+const numberKeys = Object.freeze([
   '0',
   '1',
   '2',
@@ -274,15 +313,6 @@ const allowedKeyPressesExceptDecimalPoint = Object.freeze([
   '7',
   '8',
   '9',
-  'ArrowUp',
-  'ArrowDown',
-  'ArrowLeft',
-  'ArrowRight',
-  'ArrowRight',
-  'Tab',
-  'Enter',
-  'Backspace',
-  'Delete',
 ]);
 
 /**
