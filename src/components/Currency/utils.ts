@@ -13,7 +13,7 @@ function stringHasMultipleSubstring(str: string, substr: string) {
   return secondOccurrenceIndex !== -1;
 }
 
-export function parseValue(
+export function parseNumerishValue(
   rawValue: string | number | undefined,
   format: CurrencyFormatType,
 ) {
@@ -91,20 +91,11 @@ export function deformatValue(
     .replace(format.decimalPoint, '.');
 }
 
-export function parseNumericValue(
-  rawValue: string | number | undefined,
-  format: CurrencyFormatType,
-) {
-  return (
-    Number(parseValue(rawValue, format).replace(format.decimalPoint, '.')) || 0
-  );
-}
-
 export function formatValue(
   rawValue: string | number | undefined,
   format: CurrencyFormatType,
 ) {
-  const stringValue = parseValue(rawValue, format);
+  const stringValue = parseNumerishValue(rawValue, format);
 
   if (stringValue === '') {
     return '';

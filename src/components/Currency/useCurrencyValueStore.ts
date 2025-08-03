@@ -1,27 +1,19 @@
 import * as React from 'react';
 
 import { CurrencyFormatType } from './types';
-import {
-  deformatValue,
-  formatValue,
-  parseNumericValue,
-  parseValue,
-} from './utils';
+import { deformatValue, formatValue, parseNumerishValue } from './utils';
 
 type StateType = {
   /** Starts at 1; each time the state changes, it increments */
   version: number;
   /**
-   * `state.value` is in the format that can be input via the `value` or
-   * `defaultValue` prop, and is emmitted via the onChange event back to the
-   * parent.
-   * - it’s a string
-   * - it does not include thousands separators
-   * - it won’t have the decimal prefix at the very end of the string
-   * - it will abide the minimum and maximum decimal places (unless it is
-   *   an empty string)
+   * `state.numerishValue` is the version of the value that can be parsed as a
+   * Number(): it has no thousands separators and the decimalPoint is always
+   * ".". This is the version of the value that is emitted via the Currency
+   * component’s onChange handler back to the parent, as it is generally the
+   * most useful programmatically.
    */
-  value: string;
+  numerishValue: string;
   /**
    * `state.workingValue` is the value of the <input> that the user
    * is interacting with. It’s initially set to the formatted version of
@@ -31,10 +23,9 @@ type StateType = {
    */
   workingValue: string;
   /**
-   * `state.placeholderValue` is the same as
-   * `state.workingValue`, except it abides the minimum and maximum
-   * decimal places, so the user can see the hint about decimal places in the
-   * background.
+   * `state.placeholderValue` is the same as `state.workingValue`, except it
+   * abides the minimum and maximum decimal places, so the user can see the
+   * hint about decimal places in the background.
    */
   placeholderValue: string;
   /**
@@ -49,12 +40,11 @@ type StateType = {
    */
   format: CurrencyFormatType;
   /**
-   * Whenever the state’s `value` changes, a descriptor for what caused the
-   * change is set here, so that downstream code can conditionally decide
-   * whether to act on changes to the `value`. For example, the <Currency>
-   * component does not want to refire a value change event when the source
-   * of the subsequent value change was from a new controlled `value` being
-   * passed in.
+   * Whenever the state changes, a descriptor for what caused the change is set
+   * here, so that downstream code can conditionally decide whether to act on
+   * changes to the `value`. For example, the <Currency> component does not want
+   * to refire a change event when the new value is the result of a new
+   * controlledValue being passed in.
    */
   source: 'initialValue' | 'controlledValue' | 'workingValue';
 };
@@ -137,7 +127,7 @@ function createStates({
 
   const initialState: StateType = {
     version: 1,
-    value: parseValue(initialValue, format),
+    numerishValue: parseNumerishValue(initialValue, format),
     workingValue: formatWorkingValue(initialValue, format),
     placeholderValue: formatPlaceholderValue(initialValue, format),
     controlledValue,
@@ -151,7 +141,7 @@ function createStates({
   };
 }
 
-function updatedStates(
+function updateStates(
   oldStates: StatesType,
   stateChanges: Omit<Partial<StateType>, 'version'>,
 ): StatesType {
@@ -170,37 +160,33 @@ function updatedStates(
 
 /** Reducer for the store used in useCurrencyValueState */
 function reducer(states: StatesType, action: ActionType): StatesType {
-  //const decimalPoint = states.currentState.decimalPoint;
-  //const thousandsSeparator = states.currentState.thousandsSeparator;
-
-  let newValue: string;
+  let newNumerishValue: string;
 
   switch (action.type) {
     case 'updateFromControlledValue':
-      // If the controlledValue is identical to our current state, change
-      // nothing.
+      // If the controlledValue is identical to our current state, don't
+      // create a change
       if (action.payload === states.currentState.controlledValue) {
         return states;
       }
 
-      newValue = parseValue(action.payload, states.currentState.format);
+      newNumerishValue = parseNumerishValue(
+        action.payload,
+        states.currentState.format,
+      );
 
       // Don’t update the formatted versions unless there is a numerical
       // change. Otherwise the user's formatting changes will get wiped.
       const formattedValuesShouldChange =
-        parseNumericValue(newValue, states.currentState.format) !==
-        parseNumericValue(
-          states.currentState.value,
-          states.currentState.format,
-        );
+        Number(newNumerishValue) !== Number(states.currentState.numerishValue);
 
-      return updatedStates(states, {
-        value: newValue,
+      return updateStates(states, {
+        numerishValue: newNumerishValue,
         workingValue: formattedValuesShouldChange
-          ? formatWorkingValue(newValue, states.currentState.format)
+          ? formatWorkingValue(newNumerishValue, states.currentState.format)
           : states.currentState.workingValue,
         placeholderValue: formattedValuesShouldChange
-          ? formatPlaceholderValue(newValue, states.currentState.format)
+          ? formatPlaceholderValue(newNumerishValue, states.currentState.format)
           : states.currentState.placeholderValue,
         controlledValue: action.payload,
         source: 'controlledValue',
@@ -211,10 +197,13 @@ function reducer(states: StatesType, action: ActionType): StatesType {
         action.payload,
         states.currentState.format,
       );
-      newValue = parseValue(deformattedValue, states.currentState.format);
+      newNumerishValue = parseNumerishValue(
+        deformattedValue,
+        states.currentState.format,
+      );
 
-      return updatedStates(states, {
-        value: newValue,
+      return updateStates(states, {
+        numerishValue: newNumerishValue,
         workingValue: formatWorkingValue(
           deformattedValue,
           states.currentState.format,
@@ -229,10 +218,10 @@ function reducer(states: StatesType, action: ActionType): StatesType {
 }
 
 function formatWorkingValue(
-  value: string | number | undefined,
+  rawValue: string | number | undefined,
   format: CurrencyFormatType,
 ) {
-  return formatValue(value, {
+  return formatValue(rawValue, {
     ...format,
     // These allow the decimal part to be a work in progress
     allowTrailingDecimalPoint: true,
@@ -241,10 +230,10 @@ function formatWorkingValue(
 }
 
 function formatPlaceholderValue(
-  value: string | number | undefined,
+  rawValue: string | number | undefined,
   format: CurrencyFormatType,
 ) {
-  return formatValue(value || '0', {
+  return formatValue(rawValue || '0', {
     ...format,
     minDecimalPlaces: format.maxDecimalPlaces,
   });

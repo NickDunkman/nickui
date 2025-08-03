@@ -1,6 +1,6 @@
 // Note: most tests are in story play functions in Radio.stories.tsx
 import { CurrencyFormatType } from './types';
-import { deformatValue, parseValue } from './utils';
+import { deformatValue, parseNumerishValue } from './utils';
 
 const usdFormat: CurrencyFormatType = {
   decimalPoint: '.',
@@ -15,20 +15,20 @@ const euroFormat: CurrencyFormatType = {
   thousandsSeparator: '.',
 };
 
-describe('parseValue', () => {
+describe('parseNumerishValue', () => {
   test('multiple decimal points is invalid', () => {
-    expect(parseValue('1.2.3', usdFormat)).toStrictEqual('');
+    expect(parseNumerishValue('1.2.3', usdFormat)).toStrictEqual('');
   });
 
   test('improperly positioned negative signs are invalid', () => {
-    expect(parseValue('-1-', usdFormat)).toStrictEqual('');
-    expect(parseValue('1-', usdFormat)).toStrictEqual('');
+    expect(parseNumerishValue('-1-', usdFormat)).toStrictEqual('');
+    expect(parseNumerishValue('1-', usdFormat)).toStrictEqual('');
   });
 
   test('properly positioned negative signs are valid', () => {
-    expect(parseValue('-1', usdFormat)).toStrictEqual('-1.00');
-    expect(parseValue(' -1 ', usdFormat)).toStrictEqual('-1.00');
-    expect(parseValue(' -1.23 ', usdFormat)).toStrictEqual('-1.23');
+    expect(parseNumerishValue('-1', usdFormat)).toStrictEqual('-1.00');
+    expect(parseNumerishValue(' -1 ', usdFormat)).toStrictEqual('-1.00');
+    expect(parseNumerishValue(' -1.23 ', usdFormat)).toStrictEqual('-1.23');
   });
 
   test.each([
@@ -66,7 +66,7 @@ describe('parseValue', () => {
     'min & max decimal places are abided: $0',
     (_, { input, min, max, output }) => {
       expect(
-        parseValue(input, {
+        parseNumerishValue(input, {
           ...usdFormat,
           minDecimalPlaces: min,
           maxDecimalPlaces: max,
@@ -77,40 +77,40 @@ describe('parseValue', () => {
 
   test('does not use custom decimalPoint', () => {
     expect(
-      parseValue('1234', { ...euroFormat, minDecimalPlaces: 2 }),
+      parseNumerishValue('1234', { ...euroFormat, minDecimalPlaces: 2 }),
     ).toStrictEqual('1234.00');
   });
 
   test('should strip leading zeros properly', () => {
-    expect(parseValue('0', usdFormat)).toStrictEqual('0.00');
-    expect(parseValue('0.', usdFormat)).toStrictEqual('0.00');
-    expect(parseValue('-0', usdFormat)).toStrictEqual('-0.00');
-    expect(parseValue('-0.', usdFormat)).toStrictEqual('-0.00');
+    expect(parseNumerishValue('0', usdFormat)).toStrictEqual('0.00');
+    expect(parseNumerishValue('0.', usdFormat)).toStrictEqual('0.00');
+    expect(parseNumerishValue('-0', usdFormat)).toStrictEqual('-0.00');
+    expect(parseNumerishValue('-0.', usdFormat)).toStrictEqual('-0.00');
 
-    expect(parseValue('00', usdFormat)).toStrictEqual('0.00');
-    expect(parseValue('00.', usdFormat)).toStrictEqual('0.00');
-    expect(parseValue('-00', usdFormat)).toStrictEqual('-0.00');
-    expect(parseValue('-00.', usdFormat)).toStrictEqual('-0.00');
+    expect(parseNumerishValue('00', usdFormat)).toStrictEqual('0.00');
+    expect(parseNumerishValue('00.', usdFormat)).toStrictEqual('0.00');
+    expect(parseNumerishValue('-00', usdFormat)).toStrictEqual('-0.00');
+    expect(parseNumerishValue('-00.', usdFormat)).toStrictEqual('-0.00');
 
-    expect(parseValue('001', usdFormat)).toStrictEqual('1.00');
-    expect(parseValue('001.', usdFormat)).toStrictEqual('1.00');
-    expect(parseValue('-001', usdFormat)).toStrictEqual('-1.00');
-    expect(parseValue('-001.', usdFormat)).toStrictEqual('-1.00');
+    expect(parseNumerishValue('001', usdFormat)).toStrictEqual('1.00');
+    expect(parseNumerishValue('001.', usdFormat)).toStrictEqual('1.00');
+    expect(parseNumerishValue('-001', usdFormat)).toStrictEqual('-1.00');
+    expect(parseNumerishValue('-001.', usdFormat)).toStrictEqual('-1.00');
 
-    expect(parseValue('0010', usdFormat)).toStrictEqual('10.00');
-    expect(parseValue('0010.', usdFormat)).toStrictEqual('10.00');
-    expect(parseValue('-0010', usdFormat)).toStrictEqual('-10.00');
-    expect(parseValue('-0010.', usdFormat)).toStrictEqual('-10.00');
+    expect(parseNumerishValue('0010', usdFormat)).toStrictEqual('10.00');
+    expect(parseNumerishValue('0010.', usdFormat)).toStrictEqual('10.00');
+    expect(parseNumerishValue('-0010', usdFormat)).toStrictEqual('-10.00');
+    expect(parseNumerishValue('-0010.', usdFormat)).toStrictEqual('-10.00');
 
-    expect(parseValue('0010.0', usdFormat)).toStrictEqual('10.00');
-    expect(parseValue('0010.0', usdFormat)).toStrictEqual('10.00');
-    expect(parseValue('-0010.0', usdFormat)).toStrictEqual('-10.00');
-    expect(parseValue('-0010.0', usdFormat)).toStrictEqual('-10.00');
+    expect(parseNumerishValue('0010.0', usdFormat)).toStrictEqual('10.00');
+    expect(parseNumerishValue('0010.0', usdFormat)).toStrictEqual('10.00');
+    expect(parseNumerishValue('-0010.0', usdFormat)).toStrictEqual('-10.00');
+    expect(parseNumerishValue('-0010.0', usdFormat)).toStrictEqual('-10.00');
 
-    expect(parseValue('0010.1', usdFormat)).toStrictEqual('10.10');
-    expect(parseValue('0010.1', usdFormat)).toStrictEqual('10.10');
-    expect(parseValue('-0010.1', usdFormat)).toStrictEqual('-10.10');
-    expect(parseValue('-0010.1', usdFormat)).toStrictEqual('-10.10');
+    expect(parseNumerishValue('0010.1', usdFormat)).toStrictEqual('10.10');
+    expect(parseNumerishValue('0010.1', usdFormat)).toStrictEqual('10.10');
+    expect(parseNumerishValue('-0010.1', usdFormat)).toStrictEqual('-10.10');
+    expect(parseNumerishValue('-0010.1', usdFormat)).toStrictEqual('-10.10');
   });
 });
 

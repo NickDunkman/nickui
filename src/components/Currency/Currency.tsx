@@ -95,7 +95,7 @@ export function Currency({
   React.useEffect(() => {
     if (
       internalInputRef.current &&
-      currentState.value !== previousState?.value &&
+      currentState.numerishValue !== previousState?.numerishValue &&
       currentState.source !== 'controlledValue' &&
       currentState.source !== 'initialValue'
     ) {
@@ -107,11 +107,15 @@ export function Currency({
       const setValue = descriptor.set;
       if (setValue) {
         const event = new Event('input', { bubbles: true });
-        setValue.call(internalInputRef.current, currentState.value);
+        setValue.call(internalInputRef.current, currentState.numerishValue);
         internalInputRef.current.dispatchEvent(event);
       }
     }
-  }, [currentState.value, previousState?.value, currentState.source]);
+  }, [
+    currentState.numerishValue,
+    previousState?.numerishValue,
+    currentState.source,
+  ]);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     // Don't block when holding command/etc, since those are things like
@@ -248,7 +252,7 @@ export function Currency({
         // `value` prop here, otherwise React will supress that change event.
         // We can, however, set a defaultValue, so that the <input> has the
         // initial value.
-        defaultValue={currentState.value}
+        defaultValue={currentState.numerishValue}
       />
     </Field>
   );
