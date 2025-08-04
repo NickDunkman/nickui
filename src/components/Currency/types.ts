@@ -72,5 +72,10 @@ export type CurrencyValueType = {
    * <Currency> component does not want to refire a change event when a new
    * controlledValue is passed in.
    */
-  source: 'initialValue' | 'controlledValue' | 'workingValue' | 'format';
+  source:
+    | 'initialValue'
+    | 'controlledValue'
+    | 'workingValue'
+    | 'format'
+    | 'increment';
 };

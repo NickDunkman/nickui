@@ -13,7 +13,7 @@ import { useScrollClone } from '@/utils/useScrollClone';
 import { currencyStyler } from './styles';
 import { CurrencyFormatProps, CurrencyFormatType } from './types';
 import { useCurrencyValueStore } from './useCurrencyValueStore';
-import { deformatSelection } from './utils';
+import { getDeformattedSelection } from './utils';
 
 interface CurrencyInputProps
   extends Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'> {
@@ -95,12 +95,16 @@ export function Currency({
     end: 0,
   });
 
-  const { currentValue, previousValue, updateFromWorkingValue } =
-    useCurrencyValueStore({
-      controlledValue,
-      defaultValue,
-      format: isFocusFormatted ? focusFormat : blurFormat,
-    });
+  const {
+    currentValue,
+    previousValue,
+    updateFromWorkingValue,
+    updateFromIncrement,
+  } = useCurrencyValueStore({
+    controlledValue,
+    defaultValue,
+    format: isFocusFormatted ? focusFormat : blurFormat,
+  });
 
   const a11yIds = useFieldA11yIds({
     label,
@@ -200,35 +204,65 @@ export function Currency({
           }
         }
       }
+
+      if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        updateFromIncrement(1);
+      }
+
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        updateFromIncrement(-1);
+      }
     }
 
     setPreviousSelection(selection);
     onKeyDown?.(event);
   }
 
-  // When a format change occurs, such as when the field is focused/blurred (to
-  // remove/add thousandsSeparators), we need to persist the format change to
-  // into the working <input>'s value, and then we need to update the cursor
-  // position/selection to account for the change.
+  // In certain situations, we need to programmatically install the updated
+  // "workingValue" into the working <input>:
+  // - immediately after we first mount the component
+  // - when the user focuses into the field, we update the format to not include
+  //   a thousands separator
+  // - when the user increments or decrements using the arrow keys
   React.useEffect(() => {
-    if (workingInputRef.current) {
-      if (workingInputRef.current.value !== currentValue.workingValue) {
-        // Install new formatted value
-        workingInputRef.current.value = currentValue.workingValue;
+    if (
+      workingInputRef.current &&
+      workingInputRef.current.value !== currentValue.workingValue
+    ) {
+      // Install into the working <input>
+      workingInputRef.current.value = currentValue.workingValue;
 
-        // If the field is focused, update the selection
-        if (
-          previousValue &&
-          document.activeElement === workingInputRef.current
-        ) {
-          const newSelection = deformatSelection(
-            previousValue,
-            previousSelection,
-          );
-
+      // If the field is focused, there are certain cases where we need to
+      // tweak the cursor/selection position after updating the value, so that
+      // the cursor doesn't just automatically go to the end and yank the user
+      // away from what they were trying to do with the cursor
+      if (previousValue && document.activeElement === workingInputRef.current) {
+        // If this is due to removing the thousands separator, we need to adjust
+        // the cursor position (or selection range) based on the change, so the
+        // cursor is still at the same position in the number (or still has
+        // the same range of the number selected)
+        if (currentValue.source === 'format') {
           workingInputRef.current.setSelectionRange(
-            newSelection.start,
-            newSelection.end,
+            ...getDeformattedSelection(
+              previousValue,
+              previousSelection.start,
+              previousSelection.end,
+            ),
+          );
+        }
+
+        // If it's due to incrementing or decrementing, we may need to move
+        // the cursor one spot to the left or right to keep the user in the
+        // same spot they were in
+        if (currentValue.source === 'increment') {
+          const digitDelta =
+            currentValue.numerishValue.length -
+            previousValue.numerishValue.length;
+          workingInputRef.current.setSelectionRange(
+            previousSelection.start + digitDelta,
+            previousSelection.end + digitDelta,
           );
         }
       }

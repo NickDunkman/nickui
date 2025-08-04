@@ -139,29 +139,31 @@ export function deformatValue(
 
 /**
  * Given a value that may have formatting, return the appropriate selection
- * after deformatting.
+ * after removing the thousands separators.
  */
-export function deformatSelection(
+export function getDeformattedSelection(
   value: CurrencyValueType,
-  selection: { start: number; end: number },
-) {
-  // adjust selection to workingValue w/o thousands separators
-  return {
-    start:
-      selection.start -
+  previousSelectionStart: number,
+  previousSelectionEnd: number,
+): [newSelectionStart: number, newSelectionEnd: number] {
+  return [
+    // Move the `start` to the left based on how many preceeding thousands
+    // separators there were
+    previousSelectionStart -
       substringCount(
-        value.workingValue.slice(0, selection.start),
+        value.workingValue.slice(0, previousSelectionStart),
         value.format.thousandsSeparator,
       ) *
         value.format.thousandsSeparator.length,
-    end:
-      selection.end -
+    // Move the `end` to the left based on how many preceeding thousands
+    // separators there were
+    previousSelectionEnd -
       substringCount(
-        value.workingValue.slice(0, selection.end),
+        value.workingValue.slice(0, previousSelectionEnd),
         value.format.thousandsSeparator,
       ) *
         value.format.thousandsSeparator.length,
-  };
+  ];
 }
 
 /** Returns the number of times some substring occurs in a string */

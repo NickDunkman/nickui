@@ -49,6 +49,9 @@ export default defineConfig({
     ...prettierConfig.rules,
     ...storybookPlugin.configs.recommended.rules,
     'prettier/prettier': 'error',
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { argsIgnorePattern: '^_.*', varsIgnorePattern: '^_' },
+    ],
   },
 });

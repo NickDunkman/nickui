@@ -20,6 +20,10 @@ type ActionType =
   | {
       type: 'updateFromFormat';
       payload: CurrencyFormatType;
+    }
+  | {
+      type: 'updateFromIncrement';
+      payload: number;
     };
 
 /**
@@ -40,6 +44,13 @@ export function useCurrencyValueStore(args: {
   const updateFromWorkingValue = React.useCallback(
     (newWorkingValue: string) => {
       dispatch({ type: 'updateFromWorkingValue', payload: newWorkingValue });
+    },
+    [dispatch],
+  );
+
+  const updateFromIncrement = React.useCallback(
+    (amount: number) => {
+      dispatch({ type: 'updateFromIncrement', payload: amount });
     },
     [dispatch],
   );
@@ -65,6 +76,7 @@ export function useCurrencyValueStore(args: {
     previousValue,
     currentValue,
     updateFromWorkingValue,
+    updateFromIncrement,
   };
 }
 
@@ -187,6 +199,31 @@ function historyReducer(
         ),
         format: action.payload,
         source: 'format',
+      });
+
+    case 'updateFromIncrement':
+      newNumerishValue = (
+        Number(history.currentValue.numerishValue) + action.payload
+      ).toString();
+
+      // persist exact decimals from the old working value
+      const [incrementedWholePart] = newNumerishValue.split('.');
+      const [_, incrementedDecimalPart] =
+        history.currentValue.workingValue.split(
+          history.currentValue.format.decimalPoint,
+        );
+
+      return updateHistory(history, {
+        numerishValue: newNumerishValue,
+        workingValue: formatWorkingValue(
+          `${incrementedWholePart}${incrementedDecimalPart !== undefined ? history.currentValue.format.decimalPoint : ''}${incrementedDecimalPart || ''}`,
+          history.currentValue.format,
+        ),
+        placeholderValue: formatPlaceholderValue(
+          newNumerishValue,
+          history.currentValue.format,
+        ),
+        source: 'increment',
       });
   }
 }
