@@ -1,58 +1,11 @@
 import * as React from 'react';
 
-import { CurrencyFormatType } from './types';
+import { CurrencyFormatType, CurrencyValueType } from './types';
 import { deformatValue, formatValue, parseNumerishValue } from './utils';
 
-type StateType = {
-  /** Starts at 1; each time the state changes, it increments */
-  version: number;
-  /**
-   * `state.numerishValue` is the version of the value that can be parsed as a
-   * Number(): it has no thousands separators and the decimalPoint is always
-   * ".". This is the version of the value that is emitted via the Currency
-   * component’s onChange handler back to the parent, as it is generally the
-   * most useful programmatically.
-   */
-  numerishValue: string;
-  /**
-   * `state.workingValue` is the value of the <input> that the user
-   * is interacting with. It’s initially set to the formatted version of
-   * `state.value` (e.g. with thousands separators), and then stays in sync
-   * with what the user is typing. For example, it can have the decimal prefix
-   * at the end of the string.
-   */
-  workingValue: string;
-  /**
-   * `state.placeholderValue` is the same as `state.workingValue`, except it
-   * abides the minimum and maximum decimal places, so the user can see the
-   * hint about decimal places in the background.
-   */
-  placeholderValue: string;
-  /**
-   * The <Currency> component’s raw `value` that was present alongside this
-   * state. Can be used downstream to see if it changed from the previous
-   * state.
-   */
-  controlledValue: string | number | undefined;
-  /**
-   * The currency formatting config used to parse & format the values for this
-   * state.
-   */
-  format: CurrencyFormatType;
-  /**
-   * Whenever the state changes, a descriptor for what caused the change is set
-   * here, so that downstream code can conditionally decide whether to act on
-   * changes to the `value`. For example, the <Currency> component does not want
-   * to refire a change event when the new value is the result of a new
-   * controlledValue being passed in.
-   */
-  source: 'initialValue' | 'controlledValue' | 'workingValue';
-};
-
-type StatesType = {
-  currentState: StateType;
-  previousState?: StateType;
-  history: StateType[];
+type CurrencyValueHistoryType = {
+  currentValue: CurrencyValueType;
+  previousValue?: CurrencyValueType;
 };
 
 type ActionType =
@@ -63,6 +16,10 @@ type ActionType =
   | {
       type: 'updateFromWorkingValue';
       payload: string;
+    }
+  | {
+      type: 'updateFromFormat';
+      payload: CurrencyFormatType;
     };
 
 /**
@@ -74,17 +31,10 @@ export function useCurrencyValueStore(args: {
   defaultValue: string | number | undefined;
   format: CurrencyFormatType;
 }) {
-  const [{ currentState, previousState }, dispatch] = React.useReducer(
-    reducer,
+  const [{ currentValue, previousValue }, dispatch] = React.useReducer(
+    historyReducer,
     args,
-    createStates,
-  );
-
-  const updateFromControlledValue = React.useCallback(
-    (newRawValue: string | number | undefined) => {
-      dispatch({ type: 'updateFromControlledValue', payload: newRawValue });
-    },
-    [dispatch],
+    initializeHistory,
   );
 
   const updateFromWorkingValue = React.useCallback(
@@ -94,26 +44,31 @@ export function useCurrencyValueStore(args: {
     [dispatch],
   );
 
+  // Update w/ new format when it changes
+  React.useEffect(() => {
+    if (args.format !== currentValue.format) {
+      dispatch({ type: 'updateFromFormat', payload: args.format });
+    }
+  }, [args.format, currentValue.format, dispatch]);
+
   // Update w/ new controlledValue when it changes
   React.useEffect(() => {
-    if (args.controlledValue !== currentState.controlledValue) {
-      updateFromControlledValue(args.controlledValue);
+    if (args.controlledValue !== currentValue.controlledValue) {
+      dispatch({
+        type: 'updateFromControlledValue',
+        payload: args.controlledValue,
+      });
     }
-  }, [
-    args.controlledValue,
-    currentState.controlledValue,
-    updateFromControlledValue,
-  ]);
+  }, [args.controlledValue, currentValue.controlledValue, dispatch]);
 
   return {
-    previousState,
-    currentState,
-    updateFromControlledValue,
+    previousValue,
+    currentValue,
     updateFromWorkingValue,
   };
 }
 
-function createStates({
+function initializeHistory({
   controlledValue,
   defaultValue,
   format,
@@ -121,98 +76,117 @@ function createStates({
   controlledValue: string | number | undefined;
   defaultValue: string | number | undefined;
   format: CurrencyFormatType;
-}): StatesType {
-  const initialValue =
+}): CurrencyValueHistoryType {
+  const rawValue =
     controlledValue !== undefined ? controlledValue : defaultValue;
-
-  const initialState: StateType = {
-    version: 1,
-    numerishValue: parseNumerishValue(initialValue, format),
-    workingValue: formatWorkingValue(initialValue, format),
-    placeholderValue: formatPlaceholderValue(initialValue, format),
-    controlledValue,
-    format,
-    source: 'initialValue',
-  };
+  const workingValue = formatWorkingValue(rawValue, format);
 
   return {
-    currentState: initialState,
-    history: [initialState],
+    currentValue: {
+      version: 1,
+      numerishValue: parseNumerishValue(rawValue, format),
+      workingValue,
+      placeholderValue: formatPlaceholderValue(rawValue, format),
+      controlledValue,
+      format,
+      source: 'initialValue',
+    },
   };
 }
 
-function updateStates(
-  oldStates: StatesType,
-  stateChanges: Omit<Partial<StateType>, 'version'>,
-): StatesType {
-  const newState = {
-    ...oldStates.currentState,
-    ...stateChanges,
-    version: oldStates.currentState?.version + 1,
-  };
-
+function updateHistory(
+  oldHistory: CurrencyValueHistoryType,
+  valueChanges: Omit<Partial<CurrencyValueType>, 'version'>,
+): CurrencyValueHistoryType {
   return {
-    currentState: newState,
-    previousState: oldStates?.currentState,
-    history: [...(oldStates?.history || []), newState],
+    currentValue: {
+      ...oldHistory.currentValue,
+      ...valueChanges,
+      version: oldHistory.currentValue?.version + 1,
+    },
+    previousValue: oldHistory?.currentValue,
   };
 }
 
-/** Reducer for the store used in useCurrencyValueState */
-function reducer(states: StatesType, action: ActionType): StatesType {
+/** Reducer for the store used in useCurrencyValueStore */
+function historyReducer(
+  history: CurrencyValueHistoryType,
+  action: ActionType,
+): CurrencyValueHistoryType {
   let newNumerishValue: string;
 
   switch (action.type) {
     case 'updateFromControlledValue':
-      // If the controlledValue is identical to our current state, don't
-      // create a change
-      if (action.payload === states.currentState.controlledValue) {
-        return states;
+      // If the controlledValue is not changing, don't update the history
+      if (action.payload === history.currentValue.controlledValue) {
+        return history;
       }
 
       newNumerishValue = parseNumerishValue(
         action.payload,
-        states.currentState.format,
+        history.currentValue.format,
       );
 
       // Don’t update the formatted versions unless there is a numerical
       // change. Otherwise the user's formatting changes will get wiped.
       const formattedValuesShouldChange =
-        Number(newNumerishValue) !== Number(states.currentState.numerishValue);
+        Number(newNumerishValue) !== Number(history.currentValue.numerishValue);
 
-      return updateStates(states, {
+      return updateHistory(history, {
         numerishValue: newNumerishValue,
         workingValue: formattedValuesShouldChange
-          ? formatWorkingValue(newNumerishValue, states.currentState.format)
-          : states.currentState.workingValue,
+          ? formatWorkingValue(newNumerishValue, history.currentValue.format)
+          : history.currentValue.workingValue,
         placeholderValue: formattedValuesShouldChange
-          ? formatPlaceholderValue(newNumerishValue, states.currentState.format)
-          : states.currentState.placeholderValue,
+          ? formatPlaceholderValue(
+              newNumerishValue,
+              history.currentValue.format,
+            )
+          : history.currentValue.placeholderValue,
         controlledValue: action.payload,
         source: 'controlledValue',
       });
 
     case 'updateFromWorkingValue':
-      const deformattedValue = deformatValue(
+      var deformattedWorkingValue = deformatValue(
         action.payload,
-        states.currentState.format,
+        history.currentValue.format,
       );
       newNumerishValue = parseNumerishValue(
-        deformattedValue,
-        states.currentState.format,
+        deformattedWorkingValue,
+        history.currentValue.format,
       );
 
-      return updateStates(states, {
+      return updateHistory(history, {
         numerishValue: newNumerishValue,
         workingValue: formatWorkingValue(
-          deformattedValue,
-          states.currentState.format,
+          deformattedWorkingValue,
+          history.currentValue.format,
         ),
         placeholderValue: formatPlaceholderValue(
-          deformattedValue,
-          states.currentState.format,
+          deformattedWorkingValue,
+          history.currentValue.format,
         ),
         source: 'workingValue',
+      });
+
+    case 'updateFromFormat':
+      var deformattedWorkingValue = deformatValue(
+        history.currentValue.workingValue,
+        action.payload,
+      );
+
+      return updateHistory(history, {
+        workingValue: formatWorkingValue(
+          deformattedWorkingValue,
+          action.payload,
+        ),
+        placeholderValue: formatPlaceholderValue(
+          deformattedWorkingValue,
+          action.payload,
+        ),
+        format: action.payload,
+        source: 'format',
       });
   }
 }

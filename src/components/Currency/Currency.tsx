@@ -13,6 +13,7 @@ import { useScrollClone } from '@/utils/useScrollClone';
 import { currencyStyler } from './styles';
 import { CurrencyFormatProps, CurrencyFormatType } from './types';
 import { useCurrencyValueStore } from './useCurrencyValueStore';
+import { deformatSelection } from './utils';
 
 interface CurrencyInputProps
   extends Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'> {
@@ -53,6 +54,10 @@ export function Currency({
   ref: controlledInputRef,
   onChange,
   onKeyDown,
+  onFocus,
+  onBlur,
+  onMouseDown,
+  onMouseUp,
   'aria-labelledby': controlledAriaLabelledBy,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
@@ -73,16 +78,28 @@ export function Currency({
   const [workingInputRef, placeholderInputRef] =
     useScrollClone<HTMLInputElement>();
 
-  const { currentState, previousState, updateFromWorkingValue } =
+  // The "focus format" has no thousands separators & is used while the user
+  // is focused on the field. Having thousands separators added/removed while
+  // you’re typing is janky, so just remove that formatting while focused.
+  const [isMouseDown, setIsMouseDown] = React.useState(false);
+  const [isFocusFormatted, setIsFocusFormatted] = React.useState(false);
+  const focusFormat = createFormat(decimalPoint, decimalPlaces, '');
+  const blurFormat = createFormat(
+    decimalPoint,
+    decimalPlaces,
+    thousandsSeparator,
+  );
+
+  const [previousSelection, setPreviousSelection] = React.useState({
+    start: 0,
+    end: 0,
+  });
+
+  const { currentValue, previousValue, updateFromWorkingValue } =
     useCurrencyValueStore({
       controlledValue,
       defaultValue,
-      format: createFormat(
-        decimalPoint,
-        decimalPlaces,
-        decimalPlaces,
-        thousandsSeparator,
-      ),
+      format: isFocusFormatted ? focusFormat : blurFormat,
     });
 
   const a11yIds = useFieldA11yIds({
@@ -98,9 +115,9 @@ export function Currency({
   React.useEffect(() => {
     if (
       internalInputRef.current &&
-      currentState.numerishValue !== previousState?.numerishValue &&
-      currentState.source !== 'controlledValue' &&
-      currentState.source !== 'initialValue'
+      currentValue.numerishValue !== previousValue?.numerishValue &&
+      currentValue.source !== 'controlledValue' &&
+      currentValue.source !== 'initialValue'
     ) {
       const inputProto = window.HTMLInputElement.prototype;
       const descriptor = Object.getOwnPropertyDescriptor(
@@ -110,14 +127,14 @@ export function Currency({
       const setValue = descriptor.set;
       if (setValue) {
         const event = new Event('input', { bubbles: true });
-        setValue.call(internalInputRef.current, currentState.numerishValue);
+        setValue.call(internalInputRef.current, currentValue.numerishValue);
         internalInputRef.current.dispatchEvent(event);
       }
     }
   }, [
-    currentState.numerishValue,
-    previousState?.numerishValue,
-    currentState.source,
+    currentValue.numerishValue,
+    previousValue?.numerishValue,
+    currentValue.source,
   ]);
 
   const allowedKeyPresses = React.useMemo(
@@ -138,6 +155,11 @@ export function Currency({
   );
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    const selection = {
+      start: workingInputRef.current?.selectionStart || 0,
+      end: workingInputRef.current?.selectionEnd || 0,
+    };
+
     // Don't block when holding command/etc, since those are things like
     // "copy" / "paste", instead of character inputs.
     if (!event.metaKey) {
@@ -153,7 +175,7 @@ export function Currency({
       // Block input of a second decimal
       if (
         event.key === decimalPoint &&
-        currentState.workingValue.indexOf(decimalPoint) !== -1
+        currentValue.workingValue.indexOf(decimalPoint) !== -1
       ) {
         event.preventDefault();
         return;
@@ -161,17 +183,16 @@ export function Currency({
 
       // Block too many decimal places
       if (workingInputRef.current && numberKeys.includes(event.key)) {
-        // Don’t block when there is selected text, since the number key press
-        // can’t possibly add another decimal place
-        const cursorPosition = workingInputRef.current.selectionStart || 0;
-        if (cursorPosition === (workingInputRef.current.selectionEnd || 0)) {
+        // Don’t block when there is a selection range, since the number key
+        // press can’t possibly add another decimal place
+        if (selection.start === selection.end) {
           // Don't block unless the cursor is to the right of the decimal point
           const decimalPointIndex =
-            currentState.workingValue.indexOf(decimalPoint);
-          if (decimalPointIndex !== -1 && cursorPosition > decimalPointIndex) {
+            currentValue.workingValue.indexOf(decimalPoint);
+          if (decimalPointIndex !== -1 && selection.start > decimalPointIndex) {
             // Don't block unless we already have max decimal places
             const decimalPlacesOnWorkingValue =
-              currentState.workingValue.length - (decimalPointIndex + 1);
+              currentValue.workingValue.length - (decimalPointIndex + 1);
             if (decimalPlacesOnWorkingValue >= decimalPlaces) {
               event.preventDefault();
               return;
@@ -181,15 +202,45 @@ export function Currency({
       }
     }
 
+    setPreviousSelection(selection);
     onKeyDown?.(event);
   }
+
+  // When a format change occurs, such as when the field is focused/blurred (to
+  // remove/add thousandsSeparators), we need to persist the format change to
+  // into the working <input>'s value, and then we need to update the cursor
+  // position/selection to account for the change.
+  React.useEffect(() => {
+    if (workingInputRef.current) {
+      if (workingInputRef.current.value !== currentValue.workingValue) {
+        // Install new formatted value
+        workingInputRef.current.value = currentValue.workingValue;
+
+        // If the field is focused, update the selection
+        if (
+          previousValue &&
+          document.activeElement === workingInputRef.current
+        ) {
+          const newSelection = deformatSelection(
+            previousValue,
+            previousSelection,
+          );
+
+          workingInputRef.current.setSelectionRange(
+            newSelection.start,
+            newSelection.end,
+          );
+        }
+      }
+    }
+  }, [currentValue, previousValue, previousSelection, workingInputRef]);
 
   const resolvedSizer = useResolvedSizer(sizer);
   const textStyles = textStyler({ sizer: resolvedSizer, hasError: !!error });
   const currencyStyles = currencyStyler({
     sizer: resolvedSizer,
     hasError: !!error,
-    hasWorkingValue: !!currentState.workingValue,
+    hasWorkingValue: !!currentValue.workingValue,
     hasSpacingApplied: !!currencySymbolBounds,
   });
 
@@ -218,7 +269,7 @@ export function Currency({
         <input
           ref={placeholderInputRef}
           className={clsw(textStyles, currencyStyles.placeholderInput())}
-          value={currentState.placeholderValue}
+          value={currentValue.placeholderValue}
           onChange={() => {}} // silence no onChange w/ value warning
           disabled={disabled}
           tabIndex={-1}
@@ -234,6 +285,11 @@ export function Currency({
           before typing the decimal places. It does not necessarily abide
           the min/max decimal places -- those are shown in the placeholder
           <input> behind until the user enters them manually.
+
+          Note: there is intentionally no `value` prop specified here. There is
+          an effect above that updates the value on this <input> above, since
+          it needs to programmatically update the cursor position as it does
+          so.
         */}
         <input
           role="spinbutton"
@@ -244,7 +300,6 @@ export function Currency({
           className={clsw(textStyles, currencyStyles.workingInput())}
           disabled={disabled}
           required={required}
-          value={currentState.workingValue}
           aria-labelledby={a11yIds.ariaLabelledBy}
           aria-describedby={a11yIds.ariaDescribedBy}
           aria-errormessage={a11yIds.ariaErrorMessage}
@@ -252,6 +307,49 @@ export function Currency({
           onChange={(event) => updateFromWorkingValue(event.target.value)}
           onKeyDown={handleKeyDown}
           style={{ paddingLeft: currencySymbolBounds?.width }}
+          onMouseDown={(event) => {
+            if (!isMouseDown) {
+              setIsMouseDown(true);
+            }
+
+            onMouseDown?.(event);
+          }}
+          onMouseUp={(event) => {
+            if (isMouseDown) {
+              setIsMouseDown(false);
+            }
+
+            if (!isFocusFormatted) {
+              setPreviousSelection({
+                start: workingInputRef.current?.selectionStart || 0,
+                end: workingInputRef.current?.selectionEnd || 0,
+              });
+              setIsFocusFormatted(true);
+            }
+
+            onMouseUp?.(event);
+          }}
+          onFocus={(event) => {
+            // When the user is focusing with a mouse click, wait until the
+            // mouseUp to do this, since we don't want to interrupt them if
+            // they are holding the mouse to select a range
+            if (!isMouseDown && !isFocusFormatted) {
+              setPreviousSelection({
+                start: workingInputRef.current?.selectionStart || 0,
+                end: workingInputRef.current?.selectionEnd || 0,
+              });
+              setIsFocusFormatted(true);
+            }
+
+            onFocus?.(event);
+          }}
+          onBlur={(event) => {
+            if (isFocusFormatted) {
+              setIsFocusFormatted(false);
+              setPreviousSelection({ start: 0, end: 0 });
+            }
+            onBlur?.(event);
+          }}
         />
 
         <div
@@ -296,7 +394,7 @@ export function Currency({
         // `value` prop here, otherwise React will supress that change event.
         // We can, however, set a defaultValue, so that the <input> has the
         // initial value.
-        defaultValue={currentState.numerishValue}
+        defaultValue={currentValue.numerishValue}
       />
     </Field>
   );
@@ -322,13 +420,12 @@ const numberKeys = Object.freeze([
 const createFormat = memoize(
   (
     decimalPoint: CurrencyFormatType['decimalPoint'],
-    minDecimalPlaces: CurrencyFormatType['minDecimalPlaces'],
-    maxDecimalPlaces: CurrencyFormatType['maxDecimalPlaces'],
+    decimalPlaces: CurrencyFormatType['minDecimalPlaces'],
     thousandsSeparator: CurrencyFormatType['thousandsSeparator'],
   ) => ({
     decimalPoint,
-    minDecimalPlaces,
-    maxDecimalPlaces,
+    minDecimalPlaces: decimalPlaces,
+    maxDecimalPlaces: decimalPlaces,
     thousandsSeparator,
   }),
 );

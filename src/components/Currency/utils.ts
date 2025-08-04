@@ -1,4 +1,4 @@
-import { CurrencyFormatType } from './types';
+import { CurrencyFormatType, CurrencyValueType } from './types';
 
 /**
  * Given a raw value, converts to a "numerish" (number as a string)
@@ -19,16 +19,14 @@ export function parseNumerishValue(
 ) {
   let stringValue = rawValue?.toString().replace(/[^0-9.-]/g, '') || '';
 
-  // Reject if there is a negative sign not at the front
-  if (
-    stringValue.indexOf('-') > 0 ||
-    stringHasMultipleSubstring(stringValue, '-')
-  ) {
+  // Reject if there is a negative sign not at the front, or if there are
+  // multiple negative signs
+  if (stringValue.indexOf('-') > 0 || substringCount(stringValue, '-') > 1) {
     return '';
   }
 
   // Reject if there are more than one decimal points
-  if (stringHasMultipleSubstring(stringValue, '.')) {
+  if (substringCount(stringValue, '.') > 1) {
     return '';
   }
 
@@ -139,15 +137,34 @@ export function deformatValue(
     .replace(format.decimalPoint, '.');
 }
 
-/** Returns `true` if a string has multiple occurrences of a substring */
-function stringHasMultipleSubstring(str: string, substr: string) {
-  const firstOccurenceIndex = str.indexOf(substr);
+/**
+ * Given a value that may have formatting, return the appropriate selection
+ * after deformatting.
+ */
+export function deformatSelection(
+  value: CurrencyValueType,
+  selection: { start: number; end: number },
+) {
+  // adjust selection to workingValue w/o thousands separators
+  return {
+    start:
+      selection.start -
+      substringCount(
+        value.workingValue.slice(0, selection.start),
+        value.format.thousandsSeparator,
+      ) *
+        value.format.thousandsSeparator.length,
+    end:
+      selection.end -
+      substringCount(
+        value.workingValue.slice(0, selection.end),
+        value.format.thousandsSeparator,
+      ) *
+        value.format.thousandsSeparator.length,
+  };
+}
 
-  if (firstOccurenceIndex === -1) {
-    return false;
-  }
-
-  const secondOccurrenceIndex = str.indexOf(substr, firstOccurenceIndex + 1);
-
-  return secondOccurrenceIndex !== -1;
+/** Returns the number of times some substring occurs in a string */
+function substringCount(string: string, substring: string) {
+  return string.split(substring).length - 1;
 }
