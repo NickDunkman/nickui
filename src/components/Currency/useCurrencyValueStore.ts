@@ -211,7 +211,10 @@ function historyReducer(
         ).toString();
       }
 
-      // persist exact decimals from the old working value
+      // Persist exact decimals from the old working value. They should remain
+      // the same since incrementing happens by integers. Keeping the decimals
+      // the same (rather than potentially padding w/ another zero) allows the
+      // cursor position to not jerk over
       const [incrementedWholePart] = newNumerishValue.split('.');
       const [_, incrementedDecimalPart] =
         history.currentValue.workingValue.split(
