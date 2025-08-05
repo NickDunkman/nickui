@@ -226,12 +226,12 @@ export function Currency({
 
       if (event.key === 'ArrowUp') {
         event.preventDefault();
-        updateFromIncrement(1);
+        updateFromIncrement(event.shiftKey ? 10 : 1);
       }
 
       if (event.key === 'ArrowDown') {
         event.preventDefault();
-        updateFromIncrement(-1);
+        updateFromIncrement(event.shiftKey ? -10 : -1);
       }
     }
 
