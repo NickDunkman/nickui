@@ -10,9 +10,16 @@ import * as React from 'react';
 export function useScrollClone<
   CloneFromElementType extends HTMLElement = HTMLElement,
   CloneToElementType extends HTMLElement = CloneFromElementType,
->() {
-  const cloneFromElementRef = React.useRef<CloneFromElementType>(null);
-  const cloneToElementRef = React.useRef<CloneToElementType>(null);
+>(
+  controlledCloneFromElement?: CloneFromElementType,
+  controlledCloneToElement?: CloneToElementType,
+) {
+  const cloneFromElementRef = React.useRef<CloneFromElementType>(
+    controlledCloneFromElement || null,
+  );
+  const cloneToElementRef = React.useRef<CloneToElementType>(
+    controlledCloneToElement || null,
+  );
 
   React.useEffect(() => {
     const cloneFromElement = cloneFromElementRef.current;
