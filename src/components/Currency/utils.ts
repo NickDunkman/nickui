@@ -4,7 +4,8 @@ import { CurrencyFormatType, CurrencyValueType } from './types';
  * Given a raw value, converts to a "numerish" (number as a string)
  * representation that abides by any of the formatting configuration options
  * that wouldn't prevent the string from being a parsable Number() -- e.g.
- * `minDecimalPoints` is followed, but adding `thousandsSeparators` is not.
+ * `minDecimalPlaces` is followed, but adding `thousandsSeparators` or
+ * customizing the decimalPoint is not.
  *
  * If the raw value provided is not a valid representation of a number (such
  * as by having multiple decimal points, or by being an empty string), returns
