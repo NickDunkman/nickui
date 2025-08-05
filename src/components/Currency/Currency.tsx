@@ -13,8 +13,8 @@ import { useScrollClone } from '@/utils/useScrollClone';
 
 import { currencyStyler } from './styles';
 import { CurrencyFormatProps, CurrencyFormatType } from './types';
-import { useCurrencyKeyDownConstrictor } from './useCurrencyKeyDownConstrictor';
-import { useCurrencyValueStore } from './useCurrencyValueStore';
+import { useKeyDownConstrictor } from './useKeyDownConstrictor';
+import { useValueStore } from './useValueStore';
 import { getDeformattedSelection } from './utils';
 
 interface CurrencyInputProps
@@ -109,7 +109,7 @@ export function Currency({
     previousValue,
     updateFromWorkingValue,
     updateFromIncrement,
-  } = useCurrencyValueStore({
+  } = useValueStore({
     controlledValue,
     defaultValue,
     format: isFocusFormatted ? focusFormat : blurFormat,
@@ -142,7 +142,7 @@ export function Currency({
     currentValue.source,
   ]);
 
-  const keyDownConstrictor = useCurrencyKeyDownConstrictor({
+  const keyDownConstrictor = useKeyDownConstrictor({
     allowNegatives,
     decimalPlaces,
     decimalPoint,

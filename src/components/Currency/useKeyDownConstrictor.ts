@@ -6,7 +6,7 @@ import * as React from 'react';
  * typing a decimalPoint when there is already a decimalPoint in the value
  * is not allowed.
  */
-export function useCurrencyKeyDownConstrictor({
+export function useKeyDownConstrictor({
   allowNegatives,
   decimalPlaces,
   decimalPoint,

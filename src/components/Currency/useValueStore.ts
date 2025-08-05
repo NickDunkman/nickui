@@ -30,7 +30,7 @@ type ActionType =
  * Returns a store for managing the various values needed in the <Currency>
  * component.
  */
-export function useCurrencyValueStore(args: {
+export function useValueStore(args: {
   controlledValue: string | number | undefined;
   defaultValue: string | number | undefined;
   format: CurrencyFormatType;
