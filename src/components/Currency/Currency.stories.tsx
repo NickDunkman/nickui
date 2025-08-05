@@ -4,12 +4,22 @@ import { expect, fn } from 'storybook/test';
 
 import { PrettyPrint } from '@/docs/PrettyPrint';
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { propDefaults } from '@/utils/propDefaults';
 
 import { Currency } from './Currency';
 
 const meta = {
   title: 'Form controls/Currency',
   component: Currency,
+  argTypes: propDefaults<typeof Currency>({
+    currencySymbol: '$',
+    decimalPoint: '.',
+    decimalPlaces: 2,
+    thousandsSeparator: ',',
+    allowNegatives: false,
+    disabled: false,
+    sizer: 'base',
+  }),
 } satisfies Meta<typeof Currency>;
 
 export default meta;
