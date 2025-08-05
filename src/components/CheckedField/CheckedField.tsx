@@ -26,7 +26,7 @@ export interface CheckedFieldProps extends React.ComponentProps<'label'> {
  * invalid.
  *
  * Note: this layout is already built-into Checkbox, Radio, and Switch—you can
- * use this component to create a custom form control that behaves the same way.
+ * use this component to create a custom form control with the same layout.
  */
 export function CheckedField({
   children: formControl,

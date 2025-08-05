@@ -18,7 +18,27 @@ A form control that allows users to enter a monetary amount.
 <Docs.TableOfContents />
 
 <Docs.Props of={Stories} nativeBase="input" wrapper="Field" />
-<Docs.ControlStates of={Stories} valuable />
+<Docs.ControlStates
+  of={Stories}
+  valuable
+  note={`
+    Note: when controlled, <ComponentName of="Money" /> behaves slightly
+    differently from other form controls. Since the input’s value needs to be
+    disconnected from the controlled \`value\` to enable currency formatting,
+    the input’s value can change even if you aren’t passing in the new
+    controlled value. However, if you do pass in a numerically different
+    controlled value, everything will cascade accordingly.
+  `}
+/>
+
+## Currency formatting & constraints
+
+TODO
+
+## Working with the value
+
+TODO
+
 <Docs.Sizers of={Stories} wrapper="Field" />
 <Docs.FormLibraryCompatibility
   of={Stories}
