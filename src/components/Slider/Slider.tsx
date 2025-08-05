@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Field } from '@/components/Field';
 import { CommonFieldProps } from '@/types';
 import { debounceToRepaint } from '@/utils/debounceToRepaint';
+import { fireInputChange } from '@/utils/fireInputChange';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
@@ -145,24 +146,7 @@ export function Slider({
 
     setUncontrolledValue(cleanedNewValue);
 
-    // Trigger a call to the `onChange` prop by dispatching an `input` event
-    // to the hidden input, where the onChange callback is mounted. This
-    // allows the callback to be called with a full SyntheticEvent from
-    // an HTMLInputElement, which helps make the component compatible with
-    // form libraries like React Hook Form.
-    if (internalInputRef.current) {
-      const inputProto = window.HTMLInputElement.prototype;
-      const descriptor = Object.getOwnPropertyDescriptor(
-        inputProto,
-        'value',
-      ) as PropertyDescriptor;
-      const setValue = descriptor.set;
-      if (setValue) {
-        const event = new Event('input', { bubbles: true });
-        setValue.call(internalInputRef.current, cleanedNewValue);
-        internalInputRef.current.dispatchEvent(event);
-      }
-    }
+    fireInputChange(internalInputRef.current, cleanedNewValue.toString());
   }
 
   /**

@@ -5,6 +5,7 @@ import { Field } from '@/components/Field';
 import { textStyler } from '@/components/Text/styles';
 import type { CommonFieldProps } from '@/types';
 import { clsw } from '@/utils/clsw';
+import { fireInputChange } from '@/utils/fireInputChange';
 import { useElementBounds } from '@/utils/useElementBounds';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
@@ -124,24 +125,16 @@ export function Currency({
     controlledAriaErrorMessage,
   });
 
+  // When the numerish value is changing, and the source of the change wasn’t
+  // due to a passed in `value` or `defaultValue` prop, we should push the new
+  // value up to the parent via the hidden <input>’s onChange handle.
   React.useEffect(() => {
     if (
-      internalInputRef.current &&
       currentValue.numerishValue !== previousValue?.numerishValue &&
       currentValue.source !== 'controlledValue' &&
       currentValue.source !== 'initialValue'
     ) {
-      const inputProto = window.HTMLInputElement.prototype;
-      const descriptor = Object.getOwnPropertyDescriptor(
-        inputProto,
-        'value',
-      ) as PropertyDescriptor;
-      const setValue = descriptor.set;
-      if (setValue) {
-        const event = new Event('input', { bubbles: true });
-        setValue.call(internalInputRef.current, currentValue.numerishValue);
-        internalInputRef.current.dispatchEvent(event);
-      }
+      fireInputChange(internalInputRef.current, currentValue.numerishValue);
     }
   }, [
     currentValue.numerishValue,
