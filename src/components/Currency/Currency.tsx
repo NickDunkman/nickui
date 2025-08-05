@@ -12,6 +12,7 @@ import { useScrollClone } from '@/utils/useScrollClone';
 
 import { currencyStyler } from './styles';
 import { CurrencyFormatProps, CurrencyFormatType } from './types';
+import { useCurrencyKeyDownConstrictor } from './useCurrencyKeyDownConstrictor';
 import { useCurrencyValueStore } from './useCurrencyValueStore';
 import { getDeformattedSelection } from './utils';
 
@@ -148,94 +149,33 @@ export function Currency({
     currentValue.source,
   ]);
 
-  const allowedKeyPresses = React.useMemo(
-    () => [
-      ...numberKeys,
-      decimalPoint,
-      ...(allowNegatives ? ['-'] : []),
-      'ArrowUp',
-      'ArrowDown',
-      'ArrowLeft',
-      'ArrowRight',
-      'ArrowRight',
-      'Tab',
-      'Enter',
-      'Backspace',
-      'Delete',
-    ],
-    [decimalPoint, allowNegatives],
-  );
-
+  const keyDownConstrictor = useCurrencyKeyDownConstrictor({
+    allowNegatives,
+    decimalPlaces,
+    decimalPoint,
+  });
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    const selection = {
-      start: workingInputRef.current?.selectionStart || 0,
-      end: workingInputRef.current?.selectionEnd || 0,
-    };
-
-    // Don't block when holding command/etc, since those are things like
-    // "copy" / "paste", instead of character inputs.
-    if (!event.metaKey) {
-      // Block disallowed characters
-      if (
-        !allowedKeyPresses.includes(event.key) &&
-        event.key !== decimalPoint
-      ) {
-        event.preventDefault();
-        return;
-      }
-
-      // Block input of a second decimal
-      if (
-        event.key === decimalPoint &&
-        currentValue.workingValue.indexOf(decimalPoint) !== -1
-      ) {
-        event.preventDefault();
-        return;
-      }
-
-      // Negative sign only allowed when cursor is at the start & there is
-      // no negative sign yet
-      if (
-        event.key === '-' &&
-        (selection.start > 0 ||
-          workingInputRef.current?.value.indexOf('-') !== -1)
-      ) {
-        event.preventDefault();
-        return;
-      }
-
-      if (workingInputRef.current && numberKeys.includes(event.key)) {
-        // Block too many decimal places
-        // Don’t block when there is a selection range, since the number key
-        // press can’t possibly add another decimal place
-        if (selection.start === selection.end) {
-          // Don't block unless the cursor is to the right of the decimal point
-          const decimalPointIndex =
-            currentValue.workingValue.indexOf(decimalPoint);
-          if (decimalPointIndex !== -1 && selection.start > decimalPointIndex) {
-            // Don't block unless we already have max decimal places
-            const decimalPlacesOnWorkingValue =
-              currentValue.workingValue.length - (decimalPointIndex + 1);
-            if (decimalPlacesOnWorkingValue >= decimalPlaces) {
-              event.preventDefault();
-              return;
-            }
-          }
-        }
-      }
-
-      if (event.key === 'ArrowUp') {
-        event.preventDefault();
-        updateFromIncrement(event.shiftKey ? 10 : 1);
-      }
-
-      if (event.key === 'ArrowDown') {
-        event.preventDefault();
-        updateFromIncrement(event.shiftKey ? -10 : -1);
-      }
+    const shouldConstrict = keyDownConstrictor(event);
+    if (shouldConstrict) {
+      event.preventDefault();
+      return;
     }
 
-    setPreviousSelection(selection);
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      updateFromIncrement(event.shiftKey ? 10 : 1);
+    }
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      updateFromIncrement(event.shiftKey ? -10 : -1);
+    }
+
+    setPreviousSelection({
+      start: workingInputRef.current?.selectionStart || 0,
+      end: workingInputRef.current?.selectionEnd || 0,
+    });
+
     onKeyDown?.(event);
   }
 
@@ -452,19 +392,6 @@ export function Currency({
     </Field>
   );
 }
-
-const numberKeys = Object.freeze([
-  '0',
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-]);
 
 /**
  * A function that creates the `format` in a guaranteed-memoized way
