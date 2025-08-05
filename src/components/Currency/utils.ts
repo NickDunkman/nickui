@@ -1,3 +1,5 @@
+import memoize from 'just-memoize';
+
 import { CurrencyFormatType, CurrencyValueType } from './types';
 
 /**
@@ -174,3 +176,22 @@ export function getDeformattedSelection(
 function substringCount(string: string, substring: string) {
   return string.split(substring).length - 1;
 }
+
+/**
+ * A function that creates the `format` in a guaranteed-memoized way
+ * (React.useMemo does not guarantee absolute memoization)
+ */
+export const createFormatConfig = memoize(
+  (
+    decimalPoint: CurrencyFormatType['decimalPoint'],
+    decimalPlaces: CurrencyFormatType['minDecimalPlaces'],
+    thousandsSeparator: CurrencyFormatType['thousandsSeparator'],
+    allowNegatives: CurrencyFormatType['allowNegatives'],
+  ) => ({
+    decimalPoint,
+    minDecimalPlaces: decimalPlaces,
+    maxDecimalPlaces: decimalPlaces,
+    thousandsSeparator,
+    allowNegatives,
+  }),
+);

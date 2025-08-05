@@ -1,3 +1,22 @@
+import * as React from 'react';
+
+import { CommonFieldProps } from '@/types';
+
+export interface CurrencyInputProps
+  extends Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'> {
+  /** Called when the value of the Text changes */
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  /**
+   * Sets the value of the Text when using it as a
+   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
+   */
+  value?: string;
+  /** Sets the value of the Text when using it as an uncontrolled component */
+  defaultValue?: string;
+  /** Option to change the currency symbol shown at the front of the input */
+  currencySymbol?: React.ReactNode;
+}
+
 /** These props are used to parse & format the <Currency> component's value */
 export interface CurrencyFormatProps {
   /**
@@ -19,6 +38,11 @@ export interface CurrencyFormatProps {
   /** Set to `true` if you want to allow the user to enter negative values */
   allowNegatives?: boolean;
 }
+
+/** The full spec of props for the <Currency> component */
+export type CurrencyProps = CurrencyInputProps &
+  CurrencyFormatProps &
+  CommonFieldProps;
 
 /**
  * The formatting configuration used internally in the Currency component

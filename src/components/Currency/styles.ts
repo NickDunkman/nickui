@@ -17,7 +17,9 @@ export const currencyStyler = tv({
       absolute top-0 bottom-0 left-0.5
       flex items-center  
       select-none pointer-events-none
-      text-gray-400 peer-disabled:text-gray-400 
+      text-black
+      peer-placeholder-shown:text-gray-400 
+      peer-disabled:text-gray-400 
       font-medium
     `,
   },
@@ -41,11 +43,8 @@ export const currencyStyler = tv({
     },
     hasError: {
       true: {
-        currencySymbol: 'text-rose-800',
+        currencySymbol: 'text-rose-800 peer-placeholder-shown:text-rose-800',
       },
-    },
-    hasWorkingValue: {
-      true: {},
     },
     // Prevent text from appearing to jump to the right when the currency symbol
     // padding is applied
@@ -57,15 +56,6 @@ export const currencyStyler = tv({
       },
     },
   },
-  compoundVariants: [
-    {
-      hasError: false,
-      hasWorkingValue: true,
-      class: {
-        currencySymbol: 'text-black',
-      },
-    },
-  ],
   defaultVariants: {
     sizer: 'base',
     hasError: false,

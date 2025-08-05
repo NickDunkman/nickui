@@ -11,8 +11,8 @@ export function useScrollClone<
   CloneFromElementType extends HTMLElement = HTMLElement,
   CloneToElementType extends HTMLElement = CloneFromElementType,
 >(
-  controlledCloneFromElementRef?: React.RefObject<CloneFromElementType>,
-  controlledCloneToElementRef?: React.RefObject<CloneToElementType>,
+  controlledCloneFromElementRef?: React.RefObject<CloneFromElementType | null>,
+  controlledCloneToElementRef?: React.RefObject<CloneToElementType | null>,
 ) {
   const uncontrolledCloneFromElementRef =
     React.useRef<CloneFromElementType>(null);

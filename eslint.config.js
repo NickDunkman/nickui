@@ -53,5 +53,10 @@ export default defineConfig({
       'error',
       { argsIgnorePattern: '^_.*', varsIgnorePattern: '^_' },
     ],
+    // allow expression like: `!someTest && callFunction()`
+    '@typescript-eslint/no-unused-expressions': [
+      'error',
+      { allowShortCircuit: true },
+    ],
   },
 });
