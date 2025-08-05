@@ -1,0 +1,9 @@
+import{j as t,M as p}from"./blocks-BPbaDkdy.js";import{useMDXComponents as m}from"./index-BgiDar2_.js";import{D as o}from"./index-B1U4hx14.js";import{S as i,C as s}from"./Currency.stories-DYjmTwZt.js";import"./preload-helper-D9Z9MdNV.js";import"./iframe-yGhCdJix.js";import"./index-B9HucVUH.js";import"./client-DMg-qjFZ.js";import"./index-BvyJpxie.js";import"./Button-DG5fV3Nt.js";import"./index-DtECKpfQ.js";import"./PrettyPrint-pbLhOdDF.js";import"./AllSizersStoryWrapper-BViIvCrF.js";import"./Field-Br2aUlYd.js";import"./styles-yAOqukd3.js";import"./useElementBounds-DSTD96NG.js";import"./useFieldA11yIds-COiPZunh.js";import"./randomId-Dfhrkieu.js";import"./fireInputChange-BU1kNzof.js";function a(e){const n={p:"p",...m(),...e.components};return o||r("Docs",!1),o.ComponentHeading||r("Docs.ComponentHeading",!0),o.ControlStates||r("Docs.ControlStates",!0),o.FauxCanvas||r("Docs.FauxCanvas",!0),o.FormLibraryCompatibility||r("Docs.FormLibraryCompatibility",!0),o.Props||r("Docs.Props",!0),o.Sizers||r("Docs.Sizers",!0),o.TableOfContents||r("Docs.TableOfContents",!0),t.jsxs(t.Fragment,{children:[t.jsx(p,{of:i}),`
+`,t.jsx(o.ComponentHeading,{of:"Currency"}),`
+`,t.jsx(n.p,{children:"A form control that allows users to enter & edit a single line of text."}),`
+`,t.jsx(o.FauxCanvas,{children:t.jsx(s,{defaultValue:"1234567.89"})}),`
+`,t.jsx(o.TableOfContents,{}),`
+`,t.jsx(o.Props,{of:i,nativeBase:"input",wrapper:"Field"}),`
+`,t.jsx(o.ControlStates,{of:i,valuable:!0}),`
+`,t.jsx(o.Sizers,{of:i,wrapper:"Field"}),`
+`,t.jsx(o.FormLibraryCompatibility,{of:i,fieldName:"player",initialValue:"1234.56",component:s,componentProps:{label:"Player name",hint:"Try editting me!"}})]})}function L(e={}){const{wrapper:n}={...m(),...e.components};return n?t.jsx(n,{...e,children:t.jsx(a,{...e})}):a(e)}function r(e,n){throw new Error("Expected "+(n?"component":"object")+" `"+e+"` to be defined: you likely forgot to import, pass, or provide it.")}export{L as default};
