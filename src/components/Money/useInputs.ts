@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { fireInputChange } from '@/utils/fireInputChange';
 
-import { CurrencyProps } from './types';
+import { MoneyProps } from './types';
 import { useKeyDownConstrictor } from './useKeyDownConstrictor';
 import { useValueStore } from './useValueStore';
 import { createFormatConfig, getDeformattedSelection } from './utils';
@@ -13,22 +13,22 @@ type ManagedInputProps = Omit<InputProps, 'ref'> & {
 };
 
 /**
- * Given the props passed to the Currency component, returns props that should
+ * Given the props passed to the Money component, returns props that should
  * be installed on each of the 3 <input>s within the component.
  *
  * Does *not* provide props for styling the inputs; it’s more clear to
- * co-locate those with the JSX in the Currency component code.
+ * co-locate those with the JSX in the Money component code.
  *
  * This is broken out b/c distributing this logic between the 3 inputs is
  * complex:
  * - validating & formatting the value as you type, or as a new `value` or
- *   `defaultValue` comes in through the Currency props, especially as each
+ *   `defaultValue` comes in through the Money props, especially as each
  *   <input>’s value uses a slightly different format & has different rules
  * - propogating the new value up to the parent via the onChange prop (and not
  *   doing so under certain conditions)
  * - accessibility
  */
-export function useInputs(props: CurrencyProps): {
+export function useInputs(props: MoneyProps): {
   workingInput: ManagedInputProps;
   placeholderInput: ManagedInputProps;
   hiddenInput: ManagedInputProps;

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { CommonFieldProps } from '@/types';
 
-export interface CurrencyInputProps
+export interface MoneyInputProps
   extends Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'> {
   /** Called when the value of the Text changes */
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -17,8 +17,8 @@ export interface CurrencyInputProps
   currencySymbol?: React.ReactNode;
 }
 
-/** These props are used to parse & format the <Currency> component's value */
-export interface CurrencyFormatProps {
+/** These props are used to parse & format the <Money> component's value */
+export interface MoneyFormatProps {
   /**
    * The character to use to separate the whole part from the decimal part,
    * typically "."
@@ -39,25 +39,23 @@ export interface CurrencyFormatProps {
   allowNegatives?: boolean;
 }
 
-/** The full spec of props for the <Currency> component */
-export type CurrencyProps = CurrencyInputProps &
-  CurrencyFormatProps &
-  CommonFieldProps;
+/** The full spec of props for the <Money> component */
+export type MoneyProps = MoneyInputProps & MoneyFormatProps & CommonFieldProps;
 
 /**
- * The formatting configuration used internally in the Currency component
+ * The formatting configuration used internally in the Money component
  * system.
  */
-export interface CurrencyFormatType {
-  decimalPoint: NonNullable<CurrencyFormatProps['decimalPoint']>;
-  minDecimalPlaces: NonNullable<CurrencyFormatProps['decimalPlaces']>;
-  maxDecimalPlaces: NonNullable<CurrencyFormatProps['decimalPlaces']>;
-  thousandsSeparator: NonNullable<CurrencyFormatProps['decimalPoint']>;
-  allowNegatives: NonNullable<CurrencyFormatProps['allowNegatives']>;
+export interface MoneyFormatType {
+  decimalPoint: NonNullable<MoneyFormatProps['decimalPoint']>;
+  minDecimalPlaces: NonNullable<MoneyFormatProps['decimalPlaces']>;
+  maxDecimalPlaces: NonNullable<MoneyFormatProps['decimalPlaces']>;
+  thousandsSeparator: NonNullable<MoneyFormatProps['decimalPoint']>;
+  allowNegatives: NonNullable<MoneyFormatProps['allowNegatives']>;
   allowTrailingDecimalPoint?: boolean;
 }
 
-export type CurrencyValueType = {
+export type MoneyValueType = {
   /**
    * Starts at 1; each new value added to the history gets an incremented
    * version
@@ -66,7 +64,7 @@ export type CurrencyValueType = {
   /**
    * `numerishValue` is the version of the value that can be parsed as a
    * Number(): it has no thousands separators and the decimalPoint is always
-   * ".". This is the version of the value that is emitted via the Currency
+   * ".". This is the version of the value that is emitted via the Money
    * component’s onChange handler back to the parent, as it is generally the
    * most useful programmatically.
    */
@@ -85,18 +83,18 @@ export type CurrencyValueType = {
    */
   placeholderValue: string;
   /**
-   * The <Currency> component’s raw `value` prop that was present alongside this
+   * The <Money> component’s raw `value` prop that was present alongside this
    * value. Can be used downstream to see if it changed from the
    * previousValue.controlledValue
    */
   controlledValue: string | number | undefined;
   /** The formatting config used to parse & format this value */
-  format: CurrencyFormatType;
+  format: MoneyFormatType;
   /**
    * Whenever the a new value is added to the history, a descriptor for what
    * caused the change is set here, so that downstream code can conditionally
    * decide whether to act on changes to the `value`. For example, the
-   * <Currency> component does not want to refire a change event when a new
+   * <Money> component does not want to refire a change event when a new
    * controlledValue is passed in.
    */
   source:

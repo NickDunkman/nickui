@@ -1,8 +1,8 @@
 // Note: most tests are in story play functions in Radio.stories.tsx
-import { CurrencyFormatType } from './types';
+import { MoneyFormatType } from './types';
 import { deformatValue, parseNumerishValue } from './utils';
 
-const usdFormat: CurrencyFormatType = {
+const usdFormat: MoneyFormatType = {
   decimalPoint: '.',
   minDecimalPlaces: 2,
   maxDecimalPlaces: 2,
@@ -10,7 +10,7 @@ const usdFormat: CurrencyFormatType = {
   allowNegatives: true,
 };
 
-const euroFormat: CurrencyFormatType = {
+const euroFormat: MoneyFormatType = {
   ...usdFormat,
   decimalPoint: ',',
   thousandsSeparator: '.',

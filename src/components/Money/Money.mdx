@@ -2,17 +2,17 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/docs';
 
-import { Currency } from './Currency';
-import * as Stories from './Currency.stories';
+import { Money } from './Money';
+import * as Stories from './Money.stories';
 
 <Meta of={Stories} />
 
-<Docs.ComponentHeading of="Currency" />
+<Docs.ComponentHeading of="Money" />
 
-A form control that allows users to enter & edit a single line of text.
+A form control that allows users to enter a monetary amount.
 
 <Docs.FauxCanvas>
-  <Currency defaultValue="1234567.89" />
+  <Money defaultValue="1234567.89" />
 </Docs.FauxCanvas>
 
 <Docs.TableOfContents />
@@ -24,7 +24,7 @@ A form control that allows users to enter & edit a single line of text.
   of={Stories}
   fieldName="player"
   initialValue="1234.56"
-  component={Currency}
+  component={Money}
   componentProps={{
     label: 'Player name',
     hint: 'Try editting me!',

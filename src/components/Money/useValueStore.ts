@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-import { CurrencyFormatType, CurrencyValueType } from './types';
+import { MoneyFormatType, MoneyValueType } from './types';
 import { deformatValue, formatValue, parseNumerishValue } from './utils';
 
-type CurrencyValueHistoryType = {
-  currentValue: CurrencyValueType;
-  previousValue?: CurrencyValueType;
+type MoneyValueHistoryType = {
+  currentValue: MoneyValueType;
+  previousValue?: MoneyValueType;
 };
 
 type ActionType =
@@ -19,7 +19,7 @@ type ActionType =
     }
   | {
       type: 'updateFromFormat';
-      payload: CurrencyFormatType;
+      payload: MoneyFormatType;
     }
   | {
       type: 'updateFromIncrement';
@@ -27,13 +27,13 @@ type ActionType =
     };
 
 /**
- * Returns a store for managing the various values needed in the <Currency>
+ * Returns a store for managing the various values needed in the <Money>
  * component.
  */
 export function useValueStore(args: {
   controlledValue: string | number | undefined;
   defaultValue: string | number | undefined;
-  format: CurrencyFormatType;
+  format: MoneyFormatType;
 }) {
   const [{ currentValue, previousValue }, dispatch] = React.useReducer(
     historyReducer,
@@ -87,8 +87,8 @@ function initializeHistory({
 }: {
   controlledValue: string | number | undefined;
   defaultValue: string | number | undefined;
-  format: CurrencyFormatType;
-}): CurrencyValueHistoryType {
+  format: MoneyFormatType;
+}): MoneyValueHistoryType {
   const rawValue =
     controlledValue !== undefined ? controlledValue : defaultValue;
   const workingValue = formatWorkingValue(rawValue, format);
@@ -107,9 +107,9 @@ function initializeHistory({
 }
 
 function updateHistory(
-  oldHistory: CurrencyValueHistoryType,
-  valueChanges: Omit<Partial<CurrencyValueType>, 'version'>,
-): CurrencyValueHistoryType {
+  oldHistory: MoneyValueHistoryType,
+  valueChanges: Omit<Partial<MoneyValueType>, 'version'>,
+): MoneyValueHistoryType {
   return {
     currentValue: {
       ...oldHistory.currentValue,
@@ -120,11 +120,11 @@ function updateHistory(
   };
 }
 
-/** Reducer for the store used in useCurrencyValueStore */
+/** Reducer for the store used in useMoneyValueStore */
 function historyReducer(
-  history: CurrencyValueHistoryType,
+  history: MoneyValueHistoryType,
   action: ActionType,
-): CurrencyValueHistoryType {
+): MoneyValueHistoryType {
   let newNumerishValue: string;
 
   switch (action.type) {
@@ -245,7 +245,7 @@ function historyReducer(
 
 function formatWorkingValue(
   rawValue: string | number | undefined,
-  format: CurrencyFormatType,
+  format: MoneyFormatType,
 ) {
   return formatValue(rawValue, {
     ...format,
@@ -257,7 +257,7 @@ function formatWorkingValue(
 
 function formatPlaceholderValue(
   rawValue: string | number | undefined,
-  format: CurrencyFormatType,
+  format: MoneyFormatType,
 ) {
   return formatValue(rawValue || '0', {
     ...format,

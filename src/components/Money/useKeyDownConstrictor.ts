@@ -2,7 +2,7 @@ import * as React from 'react';
 
 /**
  * Returns a function that can be used to determine whether a key press on
- * the Currency component’s working <input> should be blocked. For example,
+ * the Money component’s working <input> should be blocked. For example,
  * typing a decimalPoint when there is already a decimalPoint in the value
  * is not allowed.
  */

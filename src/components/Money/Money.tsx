@@ -8,15 +8,15 @@ import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 import { useScrollClone } from '@/utils/useScrollClone';
 
-import { currencyStyler } from './styles';
-import { CurrencyProps } from './types';
+import { moneyStyler } from './styles';
+import { MoneyProps } from './types';
 import { useInputs } from './useInputs';
 
 /**
- * A form control that allows users to enter & edit a single line of text
- * @param props {@link CurrencyProps}
+ * A form control that allows users to enter a monetary amount
+ * @param props {@link MoneyProps}
  */
-export function Currency(props: CurrencyProps) {
+export function Money(props: MoneyProps) {
   const a11yIds = useFieldA11yIds({
     label: props.label,
     hint: props.hint,
@@ -47,7 +47,7 @@ export function Currency(props: CurrencyProps) {
     sizer: resolvedSizer,
     hasError: !!props.error,
   });
-  const currencyStyles = currencyStyler({
+  const moneyStyles = moneyStyler({
     sizer: resolvedSizer,
     hasError: !!props.error,
     hasSpacingApplied: !!currencySymbolBounds,
@@ -67,7 +67,7 @@ export function Currency(props: CurrencyProps) {
       disabled={props.disabled}
       required={props.required}
     >
-      <div className={currencyStyles.visibleInputsContainer()}>
+      <div className={moneyStyles.visibleInputsContainer()}>
         {/*
           This is the "placholder" <input>. It's positioned directly underneath
           the working <input>. It has the same value in a muter color, except
@@ -77,7 +77,7 @@ export function Currency(props: CurrencyProps) {
         */}
         <input
           {...placeholderInput}
-          className={clsw(textStyles, currencyStyles.placeholderInput())}
+          className={clsw(textStyles, moneyStyles.placeholderInput())}
           style={{ paddingLeft: currencySymbolBounds?.width }}
           tabIndex={-1}
           aria-hidden
@@ -93,7 +93,7 @@ export function Currency(props: CurrencyProps) {
         */}
         <input
           {...workingInput}
-          className={clsw(textStyles, currencyStyles.workingInput())}
+          className={clsw(textStyles, moneyStyles.workingInput())}
           style={{ paddingLeft: currencySymbolBounds?.width }}
           // This non-empty placeholder allows the currency symbol to adjust
           // its style based on whether its peer has a value (when the
@@ -101,10 +101,7 @@ export function Currency(props: CurrencyProps) {
           placeholder=" "
         />
 
-        <div
-          ref={currencySymbolRef}
-          className={currencyStyles.currencySymbol()}
-        >
+        <div ref={currencySymbolRef} className={moneyStyles.currencySymbol()}>
           {props.currencySymbol === undefined ? '$' : props.currencySymbol}
         </div>
       </div>
@@ -116,7 +113,7 @@ export function Currency(props: CurrencyProps) {
         non-formatted, so they can be easily parsed as numbers. It's filled
         with {valueState.value}, which has no thousands separators, but does
         abide by the min/max decimal places, so that the parent component
-        can get properly-decimaled currency number values as it desires.
+        can get properly-decimaled values as it desires.
 
         As the user interacts with the working <input> above, updates to the
         value are passed to this hidden <input> via programmatically-initiated
@@ -125,7 +122,7 @@ export function Currency(props: CurrencyProps) {
       */}
       <input
         {...hiddenInput}
-        className={currencyStyles.hiddenInput()}
+        className={moneyStyles.hiddenInput()}
         tabIndex={-1}
         aria-hidden
       />

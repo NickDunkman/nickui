@@ -6,12 +6,12 @@ import { PrettyPrint } from '@/docs/PrettyPrint';
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 import { propDefaults } from '@/utils/propDefaults';
 
-import { Currency } from './Currency';
+import { Money } from './Money';
 
 const meta = {
-  title: 'Form controls/Currency',
-  component: Currency,
-  argTypes: propDefaults<typeof Currency>({
+  title: 'Form controls/Money',
+  component: Money,
+  argTypes: propDefaults<typeof Money>({
     currencySymbol: '$',
     decimalPoint: '.',
     decimalPlaces: 2,
@@ -20,19 +20,19 @@ const meta = {
     disabled: false,
     sizer: 'base',
   }),
-} satisfies Meta<typeof Currency>;
+} satisfies Meta<typeof Money>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function ControlledCurrency(props: React.ComponentProps<typeof Currency>) {
+function ControlledMoney(props: React.ComponentProps<typeof Money>) {
   const [value, setValue] = React.useState(props.value);
   const [count, setCount] = React.useState(0);
 
   return (
     <>
       <PrettyPrint className="mb-2" data={{ count, value }} />
-      <Currency
+      <Money
         {...props}
         value={value}
         onChange={(event) => {
@@ -46,14 +46,14 @@ function ControlledCurrency(props: React.ComponentProps<typeof Currency>) {
   );
 }
 
-function UncontrolledCurrency(props: React.ComponentProps<typeof Currency>) {
+function UncontrolledMoney(props: React.ComponentProps<typeof Money>) {
   const [value, setValue] = React.useState(props.defaultValue);
   const [count, setCount] = React.useState(0);
 
   return (
     <>
       <PrettyPrint className="mb-2" data={{ count, value }} />
-      <Currency
+      <Money
         {...props}
         defaultValue={value}
         onChange={(event) => {
@@ -97,7 +97,7 @@ export const FieldLayout: Story = {
 export const Empty: Story = {
   tags: ['control-state'],
   args: {
-    'aria-label': 'Empty Currency',
+    'aria-label': 'Empty Money',
     onChange: fn(),
   },
   //  play: async ({ args, canvas, step, userEvent }) => {
@@ -121,10 +121,10 @@ export const Empty: Story = {
 //
 export const Controlled: Story = {
   tags: ['control-state'],
-  render: (args) => <ControlledCurrency {...args} />,
+  render: (args) => <ControlledMoney {...args} />,
   args: {
     value: '1234.56',
-    'aria-label': 'Controlled Currency',
+    'aria-label': 'Controlled Money',
     onChange: fn(),
   },
   //  play: async ({ args, canvas, step, userEvent }) => {
@@ -147,10 +147,10 @@ export const Controlled: Story = {
 //
 export const Uncontrolled: Story = {
   tags: ['control-state'],
-  render: (args) => <UncontrolledCurrency {...args} />,
+  render: (args) => <UncontrolledMoney {...args} />,
   args: {
     defaultValue: '1234.56',
-    'aria-label': 'Uncontrolled Currency',
+    'aria-label': 'Uncontrolled Money',
     onChange: fn(),
   },
   //  play: async ({ args, canvas, step, userEvent }) => {
@@ -181,7 +181,7 @@ export const Disabled: Story = {
   args: {
     defaultValue: '1234.56',
     disabled: true,
-    'aria-label': 'Disabled Currency',
+    'aria-label': 'Disabled Money',
     onChange: fn(),
   },
   //  play: async ({ args, canvas, step, userEvent }) => {
@@ -231,16 +231,16 @@ export const Xs: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xs',
-    label: 'Xs Currency',
+    label: 'Xs Money',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the xs sizer style on both the Currency & Field',
+      'Assert the xs sizer style on both the Money & Field',
       async () => {
-        expect(canvas.getByLabelText('Xs Currency')).toHaveClass('text-xs');
-        expect(canvas.getByText('Xs Currency')).toHaveClass('text-xs');
+        expect(canvas.getByLabelText('Xs Money')).toHaveClass('text-xs');
+        expect(canvas.getByText('Xs Money')).toHaveClass('text-xs');
         expect(canvas.getByText('$')).toHaveClass('text-xs');
       },
     );
@@ -251,16 +251,16 @@ export const Sm: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'sm',
-    label: 'Sm Currency',
+    label: 'Sm Money',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the sm sizer style on both the Currency & Field',
+      'Assert the sm sizer style on both the Money & Field',
       async () => {
-        expect(canvas.getByLabelText('Sm Currency')).toHaveClass('text-sm');
-        expect(canvas.getByText('Sm Currency')).toHaveClass('text-sm');
+        expect(canvas.getByLabelText('Sm Money')).toHaveClass('text-sm');
+        expect(canvas.getByText('Sm Money')).toHaveClass('text-sm');
         expect(canvas.getByText('$')).toHaveClass('text-sm');
       },
     );
@@ -271,16 +271,16 @@ export const Base: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'base',
-    label: 'Base Currency',
+    label: 'Base Money',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the base sizer style on both the Currency & Field',
+      'Assert the base sizer style on both the Money & Field',
       async () => {
-        expect(canvas.getByLabelText('Base Currency')).toHaveClass('text-base');
-        expect(canvas.getByText('Base Currency')).toHaveClass('text-base');
+        expect(canvas.getByLabelText('Base Money')).toHaveClass('text-base');
+        expect(canvas.getByText('Base Money')).toHaveClass('text-base');
         expect(canvas.getByText('$')).toHaveClass('text-base');
       },
     );
@@ -291,16 +291,16 @@ export const Lg: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'lg',
-    label: 'Lg Currency',
+    label: 'Lg Money',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the lg sizer style on both the Currency & Field',
+      'Assert the lg sizer style on both the Money & Field',
       async () => {
-        expect(canvas.getByLabelText('Lg Currency')).toHaveClass('text-lg');
-        expect(canvas.getByText('Lg Currency')).toHaveClass('text-lg');
+        expect(canvas.getByLabelText('Lg Money')).toHaveClass('text-lg');
+        expect(canvas.getByText('Lg Money')).toHaveClass('text-lg');
         expect(canvas.getByText('$')).toHaveClass('text-lg');
       },
     );
@@ -311,16 +311,16 @@ export const Xl: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xl',
-    label: 'Xl Currency',
+    label: 'Xl Money',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
     await step(
-      'Assert the xl sizer style on both the Currency & Field',
+      'Assert the xl sizer style on both the Money & Field',
       async () => {
-        expect(canvas.getByLabelText('Xl Currency')).toHaveClass('text-xl');
-        expect(canvas.getByText('Xl Currency')).toHaveClass('text-xl');
+        expect(canvas.getByLabelText('Xl Money')).toHaveClass('text-xl');
+        expect(canvas.getByText('Xl Money')).toHaveClass('text-xl');
         expect(canvas.getByText('$')).toHaveClass('text-xl');
       },
     );
@@ -331,7 +331,7 @@ export const Responsive: Story = {
   tags: ['sizer'],
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
-    label: 'Responsive Currency',
+    label: 'Responsive Money',
     defaultValue: '1.23',
     onChange: fn(),
   },
@@ -353,11 +353,11 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Currency {...Xs.args} />
-      <Currency {...Sm.args} />
-      <Currency {...Base.args} />
-      <Currency {...Lg.args} />
-      <Currency {...Xl.args} />
+      <Money {...Xs.args} />
+      <Money {...Sm.args} />
+      <Money {...Base.args} />
+      <Money {...Lg.args} />
+      <Money {...Xl.args} />
     </AllSizersStoryWrapper>
   ),
 };

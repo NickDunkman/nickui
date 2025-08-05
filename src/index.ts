@@ -5,7 +5,7 @@ export { Toaster, toast } from '@/components/Toast';
 export { Button } from '@/components/Button';
 export { Checkbox } from '@/components/Checkbox';
 export { Checkboxes } from '@/components/Checkboxes';
-export { Currency } from '@/components/Currency';
+export { Money } from '@/components/Money';
 export { Radio } from '@/components/Radio';
 export { Radios } from '@/components/Radios';
 export { Select } from '@/components/Select';

@@ -1,6 +1,6 @@
 import memoize from 'just-memoize';
 
-import { CurrencyFormatType, CurrencyValueType } from './types';
+import { MoneyFormatType, MoneyValueType } from './types';
 
 /**
  * Given a raw value, converts to a "numerish" (number as a string)
@@ -18,7 +18,7 @@ import { CurrencyFormatType, CurrencyValueType } from './types';
  */
 export function parseNumerishValue(
   rawValue: string | number | undefined,
-  format: CurrencyFormatType,
+  format: MoneyFormatType,
 ) {
   let stringValue = rawValue?.toString().replace(/[^0-9.-]/g, '') || '';
 
@@ -87,18 +87,18 @@ export function parseNumerishValue(
 }
 
 /**
- * Converts a raw value to a fully formatted currency based on the provided
- * formatting configuration, for display to the user.
+ * Converts a raw value to a fully formatted monetary string based on the
+ * provided formatting configuration, for display to the user.
  *
  * This string is intended to be presented to the user (such as in the
- * Currency component’s interactive <input>. It is not necessarily parsable
+ * Money component’s interactive <input>. It is not necessarily parsable
  * using Number(), since Number() parsing only works with standard number
  * formatting (such as by having "." as the decimal point). To convert to a
  * parseable Number() string, use the parseNumerishValue() function.
  */
 export function formatValue(
   rawValue: string | number | undefined,
-  format: CurrencyFormatType,
+  format: MoneyFormatType,
 ) {
   const stringValue = parseNumerishValue(rawValue, format);
 
@@ -130,14 +130,11 @@ export function formatValue(
 }
 
 /**
- * Given a currency string that is formatted (such as the value provided from
- * the Currency component’s interactive <input>, strips the custom formatting
+ * Given a monetary string that is formatted (such as the value provided from
+ * the Money component’s interactive <input>, strips the custom formatting
  * so that it can then be parsed using parseNumerishValue().
  */
-export function deformatValue(
-  formattedValue: string,
-  format: CurrencyFormatType,
-) {
+export function deformatValue(formattedValue: string, format: MoneyFormatType) {
   return formattedValue
     .replaceAll(format.thousandsSeparator, '')
     .replace(format.decimalPoint, '.');
@@ -148,7 +145,7 @@ export function deformatValue(
  * after removing the thousands separators.
  */
 export function getDeformattedSelection(
-  value: CurrencyValueType,
+  value: MoneyValueType,
   previousSelectionStart: number,
   previousSelectionEnd: number,
 ): [newSelectionStart: number, newSelectionEnd: number] {
@@ -183,10 +180,10 @@ function substringCount(string: string, substring: string) {
  */
 export const createFormatConfig = memoize(
   (
-    decimalPoint: CurrencyFormatType['decimalPoint'],
-    decimalPlaces: CurrencyFormatType['minDecimalPlaces'],
-    thousandsSeparator: CurrencyFormatType['thousandsSeparator'],
-    allowNegatives: CurrencyFormatType['allowNegatives'],
+    decimalPoint: MoneyFormatType['decimalPoint'],
+    decimalPlaces: MoneyFormatType['minDecimalPlaces'],
+    thousandsSeparator: MoneyFormatType['thousandsSeparator'],
+    allowNegatives: MoneyFormatType['allowNegatives'],
   ) => ({
     decimalPoint,
     minDecimalPlaces: decimalPlaces,

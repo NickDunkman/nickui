@@ -1,10 +1,10 @@
 import { tv } from 'tailwind-variants';
 
 /**
- * tailwind-variants styles for the Currency component. Meant to be used in
+ * tailwind-variants styles for the Money component. Meant to be used in
  * conjuction with the Text component styler
  */
-export const currencyStyler = tv({
+export const moneyStyler = tv({
   slots: {
     visibleInputsContainer: 'relative',
     placeholderInput: `
