@@ -7,6 +7,7 @@ const usdFormat: CurrencyFormatType = {
   minDecimalPlaces: 2,
   maxDecimalPlaces: 2,
   thousandsSeparator: ',',
+  allowNegatives: true,
 };
 
 const euroFormat: CurrencyFormatType = {
@@ -23,6 +24,9 @@ describe('parseNumerishValue', () => {
   test('improperly positioned negative signs are invalid', () => {
     expect(parseNumerishValue('-1-', usdFormat)).toStrictEqual('');
     expect(parseNumerishValue('1-', usdFormat)).toStrictEqual('');
+    expect(
+      parseNumerishValue('-1', { ...usdFormat, allowNegatives: false }),
+    ).toStrictEqual('');
   });
 
   test('properly positioned negative signs are valid', () => {

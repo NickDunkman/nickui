@@ -50,6 +50,7 @@ export function Currency({
   currencySymbol = '$',
   decimalPoint = '.',
   decimalPlaces = 2,
+  allowNegatives = false,
   thousandsSeparator = ',',
   ref: controlledInputRef,
   onChange,
@@ -83,11 +84,17 @@ export function Currency({
   // you’re typing is janky, so just remove that formatting while focused.
   const [isMouseDown, setIsMouseDown] = React.useState(false);
   const [isFocusFormatted, setIsFocusFormatted] = React.useState(false);
-  const focusFormat = createFormat(decimalPoint, decimalPlaces, '');
+  const focusFormat = createFormat(
+    decimalPoint,
+    decimalPlaces,
+    '',
+    allowNegatives,
+  );
   const blurFormat = createFormat(
     decimalPoint,
     decimalPlaces,
     thousandsSeparator,
+    allowNegatives,
   );
 
   const [previousSelection, setPreviousSelection] = React.useState({
@@ -145,6 +152,7 @@ export function Currency({
     () => [
       ...numberKeys,
       decimalPoint,
+      ...(allowNegatives ? ['-'] : []),
       'ArrowUp',
       'ArrowDown',
       'ArrowLeft',
@@ -155,7 +163,7 @@ export function Currency({
       'Backspace',
       'Delete',
     ],
-    [decimalPoint],
+    [decimalPoint, allowNegatives],
   );
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -185,8 +193,19 @@ export function Currency({
         return;
       }
 
-      // Block too many decimal places
+      // Negative sign only allowed when cursor is at the start & there is
+      // no negative sign yet
+      if (
+        event.key === '-' &&
+        (selection.start > 0 ||
+          workingInputRef.current?.value.indexOf('-') !== -1)
+      ) {
+        event.preventDefault();
+        return;
+      }
+
       if (workingInputRef.current && numberKeys.includes(event.key)) {
+        // Block too many decimal places
         // Don’t block when there is a selection range, since the number key
         // press can’t possibly add another decimal place
         if (selection.start === selection.end) {
@@ -456,10 +475,12 @@ const createFormat = memoize(
     decimalPoint: CurrencyFormatType['decimalPoint'],
     decimalPlaces: CurrencyFormatType['minDecimalPlaces'],
     thousandsSeparator: CurrencyFormatType['thousandsSeparator'],
+    allowNegatives: CurrencyFormatType['allowNegatives'],
   ) => ({
     decimalPoint,
     minDecimalPlaces: decimalPlaces,
     maxDecimalPlaces: decimalPlaces,
     thousandsSeparator,
+    allowNegatives,
   }),
 );

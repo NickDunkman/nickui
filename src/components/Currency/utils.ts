@@ -20,9 +20,12 @@ export function parseNumerishValue(
 ) {
   let stringValue = rawValue?.toString().replace(/[^0-9.-]/g, '') || '';
 
-  // Reject if there is a negative sign not at the front, or if there are
-  // multiple negative signs
-  if (stringValue.indexOf('-') > 0 || substringCount(stringValue, '-') > 1) {
+  // If negatives are allowed, there should only be one negative sign at the
+  // front of the string
+  if (
+    stringValue.indexOf('-') > 0 ||
+    substringCount(stringValue, '-') > (format.allowNegatives ? 1 : 0)
+  ) {
     return '';
   }
 

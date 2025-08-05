@@ -16,6 +16,8 @@ export interface CurrencyFormatProps {
    * Typically 2.
    */
   decimalPlaces?: number;
+  /** Set to `true` if you want to allow the user to enter negative values */
+  allowNegatives?: boolean;
 }
 
 /**
@@ -27,6 +29,7 @@ export interface CurrencyFormatType {
   minDecimalPlaces: NonNullable<CurrencyFormatProps['decimalPlaces']>;
   maxDecimalPlaces: NonNullable<CurrencyFormatProps['decimalPlaces']>;
   thousandsSeparator: NonNullable<CurrencyFormatProps['decimalPoint']>;
+  allowNegatives: NonNullable<CurrencyFormatProps['allowNegatives']>;
   allowTrailingDecimalPoint?: boolean;
 }
 

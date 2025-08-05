@@ -206,9 +206,16 @@ function historyReducer(
       if (history.currentValue.numerishValue === '' && action.payload === -1) {
         newNumerishValue = parseNumerishValue(0, history.currentValue.format);
       } else {
-        newNumerishValue = (
-          Number(history.currentValue.numerishValue) + action.payload
+        newNumerishValue = Math.max(
+          Number(history.currentValue.numerishValue) + action.payload,
+          history.currentValue.format.allowNegatives ? -Infinity : 0,
         ).toString();
+      }
+
+      // This can happen if trying to decrement from zero and negatives are not
+      // allowed
+      if (newNumerishValue === history.currentValue.numerishValue) {
+        return history;
       }
 
       // Persist exact decimals from the old working value. They should remain
