@@ -185,7 +185,7 @@ function historyReducer(
     case 'updateFromFormat':
       var deformattedWorkingValue = deformatValue(
         history.currentValue.workingValue,
-        action.payload,
+        history.currentValue.format,
       );
 
       return updateHistory(history, {
