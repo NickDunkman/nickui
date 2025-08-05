@@ -179,12 +179,32 @@ export function useInputs(props: CurrencyProps): {
     props.onKeyDown?.(event);
   }
 
+  // deconstruct an <input>-props only object so we can spread the remainder
+  // onto the working input. This will allow you to use any other prop, such
+  // as setting an `aria-label`
+  const {
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    className, // className is intended to be used on the <Field> wrapper
+    sizer,
+    label,
+    hint,
+    error,
+    currencySymbol,
+    decimalPoint,
+    decimalPlaces,
+    thousandsSeparator,
+    allowNegatives,
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+    ...inputHTMLProps
+  } = props;
+
   return {
     // Note: there is intentionally no `value` prop specified on the
     // workingInput. There is an effect above that updates the value on this
     // <input> above, since it needs to programmatically update the cursor
     // position as it does so.
     workingInput: {
+      ...inputHTMLProps,
       ref: workingRef,
       role: 'spinbutton',
       type: 'text',
