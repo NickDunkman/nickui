@@ -202,9 +202,14 @@ function historyReducer(
       });
 
     case 'updateFromIncrement':
-      newNumerishValue = (
-        Number(history.currentValue.numerishValue) + action.payload
-      ).toString();
+      // pressing the "down" arrow on an empty value should just set to 0
+      if (history.currentValue.numerishValue === '' && action.payload === -1) {
+        newNumerishValue = parseNumerishValue(0, history.currentValue.format);
+      } else {
+        newNumerishValue = (
+          Number(history.currentValue.numerishValue) + action.payload
+        ).toString();
+      }
 
       // persist exact decimals from the old working value
       const [incrementedWholePart] = newNumerishValue.split('.');
