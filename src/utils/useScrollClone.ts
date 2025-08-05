@@ -11,15 +11,17 @@ export function useScrollClone<
   CloneFromElementType extends HTMLElement = HTMLElement,
   CloneToElementType extends HTMLElement = CloneFromElementType,
 >(
-  controlledCloneFromElement?: CloneFromElementType,
-  controlledCloneToElement?: CloneToElementType,
+  controlledCloneFromElementRef?: React.RefObject<CloneFromElementType>,
+  controlledCloneToElementRef?: React.RefObject<CloneToElementType>,
 ) {
-  const cloneFromElementRef = React.useRef<CloneFromElementType>(
-    controlledCloneFromElement || null,
-  );
-  const cloneToElementRef = React.useRef<CloneToElementType>(
-    controlledCloneToElement || null,
-  );
+  const uncontrolledCloneFromElementRef =
+    React.useRef<CloneFromElementType>(null);
+  const cloneFromElementRef =
+    controlledCloneFromElementRef || uncontrolledCloneFromElementRef;
+
+  const uncontrolledCloneToElementRef = React.useRef<CloneToElementType>(null);
+  const cloneToElementRef =
+    controlledCloneToElementRef || uncontrolledCloneToElementRef;
 
   React.useEffect(() => {
     const cloneFromElement = cloneFromElementRef.current;
