@@ -199,10 +199,6 @@ export function useInputs(props: MoneyProps): {
   } = props;
 
   return {
-    // Note: there is intentionally no `value` prop specified on the
-    // workingInput. There is an effect above that updates the value on this
-    // <input> above, since it needs to programmatically update the cursor
-    // position as it does so.
     workingInput: {
       ...inputHTMLProps,
       ref: workingRef,
@@ -237,6 +233,12 @@ export function useInputs(props: MoneyProps): {
         !isFocusFormatted && setIsFocusFormatted(true);
         props.onMouseUp?.(event);
       },
+      // Note: there is intentionally no `value` prop specified on the
+      // workingInput. There is an effect above that updates the value on this
+      // <input> above, since it needs to programmatically update the cursor
+      // position as it does so.
+      value: undefined,
+      defaultValue: undefined,
     },
     placeholderInput: {
       ref: placeholderRef,
