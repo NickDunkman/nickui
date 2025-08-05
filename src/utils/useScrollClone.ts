@@ -4,8 +4,8 @@ import * as React from 'react';
  * As you scroll one element, will keep the scroll position of another element
  * identical.
  *
- * @returns 2 refs -- the first should be installed on the element you want to
- * copy the scroll position *from*.
+ * @returns 2 refs. If you don’t pass in refs to use, you need to install these
+ * on the corresponding elements.
  */
 export function useScrollClone<
   CloneFromElementType extends HTMLElement = HTMLElement,
