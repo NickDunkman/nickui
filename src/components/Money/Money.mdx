@@ -33,7 +33,23 @@ A form control that allows users to enter a monetary amount.
 
 ## Currency formatting & constraints
 
-<Canvas of={Stories.CurrencyConversion} />
+To customize the currency format, you can use a combination of the
+`currencySymbol`, `decimalPoint`, and `thousandsSeparator` props. They are all
+set to USD defaults.
+
+The `decimalPlaces` prop defaults to `2` and configures:
+
+- the maximum number of decimal places the user can enter
+- the number of "placeholder" decimal places that are suggested as you type
+- the number of decimal places always included on `onChange(event.target.value)`
+
+<Canvas
+  of={Stories.CurrencyConversion}
+  source={{
+    language: 'tsx',
+    code: Stories.CurrencyConversion.parameters.source,
+  }}
+/>
 
 ## Working with the value
 

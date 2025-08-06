@@ -252,8 +252,9 @@ function CurrencyConverter() {
   }
 
   return (
-    <div className="flex gap-3">
+    <div className="flex flex-col gap-3 sm:flex-row">
       <Money
+        className="sm:flex-1"
         label="US Dollars"
         value={usdValue}
         onChange={(event) =>
@@ -263,6 +264,7 @@ function CurrencyConverter() {
         }
       />
       <Money
+        className="sm:flex-1"
         label="Euros"
         value={
           usdValue === undefined
@@ -281,6 +283,7 @@ function CurrencyConverter() {
         thousandsSeparator="."
       />
       <Money
+        className="sm:flex-1"
         label="Bitcoin"
         value={
           usdValue === undefined
@@ -303,7 +306,87 @@ function CurrencyConverter() {
 
 export const CurrencyConversion: Story = {
   tags: ['!dev', '!test'],
-  render: () => <CurrencyConverter />,
+  render: (_args) => <CurrencyConverter />,
+  parameters: {
+    source: `
+    function CurrencyConverter() {
+      const [usdValue, setUsdValue] = React.useState<number | undefined>(10000);
+      const [exchangeRates, setExchangeRates] = React.useState<{
+        btc: number;
+        eur: number;
+      }>();
+
+      React.useEffect(() => {
+        fetch(
+          'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json',
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setExchangeRates({
+              btc: data.usd.btc,
+              eur: data.usd.eur,
+            });
+          });
+      }, []);
+
+      if (!exchangeRates) {
+        return null;
+      }
+
+      return (
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Money
+            className="sm:flex-1"
+            label="US Dollars"
+            value={usdValue}
+            onChange={(event) =>
+              setUsdValue(
+                event.target.value === '' ? undefined : Number(event.target.value),
+              )
+            }
+          />
+          <Money
+            className="sm:flex-1"
+            label="Euros"
+            currencySymbol="€"
+            decimalPoint=","
+            thousandsSeparator="."
+            value={
+              usdValue === undefined
+                ? undefined
+                : Number(usdValue) * exchangeRates.eur
+            }
+            onChange={(event) =>
+              setUsdValue(
+                event.target.value === ''
+                  ? undefined
+                  : Number(event.target.value) / exchangeRates.eur,
+              )
+            }
+          />
+          <Money
+            className="sm:flex-1"
+            label="Bitcoin"
+            currencySymbol="₿"
+            decimalPlaces={8}
+            value={
+              usdValue === undefined
+                ? undefined
+                : Number(usdValue) * exchangeRates.btc
+            }
+            onChange={(event) =>
+              setUsdValue(
+                event.target.value === ''
+                  ? undefined
+                  : Number(event.target.value) / exchangeRates.btc,
+              )
+            }
+          />
+        </div>
+      );
+    }
+    `,
+  },
 };
 
 export const Xs: Story = {
