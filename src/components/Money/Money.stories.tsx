@@ -226,7 +226,68 @@ export const Euros: Story = {
   //    });
   //  },
 };
-//
+
+function CurrencyConverter() {
+  const [exchangeRates, setExchangeRates] = React.useState<{
+    btc: number;
+    eur: number;
+  }>();
+  const [usdValue, setUsdValue] = React.useState('10000.00');
+
+  React.useEffect(() => {
+    fetch(
+      'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json',
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setExchangeRates({
+          btc: data.usd.btc,
+          eur: data.usd.eur,
+        });
+      });
+  }, []);
+
+  if (!exchangeRates) {
+    return null;
+  }
+
+  return (
+    <div className="flex gap-3">
+      <Money
+        label="US Dollars"
+        value={usdValue}
+        onChange={(event) => setUsdValue(event.target.value)}
+      />
+      <Money
+        label="Euros"
+        value={
+          usdValue === ''
+            ? ''
+            : (Number(usdValue) * exchangeRates.eur).toString()
+        }
+        currencySymbol="€"
+        decimalPoint=","
+        thousandsSeparator="."
+      />
+      <Money
+        label="Bitcoin"
+        value={
+          usdValue === ''
+            ? ''
+            : (Number(usdValue) * exchangeRates.btc).toString()
+        }
+        decimalPlaces={5}
+        currencySymbol="₿"
+      />
+    </div>
+  );
+}
+
+export const CurrencyConversion: Story = {
+  tags: ['!dev', '!test'],
+  render: () => <CurrencyConverter />,
+};
+
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
