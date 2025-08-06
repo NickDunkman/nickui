@@ -8,7 +8,7 @@ import { useValueStore } from './useValueStore';
 import { createFormatConfig, getDeformattedSelection } from './utils';
 
 type InputProps = React.ComponentProps<'input'>;
-type ManagedInputProps = Omit<InputProps, 'ref'> & {
+type InputPropsWithRefObject = Omit<InputProps, 'ref'> & {
   ref: React.RefObject<HTMLInputElement | null>;
 };
 
@@ -29,25 +29,13 @@ type ManagedInputProps = Omit<InputProps, 'ref'> & {
  * - accessibility
  */
 export function useInputs(props: MoneyProps): {
-  workingInput: ManagedInputProps;
-  placeholderInput: ManagedInputProps;
-  hiddenInput: ManagedInputProps;
+  workingInput: InputPropsWithRefObject;
+  placeholderInput: InputPropsWithRefObject;
+  hiddenInput: InputProps;
 } {
   const workingRef = React.useRef<HTMLInputElement>(null);
   const placeholderRef = React.useRef<HTMLInputElement>(null);
   const hiddenRef = React.useRef<HTMLInputElement>(null);
-
-  // Initialize `ref` prop if provided
-  const { ref: refProp } = props;
-  React.useEffect(() => {
-    if (hiddenRef.current && refProp) {
-      if (typeof refProp === 'function') {
-        refProp(hiddenRef.current);
-      } else {
-        refProp.current = hiddenRef.current;
-      }
-    }
-  }, [hiddenRef, refProp]);
 
   // The "focus format" has no thousands separators & is used while the user
   // is focused on the field. Having thousands separators added/removed while
@@ -74,6 +62,7 @@ export function useInputs(props: MoneyProps): {
   const {
     currentValue,
     previousValue,
+    reinitializeValue,
     updateFromWorkingValue,
     updateFromIncrement,
   } = useValueStore({
@@ -181,6 +170,23 @@ export function useInputs(props: MoneyProps): {
     props.onKeyDown?.(event);
   }
 
+  // React Hook Form sets the inital field value by using the `ref` prop to
+  // programmatically set the `value` on the hidden input element. So when
+  // the caller isn't using the `value` or `defaultValue` props, we should
+  // inspect the hidden input, and if something has magically set its value,
+  // use that as the initial value for this component -- allowing the checkboxes
+  // to be properly checked or unchecked after mount.
+  React.useLayoutEffect(() => {
+    if (props.value === undefined && props.defaultValue === undefined) {
+      const hiddenValue = hiddenRef.current?.value;
+      if (hiddenValue != null && hiddenValue !== '') {
+        reinitializeValue({ defaultValue: hiddenValue });
+      }
+    }
+    // We only want to run this effect once after mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // deconstruct an <input>-props only object so we can spread the remainder
   // onto the working input. This will allow you to use any other prop, such
   // as setting an `aria-label`
@@ -242,6 +248,8 @@ export function useInputs(props: MoneyProps): {
       // position as it does so.
       value: undefined,
       defaultValue: undefined,
+      // Name goes on the hidden input
+      name: undefined,
     },
     placeholderInput: {
       ref: placeholderRef,
@@ -251,8 +259,17 @@ export function useInputs(props: MoneyProps): {
       disabled: props.disabled,
     },
     hiddenInput: {
-      ref: hiddenRef,
+      ref: (el) => {
+        hiddenRef.current = el;
+
+        if (typeof props.ref === 'function') {
+          props.ref(el);
+        } else if (props.ref) {
+          props.ref.current = el;
+        }
+      },
       type: 'number',
+      name: props.name,
       onChange: props.onChange,
       // We set the value on this hidden <input> by programmatically
       // dispatching an `input` event above, which causes a 'change' to then

@@ -10,6 +10,13 @@ type MoneyValueHistoryType = {
 
 type ActionType =
   | {
+      type: 'reinitializeValue';
+      payload: {
+        controlledValue?: string | number;
+        defaultValue?: string | number;
+      };
+    }
+  | {
       type: 'updateFromControlledValue';
       payload: string | number | undefined;
     }
@@ -55,6 +62,16 @@ export function useValueStore(args: {
     [dispatch],
   );
 
+  const reinitializeValue = React.useCallback(
+    (args: {
+      controlledValue?: string | number;
+      defaultValue?: string | number;
+    }) => {
+      dispatch({ type: 'reinitializeValue', payload: args });
+    },
+    [dispatch],
+  );
+
   // Update w/ new format when it changes
   React.useEffect(() => {
     if (args.format !== currentValue.format) {
@@ -75,6 +92,7 @@ export function useValueStore(args: {
   return {
     previousValue,
     currentValue,
+    reinitializeValue,
     updateFromWorkingValue,
     updateFromIncrement,
   };
@@ -85,8 +103,8 @@ function initializeHistory({
   defaultValue,
   format,
 }: {
-  controlledValue: string | number | undefined;
-  defaultValue: string | number | undefined;
+  controlledValue?: string | number;
+  defaultValue?: string | number;
   format: MoneyFormatType;
 }): MoneyValueHistoryType {
   const rawValue =
@@ -131,6 +149,12 @@ function historyReducer(
   let newNumerishValue: string;
 
   switch (action.type) {
+    case 'reinitializeValue':
+      return initializeHistory({
+        ...action.payload,
+        format: history.currentValue.format,
+      });
+
     case 'updateFromControlledValue':
       // If the controlledValue is not changing, don't update the history
       if (action.payload === history.currentValue.controlledValue) {
