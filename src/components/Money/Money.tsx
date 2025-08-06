@@ -49,7 +49,6 @@ export function Money(props: MoneyProps) {
   });
   const moneyStyles = moneyStyler({
     sizer: resolvedSizer,
-    hasError: !!props.error,
     hasSpacingApplied: !!currencySymbolBounds,
   });
 

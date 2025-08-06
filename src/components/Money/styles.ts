@@ -41,11 +41,6 @@ export const moneyStyler = tv({
         currencySymbol: 'text-xl pl-4.5 pr-2.5',
       },
     },
-    hasError: {
-      true: {
-        currencySymbol: 'text-rose-800 peer-placeholder-shown:text-rose-800',
-      },
-    },
     // Prevent text from appearing to jump to the right when the currency symbol
     // padding is applied
     hasSpacingApplied: {
@@ -58,7 +53,6 @@ export const moneyStyler = tv({
   },
   defaultVariants: {
     sizer: 'base',
-    hasError: false,
     hasValue: false,
     hasSpacingApplied: true,
   },
