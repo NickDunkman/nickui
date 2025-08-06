@@ -10,9 +10,9 @@ export interface MoneyInputProps
    * Sets the value of the Text when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
    */
-  value?: string;
+  value?: string | number;
   /** Sets the value of the Text when using it as an uncontrolled component */
-  defaultValue?: string;
+  defaultValue?: string | number;
   /** Option to change the currency symbol shown at the front of the input */
   currencySymbol?: React.ReactNode;
 }

@@ -232,7 +232,7 @@ function CurrencyConverter() {
     btc: number;
     eur: number;
   }>();
-  const [usdValue, setUsdValue] = React.useState('10000.00');
+  const [usdValue, setUsdValue] = React.useState<number | undefined>(10000);
 
   React.useEffect(() => {
     fetch(
@@ -256,14 +256,25 @@ function CurrencyConverter() {
       <Money
         label="US Dollars"
         value={usdValue}
-        onChange={(event) => setUsdValue(event.target.value)}
+        onChange={(event) =>
+          setUsdValue(
+            event.target.value === '' ? undefined : Number(event.target.value),
+          )
+        }
       />
       <Money
         label="Euros"
         value={
-          usdValue === ''
-            ? ''
+          usdValue === undefined
+            ? undefined
             : (Number(usdValue) * exchangeRates.eur).toString()
+        }
+        onChange={(event) =>
+          setUsdValue(
+            event.target.value === ''
+              ? undefined
+              : Number(event.target.value) / exchangeRates.eur,
+          )
         }
         currencySymbol="€"
         decimalPoint=","
@@ -272,9 +283,16 @@ function CurrencyConverter() {
       <Money
         label="Bitcoin"
         value={
-          usdValue === ''
-            ? ''
+          usdValue === undefined
+            ? undefined
             : (Number(usdValue) * exchangeRates.btc).toString()
+        }
+        onChange={(event) =>
+          setUsdValue(
+            event.target.value === ''
+              ? undefined
+              : Number(event.target.value) / exchangeRates.btc,
+          )
         }
         decimalPlaces={5}
         currencySymbol="₿"

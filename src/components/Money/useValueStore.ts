@@ -221,20 +221,24 @@ function historyReducer(
         return history;
       }
 
-      // Persist exact decimals from the old working value. They should remain
-      // the same since incrementing happens by integers. Keeping the decimals
-      // the same (rather than potentially padding w/ another zero) allows the
-      // cursor position to not jerk over
-      const [incrementedWholePart] = newNumerishValue.split('.');
-      const [_, incrementedDecimalPart] =
-        history.currentValue.workingValue.split(
-          history.currentValue.format.decimalPoint,
-        );
+      const [newWholePart] = newNumerishValue.split('.');
+      let newWorkingDecimalPart = newNumerishValue.replace(/^-?[0-9]*/, '');
+      const previousWorkingDecimalPart =
+        history.currentValue.workingValue.replace(/^-?[0-9]*/, '');
+
+      // If the updated decimal part (which will abide minDecimalPlaces) is
+      // numerically equivalent to what the working decimal part was previously,
+      // keep it as it was to avoid prematurally padding with zeros.
+      if (
+        Number(newWorkingDecimalPart) === Number(previousWorkingDecimalPart)
+      ) {
+        newWorkingDecimalPart = previousWorkingDecimalPart;
+      }
 
       return updateHistory(history, {
         numerishValue: newNumerishValue,
         workingValue: formatWorkingValue(
-          `${incrementedWholePart}${incrementedDecimalPart !== undefined ? history.currentValue.format.decimalPoint : ''}${incrementedDecimalPart || ''}`,
+          `${newWholePart}${newWorkingDecimalPart}`,
           history.currentValue.format,
         ),
         placeholderValue: formatPlaceholderValue(
