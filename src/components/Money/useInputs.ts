@@ -63,7 +63,7 @@ export function useInputs(props: MoneyProps): {
     currentValue,
     previousValue,
     reinitializeValue,
-    updateFromWorkingValue,
+    updateFromWorkingValueChange,
     updateFromIncrement,
   } = useValueStore({
     controlledValue: props.value,
@@ -220,7 +220,7 @@ export function useInputs(props: MoneyProps): {
       'aria-describedby': props['aria-describedby'],
       'aria-errormessage': props['aria-errormessage'],
       'aria-invalid': props['aria-invalid'] ?? !!props.error,
-      onChange: (event) => updateFromWorkingValue(event.target.value),
+      onChange: (event) => updateFromWorkingValueChange(event.target.value),
       onKeyDown: handleKeyDown,
       onFocus: (event) => {
         !isMouseDown && !isFocusFormatted && setIsFocusFormatted(true);

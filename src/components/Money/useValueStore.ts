@@ -10,26 +10,26 @@ type MoneyValueHistoryType = {
 
 type ActionType =
   | {
-      type: 'reinitializeValue';
+      type: 'REINITIALIZE_VALUE';
       payload: {
         controlledValue?: string | number;
         defaultValue?: string | number;
       };
     }
   | {
-      type: 'updateFromControlledValue';
+      type: 'UPDATE_FROM_CONTROLLED_VALUE_CHANGE';
       payload: string | number | undefined;
     }
   | {
-      type: 'updateFromWorkingValue';
+      type: 'UPDATE_FROM_WORKING_VALUE_CHANGE';
       payload: string;
     }
   | {
-      type: 'updateFromFormat';
+      type: 'UPDATE_FROM_REFORMAT';
       payload: MoneyFormatType;
     }
   | {
-      type: 'updateFromIncrement';
+      type: 'UPDATE_FROM_INCREMENT';
       payload: number;
     };
 
@@ -48,16 +48,19 @@ export function useValueStore(args: {
     initializeHistory,
   );
 
-  const updateFromWorkingValue = React.useCallback(
+  const updateFromWorkingValueChange = React.useCallback(
     (newWorkingValue: string) => {
-      dispatch({ type: 'updateFromWorkingValue', payload: newWorkingValue });
+      dispatch({
+        type: 'UPDATE_FROM_WORKING_VALUE_CHANGE',
+        payload: newWorkingValue,
+      });
     },
     [dispatch],
   );
 
   const updateFromIncrement = React.useCallback(
     (amount: number) => {
-      dispatch({ type: 'updateFromIncrement', payload: amount });
+      dispatch({ type: 'UPDATE_FROM_INCREMENT', payload: amount });
     },
     [dispatch],
   );
@@ -67,7 +70,7 @@ export function useValueStore(args: {
       controlledValue?: string | number;
       defaultValue?: string | number;
     }) => {
-      dispatch({ type: 'reinitializeValue', payload: args });
+      dispatch({ type: 'REINITIALIZE_VALUE', payload: args });
     },
     [dispatch],
   );
@@ -75,7 +78,7 @@ export function useValueStore(args: {
   // Update w/ new format when it changes
   React.useEffect(() => {
     if (args.format !== currentValue.format) {
-      dispatch({ type: 'updateFromFormat', payload: args.format });
+      dispatch({ type: 'UPDATE_FROM_REFORMAT', payload: args.format });
     }
   }, [args.format, currentValue.format, dispatch]);
 
@@ -83,7 +86,7 @@ export function useValueStore(args: {
   React.useEffect(() => {
     if (args.controlledValue !== currentValue.controlledValue) {
       dispatch({
-        type: 'updateFromControlledValue',
+        type: 'UPDATE_FROM_CONTROLLED_VALUE_CHANGE',
         payload: args.controlledValue,
       });
     }
@@ -93,7 +96,7 @@ export function useValueStore(args: {
     previousValue,
     currentValue,
     reinitializeValue,
-    updateFromWorkingValue,
+    updateFromWorkingValueChange,
     updateFromIncrement,
   };
 }
@@ -149,13 +152,13 @@ function historyReducer(
   let newNumerishValue: string;
 
   switch (action.type) {
-    case 'reinitializeValue':
+    case 'REINITIALIZE_VALUE':
       return initializeHistory({
         ...action.payload,
         format: history.currentValue.format,
       });
 
-    case 'updateFromControlledValue':
+    case 'UPDATE_FROM_CONTROLLED_VALUE_CHANGE':
       // If the controlledValue is not changing, don't update the history
       if (action.payload === history.currentValue.controlledValue) {
         return history;
@@ -187,7 +190,7 @@ function historyReducer(
         source: 'controlledValue',
       });
 
-    case 'updateFromWorkingValue':
+    case 'UPDATE_FROM_WORKING_VALUE_CHANGE':
       var deformattedWorkingValue = deformatValue(
         action.payload,
         history.currentValue.format,
@@ -210,7 +213,7 @@ function historyReducer(
         source: 'workingValue',
       });
 
-    case 'updateFromFormat':
+    case 'UPDATE_FROM_REFORMAT':
       var deformattedWorkingValue = deformatValue(
         history.currentValue.workingValue,
         history.currentValue.format,
@@ -229,7 +232,7 @@ function historyReducer(
         source: 'format',
       });
 
-    case 'updateFromIncrement':
+    case 'UPDATE_FROM_INCREMENT':
       // pressing the "down" arrow on an empty value should just set to 0
       if (history.currentValue.numerishValue === '' && action.payload < 0) {
         newNumerishValue = parseNumerishValue(0, history.currentValue.format);
