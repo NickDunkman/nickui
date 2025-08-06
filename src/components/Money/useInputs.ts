@@ -204,6 +204,7 @@ export function useInputs(props: MoneyProps): {
       ref: workingRef,
       role: 'spinbutton',
       type: 'text',
+      inputMode: 'numeric',
       id: props.id,
       disabled: props.disabled,
       required: props.required,
