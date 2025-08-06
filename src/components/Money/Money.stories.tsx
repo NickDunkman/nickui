@@ -25,48 +25,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function ControlledMoney(props: React.ComponentProps<typeof Money>) {
-  const [value, setValue] = React.useState(props.value);
-  const [count, setCount] = React.useState(0);
-
-  return (
-    <>
-      <PrettyPrint className="mb-2" data={{ count, value }} />
-      <Money
-        {...props}
-        value={value}
-        onChange={(event) => {
-          setCount(count + 1);
-          setValue(
-            event.target.value === '1.23' ? '69.69' : event.target.value,
-          );
-        }}
-      />
-    </>
-  );
-}
-
-function UncontrolledMoney(props: React.ComponentProps<typeof Money>) {
-  const [value, setValue] = React.useState(props.defaultValue);
-  const [count, setCount] = React.useState(0);
-
-  return (
-    <>
-      <PrettyPrint className="mb-2" data={{ count, value }} />
-      <Money
-        {...props}
-        defaultValue={value}
-        onChange={(event) => {
-          setCount(count + 1);
-          setValue(
-            event.target.value === '1.23' ? '69.69' : event.target.value,
-          );
-        }}
-      />
-    </>
-  );
-}
-
 export const FieldLayout: Story = {
   tags: ['field-layout'],
   args: {
@@ -97,7 +55,7 @@ export const FieldLayout: Story = {
 export const Empty: Story = {
   tags: ['control-state'],
   args: {
-    'aria-label': 'Empty Money',
+    label: 'Empty Money',
     onChange: fn(),
   },
   //  play: async ({ args, canvas, step, userEvent }) => {
@@ -121,10 +79,9 @@ export const Empty: Story = {
 //
 export const Controlled: Story = {
   tags: ['control-state'],
-  render: (args) => <ControlledMoney {...args} />,
   args: {
+    label: 'Controlled Money',
     value: '1234.56',
-    'aria-label': 'Controlled Money',
     onChange: fn(),
   },
   //  play: async ({ args, canvas, step, userEvent }) => {
@@ -147,10 +104,9 @@ export const Controlled: Story = {
 //
 export const Uncontrolled: Story = {
   tags: ['control-state'],
-  render: (args) => <UncontrolledMoney {...args} />,
   args: {
+    label: 'Uncontrolled Money',
     defaultValue: '1234.56',
-    'aria-label': 'Uncontrolled Money',
     onChange: fn(),
   },
   //  play: async ({ args, canvas, step, userEvent }) => {
@@ -179,9 +135,9 @@ export const Uncontrolled: Story = {
 export const Disabled: Story = {
   tags: ['control-state'],
   args: {
+    label: 'Disabled Money',
     defaultValue: '1234.56',
     disabled: true,
-    'aria-label': 'Disabled Money',
     onChange: fn(),
   },
   //  play: async ({ args, canvas, step, userEvent }) => {

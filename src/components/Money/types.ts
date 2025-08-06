@@ -7,11 +7,11 @@ export interface MoneyInputProps
   /** Called when the value of the Text changes */
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   /**
-   * Sets the value of the Text when using it as a
+   * Sets the value of the Money when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
    */
   value?: string | number;
-  /** Sets the value of the Text when using it as an uncontrolled component */
+  /** Sets the value of the Money when using it as an uncontrolled component */
   defaultValue?: string | number;
 }
 
