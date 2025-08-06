@@ -203,13 +203,16 @@ function historyReducer(
 
     case 'updateFromIncrement':
       // pressing the "down" arrow on an empty value should just set to 0
-      if (history.currentValue.numerishValue === '' && action.payload === -1) {
+      if (history.currentValue.numerishValue === '' && action.payload < 0) {
         newNumerishValue = parseNumerishValue(0, history.currentValue.format);
       } else {
-        newNumerishValue = Math.max(
-          Number(history.currentValue.numerishValue) + action.payload,
-          history.currentValue.format.allowNegatives ? -Infinity : 0,
-        ).toString();
+        newNumerishValue = parseNumerishValue(
+          Math.max(
+            Number(history.currentValue.numerishValue) + action.payload,
+            history.currentValue.format.allowNegatives ? -Infinity : 0,
+          ),
+          history.currentValue.format,
+        );
       }
 
       // This can happen if trying to decrement from zero and negatives are not
