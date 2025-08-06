@@ -11,6 +11,10 @@ import * as Stories from './Money.stories';
 
 A form control that allows users to enter a monetary amount.
 
+The displayed value is automatically formatted according to the specified
+configuration, though will "deformat" as you edit the field, since it can feel
+disorienting when the changes don’t match your keystrokes.
+
 <Docs.FauxCanvas>
   <Money defaultValue="1234567.89" />
 </Docs.FauxCanvas>
@@ -34,8 +38,8 @@ A form control that allows users to enter a monetary amount.
 ## Currency formatting & constraints
 
 To customize the currency format, you can use a combination of the
-`currencySymbol`, `decimalPoint`, and `thousandsSeparator` props. They are all
-set to USD defaults.
+`currencySymbol`, `decimalPoint`, and `thousandsSeparator` props. They all use
+USD defaults.
 
 The `decimalPlaces` prop defaults to `2` and configures:
 
@@ -50,6 +54,13 @@ The `decimalPlaces` prop defaults to `2` and configures:
     code: Stories.CurrencyConversion.parameters.source,
   }}
 />
+
+By default, negative values are not allowed, since typically, a monetary field
+is either positive (like in a deposit form), or negative represented with a
+positive value (like in a withdrawal form). However, you can allow negatives
+using the `allowNegatives` prop.
+
+<Canvas of={Stories.AllowNegatives} />
 
 ## Working with the value
 

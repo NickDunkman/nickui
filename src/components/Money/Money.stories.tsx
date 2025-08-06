@@ -344,6 +344,15 @@ export const CurrencyConversion: Story = {
   },
 };
 
+export const AllowNegatives: Story = {
+  tags: ['sizer'],
+  args: {
+    label: 'Negatives allowed!',
+    defaultValue: '-1234.56',
+    allowNegatives: true,
+  },
+};
+
 export const Xs: Story = {
   tags: ['sizer'],
   args: {
