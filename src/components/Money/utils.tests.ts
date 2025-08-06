@@ -3,6 +3,7 @@ import { MoneyFormatType } from './types';
 import { deformatValue, parseNumerishValue } from './utils';
 
 const usdFormat: MoneyFormatType = {
+  currencySymbol: '$',
   decimalPoint: '.',
   minDecimalPlaces: 2,
   maxDecimalPlaces: 2,
@@ -12,6 +13,7 @@ const usdFormat: MoneyFormatType = {
 
 const euroFormat: MoneyFormatType = {
   ...usdFormat,
+  currencySymbol: '€',
   decimalPoint: ',',
   thousandsSeparator: '.',
 };

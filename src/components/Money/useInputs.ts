@@ -4,7 +4,7 @@ import { fireInputChange } from '@/utils/fireInputChange';
 
 import { MoneyProps } from './types';
 import { useKeyDownConstrictor } from './useKeyDownConstrictor';
-import { useValueStore } from './useValueStore';
+import { useValueState } from './useValueState';
 import { createFormatConfig, getDeformattedSelection } from './utils';
 
 type InputProps = React.ComponentProps<'input'>;
@@ -63,9 +63,9 @@ export function useInputs(props: MoneyProps): {
     currentValue,
     previousValue,
     reinitializeValue,
-    updateFromWorkingValueChange,
-    updateFromIncrement,
-  } = useValueStore({
+    updateWorkingValue,
+    incrementValue,
+  } = useValueState({
     controlledValue: props.value,
     defaultValue: props.defaultValue,
     format: isFocusFormatted ? focusFormat : fullFormat,
@@ -159,12 +159,12 @@ export function useInputs(props: MoneyProps): {
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
-      updateFromIncrement(event.shiftKey ? 10 : 1);
+      incrementValue(event.shiftKey ? 10 : 1);
     }
 
     if (event.key === 'ArrowDown') {
       event.preventDefault();
-      updateFromIncrement(event.shiftKey ? -10 : -1);
+      incrementValue(event.shiftKey ? -10 : -1);
     }
 
     props.onKeyDown?.(event);
@@ -220,7 +220,7 @@ export function useInputs(props: MoneyProps): {
       'aria-describedby': props['aria-describedby'],
       'aria-errormessage': props['aria-errormessage'],
       'aria-invalid': props['aria-invalid'] ?? !!props.error,
-      onChange: (event) => updateFromWorkingValueChange(event.target.value),
+      onChange: (event) => updateWorkingValue(event.target.value),
       onKeyDown: handleKeyDown,
       onFocus: (event) => {
         !isMouseDown && !isFocusFormatted && setIsFocusFormatted(true);

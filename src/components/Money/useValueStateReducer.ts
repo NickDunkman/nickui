@@ -3,7 +3,20 @@ import * as React from 'react';
 import { MoneyFormatType, MoneyValueType } from './types';
 import { deformatValue, formatValue, parseNumerishValue } from './utils';
 
-type MoneyValueHistoryType = {
+/** A reducer hook for making updates to the Money value state */
+export function useValueStateReducer(args: {
+  controlledValue: string | number | undefined;
+  defaultValue: string | number | undefined;
+  format: MoneyFormatType;
+}) {
+  return React.useReducer(reducer, args, initializeState);
+}
+
+/**
+ * Represents one holistic state of the values used in the Money component
+ * system, including the current set + previous set
+ */
+type MoneyValueStateType = {
   currentValue: MoneyValueType;
   previousValue?: MoneyValueType;
 };
@@ -17,91 +30,23 @@ type ActionType =
       };
     }
   | {
-      type: 'UPDATE_FROM_CONTROLLED_VALUE_CHANGE';
+      type: 'UPDATE_CONTROLLED_VALUE';
       payload: string | number | undefined;
     }
   | {
-      type: 'UPDATE_FROM_WORKING_VALUE_CHANGE';
+      type: 'UPDATE_WORKING_VALUE';
       payload: string;
     }
   | {
-      type: 'UPDATE_FROM_REFORMAT';
+      type: 'REFORMAT_VALUE';
       payload: MoneyFormatType;
     }
   | {
-      type: 'UPDATE_FROM_INCREMENT';
+      type: 'INCREMENT_VALUE';
       payload: number;
     };
 
-/**
- * Returns a store for managing the various values needed in the <Money>
- * component.
- */
-export function useValueStore(args: {
-  controlledValue: string | number | undefined;
-  defaultValue: string | number | undefined;
-  format: MoneyFormatType;
-}) {
-  const [{ currentValue, previousValue }, dispatch] = React.useReducer(
-    historyReducer,
-    args,
-    initializeHistory,
-  );
-
-  const updateFromWorkingValueChange = React.useCallback(
-    (newWorkingValue: string) => {
-      dispatch({
-        type: 'UPDATE_FROM_WORKING_VALUE_CHANGE',
-        payload: newWorkingValue,
-      });
-    },
-    [dispatch],
-  );
-
-  const updateFromIncrement = React.useCallback(
-    (amount: number) => {
-      dispatch({ type: 'UPDATE_FROM_INCREMENT', payload: amount });
-    },
-    [dispatch],
-  );
-
-  const reinitializeValue = React.useCallback(
-    (args: {
-      controlledValue?: string | number;
-      defaultValue?: string | number;
-    }) => {
-      dispatch({ type: 'REINITIALIZE_VALUE', payload: args });
-    },
-    [dispatch],
-  );
-
-  // Update w/ new format when it changes
-  React.useEffect(() => {
-    if (args.format !== currentValue.format) {
-      dispatch({ type: 'UPDATE_FROM_REFORMAT', payload: args.format });
-    }
-  }, [args.format, currentValue.format, dispatch]);
-
-  // Update w/ new controlledValue when it changes
-  React.useEffect(() => {
-    if (args.controlledValue !== currentValue.controlledValue) {
-      dispatch({
-        type: 'UPDATE_FROM_CONTROLLED_VALUE_CHANGE',
-        payload: args.controlledValue,
-      });
-    }
-  }, [args.controlledValue, currentValue.controlledValue, dispatch]);
-
-  return {
-    previousValue,
-    currentValue,
-    reinitializeValue,
-    updateFromWorkingValueChange,
-    updateFromIncrement,
-  };
-}
-
-function initializeHistory({
+function initializeState({
   controlledValue,
   defaultValue,
   format,
@@ -109,7 +54,7 @@ function initializeHistory({
   controlledValue?: string | number;
   defaultValue?: string | number;
   format: MoneyFormatType;
-}): MoneyValueHistoryType {
+}): MoneyValueStateType {
   const rawValue =
     controlledValue !== undefined ? controlledValue : defaultValue;
   const numerishValue = parseNumerishValue(rawValue, format);
@@ -130,96 +75,93 @@ function initializeHistory({
   };
 }
 
-function updateHistory(
-  oldHistory: MoneyValueHistoryType,
+function updatedState(
+  oldState: MoneyValueStateType,
   valueChanges: Omit<Partial<MoneyValueType>, 'version'>,
-): MoneyValueHistoryType {
+): MoneyValueStateType {
   return {
     currentValue: {
-      ...oldHistory.currentValue,
+      ...oldState.currentValue,
       ...valueChanges,
-      version: oldHistory.currentValue?.version + 1,
+      version: oldState.currentValue?.version + 1,
     },
-    previousValue: oldHistory?.currentValue,
+    previousValue: oldState?.currentValue,
   };
 }
 
-/** Reducer for the store used in useMoneyValueStore */
-function historyReducer(
-  history: MoneyValueHistoryType,
+function reducer(
+  state: MoneyValueStateType,
   action: ActionType,
-): MoneyValueHistoryType {
+): MoneyValueStateType {
   let newNumerishValue: string;
 
   switch (action.type) {
     case 'REINITIALIZE_VALUE':
-      return initializeHistory({
+      return initializeState({
         ...action.payload,
-        format: history.currentValue.format,
+        format: state.currentValue.format,
       });
 
-    case 'UPDATE_FROM_CONTROLLED_VALUE_CHANGE':
-      // If the controlledValue is not changing, don't update the history
-      if (action.payload === history.currentValue.controlledValue) {
-        return history;
+    case 'UPDATE_CONTROLLED_VALUE':
+      // If the controlledValue is not changing, don't update the state
+      if (action.payload === state.currentValue.controlledValue) {
+        return state;
       }
 
       newNumerishValue = parseNumerishValue(
         action.payload,
-        history.currentValue.format,
+        state.currentValue.format,
       );
 
       // Don’t update the formatted versions unless there is a numerical
       // change. Otherwise the user's formatting changes will get wiped.
       const formattedValuesShouldChange =
-        Number(newNumerishValue) !==
-          Number(history.currentValue.numerishValue) ||
-        (newNumerishValue === '' &&
-          history.currentValue.numerishValue !== '') ||
-        (newNumerishValue !== '' && history.currentValue.numerishValue === '');
+        Number(newNumerishValue) !== Number(state.currentValue.numerishValue) ||
+        (newNumerishValue === '' && state.currentValue.numerishValue !== '') ||
+        (newNumerishValue !== '' && state.currentValue.numerishValue === '');
 
-      return updateHistory(history, {
+      return updatedState(state, {
         numerishValue: newNumerishValue,
         workingValue: formattedValuesShouldChange
-          ? formatWorkingValue(newNumerishValue, history.currentValue.format)
-          : history.currentValue.workingValue,
+          ? formatWorkingValue(newNumerishValue, state.currentValue.format)
+          : state.currentValue.workingValue,
         placeholderValue: formattedValuesShouldChange
-          ? formatFullValue(newNumerishValue, history.currentValue.format)
-          : history.currentValue.placeholderValue,
+          ? formatFullValue(newNumerishValue, state.currentValue.format)
+          : state.currentValue.placeholderValue,
         controlledValue: action.payload,
         source: 'controlledValue',
       });
 
-    case 'UPDATE_FROM_WORKING_VALUE_CHANGE':
+    case 'UPDATE_WORKING_VALUE':
       var deformattedWorkingValue = deformatValue(
         action.payload,
-        history.currentValue.format,
+        state.currentValue.format,
       );
       newNumerishValue = parseNumerishValue(
         deformattedWorkingValue,
-        history.currentValue.format,
+        state.currentValue.format,
       );
 
-      return updateHistory(history, {
+      return updatedState(state, {
         numerishValue: newNumerishValue,
         workingValue: formatWorkingValue(
           deformattedWorkingValue,
-          history.currentValue.format,
+          state.currentValue.format,
         ),
         placeholderValue: formatFullValue(
           deformattedWorkingValue,
-          history.currentValue.format,
+          state.currentValue.format,
         ),
         source: 'workingValue',
       });
 
-    case 'UPDATE_FROM_REFORMAT':
+    case 'REFORMAT_VALUE':
       var deformattedWorkingValue = deformatValue(
-        history.currentValue.workingValue,
-        history.currentValue.format,
+        state.currentValue.workingValue,
+        state.currentValue.format,
       );
 
-      return updateHistory(history, {
+      return updatedState(state, {
         workingValue: formatWorkingValue(
           deformattedWorkingValue,
           action.payload,
@@ -232,30 +174,30 @@ function historyReducer(
         source: 'format',
       });
 
-    case 'UPDATE_FROM_INCREMENT':
+    case 'INCREMENT_VALUE':
       // pressing the "down" arrow on an empty value should just set to 0
-      if (history.currentValue.numerishValue === '' && action.payload < 0) {
-        newNumerishValue = parseNumerishValue(0, history.currentValue.format);
+      if (state.currentValue.numerishValue === '' && action.payload < 0) {
+        newNumerishValue = parseNumerishValue(0, state.currentValue.format);
       } else {
         newNumerishValue = parseNumerishValue(
           Math.max(
-            Number(history.currentValue.numerishValue) + action.payload,
-            history.currentValue.format.allowNegatives ? -Infinity : 0,
+            Number(state.currentValue.numerishValue) + action.payload,
+            state.currentValue.format.allowNegatives ? -Infinity : 0,
           ),
-          history.currentValue.format,
+          state.currentValue.format,
         );
       }
 
       // This can happen if trying to decrement from zero and negatives are not
       // allowed
-      if (newNumerishValue === history.currentValue.numerishValue) {
-        return history;
+      if (newNumerishValue === state.currentValue.numerishValue) {
+        return state;
       }
 
       const [newWholePart] = newNumerishValue.split('.');
       let newWorkingDecimalPart = newNumerishValue.replace(/^-?[0-9]*/, '');
       const previousWorkingDecimalPart =
-        history.currentValue.workingValue.replace(/^-?[0-9]*/, '');
+        state.currentValue.workingValue.replace(/^-?[0-9]*/, '');
 
       // If the updated decimal part (which will abide minDecimalPlaces) is
       // numerically equivalent to what the working decimal part was previously,
@@ -266,15 +208,15 @@ function historyReducer(
         newWorkingDecimalPart = previousWorkingDecimalPart;
       }
 
-      return updateHistory(history, {
+      return updatedState(state, {
         numerishValue: newNumerishValue,
         workingValue: formatWorkingValue(
           `${newWholePart}${newWorkingDecimalPart}`,
-          history.currentValue.format,
+          state.currentValue.format,
         ),
         placeholderValue: formatFullValue(
           newNumerishValue,
-          history.currentValue.format,
+          state.currentValue.format,
         ),
         source: 'increment',
       });

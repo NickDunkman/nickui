@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
-import { PrettyPrint } from '@/docs/PrettyPrint';
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 import { propDefaults } from '@/utils/propDefaults';
 
@@ -55,7 +54,7 @@ export const FieldLayout: Story = {
 export const Empty: Story = {
   tags: ['control-state'],
   args: {
-    label: 'Empty Money',
+    label: 'Empty',
     onChange: fn(),
   },
   //  play: async ({ args, canvas, step, userEvent }) => {
@@ -80,7 +79,7 @@ export const Empty: Story = {
 export const Controlled: Story = {
   tags: ['control-state'],
   args: {
-    label: 'Controlled Money',
+    label: 'Controlled',
     value: '1234.56',
     onChange: fn(),
   },
@@ -105,7 +104,7 @@ export const Controlled: Story = {
 export const Uncontrolled: Story = {
   tags: ['control-state'],
   args: {
-    label: 'Uncontrolled Money',
+    label: 'Uncontrolled',
     defaultValue: '1234.56',
     onChange: fn(),
   },
@@ -135,7 +134,7 @@ export const Uncontrolled: Story = {
 export const Disabled: Story = {
   tags: ['control-state'],
   args: {
-    label: 'Disabled Money',
+    label: 'Disabled',
     defaultValue: '1234.56',
     disabled: true,
     onChange: fn(),
@@ -458,11 +457,11 @@ export const Responsive: Story = {
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4">
-      <Money {...Empty.args} />
-      <Money {...Controlled.args} />
-      <Money {...Uncontrolled.args} />
-      <Money {...Disabled.args} />
+    <div className="flex flex-col gap-3 sm:flex-row">
+      <Money {...Empty.args} className="sm:flex-1" />
+      <Money {...Controlled.args} className="sm:flex-1" />
+      <Money {...Uncontrolled.args} className="sm:flex-1" />
+      <Money {...Disabled.args} className="sm:flex-1" />
     </div>
   ),
 };

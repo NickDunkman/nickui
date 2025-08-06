@@ -254,11 +254,11 @@ export const Responsive: Story = {
 export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4">
-      <Text {...Empty.args} />
-      <Text {...Controlled.args} />
-      <Text {...Uncontrolled.args} />
-      <Text {...Disabled.args} />
+    <div className="flex flex-col gap-3 sm:flex-row">
+      <Text {...Empty.args} className="sm:flex-1" />
+      <Text {...Controlled.args} className="sm:flex-1" />
+      <Text {...Uncontrolled.args} className="sm:flex-1" />
+      <Text {...Disabled.args} className="sm:flex-1" />
     </div>
   ),
 };
