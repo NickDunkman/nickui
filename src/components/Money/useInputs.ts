@@ -187,7 +187,7 @@ export function useInputs(props: MoneyProps): {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // deconstruct an <input>-props only object so we can spread the remainder
+  // deconstruct an <input>-props-only object so we can spread the remainder
   // onto the working input. This will allow you to use any other prop, such
   // as setting an `aria-label`
   const {
