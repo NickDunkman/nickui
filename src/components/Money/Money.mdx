@@ -60,6 +60,10 @@ is either positive (like in a deposit form), or negative represented with a
 positive value (like in a withdrawal form). However, you can allow negatives
 using the `allowNegatives` prop.
 
+Keep in mind that if you allow negatives, the user won’t be able to use the
+simpler numeric keyboard on mobile devices, since it doesn’t include a key for
+the negative sign.
+
 <Canvas of={Stories.AllowNegatives} />
 
 ## Working with the value

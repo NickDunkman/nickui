@@ -210,7 +210,11 @@ export function useInputs(props: MoneyProps): {
     workingInput: {
       role: 'spinbutton',
       type: 'text',
-      inputMode: fullFormat.maxDecimalPlaces ? 'decimal' : 'numeric',
+      inputMode: fullFormat.allowNegatives
+        ? 'text'
+        : fullFormat.maxDecimalPlaces
+          ? 'decimal'
+          : 'numeric',
       ...inputHTMLProps,
       ref: workingRef,
       id: props.id,
