@@ -267,7 +267,7 @@ function CurrencyConverter() {
         value={
           usdValue === undefined
             ? undefined
-            : (Number(usdValue) * exchangeRates.eur).toString()
+            : Number(usdValue) * exchangeRates.eur
         }
         onChange={(event) =>
           setUsdValue(
@@ -285,7 +285,7 @@ function CurrencyConverter() {
         value={
           usdValue === undefined
             ? undefined
-            : (Number(usdValue) * exchangeRates.btc).toString()
+            : Number(usdValue) * exchangeRates.btc
         }
         onChange={(event) =>
           setUsdValue(
@@ -294,7 +294,7 @@ function CurrencyConverter() {
               : Number(event.target.value) / exchangeRates.btc,
           )
         }
-        decimalPlaces={5}
+        decimalPlaces={8}
         currencySymbol="₿"
       />
     </div>

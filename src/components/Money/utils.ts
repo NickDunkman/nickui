@@ -180,11 +180,13 @@ function substringCount(string: string, substring: string) {
  */
 export const createFormatConfig = memoize(
   (
+    currencySymbol: MoneyFormatType['currencySymbol'],
     decimalPoint: MoneyFormatType['decimalPoint'],
     decimalPlaces: MoneyFormatType['minDecimalPlaces'],
     thousandsSeparator: MoneyFormatType['thousandsSeparator'],
     allowNegatives: MoneyFormatType['allowNegatives'],
   ) => ({
+    currencySymbol,
     decimalPoint,
     minDecimalPlaces: decimalPlaces,
     maxDecimalPlaces: decimalPlaces,

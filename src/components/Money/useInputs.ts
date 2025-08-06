@@ -56,6 +56,7 @@ export function useInputs(props: MoneyProps): {
   const [isFocusFormatted, setIsFocusFormatted] = React.useState(false);
 
   const fullFormat = createFormatConfig(
+    props.currencySymbol ?? '$',
     props.decimalPoint ?? '.',
     props.decimalPlaces ?? 2,
     props.thousandsSeparator ?? ',',
@@ -63,6 +64,7 @@ export function useInputs(props: MoneyProps): {
   );
 
   const focusFormat = createFormatConfig(
+    fullFormat.currencySymbol,
     fullFormat.decimalPoint,
     fullFormat.maxDecimalPlaces,
     '',

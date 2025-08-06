@@ -13,12 +13,12 @@ export interface MoneyInputProps
   value?: string | number;
   /** Sets the value of the Text when using it as an uncontrolled component */
   defaultValue?: string | number;
-  /** Option to change the currency symbol shown at the front of the input */
-  currencySymbol?: React.ReactNode;
 }
 
 /** These props are used to parse & format the <Money> component's value */
 export interface MoneyFormatProps {
+  /** The currency symbol shown at the front of the input, typically "$" */
+  currencySymbol?: React.ReactNode;
   /**
    * The character to use to separate the whole part from the decimal part,
    * typically "."
@@ -52,6 +52,7 @@ export interface MoneyFormatType {
   maxDecimalPlaces: NonNullable<MoneyFormatProps['decimalPlaces']>;
   thousandsSeparator: NonNullable<MoneyFormatProps['decimalPoint']>;
   allowNegatives: NonNullable<MoneyFormatProps['allowNegatives']>;
+  currencySymbol: NonNullable<MoneyFormatProps['currencySymbol']>;
   allowTrailingDecimalPoint?: boolean;
 }
 

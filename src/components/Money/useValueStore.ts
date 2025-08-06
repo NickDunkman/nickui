@@ -91,14 +91,17 @@ function initializeHistory({
 }): MoneyValueHistoryType {
   const rawValue =
     controlledValue !== undefined ? controlledValue : defaultValue;
-  const workingValue = formatWorkingValue(rawValue, format);
+  const numerishValue = parseNumerishValue(rawValue, format);
 
   return {
     currentValue: {
       version: 1,
-      numerishValue: parseNumerishValue(rawValue, format),
-      workingValue,
-      placeholderValue: formatPlaceholderValue(rawValue, format),
+      numerishValue,
+      // On initialization, if a value is passed in, the workingValue should
+      // start with the full set of decimalPlaces
+      workingValue:
+        numerishValue === '' ? '' : formatFullValue(rawValue, format),
+      placeholderValue: formatFullValue(rawValue, format),
       controlledValue,
       format,
       source: 'initialValue',
@@ -142,7 +145,11 @@ function historyReducer(
       // Don’t update the formatted versions unless there is a numerical
       // change. Otherwise the user's formatting changes will get wiped.
       const formattedValuesShouldChange =
-        Number(newNumerishValue) !== Number(history.currentValue.numerishValue);
+        Number(newNumerishValue) !==
+          Number(history.currentValue.numerishValue) ||
+        (newNumerishValue === '' &&
+          history.currentValue.numerishValue !== '') ||
+        (newNumerishValue !== '' && history.currentValue.numerishValue === '');
 
       return updateHistory(history, {
         numerishValue: newNumerishValue,
@@ -150,10 +157,7 @@ function historyReducer(
           ? formatWorkingValue(newNumerishValue, history.currentValue.format)
           : history.currentValue.workingValue,
         placeholderValue: formattedValuesShouldChange
-          ? formatPlaceholderValue(
-              newNumerishValue,
-              history.currentValue.format,
-            )
+          ? formatFullValue(newNumerishValue, history.currentValue.format)
           : history.currentValue.placeholderValue,
         controlledValue: action.payload,
         source: 'controlledValue',
@@ -175,7 +179,7 @@ function historyReducer(
           deformattedWorkingValue,
           history.currentValue.format,
         ),
-        placeholderValue: formatPlaceholderValue(
+        placeholderValue: formatFullValue(
           deformattedWorkingValue,
           history.currentValue.format,
         ),
@@ -193,7 +197,7 @@ function historyReducer(
           deformattedWorkingValue,
           action.payload,
         ),
-        placeholderValue: formatPlaceholderValue(
+        placeholderValue: formatFullValue(
           deformattedWorkingValue,
           action.payload,
         ),
@@ -241,7 +245,7 @@ function historyReducer(
           `${newWholePart}${newWorkingDecimalPart}`,
           history.currentValue.format,
         ),
-        placeholderValue: formatPlaceholderValue(
+        placeholderValue: formatFullValue(
           newNumerishValue,
           history.currentValue.format,
         ),
@@ -262,7 +266,7 @@ function formatWorkingValue(
   });
 }
 
-function formatPlaceholderValue(
+function formatFullValue(
   rawValue: string | number | undefined,
   format: MoneyFormatType,
 ) {
