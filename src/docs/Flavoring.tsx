@@ -30,7 +30,7 @@ default), \`"positive"\`, \`"caution"\` or \`"negative"\`.
         />
       )}
 
-      {of.AllSecondaryFlavors && (
+      {of.allSecondaryFlavors && (
         <>
           <Markdown>
             {`
@@ -39,12 +39,12 @@ You can also use the \`secondary\` prop for a more muted look to each flavor.
           </Markdown>
 
           <Canvas
-            of={of.AllSecondaryFlavors}
+            of={of.allSecondaryFlavors}
             source={
-              of.AllSecondaryFlavors?.parameters?.source
+              of.allSecondaryFlavors?.parameters?.source
                 ? {
                     language: 'tsx',
-                    code: of.AllSecondaryFlavors?.parameters?.source,
+                    code: of.allSecondaryFlavors?.parameters?.source,
                   }
                 : undefined
             }

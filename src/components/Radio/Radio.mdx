@@ -3,9 +3,9 @@ import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Radio } from './Radio';
-import * as Stories from './Radio.stories';
+import * as stories from './Radio.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Radio" />
 
@@ -17,12 +17,12 @@ A form control that allow users to choose one option from a set.
 
 <Docs.TableOfContents />
 
-<Docs.Props of={Stories} wrapper="CheckedField" nativeBase="input" />
-<Docs.ControlStates of={Stories} checkable />
-<Docs.Sizers of={Stories} wrapper="CheckedField" />
+<Docs.Props of={stories} wrapper="CheckedField" nativeBase="input" />
+<Docs.ControlStates of={stories} checkable />
+<Docs.Sizers of={stories} wrapper="CheckedField" />
 
 <Docs.FormLibraryCompatibility
-  of={Stories}
+  of={stories}
   fieldName="inTheHoleFormik"
   radioWithValue="holed-out"
   componentProps={{ label: 'It’s in the hole' }}

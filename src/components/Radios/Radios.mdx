@@ -3,9 +3,9 @@ import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Radios } from './Radios';
-import * as Stories from './Radios.stories';
+import * as stories from './Radios.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Radios" />
 
@@ -28,14 +28,14 @@ import * as Stories from './Radios.stories';
 <Docs.TableOfContents />
 
 <Docs.Props
-  of={Stories}
+  of={stories}
   nativeBase="input"
   wrapper="Fieldset"
   exclude={['delimiter']}
 />
 
 <Docs.ControlStates
-  of={Stories}
+  of={stories}
   valuable
   sourceState="hidden"
   note="Note: while you can disable individual radios as shown in sections below, using `disabled={true}` will disable the entire field by forcing all child radios to be disabled."
@@ -46,7 +46,7 @@ import * as Stories from './Radios.stories';
 For the standard look & feel, use the `options` prop to configure the individual
 radios. <Docs of="Radios" /> will manage the interior layout.
 
-<Canvas of={Stories.StandardLayout} sourceState="shown" />
+<Canvas of={stories.standardLayout} sourceState="shown" />
 
 To customize the radio controls, such as to use a different component for the
 individual radios, call the props differently, or add other elements, you can
@@ -57,7 +57,7 @@ pass a `render` function instead of using `options`.
   behave properly.
 </strong>
 
-<Canvas of={Stories.CustomLayout} sourceState="none" />
+<Canvas of={stories.customLayout} sourceState="none" />
 
 <Source
   dark
@@ -94,10 +94,10 @@ pass a `render` function instead of using `options`.
   `}
 />
 
-<Docs.Sizers of={Stories} wrapper="Fieldset" />
+<Docs.Sizers of={stories} wrapper="Fieldset" />
 
 <Docs.FormLibraryCompatibility
-  of={Stories}
+  of={stories}
   fieldName="pinPositionFormik"
   initialValue="front"
   componentProps={{

@@ -3,9 +3,9 @@ import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { CheckedField } from './CheckedField';
-import * as Stories from './CheckedField.stories';
+import * as stories from './CheckedField.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="CheckedField" />
 
@@ -30,12 +30,12 @@ state invalid.
 </Docs.FauxCanvas>
 
 <Docs.TableOfContents />
-<Docs.Props of={Stories} nativeBase="label" />
+<Docs.Props of={stories} nativeBase="label" />
 
 ## Basic elements
 
 These elements are controlled using the `label` and `hint` props.
 
-<Canvas of={Stories.Basic} sourceState="shown" />
+<Canvas of={stories.basic} sourceState="shown" />
 
-<Docs.Sizers of={Stories} />
+<Docs.Sizers of={stories} />

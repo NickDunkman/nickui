@@ -15,7 +15,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FieldLayout: Story = {
+export const fieldLayout: Story = {
   tags: ['field-layout'],
   args: {
     required: true,
@@ -42,7 +42,7 @@ export const FieldLayout: Story = {
   },
 };
 
-export const Empty: Story = {
+export const empty: Story = {
   tags: ['control-state'],
   args: {
     placeholder: 'Empty TextArea',
@@ -68,7 +68,7 @@ export const Empty: Story = {
   },
 };
 
-export const Controlled: Story = {
+export const controlled: Story = {
   tags: ['control-state'],
   args: {
     value: 'Controlled TextArea',
@@ -93,7 +93,7 @@ export const Controlled: Story = {
   },
 };
 
-export const Uncontrolled: Story = {
+export const uncontrolled: Story = {
   tags: ['control-state'],
   args: {
     defaultValue: 'Uncontrolled TextArea',
@@ -123,7 +123,7 @@ export const Uncontrolled: Story = {
   },
 };
 
-export const Disabled: Story = {
+export const disabled: Story = {
   tags: ['control-state'],
   args: {
     defaultValue: 'Disabled TextArea',
@@ -147,7 +147,7 @@ export const Disabled: Story = {
   },
 };
 
-export const Xs: Story = {
+export const xs: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xs',
@@ -166,7 +166,7 @@ export const Xs: Story = {
   },
 };
 
-export const Sm: Story = {
+export const sm: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'sm',
@@ -185,7 +185,7 @@ export const Sm: Story = {
   },
 };
 
-export const Base: Story = {
+export const base: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'base',
@@ -204,7 +204,7 @@ export const Base: Story = {
   },
 };
 
-export const Lg: Story = {
+export const lg: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'lg',
@@ -223,7 +223,7 @@ export const Lg: Story = {
   },
 };
 
-export const Xl: Story = {
+export const xl: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xl',
@@ -242,7 +242,7 @@ export const Xl: Story = {
   },
 };
 
-export const Responsive: Story = {
+export const responsive: Story = {
   tags: ['sizer'],
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
@@ -252,7 +252,7 @@ export const Responsive: Story = {
   },
 };
 
-export const AutoResizableHeight: Story = {
+export const autoResizableHeight: Story = {
   args: {
     'aria-label': 'Autoresizable TextArea',
     defaultValue:
@@ -304,7 +304,7 @@ Proin et fringilla enim. Fusce id ultrices nisl. Fusce dignissim dolor et elemen
   },
 };
 
-export const FixedHeight: Story = {
+export const fixedHeight: Story = {
   args: {
     'aria-label': 'Fixed height TextArea',
     defaultValue:
@@ -354,7 +354,7 @@ Proin et fringilla enim. Fusce id ultrices nisl. Fusce dignissim dolor et elemen
   },
 };
 
-export const DisableManualResize: Story = {
+export const disableManualResize: Story = {
   args: {
     'aria-label': 'Disabled manual resize TextArea',
     defaultValue: 'This TextArea has no resize handle at the bottom right!',
@@ -373,27 +373,27 @@ export const DisableManualResize: Story = {
   },
 };
 
-export const AllControlStates: Story = {
+export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
-      <TextArea {...Empty.args} />
-      <TextArea {...Controlled.args} />
-      <TextArea {...Uncontrolled.args} />
-      <TextArea {...Disabled.args} />
+      <TextArea {...empty.args} />
+      <TextArea {...controlled.args} />
+      <TextArea {...uncontrolled.args} />
+      <TextArea {...disabled.args} />
     </div>
   ),
 };
 
-export const AllSizers: Story = {
+export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <TextArea {...Xs.args} />
-      <TextArea {...Sm.args} />
-      <TextArea {...Base.args} />
-      <TextArea {...Lg.args} />
-      <TextArea {...Xl.args} />
+      <TextArea {...xs.args} />
+      <TextArea {...sm.args} />
+      <TextArea {...base.args} />
+      <TextArea {...lg.args} />
+      <TextArea {...xl.args} />
     </AllSizersStoryWrapper>
   ),
 };

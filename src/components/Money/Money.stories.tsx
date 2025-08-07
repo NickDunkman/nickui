@@ -496,7 +496,7 @@ export const responsive: Story = {
   },
 };
 
-export const AllControlStates: Story = {
+export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-3 sm:flex-row">
@@ -508,7 +508,7 @@ export const AllControlStates: Story = {
   ),
 };
 
-export const AllSizers: Story = {
+export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>

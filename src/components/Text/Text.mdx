@@ -3,9 +3,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Text } from './Text';
-import * as Stories from './Text.stories';
+import * as stories from './Text.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Text" />
 
@@ -17,11 +17,11 @@ A form control that allows users to enter & edit a single line of text.
 
 <Docs.TableOfContents />
 
-<Docs.Props of={Stories} nativeBase="input" wrapper="Field" />
-<Docs.ControlStates of={Stories} valuable />
-<Docs.Sizers of={Stories} wrapper="Field" />
+<Docs.Props of={stories} nativeBase="input" wrapper="Field" />
+<Docs.ControlStates of={stories} valuable />
+<Docs.Sizers of={stories} wrapper="Field" />
 <Docs.FormLibraryCompatibility
-  of={Stories}
+  of={stories}
   fieldName="player"
   initialValue="Nick"
   component={Text}

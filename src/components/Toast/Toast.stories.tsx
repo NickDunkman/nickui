@@ -30,7 +30,7 @@ const renderWithButtonOpener: DecoratorFunction<
   );
 };
 
-export const Neutral: Story = {
+export const neutral: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
@@ -40,7 +40,7 @@ export const Neutral: Story = {
   },
 };
 
-export const Positive: Story = {
+export const positive: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
@@ -50,7 +50,7 @@ export const Positive: Story = {
   },
 };
 
-export const Caution: Story = {
+export const caution: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
@@ -60,7 +60,7 @@ export const Caution: Story = {
   },
 };
 
-export const Negative: Story = {
+export const negative: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
@@ -70,7 +70,7 @@ export const Negative: Story = {
   },
 };
 
-export const SecondaryNeutral: Story = {
+export const secondaryNeutral: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
@@ -81,7 +81,7 @@ export const SecondaryNeutral: Story = {
   },
 };
 
-export const SecondaryPositive: Story = {
+export const secondaryPositive: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
@@ -92,7 +92,7 @@ export const SecondaryPositive: Story = {
   },
 };
 
-export const SecondaryCaution: Story = {
+export const secondaryCaution: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
@@ -103,7 +103,7 @@ export const SecondaryCaution: Story = {
   },
 };
 
-export const SecondaryNegative: Story = {
+export const secondaryNegative: Story = {
   tags: ['flavor'],
   decorators: [renderWithButtonOpener],
   args: {
@@ -114,7 +114,7 @@ export const SecondaryNegative: Story = {
   },
 };
 
-export const AsyncToast: Story = {
+export const asyncToast: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <Button
@@ -139,7 +139,7 @@ export const AsyncToast: Story = {
   ),
 };
 
-export const CustomAsyncToast: Story = {
+export const customAsyncToast: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <Button
@@ -174,14 +174,14 @@ export const CustomAsyncToast: Story = {
   ),
 };
 
-const allFlavors = [Neutral, Positive, Caution, Negative];
-export const AllFlavors: Story = {
+const flavors = [neutral, positive, caution, negative];
+export const allFlavors: Story = {
   tags: ['!dev', '!test'],
   parameters: {
     source: `
       import { Button, toast } from 'nickui';
 
-      <div className="flex gap-4 flex-wrap">${allFlavors
+      <div className="flex gap-4 flex-wrap">${flavors
         .map(
           (s) => `
         <Button
@@ -200,7 +200,7 @@ export const AllFlavors: Story = {
   },
   render: (_args) => (
     <div className="flex flex-wrap gap-4">
-      {allFlavors.map((s) => (
+      {flavors.map((s) => (
         <Button
           key={s.name}
           flavor={s.args?.flavor}
@@ -213,20 +213,20 @@ export const AllFlavors: Story = {
   ),
 };
 
-const allSecondaryFlavors = [
-  SecondaryNeutral,
-  SecondaryPositive,
-  SecondaryCaution,
-  SecondaryNegative,
+const secondaryFlavors = [
+  secondaryNeutral,
+  secondaryPositive,
+  secondaryCaution,
+  secondaryNegative,
 ];
 
-export const AllSecondaryFlavors: Story = {
+export const allSecondaryFlavors: Story = {
   tags: ['!dev', '!test'],
   parameters: {
     source: `
       import { Button, toast } from 'nickui';
 
-      <div className="flex gap-4 flex-wrap">${allSecondaryFlavors
+      <div className="flex gap-4 flex-wrap">${secondaryFlavors
         .map(
           (s) => `
         <Button
@@ -246,7 +246,7 @@ export const AllSecondaryFlavors: Story = {
   },
   render: (_args) => (
     <div className="flex flex-wrap gap-4">
-      {allSecondaryFlavors.map((s) => (
+      {secondaryFlavors.map((s) => (
         <Button
           key={s.name}
           flavor={s.args?.flavor}

@@ -3,9 +3,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Switch } from './Switch';
-import * as Stories from './Switch.stories';
+import * as stories from './Switch.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Switch" />
 
@@ -20,11 +20,11 @@ discrete fields under a common category.
 
 <Docs.TableOfContents />
 
-<Docs.Props of={Stories} wrapper="CheckedField" nativeBase="input" />
-<Docs.ControlStates of={Stories} checkable />
-<Docs.Sizers of={Stories} wrapper="CheckedField" />
+<Docs.Props of={stories} wrapper="CheckedField" nativeBase="input" />
+<Docs.ControlStates of={stories} checkable />
+<Docs.Sizers of={stories} wrapper="CheckedField" />
 <Docs.FormLibraryCompatibility
-  of={Stories}
+  of={stories}
   fieldName="liftCleanAndPlace"
   checkbox
   initialValue={true}

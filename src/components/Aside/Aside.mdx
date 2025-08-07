@@ -3,9 +3,9 @@ import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Aside } from './Aside';
-import * as Stories from './Aside.stories';
+import * as stories from './Aside.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Aside" />
 
@@ -38,7 +38,7 @@ main content.
 
 <Docs.TableOfContents />
 
-<Docs.Props of={Stories} nativeBase="aside" />
+<Docs.Props of={stories} nativeBase="aside" />
 
 ## Adding content
 
@@ -62,5 +62,5 @@ or `<h5>`).
   `}
 />
 
-<Docs.Flavoring of={Stories} />
-<Docs.Sizers of={Stories} />
+<Docs.Flavoring of={stories} />
+<Docs.Sizers of={stories} />

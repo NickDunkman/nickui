@@ -3,9 +3,9 @@ import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Field } from './Field';
-import * as Stories from './Field.stories';
+import * as stories from './Field.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Field" />
 
@@ -26,18 +26,18 @@ etc).
 </Docs.FauxCanvas>
 
 <Docs.TableOfContents />
-<Docs.Props of={Stories} nativeBase="div" />
+<Docs.Props of={stories} nativeBase="div" />
 
 ## Basic elements
 
 These elements are controlled using the `label`, `hint, and `error` props.
 
-<Canvas of={Stories.Basic} sourceState="shown" />
+<Canvas of={stories.basic} sourceState="shown" />
 
-<Docs.Sizers of={Stories} />
+<Docs.Sizers of={stories} />
 
 ## Required fields
 
 The `required` prop is used to add an asterisk to the label.
 
-<Canvas of={Stories.Required} />
+<Canvas of={stories.required} />

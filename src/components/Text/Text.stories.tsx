@@ -14,7 +14,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FieldLayout: Story = {
+export const fieldLayout: Story = {
   tags: ['field-layout'],
   args: {
     required: true,
@@ -41,7 +41,7 @@ export const FieldLayout: Story = {
   },
 };
 
-export const Empty: Story = {
+export const empty: Story = {
   tags: ['control-state'],
   args: {
     placeholder: 'Empty Text',
@@ -67,7 +67,7 @@ export const Empty: Story = {
   },
 };
 
-export const Controlled: Story = {
+export const controlled: Story = {
   tags: ['control-state'],
   args: {
     value: 'Controlled Text',
@@ -92,7 +92,7 @@ export const Controlled: Story = {
   },
 };
 
-export const Uncontrolled: Story = {
+export const uncontrolled: Story = {
   tags: ['control-state'],
   args: {
     defaultValue: 'Uncontrolled Text',
@@ -122,7 +122,7 @@ export const Uncontrolled: Story = {
   },
 };
 
-export const Disabled: Story = {
+export const disabled: Story = {
   tags: ['control-state'],
   args: {
     defaultValue: 'Disabled Text',
@@ -146,7 +146,7 @@ export const Disabled: Story = {
   },
 };
 
-export const Xs: Story = {
+export const xs: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xs',
@@ -165,7 +165,7 @@ export const Xs: Story = {
   },
 };
 
-export const Sm: Story = {
+export const sm: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'sm',
@@ -184,7 +184,7 @@ export const Sm: Story = {
   },
 };
 
-export const Base: Story = {
+export const base: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'base',
@@ -203,7 +203,7 @@ export const Base: Story = {
   },
 };
 
-export const Lg: Story = {
+export const lg: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'lg',
@@ -222,7 +222,7 @@ export const Lg: Story = {
   },
 };
 
-export const Xl: Story = {
+export const xl: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xl',
@@ -241,7 +241,7 @@ export const Xl: Story = {
   },
 };
 
-export const Responsive: Story = {
+export const responsive: Story = {
   tags: ['sizer'],
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
@@ -251,27 +251,27 @@ export const Responsive: Story = {
   },
 };
 
-export const AllControlStates: Story = {
+export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-3 sm:flex-row">
-      <Text {...Empty.args} className="sm:flex-1" />
-      <Text {...Controlled.args} className="sm:flex-1" />
-      <Text {...Uncontrolled.args} className="sm:flex-1" />
-      <Text {...Disabled.args} className="sm:flex-1" />
+      <Text {...empty.args} className="sm:flex-1" />
+      <Text {...controlled.args} className="sm:flex-1" />
+      <Text {...uncontrolled.args} className="sm:flex-1" />
+      <Text {...disabled.args} className="sm:flex-1" />
     </div>
   ),
 };
 
-export const AllSizers: Story = {
+export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Text {...Xs.args} />
-      <Text {...Sm.args} />
-      <Text {...Base.args} />
-      <Text {...Lg.args} />
-      <Text {...Xl.args} />
+      <Text {...xs.args} />
+      <Text {...sm.args} />
+      <Text {...base.args} />
+      <Text {...lg.args} />
+      <Text {...xl.args} />
     </AllSizersStoryWrapper>
   ),
 };

@@ -14,7 +14,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {
+export const basic: Story = {
   tags: ['!dev', '!test', 'field-layout'],
   args: {
     children: <Docs.FormControlPlaceholder />,
@@ -25,7 +25,7 @@ export const Basic: Story = {
   },
 };
 
-export const Xs: Story = {
+export const xs: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xs',
@@ -37,7 +37,7 @@ export const Xs: Story = {
   },
 };
 
-export const Sm: Story = {
+export const sm: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'sm',
@@ -49,7 +49,7 @@ export const Sm: Story = {
   },
 };
 
-export const Base: Story = {
+export const base: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'base',
@@ -61,7 +61,7 @@ export const Base: Story = {
   },
 };
 
-export const Lg: Story = {
+export const lg: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'lg',
@@ -73,7 +73,7 @@ export const Lg: Story = {
   },
 };
 
-export const Xl: Story = {
+export const xl: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xl',
@@ -85,7 +85,7 @@ export const Xl: Story = {
   },
 };
 
-export const Responsive: Story = {
+export const responsive: Story = {
   tags: ['sizer'],
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
@@ -97,7 +97,7 @@ export const Responsive: Story = {
   },
 };
 
-export const Required: Story = {
+export const required: Story = {
   args: {
     children: <Docs.FormControlPlaceholder />,
     label: 'Necessary information',
@@ -106,15 +106,15 @@ export const Required: Story = {
   },
 };
 
-export const AllSizers: Story = {
+export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Field {...Xs.args} />
-      <Field {...Sm.args} />
-      <Field {...Base.args} />
-      <Field {...Lg.args} />
-      <Field {...Xl.args} />
+      <Field {...xs.args} />
+      <Field {...sm.args} />
+      <Field {...base.args} />
+      <Field {...lg.args} />
+      <Field {...xl.args} />
     </AllSizersStoryWrapper>
   ),
 };

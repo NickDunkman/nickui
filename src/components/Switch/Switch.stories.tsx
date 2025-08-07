@@ -14,7 +14,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const CheckedFieldLayout: Story = {
+export const checkedFieldLayout: Story = {
   tags: ['field-layout'],
   args: {
     label: 'A label',
@@ -47,7 +47,7 @@ export const CheckedFieldLayout: Story = {
   },
 };
 
-export const Unchecked: Story = {
+export const unchecked: Story = {
   tags: ['control-state'],
   args: {
     label: 'Unchecked Switch',
@@ -58,7 +58,7 @@ export const Unchecked: Story = {
   },
 };
 
-export const Controlled: Story = {
+export const controlled: Story = {
   tags: ['control-state'],
   args: {
     label: 'Controlled Switch',
@@ -83,7 +83,7 @@ export const Controlled: Story = {
   },
 };
 
-export const Uncontrolled: Story = {
+export const uncontrolled: Story = {
   tags: ['control-state'],
   args: {
     label: 'Uncontrolled Switch',
@@ -115,7 +115,7 @@ export const Uncontrolled: Story = {
   },
 };
 
-export const DisabledUnchecked: Story = {
+export const disabledUnchecked: Story = {
   tags: ['control-state'],
   args: {
     label: 'Disabled & unchecked Switch',
@@ -139,7 +139,7 @@ export const DisabledUnchecked: Story = {
   },
 };
 
-export const DisabledChecked: Story = {
+export const disabledChecked: Story = {
   tags: ['control-state'],
   args: {
     label: 'Disabled & checked Switch',
@@ -164,7 +164,7 @@ export const DisabledChecked: Story = {
   },
 };
 
-export const Xs: Story = {
+export const xs: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xs',
@@ -179,7 +179,7 @@ export const Xs: Story = {
   },
 };
 
-export const Sm: Story = {
+export const sm: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'sm',
@@ -194,7 +194,7 @@ export const Sm: Story = {
   },
 };
 
-export const Base: Story = {
+export const base: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'base',
@@ -209,7 +209,7 @@ export const Base: Story = {
   },
 };
 
-export const Lg: Story = {
+export const lg: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'lg',
@@ -224,7 +224,7 @@ export const Lg: Story = {
   },
 };
 
-export const Xl: Story = {
+export const xl: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xl',
@@ -239,7 +239,7 @@ export const Xl: Story = {
   },
 };
 
-export const Responsive: Story = {
+export const responsive: Story = {
   tags: ['sizer'],
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
@@ -248,28 +248,28 @@ export const Responsive: Story = {
   },
 };
 
-export const AllControlStates: Story = {
+export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
-      <Switch {...Unchecked.args} />
-      <Switch {...Controlled.args} />
-      <Switch {...Uncontrolled.args} />
-      <Switch {...DisabledUnchecked.args} />
-      <Switch {...DisabledChecked.args} />
+      <Switch {...unchecked.args} />
+      <Switch {...controlled.args} />
+      <Switch {...uncontrolled.args} />
+      <Switch {...disabledUnchecked.args} />
+      <Switch {...disabledChecked.args} />
     </div>
   ),
 };
 
-export const AllSizers: Story = {
+export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Switch {...Xs.args} />
-      <Switch {...Sm.args} />
-      <Switch {...Base.args} />
-      <Switch {...Lg.args} />
-      <Switch {...Xl.args} />
+      <Switch {...xs.args} />
+      <Switch {...sm.args} />
+      <Switch {...base.args} />
+      <Switch {...lg.args} />
+      <Switch {...xl.args} />
     </AllSizersStoryWrapper>
   ),
 };

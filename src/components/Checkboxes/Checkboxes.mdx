@@ -3,9 +3,9 @@ import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Checkboxes } from './Checkboxes';
-import * as Stories from './Checkboxes.stories';
+import * as stories from './Checkboxes.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Checkboxes" />
 
@@ -30,9 +30,9 @@ import * as Stories from './Checkboxes.stories';
 
 <Docs.TableOfContents />
 
-<Docs.Props of={Stories} nativeBase="input" wrapper="Fieldset" />
+<Docs.Props of={stories} nativeBase="input" wrapper="Fieldset" />
 <Docs.ControlStates
-  of={Stories}
+  of={stories}
   valuable
   sourceState="hidden"
   note="Note: while you can disable individual checkboxes as shown in sections below, using `disabled={true}` will disable the entire field by forcing all child checkboxes to be disabled."
@@ -43,7 +43,7 @@ import * as Stories from './Checkboxes.stories';
 For the standard look & feel, use the `options` prop to configure the individual
 checkboxes. <Docs of="Checkboxes" /> will manage the interior layout.
 
-<Canvas of={Stories.StandardLayout} sourceState="shown" />
+<Canvas of={stories.standardLayout} sourceState="shown" />
 
 To customize the checkbox controls, such as to use a different component for the
 individual checkboxes, call the props differently, or add other elements, you
@@ -54,7 +54,7 @@ can pass a `render` function instead of using `options`.
   behave properly.
 </strong>
 
-<Canvas of={Stories.CustomLayout} sourceState="none" />
+<Canvas of={stories.customLayout} sourceState="none" />
 
 <Source
   dark
@@ -116,10 +116,10 @@ example:
   `}
 />
 
-<Docs.Sizers of={Stories} wrapper="Fieldset" />
+<Docs.Sizers of={stories} wrapper="Fieldset" />
 
 <Docs.FormLibraryCompatibility
-  of={Stories}
+  of={stories}
   fieldName="courseFeatures"
   initialValue="pot-bunkers,undulated-greens"
   componentProps={{

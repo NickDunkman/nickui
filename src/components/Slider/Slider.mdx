@@ -3,9 +3,9 @@ import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Slider } from './Slider';
-import * as Stories from './Slider.stories';
+import * as stories from './Slider.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Slider" />
 
@@ -18,13 +18,13 @@ A form control that allows users to choose a number within a range.
 <Docs.TableOfContents />
 
 <Docs.Props
-  of={Stories}
+  of={stories}
   nativeBase="div"
   wrapper="Field"
   exclude={['ref', 'onBlur']}
 />
 
-<Docs.ControlStates of={Stories} valuable />
+<Docs.ControlStates of={stories} valuable />
 
 ## Customizing the value range
 
@@ -33,12 +33,12 @@ the granularity of values within it. You can also use `shiftSteps` to control
 how many steps are moved when the user is holding the shift key while using the
 keyboard to interact with the <Docs of="Slider" />.
 
-<Canvas of={Stories.CustomRange} sourceState="shown" />
+<Canvas of={stories.customRange} sourceState="shown" />
 
-<Docs.Sizers of={Stories} wrapper="Field" />
+<Docs.Sizers of={stories} wrapper="Field" />
 
 <Docs.FormLibraryCompatibility
-  of={Stories}
+  of={stories}
   fieldName="index"
   initialValue="8.9"
   componentProps={{

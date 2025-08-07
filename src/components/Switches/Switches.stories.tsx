@@ -15,7 +15,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FieldsetLayout: Story = {
+export const fieldsetLayout: Story = {
   tags: ['field-layout'],
   args: {
     required: true,
@@ -47,7 +47,7 @@ export const FieldsetLayout: Story = {
   },
 };
 
-export const NoValue: Story = {
+export const noValue: Story = {
   tags: ['control-state'],
   args: {
     label: 'No valueish prop',
@@ -101,7 +101,7 @@ export const NoValue: Story = {
   },
 };
 
-export const Controlled: Story = {
+export const controlled: Story = {
   tags: ['control-state'],
   args: {
     label: 'Controlled',
@@ -139,7 +139,7 @@ export const Controlled: Story = {
   },
 };
 
-export const Uncontrolled: Story = {
+export const uncontrolled: Story = {
   tags: ['control-state'],
   args: {
     label: 'Uncontrolled',
@@ -182,7 +182,7 @@ export const Uncontrolled: Story = {
   },
 };
 
-export const Disabled: Story = {
+export const disabled: Story = {
   tags: ['control-state'],
   args: {
     label: 'Disabled',
@@ -209,7 +209,7 @@ export const Disabled: Story = {
   },
 };
 
-export const StandardLayout: Story = {
+export const standardLayout: Story = {
   args: {
     label: 'Please select some standards',
     defaultValue: '8601',
@@ -251,7 +251,7 @@ export const StandardLayout: Story = {
   },
 };
 
-export const CustomLayout: Story = {
+export const customLayout: Story = {
   args: {
     label: 'Please select some customizations',
     defaultValue: 'colorful,embiggened',
@@ -292,7 +292,7 @@ export const CustomLayout: Story = {
   },
 };
 
-export const Xs: Story = {
+export const xs: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xs',
@@ -323,7 +323,7 @@ export const Xs: Story = {
   },
 };
 
-export const Sm: Story = {
+export const sm: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'sm',
@@ -354,7 +354,7 @@ export const Sm: Story = {
   },
 };
 
-export const Base: Story = {
+export const base: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'base',
@@ -385,7 +385,7 @@ export const Base: Story = {
   },
 };
 
-export const Lg: Story = {
+export const lg: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'lg',
@@ -416,7 +416,7 @@ export const Lg: Story = {
   },
 };
 
-export const Xl: Story = {
+export const xl: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xl',
@@ -447,7 +447,7 @@ export const Xl: Story = {
   },
 };
 
-export const Responsive: Story = {
+export const responsive: Story = {
   tags: ['sizer'],
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
@@ -467,27 +467,27 @@ export const Responsive: Story = {
   },
 };
 
-export const AllControlStates: Story = {
+export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4 sm:flex-row">
-      <Switches {...NoValue.args} className="sm:flex-1" />
-      <Switches {...Controlled.args} className="sm:flex-1" />
-      <Switches {...Uncontrolled.args} className="sm:flex-1" />
-      <Switches {...Disabled.args} className="sm:flex-1" />
+      <Switches {...noValue.args} className="sm:flex-1" />
+      <Switches {...controlled.args} className="sm:flex-1" />
+      <Switches {...uncontrolled.args} className="sm:flex-1" />
+      <Switches {...disabled.args} className="sm:flex-1" />
     </div>
   ),
 };
 
-export const AllSizers: Story = {
+export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Switches {...Xs.args} className="sm:flex-1" />
-      <Switches {...Sm.args} className="sm:flex-1" />
-      <Switches {...Base.args} className="sm:flex-1" />
-      <Switches {...Lg.args} className="sm:flex-1" />
-      <Switches {...Xl.args} className="sm:flex-1" />
+      <Switches {...xs.args} className="sm:flex-1" />
+      <Switches {...sm.args} className="sm:flex-1" />
+      <Switches {...base.args} className="sm:flex-1" />
+      <Switches {...lg.args} className="sm:flex-1" />
+      <Switches {...xl.args} className="sm:flex-1" />
     </AllSizersStoryWrapper>
   ),
 };

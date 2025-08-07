@@ -3,11 +3,11 @@ import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 import { Button } from '@/components/Button';
 import Docs from '@/docs';
 
-import * as Stories from './Toast.stories';
+import * as stories from './Toast.stories';
 import { Toaster } from './Toaster';
 import { toast } from './toastFn';
 
-<Meta title="Notices/Toast" of={Stories} />
+<Meta title="Notices/Toast" of={stories} />
 
 <Docs.ComponentHeading of="Toast" />
 
@@ -88,7 +88,7 @@ from anywhere, even outside of a render context!
   `}
 />
 
-<Docs.Flavoring of={Stories} />
+<Docs.Flavoring of={stories} />
 
 ## Asynchronous Toasts
 
@@ -97,7 +97,7 @@ completes, you can use `toast.promise()`. Pass a promise which resolves with the
 props you want to pass to the <Docs of="Toast" /> when it finishes.
 
 <Canvas
-  of={Stories.AsyncToast}
+  of={stories.asyncToast}
   sourceState="shown"
   source={{
     language: 'tsx',
@@ -131,7 +131,7 @@ options that sonner offers, like customizing the `duration`, or whether it’s
 The promise you provide should handle errors within its chain. For example, you
 could catch an HTTP error and then resolve with `flavor: 'negative'`.
 
-<Canvas of={Stories.CustomAsyncToast} sourceState="shown" source={{
+<Canvas of={stories.customAsyncToast} sourceState="shown" source={{
   language: "tsx",
   code: `
     import { Button, toast } from 'nickui';

@@ -29,7 +29,7 @@ async function uncheck(
   });
 }
 
-export const CheckedFieldLayout: Story = {
+export const checkedFieldLayout: Story = {
   tags: ['field-layout'],
   args: {
     label: 'A label',
@@ -66,7 +66,7 @@ export const CheckedFieldLayout: Story = {
   },
 };
 
-export const Unchecked: Story = {
+export const unchecked: Story = {
   tags: ['control-state'],
   args: {
     label: 'Unchecked Radio',
@@ -77,7 +77,7 @@ export const Unchecked: Story = {
   },
 };
 
-export const Controlled: Story = {
+export const controlled: Story = {
   tags: ['control-state'],
   args: {
     label: 'Controlled Radio',
@@ -91,7 +91,7 @@ export const Controlled: Story = {
   },
 };
 
-export const Uncontrolled: Story = {
+export const uncontrolled: Story = {
   tags: ['control-state'],
   args: {
     label: 'Uncontrolled Radio',
@@ -105,7 +105,7 @@ export const Uncontrolled: Story = {
   },
 };
 
-export const DisabledUnchecked: Story = {
+export const disabledUnchecked: Story = {
   tags: ['control-state'],
   args: {
     label: 'Disabled & unchecked Radio',
@@ -129,7 +129,7 @@ export const DisabledUnchecked: Story = {
   },
 };
 
-export const DisabledChecked: Story = {
+export const disabledChecked: Story = {
   tags: ['control-state'],
   args: {
     label: 'Disabled & checked Radio',
@@ -148,7 +148,7 @@ export const DisabledChecked: Story = {
   },
 };
 
-export const Xs: Story = {
+export const xs: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xs',
@@ -163,7 +163,7 @@ export const Xs: Story = {
   },
 };
 
-export const Sm: Story = {
+export const sm: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'sm',
@@ -178,7 +178,7 @@ export const Sm: Story = {
   },
 };
 
-export const Base: Story = {
+export const base: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'base',
@@ -193,7 +193,7 @@ export const Base: Story = {
   },
 };
 
-export const Lg: Story = {
+export const lg: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'lg',
@@ -208,7 +208,7 @@ export const Lg: Story = {
   },
 };
 
-export const Xl: Story = {
+export const xl: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xl',
@@ -223,7 +223,7 @@ export const Xl: Story = {
   },
 };
 
-export const Responsive: Story = {
+export const responsive: Story = {
   tags: ['sizer'],
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
@@ -233,28 +233,28 @@ export const Responsive: Story = {
   },
 };
 
-export const AllControlStates: Story = {
+export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-4">
-      <Radio {...Unchecked.args} />
-      <Radio {...Controlled.args} />
-      <Radio {...Uncontrolled.args} />
-      <Radio {...DisabledUnchecked.args} />
-      <Radio {...DisabledChecked.args} />
+      <Radio {...unchecked.args} />
+      <Radio {...controlled.args} />
+      <Radio {...uncontrolled.args} />
+      <Radio {...disabledUnchecked.args} />
+      <Radio {...disabledChecked.args} />
     </div>
   ),
 };
 
-export const AllSizers: Story = {
+export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Radio {...Xs.args} />
-      <Radio {...Sm.args} />
-      <Radio {...Base.args} />
-      <Radio {...Lg.args} />
-      <Radio {...Xl.args} />
+      <Radio {...xs.args} />
+      <Radio {...sm.args} />
+      <Radio {...base.args} />
+      <Radio {...lg.args} />
+      <Radio {...xl.args} />
     </AllSizersStoryWrapper>
   ),
 };

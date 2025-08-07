@@ -3,9 +3,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Select } from './Select';
-import * as Stories from './Select.stories';
+import * as stories from './Select.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Select" />
 
@@ -21,11 +21,11 @@ A form control that allows users to choose an option using a menu.
 
 <Docs.TableOfContents />
 
-<Docs.Props of={Stories} nativeBase="select" wrapper="Field" />
-<Docs.ControlStates of={Stories} valuable />
-<Docs.Sizers of={Stories} wrapper="Field" />
+<Docs.Props of={stories} nativeBase="select" wrapper="Field" />
+<Docs.ControlStates of={stories} valuable />
+<Docs.Sizers of={stories} wrapper="Field" />
 <Docs.FormLibraryCompatibility
-  of={Stories}
+  of={stories}
   fieldName="format"
   initialValue="scramble"
   componentProps={{

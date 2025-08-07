@@ -3,9 +3,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Checkbox } from './Checkbox';
-import * as Stories from './Checkbox.stories';
+import * as stories from './Checkbox.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Checkbox" />
 
@@ -17,11 +17,11 @@ A form control that allow users to choose zero to many options from a set.
 
 <Docs.TableOfContents />
 
-<Docs.Props of={Stories} wrapper="CheckedField" nativeBase="input" />
-<Docs.ControlStates of={Stories} checkable />
-<Docs.Sizers of={Stories} wrapper="CheckedField" />
+<Docs.Props of={stories} wrapper="CheckedField" nativeBase="input" />
+<Docs.ControlStates of={stories} checkable />
+<Docs.Sizers of={stories} wrapper="CheckedField" />
 <Docs.FormLibraryCompatibility
-  of={Stories}
+  of={stories}
   fieldName="gimme"
   checkbox
   initialValue={true}

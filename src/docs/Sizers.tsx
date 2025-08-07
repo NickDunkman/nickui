@@ -16,7 +16,7 @@ sizes are: \`"xs"\`, \`"sm"\`,\`"base"\` (the default), \`"lg"\`, and \`"xl"\`.
         `}
       </Markdown>
 
-      {of.AllSizers && <Canvas of={of.AllSizers} />}
+      {of.allSizers && <Canvas of={of.allSizers} />}
 
       {of.Responsive && (
         <>

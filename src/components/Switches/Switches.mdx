@@ -3,9 +3,9 @@ import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Switches } from './Switches';
-import * as Stories from './Switches.stories';
+import * as stories from './Switches.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Switches" />
 
@@ -63,9 +63,9 @@ import * as Stories from './Switches.stories';
 
 <Docs.TableOfContents />
 
-<Docs.Props of={Stories} nativeBase="input" wrapper="Fieldset" />
+<Docs.Props of={stories} nativeBase="input" wrapper="Fieldset" />
 <Docs.ControlStates
-  of={Stories}
+  of={stories}
   valuable
   sourceState="hidden"
   note="Note: while you can disable individual switches as shown in sections below, using `disabled={true}` will disable the entire field by forcing all child switches to be disabled."
@@ -76,7 +76,7 @@ import * as Stories from './Switches.stories';
 For the standard look & feel, use the `options` prop to configure the individual
 switches. <Docs of="Switches" /> will manage the interior layout.
 
-<Canvas of={Stories.StandardLayout} sourceState="shown" />
+<Canvas of={stories.standardLayout} sourceState="shown" />
 
 To customize the switch controls, such as to use a different component for the
 individual switches, call the props differently, or add other elements, you can
@@ -87,7 +87,7 @@ pass a `render` function instead of using `options`.
   the individual switches, so that group is functional.
 </strong>
 
-<Canvas of={Stories.CustomLayout} sourceState="none" />
+<Canvas of={stories.customLayout} sourceState="none" />
 
 <Source
   dark
@@ -149,10 +149,10 @@ example:
   `}
 />
 
-<Docs.Sizers of={Stories} wrapper="Fieldset" />
+<Docs.Sizers of={stories} wrapper="Fieldset" />
 
 <Docs.FormLibraryCompatibility
-  of={Stories}
+  of={stories}
   fieldName="preShotRoutine"
   componentProps={{
     label: 'Pre-shot routine',

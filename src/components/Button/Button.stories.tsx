@@ -14,7 +14,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Enabled: Story = {
+export const enabled: Story = {
   tags: ['control-state'],
   args: {
     children: 'Enabled Button',
@@ -28,7 +28,7 @@ export const Enabled: Story = {
   },
 };
 
-export const Disabled: Story = {
+export const disabled: Story = {
   tags: ['control-state'],
   args: {
     children: 'Disabled Button',
@@ -49,17 +49,7 @@ export const Disabled: Story = {
   },
 };
 
-export const AllControlStates: Story = {
-  tags: ['!dev', '!test'],
-  render: (_args) => (
-    <div className="flex gap-4">
-      <Button {...Enabled.args} />
-      <Button {...Disabled.args} />
-    </div>
-  ),
-};
-
-export const Xs: Story = {
+export const xs: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xs',
@@ -73,7 +63,7 @@ export const Xs: Story = {
   },
 };
 
-export const Sm: Story = {
+export const sm: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'sm',
@@ -87,7 +77,7 @@ export const Sm: Story = {
   },
 };
 
-export const Base: Story = {
+export const base: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'base',
@@ -101,7 +91,7 @@ export const Base: Story = {
   },
 };
 
-export const Lg: Story = {
+export const lg: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'lg',
@@ -115,7 +105,7 @@ export const Lg: Story = {
   },
 };
 
-export const Xl: Story = {
+export const xl: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xl',
@@ -129,7 +119,7 @@ export const Xl: Story = {
   },
 };
 
-export const Responsive: Story = {
+export const responsive: Story = {
   tags: ['sizer'],
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
@@ -138,7 +128,7 @@ export const Responsive: Story = {
   },
 };
 
-export const Neutral: Story = {
+export const neutral: Story = {
   tags: ['flavor'],
   args: {
     flavor: 'neutral',
@@ -155,7 +145,7 @@ export const Neutral: Story = {
   },
 };
 
-export const Positive: Story = {
+export const positive: Story = {
   tags: ['flavor'],
   args: {
     flavor: 'positive',
@@ -172,7 +162,7 @@ export const Positive: Story = {
   },
 };
 
-export const Caution: Story = {
+export const caution: Story = {
   tags: ['flavor'],
   args: {
     flavor: 'caution',
@@ -189,7 +179,7 @@ export const Caution: Story = {
   },
 };
 
-export const Negative: Story = {
+export const negative: Story = {
   tags: ['flavor'],
   args: {
     flavor: 'negative',
@@ -206,7 +196,7 @@ export const Negative: Story = {
   },
 };
 
-export const SecondaryNeutral: Story = {
+export const secondaryNeutral: Story = {
   tags: ['flavor'],
   args: {
     flavor: 'neutral',
@@ -223,7 +213,7 @@ export const SecondaryNeutral: Story = {
   },
 };
 
-export const SecondaryPositive: Story = {
+export const secondaryPositive: Story = {
   tags: ['flavor'],
   args: {
     flavor: 'positive',
@@ -240,7 +230,7 @@ export const SecondaryPositive: Story = {
   },
 };
 
-export const SecondaryCaution: Story = {
+export const secondaryCaution: Story = {
   tags: ['flavor'],
   args: {
     flavor: 'caution',
@@ -257,7 +247,7 @@ export const SecondaryCaution: Story = {
   },
 };
 
-export const SecondaryNegative: Story = {
+export const secondaryNegative: Story = {
   tags: ['flavor'],
   args: {
     flavor: 'negative',
@@ -274,49 +264,59 @@ export const SecondaryNegative: Story = {
   },
 };
 
-export const AllSizers: Story = {
+export const allControlStates: Story = {
+  tags: ['!dev', '!test'],
+  render: (_args) => (
+    <div className="flex gap-4">
+      <Button {...enabled.args} />
+      <Button {...disabled.args} />
+    </div>
+  ),
+};
+
+export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
       <div>
-        <Button {...Xs.args} />
+        <Button {...xs.args} />
       </div>
       <div>
-        <Button {...Sm.args} />
+        <Button {...sm.args} />
       </div>
       <div>
-        <Button {...Base.args} />
+        <Button {...base.args} />
       </div>
       <div>
-        <Button {...Lg.args} />
+        <Button {...lg.args} />
       </div>
       <div>
-        <Button {...Xl.args} />
+        <Button {...xl.args} />
       </div>
     </AllSizersStoryWrapper>
   ),
 };
 
-export const AllFlavors: Story = {
+export const allFlavors: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-wrap gap-4">
-      <Button {...Neutral.args} />
-      <Button {...Positive.args} />
-      <Button {...Caution.args} />
-      <Button {...Negative.args} />
+      <Button {...neutral.args} />
+      <Button {...positive.args} />
+      <Button {...caution.args} />
+      <Button {...negative.args} />
     </div>
   ),
 };
 
-export const AllSecondaryFlavors: Story = {
+export const allSecondaryFlavors: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-wrap gap-4">
-      <Button {...SecondaryNeutral.args} />
-      <Button {...SecondaryPositive.args} />
-      <Button {...SecondaryCaution.args} />
-      <Button {...SecondaryNegative.args} />
+      <Button {...secondaryNeutral.args} />
+      <Button {...secondaryPositive.args} />
+      <Button {...secondaryCaution.args} />
+      <Button {...secondaryNegative.args} />
     </div>
   ),
 };

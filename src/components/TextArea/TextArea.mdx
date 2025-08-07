@@ -3,9 +3,9 @@ import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { TextArea } from './TextArea';
-import * as Stories from './TextArea.stories';
+import * as stories from './TextArea.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="TextArea" />
 
@@ -17,8 +17,8 @@ A form control that allows users to enter & edit a mass of text.
 
 <Docs.TableOfContents />
 
-<Docs.Props of={Stories} nativeBase="textarea" wrapper="Field" />
-<Docs.ControlStates of={Stories} valuable />
+<Docs.Props of={stories} nativeBase="textarea" wrapper="Field" />
+<Docs.ControlStates of={stories} valuable />
 
 ## Controlling the height
 
@@ -27,21 +27,21 @@ is 2 rows). The <Docs of="TextArea" /> will automatically grow up to the
 `maxRows` prop to accomodate the value (the default is 10 rows). For an
 unbounded height, you can use `maxRows={Infinity}`.
 
-<Canvas of={Stories.AutoResizableHeight} sourceState="shown" />
+<Canvas of={stories.autoResizableHeight} sourceState="shown" />
 
 For a fixed height, use the `rows` prop.
 
-<Canvas of={Stories.FixedHeight} sourceState="shown" />
+<Canvas of={stories.fixedHeight} sourceState="shown" />
 
 To prevent the user from being able to resize the <Docs of="TextArea" />
 manually, use the `disableManualResize` prop.
 
-<Canvas of={Stories.DisableManualResize} sourceState="shown" />
+<Canvas of={stories.disableManualResize} sourceState="shown" />
 
-<Docs.Sizers of={Stories} wrapper="Field" />
+<Docs.Sizers of={stories} wrapper="Field" />
 
 <Docs.FormLibraryCompatibility
-  of={Stories}
+  of={stories}
   fieldName="ironSpecs"
   initialValue={`115x Dynamic Gold\n7 iron: 37.5” finished\n7 iron: 62.5° lie angle`}
   componentProps={{
