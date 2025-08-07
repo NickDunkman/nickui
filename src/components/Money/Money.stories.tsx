@@ -24,7 +24,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FieldLayout: Story = {
+export const fieldLayout: Story = {
   tags: ['field-layout'],
   args: {
     required: true,
@@ -57,87 +57,100 @@ export const FieldLayout: Story = {
   },
 };
 
-export const Empty: Story = {
+export const empty: Story = {
   tags: ['control-state'],
   args: {
     label: 'Empty',
     onChange: fn(),
   },
-  //  play: async ({ args, canvas, step, userEvent }) => {
-  //    const input = canvas.getByLabelText('Empty Text');
-  //
-  //    await step(
-  //      'Assert Text is functional without an initial value',
-  //      async () => {
-  //        await userEvent.type(input, 'a');
-  //        expect(input).toHaveValue('a');
-  //        expect(args.onChange).toHaveBeenCalledOnce();
-  //      },
-  //    );
-  //
-  //    await step('Reset the value', async () => {
-  //      await userEvent.type(input, '{backspace}');
-  //      expect(input).toHaveValue('');
-  //    });
-  //  },
+  play: async ({ args, canvas, step, userEvent }) => {
+    const input = canvas.getByLabelText('Empty');
+
+    await step(
+      'Assert Money is functional without an initial value',
+      async () => {
+        await userEvent.type(input, '1');
+        expect(input).toHaveValue('1');
+        expect(args.onChange).toHaveBeenCalledOnce();
+      },
+    );
+
+    await step('Reset the value', async () => {
+      await userEvent.type(input, '{backspace}');
+      expect(input).toHaveValue('');
+    });
+  },
 };
-//
-export const Controlled: Story = {
+
+export const controlled: Story = {
   tags: ['control-state'],
   args: {
     label: 'Controlled',
     value: '1234.56',
     onChange: fn(),
   },
-  //  play: async ({ args, canvas, step, userEvent }) => {
-  //    const input = canvas.getByLabelText('Controlled Text');
-  //
-  //    await step('Assert `value` works', async () => {
-  //      expect(input).toHaveValue(args.value);
-  //    });
-  //
-  //    await step(
-  //      'Try adding text. `onChange` should fire, but the value is controlled, so it shouldn’t change',
-  //      async () => {
-  //        await userEvent.type(input, 'a');
-  //        expect(args.onChange).toHaveBeenCalledOnce();
-  //        expect(input).toHaveValue(args.value);
-  //      },
-  //    );
-  //  },
+  play: async ({ args, canvas, step, userEvent }) => {
+    const input = canvas.getByLabelText('Controlled');
+
+    await step('Assert `value` gets formatted', async () => {
+      expect(input).toHaveValue('1,234.56');
+    });
+
+    await step(
+      'Try adding text. `onChange` should fire, & <Money> allows the input value to change even when the controlledValue doesn’t update',
+      async () => {
+        await userEvent.tab();
+        expect(input).toHaveFocus();
+        await userEvent.type(input, '{backspace}');
+        expect(input).toHaveValue('1234.5');
+        expect(args.onChange).toHaveBeenCalledOnce();
+      },
+    );
+
+    await step('Reset to initial state', async () => {
+      await userEvent.type(input, '6');
+      expect(input).toHaveValue('1234.56');
+      await userEvent.tab();
+      expect(input).not.toHaveFocus();
+    });
+  },
 };
-//
-export const Uncontrolled: Story = {
+
+export const uncontrolled: Story = {
   tags: ['control-state'],
   args: {
     label: 'Uncontrolled',
     defaultValue: '1234.56',
     onChange: fn(),
   },
-  //  play: async ({ args, canvas, step, userEvent }) => {
-  //    const input = canvas.getByLabelText('Uncontrolled Text');
-  //
-  //    await step('Assert `defaultValue` works', async () => {
-  //      expect(input).toHaveValue(args.defaultValue);
-  //    });
-  //
-  //    await step(
-  //      'Typing into the Text should amend the value, since it’s uncontrolled',
-  //      async () => {
-  //        await userEvent.type(input, 'a');
-  //        expect(input).toHaveValue(`${args.defaultValue}a`);
-  //        expect(args.onChange).toHaveBeenCalledOnce();
-  //      },
-  //    );
-  //
-  //    await step('Reset the value', async () => {
-  //      await userEvent.type(input, '{backspace}');
-  //      expect(input).toHaveValue(args.defaultValue);
-  //    });
-  //  },
+  play: async ({ args, canvas, step, userEvent }) => {
+    const input = canvas.getByLabelText('Uncontrolled');
+
+    await step('Assert `defaultValue` gets formatted', async () => {
+      expect(input).toHaveValue('1,234.56');
+    });
+
+    await step(
+      'Try adding text. `onChange` should fire, & the <input> value should update',
+      async () => {
+        await userEvent.tab();
+        expect(input).toHaveFocus();
+        await userEvent.type(input, '{backspace}');
+        expect(input).toHaveValue('1234.5');
+        expect(args.onChange).toHaveBeenCalledOnce();
+      },
+    );
+
+    await step('Reset to initial state', async () => {
+      await userEvent.type(input, '6');
+      expect(input).toHaveValue('1234.56');
+      await userEvent.tab();
+      expect(input).not.toHaveFocus();
+    });
+  },
 };
-//
-export const Disabled: Story = {
+
+export const disabled: Story = {
   tags: ['control-state'],
   args: {
     label: 'Disabled',
@@ -145,26 +158,28 @@ export const Disabled: Story = {
     disabled: true,
     onChange: fn(),
   },
-  //  play: async ({ args, canvas, step, userEvent }) => {
-  //    const input = canvas.getByLabelText('Disabled Text');
-  //
-  //    await step('Assert disabled state', async () => {
-  //      expect(input).toBeDisabled();
-  //    });
-  //
-  //    // Typing should not fire any changes
-  //    await step('Typing should have no effect', async () => {
-  //      await userEvent.type(input, 'a');
-  //      expect(args.onChange).not.toHaveBeenCalled();
-  //      expect(input).toHaveValue(args.defaultValue);
-  //    });
-  //  },
+  play: async ({ args, canvas, step, userEvent }) => {
+    const input = canvas.getByLabelText('Disabled');
+
+    await step('Assert disabled state', async () => {
+      expect(input).toBeDisabled();
+      await userEvent.tab();
+      expect(input).not.toHaveFocus();
+    });
+
+    // Typing should not fire any changes
+    await step('Typing should have no effect', async () => {
+      await userEvent.type(input, '{backspace}');
+      expect(args.onChange).not.toHaveBeenCalled();
+      expect(input).toHaveValue('1,234.56');
+    });
+  },
 };
 
-export const Euros: Story = {
+export const euros: Story = {
   tags: ['control-state'],
   args: {
-    defaultValue: '1234.56',
+    defaultValue: '1234567.89',
     currencySymbol: '€',
     label: 'Euros',
     hint: 'Uses "." as the thousands-separator and "," as the decimal point!',
@@ -172,20 +187,32 @@ export const Euros: Story = {
     decimalPoint: ',',
     onChange: fn(),
   },
-  //  play: async ({ args, canvas, step, userEvent }) => {
-  //    const input = canvas.getByLabelText('Disabled Text');
-  //
-  //    await step('Assert disabled state', async () => {
-  //      expect(input).toBeDisabled();
-  //    });
-  //
-  //    // Typing should not fire any changes
-  //    await step('Typing should have no effect', async () => {
-  //      await userEvent.type(input, 'a');
-  //      expect(args.onChange).not.toHaveBeenCalled();
-  //      expect(input).toHaveValue(args.defaultValue);
-  //    });
-  //  },
+  play: async ({ canvas, step, userEvent }) => {
+    const input = canvas.getByLabelText('Euros');
+
+    await step('Assert default currency formatting', async () => {
+      expect(input).toHaveValue('1.234.567,89');
+      expect(input).toHaveAccessibleName('Euros €');
+      expect(canvas.getByTestId('currency-symbol')).toHaveTextContent('€');
+    });
+
+    await step(
+      'Assert deformatting abides the currency configuration',
+      async () => {
+        await userEvent.tab();
+        expect(input).toHaveFocus();
+        await userEvent.type(input, '{backspace}');
+        expect(input).toHaveValue('1234567,8');
+      },
+    );
+
+    await step('Reset to initial state', async () => {
+      await userEvent.type(input, '9');
+      expect(input).toHaveValue('1234567,89');
+      await userEvent.tab();
+      expect(input).not.toHaveFocus();
+    });
+  },
 };
 
 function CurrencyConverter() {
@@ -265,7 +292,7 @@ function CurrencyConverter() {
   );
 }
 
-export const CurrencyConversion: Story = {
+export const currencyConverter: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => <CurrencyConverter />,
   parameters: {
@@ -350,7 +377,7 @@ export const CurrencyConversion: Story = {
   },
 };
 
-export const AllowNegatives: Story = {
+export const allowNegatives: Story = {
   tags: ['sizer'],
   args: {
     label: 'Negatives allowed!',
@@ -359,7 +386,7 @@ export const AllowNegatives: Story = {
   },
 };
 
-export const Xs: Story = {
+export const xs: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xs',
@@ -379,7 +406,7 @@ export const Xs: Story = {
   },
 };
 
-export const Sm: Story = {
+export const sm: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'sm',
@@ -399,7 +426,7 @@ export const Sm: Story = {
   },
 };
 
-export const Base: Story = {
+export const base: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'base',
@@ -419,7 +446,7 @@ export const Base: Story = {
   },
 };
 
-export const Lg: Story = {
+export const lg: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'lg',
@@ -439,7 +466,7 @@ export const Lg: Story = {
   },
 };
 
-export const Xl: Story = {
+export const xl: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xl',
@@ -459,7 +486,7 @@ export const Xl: Story = {
   },
 };
 
-export const Responsive: Story = {
+export const responsive: Story = {
   tags: ['sizer'],
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
@@ -473,10 +500,10 @@ export const AllControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-3 sm:flex-row">
-      <Money {...Empty.args} className="sm:flex-1" />
-      <Money {...Controlled.args} className="sm:flex-1" />
-      <Money {...Uncontrolled.args} className="sm:flex-1" />
-      <Money {...Disabled.args} className="sm:flex-1" />
+      <Money {...empty.args} className="sm:flex-1" />
+      <Money {...controlled.args} className="sm:flex-1" />
+      <Money {...uncontrolled.args} className="sm:flex-1" />
+      <Money {...disabled.args} className="sm:flex-1" />
     </div>
   ),
 };
@@ -485,11 +512,11 @@ export const AllSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Money {...Xs.args} />
-      <Money {...Sm.args} />
-      <Money {...Base.args} />
-      <Money {...Lg.args} />
-      <Money {...Xl.args} />
+      <Money {...xs.args} />
+      <Money {...sm.args} />
+      <Money {...base.args} />
+      <Money {...lg.args} />
+      <Money {...xl.args} />
     </AllSizersStoryWrapper>
   ),
 };

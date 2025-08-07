@@ -30,7 +30,7 @@ export function Money(props: MoneyProps) {
 
   const valueElementsProps = useValueElementsProps(props);
 
-  const currencySymbolRef = React.useRef<HTMLLabelElement>(null);
+  const currencySymbolRef = React.useRef<HTMLDivElement>(null);
   const currencySymbolBounds = useElementBounds(currencySymbolRef);
   const [currencySymbolId] = React.useState(randomId());
 
@@ -134,16 +134,16 @@ export function Money(props: MoneyProps) {
           lol
         </div>
 
-        <label
+        <div
           ref={currencySymbolRef}
           id={currencySymbolId}
-          htmlFor={a11yIds.id}
           className={moneyStyles.currencySymbol()}
           data-testid="currency-symbol"
           title={`(in ${props.currencySymbol})`}
+          aria-hidden
         >
           {props.currencySymbol === undefined ? '$' : props.currencySymbol}
-        </label>
+        </div>
       </div>
 
       {/*

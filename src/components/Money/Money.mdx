@@ -3,9 +3,9 @@ import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 import Docs from '@/docs';
 
 import { Money } from './Money';
-import * as Stories from './Money.stories';
+import * as stories from './Money.stories';
 
-<Meta of={Stories} />
+<Meta of={stories} />
 
 <Docs.ComponentHeading of="Money" />
 
@@ -21,9 +21,9 @@ disorienting when the changes don’t match your keystrokes.
 
 <Docs.TableOfContents />
 
-<Docs.Props of={Stories} nativeBase="input" wrapper="Field" />
+<Docs.Props of={stories} nativeBase="input" wrapper="Field" />
 <Docs.ControlStates
-  of={Stories}
+  of={stories}
   valuable
   note={`
     Note: when controlled, <ComponentName of="Money" /> behaves slightly
@@ -48,10 +48,10 @@ The `decimalPlaces` prop defaults to `2` and configures:
 - the number of decimal places always included on `onChange(event.target.value)`
 
 <Canvas
-  of={Stories.CurrencyConversion}
+  of={stories.currencyConverter}
   source={{
     language: 'tsx',
-    code: Stories.CurrencyConversion.parameters.source,
+    code: stories.currencyConverter.parameters.source,
   }}
 />
 
@@ -64,7 +64,7 @@ Keep in mind that if you allow negatives, the user won’t be able to use the
 simpler numeric keyboard on mobile devices, since it doesn’t include a key for
 the negative sign.
 
-<Canvas of={Stories.AllowNegatives} />
+<Canvas of={stories.allowNegatives} />
 
 ## Working with the value
 
@@ -116,9 +116,9 @@ Or, you could convert updated values back to numbers, like this:
 
 `} />
 
-<Docs.Sizers of={Stories} wrapper="Field" />
+<Docs.Sizers of={stories} wrapper="Field" />
 <Docs.FormLibraryCompatibility
-  of={Stories}
+  of={stories}
   fieldName="greensFees"
   initialValue="137.00"
   component={Money}
