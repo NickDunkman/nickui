@@ -9,7 +9,7 @@ export function Sizers({ of }: { of: StoriesModule }) {
     <>
       <Markdown>
         {`
-## ${of.Responsive ? 'Responsive sizing' : 'Sizing'}
+## ${of.responsive ? 'Responsive sizing' : 'Sizing'}
 
 Sizing is done via the \`sizer\` prop & uses Tailwind terminology. The standard
 sizes are: \`"xs"\`, \`"sm"\`,\`"base"\` (the default), \`"lg"\`, and \`"xl"\`.
@@ -18,7 +18,7 @@ sizes are: \`"xs"\`, \`"sm"\`,\`"base"\` (the default), \`"lg"\`, and \`"xl"\`.
 
       {of.allSizers && <Canvas of={of.allSizers} />}
 
-      {of.Responsive && (
+      {of.responsive && (
         <>
           <Markdown>
             {`
@@ -31,7 +31,7 @@ example, \`sizer={['xs', 'md:base', 'xl:lg']}\` resolves to...
         `}
           </Markdown>
 
-          <Canvas of={of.Responsive} sourceState="shown" />
+          <Canvas of={of.responsive} sourceState="shown" />
         </>
       )}
     </>

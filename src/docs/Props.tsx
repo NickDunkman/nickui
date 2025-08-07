@@ -51,11 +51,11 @@ export function Props({
 
   const wrapperStory =
     wrapper === 'Field'
-      ? of.FieldLayout
+      ? of.fieldLayout
       : wrapper === 'Fieldset'
-        ? of.FieldsetLayout
+        ? of.fieldsetLayout
         : wrapper === 'CheckedField'
-          ? of.CheckedFieldLayout
+          ? of.checkedFieldLayout
           : null;
 
   return (

@@ -16,14 +16,14 @@ default), \`"positive"\`, \`"caution"\` or \`"negative"\`.
         `}
       </Markdown>
 
-      {of.AllFlavors && (
+      {of.allFlavors && (
         <Canvas
-          of={of.AllFlavors}
+          of={of.allFlavors}
           source={
-            of.AllFlavors?.parameters?.source
+            of.allFlavors?.parameters?.source
               ? {
                   language: 'tsx',
-                  code: of.AllFlavors?.parameters?.source,
+                  code: of.allFlavors?.parameters?.source,
                 }
               : undefined
           }
