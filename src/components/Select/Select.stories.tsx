@@ -26,7 +26,7 @@ export const FieldLayout: Story = {
   },
   play: async ({ canvas, step }) => {
     const select = canvas.getByLabelText('A label*');
-    const requiredAsterisk = canvas.getByTitle('required');
+    const requiredAsterisk = canvas.getByTitle('(required)');
 
     await step('Assert accessibility of layout elements', async () => {
       expect(select).toHaveRole('combobox');

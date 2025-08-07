@@ -14,10 +14,11 @@ type InputPropsWithRefObject = Omit<InputProps, 'ref'> & {
 
 /**
  * Given the props passed to the Money component, returns props that should
- * be installed on each of the 3 <input>s within the component.
+ * be installed on the various sub-elements that have their props modified
+ * based on the value state.
  *
- * Does *not* provide props for styling the inputs; it’s more clear to
- * co-locate those with the JSX in the Money component code.
+ * Does *not* provide all necessary props for those elements -- e.g. you’ll
+ * need to handle styling & a11y elsewise.
  *
  * This is broken out b/c distributing this logic between the 3 inputs is
  * complex:
@@ -26,9 +27,8 @@ type InputPropsWithRefObject = Omit<InputProps, 'ref'> & {
  *   <input>’s value uses a slightly different format & has different rules
  * - propogating the new value up to the parent via the onChange prop (and not
  *   doing so under certain conditions)
- * - accessibility
  */
-export function useInputs(props: MoneyProps): {
+export function useValueElementsProps(props: MoneyProps): {
   workingInput: InputPropsWithRefObject;
   placeholderInput: InputPropsWithRefObject;
   hiddenInput: InputProps;

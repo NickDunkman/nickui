@@ -72,7 +72,7 @@ export function Fieldset({
           <legend id={legendId} className={styles.legend()}>
             {label}
             {required && (
-              <abbr className={styles.requiredAsterisk()} title="required">
+              <abbr className={styles.requiredAsterisk()} title="(required)">
                 *
               </abbr>
             )}

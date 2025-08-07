@@ -31,24 +31,30 @@ export const FieldLayout: Story = {
     label: 'A label',
     hint: 'A hint',
     error: 'An error message',
-    defaultValue: '99.99',
+    defaultValue: '1234567.89',
     onChange: fn(),
   },
-  //play: async ({ canvas, step }) => {
-  //  const input = canvas.getByLabelText('A label*');
-  //  const requiredAsterisk = canvas.getByTitle('required');
+  play: async ({ canvas, step }) => {
+    const input = canvas.getByLabelText('A label*');
+    const requiredAsterisk = canvas.getByTitle('(required)');
 
-  //  await step('Assert accessibility of layout elements', async () => {
-  //    expect(input).toHaveRole('spinbutton');
-  //    expect(input).toHaveAccessibleDescription('A hint');
-  //    expect(input).toHaveAccessibleErrorMessage('An error message');
-  //    expect(requiredAsterisk).toHaveTextContent('*');
-  //  });
+    await step('Assert accessibility of layout elements', async () => {
+      expect(input).toHaveRole('spinbutton');
+      expect(input).toHaveAccessibleName('A label* $');
+      expect(input).toHaveAccessibleDescription('A hint');
+      expect(input).toHaveAccessibleErrorMessage('An error message');
+      expect(requiredAsterisk).toHaveTextContent('*');
+    });
 
-  //  await step('Assert the error style', async () => {
-  //    expect(input).toHaveClass('border-rose-800');
-  //  });
-  //},
+    await step('Assert default currency formatting', async () => {
+      expect(input).toHaveValue('1,234,567.89');
+      expect(canvas.getByTestId('currency-symbol')).toHaveTextContent('$');
+    });
+
+    await step('Assert the error style', async () => {
+      expect(input).toHaveClass('border-rose-800');
+    });
+  },
 };
 
 export const Empty: Story = {

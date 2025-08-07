@@ -57,7 +57,7 @@ export function Field({
           <div className={styles.label()}>
             {label}
             {required && (
-              <abbr className={styles.requiredAsterisk()} title="required">
+              <abbr className={styles.requiredAsterisk()} title="(required)">
                 *
               </abbr>
             )}

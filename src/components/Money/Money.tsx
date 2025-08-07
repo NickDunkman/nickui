@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Field } from '@/components/Field';
 import { textStyler } from '@/components/Text/styles';
 import { clsw } from '@/utils/clsw';
+import { randomId } from '@/utils/randomId';
 import { useElementBounds } from '@/utils/useElementBounds';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
@@ -10,7 +11,7 @@ import { useScrollClone } from '@/utils/useScrollClone';
 
 import { moneyStyler } from './styles';
 import { MoneyProps } from './types';
-import { useInputs } from './useInputs';
+import { useValueElementsProps } from './useValueElementsProps';
 
 /**
  * A form control that allows users to enter a monetary amount
@@ -27,20 +28,18 @@ export function Money(props: MoneyProps) {
     controlledAriaErrorMessage: props['aria-errormessage'],
   });
 
-  const { workingInput, placeholderInput, hiddenInput } = useInputs({
-    ...props,
-    id: a11yIds.id,
-    'aria-labelledby': a11yIds.ariaLabelledBy,
-    'aria-describedby': a11yIds.ariaDescribedBy,
-    'aria-errormessage': a11yIds.ariaErrorMessage,
-  });
+  const valueElementsProps = useValueElementsProps(props);
 
-  const currencySymbolRef = React.useRef<HTMLDivElement>(null);
+  const currencySymbolRef = React.useRef<HTMLLabelElement>(null);
   const currencySymbolBounds = useElementBounds(currencySymbolRef);
+  const [currencySymbolId] = React.useState(randomId());
 
   // As the working <input> is scrolled, the placeholder <input> should match,
   // so that the placeholder value stays directly in line with the working value
-  useScrollClone(workingInput.ref, placeholderInput.ref);
+  useScrollClone(
+    valueElementsProps.workingInput.ref,
+    valueElementsProps.placeholderInput.ref,
+  );
 
   const resolvedSizer = useResolvedSizer(props.sizer);
   const textStyles = textStyler({
@@ -51,6 +50,18 @@ export function Money(props: MoneyProps) {
     sizer: resolvedSizer,
     hasSpacingApplied: !!currencySymbolBounds,
   });
+
+  // Add the currency symbol to the `aria-labelledby` prop on the working
+  // <input> so that a screen reader will read out what currency the field
+  // is in. For example, if the label is "Cost" and the currencySymbol is "$",
+  // the accessible name for the working <input> should be "Cost (in $)", which
+  // reads as "Cost (in dollars)".
+  //
+  // However, we don't want to do this if a custom `aria-label` prop is
+  // provided, since `aria-labelledby` takes precedence when it is set.
+  const workingInputLabelledBy = props['aria-label']
+    ? a11yIds.ariaLabelledBy
+    : `${a11yIds.ariaLabelledBy || ''} ${currencySymbolId}`;
 
   return (
     <Field
@@ -81,7 +92,7 @@ export function Money(props: MoneyProps) {
           style={{ paddingLeft: currencySymbolBounds?.width }}
           tabIndex={-1}
           aria-hidden
-          {...placeholderInput}
+          {...valueElementsProps.placeholderInput}
         />
 
         {/*
@@ -104,7 +115,7 @@ export function Money(props: MoneyProps) {
                 : 'numeric'
           }
           id={a11yIds.id}
-          aria-labelledby={a11yIds.ariaLabelledBy}
+          aria-labelledby={workingInputLabelledBy}
           aria-describedby={a11yIds.ariaDescribedBy}
           aria-errormessage={a11yIds.ariaErrorMessage}
           aria-invalid={props['aria-invalid'] ?? !!props.error}
@@ -116,20 +127,23 @@ export function Money(props: MoneyProps) {
           // its style based on whether its peer has a value (when the
           // placeholder isn't used)
           placeholder=" "
-          {...workingInput}
+          {...valueElementsProps.workingInput}
         />
 
         <div id="the-details" className="sr-only">
           lol
         </div>
 
-        <div
+        <label
           ref={currencySymbolRef}
+          id={currencySymbolId}
+          htmlFor={a11yIds.id}
           className={moneyStyles.currencySymbol()}
           data-testid="currency-symbol"
+          title={`(in ${props.currencySymbol})`}
         >
           {props.currencySymbol === undefined ? '$' : props.currencySymbol}
-        </div>
+        </label>
       </div>
 
       {/*
@@ -152,7 +166,7 @@ export function Money(props: MoneyProps) {
         className={moneyStyles.hiddenInput()}
         tabIndex={-1}
         aria-hidden
-        {...hiddenInput}
+        {...valueElementsProps.hiddenInput}
       />
     </Field>
   );
