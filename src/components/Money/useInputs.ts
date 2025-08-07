@@ -208,22 +208,8 @@ export function useInputs(props: MoneyProps): {
 
   return {
     workingInput: {
-      role: 'spinbutton',
-      type: 'text',
-      inputMode: fullFormat.allowNegatives
-        ? 'text'
-        : fullFormat.maxDecimalPlaces
-          ? 'decimal'
-          : 'numeric',
       ...inputHTMLProps,
       ref: workingRef,
-      id: props.id,
-      disabled: props.disabled,
-      required: props.required,
-      'aria-labelledby': props['aria-labelledby'],
-      'aria-describedby': props['aria-describedby'],
-      'aria-errormessage': props['aria-errormessage'],
-      'aria-invalid': props['aria-invalid'] ?? !!props.error,
       onChange: (event) => updateWorkingValue(event.target.value),
       onKeyDown: handleKeyDown,
       onFocus: (event) => {
@@ -257,10 +243,8 @@ export function useInputs(props: MoneyProps): {
     },
     placeholderInput: {
       ref: placeholderRef,
-      type: 'text',
       value: currentValue.placeholderValue,
       onChange: () => {},
-      disabled: props.disabled,
     },
     hiddenInput: {
       ref: (el) => {
@@ -272,8 +256,6 @@ export function useInputs(props: MoneyProps): {
           props.ref.current = el;
         }
       },
-      type: 'number',
-      name: props.name,
       onChange: props.onChange,
       // We set the value on this hidden <input> by programmatically
       // dispatching an `input` event above, which causes a 'change' to then

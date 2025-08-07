@@ -75,11 +75,13 @@ export function Money(props: MoneyProps) {
           <input>.
         */}
         <input
-          {...placeholderInput}
+          type="text"
+          disabled={props.disabled}
           className={clsw(textStyles, moneyStyles.placeholderInput())}
           style={{ paddingLeft: currencySymbolBounds?.width }}
           tabIndex={-1}
           aria-hidden
+          {...placeholderInput}
         />
 
         {/*
@@ -91,16 +93,41 @@ export function Money(props: MoneyProps) {
           the placeholder <input> behind until the user enters them manually.
         */}
         <input
-          {...workingInput}
+          role="spinbutton"
+          // Use numeric keyboard when available, unless negatives are allowed
+          // (the numeric keyboard doesn’t typically have a negative sign)
+          inputMode={
+            props.allowNegatives
+              ? 'text'
+              : (props.decimalPlaces ?? 2) > 0
+                ? 'decimal'
+                : 'numeric'
+          }
+          id={a11yIds.id}
+          aria-labelledby={a11yIds.ariaLabelledBy}
+          aria-describedby={a11yIds.ariaDescribedBy}
+          aria-errormessage={a11yIds.ariaErrorMessage}
+          aria-invalid={props['aria-invalid'] ?? !!props.error}
+          disabled={props.disabled}
+          required={props.required}
           className={clsw(textStyles, moneyStyles.workingInput())}
           style={{ paddingLeft: currencySymbolBounds?.width }}
           // This non-empty placeholder allows the currency symbol to adjust
           // its style based on whether its peer has a value (when the
           // placeholder isn't used)
           placeholder=" "
+          {...workingInput}
         />
 
-        <div ref={currencySymbolRef} className={moneyStyles.currencySymbol()}>
+        <div id="the-details" className="sr-only">
+          lol
+        </div>
+
+        <div
+          ref={currencySymbolRef}
+          className={moneyStyles.currencySymbol()}
+          data-testid="currency-symbol"
+        >
           {props.currencySymbol === undefined ? '$' : props.currencySymbol}
         </div>
       </div>
@@ -120,10 +147,12 @@ export function Money(props: MoneyProps) {
         event.
       */}
       <input
-        {...hiddenInput}
+        type="number"
+        name={props.name}
         className={moneyStyles.hiddenInput()}
         tabIndex={-1}
         aria-hidden
+        {...hiddenInput}
       />
     </Field>
   );
