@@ -1,4 +1,4 @@
-import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/docs';
 
@@ -68,7 +68,53 @@ the negative sign.
 
 ## Working with the value
 
-TODO
+You can pass any of these forms in through either the `value` or `defaultValue`
+props:
+
+- `undefined`
+- a `number`
+- a numeric `string` such as `"1234.56"` or `""`. It should be parseable as a
+  `Number()`. For example, while `"17,50"` is how a number might be formatted in
+  many countries, it’s not a number as far as javascript is concerned (`"17.50"`
+  is).
+
+When the user updates edits the field, use the `onChange` handler to receive the
+updated value. `event.target.value` is **always** a string in javascript, so the
+updated value will be in the form of a string.
+
+You might choose to just use strings through, like this:
+
+<Source
+  dark
+  language="tsx"
+  code={`
+    const [value, setValue] = React.useState('1234.56');
+
+    <Money
+      label="My money field"
+      value={value}
+      onChange={(event) => setValue(event.target.value)}
+    />
+
+`} />
+
+Or, you could convert updated values back to numbers, like this:
+
+<Source
+  dark
+  language="tsx"
+  code={`
+    const [value, setValue] = React.useState<number | undefined>(1234.56);
+
+    <Money
+      label="My money field"
+      value={value}
+      onChange={(event) => setValue(
+        event.target.value === '' ? undefined : Number(event.target.value)
+      )}
+    />
+
+`} />
 
 <Docs.Sizers of={Stories} wrapper="Field" />
 <Docs.FormLibraryCompatibility
