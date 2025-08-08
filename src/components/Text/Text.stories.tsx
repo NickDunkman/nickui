@@ -282,11 +282,11 @@ export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Text {...xs.args} />
-      <Text {...sm.args} />
-      <Text {...base.args} />
-      <Text {...lg.args} />
-      <Text {...xl.args} />
+      <Text {...xs.args} className="sm:flex-12" />
+      <Text {...sm.args} className="sm:flex-14" />
+      <Text {...base.args} className="sm:flex-16" />
+      <Text {...lg.args} className="sm:flex-18" />
+      <Text {...xl.args} className="sm:flex-20" />
     </AllSizersStoryWrapper>
   ),
 };

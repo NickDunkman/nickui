@@ -413,11 +413,11 @@ export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper>
-      <Slider {...xs.args} className="sm:flex-1" />
-      <Slider {...sm.args} className="sm:flex-1" />
-      <Slider {...base.args} className="sm:flex-1" />
-      <Slider {...lg.args} className="sm:flex-1" />
-      <Slider {...xl.args} className="sm:flex-1" />
+      <Slider {...xs.args} className="sm:flex-6" />
+      <Slider {...sm.args} className="sm:flex-7" />
+      <Slider {...base.args} className="sm:flex-8" />
+      <Slider {...lg.args} className="sm:flex-9" />
+      <Slider {...xl.args} className="sm:flex-10" />
     </AllSizersStoryWrapper>
   ),
 };

@@ -527,11 +527,11 @@ export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Money {...xs.args} />
-      <Money {...sm.args} />
-      <Money {...base.args} />
-      <Money {...lg.args} />
-      <Money {...xl.args} />
+      <Money {...xs.args} className="sm:flex-12" />
+      <Money {...sm.args} className="sm:flex-14" />
+      <Money {...base.args} className="sm:flex-16" />
+      <Money {...lg.args} className="sm:flex-18" />
+      <Money {...xl.args} className="sm:flex-20" />
     </AllSizersStoryWrapper>
   ),
 };

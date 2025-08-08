@@ -496,11 +496,11 @@ export const responsive: Story = {
 export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4 sm:flex-row">
-      <Radios {...noValue.args} className="sm:flex-1" />
-      <Radios {...controlled.args} className="sm:flex-1" />
-      <Radios {...uncontrolled.args} className="sm:flex-1" />
-      <Radios {...disabled.args} className="sm:flex-1" />
+    <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+      <Radios {...noValue.args} />
+      <Radios {...controlled.args} />
+      <Radios {...uncontrolled.args} />
+      <Radios {...disabled.args} />
     </div>
   ),
 };

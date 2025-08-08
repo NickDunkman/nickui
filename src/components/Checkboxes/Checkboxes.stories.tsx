@@ -469,11 +469,11 @@ export const responsive: Story = {
 export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4 sm:flex-row">
-      <Checkboxes {...noValue.args} className="sm:flex-1" />
-      <Checkboxes {...controlled.args} className="sm:flex-1" />
-      <Checkboxes {...uncontrolled.args} className="sm:flex-1" />
-      <Checkboxes {...disabled.args} className="sm:flex-1" />
+    <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+      <Checkboxes {...noValue.args} />
+      <Checkboxes {...controlled.args} />
+      <Checkboxes {...uncontrolled.args} />
+      <Checkboxes {...disabled.args} />
     </div>
   ),
 };

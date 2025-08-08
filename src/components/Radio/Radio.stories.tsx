@@ -236,7 +236,7 @@ export const responsive: Story = {
 export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
       <Radio {...unchecked.args} />
       <Radio {...controlled.args} />
       <Radio {...uncontrolled.args} />

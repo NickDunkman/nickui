@@ -248,10 +248,10 @@ export const responsive: Story = {
 export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4">
-      <Select {...controlled.args} />
-      <Select {...uncontrolled.args} />
-      <Select {...disabled.args} />
+    <div className="flex flex-col gap-4 sm:flex-row">
+      <Select {...controlled.args} className="sm:flex-1" />
+      <Select {...uncontrolled.args} className="sm:flex-1" />
+      <Select {...disabled.args} className="sm:flex-1" />
     </div>
   ),
 };
@@ -260,11 +260,11 @@ export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Select {...xs.args} />
-      <Select {...sm.args} />
-      <Select {...base.args} />
-      <Select {...lg.args} />
-      <Select {...xl.args} />
+      <Select {...xs.args} className="sm:flex-12" />
+      <Select {...sm.args} className="sm:flex-14" />
+      <Select {...base.args} className="sm:flex-16" />
+      <Select {...lg.args} className="sm:flex-18" />
+      <Select {...xl.args} className="sm:flex-20" />
     </AllSizersStoryWrapper>
   ),
 };

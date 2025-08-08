@@ -475,11 +475,11 @@ export const responsive: Story = {
 export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <div className="flex flex-col gap-4 sm:flex-row">
-      <Switches {...noValue.args} className="sm:flex-1" />
-      <Switches {...controlled.args} className="sm:flex-1" />
-      <Switches {...uncontrolled.args} className="sm:flex-1" />
-      <Switches {...disabled.args} className="sm:flex-1" />
+    <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+      <Switches {...noValue.args} />
+      <Switches {...controlled.args} />
+      <Switches {...uncontrolled.args} />
+      <Switches {...disabled.args} />
     </div>
   ),
 };
@@ -488,11 +488,11 @@ export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Switches {...xs.args} className="sm:flex-1" />
-      <Switches {...sm.args} className="sm:flex-1" />
-      <Switches {...base.args} className="sm:flex-1" />
-      <Switches {...lg.args} className="sm:flex-1" />
-      <Switches {...xl.args} className="sm:flex-1" />
+      <Switches {...xs.args} />
+      <Switches {...sm.args} />
+      <Switches {...base.args} />
+      <Switches {...lg.args} />
+      <Switches {...xl.args} />
     </AllSizersStoryWrapper>
   ),
 };

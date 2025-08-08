@@ -404,11 +404,11 @@ export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper>
-      <TextArea {...xs.args} />
-      <TextArea {...sm.args} />
-      <TextArea {...base.args} />
-      <TextArea {...lg.args} />
-      <TextArea {...xl.args} />
+      <TextArea {...xs.args} className="sm:flex-12" />
+      <TextArea {...sm.args} className="sm:flex-14" />
+      <TextArea {...base.args} className="sm:flex-16" />
+      <TextArea {...lg.args} className="sm:flex-18" />
+      <TextArea {...xl.args} className="sm:flex-20" />
     </AllSizersStoryWrapper>
   ),
 };
