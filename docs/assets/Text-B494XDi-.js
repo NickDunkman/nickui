@@ -1,9 +1,0 @@
-import{j as t,M as m}from"./blocks-mWruwjt_.js";import{useMDXComponents as p}from"./index-BaEI_hAM.js";import{D as o}from"./index-DX8L99Gr.js";import{s as i,T as s}from"./Text.stories-9Bc7jHt1.js";import"./preload-helper-D9Z9MdNV.js";import"./iframe-BKZX7tvf.js";import"./index-COFK_g9j.js";import"./client-BE10jO-m.js";import"./index-zgBM_x_G.js";import"./Button-qFMTKZQ9.js";import"./index-CZcY-C3G.js";import"./AllSizersStoryWrapper-C8_pK2IB.js";import"./Field-Do7UQPvC.js";import"./useFieldA11yIds-DBRz3Mkj.js";import"./randomId-Dfhrkieu.js";import"./styles-HRsWpWoS.js";function a(e){const n={p:"p",...p(),...e.components};return o||r("Docs",!1),o.ComponentHeading||r("Docs.ComponentHeading",!0),o.ControlStates||r("Docs.ControlStates",!0),o.FauxCanvas||r("Docs.FauxCanvas",!0),o.FormLibraryCompatibility||r("Docs.FormLibraryCompatibility",!0),o.Props||r("Docs.Props",!0),o.Sizers||r("Docs.Sizers",!0),o.TableOfContents||r("Docs.TableOfContents",!0),t.jsxs(t.Fragment,{children:[t.jsx(m,{of:i}),`
-`,t.jsx(o.ComponentHeading,{of:"Text"}),`
-`,t.jsx(n.p,{children:"A form control that allows users to enter & edit a single line of text."}),`
-`,t.jsx(o.FauxCanvas,{children:t.jsx(s,{placeholder:"Type something!"})}),`
-`,t.jsx(o.TableOfContents,{}),`
-`,t.jsx(o.Props,{of:i,nativeBase:"input",wrapper:"Field"}),`
-`,t.jsx(o.ControlStates,{of:i,valuable:!0}),`
-`,t.jsx(o.Sizers,{of:i,wrapper:"Field"}),`
-`,t.jsx(o.FormLibraryCompatibility,{of:i,fieldName:"player",initialValue:"Nick",component:s,componentProps:{label:"Player name",hint:"Try editting me!"}})]})}function v(e={}){const{wrapper:n}={...p(),...e.components};return n?t.jsx(n,{...e,children:t.jsx(a,{...e})}):a(e)}function r(e,n){throw new Error("Expected "+(n?"component":"object")+" `"+e+"` to be defined: you likely forgot to import, pass, or provide it.")}export{v as default};
