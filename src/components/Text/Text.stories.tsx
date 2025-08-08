@@ -149,17 +149,20 @@ export const disabled: Story = {
 export const xs: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Xs Text',
     sizer: 'xs',
-    label: 'Xs label',
     placeholder: 'Xs Text',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const input = canvas.getByLabelText('Xs Text');
+    const field = input.closest('[data-nickui-component="Text"]');
+
     await step(
       'Assert the xs sizer style on both the Text & Field',
       async () => {
-        expect(canvas.getByLabelText('Xs label')).toHaveClass('text-xs');
-        expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
+        expect(input).toHaveClass('text-xs');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'xs');
       },
     );
   },
@@ -168,17 +171,20 @@ export const xs: Story = {
 export const sm: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Sm Text',
     sizer: 'sm',
-    label: 'Sm label',
     placeholder: 'Sm Text',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const input = canvas.getByLabelText('Sm Text');
+    const field = input.closest('[data-nickui-component="Text"]');
+
     await step(
       'Assert the sm sizer style on both the Text & Field',
       async () => {
-        expect(canvas.getByLabelText('Sm label')).toHaveClass('text-sm');
-        expect(canvas.getByText('Sm label')).toHaveClass('text-sm');
+        expect(input).toHaveClass('text-sm');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'sm');
       },
     );
   },
@@ -187,17 +193,20 @@ export const sm: Story = {
 export const base: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Base Text',
     sizer: 'base',
-    label: 'Base label',
     placeholder: 'Base Text',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const input = canvas.getByLabelText('Base Text');
+    const field = input.closest('[data-nickui-component="Text"]');
+
     await step(
       'Assert the base sizer style on both the Text & Field',
       async () => {
-        expect(canvas.getByLabelText('Base label')).toHaveClass('text-base');
-        expect(canvas.getByText('Base label')).toHaveClass('text-base');
+        expect(input).toHaveClass('text-base');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'base');
       },
     );
   },
@@ -206,17 +215,20 @@ export const base: Story = {
 export const lg: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Lg Text',
     sizer: 'lg',
-    label: 'Lg label',
     placeholder: 'Lg Text',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const input = canvas.getByLabelText('Lg Text');
+    const field = input.closest('[data-nickui-component="Text"]');
+
     await step(
       'Assert the lg sizer style on both the Text & Field',
       async () => {
-        expect(canvas.getByLabelText('Lg label')).toHaveClass('text-lg');
-        expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
+        expect(input).toHaveClass('text-lg');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'lg');
       },
     );
   },
@@ -225,17 +237,20 @@ export const lg: Story = {
 export const xl: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Xl Text',
     sizer: 'xl',
-    label: 'Xl label',
     placeholder: 'Xl Text',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const input = canvas.getByLabelText('Xl Text');
+    const field = input.closest('[data-nickui-component="Text"]');
+
     await step(
       'Assert the xl sizer style on both the Text & Field',
       async () => {
-        expect(canvas.getByLabelText('Xl label')).toHaveClass('text-xl');
-        expect(canvas.getByText('Xl label')).toHaveClass('text-xl');
+        expect(input).toHaveClass('text-xl');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'xl');
       },
     );
   },

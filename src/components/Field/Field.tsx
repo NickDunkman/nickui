@@ -48,9 +48,10 @@ export function Field({
 
   return (
     <div
-      {...otherDivProps}
+      data-nickui-component="Field"
       data-nickui-sizer={Array.isArray(sizer) ? sizer.join(',') : sizer}
       data-nickui-resolved-sizer={resolvedSizer}
+      {...otherDivProps}
     >
       {label && (
         <label id={labelId} className={styles.heading()} htmlFor={controlId}>

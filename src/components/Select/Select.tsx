@@ -71,6 +71,7 @@ export function Select({
       errorId={a11yIds.ariaErrorMessage}
       disabled={disabled}
       required={required}
+      data-nickui-component="Select"
     >
       <div className={styles.root()}>
         <select

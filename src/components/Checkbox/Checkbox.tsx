@@ -28,7 +28,14 @@ interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
  * @param props {@link CheckboxProps} {@link CommonCheckedFieldProps}
  */
 export function Checkbox(props: CheckboxProps & CommonCheckedFieldProps) {
-  return <Checkable {...props} type="checkbox" styler={checkboxStyler} />;
+  return (
+    <Checkable
+      {...props}
+      type="checkbox"
+      styler={checkboxStyler}
+      data-nickui-component="Checkbox"
+    />
+  );
 }
 
 /**
@@ -51,11 +58,15 @@ export function Checkable({
   type,
   'aria-labelledby': controlledAriaLabelledBy,
   'aria-describedby': controlledAriaDescribedBy,
+  'data-nickui-component': dataNickUIComponent,
   ...inputProps
 }: CheckboxProps &
-  CommonCheckedFieldProps &
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  { styler?: any; type: 'checkbox' | 'radio' }) {
+  CommonCheckedFieldProps & {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    styler?: any;
+    type: 'checkbox' | 'radio';
+    'data-nickui-component'?: string;
+  }) {
   const [isMouseFocused, setIsMouseFocused] = React.useState<boolean>(false);
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
@@ -119,6 +130,7 @@ export function Checkable({
       sizer={sizer}
       disabled={disabled}
       onMouseDown={handleRootMouseDown}
+      data-nickui-component={dataNickUIComponent}
     >
       <input
         type={type}

@@ -389,17 +389,20 @@ export const allowNegatives: Story = {
 export const xs: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Xs Money',
     sizer: 'xs',
-    label: 'Xs Money',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const input = canvas.getByLabelText('Xs Money');
+    const field = input.closest('[data-nickui-component="Money"]');
+
     await step(
       'Assert the xs sizer style on both the Money & Field',
       async () => {
-        expect(canvas.getByLabelText('Xs Money')).toHaveClass('text-xs');
-        expect(canvas.getByText('Xs Money')).toHaveClass('text-xs');
+        expect(input).toHaveClass('text-xs');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'xs');
         expect(canvas.getByText('$')).toHaveClass('text-xs');
       },
     );
@@ -409,17 +412,20 @@ export const xs: Story = {
 export const sm: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Sm Money',
     sizer: 'sm',
-    label: 'Sm Money',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const input = canvas.getByLabelText('Sm Money');
+    const field = input.closest('[data-nickui-component="Money"]');
+
     await step(
       'Assert the sm sizer style on both the Money & Field',
       async () => {
-        expect(canvas.getByLabelText('Sm Money')).toHaveClass('text-sm');
-        expect(canvas.getByText('Sm Money')).toHaveClass('text-sm');
+        expect(input).toHaveClass('text-sm');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'sm');
         expect(canvas.getByText('$')).toHaveClass('text-sm');
       },
     );
@@ -429,17 +435,20 @@ export const sm: Story = {
 export const base: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Base Money',
     sizer: 'base',
-    label: 'Base Money',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const input = canvas.getByLabelText('Base Money');
+    const field = input.closest('[data-nickui-component="Money"]');
+
     await step(
       'Assert the base sizer style on both the Money & Field',
       async () => {
-        expect(canvas.getByLabelText('Base Money')).toHaveClass('text-base');
-        expect(canvas.getByText('Base Money')).toHaveClass('text-base');
+        expect(input).toHaveClass('text-base');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'base');
         expect(canvas.getByText('$')).toHaveClass('text-base');
       },
     );
@@ -449,17 +458,20 @@ export const base: Story = {
 export const lg: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Lg Money',
     sizer: 'lg',
-    label: 'Lg Money',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const input = canvas.getByLabelText('Lg Money');
+    const field = input.closest('[data-nickui-component="Money"]');
+
     await step(
       'Assert the lg sizer style on both the Money & Field',
       async () => {
-        expect(canvas.getByLabelText('Lg Money')).toHaveClass('text-lg');
-        expect(canvas.getByText('Lg Money')).toHaveClass('text-lg');
+        expect(input).toHaveClass('text-lg');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'lg');
         expect(canvas.getByText('$')).toHaveClass('text-lg');
       },
     );
@@ -469,17 +481,20 @@ export const lg: Story = {
 export const xl: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Xl Money',
     sizer: 'xl',
-    label: 'Xl Money',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const input = canvas.getByLabelText('Xl Money');
+    const field = input.closest('[data-nickui-component="Money"]');
+
     await step(
       'Assert the xl sizer style on both the Money & Field',
       async () => {
-        expect(canvas.getByLabelText('Xl Money')).toHaveClass('text-xl');
-        expect(canvas.getByText('Xl Money')).toHaveClass('text-xl');
+        expect(input).toHaveClass('text-xl');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'xl');
         expect(canvas.getByText('$')).toHaveClass('text-xl');
       },
     );

@@ -62,7 +62,12 @@ export function Checkboxes({
   ...otherProps
 }: CheckablesProps & CommonFieldsetProps) {
   return (
-    <Checkables {...otherProps} delimiter={delimiter} Checkable={Checkbox} />
+    <Checkables
+      {...otherProps}
+      delimiter={delimiter}
+      Checkable={Checkbox}
+      data-nickui-component="Checkboxes"
+    />
   );
 }
 
@@ -91,6 +96,7 @@ export function Checkables({
   onChange,
   onBlur,
   delimiter,
+  'data-nickui-component': dataNickUIComponent,
   // The rest are brought in from <'input'>
   ...otherHiddenInputProps
 }: CheckablesProps &
@@ -98,6 +104,7 @@ export function Checkables({
     Checkable: React.ComponentType<
       React.ComponentProps<'input'> & CommonCheckedFieldProps
     >;
+    'data-nickui-component'?: string;
   }) {
   const containerRef = React.createRef<HTMLDivElement>();
   const [checkableName] = React.useState(randomId());
@@ -204,6 +211,7 @@ export function Checkables({
       error={error}
       disabled={disabled}
       required={required}
+      data-nickui-component={dataNickUIComponent}
     >
       <div
         ref={containerRef}

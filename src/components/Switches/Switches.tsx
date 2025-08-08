@@ -14,6 +14,11 @@ export function Switches({
   ...otherProps
 }: CheckablesProps & CommonFieldsetProps) {
   return (
-    <Checkables {...otherProps} Checkable={Switch} delimiter={delimiter} />
+    <Checkables
+      {...otherProps}
+      Checkable={Switch}
+      delimiter={delimiter}
+      data-nickui-component="Switches"
+    />
   );
 }

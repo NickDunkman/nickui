@@ -286,13 +286,14 @@ export const xs: Story = {
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const slider = canvas.getByLabelText('Xs Slider');
+    const field = slider.closest('[data-nickui-component="Slider"]');
+
     await step(
       'Assert the xs sizer style on both the Slider & Field',
       async () => {
-        expect(canvas.getByLabelText('Xs Slider')).toHaveClass('h-4');
-        expect(
-          canvas.getByText('Xs Slider').parentNode?.parentNode,
-        ).toHaveClass('text-xs');
+        expect(slider).toHaveClass('h-4');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'xs');
       },
     );
   },
@@ -307,13 +308,14 @@ export const sm: Story = {
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const slider = canvas.getByLabelText('Sm Slider');
+    const field = slider.closest('[data-nickui-component="Slider"]');
+
     await step(
       'Assert the sm sizer style on both the Slider & Field',
       async () => {
-        expect(canvas.getByLabelText('Sm Slider')).toHaveClass('h-5');
-        expect(
-          canvas.getByText('Sm Slider').parentNode?.parentNode,
-        ).toHaveClass('text-xs');
+        expect(slider).toHaveClass('h-5');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'sm');
       },
     );
   },
@@ -328,13 +330,14 @@ export const base: Story = {
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const slider = canvas.getByLabelText('Base Slider');
+    const field = slider.closest('[data-nickui-component="Slider"]');
+
     await step(
       'Assert the base sizer style on both the Slider & Field',
       async () => {
-        expect(canvas.getByLabelText('Base Slider')).toHaveClass('h-6');
-        expect(
-          canvas.getByText('Base Slider').parentNode?.parentNode,
-        ).toHaveClass('text-sm');
+        expect(slider).toHaveClass('h-6');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'base');
       },
     );
   },
@@ -349,13 +352,14 @@ export const lg: Story = {
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const slider = canvas.getByLabelText('Lg Slider');
+    const field = slider.closest('[data-nickui-component="Slider"]');
+
     await step(
       'Assert the lg sizer style on both the Slider & Field',
       async () => {
-        expect(canvas.getByLabelText('Lg Slider')).toHaveClass('h-7');
-        expect(
-          canvas.getByText('Lg Slider').parentNode?.parentNode,
-        ).toHaveClass('text-base');
+        expect(slider).toHaveClass('h-7');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'lg');
       },
     );
   },
@@ -370,13 +374,14 @@ export const xl: Story = {
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const slider = canvas.getByLabelText('Xl Slider');
+    const field = slider.closest('[data-nickui-component="Slider"]');
+
     await step(
       'Assert the xl sizer style on both the Slider & Field',
       async () => {
-        expect(canvas.getByLabelText('Xl Slider')).toHaveClass('h-8');
-        expect(
-          canvas.getByText('Xl Slider').parentNode?.parentNode,
-        ).toHaveClass('text-lg');
+        expect(slider).toHaveClass('h-8');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'xl');
       },
     );
   },

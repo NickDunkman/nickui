@@ -42,6 +42,9 @@ export function Fieldset({
 
   return (
     <fieldset
+      data-nickui-component="Fieldset"
+      data-nickui-sizer={Array.isArray(sizer) ? sizer.join(',') : sizer}
+      data-nickui-resolved-sizer={resolvedSizer}
       {...otherFieldsetProps}
       aria-labelledby={clsx(
         // Connect the internally managed legend to the fieldset
@@ -62,8 +65,6 @@ export function Fieldset({
         ariaErrorMessage,
       )}
       aria-invalid={!!(ariaInvalid || error)}
-      data-nickui-sizer={Array.isArray(sizer) ? sizer.join(',') : sizer}
-      data-nickui-resolved-sizer={resolvedSizer}
     >
       {label && (
         // This extra wrapping div allows the legend to be used as the

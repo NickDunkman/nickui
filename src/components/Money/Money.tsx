@@ -76,6 +76,7 @@ export function Money(props: MoneyProps) {
       errorId={a11yIds.ariaErrorMessage}
       disabled={props.disabled}
       required={props.required}
+      data-nickui-component="Money"
     >
       <div className={moneyStyles.visibleInputsContainer()}>
         {/*
@@ -129,10 +130,6 @@ export function Money(props: MoneyProps) {
           placeholder=" "
           {...valueElementsProps.workingInput}
         />
-
-        <div id="the-details" className="sr-only">
-          lol
-        </div>
 
         <div
           ref={currencySymbolRef}

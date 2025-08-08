@@ -92,6 +92,7 @@ export function Text({
       errorId={a11yIds.ariaErrorMessage}
       disabled={disabled}
       required={required}
+      data-nickui-component="Text"
     >
       <input
         {...otherInputProps}

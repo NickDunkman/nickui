@@ -17,5 +17,11 @@ export function Radios({
     console.warn('The `delimiter` prop shouldn’t be used with <Radios>');
   }
 
-  return <Checkables {...otherProps} Checkable={Radio} />;
+  return (
+    <Checkables
+      {...otherProps}
+      Checkable={Radio}
+      data-nickui-component="Radios"
+    />
+  );
 }

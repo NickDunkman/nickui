@@ -28,5 +28,12 @@ interface SwitchProps extends Omit<React.ComponentProps<'input'>, 'type'> {
  * @props {@link SwitchProps}
  */
 export function Switch(props: SwitchProps & CommonCheckedFieldProps) {
-  return <Checkable {...props} type="checkbox" styler={switchStyler} />;
+  return (
+    <Checkable
+      {...props}
+      type="checkbox"
+      styler={switchStyler}
+      data-nickui-component="Switch"
+    />
+  );
 }

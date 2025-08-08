@@ -317,16 +317,14 @@ export const xs: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xs',
-    label: 'Xs label',
-    hint: 'Xs hint',
     options: [
       {
         value: 'one',
-        label: 'Option one',
+        label: 'Xs',
       },
       {
         value: 'two',
-        label: 'Option two',
+        label: 'Radios',
       },
     ],
     onChange: fn(),
@@ -338,7 +336,10 @@ export const xs: Story = {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-3.5');
         });
-        expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
+        expect(canvas.getByRole('group')).toHaveAttribute(
+          'data-nickui-sizer',
+          'xs',
+        );
       },
     );
   },
@@ -348,16 +349,14 @@ export const sm: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'sm',
-    label: 'Sm label',
-    hint: 'Sm hint',
     options: [
       {
         value: 'one',
-        label: 'Option one',
+        label: 'Sm',
       },
       {
         value: 'two',
-        label: 'Option two',
+        label: 'Radios',
       },
     ],
     onChange: fn(),
@@ -369,7 +368,10 @@ export const sm: Story = {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-4');
         });
-        expect(canvas.getByText('Sm label')).toHaveClass('text-sm');
+        expect(canvas.getByRole('group')).toHaveAttribute(
+          'data-nickui-sizer',
+          'sm',
+        );
       },
     );
   },
@@ -379,16 +381,14 @@ export const base: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'base',
-    label: 'Base label',
-    hint: 'Base hint',
     options: [
       {
         value: 'one',
-        label: 'Option one',
+        label: 'Base',
       },
       {
         value: 'two',
-        label: 'Option two',
+        label: 'Radios',
       },
     ],
     onChange: fn(),
@@ -400,7 +400,10 @@ export const base: Story = {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-4.75');
         });
-        expect(canvas.getByText('Base label')).toHaveClass('text-base');
+        expect(canvas.getByRole('group')).toHaveAttribute(
+          'data-nickui-sizer',
+          'base',
+        );
       },
     );
   },
@@ -410,16 +413,14 @@ export const lg: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'lg',
-    label: 'Lg label',
-    hint: 'Lg hint',
     options: [
       {
         value: 'one',
-        label: 'Option one',
+        label: 'Lg',
       },
       {
         value: 'two',
-        label: 'Option two',
+        label: 'Radios',
       },
     ],
     onChange: fn(),
@@ -431,7 +432,10 @@ export const lg: Story = {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-5.5');
         });
-        expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
+        expect(canvas.getByRole('group')).toHaveAttribute(
+          'data-nickui-sizer',
+          'lg',
+        );
       },
     );
   },
@@ -441,16 +445,14 @@ export const xl: Story = {
   tags: ['sizer'],
   args: {
     sizer: 'xl',
-    label: 'Xl label',
-    hint: 'Xl hint',
     options: [
       {
         value: 'one',
-        label: 'Option one',
+        label: 'Xl',
       },
       {
         value: 'two',
-        label: 'Option two',
+        label: 'Radios',
       },
     ],
     onChange: fn(),
@@ -462,7 +464,10 @@ export const xl: Story = {
         canvas.getAllByTestId('indicator').forEach((indicator) => {
           expect(indicator).toHaveClass('size-6');
         });
-        expect(canvas.getByText('Xl label')).toHaveClass('text-xl');
+        expect(canvas.getByRole('group')).toHaveAttribute(
+          'data-nickui-sizer',
+          'xl',
+        );
       },
     );
   },

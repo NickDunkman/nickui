@@ -417,6 +417,7 @@ export function Slider({
       errorId={a11yIds.ariaErrorMessage}
       disabled={disabled}
       required={required}
+      data-nickui-component="Slider"
     >
       <div
         {...otherDivProps}

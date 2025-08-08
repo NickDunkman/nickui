@@ -168,6 +168,7 @@ export function TextArea({
       errorId={a11yIds.ariaErrorMessage}
       disabled={disabled}
       required={required}
+      data-nickui-component="TextArea"
     >
       <div ref={containerRef} className={styles.root()}>
         {/*

@@ -25,5 +25,12 @@ interface RadioProps extends Omit<React.ComponentProps<'input'>, 'type'> {
  * @param props {@link RadioProps} {@link CommonCheckedFieldProps}
  */
 export function Radio(props: RadioProps & CommonCheckedFieldProps) {
-  return <Checkable {...props} type="radio" styler={radioStyler} />;
+  return (
+    <Checkable
+      {...props}
+      type="radio"
+      styler={radioStyler}
+      data-nickui-component="Radio"
+    />
+  );
 }

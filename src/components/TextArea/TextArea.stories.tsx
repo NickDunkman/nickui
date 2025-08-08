@@ -150,17 +150,20 @@ export const disabled: Story = {
 export const xs: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Xs TextArea',
     sizer: 'xs',
-    label: 'Xs label',
     placeholder: 'Xs TextArea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const textarea = canvas.getByLabelText('Xs TextArea');
+    const field = textarea.closest('[data-nickui-component="TextArea"]');
+
     await step(
       'Assert the xs sizer style on both the TextArea & Field',
       async () => {
-        expect(canvas.getByLabelText('Xs label')).toHaveClass('text-xs');
-        expect(canvas.getByText('Xs label')).toHaveClass('text-xs');
+        expect(textarea).toHaveClass('text-xs');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'xs');
       },
     );
   },
@@ -169,17 +172,20 @@ export const xs: Story = {
 export const sm: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Sm TextArea',
     sizer: 'sm',
-    label: 'Sm label',
     placeholder: 'Sm TextArea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const textarea = canvas.getByLabelText('Sm TextArea');
+    const field = textarea.closest('[data-nickui-component="TextArea"]');
+
     await step(
       'Assert the sm sizer style on both the TextArea & Field',
       async () => {
-        expect(canvas.getByLabelText('Sm label')).toHaveClass('text-sm');
-        expect(canvas.getByText('Sm label')).toHaveClass('text-sm');
+        expect(textarea).toHaveClass('text-sm');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'sm');
       },
     );
   },
@@ -188,17 +194,20 @@ export const sm: Story = {
 export const base: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Base TextArea',
     sizer: 'base',
-    label: 'Base label',
     placeholder: 'Base TextArea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const textarea = canvas.getByLabelText('Base TextArea');
+    const field = textarea.closest('[data-nickui-component="TextArea"]');
+
     await step(
       'Assert the base sizer style on both the TextArea & Field',
       async () => {
-        expect(canvas.getByLabelText('Base label')).toHaveClass('text-base');
-        expect(canvas.getByText('Base label')).toHaveClass('text-base');
+        expect(textarea).toHaveClass('text-base');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'base');
       },
     );
   },
@@ -207,17 +216,20 @@ export const base: Story = {
 export const lg: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Lg TextArea',
     sizer: 'lg',
-    label: 'Lg label',
     placeholder: 'Lg TextArea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const textarea = canvas.getByLabelText('Lg TextArea');
+    const field = textarea.closest('[data-nickui-component="TextArea"]');
+
     await step(
       'Assert the lg sizer style on both the TextArea & Field',
       async () => {
-        expect(canvas.getByLabelText('Lg label')).toHaveClass('text-lg');
-        expect(canvas.getByText('Lg label')).toHaveClass('text-lg');
+        expect(textarea).toHaveClass('text-lg');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'lg');
       },
     );
   },
@@ -226,17 +238,20 @@ export const lg: Story = {
 export const xl: Story = {
   tags: ['sizer'],
   args: {
+    'aria-label': 'Xl TextArea',
     sizer: 'xl',
-    label: 'Xl label',
     placeholder: 'Xl TextArea',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
+    const textarea = canvas.getByLabelText('Xl TextArea');
+    const field = textarea.closest('[data-nickui-component="TextArea"]');
+
     await step(
       'Assert the xl sizer style on both the TextArea & Field',
       async () => {
-        expect(canvas.getByLabelText('Xl label')).toHaveClass('text-xl');
-        expect(canvas.getByText('Xl label')).toHaveClass('text-xl');
+        expect(textarea).toHaveClass('text-xl');
+        expect(field).toHaveAttribute('data-nickui-sizer', 'xl');
       },
     );
   },
@@ -388,7 +403,7 @@ export const allControlStates: Story = {
 export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
-    <AllSizersStoryWrapper alignBaseline>
+    <AllSizersStoryWrapper>
       <TextArea {...xs.args} />
       <TextArea {...sm.args} />
       <TextArea {...base.args} />
