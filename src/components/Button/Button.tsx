@@ -18,7 +18,10 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   /** Controls the behavior of the button */
   type?: 'button' | 'reset' | 'submit';
-  /** Changes the size of the button ("sm", "base", "lg") */
+  /**
+   * Changes the size of the component. A sizer string, or an array of sizer
+   * strings for responsive sizing.
+   */
   sizer?: SizerType | SizerType[];
   /**
    * Changes the color of the button ("neutral", "positive", "caution",

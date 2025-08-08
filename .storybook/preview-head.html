@@ -25,4 +25,15 @@
     background-size: 30px 30px;
     opacity: 0.025;
   }
+
+  /* Add "|" separators between union type items in ArgsTables */
+  .docblock-argstable-body td:nth-child(2) div:nth-child(2) span:not(:first-child) {
+    position: relative;
+    margin-left: 14px;
+  }
+  .docblock-argstable-body td:nth-child(2) div:nth-child(2) span:not(:first-child)::before {
+    content: " | ";
+    position: absolute;
+    left: -14px;
+  }
 </style>

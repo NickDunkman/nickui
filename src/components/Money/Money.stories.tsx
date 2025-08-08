@@ -2,22 +2,30 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
+import { SIZERS } from '@/constants';
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
-import { propDefaults } from '@/utils/propDefaults';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { Money } from './Money';
 
 const meta = {
   title: 'Form controls/Money',
   component: Money,
-  argTypes: propDefaults<typeof Money>({
-    currencySymbol: '$',
-    decimalPoint: '.',
-    decimalPlaces: 2,
-    thousandsSeparator: ',',
-    allowNegatives: false,
-    disabled: false,
-    sizer: 'base',
+  argTypes: storyArgsTyper<typeof Money>({
+    defaultValues: {
+      currencySymbol: '$',
+      decimalPoint: '.',
+      decimalPlaces: 2,
+      thousandsSeparator: ',',
+      allowNegatives: false,
+      disabled: false,
+      sizer: 'base',
+    },
+    types: {
+      defaultValue: ['string', 'number'],
+      sizer: SIZERS,
+      value: ['string', 'number'],
+    },
   }),
 } satisfies Meta<typeof Money>;
 

@@ -13,7 +13,10 @@ interface AsideProps extends React.ComponentProps<'aside'> {
   className?: string;
   /** Optional title to put at the top of the Aside */
   heading?: React.ReactNode;
-  /** Changes the size of the Shout ("sm", "base", "lg") */
+  /**
+   * Changes the size of the component. A sizer string, or an array of sizer
+   * strings for responsive sizing.
+   */
   sizer?: SizerType | SizerType[];
   /**
    * Changes the color of the Shout ("neutral", "positive", "caution",

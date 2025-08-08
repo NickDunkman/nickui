@@ -11,7 +11,10 @@ interface ShoutProps extends React.ComponentProps<'div'> {
   children?: React.ReactNode;
   /** Optionally add utility classes to the root element */
   className?: string;
-  /** Changes the size of the Shout ("sm", "base", "lg") */
+  /**
+   * Changes the size of the component. A sizer string, or an array of sizer
+   * strings for responsive sizing.
+   */
   sizer?: SizerType | SizerType[];
   /**
    * Changes the color of the Shout ("neutral", "positive", "caution",

@@ -1,33 +1,10 @@
 import * as React from 'react';
 
-export type FlavorType = 'neutral' | 'positive' | 'caution' | 'negative';
+import { FLAVORS, SIZERS } from './constants';
 
-export type SizerType =
-  | 'xs'
-  | 'sm'
-  | 'base'
-  | 'lg'
-  | 'xl'
-  | 'sm:xs'
-  | 'sm:sm'
-  | 'sm:base'
-  | 'sm:lg'
-  | 'sm:xl'
-  | 'md:xs'
-  | 'md:sm'
-  | 'md:base'
-  | 'md:lg'
-  | 'md:xl'
-  | 'lg:xs'
-  | 'lg:sm'
-  | 'lg:base'
-  | 'lg:lg'
-  | 'lg:xl'
-  | 'xl:xs'
-  | 'xl:sm'
-  | 'xl:base'
-  | 'xl:lg'
-  | 'xl:xl';
+export type FlavorType = (typeof FLAVORS)[number];
+
+export type SizerType = (typeof SIZERS)[number];
 
 /**
  * Any component which uses Field or Fieldset as a wrapper take these props!
@@ -36,8 +13,8 @@ export type CommonFieldProps<ReactNode = React.ReactNode> = {
   /** Optionally add utility classes to the root element */
   className?: string;
   /**
-   * Changes the size of the field ("xs", "sm", "base", "lg", "xl", "sm:base",
-   * "lg:xl", etc)
+   * Changes the size of the component. A sizer string, or an array of sizer
+   * strings for responsive sizing.
    */
   sizer?: SizerType | SizerType[];
   /** The main label to show above the form control, naming the field */
@@ -65,8 +42,8 @@ export type CommonFieldsetProps = {
   /** Optionally add utility classes to the root element */
   className?: string;
   /**
-   * Changes the size of the fieldset ("xs", "sm", "base", "lg", "xl",
-   * "sm:base", "lg:xl", etc)
+   * Changes the size of the component. A sizer string, or an array of sizer
+   * strings for responsive sizing.
    */
   sizer?: SizerType | SizerType[];
   /** The main label to show above the form control, naming the field */
@@ -89,8 +66,8 @@ export type CommonCheckedFieldProps = {
   /** Optionally add utility classes to the root element */
   className?: string;
   /**
-   * Changes the size of the field ("xs", "sm", "base", "lg", "xl", "sm:base",
-   * "lg:xl", etc)
+   * Changes the size of the component. A sizer string, or an array of sizer
+   * strings for responsive sizing.
    */
   sizer?: SizerType | SizerType[];
   /** The main label to to the right of the form control, naming the field */
