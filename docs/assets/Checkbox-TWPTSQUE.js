@@ -1,9 +1,0 @@
-import{j as t,M as m}from"./blocks-BU5oOHCQ.js";import{useMDXComponents as a}from"./index-eWpqU6Lt.js";import{D as o}from"./index-CaSJQS51.js";import{C as p}from"./Checkbox-D5MYAwg-.js";import{s as i}from"./Checkbox.stories-CFMw6iFZ.js";import"./preload-helper-D9Z9MdNV.js";import"./iframe-BOhUS0D9.js";import"./index-Q1tin0oT.js";import"./client-CYwGopby.js";import"./index-DNuRN-av.js";import"./Button-CGDQzYfb.js";import"./index-BzK3n9VJ.js";import"./CheckedField-CgfdGwlm.js";import"./useElementBounds-CxKbftmz.js";import"./useFieldA11yIds-CMM-qVMC.js";import"./randomId-Dfhrkieu.js";import"./AllSizersStoryWrapper-B8yhyoy3.js";function s(e){const n={p:"p",...a(),...e.components};return o||r("Docs",!1),o.ComponentHeading||r("Docs.ComponentHeading",!0),o.ControlStates||r("Docs.ControlStates",!0),o.FauxCanvas||r("Docs.FauxCanvas",!0),o.FormLibraryCompatibility||r("Docs.FormLibraryCompatibility",!0),o.Props||r("Docs.Props",!0),o.Sizers||r("Docs.Sizers",!0),o.TableOfContents||r("Docs.TableOfContents",!0),t.jsxs(t.Fragment,{children:[t.jsx(m,{of:i}),`
-`,t.jsx(o.ComponentHeading,{of:"Checkbox"}),`
-`,t.jsx(n.p,{children:"A form control that allow users to choose zero to many options from a set."}),`
-`,t.jsx(o.FauxCanvas,{children:t.jsx(p,{label:"Don’t not opt out of my newsletter 😈"})}),`
-`,t.jsx(o.TableOfContents,{}),`
-`,t.jsx(o.Props,{of:i,wrapper:"CheckedField",nativeBase:"input"}),`
-`,t.jsx(o.ControlStates,{of:i,checkable:!0}),`
-`,t.jsx(o.Sizers,{of:i,wrapper:"CheckedField"}),`
-`,t.jsx(o.FormLibraryCompatibility,{of:i,fieldName:"gimme",checkbox:!0,initialValue:!0,componentProps:{label:"That’s a gimme"}})]})}function S(e={}){const{wrapper:n}={...a(),...e.components};return n?t.jsx(n,{...e,children:t.jsx(s,{...e})}):s(e)}function r(e,n){throw new Error("Expected "+(n?"component":"object")+" `"+e+"` to be defined: you likely forgot to import, pass, or provide it.")}export{S as default};
