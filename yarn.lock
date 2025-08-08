@@ -1434,33 +1434,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/form-core@npm:1.15.0":
-  version: 1.15.0
-  resolution: "@tanstack/form-core@npm:1.15.0"
+"@tanstack/form-core@npm:1.19.0":
+  version: 1.19.0
+  resolution: "@tanstack/form-core@npm:1.19.0"
   dependencies:
     "@tanstack/store": "npm:^0.7.2"
-  checksum: 10c0/eeb069554a16743dd89737dce29529b2249c13c361e15e7d76b5de680498a4d04c61a93c3afcfb20301ee22edb0b328d4405aeb2a3eee87c3901431ae9e689d9
+  checksum: 10c0/e906abcc596fecae6be09cabb9043609e31111098ab3e4eb3fb0c57cc58e8bf6d195b7a99dac95726d8271dae9073c48e4020bbdc41e6325c12f5f560bab3edc
   languageName: node
   linkType: hard
 
-"@tanstack/react-form@npm:^1.15.0":
-  version: 1.15.0
-  resolution: "@tanstack/react-form@npm:1.15.0"
+"@tanstack/react-form@npm:^1.19.0":
+  version: 1.19.0
+  resolution: "@tanstack/react-form@npm:1.19.0"
   dependencies:
-    "@tanstack/form-core": "npm:1.15.0"
+    "@tanstack/form-core": "npm:1.19.0"
     "@tanstack/react-store": "npm:^0.7.3"
     decode-formdata: "npm:^0.9.0"
     devalue: "npm:^5.1.1"
   peerDependencies:
-    "@tanstack/react-start": ^1.112.0
+    "@tanstack/react-start": ^1.130.10
     react: ^17.0.0 || ^18.0.0 || ^19.0.0
-    vinxi: ^0.5.0
   peerDependenciesMeta:
     "@tanstack/react-start":
       optional: true
-    vinxi:
-      optional: true
-  checksum: 10c0/7a02bc8e6d36c38e14d90849cd33a21d9bd79d4398aa18ce393a3eae2a790e4cba8025ebb25621728db15e21182f5a67bfbc26b5f80ba6b39d90c96427cda018
+  checksum: 10c0/1fbdd64a7a52b84a1495df847823b7808c9abf1f181b91bc0e3dc7404c2bb345153ae45e21c1fe305395bf0069dd8eb055be58c31a60010c05364b737dda06c1
   languageName: node
   linkType: hard
 
@@ -5313,7 +5310,7 @@ __metadata:
     "@storybook/react-vite": "npm:^9.1.1"
     "@tailwindcss/postcss": "npm:^4.1.8"
     "@tailwindcss/vite": "npm:^4.1.8"
-    "@tanstack/react-form": "npm:^1.15.0"
+    "@tanstack/react-form": "npm:^1.19.0"
     "@testing-library/dom": "npm:^10.4.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.3.0"
