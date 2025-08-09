@@ -1,13 +1,15 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import type { CommonFieldProps } from '@/types';
+import { FieldableProps } from '@/types';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { textareaStyler } from './styles';
 
-interface TextAreaProps extends React.ComponentProps<'textarea'> {
+export interface TextAreaProps
+  extends React.ComponentProps<'textarea'>,
+    FieldableProps {
   /**
    * Sets the value of the TextArea when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/textarea#controlling-a-text-area-with-a-state-variable)
@@ -35,7 +37,7 @@ interface TextAreaProps extends React.ComponentProps<'textarea'> {
   /** Set to `true` to remove the resize handle from the bottom right */
   disableManualResize?: boolean;
   /** Called when the value of the TextArea changes */
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   /**
    * A string that contains a brief hint to the user as to what information is
    * expected in the field.
@@ -45,7 +47,7 @@ interface TextAreaProps extends React.ComponentProps<'textarea'> {
 
 /**
  * A form control that allows users to enter & edit a mass of text
- * @param props {@link TextAreaProps} + {@link CommonFieldProps}
+ * @param props {@link TextAreaProps}
  */
 export function TextArea({
   // Field props
@@ -71,7 +73,7 @@ export function TextArea({
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <textarea>
   ...otherTextAreaProps
-}: TextAreaProps & CommonFieldProps) {
+}: TextAreaProps) {
   const containerRef = React.createRef<HTMLDivElement>();
   const hiddenTextArea = React.useRef<HTMLTextAreaElement>(null);
   const [autoRows, setAutoRows] = React.useState<number>(0);

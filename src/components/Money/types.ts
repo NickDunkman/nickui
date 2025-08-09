@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { CommonFieldProps } from '@/types';
+import { FieldableProps } from '@/types';
 
 export interface MoneyInputProps
   extends Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'> {
@@ -40,7 +40,20 @@ export interface MoneyFormatProps {
 }
 
 /** The full spec of props for the <Money> component */
-export type MoneyProps = MoneyInputProps & MoneyFormatProps & CommonFieldProps;
+export interface MoneyProps
+  extends Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'>,
+    FieldableProps,
+    MoneyFormatProps {
+  /** Called when the value of the Text changes */
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  /**
+   * Sets the value of the Money when using it as a
+   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
+   */
+  value?: string | number;
+  /** Sets the value of the Money when using it as an uncontrolled component */
+  defaultValue?: string | number;
+}
 
 /**
  * The formatting configuration used internally in the Money component

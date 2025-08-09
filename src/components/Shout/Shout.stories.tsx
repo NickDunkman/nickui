@@ -3,12 +3,17 @@ import * as React from 'react';
 import { expect } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { Shout } from './Shout';
 
 const meta = {
   title: 'Notices/Shout',
   component: Shout,
+  argTypes: storyArgsTyper<typeof Shout>({
+    hasFlavors: true,
+    hasSizers: true,
+  }),
 } satisfies Meta<typeof Shout>;
 
 export default meta;

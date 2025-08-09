@@ -3,12 +3,17 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { Checkbox } from './Checkbox';
 
 const meta = {
   title: 'Form controls/Checkbox',
   component: Checkbox,
+  argTypes: storyArgsTyper<typeof Checkbox>({
+    isDisableable: true,
+    hasSizers: true,
+  }),
 } satisfies Meta<typeof Checkbox>;
 
 export default meta;

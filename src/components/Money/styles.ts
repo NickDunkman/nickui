@@ -53,7 +53,6 @@ export const moneyStyler = tv({
   },
   defaultVariants: {
     sizer: 'base',
-    hasValue: false,
     hasSpacingApplied: true,
   },
 });

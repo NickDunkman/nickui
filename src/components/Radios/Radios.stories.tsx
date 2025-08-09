@@ -4,12 +4,17 @@ import { expect, fn } from 'storybook/test';
 
 import { Radio } from '@/components/Radio';
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { Radios } from './Radios';
 
 const meta = {
   title: 'Form controls/Radios',
   component: Radios,
+  argTypes: storyArgsTyper<typeof Radios>({
+    isDisableable: true,
+    hasSizers: true,
+  }),
 } satisfies Meta<typeof Radios>;
 
 export default meta;

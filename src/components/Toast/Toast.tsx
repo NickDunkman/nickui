@@ -1,17 +1,15 @@
 import * as React from 'react';
 import { OrbitProgress } from 'react-loading-indicators';
 
-import { FlavorType } from '@/types';
+import { SecondaryFlavorableProps } from '@/types';
 
 import { toastStyler } from './styles';
 
-export interface ToastProps {
+export interface ToastProps extends SecondaryFlavorableProps {
   title?: string;
   body?: React.ReactNode;
   loading?: boolean;
   onDismiss?: React.MouseEventHandler<HTMLButtonElement>;
-  flavor?: FlavorType;
-  secondary?: boolean;
 }
 
 /** A fully custom toast that still maintains the animations and interactions. */

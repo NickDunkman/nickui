@@ -3,12 +3,25 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
-import { Button } from './Button';
+import { ALLOWED_TYPES, Button } from './Button';
 
 const meta = {
   title: 'Form controls/Button',
   component: Button,
+  argTypes: storyArgsTyper<typeof Button>({
+    isDisableable: true,
+    hasFlavors: true,
+    hasSizers: true,
+    defaultValues: {
+      secondary: false,
+      type: 'button',
+    },
+    types: {
+      type: ALLOWED_TYPES,
+    },
+  }),
 } satisfies Meta<typeof Button>;
 
 export default meta;

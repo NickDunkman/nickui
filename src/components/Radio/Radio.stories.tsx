@@ -3,12 +3,17 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { Radio } from './Radio';
 
 const meta = {
   title: 'Form controls/Radio',
   component: Radio,
+  argTypes: storyArgsTyper<typeof Radio>({
+    isDisableable: true,
+    hasSizers: true,
+  }),
 } satisfies Meta<typeof Radio>;
 
 export default meta;

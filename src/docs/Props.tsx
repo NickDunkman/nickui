@@ -5,7 +5,7 @@ import { StoriesModule } from '@/types';
 
 import { ComponentName } from './ComponentName';
 
-const commonFieldProps = ['label', 'hint', 'error', 'required'];
+const fieldableProps = ['label', 'hint', 'error', 'required'];
 
 /**
  * These are the elements that React has custom docs for at
@@ -74,7 +74,7 @@ You may be looking for these:
       <ArgTypes
         of={of}
         exclude={[
-          ...(wrapper ? commonFieldProps : []),
+          ...(wrapper ? fieldableProps : []),
           ...(exclude || []),
           ...alwaysExclude,
         ]}
@@ -97,7 +97,7 @@ Accessibility is handled for you.
 
           <ArgTypes
             of={of}
-            include={commonFieldProps}
+            include={fieldableProps}
             exclude={[...(exclude || []), ...alwaysExclude]}
             sort="requiredFirst"
           />

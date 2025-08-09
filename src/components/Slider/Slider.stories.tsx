@@ -3,12 +3,25 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { Slider } from './Slider';
 
 const meta = {
   title: 'Form controls/Slider',
   component: Slider,
+  argTypes: storyArgsTyper<typeof Slider>({
+    isDisableable: true,
+    hasSizers: true,
+    types: {
+      min: ['number', 'string'],
+      max: ['number', 'string'],
+      step: ['number', 'string'],
+      shiftSteps: ['number', 'string'],
+      value: ['string', 'number'],
+      defaultValue: ['string', 'number'],
+    },
+  }),
 } satisfies Meta<typeof Slider>;
 
 export default meta;

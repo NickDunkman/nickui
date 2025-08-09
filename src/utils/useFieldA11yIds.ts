@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { CommonFieldProps } from '@/types';
+import { FieldableProps } from '@/types';
 
 import { randomId } from './randomId';
 
@@ -17,9 +17,9 @@ export function useFieldA11yIds({
   controlledAriaDescribedBy,
   controlledAriaErrorMessage,
 }: {
-  label?: CommonFieldProps['label'];
-  hint?: CommonFieldProps['hint'];
-  error?: CommonFieldProps['error'];
+  label?: FieldableProps['label'];
+  hint?: FieldableProps['hint'];
+  error?: FieldableProps['error'];
   controlledId?: string;
   controlledAriaLabelledBy?: string;
   controlledAriaDescribedBy?: string;

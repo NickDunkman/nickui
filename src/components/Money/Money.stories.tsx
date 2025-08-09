@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
-import { SIZERS } from '@/constants';
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
@@ -12,18 +11,17 @@ const meta = {
   title: 'Form controls/Money',
   component: Money,
   argTypes: storyArgsTyper<typeof Money>({
+    isDisableable: true,
+    hasSizers: true,
     defaultValues: {
       currencySymbol: '$',
       decimalPoint: '.',
       decimalPlaces: 2,
       thousandsSeparator: ',',
       allowNegatives: false,
-      disabled: false,
-      sizer: 'base',
     },
     types: {
       defaultValue: ['string', 'number'],
-      sizer: SIZERS,
       value: ['string', 'number'],
     },
   }),

@@ -4,12 +4,17 @@ import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
 import { fastType } from '@/utils/fastType';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { TextArea } from './TextArea';
 
 const meta = {
   title: 'Form controls/TextArea',
   component: TextArea,
+  argTypes: storyArgsTyper<typeof TextArea>({
+    isDisableable: true,
+    hasSizers: true,
+  }),
 } satisfies Meta<typeof TextArea>;
 
 export default meta;

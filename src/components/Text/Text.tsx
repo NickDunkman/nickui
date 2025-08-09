@@ -1,15 +1,37 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import type { CommonFieldProps } from '@/types';
+import { FieldableProps } from '@/types';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { textStyler } from './styles';
 
-interface TextProps extends React.ComponentProps<'input'> {
+/**
+ * These are all of the "textual" <input> types. For example, type="checkbox"
+ * is not textual, so we don’t want the <Text> component to accept it.
+ */
+export const ALLOWED_TYPES = [
+  'date',
+  'datetime',
+  'datetime-local',
+  'email',
+  'month',
+  'number',
+  'password',
+  'search',
+  'tel',
+  'text',
+  'time',
+  'url',
+  'week',
+] as const;
+
+export interface TextProps
+  extends React.ComponentProps<'input'>,
+    FieldableProps {
   /** Called when the value of the Text changes */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   /**
    * A string that contains a brief hint to the user as to what information is
    * expected in the field.
@@ -21,20 +43,7 @@ interface TextProps extends React.ComponentProps<'input'> {
    * [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
    * for more details
    */
-  type?:
-    | 'date'
-    | 'datetime'
-    | 'datetime-local'
-    | 'email'
-    | 'month'
-    | 'number'
-    | 'password'
-    | 'search'
-    | 'tel'
-    | 'text'
-    | 'time'
-    | 'url'
-    | 'week';
+  type?: (typeof ALLOWED_TYPES)[number];
   /**
    * Sets the value of the Text when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
@@ -46,7 +55,7 @@ interface TextProps extends React.ComponentProps<'input'> {
 
 /**
  * A form control that allows users to enter & edit a single line of text
- * @param props {@link TextProps} + {@link CommonFieldProps}
+ * @param props {@link TextProps}
  */
 export function Text({
   // Field props
@@ -65,7 +74,7 @@ export function Text({
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <input>
   ...otherInputProps
-}: TextProps & CommonFieldProps) {
+}: TextProps) {
   const a11yIds = useFieldA11yIds({
     label,
     hint,

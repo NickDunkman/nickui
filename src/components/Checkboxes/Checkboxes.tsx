@@ -2,13 +2,14 @@ import * as React from 'react';
 
 import { Checkbox } from '@/components/Checkbox';
 import { Fieldset } from '@/components/Fieldset';
-import type { CommonCheckedFieldProps, CommonFieldsetProps } from '@/types';
+import type { CheckedFieldableProps, FieldableProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 export interface CheckablesProps
-  extends Omit<React.ComponentProps<'input'>, 'children' | 'className'> {
+  extends Omit<React.ComponentProps<'input'>, 'children'>,
+    FieldableProps {
   /** The name for the field */
   name?: string;
   /**
@@ -16,7 +17,7 @@ export interface CheckablesProps
    * provided callback to get props to pass down to each input.
    */
   render?: (
-    inputProps: (control: {
+    inputProps: (config: {
       value: string;
       disabled?: boolean;
     }) => React.ComponentProps<'input'>,
@@ -55,12 +56,12 @@ export interface CheckablesProps
  * substring that can be added to or removed from the delimited-string by
  * toggling the checked status.
  *
- * @props {@link CheckablesProps} + {@link CommonFieldsetProps}
+ * @props {@link CheckablesProps}
  */
 export function Checkboxes({
   delimiter = ',',
   ...otherProps
-}: CheckablesProps & CommonFieldsetProps) {
+}: CheckablesProps) {
   return (
     <Checkables
       {...otherProps}
@@ -99,13 +100,12 @@ export function Checkables({
   'data-nickui-component': dataNickUIComponent,
   // The rest are brought in from <'input'>
   ...otherHiddenInputProps
-}: CheckablesProps &
-  CommonFieldsetProps & {
-    Checkable: React.ComponentType<
-      React.ComponentProps<'input'> & CommonCheckedFieldProps
-    >;
-    'data-nickui-component'?: string;
-  }) {
+}: CheckablesProps & {
+  Checkable: React.ComponentType<
+    React.ComponentProps<'input'> & CheckedFieldableProps
+  >;
+  'data-nickui-component'?: string;
+}) {
   const containerRef = React.createRef<HTMLDivElement>();
   const [checkableName] = React.useState(randomId());
 

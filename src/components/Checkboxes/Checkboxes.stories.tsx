@@ -4,12 +4,18 @@ import { expect, fn } from 'storybook/test';
 
 import { Checkbox } from '@/components/Checkbox';
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { Checkboxes } from './Checkboxes';
 
 const meta = {
   title: 'Form controls/Checkboxes',
   component: Checkboxes,
+  argTypes: storyArgsTyper<typeof Checkboxes>({
+    isDisableable: true,
+    hasSizers: true,
+    defaultValues: { delimiter: ',' },
+  }),
 } satisfies Meta<typeof Checkboxes>;
 
 export default meta;

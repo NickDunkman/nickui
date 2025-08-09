@@ -1,35 +1,29 @@
 import keycode from 'keycode';
 import * as React from 'react';
 
-import { FlavorType, SizerType } from '@/types';
+import {
+  DisableableProps,
+  SecondaryFlavorableProps,
+  SizerableProps,
+} from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { buttonStyler } from './styles';
 
-export interface ButtonProps extends React.ComponentProps<'button'> {
+export const ALLOWED_TYPES = ['button', 'reset', 'submit'] as const;
+
+export interface ButtonProps
+  extends React.ComponentProps<'button'>,
+    DisableableProps,
+    SecondaryFlavorableProps,
+    SizerableProps {
   /** The inner content shown in the Button */
   children?: React.ReactNode;
-  /** Optionally add utility classes */
-  className?: string;
-  /** Prevents the user from interacting with the Button */
-  disabled?: boolean;
-  /** Called when Button is pressed */
+  /** Called when Button is activated */
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   /** Controls the behavior of the button */
-  type?: 'button' | 'reset' | 'submit';
-  /**
-   * Changes the size of the component. A sizer string, or an array of sizer
-   * strings for responsive sizing.
-   */
-  sizer?: SizerType | SizerType[];
-  /**
-   * Changes the color of the button ("neutral", "positive", "caution",
-   * "negative")
-   */
-  flavor?: FlavorType;
-  /** Set to `true` to show the secondary style of the flavor */
-  secondary?: boolean;
+  type?: (typeof ALLOWED_TYPES)[number];
 }
 
 /**
@@ -38,11 +32,11 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
  */
 export function Button({
   className,
-  type = 'button',
-  disabled = false,
+  type,
+  disabled,
   sizer,
   flavor,
-  secondary = false,
+  secondary,
   onTouchStart,
   onTouchEnd,
   onTouchCancel,

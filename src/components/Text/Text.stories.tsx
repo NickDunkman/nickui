@@ -3,12 +3,23 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
-import { Text } from './Text';
+import { ALLOWED_TYPES, Text } from './Text';
 
 const meta = {
   title: 'Form controls/Text',
   component: Text,
+  argTypes: storyArgsTyper<typeof Text>({
+    isDisableable: true,
+    hasSizers: true,
+    defaultValues: {
+      type: 'text',
+    },
+    types: {
+      type: ALLOWED_TYPES,
+    },
+  }),
 } satisfies Meta<typeof Text>;
 
 export default meta;

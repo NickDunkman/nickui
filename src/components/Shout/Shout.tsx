@@ -1,26 +1,17 @@
 import * as React from 'react';
 
-import { FlavorType, SizerType } from '@/types';
+import { FlavorableProps, SizerableProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { shoutStyler } from './styles';
 
-interface ShoutProps extends React.ComponentProps<'div'> {
+export interface ShoutProps
+  extends React.ComponentProps<'div'>,
+    FlavorableProps,
+    SizerableProps {
   /** The inner content shown in the Shout */
   children?: React.ReactNode;
-  /** Optionally add utility classes to the root element */
-  className?: string;
-  /**
-   * Changes the size of the component. A sizer string, or an array of sizer
-   * strings for responsive sizing.
-   */
-  sizer?: SizerType | SizerType[];
-  /**
-   * Changes the color of the Shout ("neutral", "positive", "caution",
-   * "negative")
-   */
-  flavor?: FlavorType;
 }
 
 /**

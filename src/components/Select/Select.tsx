@@ -1,15 +1,17 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import type { CommonFieldProps } from '@/types';
+import { FieldableProps } from '@/types';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { selectStyler } from './styles';
 
-interface SelectProps extends React.ComponentProps<'select'> {
+export interface SelectProps
+  extends React.ComponentProps<'select'>,
+    FieldableProps {
   /** Called when the value of the Select changes */
-  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
   /**
    * Sets the value of the Select when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/select#controlling-a-select-box-with-a-state-variable)
@@ -21,7 +23,7 @@ interface SelectProps extends React.ComponentProps<'select'> {
 
 /**
  * A form control that allows users to choose an option using a menu
- * @param props {@link SelectProps} + {@link CommonFieldProps}
+ * @param props {@link SelectProps}
  */
 export function Select({
   // Field props
@@ -40,7 +42,7 @@ export function Select({
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <select>
   ...otherSelectProps
-}: SelectProps & CommonFieldProps) {
+}: SelectProps) {
   const a11yIds = useFieldA11yIds({
     label,
     hint,

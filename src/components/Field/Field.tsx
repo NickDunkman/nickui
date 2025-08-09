@@ -1,11 +1,13 @@
 import * as React from 'react';
 
-import { CommonFieldProps } from '@/types';
+import { FieldableProps } from '@/types';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { fieldStyler } from './styles';
 
-export interface FieldProps extends React.ComponentProps<'div'> {
+export interface FieldProps
+  extends React.ComponentProps<'div'>,
+    FieldableProps {
   /** The content of the form-control section of the Field */
   children?: React.ReactNode;
   /** For accessibility purposes: an id to set on the label element */
@@ -25,7 +27,7 @@ export interface FieldProps extends React.ComponentProps<'div'> {
 /**
  * Field wraps one form control in a standard field layout (label, hint, error
  * message, etc).
- * @props {@link FieldProps} {@link CommonFieldProps}
+ * @props {@link FieldProps}
  */
 export function Field({
   children: formControl,
@@ -40,7 +42,7 @@ export function Field({
   disabled: _disabled,
   required = false,
   ...otherDivProps
-}: FieldProps & CommonFieldProps) {
+}: FieldProps) {
   const resolvedSizer = useResolvedSizer(sizer);
   const styles = fieldStyler({ sizer: resolvedSizer });
 

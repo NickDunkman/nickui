@@ -2,7 +2,7 @@ import keycode from 'keycode';
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { CommonFieldProps } from '@/types';
+import { FieldableProps } from '@/types';
 import { debounceToRepaint } from '@/utils/debounceToRepaint';
 import { fireInputChange } from '@/utils/fireInputChange';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
@@ -24,11 +24,12 @@ type SliderFieldDescriptor =
       step: number;
     }) => React.ReactNode);
 
-interface SliderProps
+export interface SliderProps
   extends Omit<
-    React.ComponentProps<'div'>,
-    'onChange' | 'onBlur' | 'children' | 'ref'
-  > {
+      React.ComponentProps<'div'>,
+      'onChange' | 'onBlur' | 'children' | 'ref'
+    >,
+    FieldableProps<SliderFieldDescriptor> {
   /** Optionally add utility classes to the root element */
   className?: string;
   /** Called when the value of the Slider changes */
@@ -44,12 +45,12 @@ interface SliderProps
    * For example, to have possible values of [1, 3, 5, 7, 9], use:
    *   `<Slider min={1} max={9} step={2} />`
    */
-  step?: number;
+  step?: number | string;
   /**
    * The number of steps to move when the shift key is held while adjusting
    * the value via the keyboard, defaults to 10
    */
-  shiftSteps?: number;
+  shiftSteps?: number | string;
   /** The field name */
   name?: string;
   /**
@@ -63,11 +64,9 @@ interface SliderProps
   ref?: React.Ref<HTMLInputElement>;
 }
 
-type SliderFieldProps = CommonFieldProps<SliderFieldDescriptor>;
-
 /**
  * A form control that allows users to choose a number within a range.
- * @param props {@link SliderProps} + {@link SliderFieldProps}
+ * @param props {@link SliderProps}
  */
 export function Slider({
   // Field props
@@ -83,8 +82,8 @@ export function Slider({
   name,
   max: rawMax = 100,
   min: rawMin = 0,
-  step = 1,
-  shiftSteps = 10,
+  step: rawStep = 1,
+  shiftSteps: rawShiftSteps = 10,
   tabIndex,
   value: controlledValue,
   defaultValue,
@@ -100,7 +99,7 @@ export function Slider({
   'aria-invalid': ariaInvalid,
   // The rest are brought in from <div>
   ...otherDivProps
-}: SliderProps & SliderFieldProps) {
+}: SliderProps) {
   const rootRef = React.useRef<HTMLDivElement>(null);
   const trackRef = React.useRef<HTMLDivElement>(null);
 
@@ -120,6 +119,8 @@ export function Slider({
 
   const max = Number(rawMax);
   const min = Number(rawMin);
+  const step = Number(rawStep);
+  const shiftSteps = Number(rawShiftSteps);
 
   const isControlledComponent = controlledValue !== undefined;
   const value = isControlledComponent

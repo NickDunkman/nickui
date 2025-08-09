@@ -1,11 +1,13 @@
 import * as React from 'react';
 
 import { Checkable } from '@/components/Checkbox';
-import { CommonCheckedFieldProps } from '@/types';
+import { CheckedFieldableProps } from '@/types';
 
 import { switchStyler } from './styles';
 
-interface SwitchProps extends Omit<React.ComponentProps<'input'>, 'type'> {
+export interface SwitchProps
+  extends Omit<React.ComponentProps<'input'>, 'type'>,
+    CheckedFieldableProps {
   /**
    * Sets the checked state of the Checkbox when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
@@ -17,7 +19,7 @@ interface SwitchProps extends Omit<React.ComponentProps<'input'>, 'type'> {
    */
   defaultChecked?: boolean;
   /** Called when the checked state changes  */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 /**
@@ -27,7 +29,7 @@ interface SwitchProps extends Omit<React.ComponentProps<'input'>, 'type'> {
  * under a common category.
  * @props {@link SwitchProps}
  */
-export function Switch(props: SwitchProps & CommonCheckedFieldProps) {
+export function Switch(props: SwitchProps) {
   return (
     <Checkable
       {...props}

@@ -4,12 +4,18 @@ import { expect, fn } from 'storybook/test';
 
 import { Switch } from '@/components/Switch';
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { Switches } from './Switches';
 
 const meta = {
   title: 'Form controls/Switches',
   component: Switches,
+  argTypes: storyArgsTyper<typeof Switches>({
+    isDisableable: true,
+    hasSizers: true,
+    defaultValues: { delimiter: ',' },
+  }),
 } satisfies Meta<typeof Switches>;
 
 export default meta;

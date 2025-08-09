@@ -1,28 +1,17 @@
 import * as React from 'react';
 
-import { FlavorType, SizerType } from '@/types';
+import { FlavorType, FlavorableProps, SizerableProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { asideStyler } from './styles';
 
-interface AsideProps extends React.ComponentProps<'aside'> {
+export interface AsideProps
+  extends React.ComponentProps<'aside'>,
+    FlavorableProps,
+    SizerableProps {
   /** The inner content shown in the Shout */
   children?: React.ReactNode;
-  /** Optionally add utility classes to the root element */
-  className?: string;
-  /** Optional title to put at the top of the Aside */
-  heading?: React.ReactNode;
-  /**
-   * Changes the size of the component. A sizer string, or an array of sizer
-   * strings for responsive sizing.
-   */
-  sizer?: SizerType | SizerType[];
-  /**
-   * Changes the color of the Shout ("neutral", "positive", "caution",
-   * "negative")
-   */
-  flavor?: FlavorType;
 }
 
 /**

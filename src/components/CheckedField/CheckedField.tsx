@@ -1,13 +1,15 @@
 import * as React from 'react';
 
-import { CommonCheckedFieldProps } from '@/types';
+import { CheckedFieldableProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useElementBounds } from '@/utils/useElementBounds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { checkedFieldStyler } from './styles';
 
-export interface CheckedFieldProps extends React.ComponentProps<'label'> {
+export interface CheckedFieldProps
+  extends React.ComponentProps<'label'>,
+    CheckedFieldableProps {
   /** The content of the form-control section of the Field */
   children?: React.ReactNode;
   /** For accessibility purposes: an id to set on the label element */
@@ -38,7 +40,7 @@ export function CheckedField({
   sizer,
   disabled: disabled,
   ...labelProps
-}: CheckedFieldProps & CommonCheckedFieldProps) {
+}: CheckedFieldProps) {
   const controlRef = React.useRef<HTMLDivElement>(null);
   const controlBounds = useElementBounds(controlRef);
 

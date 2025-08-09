@@ -3,12 +3,17 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { Select } from './Select';
 
 const meta = {
   title: 'Form controls/Select',
   component: Select,
+  argTypes: storyArgsTyper<typeof Select>({
+    isDisableable: true,
+    hasSizers: true,
+  }),
 } satisfies Meta<typeof Select>;
 
 export default meta;

@@ -3,12 +3,17 @@ import * as React from 'react';
 import { expect } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { Aside } from './Aside';
 
 const meta = {
   title: 'Notices/Aside',
   component: Aside,
+  argTypes: storyArgsTyper<typeof Aside>({
+    hasFlavors: true,
+    hasSizers: true,
+  }),
 } satisfies Meta<typeof Aside>;
 
 export default meta;

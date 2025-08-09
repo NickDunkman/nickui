@@ -3,12 +3,17 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/utils/storyArgsTyper';
 
 import { Switch } from './Switch';
 
 const meta = {
   title: 'Form controls/Switch',
   component: Switch,
+  argTypes: storyArgsTyper<typeof Switch>({
+    isDisableable: true,
+    hasSizers: true,
+  }),
 } satisfies Meta<typeof Switch>;
 
 export default meta;

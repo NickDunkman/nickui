@@ -1,14 +1,16 @@
 import * as React from 'react';
 
 import { CheckedField } from '@/components/CheckedField';
-import { CommonCheckedFieldProps } from '@/types';
+import { CheckedFieldableProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { checkboxStyler } from './styles';
 
-interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
+export interface CheckboxProps
+  extends Omit<React.ComponentProps<'input'>, 'type'>,
+    CheckedFieldableProps {
   /**
    * Sets the checked state of the Checkbox when using it as a
    * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
@@ -20,14 +22,14 @@ interface CheckboxProps extends Omit<React.ComponentProps<'input'>, 'type'> {
    */
   defaultChecked?: boolean;
   /** Called when the checked state changes  */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 /**
  * A form control that allow users to choose zero to many options from a set
- * @param props {@link CheckboxProps} {@link CommonCheckedFieldProps}
+ * @param props {@link CheckboxProps}
  */
-export function Checkbox(props: CheckboxProps & CommonCheckedFieldProps) {
+export function Checkbox(props: CheckboxProps) {
   return (
     <Checkable
       {...props}
@@ -60,13 +62,12 @@ export function Checkable({
   'aria-describedby': controlledAriaDescribedBy,
   'data-nickui-component': dataNickUIComponent,
   ...inputProps
-}: CheckboxProps &
-  CommonCheckedFieldProps & {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    styler?: any;
-    type: 'checkbox' | 'radio';
-    'data-nickui-component'?: string;
-  }) {
+}: CheckboxProps & {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  styler?: any;
+  type: 'checkbox' | 'radio';
+  'data-nickui-component'?: string;
+}) {
   const [isMouseFocused, setIsMouseFocused] = React.useState<boolean>(false);
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
