@@ -3,14 +3,14 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
-import { storyArgsTyper } from '@/dev/stories/storyArgsTyper';
+import { getStoryArgTypes } from '@/dev/stories/getStoryArgTypes';
 
 import { Money } from './Money';
 
 const meta = {
   title: 'Form controls/Money',
   component: Money,
-  argTypes: storyArgsTyper<typeof Money>({
+  argTypes: getStoryArgTypes<typeof Money>({
     formControl: {
       isDisableable: true,
       valueType: ['string', 'number'],

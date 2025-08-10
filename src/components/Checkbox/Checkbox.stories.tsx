@@ -3,14 +3,14 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
-import { storyArgsTyper } from '@/dev/stories/storyArgsTyper';
+import { getStoryArgTypes } from '@/dev/stories/getStoryArgTypes';
 
 import { Checkbox } from './Checkbox';
 
 const meta = {
   title: 'Form controls/Checkbox',
   component: Checkbox,
-  argTypes: storyArgsTyper<typeof Checkbox>({
+  argTypes: getStoryArgTypes<typeof Checkbox>({
     formControl: {
       isCheckable: true,
       isDisableable: true,

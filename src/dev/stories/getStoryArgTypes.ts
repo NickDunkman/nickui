@@ -24,7 +24,7 @@ type TypesSpec<Component extends React.ComponentType> = Partial<
  * Reduces the boilerplate needed to produce argTypes objects used in
  * story Meta objects
  */
-export function storyArgsTyper<Component extends React.ComponentType>({
+export function getStoryArgTypes<Component extends React.ComponentType>({
   isFlavorable,
   formControl,
   isSizerable,

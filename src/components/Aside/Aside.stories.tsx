@@ -3,7 +3,7 @@ import * as React from 'react';
 import { expect } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
-import { storyArgsTyper } from '@/dev/stories/storyArgsTyper';
+import { getStoryArgTypes } from '@/dev/stories/getStoryArgTypes';
 
 import { Aside } from './Aside';
 
@@ -14,7 +14,7 @@ const meta = {
     'Aside.Heading': Aside.Heading,
     'Aside.Paragraph': Aside.Paragraph,
   },
-  argTypes: storyArgsTyper<typeof Aside>({
+  argTypes: getStoryArgTypes<typeof Aside>({
     isFlavorable: true,
     isSizerable: true,
   }),

@@ -4,14 +4,14 @@ import { expect, fn } from 'storybook/test';
 
 import { Radio } from '@/components/Radio';
 import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
-import { storyArgsTyper } from '@/dev/stories/storyArgsTyper';
+import { getStoryArgTypes } from '@/dev/stories/getStoryArgTypes';
 
 import { Radios } from './Radios';
 
 const meta = {
   title: 'Form controls/Radios',
   component: Radios,
-  argTypes: storyArgsTyper<typeof Radios>({
+  argTypes: getStoryArgTypes<typeof Radios>({
     formControl: {
       isDisableable: true,
       valueType: 'string',

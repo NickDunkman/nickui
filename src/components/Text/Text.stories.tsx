@@ -3,14 +3,14 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
-import { storyArgsTyper } from '@/dev/stories/storyArgsTyper';
+import { getStoryArgTypes } from '@/dev/stories/getStoryArgTypes';
 
 import { ALLOWED_TYPES, Text } from './Text';
 
 const meta = {
   title: 'Form controls/Text',
   component: Text,
-  argTypes: storyArgsTyper<typeof Text>({
+  argTypes: getStoryArgTypes<typeof Text>({
     formControl: {
       isDisableable: true,
       valueType: 'string',

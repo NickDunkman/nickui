@@ -3,14 +3,14 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
-import { storyArgsTyper } from '@/dev/stories/storyArgsTyper';
+import { getStoryArgTypes } from '@/dev/stories/getStoryArgTypes';
 
 import { Switch } from './Switch';
 
 const meta = {
   title: 'Form controls/Switch',
   component: Switch,
-  argTypes: storyArgsTyper<typeof Switch>({
+  argTypes: getStoryArgTypes<typeof Switch>({
     formControl: {
       isCheckable: true,
       isDisableable: true,

@@ -4,14 +4,14 @@ import { expect, fn } from 'storybook/test';
 
 import { Switch } from '@/components/Switch';
 import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
-import { storyArgsTyper } from '@/dev/stories/storyArgsTyper';
+import { getStoryArgTypes } from '@/dev/stories/getStoryArgTypes';
 
 import { Switches } from './Switches';
 
 const meta = {
   title: 'Form controls/Switches',
   component: Switches,
-  argTypes: storyArgsTyper<typeof Switches>({
+  argTypes: getStoryArgTypes<typeof Switches>({
     formControl: {
       isDisableable: true,
       valueType: 'string',

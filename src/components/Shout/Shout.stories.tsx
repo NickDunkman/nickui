@@ -3,14 +3,14 @@ import * as React from 'react';
 import { expect } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
-import { storyArgsTyper } from '@/dev/stories/storyArgsTyper';
+import { getStoryArgTypes } from '@/dev/stories/getStoryArgTypes';
 
 import { Shout } from './Shout';
 
 const meta = {
   title: 'Notices/Shout',
   component: Shout,
-  argTypes: storyArgsTyper<typeof Shout>({
+  argTypes: getStoryArgTypes<typeof Shout>({
     isFlavorable: true,
     isSizerable: true,
   }),
