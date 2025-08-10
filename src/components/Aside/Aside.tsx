@@ -66,14 +66,17 @@ const AsideContext = React.createContext<{
   flavor: 'neutral',
 });
 
-function AsideHeading({
+export function AsideHeading({
   children,
   className,
   level = 3,
 }: {
   /** The content to put in the heading tag */
   children?: React.ReactNode;
-  /** Optionally add utility classes */
+  /**
+   * Optionally add classes to the root element, such as to position the
+   * component, or add margins
+   */
   className?: string;
   /** Optionally switch to a different heading tag (default is h3) */
   level?: 1 | 2 | 3 | 4 | 5 | 6;
@@ -90,13 +93,16 @@ function AsideHeading({
 
 AsideHeading.displayName = 'AsideHeading';
 
-function AsideParagraph({
+export function AsideParagraph({
   children,
   className,
 }: {
-  /** The content to put in the <p> tag */
+  /** The paragraph content */
   children?: React.ReactNode;
-  /** Optional add utility classes */
+  /**
+   * Optionally add classes to the root element, such as to position the
+   * component, or add margins
+   */
   className?: string;
 }) {
   const { styles } = React.useContext(AsideContext);

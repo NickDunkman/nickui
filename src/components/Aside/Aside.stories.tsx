@@ -10,6 +10,10 @@ import { Aside } from './Aside';
 const meta = {
   title: 'Notices/Aside',
   component: Aside,
+  subcomponents: {
+    'Aside.Heading': Aside.Heading,
+    'Aside.Paragraph': Aside.Paragraph,
+  },
   argTypes: storyArgsTyper<typeof Aside>({
     isFlavorable: true,
     isSizerable: true,
