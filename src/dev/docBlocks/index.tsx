@@ -5,7 +5,6 @@ import { ComponentName } from './ComponentName';
 import { ControlStates } from './ControlStates';
 import { FauxCanvas } from './FauxCanvas';
 import { Flavoring } from './Flavoring';
-import { FormControlPlaceholder } from './FormControlPlaceholder';
 import { FormLibraryCompatibility } from './FormLibraryCompatibility';
 import { PrettyPrint } from './PrettyPrint';
 import { Props } from './Props';
@@ -24,7 +23,7 @@ import { TableOfContents } from './TableOfContents';
  *
  * Example usage in an .mdx file:
  *
- * import Docs from '@/docs';
+ * import Docs from '@/dev/docBlocks';
  *
  * # My docs!
  *
@@ -43,7 +42,6 @@ Docs.ComponentName = ComponentName;
 Docs.ControlStates = ControlStates;
 Docs.FauxCanvas = FauxCanvas;
 Docs.Flavoring = Flavoring;
-Docs.FormControlPlaceholder = FormControlPlaceholder;
 Docs.FormLibraryCompatibility = FormLibraryCompatibility;
 Docs.PrettyPrint = PrettyPrint;
 Docs.Props = Props;

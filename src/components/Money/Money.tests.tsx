@@ -1,27 +1,27 @@
-// Note: most tests are in story play functions in Text.stories.tsx
+// Note: more tests are in story play functions in Money.stories.tsx
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import * as React from 'react';
 
 import { formLibraryTests } from '@/dev/tests/formLibraryTests';
 
-import { Text } from './Text';
+import { Money } from './Money';
 
 test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
   render(
     <Test
-      Component={Text}
-      label="Name"
-      fieldName="name"
-      initialValue="Nick"
-      erroneousValue="not Nick"
+      Component={Money}
+      label="Cost"
+      fieldName="cost"
+      initialValue="99999.99"
+      erroneousValue="0.00"
     />,
   );
 
-  const input = screen.getByLabelText('Name');
-  expect(input).toHaveValue('Nick');
+  const input = screen.getByLabelText('Cost');
+  expect(input).toHaveValue('99,999.99');
   expect(input).toHaveAttribute('data-touched', 'false');
 
   await user.tab();
@@ -30,7 +30,7 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   await user.clear(input);
   expect(input).toHaveValue('');
 
-  await user.type(input, 'not Nick');
+  await user.type(input, '0.00');
   expect(input).toHaveAccessibleErrorMessage('That’s erroneous');
 
   // Ensures that onBlur is functioning properly

@@ -3,8 +3,8 @@ import * as React from 'react';
 import { expect, fn } from 'storybook/test';
 
 import { Checkbox } from '@/components/Checkbox';
-import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
-import { storyArgsTyper } from '@/utils/storyArgsTyper';
+import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
+import { storyArgsTyper } from '@/dev/stories/storyArgsTyper';
 
 import { Checkboxes } from './Checkboxes';
 

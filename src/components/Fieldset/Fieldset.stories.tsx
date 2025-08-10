@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 
-import Docs from '@/docs';
-import { AllSizersStoryWrapper } from '@/utils/AllSizersStoryWrapper';
+import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
+import { FormControlPlaceholder } from '@/dev/stories/FormControlPlaceholder';
 
 import { Fieldset } from './Fieldset';
 
@@ -18,8 +18,8 @@ export const basic: Story = {
   tags: ['!dev', '!test', 'field-layout'],
   args: {
     children: [
-      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
-      <Docs.FormControlPlaceholder key="second" />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'A label for the fieldset',
     hint: 'A hint about the fieldset’s values',
@@ -33,8 +33,8 @@ export const xs: Story = {
   args: {
     sizer: 'xs',
     children: [
-      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
-      <Docs.FormControlPlaceholder key="second" />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Xs label',
     hint: 'Xs hint',
@@ -48,8 +48,8 @@ export const sm: Story = {
   args: {
     sizer: 'sm',
     children: [
-      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
-      <Docs.FormControlPlaceholder key="second" />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Sm label',
     hint: 'Sm hint',
@@ -63,8 +63,8 @@ export const base: Story = {
   args: {
     sizer: 'base',
     children: [
-      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
-      <Docs.FormControlPlaceholder key="second" />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Base label',
     hint: 'Base hint',
@@ -78,8 +78,8 @@ export const lg: Story = {
   args: {
     sizer: 'lg',
     children: [
-      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
-      <Docs.FormControlPlaceholder key="second" />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Lg label',
     hint: 'Lg hint',
@@ -93,8 +93,8 @@ export const xl: Story = {
   args: {
     sizer: 'xl',
     children: [
-      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
-      <Docs.FormControlPlaceholder key="second" />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Xl label',
     hint: 'Xl hint',
@@ -108,8 +108,8 @@ export const responsive: Story = {
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
     children: [
-      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
-      <Docs.FormControlPlaceholder key="second" />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Responsive label',
     hint: 'Responsive hint',
@@ -121,8 +121,8 @@ export const responsive: Story = {
 export const error: Story = {
   args: {
     children: [
-      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
-      <Docs.FormControlPlaceholder key="second" />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Select some comparables',
     error: 'These cannot be compared',
@@ -132,8 +132,8 @@ export const error: Story = {
 export const required: Story = {
   args: {
     children: [
-      <Docs.FormControlPlaceholder key="first" className="mb-2" />,
-      <Docs.FormControlPlaceholder key="second" />,
+      <FormControlPlaceholder key="first" className="mb-2" />,
+      <FormControlPlaceholder key="second" />,
     ],
     label: 'Your name',
     required: true,

@@ -157,7 +157,6 @@ export function Money(props: MoneyProps) {
         event.
       */}
       <input
-        type="number"
         name={props.name}
         className={moneyStyles.hiddenInput()}
         tabIndex={-1}

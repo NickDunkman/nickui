@@ -1,7 +1,7 @@
 import { AnchorMdx } from '@storybook/addon-docs/blocks';
 import * as React from 'react';
 
-import { getStoryId } from '@/utils/stories';
+import { getStoryId } from '@/dev/stories/stories';
 
 /**
  * Custom doc block for rendering a consistent-looking Component name in the

@@ -218,7 +218,16 @@ export function useValueElementsProps(props: MoneyProps): {
       },
       onBlur: (event) => {
         isFocusFormatted && setIsFocusFormatted(false);
-        props.onBlur?.(event);
+        if (hiddenRef.current) {
+          props.onBlur?.({
+            ...event,
+            // swapping in the hidden input as the target of the blur, so that
+            // form libraries can peep the `name` attribute to see which field
+            // was "touched".
+            target: hiddenRef.current,
+            currentTarget: hiddenRef.current,
+          });
+        }
       },
       // This mouse stuff prevents onFocus from immediately switching the system
       // to use focusFormat when the user is trying to select some text -- we

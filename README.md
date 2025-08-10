@@ -58,7 +58,7 @@ One thing I really enjoyed during this project was thinking of ways to make my
 storybook docs more powerful, and cut down on the amount of boilerplate I had to
 add to each component’s docs. If you’re inspired by anything you see, feel free
 to peep the
-[custom "doc blocks" I created](https://github.com/NickDunkman/nickui/tree/main/src/docs)!
+[custom "doc blocks" I created](https://github.com/NickDunkman/nickui/tree/main/src/dev/docBlocks)!
 
 ---
 

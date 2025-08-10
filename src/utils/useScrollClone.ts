@@ -49,9 +49,7 @@ function cloneScroll(
   cloneToElement: HTMLElement | null,
 ) {
   if (cloneFromElement && cloneToElement) {
-    cloneToElement.scroll(
-      cloneFromElement.scrollLeft,
-      cloneFromElement.scrollTop,
-    );
+    cloneToElement.scrollLeft = cloneFromElement.scrollLeft;
+    cloneToElement.scrollTop = cloneFromElement.scrollTop;
   }
 }

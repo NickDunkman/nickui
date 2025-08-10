@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { clsw } from './clsw';
+import { clsw } from '@/utils/clsw';
 
 export function AllSizersStoryWrapper({
   children,
