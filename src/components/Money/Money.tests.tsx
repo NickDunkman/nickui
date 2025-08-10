@@ -13,10 +13,12 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   render(
     <Test
       Component={Money}
-      label="Cost"
       fieldName="cost"
       initialValue="99999.99"
       erroneousValue="0.00"
+      componentProps={{
+        label: 'Cost',
+      }}
     />,
   );
 

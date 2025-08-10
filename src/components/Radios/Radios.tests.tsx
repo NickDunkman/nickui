@@ -1,65 +1,39 @@
 // Note: most tests are in story play functions in Radios.stories.tsx
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { useFormik } from 'formik';
 import * as React from 'react';
-import { useForm } from 'react-hook-form';
+
+import { formLibraryTests } from '@/dev/tests/formLibraryTests';
 
 import { Radios } from './Radios';
 
-function RHFTest() {
-  const {
-    register,
-    formState: { touchedFields },
-  } = useForm({
-    mode: 'all',
-    defaultValues: { language: 'fr' },
-  });
-
-  return (
-    <Radios
-      {...register('language')}
-      options={[
-        { value: 'en', label: 'English' },
-        { value: 'fr', label: 'Français' },
-      ]}
-      data-touched={!!touchedFields.language}
-    />
-  );
-}
-
-function FormikTest() {
-  const form = useFormik({
-    initialValues: { language: 'fr' },
-    onSubmit: () => {},
-  });
-
-  return (
-    <Radios
-      {...form.getFieldProps('language')}
-      options={[
-        { value: 'en', label: 'English' },
-        { value: 'fr', label: 'Français' },
-      ]}
-      data-touched={!!form.touched.language}
-    />
-  );
-}
-
-test.each([
-  { Component: RHFTest, library: 'React Hook Forms' },
-  { Component: FormikTest, library: 'Formik' },
-])('Compatible with $library', async ({ Component }) => {
+test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
-  render(<Component />);
+  render(
+    <Test
+      Component={Radios}
+      fieldName="language"
+      initialValue="fr"
+      erroneousValue="en"
+      componentProps={{
+        label: 'Language',
+        options: [
+          { value: 'en', label: 'English' },
+          { value: 'fr', label: 'Français' },
+        ],
+      }}
+    />,
+  );
 
+  const group = screen.getByRole('group');
   const hiddenInput = screen.getByTestId('the-hidden-input');
   const english = screen.getByLabelText('English');
   const français = screen.getByLabelText('Français');
 
   expect(hiddenInput).toHaveAttribute('data-touched', 'false');
   expect(hiddenInput).toHaveValue('fr');
+  expect(group).not.toHaveAccessibleErrorMessage();
   expect(english).not.toBeChecked();
   expect(français).toBeChecked();
 
@@ -71,6 +45,7 @@ test.each([
 
   await user.keyboard(' ');
   expect(hiddenInput).toHaveValue('en');
+  expect(group).toHaveAccessibleErrorMessage('That’s erroneous');
   expect(english).toBeChecked();
   expect(français).not.toBeChecked();
 

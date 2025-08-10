@@ -9,17 +9,18 @@ export const formLibraryTests = [
   { Test: FormikTest, library: 'Formik' },
 ] as const;
 
-function ReactHookFormTest({
+export function ReactHookFormTest<T extends React.JSX.IntrinsicAttributes>({
   Component,
   fieldName,
   initialValue,
   erroneousValue,
-  ...componentProps
+  componentProps,
 }: FieldableProps & {
-  Component: React.ComponentType;
+  Component: React.ComponentType<T>;
   fieldName: string;
   initialValue: string;
   erroneousValue: string;
+  componentProps: T;
 }) {
   const {
     register,
@@ -41,17 +42,18 @@ function ReactHookFormTest({
   );
 }
 
-export function FormikTest({
+export function FormikTest<T extends React.JSX.IntrinsicAttributes>({
   Component,
   fieldName,
   initialValue,
   erroneousValue,
-  ...componentProps
-}: FieldableProps & {
-  Component: React.ComponentType;
+  componentProps,
+}: {
+  Component: React.ComponentType<T>;
   fieldName: string;
   initialValue: string;
   erroneousValue: string;
+  componentProps: T;
 }) {
   const form = useFormik({
     initialValues: {

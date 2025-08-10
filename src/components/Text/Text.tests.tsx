@@ -13,10 +13,12 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   render(
     <Test
       Component={Text}
-      label="Name"
       fieldName="name"
       initialValue="Nick"
       erroneousValue="not Nick"
+      componentProps={{
+        label: 'Name',
+      }}
     />,
   );
 

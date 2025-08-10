@@ -1,65 +1,39 @@
 // Note: most tests are in story play functions in Switches.stories.tsx
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { useFormik } from 'formik';
 import * as React from 'react';
-import { useForm } from 'react-hook-form';
+
+import { formLibraryTests } from '@/dev/tests/formLibraryTests';
 
 import { Switches } from './Switches';
 
-function RHFTest() {
-  const {
-    register,
-    formState: { touchedFields },
-  } = useForm({
-    mode: 'all',
-    defaultValues: { name: 'nick,dunkman' },
-  });
-
-  return (
-    <Switches
-      {...register('name')}
-      options={[
-        { value: 'nick', label: 'Nick' },
-        { value: 'dunkman', label: 'Dunkman' },
-      ]}
-      data-touched={!!touchedFields.name}
-    />
-  );
-}
-
-function FormikTest() {
-  const form = useFormik({
-    initialValues: { name: 'nick,dunkman' },
-    onSubmit: () => {},
-  });
-
-  return (
-    <Switches
-      {...form.getFieldProps('name')}
-      options={[
-        { value: 'nick', label: 'Nick' },
-        { value: 'dunkman', label: 'Dunkman' },
-      ]}
-      data-touched={!!form.touched.name}
-    />
-  );
-}
-
-test.each([
-  { Component: RHFTest, library: 'React Hook Forms' },
-  { Component: FormikTest, library: 'Formik' },
-])('Compatible with $library', async ({ Component }) => {
+test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
-  render(<Component />);
+  render(
+    <Test
+      Component={Switches}
+      fieldName="name"
+      initialValue="nick,dunkman"
+      erroneousValue="dunkman"
+      componentProps={{
+        label: 'Name',
+        options: [
+          { value: 'nick', label: 'Nick' },
+          { value: 'dunkman', label: 'Dunkman' },
+        ],
+      }}
+    />,
+  );
 
+  const group = screen.getByRole('group');
   const hiddenInput = screen.getByTestId('the-hidden-input');
   const nick = screen.getByLabelText('Nick');
   const dunkman = screen.getByLabelText('Dunkman');
 
   expect(hiddenInput).toHaveAttribute('data-touched', 'false');
   expect(hiddenInput).toHaveValue('nick,dunkman');
+  expect(group).not.toHaveAccessibleErrorMessage();
   expect(nick).toBeChecked();
   expect(dunkman).toBeChecked();
 
@@ -68,6 +42,7 @@ test.each([
 
   await user.keyboard(' ');
   expect(hiddenInput).toHaveValue('dunkman');
+  expect(group).toHaveAccessibleErrorMessage('That’s erroneous');
   expect(nick).not.toBeChecked();
   expect(dunkman).toBeChecked();
 
@@ -75,6 +50,7 @@ test.each([
   // beginning of the value!
   await user.keyboard(' ');
   expect(hiddenInput).toHaveValue('nick,dunkman');
+  expect(group).not.toHaveAccessibleErrorMessage();
   expect(nick).toBeChecked();
   expect(dunkman).toBeChecked();
 
