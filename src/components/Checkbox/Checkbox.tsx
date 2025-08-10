@@ -1,29 +1,14 @@
 import * as React from 'react';
 
 import { CheckedField } from '@/components/CheckedField';
-import { CheckedFieldableProps } from '@/types';
+import { CheckedFieldableFormControlProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { checkboxStyler } from './styles';
 
-export interface CheckboxProps
-  extends Omit<React.ComponentProps<'input'>, 'type'>,
-    CheckedFieldableProps {
-  /**
-   * Sets the checked state of the Checkbox when using it as a
-   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
-   */
-  checked?: boolean;
-  /**
-   * Sets the checked state of the Checkbox when using it as a uncontrolled
-   * component
-   */
-  defaultChecked?: boolean;
-  /** Called when the checked state changes  */
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-}
+export type CheckboxProps = CheckedFieldableFormControlProps;
 
 /**
  * A form control that allow users to choose zero to many options from a set

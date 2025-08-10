@@ -74,7 +74,6 @@ export function Money(props: MoneyProps) {
       hintId={a11yIds.ariaDescribedBy}
       error={props.error !== true ? props.error : undefined}
       errorId={a11yIds.ariaErrorMessage}
-      disabled={props.disabled}
       required={props.required}
       data-nickui-component="Money"
     >

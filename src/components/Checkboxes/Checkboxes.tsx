@@ -2,16 +2,16 @@ import * as React from 'react';
 
 import { Checkbox } from '@/components/Checkbox';
 import { Fieldset } from '@/components/Fieldset';
-import type { CheckedFieldableProps, FieldableProps } from '@/types';
+import type { CheckedFieldableProps, FieldableFormControlProps } from '@/types';
 import { clsw } from '@/utils/clsw';
 import { randomId } from '@/utils/randomId';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 export interface CheckablesProps
-  extends Omit<React.ComponentProps<'input'>, 'children'>,
-    FieldableProps {
-  /** The name for the field */
-  name?: string;
+  extends FieldableFormControlProps<
+    string,
+    Omit<React.ComponentProps<'input'>, 'children'>
+  > {
   /**
    * Render function used to render customized checkable inputs. Call the
    * provided callback to get props to pass down to each input.
@@ -29,15 +29,6 @@ export interface CheckablesProps
     hint?: React.ReactNode;
     disabled?: boolean;
   }[];
-  /** Called when the value changes */
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  /**
-   * Sets the value when using it as a
-   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
-   */
-  value?: string;
-  /** Sets the value when using it as an uncontrolled component */
-  defaultValue?: string;
   /**
    * Optionally override the delimiter used to split the value into individual
    * checkable values

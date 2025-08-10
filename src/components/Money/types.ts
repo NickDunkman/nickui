@@ -1,22 +1,12 @@
 import * as React from 'react';
 
-import { FieldableProps } from '@/types';
+import { FieldableFormControlProps } from '@/types';
 
-export interface MoneyInputProps
-  extends Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'> {
-  /** Called when the value of the Text changes */
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  /**
-   * Sets the value of the Money when using it as a
-   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
-   */
-  value?: string | number;
-  /** Sets the value of the Money when using it as an uncontrolled component */
-  defaultValue?: string | number;
-}
-
-/** These props are used to parse & format the <Money> component's value */
-export interface MoneyFormatProps {
+export interface MoneyProps
+  extends FieldableFormControlProps<
+    string | number,
+    Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'>
+  > {
   /** The currency symbol shown at the front of the input, typically "$" */
   currencySymbol?: React.ReactNode;
   /**
@@ -39,33 +29,17 @@ export interface MoneyFormatProps {
   allowNegatives?: boolean;
 }
 
-/** The full spec of props for the <Money> component */
-export interface MoneyProps
-  extends Omit<React.ComponentProps<'input'>, 'type' | 'placeholder'>,
-    FieldableProps,
-    MoneyFormatProps {
-  /** Called when the value of the Text changes */
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  /**
-   * Sets the value of the Money when using it as a
-   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
-   */
-  value?: string | number;
-  /** Sets the value of the Money when using it as an uncontrolled component */
-  defaultValue?: string | number;
-}
-
 /**
  * The formatting configuration used internally in the Money component
  * system.
  */
 export interface MoneyFormatType {
-  decimalPoint: NonNullable<MoneyFormatProps['decimalPoint']>;
-  minDecimalPlaces: NonNullable<MoneyFormatProps['decimalPlaces']>;
-  maxDecimalPlaces: NonNullable<MoneyFormatProps['decimalPlaces']>;
-  thousandsSeparator: NonNullable<MoneyFormatProps['decimalPoint']>;
-  allowNegatives: NonNullable<MoneyFormatProps['allowNegatives']>;
-  currencySymbol: NonNullable<MoneyFormatProps['currencySymbol']>;
+  decimalPoint: NonNullable<MoneyProps['decimalPoint']>;
+  minDecimalPlaces: NonNullable<MoneyProps['decimalPlaces']>;
+  maxDecimalPlaces: NonNullable<MoneyProps['decimalPlaces']>;
+  thousandsSeparator: NonNullable<MoneyProps['decimalPoint']>;
+  allowNegatives: NonNullable<MoneyProps['allowNegatives']>;
+  currencySymbol: NonNullable<MoneyProps['currencySymbol']>;
   allowTrailingDecimalPoint?: boolean;
 }
 

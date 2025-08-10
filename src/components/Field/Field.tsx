@@ -39,7 +39,6 @@ export function Field({
   error,
   errorId,
   sizer,
-  disabled: _disabled,
   required = false,
   ...otherDivProps
 }: FieldProps) {

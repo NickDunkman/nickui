@@ -25,7 +25,6 @@ export function Fieldset({
   hint,
   error,
   sizer,
-  disabled: _disabled,
   required = false,
   'aria-labelledby': ariaLabeledBy,
   'aria-describedby': ariaDescribedBy,

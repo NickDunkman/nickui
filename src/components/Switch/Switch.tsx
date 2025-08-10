@@ -1,26 +1,11 @@
 import * as React from 'react';
 
 import { Checkable } from '@/components/Checkbox';
-import { CheckedFieldableProps } from '@/types';
+import { CheckedFieldableFormControlProps } from '@/types';
 
 import { switchStyler } from './styles';
 
-export interface SwitchProps
-  extends Omit<React.ComponentProps<'input'>, 'type'>,
-    CheckedFieldableProps {
-  /**
-   * Sets the checked state of the Checkbox when using it as a
-   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
-   */
-  checked?: boolean;
-  /**
-   * Sets the checked state of the Checkbox when using it as a uncontrolled
-   * component
-   */
-  defaultChecked?: boolean;
-  /** Called when the checked state changes  */
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-}
+export type SwitchProps = CheckedFieldableFormControlProps;
 
 /**
  * A variation of the Checkbox component that has a more explict-feeling "off"

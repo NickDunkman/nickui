@@ -1,24 +1,14 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { FieldableProps } from '@/types';
+import { FieldableFormControlProps } from '@/types';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { textareaStyler } from './styles';
 
 export interface TextAreaProps
-  extends React.ComponentProps<'textarea'>,
-    FieldableProps {
-  /**
-   * Sets the value of the TextArea when using it as a
-   * [controlled component](https://react.dev/reference/react-dom/components/textarea#controlling-a-text-area-with-a-state-variable)
-   */
-  value?: string;
-  /**
-   * Sets the value of the TextArea when using it as an uncontrolled component
-   */
-  defaultValue?: string;
+  extends FieldableFormControlProps<string, 'textarea'> {
   /**
    * Use this to set a fixed number of visible rows on the TextArea. Causes
    * the `minRows` & `maxRows` props to be ignored.
@@ -36,8 +26,6 @@ export interface TextAreaProps
   maxRows?: number;
   /** Set to `true` to remove the resize handle from the bottom right */
   disableManualResize?: boolean;
-  /** Called when the value of the TextArea changes */
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   /**
    * A string that contains a brief hint to the user as to what information is
    * expected in the field.
@@ -168,7 +156,6 @@ export function TextArea({
       hintId={a11yIds.ariaDescribedBy}
       error={error !== true ? error : undefined}
       errorId={a11yIds.ariaErrorMessage}
-      disabled={disabled}
       required={required}
       data-nickui-component="TextArea"
     >

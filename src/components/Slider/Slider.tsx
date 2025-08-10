@@ -2,7 +2,7 @@ import keycode from 'keycode';
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { FieldableProps } from '@/types';
+import { FieldableFormControlProps } from '@/types';
 import { debounceToRepaint } from '@/utils/debounceToRepaint';
 import { fireInputChange } from '@/utils/fireInputChange';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
@@ -25,13 +25,16 @@ type SliderFieldDescriptor =
     }) => React.ReactNode);
 
 export interface SliderProps
-  extends Omit<
+  extends FieldableFormControlProps<
+    number | string,
+    Omit<
       React.ComponentProps<'div'>,
       'onChange' | 'onBlur' | 'children' | 'ref'
     >,
-    FieldableProps<SliderFieldDescriptor> {
-  /** Optionally add utility classes to the root element */
-  className?: string;
+    SliderFieldDescriptor
+  > {
+  /** The `ref` is for the hidden input */
+  ref?: React.Ref<HTMLInputElement>;
   /** Called when the value of the Slider changes */
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   /** Called when the Slider is unfocused */
@@ -51,17 +54,6 @@ export interface SliderProps
    * the value via the keyboard, defaults to 10
    */
   shiftSteps?: number | string;
-  /** The field name */
-  name?: string;
-  /**
-   * Sets the value of the Slider when using it as a
-   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
-   */
-  value?: number | string;
-  /** Sets the value of the Slider when using it as an uncontrolled component */
-  defaultValue?: number | string;
-  /** The `ref` is for the hidden input */
-  ref?: React.Ref<HTMLInputElement>;
 }
 
 /**
@@ -416,7 +408,6 @@ export function Slider({
       hintId={a11yIds.ariaDescribedBy}
       error={error}
       errorId={a11yIds.ariaErrorMessage}
-      disabled={disabled}
       required={required}
       data-nickui-component="Slider"
     >

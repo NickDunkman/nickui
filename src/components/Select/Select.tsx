@@ -1,25 +1,13 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { FieldableProps } from '@/types';
+import { FieldableFormControlProps } from '@/types';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { selectStyler } from './styles';
 
-export interface SelectProps
-  extends React.ComponentProps<'select'>,
-    FieldableProps {
-  /** Called when the value of the Select changes */
-  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
-  /**
-   * Sets the value of the Select when using it as a
-   * [controlled component](https://react.dev/reference/react-dom/components/select#controlling-a-select-box-with-a-state-variable)
-   */
-  value?: string;
-  /** Sets the value of the Select when using it as an uncontrolled component */
-  defaultValue?: string;
-}
+export type SelectProps = FieldableFormControlProps<string, 'select'>;
 
 /**
  * A form control that allows users to choose an option using a menu
@@ -71,7 +59,6 @@ export function Select({
       hintId={a11yIds.ariaDescribedBy}
       error={error !== true ? error : undefined}
       errorId={a11yIds.ariaErrorMessage}
-      disabled={disabled}
       required={required}
       data-nickui-component="Select"
     >

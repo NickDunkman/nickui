@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Field } from '@/components/Field';
-import { FieldableProps } from '@/types';
+import { FieldableFormControlProps } from '@/types';
 import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
@@ -27,30 +27,18 @@ export const ALLOWED_TYPES = [
   'week',
 ] as const;
 
-export interface TextProps
-  extends React.ComponentProps<'input'>,
-    FieldableProps {
-  /** Called when the value of the Text changes */
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+export interface TextProps extends FieldableFormControlProps {
   /**
    * A string that contains a brief hint to the user as to what information is
    * expected in the field.
    */
   placeholder?: string;
   /**
-   * The input type to use (only textual types are allowed with Text).
-   * See
+   * The input type to use (only textual types are allowed with Text). See
    * [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
    * for more details
    */
   type?: (typeof ALLOWED_TYPES)[number];
-  /**
-   * Sets the value of the Text when using it as a
-   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
-   */
-  value?: string;
-  /** Sets the value of the Text when using it as an uncontrolled component */
-  defaultValue?: string;
 }
 
 /**
@@ -99,7 +87,6 @@ export function Text({
       hintId={a11yIds.ariaDescribedBy}
       error={error !== true ? error : undefined}
       errorId={a11yIds.ariaErrorMessage}
-      disabled={disabled}
       required={required}
       data-nickui-component="Text"
     >
