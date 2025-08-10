@@ -25,16 +25,20 @@ type TypesSpec<Component extends React.ComponentType> = Partial<
  * story Meta objects
  */
 export function storyArgsTyper<Component extends React.ComponentType>({
-  isDisableable,
-  hasSizers,
-  hasFlavors,
+  isFlavorable,
+  formControl,
+  isSizerable,
   defaultValues,
   descriptions,
   types,
 }: {
-  isDisableable?: boolean;
-  hasSizers?: boolean;
-  hasFlavors?: boolean;
+  isFlavorable?: boolean;
+  isSizerable?: boolean;
+  formControl?: {
+    isCheckable?: boolean;
+    isDisableable?: boolean;
+    valueType?: string | string[];
+  };
   /** Overrides default values shown in the ArgsTable */
   defaultValues?: DefaultValuesSpec<Component>;
   /** Overrides the prop descriptions shown in the ArgsTable */
@@ -45,12 +49,14 @@ export function storyArgsTyper<Component extends React.ComponentType>({
    */
   types?: TypesSpec<Component>;
 }): ResultType<Component> {
+  const hasOnChange = !!(formControl?.isCheckable || formControl?.valueType);
+
   return merge(
     // Set some universal defaults
     withDefaultValues({
-      ...(isDisableable && { disabled: false }),
-      ...(hasFlavors && { flavor: 'neutral' }),
-      ...(hasSizers && { sizer: 'base' }),
+      ...(formControl?.isDisableable && { disabled: false }),
+      ...(isFlavorable && { flavor: 'neutral' }),
+      ...(isSizerable && { sizer: 'base' }),
     }),
     // Then apply customizations
     withDefaultValues(defaultValues),
@@ -58,14 +64,24 @@ export function storyArgsTyper<Component extends React.ComponentType>({
     withDescriptions({
       className:
         'Optionally add classes to the root element, such as to position the component, or add margins',
+      ...(hasOnChange && {
+        onChange: formControl?.isCheckable
+          ? 'Called when the checked state of the component changes'
+          : 'Called when the value of the component changes',
+      }),
     }),
     // Then apply customizations
     withDescriptions(descriptions),
     // Set some universal types
     withTypes({
       className: 'string',
-      ...(hasFlavors && { flavor: FLAVORS }),
-      ...(hasSizers && { sizer: SIZERS }),
+      ...(isFlavorable && { flavor: FLAVORS }),
+      ...(isSizerable && { sizer: SIZERS }),
+      ...(formControl?.valueType && {
+        value: formControl.valueType,
+        defaultValue: formControl.valueType,
+      }),
+      ...(hasOnChange && { onChange: 'React.ChangeEventHandler' }),
     }),
     // Then apply customizations
     withTypes(types),

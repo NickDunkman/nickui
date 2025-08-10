@@ -11,8 +11,8 @@ const meta = {
   title: 'Notices/Aside',
   component: Aside,
   argTypes: storyArgsTyper<typeof Aside>({
-    hasFlavors: true,
-    hasSizers: true,
+    isFlavorable: true,
+    isSizerable: true,
   }),
 } satisfies Meta<typeof Aside>;
 

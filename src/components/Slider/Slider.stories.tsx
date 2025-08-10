@@ -11,15 +11,16 @@ const meta = {
   title: 'Form controls/Slider',
   component: Slider,
   argTypes: storyArgsTyper<typeof Slider>({
-    isDisableable: true,
-    hasSizers: true,
+    formControl: {
+      isDisableable: true,
+      valueType: ['string', 'number'],
+    },
+    isSizerable: true,
     types: {
       min: ['number', 'string'],
       max: ['number', 'string'],
       step: ['number', 'string'],
       shiftSteps: ['number', 'string'],
-      value: ['string', 'number'],
-      defaultValue: ['string', 'number'],
     },
   }),
 } satisfies Meta<typeof Slider>;

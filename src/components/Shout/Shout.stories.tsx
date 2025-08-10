@@ -11,8 +11,8 @@ const meta = {
   title: 'Notices/Shout',
   component: Shout,
   argTypes: storyArgsTyper<typeof Shout>({
-    hasFlavors: true,
-    hasSizers: true,
+    isFlavorable: true,
+    isSizerable: true,
   }),
 } satisfies Meta<typeof Shout>;
 

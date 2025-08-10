@@ -11,9 +11,11 @@ const meta = {
   title: 'Form controls/Button',
   component: Button,
   argTypes: storyArgsTyper<typeof Button>({
-    isDisableable: true,
-    hasFlavors: true,
-    hasSizers: true,
+    formControl: {
+      isDisableable: true,
+    },
+    isFlavorable: true,
+    isSizerable: true,
     defaultValues: {
       secondary: false,
       type: 'button',

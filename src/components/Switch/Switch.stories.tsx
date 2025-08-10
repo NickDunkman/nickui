@@ -11,8 +11,11 @@ const meta = {
   title: 'Form controls/Switch',
   component: Switch,
   argTypes: storyArgsTyper<typeof Switch>({
-    isDisableable: true,
-    hasSizers: true,
+    formControl: {
+      isCheckable: true,
+      isDisableable: true,
+    },
+    isSizerable: true,
   }),
 } satisfies Meta<typeof Switch>;
 

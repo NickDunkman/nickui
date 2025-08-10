@@ -11,8 +11,11 @@ const meta = {
   title: 'Form controls/Text',
   component: Text,
   argTypes: storyArgsTyper<typeof Text>({
-    isDisableable: true,
-    hasSizers: true,
+    formControl: {
+      isDisableable: true,
+      valueType: 'string',
+    },
+    isSizerable: true,
     defaultValues: {
       type: 'text',
     },

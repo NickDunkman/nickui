@@ -26,7 +26,7 @@ type SliderFieldDescriptor =
 
 export interface SliderProps
   extends FieldableFormControlProps<
-    number | string,
+    string | number,
     Omit<
       React.ComponentProps<'div'>,
       'onChange' | 'onBlur' | 'children' | 'ref'

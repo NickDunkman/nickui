@@ -11,8 +11,11 @@ const meta = {
   title: 'Form controls/Money',
   component: Money,
   argTypes: storyArgsTyper<typeof Money>({
-    isDisableable: true,
-    hasSizers: true,
+    formControl: {
+      isDisableable: true,
+      valueType: ['string', 'number'],
+    },
+    isSizerable: true,
     defaultValues: {
       currencySymbol: '$',
       decimalPoint: '.',

@@ -12,8 +12,11 @@ const meta = {
   title: 'Form controls/Checkboxes',
   component: Checkboxes,
   argTypes: storyArgsTyper<typeof Checkboxes>({
-    isDisableable: true,
-    hasSizers: true,
+    formControl: {
+      isDisableable: true,
+      valueType: 'string',
+    },
+    isSizerable: true,
     defaultValues: { delimiter: ',' },
   }),
 } satisfies Meta<typeof Checkboxes>;

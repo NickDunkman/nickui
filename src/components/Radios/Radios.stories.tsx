@@ -12,8 +12,11 @@ const meta = {
   title: 'Form controls/Radios',
   component: Radios,
   argTypes: storyArgsTyper<typeof Radios>({
-    isDisableable: true,
-    hasSizers: true,
+    formControl: {
+      isDisableable: true,
+      valueType: 'string',
+    },
+    isSizerable: true,
   }),
 } satisfies Meta<typeof Radios>;
 

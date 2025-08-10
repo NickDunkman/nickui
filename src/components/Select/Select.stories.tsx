@@ -11,8 +11,11 @@ const meta = {
   title: 'Form controls/Select',
   component: Select,
   argTypes: storyArgsTyper<typeof Select>({
-    isDisableable: true,
-    hasSizers: true,
+    formControl: {
+      isDisableable: true,
+      valueType: 'string',
+    },
+    isSizerable: true,
   }),
 } satisfies Meta<typeof Select>;
 

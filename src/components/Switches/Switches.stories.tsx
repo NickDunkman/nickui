@@ -12,8 +12,11 @@ const meta = {
   title: 'Form controls/Switches',
   component: Switches,
   argTypes: storyArgsTyper<typeof Switches>({
-    isDisableable: true,
-    hasSizers: true,
+    formControl: {
+      isDisableable: true,
+      valueType: 'string',
+    },
+    isSizerable: true,
     defaultValues: { delimiter: ',' },
   }),
 } satisfies Meta<typeof Switches>;
