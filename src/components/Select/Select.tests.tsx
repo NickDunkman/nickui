@@ -11,23 +11,14 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
   render(
-    <Test
-      Component={Select}
-      fieldName="language"
-      initialValue="fr"
-      erroneousValue="en"
-      componentProps={{
-        label: 'Language',
-        children: [
-          <option value="en" key="en">
-            English
-          </option>,
-          <option value="fr" key="fr">
-            Français
-          </option>,
-        ],
-      }}
-    />,
+    <Test fieldName="language" initialValue="fr" erroneousValue="en">
+      {({ props, error }) => (
+        <Select {...props()} label="Language" error={error}>
+          <option value="en"> English </option>
+          <option value="fr"> Français </option>
+        </Select>
+      )}
+    </Test>,
   );
 
   const select = screen.getByLabelText('Language');

@@ -11,15 +11,11 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
   render(
-    <Test
-      Component={Slider}
-      fieldName="score"
-      initialValue="50"
-      erroneousValue="51"
-      componentProps={{
-        label: 'Score',
-      }}
-    />,
+    <Test fieldName="score" initialValue="50" erroneousValue="51">
+      {({ props, error }) => (
+        <Slider {...props()} label="Score" error={error} />
+      )}
+    </Test>,
   );
 
   const slider = screen.getByLabelText('Score');

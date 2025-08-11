@@ -11,15 +11,9 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
   render(
-    <Test
-      Component={Checkbox}
-      fieldName="nameIsNick"
-      initialValue={true}
-      isCheckbox
-      componentProps={{
-        label: 'Name is Nick',
-      }}
-    />,
+    <Test fieldName="nameIsNick" isCheckbox initialValue={true}>
+      {({ props }) => <Checkbox {...props()} label="Name is Nick" />}
+    </Test>,
   );
 
   const checkbox = screen.getByLabelText('Name is Nick');

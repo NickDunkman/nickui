@@ -3,8 +3,6 @@ import { useFormik } from 'formik';
 import * as React from 'react';
 import { useForm as useReactHookForm } from 'react-hook-form';
 
-import { FieldableProps } from '@/types';
-
 export const formLibraryTests = [
   { Test: ReactHookFormTest, library: 'React Hook Form' },
   { Test: TanstackFormTest, library: 'Tanstack Form' },
@@ -13,21 +11,29 @@ export const formLibraryTests = [
 
 type ValueType = string | boolean;
 
-export function ReactHookFormTest<T extends React.JSX.IntrinsicAttributes>({
-  Component,
-  fieldName,
-  initialValue,
-  erroneousValue,
-  isCheckbox: _isCheckbox,
-  componentProps,
-}: FieldableProps & {
-  Component: React.ComponentType<T>;
+interface TesterProps {
   fieldName: string;
   initialValue: ValueType;
   erroneousValue?: ValueType;
   isCheckbox?: boolean;
-  componentProps: T;
-}) {
+  children: (args: {
+    props: (radioValue?: string) => Omit<
+      React.HTMLAttributes<HTMLElement>,
+      'value' | 'defaultValue'
+    > & {
+      value?: string;
+      defaultValue?: string;
+    };
+    error?: React.ReactNode;
+  }) => React.ReactNode;
+}
+
+export function ReactHookFormTest({
+  children,
+  fieldName,
+  initialValue,
+  erroneousValue,
+}: TesterProps) {
   const {
     register,
     formState: { errors, touchedFields },
@@ -36,36 +42,27 @@ export function ReactHookFormTest<T extends React.JSX.IntrinsicAttributes>({
     defaultValues: { [fieldName]: initialValue },
   });
 
-  return (
-    <Component
-      {...register(fieldName, {
+  return children({
+    props: (_radioValue) => ({
+      'data-touched': !!touchedFields[fieldName],
+      ...register(fieldName, {
         validate:
           erroneousValue !== undefined
             ? (value) => value !== erroneousValue || 'That’s erroneous'
             : undefined,
-      })}
-      error={errors[fieldName]?.message?.toString()}
-      data-touched={!!touchedFields[fieldName]}
-      {...componentProps}
-    />
-  );
+      }),
+    }),
+    error: errors[fieldName]?.message?.toString(),
+  });
 }
 
-export function TanstackFormTest<T extends React.JSX.IntrinsicAttributes>({
-  Component,
+export function TanstackFormTest({
+  children,
   fieldName,
   initialValue,
   erroneousValue,
   isCheckbox,
-  componentProps,
-}: {
-  Component: React.ComponentType<T>;
-  fieldName: string;
-  initialValue: ValueType;
-  erroneousValue?: ValueType;
-  isCheckbox?: boolean;
-  componentProps: T;
-}) {
+}: TesterProps) {
   const form = useTanstackForm({
     defaultValues: {
       [fieldName]: initialValue,
@@ -84,45 +81,36 @@ export function TanstackFormTest<T extends React.JSX.IntrinsicAttributes>({
           : undefined
       }
     >
-      {(field) => (
-        <Component
-          name={field.name}
-          value={isCheckbox ? undefined : field.state.value}
-          checked={!isCheckbox ? undefined : field.state.value}
-          onBlur={field.handleBlur}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            field.handleChange(
-              isCheckbox ? event.target.checked : event.target.value,
-            );
-          }}
-          error={
-            !field.state.meta.isValid
-              ? field.state.meta.errors.join(', ')
-              : undefined
-          }
-          data-touched={!!field.state.meta.isTouched}
-          {...componentProps}
-        />
-      )}
+      {(field) =>
+        children({
+          props: (_radioValue) => ({
+            'data-touched': !!field.state.meta.isTouched,
+            name: field.name,
+            value: isCheckbox ? undefined : field.state.value.toString(),
+            checked: isCheckbox ? field.state.value : undefined,
+            onBlur: field.handleBlur,
+            onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+              field.handleChange(
+                isCheckbox ? event.target.checked : event.target.value,
+              );
+            },
+          }),
+          error: !field.state.meta.isValid
+            ? field.state.meta.errors.join(', ')
+            : undefined,
+        })
+      }
     </form.Field>
   );
 }
 
-export function FormikTest<T extends React.JSX.IntrinsicAttributes>({
-  Component,
+export function FormikTest({
+  children,
   fieldName,
   initialValue,
   erroneousValue,
   isCheckbox,
-  componentProps,
-}: {
-  Component: React.ComponentType<T>;
-  fieldName: string;
-  initialValue: ValueType;
-  erroneousValue?: ValueType;
-  isCheckbox?: boolean;
-  componentProps: T;
-}) {
+}: TesterProps) {
   const form = useFormik({
     initialValues: {
       [fieldName]: initialValue,
@@ -138,15 +126,14 @@ export function FormikTest<T extends React.JSX.IntrinsicAttributes>({
         : undefined,
   });
 
-  return (
-    <Component
-      {...form.getFieldProps({
+  return children({
+    props: (_radioValue) => ({
+      'data-touched': !!form.touched[fieldName],
+      ...form.getFieldProps({
         name: fieldName,
         type: isCheckbox ? 'checkbox' : undefined,
-      })}
-      error={form.errors[fieldName]}
-      data-touched={!!form.touched[fieldName]}
-      {...componentProps}
-    />
-  );
+      }),
+    }),
+    error: form.errors[fieldName],
+  });
 }

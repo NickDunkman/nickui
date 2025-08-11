@@ -1,52 +1,20 @@
 // Note: most tests are in story play functions in Switch.stories.tsx
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { useFormik } from 'formik';
 import * as React from 'react';
-import { useForm } from 'react-hook-form';
+
+import { formLibraryTests } from '@/dev/tests/formLibraryTests';
 
 import { Switch } from './Switch';
 
-function RHFTest() {
-  const {
-    register,
-    formState: { touchedFields },
-  } = useForm({
-    mode: 'all',
-    defaultValues: { nameIsNick: true },
-  });
-
-  return (
-    <Switch
-      label="Name is Nick"
-      {...register('nameIsNick')}
-      data-touched={!!touchedFields.nameIsNick}
-    />
-  );
-}
-
-function FormikTest() {
-  const form = useFormik({
-    initialValues: { nameIsNick: true },
-    onSubmit: () => {},
-  });
-
-  return (
-    <Switch
-      label="Name is Nick"
-      {...form.getFieldProps({ name: 'nameIsNick', type: 'checkbox' })}
-      data-touched={!!form.touched.nameIsNick}
-    />
-  );
-}
-
-test.each([
-  { Component: RHFTest, library: 'React Hook Forms' },
-  { Component: FormikTest, library: 'Formik' },
-])('Compatible with $library', async ({ Component }) => {
+test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
-  render(<Component />);
+  render(
+    <Test fieldName="nameIsNick" isCheckbox initialValue={true}>
+      {({ props }) => <Switch {...props()} label="Name is Nick" />}
+    </Test>,
+  );
 
   const checkbox = screen.getByLabelText('Name is Nick');
   expect(checkbox).toBeChecked();

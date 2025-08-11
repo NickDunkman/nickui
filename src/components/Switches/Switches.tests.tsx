@@ -11,19 +11,19 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
   render(
-    <Test
-      Component={Switches}
-      fieldName="name"
-      initialValue="nick,dunkman"
-      erroneousValue="dunkman"
-      componentProps={{
-        label: 'Name',
-        options: [
-          { value: 'nick', label: 'Nick' },
-          { value: 'dunkman', label: 'Dunkman' },
-        ],
-      }}
-    />,
+    <Test fieldName="name" initialValue="nick,dunkman" erroneousValue="dunkman">
+      {({ props, error }) => (
+        <Switches
+          {...props()}
+          label="Name"
+          error={error}
+          options={[
+            { value: 'nick', label: 'Nick' },
+            { value: 'dunkman', label: 'Dunkman' },
+          ]}
+        />
+      )}
+    </Test>,
   );
 
   const group = screen.getByRole('group');

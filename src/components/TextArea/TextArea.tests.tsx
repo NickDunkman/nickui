@@ -11,15 +11,11 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
   render(
-    <Test
-      Component={TextArea}
-      fieldName="name"
-      initialValue="Nick"
-      erroneousValue="not Nick"
-      componentProps={{
-        label: 'Name',
-      }}
-    />,
+    <Test fieldName="name" initialValue="Nick" erroneousValue="not Nick">
+      {({ props, error }) => (
+        <TextArea {...props()} label="Name" error={error} />
+      )}
+    </Test>,
   );
 
   const textarea = screen.getByLabelText('Name');

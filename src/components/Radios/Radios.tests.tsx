@@ -11,19 +11,19 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
   render(
-    <Test
-      Component={Radios}
-      fieldName="language"
-      initialValue="fr"
-      erroneousValue="en"
-      componentProps={{
-        label: 'Language',
-        options: [
-          { value: 'en', label: 'English' },
-          { value: 'fr', label: 'Français' },
-        ],
-      }}
-    />,
+    <Test fieldName="language" initialValue="fr" erroneousValue="en">
+      {({ props, error }) => (
+        <Radios
+          {...props()}
+          label="Language"
+          error={error}
+          options={[
+            { value: 'en', label: 'English' },
+            { value: 'fr', label: 'Français' },
+          ]}
+        />
+      )}
+    </Test>,
   );
 
   const group = screen.getByRole('group');

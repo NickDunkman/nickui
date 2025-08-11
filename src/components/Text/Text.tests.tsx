@@ -11,15 +11,9 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
   render(
-    <Test
-      Component={Text}
-      fieldName="name"
-      initialValue="Nick"
-      erroneousValue="not Nick"
-      componentProps={{
-        label: 'Name',
-      }}
-    />,
+    <Test fieldName="name" initialValue="Nick" erroneousValue="not Nick">
+      {({ props, error }) => <Text {...props()} label="Name" error={error} />}
+    </Test>,
   );
 
   const input = screen.getByLabelText('Name');
