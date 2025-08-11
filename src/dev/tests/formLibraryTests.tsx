@@ -20,6 +20,7 @@ interface LibrarySetupProps {
    */
   erroneousValue?: ValueType;
   isCheckbox?: boolean;
+  isRadio?: boolean;
   children: (args: {
     props: (radioValue?: string) => Omit<
       React.HTMLAttributes<HTMLElement>,
@@ -38,6 +39,7 @@ function ReactHookFormSetup({
   fieldName,
   initialValue,
   erroneousValue,
+  isRadio,
 }: LibrarySetupProps) {
   const {
     register,
@@ -48,13 +50,14 @@ function ReactHookFormSetup({
   });
 
   return children({
-    props: (_radioValue) => ({
+    props: (radioValue) => ({
       ...register(fieldName, {
         validate:
           erroneousValue !== undefined
             ? (value) => value !== erroneousValue || 'That’s erroneous'
             : undefined,
       }),
+      ...(isRadio && { value: radioValue }),
     }),
     error: errors[fieldName]?.message?.toString(),
     touched: !!touchedFields[fieldName],
@@ -67,6 +70,7 @@ function TanstackFormSetup({
   initialValue,
   erroneousValue,
   isCheckbox,
+  isRadio,
 }: LibrarySetupProps) {
   const form = useTanstackForm({
     defaultValues: {
@@ -88,10 +92,18 @@ function TanstackFormSetup({
     >
       {(field) =>
         children({
-          props: (_radioValue) => ({
+          props: (radioValue) => ({
             name: field.name,
-            value: isCheckbox ? undefined : field.state.value.toString(),
-            checked: isCheckbox ? field.state.value : undefined,
+            value: isCheckbox
+              ? undefined
+              : isRadio
+                ? radioValue
+                : field.state.value.toString(),
+            checked: isCheckbox
+              ? field.state.value
+              : isRadio
+                ? radioValue === field.state.value
+                : undefined,
             onBlur: field.handleBlur,
             onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
               field.handleChange(
@@ -115,6 +127,7 @@ function FormikSetup({
   initialValue,
   erroneousValue,
   isCheckbox,
+  isRadio,
 }: LibrarySetupProps) {
   const form = useFormik({
     initialValues: {
@@ -132,11 +145,13 @@ function FormikSetup({
   });
 
   return children({
-    props: (_radioValue) => ({
+    props: (radioValue) => ({
       ...form.getFieldProps({
         name: fieldName,
-        type: isCheckbox ? 'checkbox' : undefined,
+        type: isCheckbox ? 'checkbox' : isRadio ? 'radio' : undefined,
+        value: isRadio ? radioValue : undefined,
       }),
+      ...(isRadio && { value: radioValue }),
     }),
     error: form.errors[fieldName],
     touched: !!form.touched[fieldName],
