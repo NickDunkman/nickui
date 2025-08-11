@@ -162,10 +162,14 @@ function reducer(
       );
 
       return updatedState(state, {
-        workingValue: formatWorkingValue(
+        numerishValue: parseNumerishValue(
           deformattedWorkingValue,
           action.payload,
         ),
+        workingValue:
+          deformattedWorkingValue === ''
+            ? ''
+            : formatFullValue(deformattedWorkingValue, action.payload),
         placeholderValue: formatFullValue(
           deformattedWorkingValue,
           action.payload,
@@ -203,7 +207,8 @@ function reducer(
       // numerically equivalent to what the working decimal part was previously,
       // keep it as it was to avoid prematurally padding with zeros.
       if (
-        Number(newWorkingDecimalPart) === Number(previousWorkingDecimalPart)
+        (Number(newWorkingDecimalPart) || 0) ===
+        (Number(previousWorkingDecimalPart) || 0)
       ) {
         newWorkingDecimalPart = previousWorkingDecimalPart;
       }
