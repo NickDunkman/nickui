@@ -108,7 +108,7 @@ export type FieldableFormControlProps<
   FieldableProps<DescriptorType> &
     // + `disabled` prop
     DisableableProps &
-    // + all of the specified intrinsice props (except those we’ll override below)
+    // + all of the specified intrinsic props (except those we’ll override below)
     Omit<IntrinsicProps, 'value' | 'defaultValue'> &
     // + some overrides
     {
@@ -130,8 +130,8 @@ export type FieldableFormControlProps<
  * their props extend this to promote consistent typing + jsdocs
  */
 export interface CheckedFieldableProps<DescriptorType = React.ReactNode>
-  extends DisableableProps,
-    SizerableProps {
+  extends SizerableProps,
+    DisableableProps {
   /** The main label to to the right of the form control, naming the field */
   label?: DescriptorType;
   /** Additional detail about the field, placed directly below the label */
@@ -142,20 +142,48 @@ export interface CheckedFieldableProps<DescriptorType = React.ReactNode>
  * NICKUI form control components which use CheckedField can have their props
  * extend this to promote consistent typing + jsdocs
  */
-export interface CheckedFieldableFormControlProps<
+export type CheckedFieldableFormControlProps<
+  /**
+   * The base intrinsic element’s props to base off of. Either an intrinsic
+   * name (like 'input' or 'select'), or subset of an intrinsic's props. The
+   * latter allows you the ability to omit props, such as if yout to omit
+   * an input’s type prop with `Omit<React.ComponentProps<'input'>, 'type'>`.
+   */
+  Intrinsic extends
+    | keyof React.JSX.IntrinsicElements
+    | Partial<React.HTMLAttributes<HTMLElement>> = 'input',
+  /**
+   * Option to override the type used for the `label`, `hint`, and `error`
+   * props. Defaults to `React.ReactNode`. For example, this is used by the
+   * Slider component to allow you to optionally pass render functions to each.
+   */
   DescriptorType = React.ReactNode,
-> extends Omit<React.ComponentProps<'input'>, 'type'>,
-    CheckedFieldableProps<DescriptorType> {
   /**
-   * Sets the checked state of the component when using it as a
-   * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
+   * Used internally to convert the `Intrinic` generic to its props, when an
+   * intrinsic name is specified. You probably don’t want to override this!
    */
-  checked?: boolean;
-  /**
-   * Sets the checked state of the component when using it as a uncontrolled
-   * component
-   */
-  defaultChecked?: boolean;
-  /** The name of the field  */
-  name?: string;
-}
+  IntrinsicProps = Intrinsic extends keyof React.JSX.IntrinsicElements
+    ? React.JSX.IntrinsicElements[Intrinsic]
+    : Intrinsic,
+> =
+  // All of the CheckedFieldable props
+  CheckedFieldableProps<DescriptorType> &
+    // + `disabled` prop
+    DisableableProps &
+    // + all of the specified intrinsic props (except those we’ll override below)
+    IntrinsicProps &
+    // + some overrides
+    {
+      /**
+       * Sets the checked state of the component when using it as a
+       * [controlled component](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
+       */
+      checked?: boolean;
+      /**
+       * Sets the checked state of the component when using it as a uncontrolled
+       * component
+       */
+      defaultChecked?: boolean;
+      /** The name of the field  */
+      name?: string;
+    };

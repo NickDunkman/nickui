@@ -1,52 +1,26 @@
 // Note: most tests are in story play functions in Checkbox.stories.tsx
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { useFormik } from 'formik';
 import * as React from 'react';
-import { useForm } from 'react-hook-form';
+
+import { formLibraryTests } from '@/dev/tests/formLibraryTests';
 
 import { Checkbox } from './Checkbox';
 
-function RHFTest() {
-  const {
-    register,
-    formState: { touchedFields },
-  } = useForm({
-    mode: 'all',
-    defaultValues: { nameIsNick: true },
-  });
-
-  return (
-    <Checkbox
-      label="Name is Nick"
-      {...register('nameIsNick')}
-      data-touched={!!touchedFields.nameIsNick}
-    />
-  );
-}
-
-function FormikTest() {
-  const form = useFormik({
-    initialValues: { nameIsNick: true },
-    onSubmit: () => {},
-  });
-
-  return (
-    <Checkbox
-      label="Name is Nick"
-      {...form.getFieldProps({ name: 'nameIsNick', type: 'checkbox' })}
-      data-touched={!!form.touched.nameIsNick}
-    />
-  );
-}
-
-test.each([
-  { Component: RHFTest, library: 'React Hook Forms' },
-  { Component: FormikTest, library: 'Formik' },
-])('Compatible with $library', async ({ Component }) => {
+test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
   const user = userEvent.setup();
 
-  render(<Component />);
+  render(
+    <Test
+      Component={Checkbox}
+      fieldName="nameIsNick"
+      initialValue={true}
+      isCheckbox
+      componentProps={{
+        label: 'Name is Nick',
+      }}
+    />,
+  );
 
   const checkbox = screen.getByLabelText('Name is Nick');
   expect(checkbox).toBeChecked();

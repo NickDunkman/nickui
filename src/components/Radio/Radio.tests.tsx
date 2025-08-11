@@ -38,6 +38,7 @@ function FormikTest() {
           type: 'radio',
           value: 'apple',
         })}
+        value="apple"
         label="Apple"
       />
       <Radio
