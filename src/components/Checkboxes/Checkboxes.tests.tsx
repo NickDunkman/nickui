@@ -12,7 +12,7 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
 
   render(
     <Test fieldName="name" initialValue="nick,dunkman" erroneousValue="dunkman">
-      {({ props, error }) => (
+      {({ props, error, touched }) => (
         <Checkboxes
           {...props()}
           label="Name"
@@ -21,6 +21,7 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
             { value: 'nick', label: 'Nick' },
             { value: 'dunkman', label: 'Dunkman' },
           ]}
+          data-touched={touched}
         />
       )}
     </Test>,

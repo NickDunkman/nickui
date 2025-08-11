@@ -12,8 +12,13 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
 
   render(
     <Test fieldName="name" initialValue="Nick" erroneousValue="not Nick">
-      {({ props, error }) => (
-        <TextArea {...props()} label="Name" error={error} />
+      {({ props, error, touched }) => (
+        <TextArea
+          {...props()}
+          label="Name"
+          error={error}
+          data-touched={touched}
+        />
       )}
     </Test>,
   );

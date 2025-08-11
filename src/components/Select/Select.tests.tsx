@@ -12,8 +12,13 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
 
   render(
     <Test fieldName="language" initialValue="fr" erroneousValue="en">
-      {({ props, error }) => (
-        <Select {...props()} label="Language" error={error}>
+      {({ props, error, touched }) => (
+        <Select
+          {...props()}
+          label="Language"
+          error={error}
+          data-touched={touched}
+        >
           <option value="en"> English </option>
           <option value="fr"> Français </option>
         </Select>

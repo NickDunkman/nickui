@@ -12,7 +12,7 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
 
   render(
     <Test fieldName="language" initialValue="fr" erroneousValue="en">
-      {({ props, error }) => (
+      {({ props, error, touched }) => (
         <Radios
           {...props()}
           label="Language"
@@ -21,6 +21,7 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
             { value: 'en', label: 'English' },
             { value: 'fr', label: 'Français' },
           ]}
+          data-touched={touched}
         />
       )}
     </Test>,

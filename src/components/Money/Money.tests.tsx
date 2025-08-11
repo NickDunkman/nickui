@@ -12,7 +12,9 @@ test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
 
   render(
     <Test fieldName="cost" initialValue="99999.99" erroneousValue="0.00">
-      {({ props, error }) => <Money {...props()} label="Cost" error={error} />}
+      {({ props, error, touched }) => (
+        <Money {...props()} label="Cost" error={error} data-touched={touched} />
+      )}
     </Test>,
   );
 

@@ -25,6 +25,7 @@ interface TesterProps {
       defaultValue?: string;
     };
     error?: React.ReactNode;
+    touched: boolean;
   }) => React.ReactNode;
 }
 
@@ -44,7 +45,6 @@ export function ReactHookFormTest({
 
   return children({
     props: (_radioValue) => ({
-      'data-touched': !!touchedFields[fieldName],
       ...register(fieldName, {
         validate:
           erroneousValue !== undefined
@@ -53,6 +53,7 @@ export function ReactHookFormTest({
       }),
     }),
     error: errors[fieldName]?.message?.toString(),
+    touched: !!touchedFields[fieldName],
   });
 }
 
@@ -84,7 +85,6 @@ export function TanstackFormTest({
       {(field) =>
         children({
           props: (_radioValue) => ({
-            'data-touched': !!field.state.meta.isTouched,
             name: field.name,
             value: isCheckbox ? undefined : field.state.value.toString(),
             checked: isCheckbox ? field.state.value : undefined,
@@ -98,6 +98,7 @@ export function TanstackFormTest({
           error: !field.state.meta.isValid
             ? field.state.meta.errors.join(', ')
             : undefined,
+          touched: !!field.state.meta.isTouched,
         })
       }
     </form.Field>
@@ -128,12 +129,12 @@ export function FormikTest({
 
   return children({
     props: (_radioValue) => ({
-      'data-touched': !!form.touched[fieldName],
       ...form.getFieldProps({
         name: fieldName,
         type: isCheckbox ? 'checkbox' : undefined,
       }),
     }),
     error: form.errors[fieldName],
+    touched: !!form.touched[fieldName],
   });
 }
