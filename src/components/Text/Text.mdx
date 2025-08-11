@@ -23,13 +23,13 @@ A form control that allows users to enter & edit a single line of text.
 
 <Docs.Sizers of={stories} wrapper="Field" />
 
-<Docs.FormLibraryCompatibility
-  of={stories}
-  fieldName="player"
-  initialValue="Nick"
-  component={Text}
-  componentProps={{
-    label: 'Player name',
-    hint: 'Try editting me!',
-  }}
-/>
+<Docs.FormLibraryDemos of="Text" fieldName="player" initialValue="Nick">
+  {({ props, error }) => (
+    <Text
+      {...props}
+      label="Player name"
+      hint="Try editting me!"
+      error={error}
+    />
+  )}
+</Docs.FormLibraryDemos>

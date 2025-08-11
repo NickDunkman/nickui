@@ -119,26 +119,31 @@ example:
 
 <Docs.Sizers of={stories} wrapper="Fieldset" />
 
-<Docs.FormLibraryCompatibility
-  of={stories}
+<Docs.FormLibraryDemos
+  of="Checkboxes"
   fieldName="courseFeatures"
   initialValue="pot-bunkers,undulated-greens"
-  componentProps={{
-    label: 'Course features',
-    hint: 'Try editting me!',
-    options: [
-      {
-        value: 'pot-bunkers',
-        label: 'Pot bunkers',
-      },
-      {
-        value: 'water',
-        label: 'Water hazards',
-      },
-      {
-        value: 'undulated-greens',
-        label: 'Undulated greens',
-      },
-    ],
-  }}
-/>
+>
+  {({ props, error }) => (
+    <Checkboxes
+      {...props}
+      label="Course features"
+      hint="Try editting me!"
+      error={error}
+      options={[
+        {
+          value: 'pot-bunkers',
+          label: 'Pot bunkers',
+        },
+        {
+          value: 'water',
+          label: 'Water hazards',
+        },
+        {
+          value: 'undulated-greens',
+          label: 'Undulated greens',
+        },
+      ]}
+    />
+  )}
+</Docs.FormLibraryDemos>

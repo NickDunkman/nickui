@@ -2,34 +2,21 @@ import { Source } from '@storybook/addon-docs/blocks';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { StoriesModule } from '@/types';
+import { FauxCanvas } from '../FauxCanvas';
+import { PrettyPrint } from '../PrettyPrint';
 
-import { FauxCanvas } from './FauxCanvas';
-import { PrettyPrint } from './PrettyPrint';
+import { FormLibraryDemoProps } from './types';
 
-/**
- * Helper for easily demonstrating RHF compatibility within a component's
- * docs. Shows the working component + realtime-updating RHF context within
- * a FauxCanvas, and then a code snippet which shows how to integrate RHF
- * into the component.
- */
 export function ReactHookFormDemo({
   of,
   fieldName,
   initialValue,
-  checkbox,
+  isCheckbox,
   radioWithValue,
-  componentProps,
-}: {
-  of: StoriesModule;
-  fieldName: string;
-  initialValue?: string | boolean;
-  checkbox?: boolean;
-  radioWithValue?: string;
-  componentProps?: object;
-}) {
-  const addValidation = !checkbox && !radioWithValue;
-  const theInitialValue = checkbox ? !!initialValue : (initialValue ?? '');
+  children,
+}: FormLibraryDemoProps) {
+  const addValidation = !isCheckbox && !radioWithValue;
+  const theInitialValue = isCheckbox ? !!initialValue : (initialValue ?? '');
   const theInitialValueDisplay =
     typeof theInitialValue === 'boolean'
       ? theInitialValue.toString()
@@ -44,9 +31,6 @@ export function ReactHookFormDemo({
     defaultValues: { [fieldName]: theInitialValue },
   });
 
-  const Component = of.default.component;
-  const componentName = of.default.title.split('/').pop();
-
   return (
     <>
       <div style={{ marginTop: -20 }}>
@@ -56,12 +40,12 @@ export function ReactHookFormDemo({
           code={`
 import { useForm } from 'react-hook-form';
 
-const form = useForm<{ ${fieldName}: string }>({
+const form = useForm({
   mode: 'all',
   defaultValues: { ${fieldName}: ${theInitialValueDisplay} },
 });
 
-<${componentName}${
+<${of}${
             addValidation
               ? `
   {...register('${fieldName}', {
@@ -83,17 +67,18 @@ const form = useForm<{ ${fieldName}: string }>({
       </div>
 
       <FauxCanvas>
-        <Component
-          value={radioWithValue}
-          {...register(fieldName, {
-            validate: !addValidation
-              ? undefined
-              : (value) =>
-                  value === theInitialValue || 'Heyyyy, change that back',
-          })}
-          error={errors[fieldName]?.message}
-          {...componentProps}
-        />
+        {children({
+          props: {
+            ...register(fieldName, {
+              validate: !addValidation
+                ? undefined
+                : (value) =>
+                    value === initialValue || 'Heyyy, change that back',
+            }),
+            ...(radioWithValue && { value: radioWithValue }),
+          },
+          error: errors[fieldName]?.message?.toString(),
+        })}
         <PrettyPrint
           className="-mx-5 mt-8 -mb-5"
           title="React Hook Form context"

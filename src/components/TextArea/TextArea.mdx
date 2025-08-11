@@ -41,12 +41,17 @@ manually, use the `disableManualResize` prop.
 
 <Docs.Sizers of={stories} wrapper="Field" />
 
-<Docs.FormLibraryCompatibility
-  of={stories}
+<Docs.FormLibraryDemos
+  of="TextArea"
   fieldName="ironSpecs"
   initialValue={`115x Dynamic Gold\n7 iron: 37.5” finished\n7 iron: 62.5° lie angle`}
-  componentProps={{
-    label: 'Iron specs',
-    hint: 'Try editting me!',
-  }}
-/>
+>
+  {({ props, error }) => (
+    <TextArea
+      {...props}
+      label="Iron specs"
+      hint="Try editting me!"
+      error={error}
+    />
+  )}
+</Docs.FormLibraryDemos>

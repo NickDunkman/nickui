@@ -23,9 +23,10 @@ A form control that allow users to choose one option from a set.
 
 <Docs.Sizers of={stories} wrapper="CheckedField" />
 
-<Docs.FormLibraryCompatibility
-  of={stories}
+<Docs.FormLibraryDemos
+  of="Radio"
   fieldName="inTheHole"
-  radioWithValue="holed-out"
-  componentProps={{ label: 'It’s in the hole' }}
-/>
+  radioWithValue="holded-out"
+>
+  {({ props }) => <Radio {...props} label="It’s in the hole" />}
+</Docs.FormLibraryDemos>

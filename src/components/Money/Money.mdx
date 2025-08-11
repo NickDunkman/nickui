@@ -119,13 +119,13 @@ Or, you could convert updated values back to numbers, like this:
 
 <Docs.Sizers of={stories} wrapper="Field" />
 
-<Docs.FormLibraryCompatibility
-  of={stories}
-  fieldName="greensFees"
-  initialValue="137.00"
-  component={Money}
-  componentProps={{
-    label: 'Greens fees',
-    hint: 'Try editting me!',
-  }}
-/>
+<Docs.FormLibraryDemos of="Money" fieldName="greensFees" initialValue="137.00">
+  {({ props, error }) => (
+    <Money
+      {...props}
+      label="Greens fees"
+      hint="Try editting me!"
+      error={error}
+    />
+  )}
+</Docs.FormLibraryDemos>

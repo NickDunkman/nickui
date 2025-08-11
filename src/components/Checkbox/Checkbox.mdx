@@ -23,10 +23,11 @@ A form control that allow users to choose zero to many options from a set.
 
 <Docs.Sizers of={stories} wrapper="CheckedField" />
 
-<Docs.FormLibraryCompatibility
-  of={stories}
+<Docs.FormLibraryDemos
+  of="Checkbox"
   fieldName="gimme"
-  checkbox
   initialValue={true}
-  componentProps={{ label: 'That’s a gimme' }}
-/>
+  isCheckbox
+>
+  {({ props }) => <Checkbox {...props} label="That’s a gimme" />}
+</Docs.FormLibraryDemos>

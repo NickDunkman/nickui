@@ -26,10 +26,13 @@ discrete fields under a common category.
 
 <Docs.Sizers of={stories} wrapper="CheckedField" />
 
-<Docs.FormLibraryCompatibility
-  of={stories}
+<Docs.FormLibraryDemos
+  of="Switch"
   fieldName="liftCleanAndPlace"
-  checkbox
+  isCheckbox
   initialValue={true}
-  componentProps={{ label: 'Lift, clean, and place in effect' }}
-/>
+>
+  {({ props }) => (
+    <Switch {...props} label="Lift, clean, and place in effect" />
+  )}
+</Docs.FormLibraryDemos>

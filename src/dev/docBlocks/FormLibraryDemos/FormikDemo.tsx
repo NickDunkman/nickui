@@ -2,10 +2,10 @@ import { Source } from '@storybook/addon-docs/blocks';
 import { useFormik } from 'formik';
 import * as React from 'react';
 
-import { StoriesModule } from '@/types';
+import { FauxCanvas } from '../FauxCanvas';
+import { PrettyPrint } from '../PrettyPrint';
 
-import { FauxCanvas } from './FauxCanvas';
-import { PrettyPrint } from './PrettyPrint';
+import { FormLibraryDemoProps } from './types';
 
 /**
  * Helper for easily demonstrating Formik compatibility within a component's
@@ -17,19 +17,12 @@ export function FormikDemo({
   of,
   fieldName,
   initialValue,
-  checkbox,
+  isCheckbox,
   radioWithValue,
-  componentProps,
-}: {
-  of: StoriesModule;
-  fieldName: string;
-  initialValue: string;
-  checkbox?: boolean;
-  radioWithValue?: string;
-  componentProps?: object;
-}) {
-  const addValidation = !checkbox && !radioWithValue;
-  const theInitialValue = checkbox ? !!initialValue : (initialValue ?? '');
+  children,
+}: FormLibraryDemoProps) {
+  const addValidation = !isCheckbox && !radioWithValue;
+  const theInitialValue = isCheckbox ? !!initialValue : (initialValue ?? '');
   const theInitialValueDisplay =
     typeof theInitialValue === 'boolean'
       ? theInitialValue.toString()
@@ -48,9 +41,6 @@ export function FormikDemo({
           }
         },
   });
-
-  const Component = of.default.component;
-  const componentName = of.default.title.split('/').pop();
 
   return (
     <>
@@ -75,14 +65,14 @@ const form = useFormik({
   }
 });
 
-<${componentName}${
-            !checkbox && !radioWithValue
+<${of}${
+            !isCheckbox && !radioWithValue
               ? `
   {...form.getFieldProps('${fieldName}')}`
               : `
   {...form.getFieldProps({
     name: '${fieldName}',${
-      checkbox
+      isCheckbox
         ? `
     type: 'checkbox',`
         : ''
@@ -103,15 +93,21 @@ const form = useFormik({
       </div>
 
       <FauxCanvas>
-        <Component
-          {...form.getFieldProps({
-            name: fieldName,
-            type: checkbox ? 'checkbox' : radioWithValue ? 'radio' : undefined,
-            value: radioWithValue,
-          })}
-          error={form.errors[fieldName]}
-          {...componentProps}
-        />
+        {children({
+          props: {
+            ...form.getFieldProps({
+              name: fieldName,
+              type: isCheckbox
+                ? 'checkbox'
+                : radioWithValue
+                  ? 'radio'
+                  : undefined,
+              value: radioWithValue,
+            }),
+          },
+          error: form.errors[fieldName],
+        })}
+
         <PrettyPrint
           className="-mx-5 mt-8 -mb-5"
           title="Formik context"

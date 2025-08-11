@@ -98,7 +98,7 @@ function TanstackFormSetup({
               ? undefined
               : isRadio
                 ? radioValue
-                : field.state.value.toString(),
+                : field.state.value?.toString(),
             checked: isCheckbox
               ? field.state.value
               : isRadio

@@ -27,30 +27,32 @@ A form control that allows users to choose an option using a menu.
 
 <Docs.Sizers of={stories} wrapper="Field" />
 
-<Docs.FormLibraryCompatibility
-  of={stories}
-  fieldName="format"
-  initialValue="scramble"
-  componentProps={{
-    label: 'Select a format',
-    hint: 'Try editting me!',
-    children: [
-      'Chapman',
-      'Foursomes',
-      'Match play',
-      'Scramble',
-      'Shamble',
-      'Sixes',
-      'Skins',
-      'Stroke',
-      'Two ball',
-      'Vegas',
-      'Wolf',
-      'Worst ball',
-    ].map((name) => (
-      <option value={name.toLowerCase().replace(/\W+/g, '-')} key={name}>
-        {name}
-      </option>
-    )),
-  }}
-/>
+<Docs.FormLibraryDemos of="Select" fieldName="format" initialValue="scramble">
+  {({ props, error }) => (
+    <Select
+      {...props}
+      label="Select a format"
+      hint="Try editting me!"
+      error={error}
+    >
+      {[
+        'Chapman',
+        'Foursomes',
+        'Match play',
+        'Scramble',
+        'Shamble',
+        'Sixes',
+        'Skins',
+        'Stroke',
+        'Two ball',
+        'Vegas',
+        'Wolf',
+        'Worst ball',
+      ].map((name) => (
+        <option value={name.toLowerCase().replace(/\W+/g, '-')} key={name}>
+          {name}
+        </option>
+      ))}
+    </Select>
+  )}
+</Docs.FormLibraryDemos>

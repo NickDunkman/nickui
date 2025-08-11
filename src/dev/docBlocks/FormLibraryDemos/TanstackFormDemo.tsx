@@ -2,10 +2,10 @@ import { Source } from '@storybook/addon-docs/blocks';
 import { useForm } from '@tanstack/react-form';
 import * as React from 'react';
 
-import { StoriesModule } from '@/types';
+import { FauxCanvas } from '../FauxCanvas';
+import { PrettyPrint } from '../PrettyPrint';
 
-import { FauxCanvas } from './FauxCanvas';
-import { PrettyPrint } from './PrettyPrint';
+import { FormLibraryDemoProps } from './types';
 
 /**
  * Helper for easily demonstrating TanStack Form compatibility within a
@@ -17,19 +17,12 @@ export function TanStackFormDemo({
   of,
   fieldName,
   initialValue,
-  checkbox,
+  isCheckbox,
   radioWithValue,
-  componentProps,
-}: {
-  of: StoriesModule;
-  fieldName: string;
-  initialValue?: string | boolean;
-  checkbox?: boolean;
-  radioWithValue?: string;
-  componentProps?: object;
-}) {
-  const addValidation = !checkbox && !radioWithValue;
-  const theInitialValue = checkbox ? !!initialValue : (initialValue ?? '');
+  children,
+}: FormLibraryDemoProps) {
+  const addValidation = !isCheckbox && !radioWithValue;
+  const theInitialValue = isCheckbox ? !!initialValue : (initialValue ?? '');
   const theInitialValueDisplay =
     typeof theInitialValue === 'boolean'
       ? theInitialValue.toString()
@@ -40,9 +33,6 @@ export function TanStackFormDemo({
       [fieldName]: initialValue,
     },
   });
-
-  const Component = of.default.component;
-  const componentName = of.default.title.split('/').pop();
 
   return (
     <>
@@ -72,10 +62,10 @@ const form = useForm({
   }
 >
   {(field) => (
-    <${componentName}
+    <${of}
       name={field.name}
       ${
-        checkbox
+        isCheckbox
           ? 'checked={field.state.value}'
           : radioWithValue
             ? `checked={field.state.value === '${radioWithValue}'}
@@ -83,7 +73,7 @@ const form = useForm({
             : 'value={field.state.value}'
       }
       onBlur={field.handleBlur}
-      onChange={(event) => field.handleChange(event.target.${checkbox ? 'checked' : 'value'})}${
+      onChange={(event) => field.handleChange(event.target.${isCheckbox ? 'checked' : 'value'})}${
         addValidation
           ? `
       error={
@@ -113,31 +103,30 @@ const form = useForm({
                 }
           }
         >
-          {(field) => (
-            <Component
-              {...componentProps}
-              name={field.name}
-              value={
-                checkbox ? undefined : (radioWithValue ?? field.state.value)
-              }
-              checked={
-                checkbox
+          {(field) =>
+            children({
+              props: {
+                name: field.name,
+                value: isCheckbox
+                  ? undefined
+                  : (radioWithValue ?? field.state.value?.toString()),
+                checked: isCheckbox
                   ? field.state.value
                   : radioWithValue
-                    ? field.state.value === radioWithValue
-                    : undefined
-              }
-              onBlur={field.handleBlur}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                field.handleChange(
-                  checkbox ? event.target.checked : event.target.value,
-                )
-              }
-              error={
-                !field.state.meta.isValid && field.state.meta.errors.join(', ')
-              }
-            />
-          )}
+                    ? radioWithValue === field.state.value
+                    : undefined,
+                onBlur: field.handleBlur,
+                onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+                  field.handleChange(
+                    isCheckbox ? event.target.checked : event.target.value,
+                  );
+                },
+              },
+              error: !field.state.meta.isValid
+                ? field.state.meta.errors.join(', ')
+                : undefined,
+            })
+          }
         </form.Field>
 
         <form.Subscribe>

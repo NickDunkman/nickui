@@ -96,26 +96,27 @@ pass a `render` function instead of using `options`.
 
 <Docs.Sizers of={stories} wrapper="Fieldset" />
 
-<Docs.FormLibraryCompatibility
-  of={stories}
-  fieldName="pinPosition"
-  initialValue="front"
-  componentProps={{
-    label: 'Today’s pin positioning',
-    hint: 'Starting from the first hole',
-    options: [
-      {
-        value: 'front',
-        label: 'front, middle, back',
-      },
-      {
-        value: 'middle',
-        label: 'middle, back, front',
-      },
-      {
-        value: 'back',
-        label: 'back, front, middle',
-      },
-    ],
-  }}
-/>
+<Docs.FormLibraryDemos of="Radios" fieldName="pinPosition" initialValue="front">
+  {({ props, error }) => (
+    <Radios
+      {...props}
+      label="Today’s pin positioning"
+      hint="Starting from the first hole"
+      error={error}
+      options={[
+        {
+          value: 'front',
+          label: 'front, middle, back ...',
+        },
+        {
+          value: 'middle',
+          label: 'middle, back, front ...',
+        },
+        {
+          value: 'back',
+          label: 'back, front, middle ...',
+        },
+      ]}
+    />
+  )}
+</Docs.FormLibraryDemos>
