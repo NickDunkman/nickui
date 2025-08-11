@@ -7,29 +7,32 @@ import { formLibraryTests } from '@/dev/tests/formLibraryTests';
 
 import { Checkbox } from './Checkbox';
 
-test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
-  const user = userEvent.setup();
+test.each(formLibraryTests)(
+  'Compatible with $libraryName',
+  async ({ LibrarySetup }) => {
+    const user = userEvent.setup();
 
-  render(
-    <Test fieldName="nameIsNick" isCheckbox initialValue={true}>
-      {({ props, touched }) => (
-        <Checkbox {...props()} label="Name is Nick" data-touched={touched} />
-      )}
-    </Test>,
-  );
+    render(
+      <LibrarySetup fieldName="nameIsNick" isCheckbox initialValue={true}>
+        {({ props, touched }) => (
+          <Checkbox {...props()} label="Name is Nick" data-touched={touched} />
+        )}
+      </LibrarySetup>,
+    );
 
-  const checkbox = screen.getByLabelText('Name is Nick');
-  expect(checkbox).toBeChecked();
-  expect(checkbox).toHaveAttribute('data-touched', 'false');
+    const checkbox = screen.getByLabelText('Name is Nick');
+    expect(checkbox).toBeChecked();
+    expect(checkbox).toHaveAttribute('data-touched', 'false');
 
-  await user.tab();
-  expect(checkbox).toHaveFocus();
+    await user.tab();
+    expect(checkbox).toHaveFocus();
 
-  await user.keyboard(' ');
-  expect(checkbox).not.toBeChecked();
+    await user.keyboard(' ');
+    expect(checkbox).not.toBeChecked();
 
-  // Ensures that onBlur is functioning properly
-  await user.tab();
-  expect(checkbox).not.toHaveFocus();
-  expect(checkbox).toHaveAttribute('data-touched', 'true');
-});
+    // Ensures that onBlur is functioning properly
+    await user.tab();
+    expect(checkbox).not.toHaveFocus();
+    expect(checkbox).toHaveAttribute('data-touched', 'true');
+  },
+);

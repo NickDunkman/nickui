@@ -4,16 +4,20 @@ import * as React from 'react';
 import { useForm as useReactHookForm } from 'react-hook-form';
 
 export const formLibraryTests = [
-  { Test: ReactHookFormTest, library: 'React Hook Form' },
-  { Test: TanstackFormTest, library: 'Tanstack Form' },
-  { Test: FormikTest, library: 'Formik' },
+  { LibrarySetup: ReactHookFormSetup, libraryName: 'React Hook Form' },
+  { LibrarySetup: TanstackFormSetup, libraryName: 'Tanstack Form' },
+  { LibrarySetup: FormikSetup, libraryName: 'Formik' },
 ] as const;
 
 type ValueType = string | boolean;
 
-interface TesterProps {
+interface LibrarySetupProps {
   fieldName: string;
   initialValue: ValueType;
+  /**
+   * Pass a value to add a field validator which adds an error when the value
+   * matches
+   */
   erroneousValue?: ValueType;
   isCheckbox?: boolean;
   children: (args: {
@@ -29,12 +33,12 @@ interface TesterProps {
   }) => React.ReactNode;
 }
 
-export function ReactHookFormTest({
+function ReactHookFormSetup({
   children,
   fieldName,
   initialValue,
   erroneousValue,
-}: TesterProps) {
+}: LibrarySetupProps) {
   const {
     register,
     formState: { errors, touchedFields },
@@ -57,13 +61,13 @@ export function ReactHookFormTest({
   });
 }
 
-export function TanstackFormTest({
+function TanstackFormSetup({
   children,
   fieldName,
   initialValue,
   erroneousValue,
   isCheckbox,
-}: TesterProps) {
+}: LibrarySetupProps) {
   const form = useTanstackForm({
     defaultValues: {
       [fieldName]: initialValue,
@@ -105,13 +109,13 @@ export function TanstackFormTest({
   );
 }
 
-export function FormikTest({
+function FormikSetup({
   children,
   fieldName,
   initialValue,
   erroneousValue,
   isCheckbox,
-}: TesterProps) {
+}: LibrarySetupProps) {
   const form = useFormik({
     initialValues: {
       [fieldName]: initialValue,

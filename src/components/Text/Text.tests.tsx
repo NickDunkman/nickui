@@ -7,32 +7,44 @@ import { formLibraryTests } from '@/dev/tests/formLibraryTests';
 
 import { Text } from './Text';
 
-test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
-  const user = userEvent.setup();
+test.each(formLibraryTests)(
+  'Compatible with $libraryName',
+  async ({ LibrarySetup }) => {
+    const user = userEvent.setup();
 
-  render(
-    <Test fieldName="name" initialValue="Nick" erroneousValue="not Nick">
-      {({ props, error, touched }) => (
-        <Text {...props()} label="Name" error={error} data-touched={touched} />
-      )}
-    </Test>,
-  );
+    render(
+      <LibrarySetup
+        fieldName="name"
+        initialValue="Nick"
+        erroneousValue="not Nick"
+      >
+        {({ props, error, touched }) => (
+          <Text
+            {...props()}
+            label="Name"
+            error={error}
+            data-touched={touched}
+          />
+        )}
+      </LibrarySetup>,
+    );
 
-  const input = screen.getByLabelText('Name');
-  expect(input).toHaveValue('Nick');
-  expect(input).toHaveAttribute('data-touched', 'false');
+    const input = screen.getByLabelText('Name');
+    expect(input).toHaveValue('Nick');
+    expect(input).toHaveAttribute('data-touched', 'false');
 
-  await user.tab();
-  expect(input).toHaveFocus();
+    await user.tab();
+    expect(input).toHaveFocus();
 
-  await user.clear(input);
-  expect(input).toHaveValue('');
+    await user.clear(input);
+    expect(input).toHaveValue('');
 
-  await user.type(input, 'not Nick');
-  expect(input).toHaveAccessibleErrorMessage('That’s erroneous');
+    await user.type(input, 'not Nick');
+    expect(input).toHaveAccessibleErrorMessage('That’s erroneous');
 
-  // Ensures that onBlur is functioning properly
-  await user.tab();
-  expect(input).not.toHaveFocus();
-  expect(input).toHaveAttribute('data-touched', 'true');
-});
+    // Ensures that onBlur is functioning properly
+    await user.tab();
+    expect(input).not.toHaveFocus();
+    expect(input).toHaveAttribute('data-touched', 'true');
+  },
+);

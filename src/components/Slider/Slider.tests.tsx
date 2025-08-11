@@ -7,39 +7,42 @@ import { formLibraryTests } from '@/dev/tests/formLibraryTests';
 
 import { Slider } from './Slider';
 
-test.each(formLibraryTests)('Compatible with $library', async ({ Test }) => {
-  const user = userEvent.setup();
+test.each(formLibraryTests)(
+  'Compatible with $libraryName',
+  async ({ LibrarySetup }) => {
+    const user = userEvent.setup();
 
-  render(
-    <Test fieldName="score" initialValue="50" erroneousValue="51">
-      {({ props, error, touched }) => (
-        <Slider
-          {...props()}
-          label="Score"
-          error={error}
-          data-touched={touched}
-        />
-      )}
-    </Test>,
-  );
+    render(
+      <LibrarySetup fieldName="score" initialValue="50" erroneousValue="51">
+        {({ props, error, touched }) => (
+          <Slider
+            {...props()}
+            label="Score"
+            error={error}
+            data-touched={touched}
+          />
+        )}
+      </LibrarySetup>,
+    );
 
-  const slider = screen.getByLabelText('Score');
-  expect(slider).toHaveAttribute('data-touched', 'false');
+    const slider = screen.getByLabelText('Score');
+    expect(slider).toHaveAttribute('data-touched', 'false');
 
-  // Test that the value & visual representation of the value was able
-  // to be parsed from the way the library passes down the initial value
-  expect(slider).toHaveValue(50);
-  expect(screen.getByTestId('fill')).toHaveStyle({ right: '50%' });
+    // Test that the value & visual representation of the value was able
+    // to be parsed from the way the library passes down the initial value
+    expect(slider).toHaveValue(50);
+    expect(screen.getByTestId('fill')).toHaveStyle({ right: '50%' });
 
-  await user.tab();
-  expect(slider).toHaveFocus();
+    await user.tab();
+    expect(slider).toHaveFocus();
 
-  await user.keyboard('{ArrowRight}');
-  expect(slider).toHaveValue(51);
-  expect(slider).toHaveAccessibleErrorMessage('That’s erroneous');
+    await user.keyboard('{ArrowRight}');
+    expect(slider).toHaveValue(51);
+    expect(slider).toHaveAccessibleErrorMessage('That’s erroneous');
 
-  // Ensures that onBlur is functioning properly
-  await user.tab();
-  expect(slider).not.toHaveFocus();
-  expect(slider).toHaveAttribute('data-touched', 'true');
-});
+    // Ensures that onBlur is functioning properly
+    await user.tab();
+    expect(slider).not.toHaveFocus();
+    expect(slider).toHaveAttribute('data-touched', 'true');
+  },
+);
