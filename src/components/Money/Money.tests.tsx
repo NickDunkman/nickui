@@ -116,7 +116,7 @@ describe('Money', async () => {
     expect(input).toHaveValue('1,234.50');
   });
 
-  test('pads with a zero when first character is the decimal point', async () => {
+  test('prepends with a zero when first character is the decimal point', async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     render(<Money label="Cost" defaultValue="" onChange={onChange} />);
@@ -349,5 +349,108 @@ describe('Money', async () => {
     await user.click(screen.getByText('Switch to Euros'));
     expect(input).toHaveValue('');
     expect(onChange).not.toHaveBeenCalled();
+  });
+
+  test('can type a negative sign when negatives are allowed', async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(
+      <Money allowNegatives label="Cost" defaultValue="" onChange={onChange} />,
+    );
+
+    const input = screen.getByLabelText('Cost');
+    expect(input).toHaveValue('');
+
+    // type negative sign
+    await user.tab();
+    expect(input).toHaveFocus();
+    await user.keyboard('-');
+    expect(input).toHaveValue('-');
+    expect(onChange).not.toHaveBeenCalled(); // no numeric change yet!
+
+    // can’t type another one!
+    await user.keyboard('-');
+    expect(input).toHaveValue('-');
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  test('slips in a zero when first two characters are "-."', async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(
+      <Money allowNegatives label="Cost" defaultValue="" onChange={onChange} />,
+    );
+
+    const input = screen.getByLabelText('Cost');
+    expect(input).toHaveValue('');
+
+    await user.tab();
+    expect(input).toHaveFocus();
+    await user.keyboard('-.');
+    expect(input).toHaveValue('-0.');
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(eventValue('0.00'));
+
+    // cursor stayed in the proper spot, so continuing to type adds digits
+    // after the decimal
+    onChange.mockClear();
+    await user.keyboard('1');
+    expect(input).toHaveValue('-0.1');
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(eventValue('-0.10'));
+  });
+
+  test('Can decrement below zero using the down arrow when negatives are allowed', async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(
+      <Money
+        allowNegatives
+        label="Cost"
+        defaultValue="0.12"
+        onChange={onChange}
+      />,
+    );
+
+    const input = screen.getByLabelText('Cost');
+    expect(input).toHaveValue('0.12');
+
+    await user.tab();
+    expect(input).toHaveFocus();
+    await user.keyboard('{ArrowDown}');
+    expect(input).toHaveValue('-0.88');
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(eventValue('-0.88'));
+
+    // value is right when jumping back into the positives
+    onChange.mockClear();
+    await user.keyboard('{ArrowUp}');
+    expect(input).toHaveValue('0.12');
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(eventValue('0.12'));
+  });
+
+  test('Can decrement below zero using shift + the down arrow when negatives are allowed', async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(
+      <Money
+        allowNegatives
+        label="Cost"
+        defaultValue="1.23"
+        onChange={onChange}
+      />,
+    );
+
+    const input = screen.getByLabelText('Cost');
+    expect(input).toHaveValue('1.23');
+
+    await user.tab();
+    expect(input).toHaveFocus();
+    await user.keyboard('{Shift>}{ArrowDown}{/Shift}');
+    expect(input).toHaveValue('-8.77');
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(eventValue('-8.77'));
+
+    // value is right when jumping back into the positives
+    onChange.mockClear();
+    await user.keyboard('{Shift>}{ArrowUp}{/Shift}');
+    expect(input).toHaveValue('1.23');
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(eventValue('1.23'));
   });
 });

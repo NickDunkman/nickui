@@ -22,6 +22,11 @@ export function parseNumerishValue(
 ) {
   let stringValue = rawValue?.toString().replace(/[^0-9.-]/g, '') || '';
 
+  // Drop the negative sign if it's the only character (that ain't a number)
+  if (!format.allowWorkingNegativeSign && stringValue === '-') {
+    return '';
+  }
+
   // If negatives are allowed, there should only be one negative sign at the
   // front of the string
   if (
@@ -52,7 +57,7 @@ export function parseNumerishValue(
 
   // Drop the decimal point when it's the last character
   if (
-    !format?.allowTrailingDecimalPoint &&
+    !format?.allowWorkingDecimalPoint &&
     stringValue[stringValue.length - 1] === '.'
   ) {
     stringValue = stringValue.slice(0, -1);
@@ -61,7 +66,7 @@ export function parseNumerishValue(
   // Ensure minimum decimal places
   if (stringValue && format.minDecimalPlaces > 0) {
     let [wholePart, decimalPart] = stringValue.split('.');
-    stringValue = `${wholePart || '0'}.${(decimalPart || '').padEnd(format.minDecimalPlaces, '0')}`;
+    stringValue = `${wholePart === '-' ? '-0' : wholePart || '0'}.${(decimalPart || '').padEnd(format.minDecimalPlaces, '0')}`;
   }
 
   // Ensure maximum decimal places
@@ -79,8 +84,13 @@ export function parseNumerishValue(
       )
         .toString()
         .split('.');
-      stringValue = `${wholePart}.${(decimalPart || '').padEnd(format.maxDecimalPlaces, '0')}`;
+      stringValue = `${wholePart === '-' ? '-0' : wholePart}.${(decimalPart || '').padEnd(format.maxDecimalPlaces, '0')}`;
     }
+  }
+
+  // Negative zero is zero
+  if (!format.allowWorkingNegativeSign && stringValue.match(/^-0(\.(0+)?)?$/)) {
+    stringValue = stringValue.slice(1);
   }
 
   return stringValue;

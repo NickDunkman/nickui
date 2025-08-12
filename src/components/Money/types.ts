@@ -34,13 +34,51 @@ export interface MoneyProps
  * system.
  */
 export interface MoneyFormatType {
-  decimalPoint: NonNullable<MoneyProps['decimalPoint']>;
-  minDecimalPlaces: NonNullable<MoneyProps['decimalPlaces']>;
-  maxDecimalPlaces: NonNullable<MoneyProps['decimalPlaces']>;
-  thousandsSeparator: NonNullable<MoneyProps['decimalPoint']>;
-  allowNegatives: NonNullable<MoneyProps['allowNegatives']>;
+  /** The currency symbol shown at the front of the input, typically "$" */
   currencySymbol: NonNullable<MoneyProps['currencySymbol']>;
-  allowTrailingDecimalPoint?: boolean;
+  /**
+   * The character to use to separate the whole part from the decimal part,
+   * typically "."
+   */
+  decimalPoint: NonNullable<MoneyProps['decimalPoint']>;
+  /**
+   * The character to use to separate every three digits in the whole part,
+   * typically ","
+   */
+  thousandsSeparator: NonNullable<MoneyProps['decimalPoint']>;
+  /**
+   * The minimum number of decimal places that should be allowed. Min & max are
+   * separate options so that for example, the working <input> can have
+   * no decimal places (as the user is "working" towards typing them), while
+   * the placeholder <input> has the full decimal places
+   */
+  minDecimalPlaces: NonNullable<MoneyProps['decimalPlaces']>;
+  /** The maximum number of decimal places that should be allowed */
+  maxDecimalPlaces: NonNullable<MoneyProps['decimalPlaces']>;
+  /** Set to `true` if you want to allow the user to enter negative values */
+  allowNegatives: NonNullable<MoneyProps['allowNegatives']>;
+  /**
+   * Set to `true` if you want to allow a decimal point as the user is
+   * "working" towards typing the full number. For example, usually the
+   * parsing/formatting utilities will strip off trailing decimal points
+   * ("12." -> "12"), but the working <input> needs to allow that case as the
+   * user types
+   *
+   * This option is effectively ignored unless `maxDecimalPlaces` > 0, since
+   * otherwise the user can’t add the decimal point.
+   */
+  allowWorkingDecimalPoint?: boolean;
+  /**
+   * Set to `true` if you want to allow a negative sign as the user is "working"
+   * towards a full number. For example, usually the parsing/formatting
+   * utilities will disallow a lone negative sign ("-" -> ""), and strip the
+   * negative sign off of negative zero ("-0.00" -> "0.00"). But the working
+   * <input> needs to allow those cases as the user types.
+   *
+   * This option is effectively ignored unless `allowNegatives` is `true`, since
+   * otherwise the user can’t type a negative sign.
+   */
+  allowWorkingNegativeSign?: boolean;
 }
 
 export type MoneyValueType = {

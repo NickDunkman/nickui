@@ -37,6 +37,46 @@ describe('parseNumerishValue', () => {
     expect(parseNumerishValue(' -1.23 ', usdFormat)).toStrictEqual('-1.23');
   });
 
+  test('a lone negative sign is rejected, unless format.allowWorkingNegativeSign is true', () => {
+    expect(
+      parseNumerishValue('-', { ...usdFormat, allowNegatives: true }),
+    ).toStrictEqual('');
+    expect(
+      parseNumerishValue('-', {
+        ...usdFormat,
+        allowNegatives: true,
+        allowWorkingNegativeSign: true,
+      }),
+    ).toStrictEqual('-0.00');
+    expect(
+      parseNumerishValue('-', {
+        ...usdFormat,
+        allowNegatives: true,
+        allowWorkingNegativeSign: true,
+        minDecimalPlaces: 0,
+      }),
+    ).toStrictEqual('-');
+  });
+
+  test('negative zero becomes zero, unless format.allowWorkingNegativeSign is true', () => {
+    expect(
+      parseNumerishValue('-0', { ...usdFormat, allowNegatives: true }),
+    ).toStrictEqual('0.00');
+    expect(
+      parseNumerishValue('-0.00', {
+        ...usdFormat,
+        allowNegatives: true,
+      }),
+    ).toStrictEqual('0.00');
+    expect(
+      parseNumerishValue('-0.00', {
+        ...usdFormat,
+        allowNegatives: true,
+        allowWorkingNegativeSign: true,
+      }),
+    ).toStrictEqual('-0.00');
+  });
+
   test.each([
     ['undefined is accepted', { input: undefined, min: 2, max: 2, output: '' }],
     ['empty strings are preserved', { input: '', min: 2, max: 2, output: '' }],
@@ -90,13 +130,13 @@ describe('parseNumerishValue', () => {
   test('should strip leading zeros properly', () => {
     expect(parseNumerishValue('0', usdFormat)).toStrictEqual('0.00');
     expect(parseNumerishValue('0.', usdFormat)).toStrictEqual('0.00');
-    expect(parseNumerishValue('-0', usdFormat)).toStrictEqual('-0.00');
-    expect(parseNumerishValue('-0.', usdFormat)).toStrictEqual('-0.00');
+    expect(parseNumerishValue('-0', usdFormat)).toStrictEqual('0.00');
+    expect(parseNumerishValue('-0.', usdFormat)).toStrictEqual('0.00');
 
     expect(parseNumerishValue('00', usdFormat)).toStrictEqual('0.00');
     expect(parseNumerishValue('00.', usdFormat)).toStrictEqual('0.00');
-    expect(parseNumerishValue('-00', usdFormat)).toStrictEqual('-0.00');
-    expect(parseNumerishValue('-00.', usdFormat)).toStrictEqual('-0.00');
+    expect(parseNumerishValue('-00', usdFormat)).toStrictEqual('0.00');
+    expect(parseNumerishValue('-00.', usdFormat)).toStrictEqual('0.00');
 
     expect(parseNumerishValue('001', usdFormat)).toStrictEqual('1.00');
     expect(parseNumerishValue('001.', usdFormat)).toStrictEqual('1.00');

@@ -235,7 +235,8 @@ function formatWorkingValue(
   return formatValue(rawValue, {
     ...format,
     // These allow the decimal part to be a work in progress
-    allowTrailingDecimalPoint: true,
+    allowWorkingDecimalPoint: true,
+    allowWorkingNegativeSign: true,
     minDecimalPlaces: 0,
   });
 }
@@ -247,5 +248,7 @@ function formatFullValue(
   return formatValue(rawValue || '0', {
     ...format,
     minDecimalPlaces: format.maxDecimalPlaces,
+    allowWorkingDecimalPoint: true,
+    allowWorkingNegativeSign: true,
   });
 }
