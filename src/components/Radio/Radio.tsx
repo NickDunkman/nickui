@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import { Checkable } from '@/components/Checkbox';
 import { CheckedFieldableFormControlProps } from '@/types';
+
+import { CheckableFormControl } from '../CheckableFormControl';
 
 import { radioStyler } from './styles';
 
@@ -13,7 +14,7 @@ export type RadioProps = CheckedFieldableFormControlProps;
  */
 export function Radio(props: RadioProps) {
   return (
-    <Checkable
+    <CheckableFormControl
       {...props}
       type="radio"
       styler={radioStyler}

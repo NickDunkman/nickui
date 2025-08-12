@@ -1,16 +1,18 @@
 import * as React from 'react';
 
+import { CheckableFormControls } from '@/components/CheckableFormControls';
 import { Switch } from '@/components/Switch';
+import { CheckedFieldableFormControlsProps } from '@/types';
 
-import { Checkables, CheckablesProps } from '../Checkboxes/Checkboxes';
+type SwitchesProps = CheckedFieldableFormControlsProps;
 
 /**
  * Renders multiple <Switch> as one field in a <Fieldset>.
- * @props {@link CheckablesProps}
+ * @props {@link SwitchesProps}
  */
-export function Switches({ delimiter = ',', ...otherProps }: CheckablesProps) {
+export function Switches({ delimiter = ',', ...otherProps }: SwitchesProps) {
   return (
-    <Checkables
+    <CheckableFormControls
       {...otherProps}
       Checkable={Switch}
       delimiter={delimiter}

@@ -187,3 +187,36 @@ export type CheckedFieldableFormControlProps<
       /** The name of the field  */
       name?: string;
     };
+
+/**
+ * Props for NICKUI form control components which use multiple checkables
+ * for one field, such as Checkboxes, Radios, & Switches.
+ */
+export interface CheckedFieldableFormControlsProps
+  extends FieldableFormControlProps<
+    string,
+    Omit<React.ComponentProps<'input'>, 'children'>
+  > {
+  /**
+   * Render function used to render customized checkable inputs. Call the
+   * provided callback to get props to pass down to each input.
+   */
+  render?: (
+    inputProps: (config: {
+      value: string;
+      disabled?: boolean;
+    }) => React.ComponentProps<'input'>,
+  ) => React.ReactNode;
+  /** Adds the controls in the standard layout */
+  options?: {
+    value: string;
+    label: React.ReactNode;
+    hint?: React.ReactNode;
+    disabled?: boolean;
+  }[];
+  /**
+   * Optionally override the delimiter used to split the value into individual
+   * checkable values
+   */
+  delimiter?: string;
+}

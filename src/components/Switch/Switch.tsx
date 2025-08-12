@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import { Checkable } from '@/components/Checkbox';
 import { CheckedFieldableFormControlProps } from '@/types';
+
+import { CheckableFormControl } from '../CheckableFormControl';
 
 import { switchStyler } from './styles';
 
@@ -16,7 +17,7 @@ export type SwitchProps = CheckedFieldableFormControlProps;
  */
 export function Switch(props: SwitchProps) {
   return (
-    <Checkable
+    <CheckableFormControl
       {...props}
       type="checkbox"
       styler={switchStyler}

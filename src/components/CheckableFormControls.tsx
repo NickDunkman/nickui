@@ -1,0 +1,246 @@
+import * as React from 'react';
+
+import { Fieldset } from '@/components/Fieldset';
+import type {
+  CheckedFieldableFormControlsProps,
+  CheckedFieldableProps,
+} from '@/types';
+import { clsw } from '@/utils/clsw';
+import { randomId } from '@/utils/randomId';
+import { useResolvedSizer } from '@/utils/useResolvedSizer';
+
+/**
+ * This component is the engine for the components that render multiple
+ * checkables in a <Fieldset>, such as <Checkboxes>. It can handle both
+ * multiValue behavior (such as when using checkboxes) and singleValue behavior
+ * (such as when using radios).,
+ */
+export function CheckableFormControls({
+  // Fieldset props
+  className,
+  sizer,
+  label,
+  hint,
+  error,
+  disabled,
+  required,
+  // Checkables-specific props
+  Checkable,
+  name,
+  value: controlledValue,
+  defaultValue,
+  options,
+  render,
+  onChange,
+  onBlur,
+  delimiter,
+  'data-nickui-component': dataNickUIComponent,
+  // The rest are brought in from <'input'>
+  ...otherHiddenInputProps
+}: CheckedFieldableFormControlsProps & {
+  Checkable: React.ComponentType<
+    React.ComponentProps<'input'> & CheckedFieldableProps
+  >;
+  'data-nickui-component'?: string;
+}) {
+  const containerRef = React.createRef<HTMLDivElement>();
+  const [checkableName] = React.useState(randomId());
+
+  // track a value for *uncontrolled* mode, if necessary
+  const [uncontrolledValue, setUncontrolledValue] =
+    React.useState(defaultValue);
+
+  const isControlledComponent = controlledValue !== undefined;
+  const value = isControlledComponent ? controlledValue : uncontrolledValue;
+  const values =
+    !value || value === '' ? [] : delimiter ? value.split(delimiter) : [value];
+
+  // Callback to use for the onChange prop of each checkable
+  function handleCheckableChange(event: React.ChangeEvent<HTMLInputElement>) {
+    let newValue: string;
+    if (!delimiter) {
+      newValue = event.target.checked ? event.target.value : '';
+    } else {
+      const newValues = event.target.checked
+        ? [...values, event.target.value]
+        : values.filter((v) => v !== event.target.value);
+
+      // Sub-values within the value should be sorted according to the order
+      // their corresponding checkable appears in the DOM!
+      newValue = newValues
+        .sort(sortValuesByDOMOrder(containerRef))
+        .join(delimiter);
+    }
+
+    if (!isControlledComponent) {
+      setUncontrolledValue(newValue);
+    }
+
+    const hiddenInput = getHiddenInput(containerRef);
+    hiddenInput.value = newValue;
+    onChange?.({
+      ...event,
+      // The onChange events are originally triggered by the checkables, but
+      // libraries like Formik behave differently when the event.target is a
+      // checkbox or radio.
+      target: hiddenInput,
+    });
+  }
+
+  // Simulate a blur on the hidden input when a checkable is blurred. This
+  // allows form libraries like Formik to know that the field has been
+  // "touched".
+  function handleCheckableBlur(event: React.FocusEvent<HTMLInputElement>) {
+    const hiddenInput = getHiddenInput(containerRef);
+
+    onBlur?.({
+      ...event,
+      target: hiddenInput,
+    });
+  }
+
+  // This function will generate props to pass to each checkable's input
+  function inputProps({
+    value: checkableValue,
+    disabled: checkableDisabled = false,
+  }: {
+    value: string;
+    disabled?: boolean;
+  }) {
+    return {
+      name: checkableName,
+      value: checkableValue,
+      checked: values.includes(checkableValue),
+      onChange: handleCheckableChange,
+      onBlur: handleCheckableBlur,
+      disabled: disabled || checkableDisabled,
+    };
+  }
+
+  // React Hook Form sets the inital field value by using the `ref` prop to
+  // programmatically set the `value` on the hidden input element. So when
+  // the caller isn't using the `value` or `defaultValue` props, we should
+  // inspect the hidden input, and if something has magically set its value,
+  // use that as the defaultValue for this component -- allowing the checkables
+  // to be properly checked or unchecked after mount.
+  React.useLayoutEffect(() => {
+    if (controlledValue === undefined && defaultValue === undefined) {
+      const hiddenInput = getHiddenInput(containerRef);
+      if (hiddenInput.value) {
+        setUncontrolledValue(hiddenInput.value);
+      }
+    } else if (value) {
+      const hiddenInput = getHiddenInput(containerRef);
+      hiddenInput.value = value;
+    }
+    // We only want to run this effect once after mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const resolvedSizer = useResolvedSizer(sizer);
+
+  return (
+    <Fieldset
+      className={className}
+      sizer={sizer}
+      label={label}
+      hint={hint}
+      error={error}
+      disabled={disabled}
+      required={required}
+      data-nickui-component={dataNickUIComponent}
+    >
+      <div
+        ref={containerRef}
+        className={
+          // create a standard layout when self-rendering the checkables
+          // (otherwise, the caller should manage the layout within `render`)
+          options &&
+          clsw('flex flex-col', {
+            'gap-y-1.5': resolvedSizer === 'xs',
+            'gap-y-1.75': resolvedSizer === 'sm',
+            'gap-y-2': resolvedSizer === 'base',
+            'gap-y-2.25': resolvedSizer === 'lg',
+            'gap-y-2.5': resolvedSizer === 'xl',
+          })
+        }
+      >
+        {/* Standard layout using `options` */}
+        {options && (
+          <>
+            {options.map((option) => (
+              <Checkable
+                key={option.value?.toString()}
+                sizer={sizer}
+                {...inputProps({
+                  value: option.value,
+                  disabled: option.disabled,
+                })}
+                label={option.label}
+                hint={option.hint}
+              />
+            ))}
+          </>
+        )}
+
+        {/* Customized layout using `render` */}
+        {!options && render?.(inputProps)}
+
+        {/*
+          This hidden input manages the component’s value. See the component
+          description for an explanation.
+        */}
+        <input
+          {...otherHiddenInputProps}
+          name={name}
+          type="hidden"
+          className="the-hidden-input hidden"
+          disabled={disabled}
+          required={required}
+          data-testid="the-hidden-input"
+        />
+      </div>
+    </Fieldset>
+  );
+}
+
+// This function can be used with Array.sort to sort the sub-values according
+// to the order the corresponding checkables appear in the DOM.
+function sortValuesByDOMOrder(
+  checkablesContainer: React.RefObject<HTMLElement | null>,
+) {
+  // Get the order of all possible sub-values as they appear in the DOM
+  const orderInDOM = [
+    ...(checkablesContainer.current?.getElementsByTagName('input') || []),
+  ]
+    .filter((input) => input.type === 'checkbox' || input.type === 'radio')
+    .map((input) => input.value);
+
+  return (a: string, b: string) => {
+    const aIndex = orderInDOM.indexOf(a);
+    const bIndex = orderInDOM.indexOf(b);
+
+    // If B is not in the DOM, sort A to the front
+    if (bIndex === -1) {
+      return -1;
+    }
+
+    // else if A is not in the DOM, sort B to the front
+    if (aIndex === -1) {
+      return 1;
+    }
+
+    // else, sort according to their positions
+    return aIndex - bIndex;
+  };
+}
+
+function getHiddenInput(
+  checkablesContainer: React.RefObject<HTMLElement | null>,
+) {
+  return [
+    ...(checkablesContainer.current?.getElementsByClassName(
+      'the-hidden-input',
+    ) || []),
+  ][0] as HTMLInputElement;
+}
