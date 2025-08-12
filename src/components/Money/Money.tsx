@@ -30,6 +30,10 @@ export function Money(props: MoneyProps) {
     controlledAriaInvalid: props['aria-invalid'],
   });
 
+  // Props for all the elements that depend on the value state. The value state
+  // for Money is very complex due to currency formatting, and is managed within
+  // this hook. The props returned here get spread onto the elements in the
+  // JSX below.
   const valueElementsProps = useValueElementsProps(props);
 
   const currencySymbolRef = React.useRef<HTMLDivElement>(null);
@@ -43,6 +47,10 @@ export function Money(props: MoneyProps) {
     valueElementsProps.placeholderInput.ref,
   );
 
+  // Styles for <Money> are built on top of those from the <Text> styler.
+  // The `isInitialized` variant keeps all the text within the inputs invisible
+  // until the currency symbol spacing has been applied, so that the text
+  // doesn't do an unslightly visible jump to the right immediately after mount.
   const resolvedSizer = useResolvedSizer(props.sizer);
   const textStyles = textStyler({
     sizer: resolvedSizer,
@@ -50,7 +58,7 @@ export function Money(props: MoneyProps) {
   });
   const moneyStyles = moneyStyler({
     sizer: resolvedSizer,
-    hasSpacingApplied: !!currencySymbolBounds,
+    isInitialized: !!currencySymbolBounds,
   });
 
   // Add the currency symbol to the `aria-labelledby` prop on the working
@@ -95,6 +103,7 @@ export function Money(props: MoneyProps) {
           style={{ paddingLeft: currencySymbolBounds?.width }}
           tabIndex={-1}
           aria-hidden
+          data-testid="money-placeholder-input"
           {...valueElementsProps.placeholderInput}
         />
 

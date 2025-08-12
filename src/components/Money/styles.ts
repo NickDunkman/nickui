@@ -43,7 +43,7 @@ export const moneyStyler = tv({
     },
     // Prevent text from appearing to jump to the right when the currency symbol
     // padding is applied
-    hasSpacingApplied: {
+    isInitialized: {
       false: {
         placeholderInput: 'text-transparent disabled:text-transparent',
         workingInput: 'text-transparent disabled:text-transparent',
@@ -53,6 +53,6 @@ export const moneyStyler = tv({
   },
   defaultVariants: {
     sizer: 'base',
-    hasSpacingApplied: true,
+    isInitialized: true,
   },
 });

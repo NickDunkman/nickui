@@ -28,6 +28,22 @@ const meta = {
       value: ['string', 'number'],
     },
   }),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            // The accessibility checker complains that it can't check the color
+            // contrast of the placeholder input, since it is overlapped by the
+            // working input. But it’s good. So just ignore that particular
+            // check.
+            id: 'color-contrast',
+            selector: '*:not([data-testid="money-placeholder-input"])',
+          },
+        ],
+      },
+    },
+  },
 } satisfies Meta<typeof Money>;
 
 export default meta;
