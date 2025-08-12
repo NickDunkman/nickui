@@ -3,7 +3,7 @@ import * as React from 'react';
 import { CheckedField } from '@/components/CheckedField';
 import { CheckedFieldableFormControlProps } from '@/types';
 import { clsw } from '@/utils/clsw';
-import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
+import { useCheckedFieldControlA11yProps } from '@/utils/fieldA11y';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { checkboxStyler } from './styles';
@@ -43,6 +43,7 @@ export function Checkable({
   onBlur,
   onFocus,
   type,
+  'aria-label': controlledAriaLabel,
   'aria-labelledby': controlledAriaLabelledBy,
   'aria-describedby': controlledAriaDescribedBy,
   'data-nickui-component': dataNickUIComponent,
@@ -92,9 +93,10 @@ export function Checkable({
     }
   }
 
-  const a11yIds = useFieldA11yIds({
+  const a11yProps = useCheckedFieldControlA11yProps({
     label,
     hint,
+    controlledAriaLabel,
     controlledAriaLabelledBy,
     controlledAriaDescribedBy,
   });
@@ -108,25 +110,23 @@ export function Checkable({
 
   return (
     <CheckedField
+      {...a11yProps.checkedField}
       className={clsw(styles.root(), className)}
       label={label}
-      labelId={a11yIds.ariaLabelledBy}
       hint={hint}
-      hintId={a11yIds.ariaDescribedBy}
       sizer={sizer}
       disabled={disabled}
       onMouseDown={handleRootMouseDown}
       data-nickui-component={dataNickUIComponent}
     >
       <input
+        {...inputProps}
+        {...a11yProps.formControl}
         type={type}
         className={styles.input()}
         disabled={disabled}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
-        aria-labelledby={a11yIds.ariaLabelledBy}
-        aria-describedby={a11yIds.ariaDescribedBy}
-        {...inputProps}
       />
       <div
         className={styles.indicator()}
