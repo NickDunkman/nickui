@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Field } from '@/components/Field';
 import { FieldableFormControlProps } from '@/types';
-import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
+import { useFieldControlA11yProps } from '@/utils/fieldA11y';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { selectStyler } from './styles';
@@ -22,23 +22,25 @@ export function Select({
   error,
   disabled,
   required,
-  // Select-specific props
+  // The rest are brought in from <select>
   id: controlledId,
+  'aria-label': controlledAriaLabel,
   'aria-labelledby': controlledAriaLabelledBy,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
-  'aria-invalid': ariaInvalid,
-  // The rest are brought in from <select>
+  'aria-invalid': controlledAriaInvalid,
   ...otherSelectProps
 }: SelectProps) {
-  const a11yIds = useFieldA11yIds({
+  const a11yProps = useFieldControlA11yProps({
     label,
     hint,
     error,
     controlledId,
+    controlledAriaLabel,
     controlledAriaLabelledBy,
     controlledAriaDescribedBy,
     controlledAriaErrorMessage,
+    controlledAriaInvalid,
   });
 
   const resolvedSizer = useResolvedSizer(sizer);
@@ -50,29 +52,22 @@ export function Select({
 
   return (
     <Field
+      {...a11yProps.field}
       className={className}
       sizer={sizer}
       label={label}
-      labelId={a11yIds.ariaLabelledBy}
-      controlId={a11yIds.id}
       hint={hint}
-      hintId={a11yIds.ariaDescribedBy}
       error={error !== true ? error : undefined}
-      errorId={a11yIds.ariaErrorMessage}
       required={required}
       data-nickui-component="Select"
     >
       <div className={styles.root()}>
         <select
           {...otherSelectProps}
-          id={a11yIds.id}
+          {...a11yProps.formControl}
           className={styles.select()}
           disabled={disabled}
           required={required}
-          aria-labelledby={a11yIds.ariaLabelledBy}
-          aria-describedby={a11yIds.ariaDescribedBy}
-          aria-errormessage={a11yIds.ariaErrorMessage}
-          aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
         />
       </div>
     </Field>

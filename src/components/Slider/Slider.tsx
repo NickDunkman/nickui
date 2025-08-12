@@ -4,8 +4,8 @@ import * as React from 'react';
 import { Field } from '@/components/Field';
 import { FieldableFormControlProps } from '@/types';
 import { debounceToRepaint } from '@/utils/debounceToRepaint';
+import { useFieldControlA11yProps } from '@/utils/fieldA11y';
 import { fireInputChange } from '@/utils/fireInputChange';
-import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
 import { sliderStyler } from './styles';
@@ -70,27 +70,30 @@ export function Slider({
   disabled,
   required,
   // Slider-specific props
-  ref: controlledInputRef,
-  name,
+  value: controlledValue,
+  defaultValue,
   max: rawMax = 100,
   min: rawMin = 0,
   step: rawStep = 1,
   shiftSteps: rawShiftSteps = 10,
-  tabIndex,
-  value: controlledValue,
-  defaultValue,
+  // These are pulled in from <input>, for the hidden input
+  ref: controlledInputRef,
+  onBlur,
   onChange,
+  name,
+  // These are pulled in from <div>, for the interactable slider div
+  tabIndex,
   onMouseDown,
   onTouchStart,
   onKeyDown,
   onFocus,
-  onBlur,
+  id: controlledId,
+  'aria-label': controlledAriaLabel,
   'aria-labelledby': controlledAriaLabelledBy,
   'aria-describedby': controlledAriaDescribedBy,
   'aria-errormessage': controlledAriaErrorMessage,
-  'aria-invalid': ariaInvalid,
-  // The rest are brought in from <div>
-  ...otherDivProps
+  'aria-invalid': controlledAriaInvalid,
+  ...otherSliderDivProps
 }: SliderProps) {
   const rootRef = React.useRef<HTMLDivElement>(null);
   const trackRef = React.useRef<HTMLDivElement>(null);
@@ -355,13 +358,16 @@ export function Slider({
   const hint = descriptorOrFnToNode(hintOrFn);
   const error = descriptorOrFnToNode(errorOrFn);
 
-  const a11yIds = useFieldA11yIds({
+  const a11yProps = useFieldControlA11yProps({
     label,
     hint,
     error,
+    controlledId,
+    controlledAriaLabel,
     controlledAriaLabelledBy,
     controlledAriaDescribedBy,
     controlledAriaErrorMessage,
+    controlledAriaInvalid,
   });
 
   const percentage = valueToRangePercentage(implicitValue, min, max);
@@ -400,19 +406,18 @@ export function Slider({
 
   return (
     <Field
+      {...a11yProps.field}
       className={className}
       sizer={sizer}
       label={label}
-      labelId={a11yIds.ariaLabelledBy}
       hint={hint}
-      hintId={a11yIds.ariaDescribedBy}
       error={error}
-      errorId={a11yIds.ariaErrorMessage}
       required={required}
       data-nickui-component="Slider"
     >
       <div
-        {...otherDivProps}
+        {...otherSliderDivProps}
+        {...a11yProps.formControl}
         ref={rootRef}
         className={styles.root()}
         role="slider"
@@ -426,10 +431,6 @@ export function Slider({
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={implicitValue}
-        aria-labelledby={a11yIds.ariaLabelledBy}
-        aria-describedby={a11yIds.ariaDescribedBy}
-        aria-errormessage={a11yIds.ariaErrorMessage}
-        aria-invalid={ariaInvalid !== undefined ? ariaInvalid : !!error}
       >
         <div ref={trackRef} className={styles.track()}>
           <div

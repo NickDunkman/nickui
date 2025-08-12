@@ -3,9 +3,9 @@ import * as React from 'react';
 import { Field } from '@/components/Field';
 import { textStyler } from '@/components/Text/styles';
 import { clsw } from '@/utils/clsw';
+import { useFieldControlA11yProps } from '@/utils/fieldA11y';
 import { randomId } from '@/utils/randomId';
 import { useElementBounds } from '@/utils/useElementBounds';
-import { useFieldA11yIds } from '@/utils/useFieldA11yIds';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 import { useScrollClone } from '@/utils/useScrollClone';
 
@@ -18,14 +18,16 @@ import { useValueElementsProps } from './useValueElementsProps';
  * @param props {@link MoneyProps}
  */
 export function Money(props: MoneyProps) {
-  const a11yIds = useFieldA11yIds({
+  const a11yProps = useFieldControlA11yProps({
     label: props.label,
     hint: props.hint,
     error: props.error,
     controlledId: props.id,
+    controlledAriaLabel: props['aria-label'],
     controlledAriaLabelledBy: props['aria-labelledby'],
     controlledAriaDescribedBy: props['aria-describedby'],
     controlledAriaErrorMessage: props['aria-errormessage'],
+    controlledAriaInvalid: props['aria-invalid'],
   });
 
   const valueElementsProps = useValueElementsProps(props);
@@ -57,23 +59,24 @@ export function Money(props: MoneyProps) {
   // the accessible name for the working <input> should be "Cost (in $)", which
   // reads as "Cost (in dollars)".
   //
-  // However, we don't want to do this if a custom `aria-label` prop is
-  // provided, since `aria-labelledby` takes precedence when it is set.
-  const workingInputLabelledBy = props['aria-label']
-    ? a11yIds.ariaLabelledBy
-    : `${a11yIds.ariaLabelledBy || ''} ${currencySymbolId}`;
+  // However, we don't want to do this when the parent is specifying
+  // props.aria-label instead of props.label, since creating a aria-labelledby
+  // just for the currency symbol will cause the screen reader to ignore
+  // the props.aria-label. In this situation, we just rely on the parent to
+  // properly label the field.
+  const workingInputLabelledBy =
+    props['aria-label'] && !a11yProps.formControl['aria-labelledby']
+      ? undefined
+      : `${a11yProps.formControl['aria-labelledby'] || ''} ${currencySymbolId}`;
 
   return (
     <Field
+      {...a11yProps.field}
       className={props.className}
       sizer={props.sizer}
       label={props.label}
-      labelId={a11yIds.ariaLabelledBy}
-      controlId={a11yIds.id}
       hint={props.hint}
-      hintId={a11yIds.ariaDescribedBy}
       error={props.error !== true ? props.error : undefined}
-      errorId={a11yIds.ariaErrorMessage}
       required={props.required}
       data-nickui-component="Money"
     >
@@ -104,6 +107,7 @@ export function Money(props: MoneyProps) {
           the placeholder <input> behind until the user enters them manually.
         */}
         <input
+          {...a11yProps.formControl}
           role="spinbutton"
           // Use numeric keyboard when available, unless negatives are allowed
           // (the numeric keyboard doesn’t typically have a negative sign)
@@ -114,10 +118,7 @@ export function Money(props: MoneyProps) {
                 ? 'decimal'
                 : 'numeric'
           }
-          id={a11yIds.id}
           aria-labelledby={workingInputLabelledBy}
-          aria-describedby={a11yIds.ariaDescribedBy}
-          aria-errormessage={a11yIds.ariaErrorMessage}
           aria-invalid={props['aria-invalid'] ?? !!props.error}
           disabled={props.disabled}
           required={props.required}
