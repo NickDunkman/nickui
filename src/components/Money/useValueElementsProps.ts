@@ -144,11 +144,7 @@ export function useValueElementsProps(props: MoneyProps): {
     }
   }, [currentValue, previousValue, workingRef]);
 
-  const keyDownConstrictor = useKeyDownConstrictor({
-    allowNegatives: fullFormat.allowNegatives,
-    decimalPlaces: fullFormat.maxDecimalPlaces,
-    decimalPoint: fullFormat.decimalPoint,
-  });
+  const keyDownConstrictor = useKeyDownConstrictor(fullFormat);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     const shouldConstrict = keyDownConstrictor(event);

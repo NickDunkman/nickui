@@ -1,20 +1,14 @@
 import * as React from 'react';
 
+import { MoneyFormatType } from './types';
+
 /**
  * Returns a function that can be used to determine whether a key press on
  * the Money component’s working <input> should be blocked. For example,
  * typing a decimalPoint when there is already a decimalPoint in the value
  * is not allowed.
  */
-export function useKeyDownConstrictor({
-  allowNegatives,
-  decimalPlaces,
-  decimalPoint,
-}: {
-  allowNegatives: boolean;
-  decimalPlaces: number;
-  decimalPoint: string;
-}) {
+export function useKeyDownConstrictor(format: MoneyFormatType) {
   return React.useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       // Don't block when holding command/etc, since those are things like
@@ -27,8 +21,8 @@ export function useKeyDownConstrictor({
       if (
         ![
           ...numberKeys,
-          decimalPoint,
-          ...(allowNegatives ? ['-'] : []),
+          format.decimalPoint,
+          ...(format.allowNegatives ? ['-'] : []),
           'ArrowUp',
           'ArrowDown',
           'ArrowLeft',
@@ -39,7 +33,7 @@ export function useKeyDownConstrictor({
           'Backspace',
           'Delete',
         ].includes(event.key) &&
-        event.key !== decimalPoint
+        event.key !== format.decimalPoint
       ) {
         return true;
       }
@@ -50,7 +44,10 @@ export function useKeyDownConstrictor({
         (event.currentTarget.selectionEnd || 0) !== selectionStart;
 
       // Block input of a second decimal
-      if (event.key === decimalPoint && value.indexOf(decimalPoint) !== -1) {
+      if (
+        event.key === format.decimalPoint &&
+        value.indexOf(format.decimalPoint) !== -1
+      ) {
         return true;
       }
 
@@ -69,19 +66,19 @@ export function useKeyDownConstrictor({
         // press can’t possibly add another decimal place
         if (!hasSelectionRange) {
           // Don't block unless the cursor is to the right of the decimal point
-          const decimalPointIndex = value.indexOf(decimalPoint);
+          const decimalPointIndex = value.indexOf(format.decimalPoint);
           if (decimalPointIndex !== -1 && selectionStart > decimalPointIndex) {
             // Don't block unless we already have max decimal places
             const decimalPlacesOnWorkingValue =
               value.length - (decimalPointIndex + 1);
-            if (decimalPlacesOnWorkingValue >= decimalPlaces) {
+            if (decimalPlacesOnWorkingValue >= format.maxDecimalPlaces) {
               return true;
             }
           }
         }
       }
     },
-    [allowNegatives, decimalPlaces, decimalPoint],
+    [format.allowNegatives, format.maxDecimalPlaces, format.decimalPoint],
   );
 }
 
