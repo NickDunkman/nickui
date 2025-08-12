@@ -128,7 +128,6 @@ export function Money(props: MoneyProps) {
                 : 'numeric'
           }
           aria-labelledby={workingInputLabelledBy}
-          aria-invalid={props['aria-invalid'] ?? !!props.error}
           disabled={props.disabled}
           required={props.required}
           className={clsw(textStyles, moneyStyles.workingInput())}
