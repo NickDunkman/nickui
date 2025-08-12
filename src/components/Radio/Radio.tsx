@@ -1,8 +1,7 @@
 import * as React from 'react';
 
+import { CheckableFormControl } from '@/components/CheckableFormControl';
 import { CheckedFieldableFormControlProps } from '@/types';
-
-import { CheckableFormControl } from '../CheckableFormControl';
 
 import { radioStyler } from './styles';
 

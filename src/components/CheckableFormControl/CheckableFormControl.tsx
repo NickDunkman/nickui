@@ -5,7 +5,7 @@ import { clsw } from '@/utils/clsw';
 import { useCheckedFieldControlA11yProps } from '@/utils/fieldA11y';
 import { useResolvedSizer } from '@/utils/useResolvedSizer';
 
-import { CheckedField } from './CheckedField';
+import { CheckedField } from '../CheckedField';
 
 /**
  * This component is the engine of the form controls that use a checkable
