@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import deeperSortSetup from 'storybook-deeper-sort';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 const config: StorybookConfig = {
@@ -19,3 +20,19 @@ const config: StorybookConfig = {
   staticDirs: ['./assets'],
 };
 export default config;
+
+deeperSortSetup([
+  'About this project',
+  'Notices',
+  'Form controls',
+  //  This isn’t necessary since deeperSortSetup() will by default always keep
+  // "Docs" at the top of a component's stories, but leaving this as a
+  // reference ...
+  //[
+  //  '*',
+  //  // the mdx doc named "Docs" should always precede other mdx docs
+  //  ['Docs', 'Some other thing', '*'],
+  //],
+  'Field layouts',
+  '*',
+]);

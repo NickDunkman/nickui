@@ -5,17 +5,27 @@ import { getStoryId } from '@/dev/stories/getStoryId';
 
 /**
  * Custom doc block for rendering a consistent-looking Component name in the
- * the docs. Becomes a link to that Component's docs if it's not the page you’re
- * already on.
+ * the docs. By default, becomes a link to that Component's docs if it's not the
+ * page you’re already on (override one way or the other with the `asLink`
+ * prop).
  */
-export function ComponentName({ of }: { of: string }) {
+export function ComponentName({
+  of,
+  asLink,
+}: {
+  of: string;
+  asLink?: boolean;
+}) {
   const docsId = getStoryId(of, 'Docs');
-  const asLink = !!docsId && !window.location.href.includes(docsId);
+
+  const componentExists = !!docsId;
+  const withinComponentDocs = !!docsId && window.location.href.includes(docsId);
+  const renderAsLink = asLink ?? (componentExists && !withinComponentDocs);
 
   const componentName = (
     <code
       style={{
-        color: asLink ? 'rgb(2, 156, 253)' : undefined,
+        color: renderAsLink ? 'rgb(2, 156, 253)' : undefined,
         display: 'inline-block',
         fontWeight: 'bold',
         backgroundColor: 'rgb(247, 250, 252)',
@@ -31,7 +41,7 @@ export function ComponentName({ of }: { of: string }) {
     </code>
   );
 
-  return asLink ? (
+  return renderAsLink ? (
     <AnchorMdx href={`/docs/${docsId}`} target="_self">
       {componentName}
     </AnchorMdx>

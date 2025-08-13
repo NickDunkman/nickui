@@ -11,7 +11,7 @@ export function ComponentHeading({ of }: { of: string }) {
       <div>
         <Markdown
           options={{ overrides: { ComponentName } }}
-        >{`#<ComponentName of="${of}" />`}</Markdown>
+        >{`#<ComponentName of="${of}" asLink={false} />`}</Markdown>
       </div>
       <div style={{ marginLeft: 'auto' }}>
         <Markdown

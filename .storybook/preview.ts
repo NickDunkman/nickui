@@ -4,6 +4,9 @@ import '../src/style.css';
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: (a, b) => globalThis.deeperSort(a, b),
+    },
     docs: {
       source: {
         transform: async (source: string) => {
