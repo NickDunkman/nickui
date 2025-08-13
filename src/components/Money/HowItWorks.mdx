@@ -1,0 +1,98 @@
+import { Canvas, Meta, Source, Title } from '@storybook/addon-docs/blocks';
+
+import Docs from '@/dev/docBlocks';
+
+import { Money } from './Money';
+import * as stories from './Money.stories';
+
+<Meta of={stories} name="How it works" />
+
+<Docs.ComponentHeading of="Money" subtitle="How it works" />
+
+_The <Docs of="Money" /> component is a bit of a beast, so I figured I'd
+document the thinking that went into it._
+
+<br />
+
+<Title>How it works</Title>
+
+I wanted to build a currency input component that was delightful to use for both
+the user & the developer, so I started from a few observations & ideas:
+
+- **Currency inputs are often involved in high-impact use cases relative to
+  other types of form controls.** Whether you’re filling out a banking form
+  (withdrawal, transfer, wire, ...), e-commerce form (pricing backend, tipping),
+  HR form (salaries, paycheck deductions...), or in a forecasting tool—entering
+  the wrong amount just once can lead to major headaches, reputational damage,
+  or even prison time! Therefore, this component has a role to play in getting
+  the user focused and in preventing mistakes.
+
+- **Currency formatting & internationalization is very helpful, and snazzy!**
+  - Currency symbols are very effective at hinting that the field is monetary
+    and important
+  - Currency symbols are so cool. Just look at these fellas! **฿ £ ƒ ₩ ¥ ₡ ₱ € ₫
+    ₼ ៛**
+  - “Thousands separators” (e.g. commas) are helpful for comprehending larger
+    numbers. They may also be the difference between submitting a wildly wrong
+    amount, and fixing it first. If I ever see a comma while I’m entering a tip
+    amount, I’ll be on high alert!
+  - As an American, numbers presented in the European format can be confusing.
+    `1.234,56` is 😯, `4,56` is 🤨, and `1.234` is 😰—is that a “one thousand
+    two hundred thirty four” or have they pre-converted it for me as “one point
+    two three four”? I have to imagine that users across cultures have similar
+    experiences, so presenting the appropriate currency format is both a
+    friendlier user experience, and more likely to produce accurate values.
+  - I like input placeholders a lot; they’re like the “self-documenting code” of
+    form controls. And anytime I see a number with two decimal places,
+    especially when padded with trailing zeros (which are unnecessary in most
+    other situations), I’m likely to interpret it as a currency amount. So
+    showing `0.00` as a placeholder in a US$ currency input (or `0.00000000` for
+    ₿itcoin) is another opportunity to create some intuition about the field
+    type & importance.
+
+- **_Reformatting_ the value as you type is disorienting.** I’ve used currency
+  inputs that automatically add the thousands separators _as you type_. In my
+  opinion, this is better than not adding them at all, for the reasons outlined
+  above, but if you type with any kind of speed, it feels so chaotic that it can
+  become _befuddling_!
+  - By default, the browser will automatically move the cursor to the end of the
+    input value whenever it is programatically changed (such as to slot in
+    thousands separators). This means that if you add a digit to the middle of
+    the number, your cursor may be yanked over to the end of the number.
+  - _You can_ programatically reposition the cursor into the right place after
+    programatically updating the value, but even if you get it right, it’s still
+    chaotic: the existing commas can move (`1,234,567|.00` -> `12,345,678|.00`),
+    and the addition/removal of commas causes the cursor to shift by an
+    unexpected amount. And now you’ve got a _ton_ of gritty code to maintain,
+    because there are many, many edge cases. I went down this path, but it still
+    wasn’t a good user experience after I solved every possible edge case.
+
+- **Preventing invalid input is helpful—to an extent.** For accessibility &
+  usability purposes (and to reduce the amount of code I have to write), I
+  always build off of the appropriate native elements, but the
+  `<input type="number">` control does not display commas. So I'd have to drop
+  down to using an `<input type="text">`, and then layer on my own logic for
+  blocking non-numerical input. Obviously, I can block letters (unless, for
+  example, the user is holding `command` while typing `c` to copy the value).
+  Beyond that, as a user of forms, my experience is that having my keystrokes
+  blocked is frustrating unless I'm expecting it, since it’s unclear whether
+  it’s blocked on purpose, or if my browser has frozen, for example.
+  - Blocking a second decimal point is probably ok since it’s reasonable to
+    expect that it’s not allowed
+  - Negative signs can be restricted to the first character
+  - Blocking keystrokes based on having a minimum / maximum value for the field
+    is not ideal. For example, if field has a maximum allowed value of `1000`,
+    and the current value is `999`, we could theoretically block adding an
+    additional non-decimal digit, since that would put the value at over `1000`.
+    However, I don’t think there is a sufficiently good way to pre-educate the
+    user on an allowed numeric range before they start typing, since they
+    generally don’t read fine print. As a result, I’ve opted-out of having
+    min/max options, and recommend presenting error messages to the user when
+    they go outside of an allowed range.
+  - With one exception: in most situations, I think the concept of "negative
+    money" is not intuitive. For example, if you have a withdrawal form, you’ll
+    probably ask the user to a enter a “positive amount to withdraw”, rather
+    than a “negative amount to add to your account.” So <Docs of="Money" />
+    blocks negatives by default, but offers an option to allow them.
+
+- **Programatically formatting & deformatting is tedious.**

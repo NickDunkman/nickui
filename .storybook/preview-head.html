@@ -3,7 +3,6 @@
     justify-content: start !important;
   }
 
-
   /* Add checkered-background to docs canvases to show how components control the background */
 
   .docs-story,
@@ -36,4 +35,22 @@
     position: absolute;
     left: -14px;
   }
+
+  /* A little more spacing between bullet points in the docs */
+
+  /** 16px between top-level <li>s */
+  .sbdocs-wrapper *:where(:not(.sb-unstyled)) li:has(+ li) {
+    margin-bottom: 16px;
+  }
+
+  /** 8px between nested <li>s */
+  .sbdocs-wrapper *:where(:not(.sb-unstyled)) li li:has(+ li) {
+    margin-bottom: 8px;
+  }
+
+  /** 8px between an <li> and its nested <li>s */
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) li p:has(+ ul)  {
+    margin-bottom: 8px;
+  }
+
 </style>
