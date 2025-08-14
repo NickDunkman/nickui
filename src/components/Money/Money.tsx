@@ -59,6 +59,7 @@ export function Money(props: MoneyProps) {
   const moneyStyles = moneyStyler({
     sizer: resolvedSizer,
     isInitialized: !!currencySymbolBounds,
+    isSpread: !!props.docsMeta?.spread,
   });
 
   // Add the currency symbol to the `aria-labelledby` prop on the working

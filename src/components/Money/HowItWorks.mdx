@@ -1,6 +1,7 @@
 import { Canvas, Meta, Source, Title } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/dev/docBlocks';
+import { ControlledValue } from '@/dev/stories/ControlledValue';
 
 import { Aside } from '@/components/Aside';
 
@@ -234,6 +235,49 @@ type MoneyFormatType = Required<Omit<MoneyFormatType, 'decimalPlaces'>> & {
 ```
 
 ### Three separate `<input>` elements
+
+When you interact with the <Docs of="Money" /> component, you’re actually
+interacting with one of three `<input>` elements. In addition to the interactive
+("working") input, there are two others: one shows the placeholder value, and
+the other is normally hidden & actually drives the form behavior.
+
+Normally, they are collapsed together via overlapping & hiding, so you only
+perceive a single control. This demo shows the three inputs separated out.
+
+<ControlledValue defaultValue="">
+  {(value, setValue) => (
+    <div className="sb-unstyled flex flex-col sm:flex-row sm:items-stretch sm:gap-4">
+      <div className="flex-1">
+        <Docs.FauxCanvas>
+          <Money
+            label="Separated out"
+            hint={
+              <>
+                <div>top: placeholder input</div>
+                <div>middle: working input</div>
+                <div> bottom: form input</div>
+              </>
+            }
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
+            docsMeta={{ spread: true }}
+            allowNegatives
+          />
+        </Docs.FauxCanvas>
+      </div>
+      <div className="-mt-10 flex-1 sm:mt-0">
+        <Docs.FauxCanvas>
+          <Money
+            label="Collapsed together"
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
+            allowNegatives
+          />
+        </Docs.FauxCanvas>
+      </div>
+    </div>
+  )}
+</ControlledValue>
 
 #### The working `<input>`
 

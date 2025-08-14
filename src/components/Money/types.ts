@@ -27,6 +27,12 @@ export interface MoneyProps
   decimalPlaces?: number;
   /** Set to `true` to allow the user to enter negative values */
   allowNegatives?: boolean;
+
+  /** docs-specific options. Not meant to be used in prod! */
+  docsMeta?: {
+    /** Set to `true` to show all 3 inputs */
+    spread?: boolean;
+  };
 }
 
 /**
