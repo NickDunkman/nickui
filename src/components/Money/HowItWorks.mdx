@@ -124,9 +124,8 @@ the user & the developer, so I started from a few observations & ideas:
     - some hardcoded value in your javascript codebase, where it may also be
       `undefined`.
   - When the user changes the value, there is a very high probability that you
-    will need to de-format it before storing it or using it within javascript.
-    So the component should pass the pre-de-format the new value before passing
-    it back.
+    will need to deformat it before storing it or using it within javascript. So
+    the component should deformat the new value before passing it back.
     - As far as I know, most databases do not internationalize their data types.
       Numbers with thousands separators or a character other than "." for the
       decimal point is rejected.
