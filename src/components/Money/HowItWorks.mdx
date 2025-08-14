@@ -117,8 +117,8 @@ the user & the developer, so I started from a few observations & ideas:
   - If you’re pre-filling the field with a `value` (or `defaultValue`), you
     should be able to just "pass through" the data you get from any of these
     sources, without having to transform it first:
-    - a database (where it’s probably stored as a `number` or `currency` type,
-      and may be `null` if it’s an optional column)
+    - a database (where it’s probably stored as a `float` or `decimal` type, and
+      may be `null` if it’s an optional column)
     - a JSON response from some API, where it’ll be a `string` | `number`, and
       if unset, will be `null` or an empty `string`.
     - some hardcoded value in your javascript codebase, where it may also be
