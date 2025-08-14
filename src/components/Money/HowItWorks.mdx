@@ -106,4 +106,33 @@ the user & the developer, so I started from a few observations & ideas:
     than a “negative amount to add to your account.” So <Docs of="Money" />
     blocks negatives by default, but offers an option to allow them.
 
-- **Programatically formatting & deformatting is tedious.**
+- **Programatically formatting & deformatting is tedious.** In order to be as
+  useful as possible for developers, the component should consider how data
+  arrives at its front door, and where it’s going / how it’ll be used when
+  exiting via the `onChange` handler. As a developer who worked on this
+  component, I know that the work of formatting, and deformatting, especially
+  when the currency format might be "dynamic" within your application if you
+  serve users in different countries, is really tiresome. So the component
+  should handle it all for you!
+  - If you’re pre-filling the field with a `value` (or `defaultValue`), you
+    should be able to just "pass through" the data you get from any of these
+    sources, without having to transform it first:
+    - a database (where it’s probably stored as a `number` or `currency` type,
+      and may be `null` if it’s an optional column)
+    - a JSON response from some API, where it’ll be a `string` | `number`, and
+      if unset, will be `null` or an empty `string`.
+    - some hardcoded value in your javascript codebase, where it may also be
+      `undefined`.
+  - When the user changes the value, there is a very high probability that you
+    will need to de-format it before storing it or using it within javascript.
+    So the component should pass the pre-de-format the new value before passing
+    it back.
+    - As far as I know, most databases do not internationalize their data types.
+      Numbers with thousands separators or a character other than "." for the
+      decimal point is rejected.
+    - Within javascript, you might want to perform some calculation off of the
+      new value, so you’ll need to parse it as a `Number()`. While a French user
+      will intuitively understand `1.234,56` as a number, javascript won’t.
+    - NickUI provides a `formatMoney` function for the case where you _do_ want
+      to have a value formatted in the same way the <Docs of="Money" />
+      component would.
