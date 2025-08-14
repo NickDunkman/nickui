@@ -10,8 +10,8 @@ export interface MoneyProps
   /** The currency symbol shown at the front of the input, typically "$" */
   currencySymbol?: React.ReactNode;
   /**
-   * The character to use to separate the whole part from the decimal part,
-   * typically "."
+   * The character separating the whole part from the decimal part, typically
+   * "."
    */
   decimalPoint?: string;
   /**
@@ -25,7 +25,7 @@ export interface MoneyProps
    * Typically 2.
    */
   decimalPlaces?: number;
-  /** Set to `true` if you want to allow the user to enter negative values */
+  /** Set to `true` to allow the user to enter negative values */
   allowNegatives?: boolean;
 }
 

@@ -68,13 +68,22 @@
   .sbdocs-wrapper :where(:not(.sb-unstyled)) h3 { font-size: 18px; }
   .sbdocs-wrapper :where(:not(.sb-unstyled)) h4 { font-size: 14px; }
 
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h1 :where(:not(a)) code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h2 :where(:not(a)) code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h3 :where(:not(a)) code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h4 :where(:not(a)) code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h5 :where(:not(a)) code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h6 :where(:not(a)) code {
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h1 code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h2 code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h3 code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h4 code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h5 code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h6 code {
     color: var(--nickui-storybook-heading-color) !important;
+  }
+
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h1 a code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h2 a code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h3 a code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h4 a code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h5 a code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h6 a code {
+    color: rgb(2, 156, 253) !important;
   }
 
 

@@ -11,9 +11,6 @@ import * as stories from './Money.stories';
 
 # How the <Docs of="Money" /> component works
 
-_The <Docs of="Money" /> component is a bit of a beast, so I figured I'd
-document the thinking that went into it._
-
 <Docs.TableOfContents />
 
 ## Observations and ideas
@@ -158,6 +155,83 @@ NickUI provides a `formatMoney` function for the case where you _do_ want to
 have a value formatted in the same way the <Docs of="Money" /> component would.
 
 ## Architecture
+
+### Formatting options
+
+After concluding the thought exercise outlined above, these are the options I
+landed on supporting.
+
+Instead of breaking these out into separate options, I could have taken a single
+prop like `currencyType: 'usd' | 'eur' | ...`, but then my component would have
+to know every existing (& imaginary) currency format out there, and it would be
+far less flexible.
+
+I used US$ defaults for these (+ disallowing negatives), since I might as well
+make these props unnecessary for some developers!
+
+```ts
+/** The <Money> component’s formatting-related props */
+type MoneyFormatProps = {
+  /** The currency symbol shown at the front of the input, typically "$" */
+  currencySymbol?: React.ReactNode;
+  /**
+   * The character separating the whole part from the decimal part, typically
+   * "." Needs to be a string rather than ReactNode, since it will be included
+   * within the input value.
+   */
+  decimalPoint?: string;
+  /**
+   * The character to use to separate every three digits in the whole part,
+   * typically ",". Needs to be a string rather than ReactNode, since it will
+   * be included within the input value.
+   */
+  thousandsSeparator?: string;
+  /**
+   * Controls how many decimal places the user is allowed to add, and how many
+   * will always be included on the value emitted via the onChange handler.
+   * Typically 2.
+   */
+  decimalPlaces?: number;
+  /** Set to `true` to allow the user to enter negative values */
+  allowNegatives?: boolean;
+};
+```
+
+There are many moving parts within the system which depend on some subset of the
+formatting options, & lots of complex re-rendering patterns. So to make the code
+simpler, more predictable, & more performant, I wrapped the options into a
+standard object type that I could memoize at the top layer & then drill down
+through the various utilities & hooks.
+
+Additionally, there is a little more nuance to the formatting options used
+_internally_. For example, sometimes I need to allow the user to be "working
+towards" typing the full number of decimal places, and other times, I need to
+display the value w/ all of the decimal places “padded on”.
+
+```ts
+/**
+ * The standard format object <Money> drills down through its children &
+ * grandchildren
+ */
+type MoneyFormatType = Required<Omit<MoneyFormatType, 'decimalPlaces'>> & {
+  minDecimalPlaces: number;
+  maxDecimalPlaces: number;
+  /**
+   * Whether to allow the string to have a trailing decimal point, which is
+   * necessary on the input the user is typing in, since you have to type a
+   * decimal point before you can type the decimal places. But the value ejected
+   * via the onChange handler should never have a trailing decimal point.
+   */
+  allowWorkingDecimalPoint?: boolean;
+  /**
+   * Whether to all the negative sign to exist on its own. Necessary for the
+   * input the user is typing in, since often, the user will type the negative
+   * sign first before typing the rest of the negative number. However, the
+   * value ejected via the onChange handler should never just be "-".
+   */
+  allowWorkingNegativeSign?: boolean;
+};
+```
 
 ### Three separate `<input>` elements
 
