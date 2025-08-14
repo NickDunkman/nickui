@@ -10,7 +10,7 @@ import * as stories from './Money.stories';
 
 <Meta of={stories} name="How it works" />
 
-# How the <Docs of="Money" /> component works
+# How the <Docs of="Money" /> component works 🤓
 
 <Docs.TableOfContents />
 
@@ -337,7 +337,7 @@ field out.
 Normally, you can just use the `placeholder` attribute to do this for you, like
 `<input placeholder="0.00">`. However, as soon as you start typing, it won’t
 show the placeholder at all, which doesn’t allow us to show the remaining
-decimal places. So my solution was to have this separate input that is place
+decimal places. So my solution was to have this separate input that is placed
 directly _behind_ the working input. It uses the same styles, and I’ve "cloned"
 the scroll position of one to the other using a
 [custom hook I built](https://github.com/NickDunkman/nickui/blob/main/src/components/Money/Money.tsx#L45),
@@ -345,4 +345,50 @@ so the text is always precisely aligned, and you only see the trailing zeros.
 
 ### Value state reducer
 
-TODO
+The internal "value state" of this component is very complex, especially when
+you consider the many ways the value might be updated, and the nuanced changes
+each update method has on the state.
+
+At any given time, the component needs to track all of these pieces, and they
+need to be in sync with eachother to prevent inconsistent state and duplicate
+calls to the `onChange` handler:
+
+- the "controlled value" received from the parent component via the `value`
+  prop, so the component knows whether a change came from that prop.
+- the "working value" for the working input, which is formatted & can be
+  incomplete
+- the "placeholder value" for the placeholder input, which is formatted and
+  should have the complete number of decimal places
+- the "numerish value" for the form input, which is _not formatted_ and must be
+  parseable as a javascript number (or empty).
+- the formatting options that were present when all of the above formatting
+  occurred, in case we need to perform operations on these numbers in later
+  render cycles.
+- a enum representation of what source of the lastest mutation was
+
+And each of the ways the value might be updated can cascade changes to these
+different pieces in different ways!
+
+- When the controlled `value` prop changes & it’s _numerically_ different from
+  our current value, we should update all variations of the value
+- The controlled `value` prop can also change as a result of us calling the
+  `onChange` handler, which shouldn’t clobber the working input’s "partial
+  value" progress.
+- When the working input value changes, we update the formatted variations, and
+  trigger a form value update if there is a numerical change.
+- When incrementing using the up/down arrows, there is different logic for
+  keeping the cursor in the right place.
+- etc. etc. etc.
+
+Luckily, `React.useReducer` was created to make sense of situations like this.
+If you peak into the implementation of <Docs of="Money" />, you’ll find a hook
+call chain which ultimately relies on `React.useReducer` to manage a versioned
+history of changes to the value.
+
+- `useValueStateReducer()` uses `React.useReducer` to manage a "value state"
+  object
+- `useValueState()` wraps `useValueStateReducer` and adds some functions for
+  making changes
+- `useValueElementsProps()` encapsulates all of that and provides props for all
+  of the sub-elements that depend on the value state (such as to display the
+  value, or make changes).
