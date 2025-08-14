@@ -1,6 +1,13 @@
 <style type="text/css">
   .sbdocs-wrapper {
     justify-content: start !important;
+    padding: 30px 20px !important;
+  }
+
+  @media only screen and (min-width: 480px) {
+    .sbdocs-wrapper {
+      padding: 40px 30px !important;
+    }
   }
 
   /* Add checkered-background to docs canvases to show how components control the background */
@@ -36,21 +43,39 @@
     left: -14px;
   }
 
-  /* A little more spacing between bullet points in the docs */
-
-  /** 16px between top-level <li>s */
-  .sbdocs-wrapper *:where(:not(.sb-unstyled)) li:has(+ li) {
-    margin-bottom: 16px;
+  /* In an <ol>, don’t add bottom-margin to the <p> when it’s following sibling is a nested <ol> */
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) ol p:has(+ ol) {
+    margin-bottom: 0;
   }
 
-  /** 8px between nested <li>s */
-  .sbdocs-wrapper *:where(:not(.sb-unstyled)) li li:has(+ li) {
-    margin-bottom: 8px;
+  /* Fix Storybook’s (non-)hierarchical heading styles & make 'em purple for fun */
+
+  :root {
+    --nickui-storybook-heading-color: oklch(0.4383 0.2179 303.91);
+    --nickui-storybook-heading-underline-color: oklch(0.4383 0.2179 303.91 / 25%);
+  }
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h1,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h2,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h3,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h4,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h5,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h6 {
+    font-weight: 700;
+    color: var(--nickui-storybook-heading-color) !important;
+    border-bottom-color: oklch(0.4383 0.2179 303.91 / 25%);
   }
 
-  /** 8px between an <li> and its nested <li>s */
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) li p:has(+ ul)  {
-    margin-bottom: 8px;
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h3 { font-size: 18px; }
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h4 { font-size: 14px; }
+
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h1 :where(:not(a)) code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h2 :where(:not(a)) code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h3 :where(:not(a)) code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h4 :where(:not(a)) code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h5 :where(:not(a)) code,
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) h6 :where(:not(a)) code {
+    color: var(--nickui-storybook-heading-color) !important;
   }
+
 
 </style>
