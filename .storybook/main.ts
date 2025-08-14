@@ -25,14 +25,45 @@ deeperSortSetup([
   'About this project',
   'Notices',
   'Form controls',
-  //  This isn’t necessary since deeperSortSetup() will by default always keep
-  // "Docs" at the top of a component's stories, but leaving this as a
-  // reference ...
-  //[
-  //  '*',
-  //  // the mdx doc named "Docs" should always precede other mdx docs
-  //  ['Docs', 'Some other thing', '*'],
-  //],
+  [
+    '*',
+    // the mdx doc named "Docs" should always precede other mdx docs
+    [
+      // "Docs" should always precede other mdx files
+      'Docs',
+      // Then the "field layouts" when they exist
+      'Field Layout',
+      'Fieldset Layout',
+      'Checked Field layout',
+      // Then the "control states" when they exist
+      'Empty',
+      'Unchecked',
+      'Controlled',
+      'Uncontrolled',
+      'Enabled',
+      'Disabled',
+      'Disabled Checked',
+      'Disabled Unchecked',
+      // Then the "flavors" when they exist
+      'Neutral',
+      'Positive',
+      'Caution',
+      'Negative',
+      'Secondary Neutral',
+      'Secondary Positive',
+      'Secondary Caution',
+      'Secondary Negative',
+      // Then the "sizers" when they exist
+      'Xs',
+      'Sm',
+      'Base',
+      'Lg',
+      'Xl',
+      'Responsive',
+      // Then anything else, in alphabetical order
+      '*',
+    ],
+  ],
   'Field layouts',
   '*',
 ]);

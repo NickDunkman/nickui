@@ -71,11 +71,12 @@ the user & the developer, so I started from a few observations & ideas:
     the number, your cursor may be yanked over to the end of the number.
   - _You can_ programatically reposition the cursor into the right place after
     programatically updating the value, but even if you get it right, it’s still
-    chaotic: the existing commas can move (`1,234,567|.00` -> `12,345,678|.00`),
-    and the addition/removal of commas causes the cursor to shift by an
-    unexpected amount. And now you’ve got a _ton_ of gritty code to maintain,
-    because there are many, many edge cases. I went down this path, but it still
-    wasn’t a good user experience after I solved every possible edge case.
+    chaotic: the existing commas can flop around (`1,234,567|.00` ->
+    `12,345,678|.00`), and the addition/removal of commas causes the cursor to
+    shift by an unexpected amount. And now you’ve got a _ton_ of gritty code to
+    maintain, because there are many, many edge cases. I went down this path,
+    but it still wasn’t a good user experience after I solved every possible
+    edge case.
 
 - **Preventing invalid input is helpful—to an extent.** For accessibility &
   usability purposes (and to reduce the amount of code I have to write), I
