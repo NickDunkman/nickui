@@ -127,8 +127,8 @@ the user & the developer, so I started from a few observations & ideas:
     will need to deformat it before storing it or using it within javascript. So
     the component should deformat the new value before passing it back.
     - As far as I know, most databases do not internationalize their data types.
-      Numbers with thousands separators or a character other than "." for the
-      decimal point is rejected.
+      Values with thousands separators or a character other than "." for the
+      decimal point are rejected.
     - Within javascript, you might want to perform some calculation off of the
       new value, so you’ll need to parse it as a `Number()`. While a French user
       will intuitively understand `1.234,56` as a number, javascript won’t.
