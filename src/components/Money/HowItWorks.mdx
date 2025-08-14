@@ -235,19 +235,68 @@ type MoneyFormatType = Required<Omit<MoneyFormatType, 'decimalPlaces'>> & {
 
 ### Three separate `<input>` elements
 
-TODO
+#### The working `<input>`
 
-#### The "working" `<input>`
+Obviously, there needs to be an `<input>` that the user interacts with to modify
+the field’s value. And to support showing commas in its value, it needs to be an
+`<input type="text">`. In my system, I call this the **"working input"** (where
+the user works on the value). The user needs to be able to be "working towards"
+typing out a valid monetary value, so it allows temporarily trailing decimal
+points, temporarily lone negative signs, and temporarily fewer than the required
+decimal places.
 
-TODO
+#### The form `<input>`
 
-#### The "placeholder" `<input>`
+There is a second, hidden `<input>` which I call the **"form input"**. It is
+what form libraries attach to (via the `ref`, `name`, `onChange`, `onBlur` etc.
+props).
 
-TODO
+I don’t want the `onChange` callback to fire unless there is a _numerical_
+change to the value. For example, if I progammatically update the value to
+add/remove/adjust the commas, I don’t think that `<Money>`’s parent should be
+concerned with that change—it really only cares when there is a new
+monetarily/numerically different value. For the parent’s intents & purposes (&
+performance), situations like these should be considered equivalent:
 
-#### The hidden `<input>`
+- `1`, `1.`, `1.0`, and `1.00` (the parent is only notified on the initial
+  keystroke in that sequence)
+- `1234` (before I progmatically add the comma) & `1,234` (after)
 
-TODO
+Note: “unset” should be different than zero, so while `0`, `0.`, `0.0`, `-0.0`,
+etc. are all equivalent, they are considered a change from when the value is
+empty, and vice versa.
+
+Rather than having a single `<input>` where I "intercept" changes and choose
+when to block them vs. propogate them up to the parent, it’s better to just have
+a separate, hidden `<input>` which only tracks the numerical representation of
+the current value. When there is a _numerical_ change to the working input, I
+progammatically trigger an `'input'` event to the form input, which causes its
+`onChange` handler to fire with the numerically-parseable form of the value. For
+example, if the working input receives `"1.234,56"`, the form input’s onChange
+handler will fire with `"1234.56"`.
+
+This is particularly important for making the component compatible with the
+various current & future form libraries out there, since they set values &
+observe changes in different ways. We don’t want those libraries overwriting our
+formatting, and we only want them to pay attention to numerical changes.
+
+#### The placeholder `<input>`
+
+Finally, there is a third `<input>` I call the **"placeholder input"**, which is
+responsible for showing the placeholder value. I concluded earlier that always
+showing the full number of available decimal places is important, so in addition
+to showing a placeholder like `0.00` when the field is empty, we also want to
+show the remaining available decimal places as zeros as the user is filling the
+field out.
+
+Normally, you can just use the `placeholder` attribute to do this for you, like
+`<input placeholder="0.00">`. However, as soon as you start typing, it won’t
+show the placeholder at all, which doesn’t allow us to show the remaining
+decimal places. So my solution was to have this separate input that is place
+directly _behind_ the working input. It uses the same styles, and I’ve "cloned"
+the scroll position of one to the other using a
+[custom hook I built](https://github.com/NickDunkman/nickui/blob/main/src/components/Money/Money.tsx#L45),
+so the text is always precisely aligned, and you only see the trailing zeros.
 
 ### Value state reducer
 
