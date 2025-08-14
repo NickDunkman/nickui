@@ -1,0 +1,1 @@
+import{r as s}from"./iframe-D_dx4C3o.js";function e(r){const[n,u]=s.useState();return s.useEffect(()=>{const t=new ResizeObserver(()=>{r.current&&u(r.current.getBoundingClientRect())});if(r.current)return t.observe(r.current),()=>t.disconnect()},[r]),n}export{e as u};
