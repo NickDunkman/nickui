@@ -241,8 +241,9 @@ interacting with one of three `<input>` elements. In addition to the interactive
 ("working") input, there are two others: one shows the placeholder value, and
 the other is normally hidden & actually drives the form behavior.
 
-Normally, they are collapsed together via overlapping & hiding, so you only
-perceive a single control. This demo shows the three inputs separated out.
+Normally, they are collapsed together via overlapping & hiding, so you (& the
+screen reader) perceive a single control. This demo shows the three inputs
+separated out.
 
 <ControlledValue defaultValue="">
   {(value, setValue) => (
@@ -254,8 +255,8 @@ perceive a single control. This demo shows the three inputs separated out.
             hint={
               <>
                 <div>top: placeholder input</div>
-                <div>middle: working input</div>
-                <div> bottom: form input</div>
+                <div>middle: working input (overlaps the placholder)</div>
+                <div>bottom: form input (hidden)</div>
               </>
             }
             value={value}
