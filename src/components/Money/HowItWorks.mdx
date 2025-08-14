@@ -2,6 +2,8 @@ import { Canvas, Meta, Source, Title } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/dev/docBlocks';
 
+import { Aside } from '@/components/Aside';
+
 import { Money } from './Money';
 import * as stories from './Money.stories';
 
@@ -27,15 +29,23 @@ the user & the developer, so I started from a few observations & ideas:
   or even prison time! Therefore, this component has a role to play in getting
   the user focused and in preventing mistakes.
 
+<div className="sb-unstyled ml-4 sm:float-right sm:mb-3 sm:ml-6 sm:max-w-75">
+  <Aside sizer="sm">
+    <Aside.Paragraph children="Currency symbols are so cool. Just look at these guys!" />
+    <Aside.Paragraph
+      className="text-lg font-bold tracking-widest"
+      children="฿ £ ƒ ₩ ¥ ₡ ₱ € ₫ ₼ ៛"
+    />
+  </Aside>
+</div>
+
 - **Currency formatting & internationalization is very helpful, and snazzy!**
   - Currency symbols are very effective at hinting that the field is monetary
     and important.
-  - Currency symbols are so cool. Just look at these fellas! **฿ £ ƒ ₩ ¥ ₡ ₱ € ₫
-    ₼ ៛**
   - “Thousands separators” (e.g. commas) are helpful for comprehending larger
-    numbers. They may also be the difference between submitting a wildly wrong
-    amount, and fixing it first. If I ever see a comma while I’m entering a tip
-    amount, I’ll be on high alert!
+    numbers. They may also be the difference between submitting a devestatingly
+    wrong amount, and fixing it first. If I ever see a comma while I’m entering
+    a tip amount, I’ll be on high alert!
   - As an American, numbers presented in the European format can be confusing.
     `1.234,56` is 😯, `4,56` is 🤨, and `1.234` is 😰—is that a “one thousand
     two hundred thirty four” or have they pre-converted it for me as “one point
