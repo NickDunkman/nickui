@@ -23,27 +23,27 @@ type MoneyValueStateType = {
 
 type ActionType =
   | {
-      type: 'REINITIALIZE_VALUE';
-      payload: {
-        controlledValue?: string | number;
-        defaultValue?: string | number;
-      };
-    }
-  | {
-      type: 'UPDATE_CONTROLLED_VALUE';
+      type: 'UPDATE_FROM_CONTROLLED_VALUE';
       payload: string | number | undefined;
     }
   | {
-      type: 'UPDATE_WORKING_VALUE';
+      type: 'UPDATE_FROM_WORKING_VALUE';
       payload: string;
     }
   | {
-      type: 'REFORMAT_VALUE';
+      type: 'UPDATE_FORMAT';
       payload: MoneyFormatType;
     }
   | {
       type: 'INCREMENT_VALUE';
       payload: number;
+    }
+  | {
+      type: 'REINITIALIZE_WITH_VALUE';
+      payload: {
+        controlledValue?: string | number;
+        defaultValue?: string | number;
+      };
     };
 
 function initializeState({
@@ -95,13 +95,13 @@ function reducer(
   let newFormValue: string;
 
   switch (action.type) {
-    case 'REINITIALIZE_VALUE':
+    case 'REINITIALIZE_WITH_VALUE':
       return initializeState({
         ...action.payload,
         format: state.currentValue.format,
       });
 
-    case 'UPDATE_CONTROLLED_VALUE':
+    case 'UPDATE_FROM_CONTROLLED_VALUE':
       // If the controlledValue is not changing, don't update the state
       if (action.payload === state.currentValue.controlledValue) {
         return state;
@@ -128,7 +128,7 @@ function reducer(
         source: 'controlledValue',
       });
 
-    case 'UPDATE_WORKING_VALUE':
+    case 'UPDATE_FROM_WORKING_VALUE':
       var deformattedWorkingValue = deformatValue(
         action.payload,
         state.currentValue.format,
@@ -151,7 +151,7 @@ function reducer(
         source: 'workingValue',
       });
 
-    case 'REFORMAT_VALUE':
+    case 'UPDATE_FORMAT':
       var deformattedWorkingValue = deformatValue(
         state.currentValue.workingValue,
         state.currentValue.format,

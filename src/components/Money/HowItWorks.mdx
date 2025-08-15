@@ -343,52 +343,61 @@ the scroll position of one to the other using a
 [custom hook I built](https://github.com/NickDunkman/nickui/blob/main/src/components/Money/Money.tsx#L45),
 so the text is always precisely aligned, and you only see the trailing zeros.
 
+### "De-formatting" on focus
+
+Since I decided that adding/removing/moving the thousands separators (commas)
+_as you type_ is too chaotic, the component removes them on focus. It does this
+by overriding the internal format object to have `thousandsSeparator = ""`, and
+then the updated format cascades throughout the internal dependents.
+
+Then, when the component loses focus, it adds the thousands separators back by
+switching back to the original format configuration.
+
 ### Value state reducer
 
-The internal "value state" of this component is very complex, especially when
-you consider the many ways the value might be updated, and the nuanced changes
-each update method has on the state.
+This component has some pretty complex requirements:
 
-At any given time, the component needs to track all of these pieces, and they
-need to be in sync with eachother to prevent inconsistent state and duplicate
-calls to the `onChange` handler:
+- At any given moment, there are several formats used by the sub-elements, which
+  need to be in sync with eachother
+- There are several ways to update the value, each with their own nuance for how
+  they should update those different formatted instances (for example, we have
+  to be careful about how we cascade changes from an updated controlled `value`
+  prop, so that we don’t clobber the user’s work)
+- There are several "effects" that occur when the value changes. For example, in
+  some instances the cursor positioning needs to be adjusted.
 
-- the "controlled value" received from the parent component via the `value`
-  prop, so the component knows whether a change came from that prop.
-- the "working value" for the working input, which is formatted & can be
-  incomplete
-- the "placeholder value" for the placeholder input, which is formatted and
-  should have the complete number of decimal places
-- the "form value" for the form input, which is _not formatted_ and must be
-  parseable as a javascript number (or empty).
-- the formatting options that were present when all of the above formatting
-  occurred, in case we need to perform operations on these numbers in later
-  render cycles.
-- a enum representation of what source of the lastest mutation was
+To avoid having the internal implentation absolutely explode in complexity, it’s
+crucial that any changes to the state happen _within a single render cycle_. Not
+only does this prevent visual jank, it also helps make sure we only call the
+`onChange` once when the value changes.
 
-And each of the ways the value might be updated can cascade changes to these
-different pieces in different ways!
+Thankfully, `React.useReducer` offers a great way to make complex state changes
+as a single change. The reducer I wrote (wrapped in `useValueStateReducer()`)
+offers these actions:
 
-- When the controlled `value` prop changes & it’s _numerically_ different from
-  our current value, we should update all variations of the value
-- The controlled `value` prop can also change as a result of us calling the
-  `onChange` handler, which shouldn’t clobber the working input’s "partial
-  value" progress.
-- When the working input value changes, we update the formatted variations, and
-  trigger a form value update if there is a numerical change.
-- When incrementing using the up/down arrows, there is different logic for
-  keeping the cursor in the right place.
-- etc. etc. etc.
+- **`UPDATE_FROM_CONTROLLED_VALUE`**: used when the component receives an update
+  to its `value` prop.
+- **`UPDATE_FROM_WORKING_VALUE`**: used when the user changes the value of the
+  interactive "working" `<input>`
+- **`UPDATE_FORMAT`**: used to remove/add thousands separats on focus/blur, and
+  when the parent passes in a new format (such as to switch currencies)
+- **`INCREMENT_VALUE`**: used to increment/decrement the value by some number.
+  For example, pressing `ArrowUp` increments by 1; `Shift+ArrowUp` increments
+  by 10.
+- **`REINITIALIZE_WITH_VALUE`**: Updates the value & resets the change history.
+  React Hook Form sets the initial value of its fields by changing the value
+  _after_ the component is mounted, and we want to use that value without
+  behaving like it is a change.
 
-Luckily, `React.useReducer` was created to make sense of situations like this.
-If you peak into the implementation of <Docs of="Money" />, you’ll find a hook
-call chain which ultimately relies on `React.useReducer` to manage a versioned
-history of changes to the value.
+If you peak into the `<Docs of="Money" />` component code, you’ll see that all
+of this complex state stuff is encapsulated into hooks; the component function
+itself is almost entirely JSX & presentational logic. The chain of hook calls
+looks like:
 
-- `useValueStateReducer()` uses `React.useReducer` to manage a "value state"
-  object
-- `useValueState()` wraps `useValueStateReducer` and adds some functions for
-  making changes
-- `useValueElementsProps()` encapsulates all of that and provides props for all
-  of the sub-elements that depend on the value state (such as to display the
-  value, or make changes).
+- `useValueStateReducer` uses `React.useReducer` to create a "value state" store
+- `useValueState` wraps `useValueStateReducer` to simplify interaction with the
+  store
+- `useValueElementsProps` encapsulates all of that and provides props for all of
+  the sub-elements that depend on the value state (such as to display the value,
+  or make changes).
+- `Money` calls `useValueElementsProps` and spreads the props within its JSX

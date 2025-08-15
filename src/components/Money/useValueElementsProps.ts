@@ -62,8 +62,8 @@ export function useValueElementsProps(props: MoneyProps): {
   const {
     currentValue,
     previousValue,
-    reinitializeValue,
-    updateWorkingValue,
+    reinitializeWithValue,
+    updateFromWorkingValue,
     incrementValue,
   } = useValueState({
     controlledValue: props.value,
@@ -171,7 +171,7 @@ export function useValueElementsProps(props: MoneyProps): {
     if (props.value === undefined && props.defaultValue === undefined) {
       const hiddenValue = hiddenRef.current?.value;
       if (hiddenValue != null && hiddenValue !== '') {
-        reinitializeValue({ defaultValue: hiddenValue });
+        reinitializeWithValue({ defaultValue: hiddenValue });
       }
     }
     // We only want to run this effect once after mount
@@ -201,7 +201,7 @@ export function useValueElementsProps(props: MoneyProps): {
     workingInput: {
       ...inputHTMLProps,
       ref: workingRef,
-      onChange: (event) => updateWorkingValue(event.target.value),
+      onChange: (event) => updateFromWorkingValue(event.target.value),
       onKeyDown: handleKeyDown,
       onFocus: (event) => {
         !isMouseDown && !isFocusFormatted && setIsFocusFormatted(true);
