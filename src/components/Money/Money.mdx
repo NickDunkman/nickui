@@ -51,6 +51,11 @@ The `decimalPlaces` prop defaults to `2` and configures:
 - the number of "placeholder" decimal places that are suggested as you type
 - the number of decimal places always included on `onChange(event.target.value)`
 
+`decimalPlaces` also takes a min/max object, if you want to allow the user to
+add even more decimal places than is suggested by the placeholder. You can see
+that in action here, where the Bitcoin field suggests 8 decimal places, but the
+user can add up to 10.
+
 <Canvas
   of={stories.currencyConverter}
   source={{

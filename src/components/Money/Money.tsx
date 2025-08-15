@@ -12,6 +12,7 @@ import { useScrollClone } from '@/utils/useScrollClone';
 import { moneyStyler } from './styles';
 import { MoneyProps } from './types';
 import { useValueElementsProps } from './useValueElementsProps';
+import { decimalPlacesToRange } from './utils';
 
 /**
  * A form control that allows users to enter a monetary amount
@@ -40,14 +41,7 @@ export function Money(props: MoneyProps) {
   const currencySymbolRef = React.useRef<HTMLDivElement>(null);
   const currencySymbolBounds = useElementBounds(currencySymbolRef);
   const [currencySymbolId] = React.useState(randomId());
-
-  const minDecimalPlaces =
-    typeof props.decimalPlaces === 'number'
-      ? props.decimalPlaces
-      : (props.decimalPlaces?.min ?? 2);
-  const allowDecimals = minDecimalPlaces > 0;
-
-  //const decimalsAllowed = props.decimalPlaces === undefined || ()
+  const allowDecimals = decimalPlacesToRange(props.decimalPlaces ?? 2).min > 0;
 
   // As the working <input> is scrolled, the placeholder <input> should match,
   // so that the placeholder value stays directly in line with the working value

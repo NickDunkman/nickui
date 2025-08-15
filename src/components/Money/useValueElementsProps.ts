@@ -5,7 +5,11 @@ import { fireInputChange } from '@/utils/fireInputChange';
 import { MoneyProps } from './types';
 import { useKeyDownConstrictor } from './useKeyDownConstrictor';
 import { useValueState } from './useValueState';
-import { createFormatConfig, getDeformattedSelection } from './utils';
+import {
+  createFormatConfig,
+  decimalPlacesToRange,
+  getDeformattedSelection,
+} from './utils';
 
 type InputProps = React.ComponentProps<'input'>;
 type InputPropsWithRefObject = Omit<InputProps, 'ref'> & {
@@ -43,18 +47,23 @@ export function useValueElementsProps(props: MoneyProps): {
   const [isMouseDown, setIsMouseDown] = React.useState(false);
   const [isFocusFormatted, setIsFocusFormatted] = React.useState(false);
 
+  const decimalPlacesRange = decimalPlacesToRange(props.decimalPlaces ?? 2);
+
   const fullFormat = createFormatConfig(
     props.currencySymbol ?? '$',
     props.decimalPoint ?? '.',
-    props.decimalPlaces ?? 2,
+    decimalPlacesRange.min,
+    decimalPlacesRange.max,
     props.thousandsSeparator ?? ',',
     props.allowNegatives || false,
   );
 
+  // Same format on focus, except no thousands separator!
   const focusFormat = createFormatConfig(
     fullFormat.currencySymbol,
     fullFormat.decimalPoint,
-    fullFormat.decimalPlaces,
+    fullFormat.decimalPlaces.min,
+    fullFormat.decimalPlaces.max,
     '',
     fullFormat.allowNegatives,
   );

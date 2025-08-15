@@ -243,10 +243,6 @@ function formatFullValue(
 ) {
   return formatValue(rawValue || '0', {
     ...format,
-    decimalPlaces: {
-      min: format.decimalPlaces.max,
-      max: format.decimalPlaces.max,
-    },
     allowWorkingDecimalPoint: true,
     allowWorkingNegativeSign: true,
   });

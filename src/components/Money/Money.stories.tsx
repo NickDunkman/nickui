@@ -310,7 +310,7 @@ function CurrencyConverter() {
               : Number(event.target.value) / exchangeRates.btc,
           )
         }
-        decimalPlaces={8}
+        decimalPlaces={{ min: 8, max: 10 }}
         currencySymbol="₿"
       />
     </div>
@@ -381,7 +381,7 @@ export const currencyConverter: Story = {
             className="sm:flex-1"
             label="Bitcoin"
             currencySymbol="₿"
-            decimalPlaces={8}
+            decimalPlaces={{ min: 8, max: 10 }}
             value={
               usdValue === undefined
                 ? undefined

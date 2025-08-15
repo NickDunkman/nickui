@@ -192,17 +192,30 @@ export const createFormatConfig = memoize(
   (
     currencySymbol: MoneyFormatType['currencySymbol'],
     decimalPoint: MoneyFormatType['decimalPoint'],
-    decimalPlaces: number | MoneyFormatType['decimalPlaces'],
+    minDecimalPlaces: number,
+    maxDecimalPlaces: number,
     thousandsSeparator: MoneyFormatType['thousandsSeparator'],
     allowNegatives: MoneyFormatType['allowNegatives'],
   ) => ({
     currencySymbol,
     decimalPoint,
-    decimalPlaces:
-      typeof decimalPlaces === 'number'
-        ? { min: decimalPlaces, max: decimalPlaces }
-        : decimalPlaces,
+    decimalPlaces: {
+      min: minDecimalPlaces,
+      max: maxDecimalPlaces,
+    },
     thousandsSeparator,
     allowNegatives,
   }),
 );
+
+/**
+ * Given a value for the `decimalPlaces` prop that is either a single number or
+ * a min/max object, returns a min/max object
+ */
+export function decimalPlacesToRange(
+  decimalPlaces: number | { min: number; max: number },
+) {
+  return typeof decimalPlaces === 'object'
+    ? decimalPlaces
+    : { min: decimalPlaces, max: decimalPlaces };
+}
