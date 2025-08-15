@@ -193,6 +193,7 @@ export function useValueElementsProps(props: MoneyProps): {
     decimalPlaces,
     thousandsSeparator,
     allowNegatives,
+    'data-nickui-component': nickUIComponent,
     /* eslint-enable @typescript-eslint/no-unused-vars */
     ...inputHTMLProps
   } = props;

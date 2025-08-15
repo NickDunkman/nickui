@@ -33,6 +33,8 @@ export interface MoneyProps
   /** Set to `true` to allow the user to enter negative values */
   allowNegatives?: boolean;
 
+  'data-nickui-component'?: string;
+
   /** docs-specific options. Not meant to be used in prod! */
   docsMeta?: {
     /** Set to `true` to show all 3 inputs */

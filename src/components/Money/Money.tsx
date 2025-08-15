@@ -41,6 +41,14 @@ export function Money(props: MoneyProps) {
   const currencySymbolBounds = useElementBounds(currencySymbolRef);
   const [currencySymbolId] = React.useState(randomId());
 
+  const minDecimalPlaces =
+    typeof props.decimalPlaces === 'number'
+      ? props.decimalPlaces
+      : (props.decimalPlaces?.min ?? 2);
+  const allowDecimals = minDecimalPlaces > 0;
+
+  //const decimalsAllowed = props.decimalPlaces === undefined || ()
+
   // As the working <input> is scrolled, the placeholder <input> should match,
   // so that the placeholder value stays directly in line with the working value
   useScrollClone(
@@ -89,7 +97,7 @@ export function Money(props: MoneyProps) {
       hint={props.hint}
       error={props.error !== true ? props.error : undefined}
       required={props.required}
-      data-nickui-component="Money"
+      data-nickui-component={props['data-nickui-component'] || 'Money'}
     >
       <div className={moneyStyles.visibleInputsContainer()}>
         {/*
@@ -110,7 +118,7 @@ export function Money(props: MoneyProps) {
           }
           tabIndex={-1}
           aria-hidden
-          data-testid="money-placeholder-input"
+          data-testid="placeholder-input"
           {...valueElementsProps.placeholderInput}
         />
 
@@ -130,7 +138,7 @@ export function Money(props: MoneyProps) {
           inputMode={
             props.allowNegatives
               ? 'text'
-              : (props.decimalPlaces ?? 2) > 0
+              : allowDecimals
                 ? 'decimal'
                 : 'numeric'
           }

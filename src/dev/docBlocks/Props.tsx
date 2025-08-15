@@ -29,7 +29,7 @@ function getInterfaceName(nativeBase: string) {
  * These props are weedsy -- they may need to be tinkered with in a component's
  * props, but they don't need to appear in the docs.
  */
-const alwaysExclude = ['onBlur', 'ref', 'docsMeta'];
+const alwaysExclude = ['onBlur', 'ref', 'docsMeta', 'data-nickui-component'];
 
 /**
  * Custom doc block for showing a Component's props with some consistent

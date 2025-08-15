@@ -5,21 +5,20 @@ import { expect, fn } from 'storybook/test';
 import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
 import { getStoryArgTypes } from '@/dev/stories/getStoryArgTypes';
 
-import { Money } from './Money';
+import { Numeric } from './Numeric';
 
 const meta = {
-  title: 'Form controls/Money',
-  component: Money,
-  argTypes: getStoryArgTypes<typeof Money>({
+  title: 'Form controls/Numeric',
+  component: Numeric,
+  argTypes: getStoryArgTypes<typeof Numeric>({
     formControl: {
       isDisableable: true,
       valueType: ['string', 'number'],
     },
     isSizerable: true,
     defaultValues: {
-      currencySymbol: '$',
       decimalPoint: '.',
-      decimalPlaces: 2,
+      decimalPlaces: 0,
       thousandsSeparator: ',',
       allowNegatives: false,
     },
@@ -44,7 +43,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof Money>;
+} satisfies Meta<typeof Numeric>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -65,15 +64,14 @@ export const fieldLayout: Story = {
 
     await step('Assert accessibility of layout elements', async () => {
       expect(input).toHaveRole('spinbutton');
-      expect(input).toHaveAccessibleName('A label* $');
+      expect(input).toHaveAccessibleName('A label*');
       expect(input).toHaveAccessibleDescription('A hint');
       expect(input).toHaveAccessibleErrorMessage('An error message');
       expect(requiredAsterisk).toHaveTextContent('*');
     });
 
-    await step('Assert default currency formatting', async () => {
-      expect(input).toHaveValue('1,234,567.89');
-      expect(canvas.getByTestId('currency-symbol')).toHaveTextContent('$');
+    await step('Assert default numeric formatting', async () => {
+      expect(input).toHaveValue('1,234,567');
     });
 
     await step('Assert the error style', async () => {
@@ -92,7 +90,7 @@ export const empty: Story = {
     const input = canvas.getByLabelText('Empty');
 
     await step(
-      'Assert Money is functional without an initial value',
+      'Assert Numeric is functional without an initial value',
       async () => {
         await userEvent.type(input, '1');
         expect(input).toHaveValue('1');
@@ -112,6 +110,7 @@ export const controlled: Story = {
   args: {
     label: 'Controlled',
     value: '1234.56',
+    decimalPlaces: 2,
     onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
@@ -122,7 +121,7 @@ export const controlled: Story = {
     });
 
     await step(
-      'Try adding text. `onChange` should fire, & <Money> allows the input value to change even when the controlledValue doesn’t update',
+      'Try adding text. `onChange` should fire, & <Numeric> allows the input value to change even when the controlledValue doesn’t update',
       async () => {
         await userEvent.tab();
         expect(input).toHaveFocus();
@@ -146,6 +145,7 @@ export const uncontrolled: Story = {
   args: {
     label: 'Uncontrolled',
     defaultValue: '1234.56',
+    decimalPlaces: 2,
     onChange: fn(),
   },
   play: async ({ args, canvas, step, userEvent }) => {
@@ -179,7 +179,7 @@ export const disabled: Story = {
   tags: ['control-state'],
   args: {
     label: 'Disabled',
-    defaultValue: '1234.56',
+    defaultValue: '1234',
     disabled: true,
     onChange: fn(),
   },
@@ -196,33 +196,31 @@ export const disabled: Story = {
     await step('Typing should have no effect', async () => {
       await userEvent.type(input, '{backspace}');
       expect(args.onChange).not.toHaveBeenCalled();
-      expect(input).toHaveValue('1,234.56');
+      expect(input).toHaveValue('1,234');
     });
   },
 };
 
-export const euros: Story = {
+export const european: Story = {
   tags: ['control-state'],
   args: {
     defaultValue: '1234567.89',
-    currencySymbol: '€',
-    label: 'Euros',
+    label: 'European number',
     hint: 'Uses "." as the thousands-separator and "," as the decimal point!',
     thousandsSeparator: '.',
     decimalPoint: ',',
+    decimalPlaces: 2,
     onChange: fn(),
   },
   play: async ({ canvas, step, userEvent }) => {
-    const input = canvas.getByLabelText('Euros');
+    const input = canvas.getByLabelText('European number');
 
-    await step('Assert default currency formatting', async () => {
+    await step('Assert proper formatting', async () => {
       expect(input).toHaveValue('1.234.567,89');
-      expect(input).toHaveAccessibleName('Euros €');
-      expect(canvas.getByTestId('currency-symbol')).toHaveTextContent('€');
     });
 
     await step(
-      'Assert deformatting abides the currency configuration',
+      'Assert deformatting abides the european configuration',
       async () => {
         await userEvent.tab();
         expect(input).toHaveFocus();
@@ -240,173 +238,12 @@ export const euros: Story = {
   },
 };
 
-function CurrencyConverter() {
-  const [exchangeRates, setExchangeRates] = React.useState<{
-    btc: number;
-    eur: number;
-  }>();
-  const [usdValue, setUsdValue] = React.useState<number | undefined>(10000);
-
-  React.useEffect(() => {
-    fetch(
-      'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json',
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setExchangeRates({
-          btc: data.usd.btc,
-          eur: data.usd.eur,
-        });
-      });
-  }, []);
-
-  if (!exchangeRates) {
-    return null;
-  }
-
-  return (
-    <div className="flex flex-col gap-3 sm:flex-row">
-      <Money
-        className="sm:flex-1"
-        label="US Dollars"
-        value={usdValue}
-        onChange={(event) =>
-          setUsdValue(
-            event.target.value === '' ? undefined : Number(event.target.value),
-          )
-        }
-      />
-      <Money
-        className="sm:flex-1"
-        label="Euros"
-        value={
-          usdValue === undefined
-            ? undefined
-            : Number(usdValue) * exchangeRates.eur
-        }
-        onChange={(event) =>
-          setUsdValue(
-            event.target.value === ''
-              ? undefined
-              : Number(event.target.value) / exchangeRates.eur,
-          )
-        }
-        currencySymbol="€"
-        decimalPoint=","
-        thousandsSeparator="."
-      />
-      <Money
-        className="sm:flex-1"
-        label="Bitcoin"
-        value={
-          usdValue === undefined
-            ? undefined
-            : Number(usdValue) * exchangeRates.btc
-        }
-        onChange={(event) =>
-          setUsdValue(
-            event.target.value === ''
-              ? undefined
-              : Number(event.target.value) / exchangeRates.btc,
-          )
-        }
-        decimalPlaces={8}
-        currencySymbol="₿"
-      />
-    </div>
-  );
-}
-
-export const currencyConverter: Story = {
-  tags: ['!dev', '!test'],
-  render: (_args) => <CurrencyConverter />,
-  parameters: {
-    source: `
-    function CurrencyConverter() {
-      const [usdValue, setUsdValue] = React.useState<number | undefined>(10000);
-      const [exchangeRates, setExchangeRates] = React.useState<{
-        btc: number;
-        eur: number;
-      }>();
-
-      React.useEffect(() => {
-        fetch(
-          'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json',
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            setExchangeRates({
-              btc: data.usd.btc,
-              eur: data.usd.eur,
-            });
-          });
-      }, []);
-
-      if (!exchangeRates) {
-        return null;
-      }
-
-      return (
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Money
-            className="sm:flex-1"
-            label="US Dollars"
-            value={usdValue}
-            onChange={(event) =>
-              setUsdValue(
-                event.target.value === '' ? undefined : Number(event.target.value),
-              )
-            }
-          />
-          <Money
-            className="sm:flex-1"
-            label="Euros"
-            currencySymbol="€"
-            decimalPoint=","
-            thousandsSeparator="."
-            value={
-              usdValue === undefined
-                ? undefined
-                : Number(usdValue) * exchangeRates.eur
-            }
-            onChange={(event) =>
-              setUsdValue(
-                event.target.value === ''
-                  ? undefined
-                  : Number(event.target.value) / exchangeRates.eur,
-              )
-            }
-          />
-          <Money
-            className="sm:flex-1"
-            label="Bitcoin"
-            currencySymbol="₿"
-            decimalPlaces={8}
-            value={
-              usdValue === undefined
-                ? undefined
-                : Number(usdValue) * exchangeRates.btc
-            }
-            onChange={(event) =>
-              setUsdValue(
-                event.target.value === ''
-                  ? undefined
-                  : Number(event.target.value) / exchangeRates.btc,
-              )
-            }
-          />
-        </div>
-      );
-    }
-    `,
-  },
-};
-
 export const allowNegatives: Story = {
   tags: ['sizer'],
   args: {
     label: 'Negatives allowed!',
     defaultValue: '-1234.56',
+    decimalPlaces: 2,
     allowNegatives: true,
   },
 };
@@ -414,21 +251,20 @@ export const allowNegatives: Story = {
 export const xs: Story = {
   tags: ['sizer'],
   args: {
-    'aria-label': 'Xs Money',
+    'aria-label': 'Xs Numeric',
     sizer: 'xs',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    const input = canvas.getByLabelText('Xs Money');
-    const field = input.closest('[data-nickui-component="Money"]');
+    const input = canvas.getByLabelText('Xs Numeric');
+    const field = input.closest('[data-nickui-component="Numeric"]');
 
     await step(
-      'Assert the xs sizer style on both the Money & Field',
+      'Assert the xs sizer style on both the Numeric & Field',
       async () => {
         expect(input).toHaveClass('text-xs');
         expect(field).toHaveAttribute('data-nickui-sizer', 'xs');
-        expect(canvas.getByText('$')).toHaveClass('text-xs');
       },
     );
   },
@@ -437,21 +273,20 @@ export const xs: Story = {
 export const sm: Story = {
   tags: ['sizer'],
   args: {
-    'aria-label': 'Sm Money',
+    'aria-label': 'Sm Numeric',
     sizer: 'sm',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    const input = canvas.getByLabelText('Sm Money');
-    const field = input.closest('[data-nickui-component="Money"]');
+    const input = canvas.getByLabelText('Sm Numeric');
+    const field = input.closest('[data-nickui-component="Numeric"]');
 
     await step(
-      'Assert the sm sizer style on both the Money & Field',
+      'Assert the sm sizer style on both the Numeric & Field',
       async () => {
         expect(input).toHaveClass('text-sm');
         expect(field).toHaveAttribute('data-nickui-sizer', 'sm');
-        expect(canvas.getByText('$')).toHaveClass('text-sm');
       },
     );
   },
@@ -460,21 +295,20 @@ export const sm: Story = {
 export const base: Story = {
   tags: ['sizer'],
   args: {
-    'aria-label': 'Base Money',
+    'aria-label': 'Base Numeric',
     sizer: 'base',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    const input = canvas.getByLabelText('Base Money');
-    const field = input.closest('[data-nickui-component="Money"]');
+    const input = canvas.getByLabelText('Base Numeric');
+    const field = input.closest('[data-nickui-component="Numeric"]');
 
     await step(
-      'Assert the base sizer style on both the Money & Field',
+      'Assert the base sizer style on both the Numeric & Field',
       async () => {
         expect(input).toHaveClass('text-base');
         expect(field).toHaveAttribute('data-nickui-sizer', 'base');
-        expect(canvas.getByText('$')).toHaveClass('text-base');
       },
     );
   },
@@ -483,21 +317,20 @@ export const base: Story = {
 export const lg: Story = {
   tags: ['sizer'],
   args: {
-    'aria-label': 'Lg Money',
+    'aria-label': 'Lg Numeric',
     sizer: 'lg',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    const input = canvas.getByLabelText('Lg Money');
-    const field = input.closest('[data-nickui-component="Money"]');
+    const input = canvas.getByLabelText('Lg Numeric');
+    const field = input.closest('[data-nickui-component="Numeric"]');
 
     await step(
-      'Assert the lg sizer style on both the Money & Field',
+      'Assert the lg sizer style on both the Numeric & Field',
       async () => {
         expect(input).toHaveClass('text-lg');
         expect(field).toHaveAttribute('data-nickui-sizer', 'lg');
-        expect(canvas.getByText('$')).toHaveClass('text-lg');
       },
     );
   },
@@ -506,21 +339,20 @@ export const lg: Story = {
 export const xl: Story = {
   tags: ['sizer'],
   args: {
-    'aria-label': 'Xl Money',
+    'aria-label': 'Xl Numeric',
     sizer: 'xl',
     defaultValue: '1.23',
     onChange: fn(),
   },
   play: async ({ canvas, step }) => {
-    const input = canvas.getByLabelText('Xl Money');
-    const field = input.closest('[data-nickui-component="Money"]');
+    const input = canvas.getByLabelText('Xl Numeric');
+    const field = input.closest('[data-nickui-component="Numeric"]');
 
     await step(
-      'Assert the xl sizer style on both the Money & Field',
+      'Assert the xl sizer style on both the Numeric & Field',
       async () => {
         expect(input).toHaveClass('text-xl');
         expect(field).toHaveAttribute('data-nickui-sizer', 'xl');
-        expect(canvas.getByText('$')).toHaveClass('text-xl');
       },
     );
   },
@@ -530,7 +362,7 @@ export const responsive: Story = {
   tags: ['sizer'],
   args: {
     sizer: ['xs', 'sm:sm', 'md:base', 'lg:lg', 'xl:xl'],
-    label: 'Responsive Money',
+    label: 'Responsive Numeric',
     defaultValue: '1.23',
     onChange: fn(),
   },
@@ -540,10 +372,10 @@ export const allControlStates: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <div className="flex flex-col gap-3 sm:flex-row">
-      <Money {...empty.args} className="sm:flex-1" />
-      <Money {...controlled.args} className="sm:flex-1" />
-      <Money {...uncontrolled.args} className="sm:flex-1" />
-      <Money {...disabled.args} className="sm:flex-1" />
+      <Numeric {...empty.args} className="sm:flex-1" />
+      <Numeric {...controlled.args} className="sm:flex-1" />
+      <Numeric {...uncontrolled.args} className="sm:flex-1" />
+      <Numeric {...disabled.args} className="sm:flex-1" />
     </div>
   ),
 };
@@ -552,11 +384,11 @@ export const allSizers: Story = {
   tags: ['!dev', '!test'],
   render: (_args) => (
     <AllSizersStoryWrapper alignBaseline>
-      <Money {...xs.args} className="sm:flex-12" />
-      <Money {...sm.args} className="sm:flex-14" />
-      <Money {...base.args} className="sm:flex-16" />
-      <Money {...lg.args} className="sm:flex-18" />
-      <Money {...xl.args} className="sm:flex-20" />
+      <Numeric {...xs.args} className="sm:flex-12" />
+      <Numeric {...sm.args} className="sm:flex-14" />
+      <Numeric {...base.args} className="sm:flex-16" />
+      <Numeric {...lg.args} className="sm:flex-18" />
+      <Numeric {...xl.args} className="sm:flex-20" />
     </AllSizersStoryWrapper>
   ),
 };

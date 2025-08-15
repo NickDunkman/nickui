@@ -71,14 +71,14 @@ export function useKeyDownConstrictor(format: MoneyFormatType) {
             // Don't block unless we already have max decimal places
             const decimalPlacesOnWorkingValue =
               value.length - (decimalPointIndex + 1);
-            if (decimalPlacesOnWorkingValue >= format.maxDecimalPlaces) {
+            if (decimalPlacesOnWorkingValue >= format.decimalPlaces.max) {
               return true;
             }
           }
         }
       }
     },
-    [format.allowNegatives, format.maxDecimalPlaces, format.decimalPoint],
+    [format.allowNegatives, format.decimalPlaces.max, format.decimalPoint],
   );
 }
 
