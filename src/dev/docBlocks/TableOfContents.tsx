@@ -54,13 +54,9 @@ export function TableOfContents() {
   }, []);
 
   return (
-    <HeadingList
-      headings={headings}
-      style={{
-        margin: '25px 0 40px',
-        paddingLeft: 15,
-      }}
-    />
+    <div className="!mb-10 !-ml-3.75">
+      <HeadingList headings={headings} />
+    </div>
   );
 }
 
@@ -77,24 +73,18 @@ const LIST_STYLE_TYPE_PROGRESSION = [
 
 function HeadingList({
   headings,
-  style,
+  listStyleType = 'decimal',
 }: {
   headings: HeadingType[];
-  style?: React.CSSProperties;
+  listStyleType?: React.CSSProperties['listStyleType'];
 }) {
-  const listStyleType = style?.listStyleType || LIST_STYLE_TYPE_PROGRESSION[0];
   const nextListStyleType =
     LIST_STYLE_TYPE_PROGRESSION[
       LIST_STYLE_TYPE_PROGRESSION.indexOf(listStyleType) + 1
     ];
 
   return (
-    <ol
-      style={{
-        ...style,
-        listStyleType,
-      }}
-    >
+    <ol style={{ listStyleType }}>
       {headings.map((heading) => (
         <li key={heading.id}>
           <Markdown>
@@ -105,10 +95,7 @@ function HeadingList({
           {heading.subHeadings.length > 0 && (
             <HeadingList
               headings={heading.subHeadings}
-              style={{
-                padding: '5px 0 10px 20px',
-                listStyleType: nextListStyleType,
-              }}
+              listStyleType={nextListStyleType}
             />
           )}
         </li>

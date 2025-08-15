@@ -32,6 +32,7 @@
     opacity: 0.025;
   }
 
+
   /* Add "|" separators between union type items in ArgsTables */
   .docblock-argstable-body td:nth-child(2) div:nth-child(2) span:not(:first-child) {
     position: relative;
@@ -43,10 +44,6 @@
     left: -14px;
   }
 
-  /* In an <ol>, don’t add bottom-margin to the <p> when it’s following sibling is a nested <ol> */
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) ol p:has(+ ol) {
-    margin-bottom: 0;
-  }
 
   /* Fix Storybook’s (non-)hierarchical heading styles & make 'em purple for fun */
 
@@ -86,5 +83,12 @@
     color: rgb(2, 156, 253) !important;
   }
 
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) ol {
+    list-style-type: decimal;
+  }
+
+  /** Prevent unintented spacing between an <li>'s text & its nested <ol> or <ul> */
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) li p:has(+ ul) { margin-bottom: 0; }
+  .sbdocs-wrapper :where(:not(.sb-unstyled)) li p:has(+ ol) { margin-bottom: 0; }
 
 </style>
