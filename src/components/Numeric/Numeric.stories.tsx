@@ -4,6 +4,7 @@ import { expect, fn } from 'storybook/test';
 
 import { AllSizersStoryWrapper } from '@/dev/stories/AllSizersStoryWrapper';
 import { getStoryArgTypes } from '@/dev/stories/getStoryArgTypes';
+import { expectDelayedValue } from '@/dev/tests/expectDelayedValue';
 
 import { Numeric } from './Numeric';
 
@@ -71,7 +72,7 @@ export const fieldLayout: Story = {
     });
 
     await step('Assert default numeric formatting', async () => {
-      expect(input).toHaveValue('1,234,567');
+      await expectDelayedValue(input, '1,234,567');
     });
 
     await step('Assert the error style', async () => {
@@ -93,14 +94,14 @@ export const empty: Story = {
       'Assert Numeric is functional without an initial value',
       async () => {
         await userEvent.type(input, '1');
-        expect(input).toHaveValue('1');
+        await expectDelayedValue(input, '1');
         expect(args.onChange).toHaveBeenCalledOnce();
       },
     );
 
     await step('Reset the value', async () => {
       await userEvent.type(input, '{backspace}');
-      expect(input).toHaveValue('');
+      await expectDelayedValue(input, '');
     });
   },
 };
@@ -117,7 +118,7 @@ export const controlled: Story = {
     const input = canvas.getByLabelText('Controlled');
 
     await step('Assert `value` gets formatted', async () => {
-      expect(input).toHaveValue('1,234.56');
+      await expectDelayedValue(input, '1,234.56');
     });
 
     await step(
@@ -126,14 +127,14 @@ export const controlled: Story = {
         await userEvent.tab();
         expect(input).toHaveFocus();
         await userEvent.type(input, '{backspace}');
-        expect(input).toHaveValue('1234.5');
+        await expectDelayedValue(input, '1234.5');
         expect(args.onChange).toHaveBeenCalledOnce();
       },
     );
 
     await step('Reset to initial state', async () => {
       await userEvent.type(input, '6');
-      expect(input).toHaveValue('1234.56');
+      await expectDelayedValue(input, '1234.56');
       await userEvent.tab();
       expect(input).not.toHaveFocus();
     });
@@ -152,7 +153,7 @@ export const uncontrolled: Story = {
     const input = canvas.getByLabelText('Uncontrolled');
 
     await step('Assert `defaultValue` gets formatted', async () => {
-      expect(input).toHaveValue('1,234.56');
+      await expectDelayedValue(input, '1,234.56');
     });
 
     await step(
@@ -161,14 +162,14 @@ export const uncontrolled: Story = {
         await userEvent.tab();
         expect(input).toHaveFocus();
         await userEvent.type(input, '{backspace}');
-        expect(input).toHaveValue('1234.5');
+        await expectDelayedValue(input, '1234.5');
         expect(args.onChange).toHaveBeenCalledOnce();
       },
     );
 
     await step('Reset to initial state', async () => {
       await userEvent.type(input, '6');
-      expect(input).toHaveValue('1234.56');
+      await expectDelayedValue(input, '1234.56');
       await userEvent.tab();
       expect(input).not.toHaveFocus();
     });
@@ -196,7 +197,7 @@ export const disabled: Story = {
     await step('Typing should have no effect', async () => {
       await userEvent.type(input, '{backspace}');
       expect(args.onChange).not.toHaveBeenCalled();
-      expect(input).toHaveValue('1,234');
+      await expectDelayedValue(input, '1,234');
     });
   },
 };
@@ -216,7 +217,7 @@ export const european: Story = {
     const input = canvas.getByLabelText('European number');
 
     await step('Assert proper formatting', async () => {
-      expect(input).toHaveValue('1.234.567,89');
+      await expectDelayedValue(input, '1.234.567,89');
     });
 
     await step(
@@ -225,13 +226,13 @@ export const european: Story = {
         await userEvent.tab();
         expect(input).toHaveFocus();
         await userEvent.type(input, '{backspace}');
-        expect(input).toHaveValue('1234567,8');
+        await expectDelayedValue(input, '1234567,8');
       },
     );
 
     await step('Reset to initial state', async () => {
       await userEvent.type(input, '9');
-      expect(input).toHaveValue('1234567,89');
+      await expectDelayedValue(input, '1234567,89');
       await userEvent.tab();
       expect(input).not.toHaveFocus();
     });
