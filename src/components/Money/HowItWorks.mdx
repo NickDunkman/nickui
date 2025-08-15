@@ -388,10 +388,10 @@ offers these actions:
   _after_ the component is mounted, and we want to use that value without
   behaving like it is a change.
 
-If you peak into the `<Docs of="Money" />` component code, you’ll see that all
-of this complex state stuff is encapsulated into hooks; the component function
-itself is almost entirely JSX & presentational logic. The chain of hook calls
-looks like:
+If you peak into the component <Docs.SourceLink
+path="/blob/main/src/components/Money/Money.tsx" />, you’ll see that all of this
+complex state stuff is encapsulated into hooks; the component function itself is
+almost entirely JSX & presentational logic. The chain of hook calls looks like:
 
 - `useValueStateReducer` uses `React.useReducer` to create a "value state" store
 - `useValueState` wraps `useValueStateReducer` to simplify interaction with the

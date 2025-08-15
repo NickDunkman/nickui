@@ -7,9 +7,11 @@ import * as React from 'react';
 export function SourceLink({
   path = '',
   markOnly = false,
+  markSize = 15,
   ...props
 }: {
   path?: string;
+  markSize?: number;
   markOnly?: boolean;
 } & React.ComponentProps<typeof AnchorMdx>) {
   return (
@@ -19,9 +21,9 @@ export function SourceLink({
       href={`https://github.com/NickDunkman/nickui${path}`}
     >
       <img
-        className="relative -top-0.5 mr-2 inline"
+        className="relative -top-0.5 mr-1.5 ml-1 inline"
         src="./github-mark.svg"
-        width={markOnly ? undefined : 20}
+        width={markSize}
         alt=""
       />
       {!markOnly && 'Source code'}

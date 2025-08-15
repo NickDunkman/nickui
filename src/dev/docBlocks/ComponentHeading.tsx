@@ -16,7 +16,7 @@ export function ComponentHeading({ of }: { of: string }) {
       <div style={{ marginLeft: 'auto' }}>
         <Markdown
           options={{ overrides: { SourceLink } }}
-        >{`<SourceLink path="/tree/main/src/components/${of}" />`}</Markdown>
+        >{`<SourceLink path="/tree/main/src/components/${of}" markSize={20} />`}</Markdown>
       </div>
     </div>
   );
