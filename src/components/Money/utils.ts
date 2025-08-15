@@ -3,7 +3,7 @@ import memoize from 'just-memoize';
 import { MoneyFormatType, MoneyValueType } from './types';
 
 /**
- * Given a raw value, converts to a "numerish" (number as a string)
+ * Given a raw value, converts to a "form" (number as a string)
  * representation that abides by any of the formatting configuration options
  * that wouldn't prevent the string from being a parsable Number() -- e.g.
  * `minDecimalPlaces` is followed, but adding `thousandsSeparators` or
@@ -16,7 +16,7 @@ import { MoneyFormatType, MoneyValueType } from './types';
  * To fully format (but not have a guaranteed parsable Number()), use the
  * formatValue function.
  */
-export function parseNumerishValue(
+export function parseFormValue(
   rawValue: string | number | undefined,
   format: MoneyFormatType,
 ) {
@@ -104,13 +104,13 @@ export function parseNumerishValue(
  * Money component’s interactive <input>. It is not necessarily parsable
  * using Number(), since Number() parsing only works with standard number
  * formatting (such as by having "." as the decimal point). To convert to a
- * parseable Number() string, use the parseNumerishValue() function.
+ * parseable Number() string, use the parseFormValue() function.
  */
 export function formatValue(
   rawValue: string | number | undefined,
   format: MoneyFormatType,
 ) {
-  const stringValue = parseNumerishValue(rawValue, format);
+  const stringValue = parseFormValue(rawValue, format);
 
   if (stringValue === '') {
     return '';
@@ -142,7 +142,7 @@ export function formatValue(
 /**
  * Given a monetary string that is formatted (such as the value provided from
  * the Money component’s interactive <input>, strips the custom formatting
- * so that it can then be parsed using parseNumerishValue().
+ * so that it can then be parsed using parseFormValue().
  */
 export function deformatValue(formattedValue: string, format: MoneyFormatType) {
   return formattedValue

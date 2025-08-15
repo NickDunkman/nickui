@@ -168,10 +168,10 @@ export function Money(props: MoneyProps) {
       */}
       <input
         name={props.name}
-        className={moneyStyles.hiddenInput()}
+        className={moneyStyles.formInput()}
         tabIndex={-1}
         aria-hidden
-        {...valueElementsProps.hiddenInput}
+        {...valueElementsProps.formInput}
       />
     </Field>
   );

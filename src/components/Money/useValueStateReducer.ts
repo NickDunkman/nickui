@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { MoneyFormatType, MoneyValueType } from './types';
-import { deformatValue, formatValue, parseNumerishValue } from './utils';
+import { deformatValue, formatValue, parseFormValue } from './utils';
 
 /** A reducer hook for making updates to the Money value state */
 export function useValueStateReducer(args: {
@@ -57,16 +57,15 @@ function initializeState({
 }): MoneyValueStateType {
   const rawValue =
     controlledValue !== undefined ? controlledValue : defaultValue;
-  const numerishValue = parseNumerishValue(rawValue, format);
+  const formValue = parseFormValue(rawValue, format);
 
   return {
     currentValue: {
       version: 1,
-      numerishValue,
+      formValue,
       // On initialization, if a value is passed in, the workingValue should
       // start with the full set of decimalPlaces
-      workingValue:
-        numerishValue === '' ? '' : formatFullValue(rawValue, format),
+      workingValue: formValue === '' ? '' : formatFullValue(rawValue, format),
       placeholderValue: formatFullValue(rawValue, format),
       controlledValue,
       format,
@@ -93,7 +92,7 @@ function reducer(
   state: MoneyValueStateType,
   action: ActionType,
 ): MoneyValueStateType {
-  let newNumerishValue: string;
+  let newFormValue: string;
 
   switch (action.type) {
     case 'REINITIALIZE_VALUE':
@@ -108,25 +107,22 @@ function reducer(
         return state;
       }
 
-      newNumerishValue = parseNumerishValue(
-        action.payload,
-        state.currentValue.format,
-      );
+      newFormValue = parseFormValue(action.payload, state.currentValue.format);
 
       // Don’t update the formatted versions unless there is a numerical
       // change. Otherwise the user's formatting changes will get wiped.
       const formattedValuesShouldChange =
-        Number(newNumerishValue) !== Number(state.currentValue.numerishValue) ||
-        (newNumerishValue === '' && state.currentValue.numerishValue !== '') ||
-        (newNumerishValue !== '' && state.currentValue.numerishValue === '');
+        Number(newFormValue) !== Number(state.currentValue.formValue) ||
+        (newFormValue === '' && state.currentValue.formValue !== '') ||
+        (newFormValue !== '' && state.currentValue.formValue === '');
 
       return updatedState(state, {
-        numerishValue: newNumerishValue,
+        formValue: newFormValue,
         workingValue: formattedValuesShouldChange
-          ? formatWorkingValue(newNumerishValue, state.currentValue.format)
+          ? formatWorkingValue(newFormValue, state.currentValue.format)
           : state.currentValue.workingValue,
         placeholderValue: formattedValuesShouldChange
-          ? formatFullValue(newNumerishValue, state.currentValue.format)
+          ? formatFullValue(newFormValue, state.currentValue.format)
           : state.currentValue.placeholderValue,
         controlledValue: action.payload,
         source: 'controlledValue',
@@ -137,13 +133,13 @@ function reducer(
         action.payload,
         state.currentValue.format,
       );
-      newNumerishValue = parseNumerishValue(
+      newFormValue = parseFormValue(
         deformattedWorkingValue,
         state.currentValue.format,
       );
 
       return updatedState(state, {
-        numerishValue: newNumerishValue,
+        formValue: newFormValue,
         workingValue: formatWorkingValue(
           deformattedWorkingValue,
           state.currentValue.format,
@@ -162,10 +158,7 @@ function reducer(
       );
 
       return updatedState(state, {
-        numerishValue: parseNumerishValue(
-          deformattedWorkingValue,
-          action.payload,
-        ),
+        formValue: parseFormValue(deformattedWorkingValue, action.payload),
         workingValue:
           deformattedWorkingValue === ''
             ? ''
@@ -180,12 +173,12 @@ function reducer(
 
     case 'INCREMENT_VALUE':
       // pressing the "down" arrow on an empty value should just set to 0
-      if (state.currentValue.numerishValue === '' && action.payload < 0) {
-        newNumerishValue = parseNumerishValue(0, state.currentValue.format);
+      if (state.currentValue.formValue === '' && action.payload < 0) {
+        newFormValue = parseFormValue(0, state.currentValue.format);
       } else {
-        newNumerishValue = parseNumerishValue(
+        newFormValue = parseFormValue(
           Math.max(
-            Number(state.currentValue.numerishValue) + action.payload,
+            Number(state.currentValue.formValue) + action.payload,
             state.currentValue.format.allowNegatives ? -Infinity : 0,
           ),
           state.currentValue.format,
@@ -194,12 +187,12 @@ function reducer(
 
       // This can happen if trying to decrement from zero and negatives are not
       // allowed
-      if (newNumerishValue === state.currentValue.numerishValue) {
+      if (newFormValue === state.currentValue.formValue) {
         return state;
       }
 
-      const [newWholePart] = newNumerishValue.split('.');
-      let newWorkingDecimalPart = newNumerishValue.replace(/^-?[0-9]*/, '');
+      const [newWholePart] = newFormValue.split('.');
+      let newWorkingDecimalPart = newFormValue.replace(/^-?[0-9]*/, '');
       const previousWorkingDecimalPart =
         state.currentValue.workingValue.replace(/^-?[0-9]*/, '');
 
@@ -214,13 +207,13 @@ function reducer(
       }
 
       return updatedState(state, {
-        numerishValue: newNumerishValue,
+        formValue: newFormValue,
         workingValue: formatWorkingValue(
           `${newWholePart}${newWorkingDecimalPart}`,
           state.currentValue.format,
         ),
         placeholderValue: formatFullValue(
-          newNumerishValue,
+          newFormValue,
           state.currentValue.format,
         ),
         source: 'increment',

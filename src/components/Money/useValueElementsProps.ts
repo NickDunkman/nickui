@@ -31,7 +31,7 @@ type InputPropsWithRefObject = Omit<InputProps, 'ref'> & {
 export function useValueElementsProps(props: MoneyProps): {
   workingInput: InputPropsWithRefObject;
   placeholderInput: InputPropsWithRefObject;
-  hiddenInput: InputProps;
+  formInput: InputProps;
 } {
   const workingRef = React.useRef<HTMLInputElement>(null);
   const placeholderRef = React.useRef<HTMLInputElement>(null);
@@ -71,22 +71,18 @@ export function useValueElementsProps(props: MoneyProps): {
     format: isFocusFormatted ? focusFormat : fullFormat,
   });
 
-  // When the numerish value is changing, and the source of the change wasn’t
+  // When the form value is changing, and the source of the change wasn’t
   // due to a passed in `value` or `defaultValue` prop, we should push the new
   // value up to the parent via the hidden <input>’s onChange handler.
   React.useEffect(() => {
     if (
-      currentValue.numerishValue !== previousValue?.numerishValue &&
+      currentValue.formValue !== previousValue?.formValue &&
       currentValue.source !== 'controlledValue' &&
       currentValue.source !== 'initialValue'
     ) {
-      fireInputChange(hiddenRef.current, currentValue.numerishValue);
+      fireInputChange(hiddenRef.current, currentValue.formValue);
     }
-  }, [
-    currentValue.numerishValue,
-    previousValue?.numerishValue,
-    currentValue.source,
-  ]);
+  }, [currentValue.formValue, previousValue?.formValue, currentValue.source]);
 
   // In certain situations, we need to programmatically install the updated
   // "workingValue" into the working <input>:
@@ -133,8 +129,7 @@ export function useValueElementsProps(props: MoneyProps): {
         // same spot they were in
         if (currentValue.source === 'increment') {
           const digitDelta =
-            currentValue.numerishValue.length -
-            previousValue.numerishValue.length;
+            currentValue.formValue.length - previousValue.formValue.length;
           workingRef.current.setSelectionRange(
             selectionBeforeChange.start + digitDelta,
             selectionBeforeChange.end + digitDelta,
@@ -251,7 +246,7 @@ export function useValueElementsProps(props: MoneyProps): {
       value: currentValue.placeholderValue,
       onChange: () => {},
     },
-    hiddenInput: {
+    formInput: {
       ref: (el) => {
         hiddenRef.current = el;
 
@@ -268,7 +263,7 @@ export function useValueElementsProps(props: MoneyProps): {
       // `value` prop here, otherwise React will supress that change event.
       // We can, however, set a defaultValue, so that the <input> has the
       // correct initial value.
-      defaultValue: currentValue.numerishValue,
+      defaultValue: currentValue.formValue,
     },
   };
 }

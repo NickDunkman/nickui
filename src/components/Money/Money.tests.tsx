@@ -130,7 +130,7 @@ describe('Money', async () => {
     expect(input).toHaveValue('0.');
     expect(onChange).toHaveBeenCalledExactlyOnceWith(eventValue('0.00'));
 
-    // Removing the decimal should keep the padded zero. Therefore the numerish
+    // Removing the decimal should keep the padded zero. Therefore the form
     // value doesn’t change, and onChange isn’t called.
     onChange.mockClear();
     await user.keyboard('{backspace}');

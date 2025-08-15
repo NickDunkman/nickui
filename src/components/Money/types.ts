@@ -94,13 +94,13 @@ export type MoneyValueType = {
    */
   version: number;
   /**
-   * `numerishValue` is the version of the value that can be parsed as a
+   * `formValue` is the version of the value that can be parsed as a
    * Number(): it has no thousands separators and the decimalPoint is always
    * ".". This is the version of the value that is emitted via the Money
    * component’s onChange handler back to the parent, as it is generally the
    * most useful programmatically.
    */
-  numerishValue: string;
+  formValue: string;
   /**
    * `workingValue` is the value of the <input> that the user is interacting
    * with. It’s initially set to the formatted version of `value` (e.g. with

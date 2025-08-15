@@ -12,7 +12,7 @@ export const moneyStyler = tv({
       text-gray-400 disabled:text-gray-400
     `,
     workingInput: 'peer absolute top-0 right-0 left-0 !bg-transparent',
-    hiddenInput: 'hidden',
+    formInput: 'hidden',
     currencySymbol: `
       absolute left-0.5
       select-none pointer-events-none
@@ -52,7 +52,7 @@ export const moneyStyler = tv({
     isSpread: {
       true: {
         workingInput: 'static mt-3',
-        hiddenInput:
+        formInput:
           'block bg-white border-1 mt-3 select-none pointer-events-none',
       },
     },
