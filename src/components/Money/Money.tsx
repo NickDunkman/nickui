@@ -36,6 +36,7 @@ export function Money(props: MoneyProps) {
   // JSX below.
   const valueElementsProps = useValueElementsProps(props);
 
+  const currencySymbol = props.currencySymbol ?? '$';
   const currencySymbolRef = React.useRef<HTMLDivElement>(null);
   const currencySymbolBounds = useElementBounds(currencySymbolRef);
   const [currencySymbolId] = React.useState(randomId());
@@ -56,9 +57,10 @@ export function Money(props: MoneyProps) {
     sizer: resolvedSizer,
     hasError: !!props.error,
   });
+
   const moneyStyles = moneyStyler({
     sizer: resolvedSizer,
-    isInitialized: !!currencySymbolBounds,
+    isInitialized: !currencySymbol || !!currencySymbolBounds,
     isSpread: !!props.docsMeta?.spread,
   });
 
@@ -101,7 +103,11 @@ export function Money(props: MoneyProps) {
           type="text"
           disabled={props.disabled}
           className={clsw(textStyles, moneyStyles.placeholderInput())}
-          style={{ paddingLeft: currencySymbolBounds?.width }}
+          style={
+            currencySymbolBounds
+              ? { paddingLeft: currencySymbolBounds.width }
+              : {}
+          }
           tabIndex={-1}
           aria-hidden
           data-testid="money-placeholder-input"
@@ -132,7 +138,11 @@ export function Money(props: MoneyProps) {
           disabled={props.disabled}
           required={props.required}
           className={clsw(textStyles, moneyStyles.workingInput())}
-          style={{ paddingLeft: currencySymbolBounds?.width }}
+          style={
+            currencySymbolBounds
+              ? { paddingLeft: currencySymbolBounds.width }
+              : {}
+          }
           // This non-empty placeholder allows the currency symbol to adjust
           // its style based on whether its peer has a value (when the
           // placeholder isn't used)
@@ -140,16 +150,18 @@ export function Money(props: MoneyProps) {
           {...valueElementsProps.workingInput}
         />
 
-        <div
-          ref={currencySymbolRef}
-          id={currencySymbolId}
-          className={moneyStyles.currencySymbol()}
-          data-testid="currency-symbol"
-          title={`(in ${props.currencySymbol})`}
-          aria-hidden
-        >
-          {props.currencySymbol === undefined ? '$' : props.currencySymbol}
-        </div>
+        {currencySymbol && (
+          <div
+            ref={currencySymbolRef}
+            id={currencySymbolId}
+            className={moneyStyles.currencySymbol()}
+            data-testid="currency-symbol"
+            title={`(in ${currencySymbol})`}
+            aria-hidden
+          >
+            {currencySymbol}
+          </div>
+        )}
       </div>
 
       {/*
