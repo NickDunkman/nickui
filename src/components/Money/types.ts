@@ -24,7 +24,12 @@ export interface MoneyProps
    * will always be included on the value emitted via the onChange handler.
    * Typically 2.
    */
-  decimalPlaces?: number;
+  decimalPlaces?:
+    | number
+    | {
+        min: number;
+        max: number;
+      };
   /** Set to `true` to allow the user to enter negative values */
   allowNegatives?: boolean;
 
@@ -53,14 +58,15 @@ export interface MoneyFormatType {
    */
   thousandsSeparator: NonNullable<MoneyProps['decimalPoint']>;
   /**
-   * The minimum number of decimal places that should be allowed. Min & max are
-   * separate options so that for example, the working <input> can have
-   * no decimal places (as the user is "working" towards typing them), while
-   * the placeholder <input> has the full decimal places
+   * Constraints for the number of decimal places.
+   * - The placeholder input will hint that the max places are available
+   * - the working input will prevent input past the max
+   * - the emitted value via onChange will always include the min places
    */
-  minDecimalPlaces: NonNullable<MoneyProps['decimalPlaces']>;
-  /** The maximum number of decimal places that should be allowed */
-  maxDecimalPlaces: NonNullable<MoneyProps['decimalPlaces']>;
+  decimalPlaces: {
+    min: number;
+    max: number;
+  };
   /** Set to `true` if you want to allow the user to enter negative values */
   allowNegatives: NonNullable<MoneyProps['allowNegatives']>;
   /**

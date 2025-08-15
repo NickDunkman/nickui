@@ -5,8 +5,7 @@ import { deformatValue, parseFormValue } from './utils';
 const usdFormat: MoneyFormatType = {
   currencySymbol: '$',
   decimalPoint: '.',
-  minDecimalPlaces: 2,
-  maxDecimalPlaces: 2,
+  decimalPlaces: { min: 2, max: 2 },
   thousandsSeparator: ',',
   allowNegatives: true,
 };
@@ -53,7 +52,10 @@ describe('parseFormValue', () => {
         ...usdFormat,
         allowNegatives: true,
         allowWorkingNegativeSign: true,
-        minDecimalPlaces: 0,
+        decimalPlaces: {
+          min: 0,
+          max: 2,
+        },
       }),
     ).toStrictEqual('-');
   });
@@ -98,15 +100,15 @@ describe('parseFormValue', () => {
     ],
     [
       'decimals are truncated to maxDecimalPlaces',
-      { input: ' 1.00000 ', min: 2, max: 3, output: '1.000' },
+      { input: ' 1.00000 ', min: 3, max: 3, output: '1.000' },
     ],
     [
       'rounding happens during truncation to maxDecimalPlaces',
-      { input: ' 1.99999 ', min: 2, max: 3, output: '2.000' },
+      { input: ' 1.99999 ', min: 3, max: 3, output: '2.000' },
     ],
     [
       'rounding happens during truncation to maxDecimalPlaces',
-      { input: ' -1.99999 ', min: 2, max: 3, output: '-2.000' },
+      { input: ' -1.99999 ', min: 3, max: 3, output: '-2.000' },
     ],
   ])(
     'min & max decimal places are abided: $0',
@@ -114,8 +116,7 @@ describe('parseFormValue', () => {
       expect(
         parseFormValue(input, {
           ...usdFormat,
-          minDecimalPlaces: min,
-          maxDecimalPlaces: max,
+          decimalPlaces: { min, max },
         }),
       ).toStrictEqual(output);
     },
@@ -123,7 +124,10 @@ describe('parseFormValue', () => {
 
   test('does not use custom decimalPoint', () => {
     expect(
-      parseFormValue('1234', { ...euroFormat, minDecimalPlaces: 2 }),
+      parseFormValue('1234', {
+        ...euroFormat,
+        decimalPlaces: { min: 2, max: 2 },
+      }),
     ).toStrictEqual('1234.00');
   });
 

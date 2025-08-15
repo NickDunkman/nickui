@@ -64,27 +64,27 @@ export function parseFormValue(
   }
 
   // Ensure minimum decimal places
-  if (stringValue && format.minDecimalPlaces > 0) {
+  if (stringValue && format.decimalPlaces.min > 0) {
     let [wholePart, decimalPart] = stringValue.split('.');
-    stringValue = `${wholePart === '-' ? '-0' : wholePart || '0'}.${(decimalPart || '').padEnd(format.minDecimalPlaces, '0')}`;
+    stringValue = `${wholePart === '-' ? '-0' : wholePart || '0'}.${(decimalPart || '').padEnd(format.decimalPlaces.min, '0')}`;
   }
 
   // Ensure maximum decimal places
-  if (stringValue && format.maxDecimalPlaces === 0) {
+  if (stringValue && format.decimalPlaces.max === 0) {
     let [wholePart] = stringValue.split('.');
     stringValue = wholePart;
   } else {
     let [wholePart, decimalPart] = stringValue.split('.');
-    if (decimalPart && decimalPart.length > format.maxDecimalPlaces) {
+    if (decimalPart && decimalPart.length > format.decimalPlaces.max) {
       [wholePart, decimalPart] = (
         Math.round(
           Number(`${wholePart}.${decimalPart}`) *
-            Math.pow(10, format.maxDecimalPlaces),
-        ) / Math.pow(10, format.maxDecimalPlaces)
+            Math.pow(10, format.decimalPlaces.max),
+        ) / Math.pow(10, format.decimalPlaces.max)
       )
         .toString()
         .split('.');
-      stringValue = `${wholePart === '-' ? '-0' : wholePart}.${(decimalPart || '').padEnd(format.maxDecimalPlaces, '0')}`;
+      stringValue = `${wholePart === '-' ? '-0' : wholePart}.${(decimalPart || '').padEnd(format.decimalPlaces.min, '0')}`;
     }
   }
 
@@ -192,14 +192,16 @@ export const createFormatConfig = memoize(
   (
     currencySymbol: MoneyFormatType['currencySymbol'],
     decimalPoint: MoneyFormatType['decimalPoint'],
-    decimalPlaces: MoneyFormatType['minDecimalPlaces'],
+    decimalPlaces: number | MoneyFormatType['decimalPlaces'],
     thousandsSeparator: MoneyFormatType['thousandsSeparator'],
     allowNegatives: MoneyFormatType['allowNegatives'],
   ) => ({
     currencySymbol,
     decimalPoint,
-    minDecimalPlaces: decimalPlaces,
-    maxDecimalPlaces: decimalPlaces,
+    decimalPlaces:
+      typeof decimalPlaces === 'number'
+        ? { min: decimalPlaces, max: decimalPlaces }
+        : decimalPlaces,
     thousandsSeparator,
     allowNegatives,
   }),

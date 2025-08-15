@@ -54,7 +54,7 @@ export function useValueElementsProps(props: MoneyProps): {
   const focusFormat = createFormatConfig(
     fullFormat.currencySymbol,
     fullFormat.decimalPoint,
-    fullFormat.maxDecimalPlaces,
+    fullFormat.decimalPlaces,
     '',
     fullFormat.allowNegatives,
   );

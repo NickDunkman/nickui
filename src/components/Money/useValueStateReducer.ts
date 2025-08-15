@@ -230,7 +230,10 @@ function formatWorkingValue(
     // These allow the decimal part to be a work in progress
     allowWorkingDecimalPoint: true,
     allowWorkingNegativeSign: true,
-    minDecimalPlaces: 0,
+    decimalPlaces: {
+      min: 0,
+      max: format.decimalPlaces.max,
+    },
   });
 }
 
@@ -240,7 +243,10 @@ function formatFullValue(
 ) {
   return formatValue(rawValue || '0', {
     ...format,
-    minDecimalPlaces: format.maxDecimalPlaces,
+    decimalPlaces: {
+      min: format.decimalPlaces.max,
+      max: format.decimalPlaces.max,
+    },
     allowWorkingDecimalPoint: true,
     allowWorkingNegativeSign: true,
   });
