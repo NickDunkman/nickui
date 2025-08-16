@@ -371,7 +371,7 @@ almost entirely JSX & presentational logic. The chain of hook calls looks like:
 
 - `useValueStateReducer` uses `React.useReducer` to create a "value state" store
 - `useValueState` wraps `useValueStateReducer` to simplify interaction with the
-  store
+  store (`dispatch` expressions read unnaturally, IMO)
 - `useValueElementsProps` encapsulates all of that and provides props for all of
   the sub-elements that depend on the value state (such as to display the value,
   or make changes).
