@@ -71,28 +71,6 @@ export interface MoneyFormatType {
   };
   /** Set to `true` if you want to allow the user to enter negative values */
   allowNegatives: NonNullable<MoneyProps['allowNegatives']>;
-  /**
-   * Set to `true` if you want to allow a decimal point as the user is
-   * "working" towards typing the full number. For example, usually the
-   * parsing/formatting utilities will strip off trailing decimal points
-   * ("12." -> "12"), but the working <input> needs to allow that case as the
-   * user types
-   *
-   * This option is effectively ignored unless `maxDecimalPlaces` > 0, since
-   * otherwise the user can’t add the decimal point.
-   */
-  allowWorkingDecimalPoint?: boolean;
-  /**
-   * Set to `true` if you want to allow a negative sign as the user is "working"
-   * towards a full number. For example, usually the parsing/formatting
-   * utilities will disallow a lone negative sign ("-" -> ""), and strip the
-   * negative sign off of negative zero ("-0.00" -> "0.00"). But the working
-   * <input> needs to allow those cases as the user types.
-   *
-   * This option is effectively ignored unless `allowNegatives` is `true`, since
-   * otherwise the user can’t type a negative sign.
-   */
-  allowWorkingNegativeSign?: boolean;
 }
 
 export type MoneyValueType = {
@@ -101,6 +79,12 @@ export type MoneyValueType = {
    * version
    */
   version: number;
+  /**
+   * True when the component is in "working mode", which happens on focus.
+   * Causes the format.thousandsSeparator to be ignored, and allows
+   * "in progress" state like trailing decimal points, lone negative signs, etc.
+   */
+  workingMode: boolean;
   /**
    * `formValue` is the version of the value that can be parsed as a
    * Number(): it has no thousands separators and the decimalPoint is always
@@ -142,5 +126,7 @@ export type MoneyValueType = {
     | 'controlledValue'
     | 'workingValue'
     | 'format'
-    | 'increment';
+    | 'increment'
+    | 'workingMode'
+    | 'idleMode';
 };

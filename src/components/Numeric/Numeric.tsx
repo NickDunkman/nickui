@@ -1,8 +1,7 @@
 import * as React from 'react';
 
+import { Money } from '@/components/Money';
 import { FieldableFormControlProps } from '@/types';
-
-import { Money } from '../Money';
 
 export interface NumericProps
   extends FieldableFormControlProps<
@@ -34,7 +33,14 @@ export interface NumericProps
   allowNegatives?: boolean;
 }
 
-export function Numeric({ decimalPlaces = 0, ...otherProps }: NumericProps) {
+/**
+ * A form control that allows users to enter a numeric value
+ * @param props {@link NumericProps}
+ */
+export function Numeric({
+  decimalPlaces = { min: 0, max: Infinity },
+  ...otherProps
+}: NumericProps) {
   // Number is just Money w/ no currencySymbol ;)
   return (
     <Money

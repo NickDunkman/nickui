@@ -215,12 +215,11 @@ all of the decimal places “padded on”.
  */
 type MoneyFormatType = Required<MoneyFormatType, 'decimalPlaces'> & {
   /**
-   * Whether to allow the string to have a trailing decimal point, which is
-   * necessary on the input the user is typing in, since you have to type a
-   * decimal point before you can type the decimal places. But the value ejected
-   * via the onChange handler should never have a trailing decimal point.
+   * Whether to allow the user to have a partial decimal portion of the value,
+   * such as a trailing decimal point, or trailing zeros that exceed the
+   * minimum decimal places.
    */
-  allowWorkingDecimalPoint?: boolean;
+  allowWorkingDecimals?: boolean;
   /**
    * Whether to all the negative sign to exist on its own. Necessary for the
    * input the user is typing in, since often, the user will type the negative

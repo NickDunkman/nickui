@@ -72,7 +72,7 @@ export const fieldLayout: Story = {
     });
 
     await step('Assert default numeric formatting', async () => {
-      await expectDelayedValue(input, '1,234,567');
+      await expectDelayedValue(input, '1,234,567.89');
     });
 
     await step('Assert the error style', async () => {

@@ -36,31 +36,16 @@ describe('parseFormValue', () => {
     expect(parseFormValue(' -1.23 ', usdFormat)).toStrictEqual('-1.23');
   });
 
-  test('a lone negative sign is rejected, unless format.allowWorkingNegativeSign is true', () => {
+  test('a lone negative sign is rejected, unless in workingMode', () => {
     expect(
       parseFormValue('-', { ...usdFormat, allowNegatives: true }),
     ).toStrictEqual('');
     expect(
-      parseFormValue('-', {
-        ...usdFormat,
-        allowNegatives: true,
-        allowWorkingNegativeSign: true,
-      }),
-    ).toStrictEqual('-0.00');
-    expect(
-      parseFormValue('-', {
-        ...usdFormat,
-        allowNegatives: true,
-        allowWorkingNegativeSign: true,
-        decimalPlaces: {
-          min: 0,
-          max: 2,
-        },
-      }),
+      parseFormValue('-', usdFormat, { allowWorkingNegative: true }),
     ).toStrictEqual('-');
   });
 
-  test('negative zero becomes zero, unless format.allowWorkingNegativeSign is true', () => {
+  test('negative zero becomes zero, unless in workingMode', () => {
     expect(
       parseFormValue('-0', { ...usdFormat, allowNegatives: true }),
     ).toStrictEqual('0.00');
@@ -71,11 +56,7 @@ describe('parseFormValue', () => {
       }),
     ).toStrictEqual('0.00');
     expect(
-      parseFormValue('-0.00', {
-        ...usdFormat,
-        allowNegatives: true,
-        allowWorkingNegativeSign: true,
-      }),
+      parseFormValue('-0.00', usdFormat, { allowWorkingNegative: true }),
     ).toStrictEqual('-0.00');
   });
 
@@ -136,6 +117,12 @@ describe('parseFormValue', () => {
     expect(parseFormValue('0.', usdFormat)).toStrictEqual('0.00');
     expect(parseFormValue('-0', usdFormat)).toStrictEqual('0.00');
     expect(parseFormValue('-0.', usdFormat)).toStrictEqual('0.00');
+    expect(
+      parseFormValue('-0.', usdFormat, {
+        allowWorkingDecimals: true,
+        allowWorkingNegative: true,
+      }),
+    ).toStrictEqual('-0.');
 
     expect(parseFormValue('00', usdFormat)).toStrictEqual('0.00');
     expect(parseFormValue('00.', usdFormat)).toStrictEqual('0.00');
@@ -161,6 +148,43 @@ describe('parseFormValue', () => {
     expect(parseFormValue('0010.1', usdFormat)).toStrictEqual('10.10');
     expect(parseFormValue('-0010.1', usdFormat)).toStrictEqual('-10.10');
     expect(parseFormValue('-0010.1', usdFormat)).toStrictEqual('-10.10');
+  });
+
+  test('should strip trailing decimal zeros properly', () => {
+    expect(
+      parseFormValue('0', {
+        ...usdFormat,
+        decimalPlaces: { min: 0, max: Infinity },
+      }),
+    ).toStrictEqual('0');
+    expect(
+      parseFormValue('0.1000', {
+        ...usdFormat,
+        decimalPlaces: { min: 0, max: Infinity },
+      }),
+    ).toStrictEqual('0.1');
+    expect(
+      parseFormValue('-.1230', {
+        ...usdFormat,
+        decimalPlaces: { min: 0, max: Infinity },
+      }),
+    ).toStrictEqual('-0.123');
+    expect(
+      parseFormValue(
+        '-.123000',
+        {
+          ...usdFormat,
+          decimalPlaces: { min: 0, max: Infinity },
+        },
+        { allowWorkingDecimals: true },
+      ),
+    ).toStrictEqual('-0.123000');
+    expect(
+      parseFormValue('-.1230', {
+        ...usdFormat,
+        decimalPlaces: { min: 4, max: Infinity },
+      }),
+    ).toStrictEqual('-0.1230');
   });
 });
 

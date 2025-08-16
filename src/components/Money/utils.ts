@@ -19,12 +19,19 @@ import { MoneyFormatType, MoneyValueType } from './types';
 export function parseFormValue(
   rawValue: string | number | undefined,
   format: MoneyFormatType,
+  {
+    allowWorkingDecimals = false,
+    allowWorkingNegative = false,
+  }: {
+    allowWorkingDecimals?: boolean;
+    allowWorkingNegative?: boolean;
+  } = {},
 ) {
   let stringValue = rawValue?.toString().replace(/[^0-9.-]/g, '') || '';
 
   // Drop the negative sign if it's the only character (that ain't a number)
-  if (!format.allowWorkingNegativeSign && stringValue === '-') {
-    return '';
+  if (stringValue === '-') {
+    return allowWorkingNegative ? '-' : '';
   }
 
   // If negatives are allowed, there should only be one negative sign at the
@@ -56,20 +63,11 @@ export function parseFormValue(
   }
 
   // Drop the decimal point when it's the last character
-  if (
-    !format?.allowWorkingDecimalPoint &&
-    stringValue[stringValue.length - 1] === '.'
-  ) {
+  if (!allowWorkingDecimals && stringValue[stringValue.length - 1] === '.') {
     stringValue = stringValue.slice(0, -1);
   }
 
-  // Ensure minimum decimal places
-  if (stringValue && format.decimalPlaces.min > 0) {
-    let [wholePart, decimalPart] = stringValue.split('.');
-    stringValue = `${wholePart === '-' ? '-0' : wholePart || '0'}.${(decimalPart || '').padEnd(format.decimalPlaces.min, '0')}`;
-  }
-
-  // Ensure maximum decimal places
+  // Reduce to maximum decimal places
   if (stringValue && format.decimalPlaces.max === 0) {
     let [wholePart] = stringValue.split('.');
     stringValue = wholePart;
@@ -88,8 +86,21 @@ export function parseFormValue(
     }
   }
 
+  // When not in workingMode:
+  // - increase to minimum decimal places
+  // - reduce trailing zeros to minimum decimal places
+  if (stringValue && !allowWorkingDecimals) {
+    let [wholePart, decimalPart] = stringValue.split('.');
+    const newDecimalPart = (decimalPart || '')
+      .replace(/0+$/, '')
+      .padEnd(format.decimalPlaces.min, '0');
+    const newWholePart =
+      wholePart === '-' && newDecimalPart.length > 0 ? '-0' : wholePart;
+    stringValue = `${newWholePart}${newDecimalPart.length > 0 ? '.' : ''}${newDecimalPart}`;
+  }
+
   // Negative zero is zero
-  if (!format.allowWorkingNegativeSign && stringValue.match(/^-0(\.(0+)?)?$/)) {
+  if (!allowWorkingNegative && stringValue.match(/^-0(\.(0+)?)?$/)) {
     stringValue = stringValue.slice(1);
   }
 
@@ -109,8 +120,20 @@ export function parseFormValue(
 export function formatValue(
   rawValue: string | number | undefined,
   format: MoneyFormatType,
+  {
+    allowWorkingDecimals = false,
+    allowWorkingNegative = false,
+    allowThousandsSeparators = true,
+  }: {
+    allowWorkingDecimals?: boolean;
+    allowWorkingNegative?: boolean;
+    allowThousandsSeparators?: boolean;
+  } = {},
 ) {
-  const stringValue = parseFormValue(rawValue, format);
+  const stringValue = parseFormValue(rawValue, format, {
+    allowWorkingDecimals,
+    allowWorkingNegative,
+  });
 
   if (stringValue === '') {
     return '';
@@ -119,24 +142,29 @@ export function formatValue(
   const [wholePart, decimalPart] = stringValue.split('.');
   const hasDecimalPoint = stringValue.indexOf('.') !== -1;
 
-  // Chunk the whole part into thousands places. Doing it this way instead of
-  // Number.toLocaleString() so that it works even with very large numbers.
-  const chunkSize = 3;
-  const numChunks = Math.ceil(wholePart.length / chunkSize);
-  const firstChunkSize = wholePart.length % chunkSize || chunkSize;
-  const chunks = [wholePart.substring(0, firstChunkSize)];
-  for (var i = 0; i < numChunks - 1; i++) {
-    chunks.push(
-      wholePart.substring(
-        firstChunkSize + i * chunkSize,
-        firstChunkSize + (i + 1) * chunkSize,
-      ),
-    );
+  let formattedWholePart: string;
+
+  if (!allowThousandsSeparators) {
+    formattedWholePart = wholePart;
+  } else {
+    // Chunk the whole part into thousands places. Doing it this way instead of
+    // Number.toLocaleString() so that it works even with very large numbers.
+    const chunkSize = 3;
+    const numChunks = Math.ceil(wholePart.length / chunkSize);
+    const firstChunkSize = wholePart.length % chunkSize || chunkSize;
+    const chunks = [wholePart.substring(0, firstChunkSize)];
+    for (var i = 0; i < numChunks - 1; i++) {
+      chunks.push(
+        wholePart.substring(
+          firstChunkSize + i * chunkSize,
+          firstChunkSize + (i + 1) * chunkSize,
+        ),
+      );
+    }
+    formattedWholePart = chunks.join(format.thousandsSeparator);
   }
 
-  const chunkedWholePart = chunks.join(format.thousandsSeparator);
-
-  return `${chunkedWholePart}${hasDecimalPoint ? format.decimalPoint : ''}${decimalPart || ''}`;
+  return `${formattedWholePart}${hasDecimalPoint ? format.decimalPoint : ''}${decimalPart || ''}`;
 }
 
 /**

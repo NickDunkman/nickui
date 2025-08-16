@@ -45,11 +45,10 @@ export function useValueElementsProps(props: MoneyProps): {
   // is focused on the field. Having thousands separators added/removed while
   // you’re typing is janky, so just remove that formatting while focused.
   const [isMouseDown, setIsMouseDown] = React.useState(false);
-  const [isFocusFormatted, setIsFocusFormatted] = React.useState(false);
 
   const decimalPlacesRange = decimalPlacesToRange(props.decimalPlaces ?? 2);
 
-  const fullFormat = createFormatConfig(
+  const format = createFormatConfig(
     props.currencySymbol ?? '$',
     props.decimalPoint ?? '.',
     decimalPlacesRange.min,
@@ -58,26 +57,18 @@ export function useValueElementsProps(props: MoneyProps): {
     props.allowNegatives || false,
   );
 
-  // Same format on focus, except no thousands separator!
-  const focusFormat = createFormatConfig(
-    fullFormat.currencySymbol,
-    fullFormat.decimalPoint,
-    fullFormat.decimalPlaces.min,
-    fullFormat.decimalPlaces.max,
-    '',
-    fullFormat.allowNegatives,
-  );
-
   const {
     currentValue,
     previousValue,
     reinitializeWithValue,
     updateFromWorkingValue,
     incrementValue,
+    setWorkingMode,
+    setIdleMode,
   } = useValueState({
     controlledValue: props.value,
     defaultValue: props.defaultValue,
-    format: isFocusFormatted ? focusFormat : fullFormat,
+    format: format,
   });
 
   // When the form value is changing, and the source of the change wasn’t
@@ -123,7 +114,7 @@ export function useValueElementsProps(props: MoneyProps): {
         // the cursor position (or selection range) based on the change, so the
         // cursor is still at the same position in the number (or still has
         // the same range of the number selected)
-        if (currentValue.source === 'format') {
+        if (currentValue.source === 'workingMode') {
           workingRef.current.setSelectionRange(
             ...getDeformattedSelection(
               previousValue,
@@ -148,7 +139,7 @@ export function useValueElementsProps(props: MoneyProps): {
     }
   }, [currentValue, previousValue, workingRef]);
 
-  const keyDownConstrictor = useKeyDownConstrictor(fullFormat);
+  const keyDownConstrictor = useKeyDownConstrictor(format);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     const shouldConstrict = keyDownConstrictor(event);
@@ -214,11 +205,11 @@ export function useValueElementsProps(props: MoneyProps): {
       onChange: (event) => updateFromWorkingValue(event.target.value),
       onKeyDown: handleKeyDown,
       onFocus: (event) => {
-        !isMouseDown && !isFocusFormatted && setIsFocusFormatted(true);
+        !isMouseDown && setWorkingMode();
         props.onFocus?.(event);
       },
       onBlur: (event) => {
-        isFocusFormatted && setIsFocusFormatted(false);
+        setIdleMode();
         if (hiddenRef.current) {
           props.onBlur?.({
             ...event,
@@ -239,7 +230,7 @@ export function useValueElementsProps(props: MoneyProps): {
       },
       onMouseUp: (event) => {
         isMouseDown && setIsMouseDown(false);
-        !isFocusFormatted && setIsFocusFormatted(true);
+        setWorkingMode();
         props.onMouseUp?.(event);
       },
       // Note: there is intentionally no `value` prop specified on the

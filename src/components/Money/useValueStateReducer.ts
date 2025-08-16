@@ -44,15 +44,19 @@ type ActionType =
         controlledValue?: string | number;
         defaultValue?: string | number;
       };
-    };
+    }
+  | { type: 'SET_WORKING_MODE' }
+  | { type: 'SET_IDLE_MODE' };
 
 function initializeState({
   controlledValue,
   defaultValue,
+  workingMode = false,
   format,
 }: {
   controlledValue?: string | number;
   defaultValue?: string | number;
+  workingMode?: boolean;
   format: MoneyFormatType;
 }): MoneyValueStateType {
   const rawValue =
@@ -62,11 +66,10 @@ function initializeState({
   return {
     currentValue: {
       version: 1,
+      workingMode,
       formValue,
-      // On initialization, if a value is passed in, the workingValue should
-      // start with the full set of decimalPlaces
-      workingValue: formValue === '' ? '' : formatFullValue(rawValue, format),
-      placeholderValue: formatFullValue(rawValue, format),
+      workingValue: formatWorkingValue(formValue, format, workingMode, true),
+      placeholderValue: formatPlaceholderValue(formValue, format, workingMode),
       controlledValue,
       format,
       source: 'initialValue',
@@ -119,10 +122,18 @@ function reducer(
       return updatedState(state, {
         formValue: newFormValue,
         workingValue: formattedValuesShouldChange
-          ? formatWorkingValue(newFormValue, state.currentValue.format)
+          ? formatWorkingValue(
+              newFormValue,
+              state.currentValue.format,
+              state.currentValue.workingMode,
+            )
           : state.currentValue.workingValue,
         placeholderValue: formattedValuesShouldChange
-          ? formatFullValue(newFormValue, state.currentValue.format)
+          ? formatPlaceholderValue(
+              newFormValue,
+              state.currentValue.format,
+              state.currentValue.workingMode,
+            )
           : state.currentValue.placeholderValue,
         controlledValue: action.payload,
         source: 'controlledValue',
@@ -143,10 +154,12 @@ function reducer(
         workingValue: formatWorkingValue(
           deformattedWorkingValue,
           state.currentValue.format,
+          state.currentValue.workingMode,
         ),
-        placeholderValue: formatFullValue(
+        placeholderValue: formatPlaceholderValue(
           deformattedWorkingValue,
           state.currentValue.format,
+          state.currentValue.workingMode,
         ),
         source: 'workingValue',
       });
@@ -159,13 +172,15 @@ function reducer(
 
       return updatedState(state, {
         formValue: parseFormValue(deformattedWorkingValue, action.payload),
-        workingValue:
-          deformattedWorkingValue === ''
-            ? ''
-            : formatFullValue(deformattedWorkingValue, action.payload),
-        placeholderValue: formatFullValue(
+        workingValue: formatWorkingValue(
           deformattedWorkingValue,
           action.payload,
+          state.currentValue.workingMode,
+        ),
+        placeholderValue: formatPlaceholderValue(
+          deformattedWorkingValue,
+          action.payload,
+          state.currentValue.workingMode,
         ),
         format: action.payload,
         source: 'format',
@@ -211,12 +226,38 @@ function reducer(
         workingValue: formatWorkingValue(
           `${newWholePart}${newWorkingDecimalPart}`,
           state.currentValue.format,
+          state.currentValue.workingMode,
         ),
-        placeholderValue: formatFullValue(
+        placeholderValue: formatPlaceholderValue(
           newFormValue,
           state.currentValue.format,
+          state.currentValue.workingMode,
         ),
         source: 'increment',
+      });
+
+    case 'SET_WORKING_MODE':
+    case 'SET_IDLE_MODE':
+      const workingMode = action.type === 'SET_WORKING_MODE';
+
+      var deformattedWorkingValue = deformatValue(
+        state.currentValue.workingValue,
+        state.currentValue.format,
+      );
+
+      return updatedState(state, {
+        workingMode,
+        workingValue: formatWorkingValue(
+          deformattedWorkingValue,
+          state.currentValue.format,
+          workingMode,
+        ),
+        placeholderValue: formatPlaceholderValue(
+          deformattedWorkingValue,
+          state.currentValue.format,
+          workingMode,
+        ),
+        source: workingMode ? 'workingMode' : 'idleMode',
       });
   }
 }
@@ -224,26 +265,24 @@ function reducer(
 function formatWorkingValue(
   rawValue: string | number | undefined,
   format: MoneyFormatType,
+  workingMode: boolean,
+  initializationMode: boolean = false,
 ) {
-  return formatValue(rawValue, {
-    ...format,
-    // These allow the decimal part to be a work in progress
-    allowWorkingDecimalPoint: true,
-    allowWorkingNegativeSign: true,
-    decimalPlaces: {
-      min: 0,
-      max: format.decimalPlaces.max,
-    },
+  return formatValue(rawValue, format, {
+    allowWorkingDecimals: workingMode && !initializationMode,
+    allowWorkingNegative: workingMode,
+    allowThousandsSeparators: !workingMode,
   });
 }
 
-function formatFullValue(
+function formatPlaceholderValue(
   rawValue: string | number | undefined,
   format: MoneyFormatType,
+  workingMode: boolean,
 ) {
-  return formatValue(rawValue || '0', {
-    ...format,
-    allowWorkingDecimalPoint: true,
-    allowWorkingNegativeSign: true,
+  return formatValue(rawValue || '0', format, {
+    allowWorkingDecimals: false,
+    allowWorkingNegative: workingMode,
+    allowThousandsSeparators: !workingMode,
   });
 }

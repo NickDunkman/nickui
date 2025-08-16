@@ -33,24 +33,24 @@ export function useValueState(
     controlledValue?: string | number;
     defaultValue?: string | number;
   }) => void;
+  setWorkingMode: () => void;
+  setIdleMode: () => void;
 } {
   const [{ currentValue, previousValue }, dispatch] =
     useValueStateReducer(args);
 
   const updateFromWorkingValue = React.useCallback(
-    (newWorkingValue: string) => {
+    (newWorkingValue: string) =>
       dispatch({
         type: 'UPDATE_FROM_WORKING_VALUE',
         payload: newWorkingValue,
-      });
-    },
+      }),
     [dispatch],
   );
 
   const incrementValue = React.useCallback(
-    (incrementAmount: number) => {
-      dispatch({ type: 'INCREMENT_VALUE', payload: incrementAmount });
-    },
+    (incrementAmount: number) =>
+      dispatch({ type: 'INCREMENT_VALUE', payload: incrementAmount }),
     [dispatch],
   );
 
@@ -58,10 +58,18 @@ export function useValueState(
     (args: {
       controlledValue?: string | number;
       defaultValue?: string | number;
-    }) => {
-      dispatch({ type: 'REINITIALIZE_WITH_VALUE', payload: args });
-    },
+    }) => dispatch({ type: 'REINITIALIZE_WITH_VALUE', payload: args }),
     [dispatch],
+  );
+
+  const setWorkingMode = React.useCallback(
+    () => !currentValue.workingMode && dispatch({ type: 'SET_WORKING_MODE' }),
+    [dispatch, currentValue.workingMode],
+  );
+
+  const setIdleMode = React.useCallback(
+    () => currentValue.workingMode && dispatch({ type: 'SET_IDLE_MODE' }),
+    [dispatch, currentValue.workingMode],
   );
 
   // Update w/ new format when it changes
@@ -87,5 +95,7 @@ export function useValueState(
     updateFromWorkingValue,
     incrementValue,
     reinitializeWithValue,
+    setWorkingMode,
+    setIdleMode,
   };
 }
