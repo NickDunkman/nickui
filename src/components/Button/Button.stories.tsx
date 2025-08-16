@@ -17,7 +17,7 @@ const meta = {
     isFlavorable: true,
     isSizerable: true,
     defaultValues: {
-      secondary: false,
+      secondary: 'false',
       type: 'button',
     },
     types: {

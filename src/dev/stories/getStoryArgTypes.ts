@@ -9,7 +9,7 @@ type ResultType<Component extends React.ComponentType> = ArgTypes<
 >;
 
 type DefaultValuesSpec<Component extends React.ComponentType> = Partial<
-  React.ComponentProps<Component>
+  Record<keyof React.ComponentProps<Component>, string>
 >;
 
 type DesciptionsSpec<Component extends React.ComponentType> = Partial<
@@ -123,7 +123,7 @@ function withTypes<Component extends React.ComponentType>(
               table: {
                 type: {
                   summary: Array.isArray(propUnionTypes)
-                    ? propUnionTypes.join('|')
+                    ? propUnionTypes.join(' | ')
                     : propUnionTypes,
                 },
               },

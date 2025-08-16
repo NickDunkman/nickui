@@ -19,13 +19,14 @@ const meta = {
     isSizerable: true,
     defaultValues: {
       decimalPoint: '.',
-      decimalPlaces: 0,
+      decimalPlaces: '{ min: 0, max: Infinity }',
       thousandsSeparator: ',',
-      allowNegatives: false,
+      allowNegatives: 'false',
     },
     types: {
       defaultValue: ['string', 'number'],
       value: ['string', 'number'],
+      decimalPlaces: ['number', '{ min: number; max: number; }'],
     },
   }),
   parameters: {

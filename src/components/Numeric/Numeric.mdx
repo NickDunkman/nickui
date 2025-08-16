@@ -18,3 +18,109 @@ disorienting when the changes don’t match your keystrokes.
 <Docs.FauxCanvas>
   <Numeric defaultValue="1234567.89" />
 </Docs.FauxCanvas>
+
+<Docs.TableOfContents />
+
+<Docs.Props of={stories} nativeBase="input" wrapper="Field" />
+
+<Docs.ControlStates
+  of={stories}
+  valuable
+  note={`
+    Note: when controlled, <ComponentName of="Numeric" /> behaves slightly
+    differently from other form controls. Since the input’s value needs to be
+    disconnected from the controlled \`value\` to enable number formatting,
+    the input’s value can change even if you aren’t passing in the new
+    controlled value. However, if you do pass in a numerically different
+    controlled value, everything will cascade accordingly.
+  `}
+/>
+
+## Number formatting & constraints
+
+To customize the format, you can use a combination of the `decimalPoint`
+(defaults to `"."`), and `thousandsSeparator` (defaults to `","`) props.
+
+The `decimalPlaces` prop defaults to `{ min: 0, max: Infinity }` and configures:
+
+- the maximum number of decimal places the user can enter
+- the number of "placeholder" decimal places that are suggested as you type
+- the number of decimal places always included on `onChange(event.target.value)`
+
+`decimalPlaces` can also be a single number, to use the same for both min & max.
+
+<Canvas of={stories.european} />
+
+By default, negative values are not allowed, since number fields disallow them
+more often than not. However, you can allow negatives using the `allowNegatives`
+prop.
+
+Keep in mind that if you allow negatives, the user won’t be able to use the
+simpler numeric keyboard on mobile devices, since it doesn’t include a key for
+the negative sign.
+
+<Canvas of={stories.allowNegatives} />
+
+## Working with the value
+
+You can pass any of these forms in through either the `value` or `defaultValue`
+props:
+
+- `undefined`
+- a `number`
+- a numeric `string` such as `"1234.56"` or `""`. It should be parseable as a
+  `Number()`. For example, while `"17,50"` is how a number might be formatted in
+  many countries, it’s not a number as far as javascript is concerned (`"17.50"`
+  is).
+
+When the user updates edits the field, use the `onChange` handler to receive the
+updated value. `event.target.value` is **always** a string in javascript, so the
+updated value will be in the form of a string.
+
+You might choose to just use strings through, like this:
+
+<Source
+  dark
+  language="tsx"
+  code={`
+    const [value, setValue] = React.useState('1234.56');
+
+    <Numeric
+      label="My number field"
+      value={value}
+      onChange={(event) => setValue(event.target.value)}
+    />
+
+`} />
+
+Or, you could convert updated values back to numbers, like this:
+
+<Source
+  dark
+  language="tsx"
+  code={`
+    const [value, setValue] = React.useState<number | undefined>(1234.56);
+
+    <Numeric
+      label="My number field"
+      value={value}
+      onChange={(event) => setValue(
+        event.target.value === '' ? undefined : Number(event.target.value)
+      )}
+    />
+
+`} />
+
+<Docs.Sizers of={stories} wrapper="Field" />
+
+<Docs.FormLibraryDemos of="Numeric" fieldName="hole12Score" initialValue="10">
+  {({ props, error }) => (
+    <Numeric
+      {...props}
+      label="Typical score on the danged 12th hole"
+      hint="Try editting me!"
+      error={error}
+      decimalPlaces={0}
+    />
+  )}
+</Docs.FormLibraryDemos>

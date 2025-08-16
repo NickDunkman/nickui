@@ -20,13 +20,14 @@ const meta = {
     defaultValues: {
       currencySymbol: '$',
       decimalPoint: '.',
-      decimalPlaces: 2,
+      decimalPlaces: '2',
       thousandsSeparator: ',',
-      allowNegatives: false,
+      allowNegatives: 'false',
     },
     types: {
       defaultValue: ['string', 'number'],
       value: ['string', 'number'],
+      decimalPlaces: ['number', '{ min: number; max: number; }'],
     },
   }),
   parameters: {
