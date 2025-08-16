@@ -342,9 +342,9 @@ crucial that any changes to the state happen _within a single render cycle_. Not
 only does this prevent visual jank, it also helps make sure we only call the
 `onChange` once when the value changes.
 
-Thankfully, `React.useReducer` offers a great way to make complex state changes
-as a single change. The reducer I wrote (wrapped in `useValueStateReducer()`)
-offers these actions:
+Thankfully, `React.useReducer` offers a great way to batch complex state
+changes. The reducer I wrote (wrapped in `useValueStateReducer()`) offers these
+actions:
 
 - **`UPDATE_FROM_CONTROLLED_VALUE`**: used when the component receives an update
   to its `value` prop.
