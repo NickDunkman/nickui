@@ -67,10 +67,10 @@ this component has a role to play in getting the user into an accuracy mindset.
 
 ### Reformatting the value _as you’re typing_ is disorienting
 
-I’ve used currency inputs that automatically add the thousands separators _as
-you type_. In my opinion, this is better than not adding them at all, for the
-reasons outlined above. But if you type with any kind of speed, the visual chaos
-can cause you to lose your train of thought.
+I’ve used currency inputs that automatically add the thousands separators as you
+type. In my opinion, this is better than not adding them at all, for the reasons
+outlined above. But if you type with any kind of speed, the visual chaos can
+cause you to lose your train of thought.
 
 - By default, the browser will automatically move the cursor to the end of the
   input value whenever it is programatically changed (such as to slot in
@@ -81,10 +81,10 @@ can cause you to lose your train of thought.
   programatically updating the value, but even if you get it right, it’s still
   chaotic: the existing commas can flop around (`1,234,567|.00` ->
   `12,345,678|.00`), and the addition/removal of commas causes the cursor to
-  shift by an unexpected amount. And now you’ve got a _ton_ of gritty code to
-  maintain, because there are many, many edge cases. I went down this path, but
-  it still wasn’t a good user experience after I solved every possible edge
-  case.
+  shift by an unexpected amount. Components that attempt to do this are often
+  easy to break, since there are so many of edge cases. I initially went down
+  this path, and while I felt I had a bulletproof implementation, it still
+  wasn’t a good user experience (& now I had a ton of gritty code to maintain).
 
 ### Preventing invalid input is helpful—to an extent
 
