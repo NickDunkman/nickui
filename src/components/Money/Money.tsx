@@ -15,7 +15,7 @@ import { useValueElementsProps } from './useValueElementsProps';
 import { decimalPlacesToRange } from './utils';
 
 /**
- * A form control that allows users to enter a monetary amount
+ * A form control that allows users to enter a monetary value
  * @param props {@link MoneyProps}
  */
 export function Money(props: MoneyProps) {
