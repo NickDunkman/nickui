@@ -6,10 +6,12 @@ import { ControlStates } from './ControlStates';
 import { FauxCanvas } from './FauxCanvas';
 import { Flavoring } from './Flavoring';
 import { FormLibraryDemos } from './FormLibraryDemos';
+import { KeyboardInteractions } from './KeyboardInteractions';
 import { PrettyPrint } from './PrettyPrint';
 import { Props } from './Props';
 import { Sizers } from './Sizers';
 import { SourceLink } from './SourceLink';
+import { Table } from './Table';
 import { TableOfContents } from './TableOfContents';
 
 /**
@@ -43,8 +45,10 @@ Docs.ControlStates = ControlStates;
 Docs.FauxCanvas = FauxCanvas;
 Docs.Flavoring = Flavoring;
 Docs.FormLibraryDemos = FormLibraryDemos;
+Docs.KeyboardInteractions = KeyboardInteractions;
 Docs.PrettyPrint = PrettyPrint;
 Docs.Props = Props;
 Docs.Sizers = Sizers;
 Docs.SourceLink = SourceLink;
+Docs.Table = Table;
 Docs.TableOfContents = TableOfContents;

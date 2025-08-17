@@ -20,7 +20,7 @@ const meta = {
       min: ['number', 'string'],
       max: ['number', 'string'],
       step: ['number', 'string'],
-      shiftSteps: ['number', 'string'],
+      leapSteps: ['number', 'string'],
     },
   }),
 } satisfies Meta<typeof Slider>;
@@ -244,7 +244,7 @@ export const customRange: Story = {
     min: -1000,
     max: 1000,
     step: 0.01,
-    shiftSteps: 500,
+    leapSteps: 500,
     onChange: fn(),
   },
   play: async ({ canvas, step, userEvent }) => {

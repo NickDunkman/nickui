@@ -50,10 +50,10 @@ export interface SliderProps
    */
   step?: number | string;
   /**
-   * The number of steps to move when the shift key is held while adjusting
-   * the value via the keyboard, defaults to 10
+   * The number of steps to move when the user holds shift while typing an
+   * arrow, or PageUp/PageDown, defaults to 10
    */
-  shiftSteps?: number | string;
+  leapSteps?: number | string;
 }
 
 /**
@@ -75,7 +75,7 @@ export function Slider({
   max: rawMax = 100,
   min: rawMin = 0,
   step: rawStep = 1,
-  shiftSteps: rawShiftSteps = 10,
+  leapSteps: rawShiftSteps = 10,
   // These are pulled in from <input>, for the hidden input
   ref: controlledInputRef,
   onBlur,
@@ -115,7 +115,7 @@ export function Slider({
   const max = Number(rawMax);
   const min = Number(rawMin);
   const step = Number(rawStep);
-  const shiftSteps = Number(rawShiftSteps);
+  const leapSteps = Number(rawShiftSteps);
 
   const isControlledComponent = controlledValue !== undefined;
   const value = isControlledComponent
@@ -241,12 +241,12 @@ export function Slider({
         case 'ArrowUp':
           newValue = Math.min(
             max,
-            implicitValue + (shiftKeyHeld ? step * shiftSteps : step),
+            implicitValue + (shiftKeyHeld ? step * leapSteps : step),
           );
           break;
         case 'page up':
         case 'PageUp':
-          newValue = Math.min(max, implicitValue + step * shiftSteps);
+          newValue = Math.min(max, implicitValue + step * leapSteps);
           break;
         case 'left':
         case 'ArrowLeft':
@@ -254,12 +254,12 @@ export function Slider({
         case 'ArrowDown':
           newValue = Math.max(
             min,
-            implicitValue - (shiftKeyHeld ? step * shiftSteps : step),
+            implicitValue - (shiftKeyHeld ? step * leapSteps : step),
           );
           break;
         case 'page down':
         case 'PageDown':
-          newValue = Math.max(min, implicitValue - step * shiftSteps);
+          newValue = Math.max(min, implicitValue - step * leapSteps);
           break;
         case 'home':
         case 'Home':

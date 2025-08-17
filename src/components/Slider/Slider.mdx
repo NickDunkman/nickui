@@ -1,6 +1,7 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
 import Docs from '@/dev/docBlocks';
+import { KeyboardKey } from '@/dev/stories/KeyboardKey';
 
 import { Slider } from './Slider';
 import * as stories from './Slider.stories';
@@ -28,10 +29,13 @@ A form control that allows users to choose a number within a range.
 
 ## Customizing the value range
 
-Use the `min`, `max`, and `step` props to customize the bounds of the range, and
-the granularity of values within it. You can also use `shiftSteps` to control
-how many steps are moved when the user is holding the shift key while using the
-keyboard to interact with the <Docs of="Slider" />.
+<div>
+  Use the `min`, `max`, and `step` props to customize the bounds of the range,
+  and the granularity of values within it. You can also use `leapSteps` to
+  control how many steps are moved when the user holds{' '}
+  <KeyboardKey>Shift</KeyboardKey> while pressing an arrow, or{' '}
+  <KeyboardKey>PageUp</KeyboardKey> / <KeyboardKey>PageDown</KeyboardKey>.
+</div>
 
 <Canvas of={stories.customRange} sourceState="shown" />
 
@@ -52,3 +56,15 @@ keyboard to interact with the <Docs of="Slider" />.
     />
   )}
 </Docs.FormLibraryDemos>
+
+<Docs.KeyboardInteractions
+  keys={[
+    [['↑', '→'], 'Increments the value by a `step`'],
+    [['↓', '←'], 'Decrements the value by a `step`'],
+    [['Shift+↑', 'Shift+→', 'PageUp'], 'Increments the value by `leapSteps`'],
+    [['Shift+↓', 'Shift+←', 'PageDown'], 'Decrements the value by `leapSteps`'],
+    ['Home', 'Sets the value to `min`'],
+    ['End', 'Sets the value to `max`'],
+    ['Esc', 'Reverts the value to what it was before the most recent focus'],
+  ]}
+/>
