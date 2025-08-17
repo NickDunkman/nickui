@@ -1,0 +1,10 @@
+import{j as o,M as f}from"./blocks-Cu13-jSp.js";import{useMDXComponents as m}from"./index-CB6ZV6Kh.js";import{D as e}from"./index-NqWXr5SC.js";import{s,T as i}from"./Text.stories-eXFMISN_.js";import"./preload-helper-D9Z9MdNV.js";import"./iframe-D7K3DBLU.js";import"./index-DoG65Fal.js";import"./client-C1uJbZbB.js";import"./Button-CM4tt_cv.js";import"./index-BfBaVl6L.js";import"./index-69CadyKP.js";import"./AllSizersStoryWrapper-C7b1EBiS.js";import"./getStoryArgTypes-DAe_MfAd.js";import"./Field-CtUzKpbc.js";import"./fieldA11y-BMp6F0pm.js";import"./randomId-Dfhrkieu.js";import"./styles-DSTw06ym.js";function a(r){const n={p:"p",...m(),...r.components};return e||t("Docs",!1),e.ComponentHeading||t("Docs.ComponentHeading",!0),e.ControlStates||t("Docs.ControlStates",!0),e.FauxCanvas||t("Docs.FauxCanvas",!0),e.FormLibraryDemos||t("Docs.FormLibraryDemos",!0),e.KeyboardInteractions||t("Docs.KeyboardInteractions",!0),e.Props||t("Docs.Props",!0),e.Sizers||t("Docs.Sizers",!0),e.TableOfContents||t("Docs.TableOfContents",!0),o.jsxs(o.Fragment,{children:[o.jsx(f,{of:s}),`
+`,o.jsx(e.ComponentHeading,{of:"Text"}),`
+`,o.jsx(n.p,{children:"A form control that allows users to enter & edit a single line of text."}),`
+`,o.jsx(e.FauxCanvas,{children:o.jsx(i,{placeholder:"Type something!"})}),`
+`,o.jsx(e.TableOfContents,{}),`
+`,o.jsx(e.Props,{of:s,nativeBase:"input",wrapper:"Field"}),`
+`,o.jsx(e.ControlStates,{of:s,valuable:!0}),`
+`,o.jsx(e.Sizers,{of:s,wrapper:"Field"}),`
+`,o.jsx(e.FormLibraryDemos,{of:"Text",fieldName:"player",initialValue:"Nick",children:({props:p,error:c})=>o.jsx(i,{...p,label:"Player name",hint:"Try editting me!",error:c})}),`
+`,o.jsx(e.KeyboardInteractions,{keys:[["Tab",'Focuses/blurs the <ComponentName of="Text" />']]})]})}function L(r={}){const{wrapper:n}={...m(),...r.components};return n?o.jsx(n,{...r,children:o.jsx(a,{...r})}):a(r)}function t(r,n){throw new Error("Expected "+(n?"component":"object")+" `"+r+"` to be defined: you likely forgot to import, pass, or provide it.")}export{L as default};
