@@ -66,11 +66,27 @@ to peep the
 
 ### Getting started
 
-TODO
+You’ll need to install the project dependencies before doing any software.
+First, make sure you have
+[`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) &
+[`yarn`](https://yarnpkg.com/getting-started/install) installed.
+
+Then, you can install everything using `yarn`:
+
+```sh
+/nickui$ yarn --version # should be 4.x.x
+/nickui$ yarn install
+```
 
 ### Running Storybook in development mode
 
-TODO
+To start the storybook dev server, run:
+
+```sh
+/nickui$ yarn run storybook
+```
+
+Then, you can visit http://localhost:6006/ in a browser.
 
 ### Configuring Cursor or VS Code
 
