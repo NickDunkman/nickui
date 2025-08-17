@@ -56,3 +56,31 @@ A form control that allows users to choose an option using a menu.
     </Select>
   )}
 </Docs.FormLibraryDemos>
+
+<Docs.KeyboardInteractions
+  keys={[
+    ['Tab', 'Focuses/blurs the <ComponentName of="Select" />'],
+    ['Space', 'Opens the menu'],
+    [
+      '↓',
+      [
+        'When the menu is closed, opens the menu',
+        'When the menu is open, moves focus to the next option',
+      ],
+    ],
+    [
+      '↑',
+      [
+        'When the menu is closed, opens the menu',
+        'When the menu is open, moves focus to the previous option',
+      ],
+    ],
+    [
+      'Enter',
+      [
+        'When the menu is open, selects the focused option',
+        'When the menu is closed, submits the wrapping `<form>`',
+      ],
+    ],
+  ]}
+/>

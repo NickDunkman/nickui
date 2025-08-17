@@ -3,15 +3,15 @@ import * as React from 'react';
 
 import { KeyboardKey } from '../stories/KeyboardKey';
 
+import { ComponentName } from './ComponentName';
 import { Table } from './Table';
 
 /** Custom doc block for rendering a component’s keyboard interactions */
 export function KeyboardInteractions({
   keys,
 }: {
-  keys?: [keyCombo: string | string[], action: string][];
+  keys: [keyCombo: string | string[], action: string | string[]][];
 }) {
-  console.log(keys);
   return (
     <>
       <Markdown>## Keyboard interactions</Markdown>
@@ -23,7 +23,7 @@ export function KeyboardInteractions({
           </tr>
         </thead>
         <tbody>
-          {keys?.map(([keyCombo, action]) => (
+          {keys.map(([keyCombo, action]) => (
             <tr
               key={typeof keyCombo === 'string' ? keyCombo : keyCombo.join(',')}
             >
@@ -39,7 +39,13 @@ export function KeyboardInteractions({
                 )}
               </td>
               <td>
-                <Markdown>{action}</Markdown>
+                {(typeof action === 'string' ? [action] : action).map((a) => (
+                  <div key={a}>
+                    <Markdown options={{ overrides: { ComponentName } }}>
+                      {a}
+                    </Markdown>
+                  </div>
+                ))}
               </td>
             </tr>
           ))}
