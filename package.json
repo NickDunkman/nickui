@@ -16,7 +16,7 @@
   "main": "index.js",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build -o ./docs/ && echo \"nickui.nickdunkman.com\" > ./docs/CNAME && sed -i '' 's/storybook - Storybook/NickUI/' ./docs/index.html",
+    "build-storybook": "storybook build -o ./docs/ && echo \"nickui.nickdunkman.dev\" > ./docs/CNAME && sed -i '' 's/storybook - Storybook/NickUI/' ./docs/index.html",
     "check": "npm run vitest && npm run eslint && npm run prettier && npm run tsc",
     "eslint": "eslint --max-warnings=0 \"**/*.{js,jsx,ts,tsx}\"",
     "prettier": "prettier -c \"**/*.{js,jsx,ts,tsx,css,scss,md}\"",
