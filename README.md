@@ -91,8 +91,9 @@ Then, you can visit http://localhost:3001/ in a browser.
 ### Configuring VS Code
 
 This project includes settings that automatically configure the right linting &
-code formatting setups in VS Code. If you open the extensions tab, you should
-see a few installation recommendations:
+code formatting setups in VS Code. But you’ll need to install some extensions to
+get the most out of it. If you open the extensions tab, you should see a few
+recommendations:
 
 - [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint):
   surfaces ESLint errors as you code, synced to the `yarn run eslint` check
