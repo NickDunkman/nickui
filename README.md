@@ -62,11 +62,11 @@ to peep the
 
 ---
 
-## 👷 Development
+## 🤓 Development
 
 ### Getting started
 
-You’ll need to install the project dependencies before doing any software.
+You’ll need to install the project dependencies before doing any development.
 First, make sure you have
 [`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) &
 [`yarn`](https://yarnpkg.com/getting-started/install) installed.
@@ -80,17 +80,29 @@ Then, you can install everything using `yarn`:
 
 ### Running Storybook in development mode
 
-To start the storybook dev server, run:
+To start the Storybook dev server, run:
 
 ```sh
-/nickui$ yarn run storybook
+/nickui$ yarn dev
 ```
 
-Then, you can visit http://localhost:6006/ in a browser.
+Then, you can visit http://localhost:3001/ in a browser.
 
-### Configuring Cursor or VS Code
+### Configuring VS Code
 
-TODO
+This project includes settings that automatically configure the right linting &
+code formatting setups in VS Code. If you open the extensions tab, you should
+see a few installation recommendations:
+
+- [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint):
+  surfaces ESLint errors as you code, synced to the `yarn run eslint` check
+- [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode):
+  automatically reformats code on save
+- [Vitest extension](https://marketplace.visualstudio.com/items?itemName=vitest.explorer):
+  Run, debug, and watch the project’s tests right in VS Code. It’s incredible.
+- [TailwindCSS extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss):
+  adds TailwindCSS auto-complete, mouse-over hints, and linting within
+  `className` strings
 
 ### Running the checks
 
