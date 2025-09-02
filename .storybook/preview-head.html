@@ -50,45 +50,45 @@
     --nickui-storybook-heading-color: oklch(0.4383 0.2179 303.91);
     --nickui-storybook-heading-underline-color: oklch(0.4383 0.2179 303.91 / 25%);
   }
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h1,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h2,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h3,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h4,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h5,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h6 {
+  .sbdocs-wrapper h1:where(:not(.sb-unstyled h1)),
+  .sbdocs-wrapper h2:where(:not(.sb-unstyled h2)),
+  .sbdocs-wrapper h3:where(:not(.sb-unstyled h3)),
+  .sbdocs-wrapper h4:where(:not(.sb-unstyled h4)),
+  .sbdocs-wrapper h5:where(:not(.sb-unstyled h5)),
+  .sbdocs-wrapper h6:where(:not(.sb-unstyled h6)) {
     font-weight: 700;
     color: var(--nickui-storybook-heading-color) !important;
     border-bottom-color: oklch(0.4383 0.2179 303.91 / 25%);
   }
 
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h3 { font-size: 18px; }
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h4 { font-size: 16px; }
+  .sbdocs-wrapper h3:where(:not(.sb-unstyled h3)) { font-size: 18px; }
+  .sbdocs-wrapper h4:where(:not(.sb-unstyled h4)) { font-size: 16px; }
 
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h1 code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h2 code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h3 code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h4 code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h5 code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h6 code {
+  .sbdocs-wrapper h1 code:where(:not(.sb-unstyled code)),
+  .sbdocs-wrapper h2 code:where(:not(.sb-unstyled code)),
+  .sbdocs-wrapper h3 code:where(:not(.sb-unstyled code)),
+  .sbdocs-wrapper h4 code:where(:not(.sb-unstyled code)),
+  .sbdocs-wrapper h5 code:where(:not(.sb-unstyled code)),
+  .sbdocs-wrapper h6 code:where(:not(.sb-unstyled code)) {
     color: var(--nickui-storybook-heading-color) !important;
   }
 
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h1 a code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h2 a code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h3 a code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h4 a code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h5 a code,
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) h6 a code {
+  .sbdocs-wrapper h1 a code:where(:not(.sb-unstyled code)),
+  .sbdocs-wrapper h2 a code:where(:not(.sb-unstyled code)),
+  .sbdocs-wrapper h3 a code:where(:not(.sb-unstyled code)),
+  .sbdocs-wrapper h4 a code:where(:not(.sb-unstyled code)),
+  .sbdocs-wrapper h5 a code:where(:not(.sb-unstyled code)),
+  .sbdocs-wrapper h6 a code:where(:not(.sb-unstyled code)) {
     color: rgb(2, 156, 253) !important;
   }
 
-  .sbdocs-wrapper :where(ol:not(.sb-unstyled ol)) {
+  .sbdocs-wrapper ol:where(:not(.sb-unstyled ol)) {
     list-style-type: decimal;
   }
 
   /** Prevent unintented spacing between an <li>'s text & its nested <ol> or <ul> */
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) li p:has(+ ul) { margin-bottom: 0; }
-  .sbdocs-wrapper :where(:not(.sb-unstyled)) li p:has(+ ol) { margin-bottom: 0; }
+  .sbdocs-wrapper li:where(:not(.sb-unstyled li)) p:has(+ ul) { margin-bottom: 0; }
+  .sbdocs-wrapper li:where(:not(.sb-unstyled li)) p:has(+ ol) { margin-bottom: 0; }
 
   /** Fix table styles */
   .docblock-argstable-body {
